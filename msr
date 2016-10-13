@@ -74,7 +74,7 @@ set bc 1
 % symmetry = 0
 % 4-group structure (3 group boundaries)
 
-set gcu  0
+set gcu  1
 set sym  0
 set nfg  4  0.625E-6  5.5E-3  0.821
 
