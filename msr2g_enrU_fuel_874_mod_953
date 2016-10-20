@@ -63,13 +63,13 @@ cell 303  0    outside   3002
 
 % --- Fuel (Enriched uranium):
 
-mat fuel    -2.0823887 tmp 922 % g/cm3
- 3007.09c   -12.21 % fuel
- 9019.09c   -70.23 % fuel
- 4009.09c   -6.81 % fuel
-40000.09c   -9.52 % fuel
-92235.09c   -1.14 % fuel
-92238.09c   -0.09 % fuel
+mat fuel    -2.0823887 tmp 874 % g/cm3
+ 3007.06c   -12.21 % fuel
+ 9019.06c   -70.23 % fuel
+ 4009.06c   -6.81 % fuel
+40000.06c   -9.52 % fuel
+92235.06c   -1.14 % fuel
+92238.06c   -0.09 % fuel
 
 % --- Moderator graphite:
 

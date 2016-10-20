@@ -73,7 +73,7 @@ mat fuel    -2.0823887 tmp 922 % g/cm3
 
 % --- Moderator graphite:
 
-mat moder    -1.843 tmp 953 /* From Cammi */ moder gr 6012
+mat moder    -1.843 tmp 1008 /* From Cammi */ moder gr 6012
  6012.09c    -1.0 % moder
 
 % --- Thermal scattering data for graphite:
