@@ -50,7 +50,7 @@ lat 300 1 0 0 23 23 6.096
 
 % --- Surfaces:
 
-surf 3000  cyl 0.0 0.0 70.104
+surf 3000  cyl 0.0 0.0 69.85
 surf 3001  pz  0
 surf 3002  pz  162.56
 
@@ -90,12 +90,8 @@ set bc 1
 
 % --- group constant generation:
 
-% universe = 0 (homogenization over all space)
-% symmetry = 0
-% 4-group structure (3 group boundaries)
-
 set gcu  2 3
-set sym  4
+set sym  0
 set nfg  2 0.625e-6
 
 % --- Neutron population and criticality cycles:
