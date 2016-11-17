@@ -1,7 +1,7 @@
 #!/bin/bash
 
 num_groups=2
-num_precursor_groups=8
+num_percursor_groups=8
 start_column=9
 stop_column=$(echo "$(($start_column + ($num_groups - 1) * 2))")
 precursor_stop_column=$(echo "$(($start_column + ($num_precursor_groups - 1) * 2))")
@@ -9,9 +9,7 @@ gsxs_start_column=7
 gsxs_stop_column=$(echo "$(($gsxs_start_column + ($num_groups*$num_groups - 1) * 2))")
 chi_start_column=7
 chi_stop_column=$(echo "$(($chi_start_column + ($num_groups - 1) * 2))")
-root=msr2g_enrU
-fuel_out=${root}_mod_953_fuel_interp
-mod_out=${root}_fuel_922_mod_interp
+root=msr2g_enrU_two_mat_homogenization
 # > $fuel_out
 # > $mod_out
 group_names=""
@@ -19,10 +17,10 @@ for i in $(seq $num_groups); do group_names=$group_names"Group"$i" "; done
 # echo "var_type temp $group_names" >> $fuel_out
 # echo "var_type temp $group_names" >> $mod_out
 
-fuel_temp_start=824
-fuel_temp_stop=1074
-mod_temp_start=858
-mod_temp_stop=1108
+fuel_temp_start=750
+fuel_temp_stop=1000
+mod_temp_start=750
+mod_temp_stop=1000
 fuel_step=50
 mod_step=50
 fuel_temp_range=($(seq $fuel_temp_start $fuel_step $fuel_temp_stop))
@@ -53,17 +51,21 @@ for index in $(seq $((${#lengths[@]} - 1))); do
     fi
 done
 
-for index in "${!xsecs[@]}"; do
-    > ${fuel_out}_${xsecs[index]}.txt
-    > ${mod_out}_${xsecs[index]}.txt
-    for fuel_temp in ${fuel_temp_range[@]}; do
-        res_file=${root}_fuel_${fuel_temp}_mod_953_res.m
-        awk -v start_column=${start_cols[index]} -v stop_column=${stop_cols[index]} -v fuel_temp=$fuel_temp -v xsec=${xsecs[index]} 'BEGIN {ORS = ""} $1==xsec {j++} j==1 {print fuel_temp" "; for (i=start_column; i <= stop_column; i=i+2) print $i" "; print "\n"; exit}' $res_file >> ${fuel_out}_${xsecs[index]}.txt
-    done
-
-    for mod_temp in ${mod_temp_range[@]}; do
-        res_file=${root}_fuel_922_mod_${mod_temp}_res.m
-        awk -v start_column=${start_cols[index]} -v stop_column=${stop_cols[index]} -v mod_temp=$mod_temp -v xsec=${xsecs[index]} 'BEGIN {ORS = ""} $1==xsec {j++} j==2 {print mod_temp" "; for (i=start_column; i <= stop_column; i=i+2) print $i" "; print "\n"; exit}' $res_file >> ${mod_out}_${xsecs[index]}.txt
+mkdir interpolation_files
+for fuel_temp in ${fuel_temp_range[@]}; do
+    echo $fuel_temp
+    mod_out=${root}_fuel_${fuel_temp}_mod_interp
+    > "interpolation_files/${mod_out}_${xsecs[index]}.txt"
+    for index in "${!xsecs[@]}"; do
+        for mod_temp in ${mod_temp_range[@]}; do
+            # fuel_out=${root}_mod_${mod_temp}_fuel_interp
+            # > ${fuel_out}_${xsecs[index]}.txt
+            res_file=${root}_fuel_${fuel_temp}_mod_${mod_temp}_res.m
+            # awk -v start_column=${start_cols[index]} -v stop_column=${stop_cols[index]} -v fuel_temp=$fuel_temp -v xsec=${xsecs[index]} \
+            #     'BEGIN {ORS = ""} $1==xsec {j++} j==1 {print fuel_temp" "; for (i=start_column; i <= stop_column; i=i+2) print $i" "; print "\n"; exit}' $res_file >> ${fuel_out}_${xsecs[index]}.txt
+            awk -v start_column=${start_cols[index]} -v stop_column=${stop_cols[index]} -v mod_temp=$mod_temp -v xsec=${xsecs[index]} \
+                'BEGIN {ORS = ""} $1==xsec {j++} j==2 {print mod_temp" "; for (i=start_column; i <= stop_column; i=i+2) print $i" "; print "\n"; exit}' $res_file >> "interpolation_files/${mod_out}_${xsecs[index]}.txt"
+        done
     done
 done
 
