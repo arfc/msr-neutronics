@@ -1,0 +1,105 @@
+% --- MSR cluster ------------------------------------------
+
+set title "MSR2G-ENRU"
+
+% --- Dummy structures
+surf 10 inf
+surf 11 inf
+
+cell 10 2 fuel -10
+cell 11 3 moder -11
+
+% --- Fuel pin:
+
+surf 1 sqc 0 0 2.54
+surf 2 pz  0
+surf 3 pz  162.56
+
+cell  1  1  fill 3   -1   2  -3
+cell  2  1  fill 2    1   2  -3
+cell  3  1  outside  -2
+cell  4  1  outside   3
+
+% --- Lattice
+
+lat 300 1 0 0 23 23 6.096
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+
+
+% --- Surfaces:
+
+surf 3000  cyl 0.0 0.0 69.85
+surf 3001  pz  0
+surf 3002  pz  162.56
+
+% --- Cells:
+
+cell 300  0    fill 300  -3000 3001 -3002
+cell 301  0    outside   3000  3001 -3002
+cell 302  0    outside   -3001
+cell 303  0    outside   3002
+
+% --- Fuel (Thorium-uranium):
+
+mat fuel    -3.327 tmp  1250 % g/cm3 from Cammi
+ 3007.12c   -7.81 % fuel
+ 9019.12c   -45.19 % fuel
+ 4009.12c   -2.24 % fuel
+90232.12c   -43.31 % fuel
+92233.12c   -1.45 % fuel
+
+% --- Moderator graphite:
+
+mat moder    -1.843 tmp  1950 /* From Cammi */ moder gr 6012
+ 6012.18c    -1.0 % moder
+
+% --- Thermal scattering data for graphite:
+
+therm gr grj3.12t
+
+% --- Cross section data library file path:
+
+set acelib "/home/lindsayad/serpent/core/xsdata/xsdir_serpent"
+
+% --- Vacuum boundary condition:
+
+set bc 1
+
+% --- group constant generation:
+
+set gcu  2 3
+set sym  0
+set nfg  2 0.625e-6
+
+% --- Neutron population and criticality cycles:
+
+set pop 2000 500 20
+
+% --- Geometry and mesh plots:
+
+plot 3 500 500
+mesh 3 500 500
+
+% ------------------------------------------------------------

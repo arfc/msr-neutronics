@@ -1,0 +1,65 @@
+% --- MSR cluster ------------------------------------------
+
+set title "MSR2G-ENRU"
+
+% --- Dummy structures
+surf 10 inf
+surf 11 inf
+
+cell 10 2 fuel -10
+cell 11 3 moder -11
+
+% --- Fuel pin:
+
+surf 1 sqc 0 0 2.08
+surf 4 sqc 0 0 5.73
+surf 2 pz  0
+surf 3 pz  396
+
+cell	 1	 0	 fill 2		 -1	 2	-3	
+cell	 2	 0	 fill 3		 1	 -4	2	-3
+cell	 3	 0	 outside	 -2
+cell	 4	 0	 outside	 3
+cell	 5	 0	 outside	 4
+% --- Fuel (Thorium-uranium):
+
+mat fuel    -2.964536250 tmp 1450  % g/cm3 from Cammi
+ 3007.12c   -7.81 % fuel
+ 9019.12c   -45.19 % fuel
+ 4009.12c   -2.24 % fuel
+90232.12c   -43.31 % fuel
+92233.12c   -1.45 % fuel
+
+% --- Moderator graphite:
+
+mat moder    -1.843 /* From Cammi */ moder gr 6012
+ 6012.15c    -1.0 % moder
+
+% --- Thermal scattering data for graphite:
+
+therm gr grj3.12t
+
+% --- Cross section data library file path:
+
+set acelib "/home/lindsayad/serpent/core/xsdata/xsdir_serpent"
+
+% --- Vacuum boundary condition:
+
+set bc 2 2 1
+
+% --- group constant generation:
+
+set gcu  2 3
+set sym  0
+set nfg  2 0.625e-6
+
+% --- Neutron population and criticality cycles:
+
+set pop 2000 500 20
+
+% --- Geometry and mesh plots:
+
+plot 3 500 500
+mesh 3 500 500
+
+% ------------------------------------------------------------
