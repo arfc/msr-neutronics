@@ -1,0 +1,619 @@
+
+==========================================================================================================================================
+
+Serpent continuous-energy Monte Carlo code version 1.1.19
+
+Input file:   IA
+Date:         Fri Jan  6 16:44:23 2017
+Title:        MSBR zone IA
+
+Random seed:  1483742663
+
+Memory allocated for DATA array:      94063552 bytes (89.71 Mb)
+Memory allocated for RESULTS array:     557648 bytes (544.58 kb)
+Memory allocated for ASCII array:       440711 bytes (430.38 kb)
+Total allocated memory:               95061911 bytes (90.66 Mb)
+
+==========================================================================================================================================
+
+XS data (8 isotopes)
+
+==========================================================================================================================================
+
+Columns: 1 - Pointer in DATA array
+         2 - Nuclide alias
+         3 - Nuclide name in ace file
+         4 - Nuclide ZAI
+         5 - Atomic weight ratio
+         6 - Temperature (K)
+         7 - Options
+         8 - File path
+
+  1/  8   243690   grj3.12t   grj3.12t  60120  12.00  600 8197 /home/andrei2/serpent/xsdata/endfb7/acedata/sssth1
+  2/  8   247140   6012.09c   6012.09c  60120  12.00  900 8193 /home/andrei2/serpent/xsdata/endfb7/acedata/6012JNDL32.ace (  grj3.12t)
+  3/  8   247186   3007.09c   3007.09c  30070   7.02  908 8209 /home/andrei2/serpent/xsdata/endfb7/acedata/3007ENDF7.ace
+  4/  8   247232   3006.09c   3006.09c  30060   6.02  908 8193 /home/andrei2/serpent/xsdata/endfb7/acedata/3006ENDF7.ace
+  5/  8   247278   9019.09c   9019.09c  90190  19.00  908 8209 /home/andrei2/serpent/xsdata/endfb7/acedata/9019ENDF7.ace
+  6/  8   247324   4009.09c   4009.09c  40090   9.01  908 8209 /home/andrei2/serpent/xsdata/endfb7/acedata/4009ENDF7.ace
+  7/  8   247370  90232.09c  90232.09c 902320 232.04  908 8217 /home/andrei2/serpent/xsdata/endfb7/acedata/90232ENDF7.ace
+  8/  8   247416  92233.09c  92233.09c 922330 233.04  908 8217 /home/andrei2/serpent/xsdata/endfb7/acedata/92233ENDF7.ace
+
+==========================================================================================================================================
+
+Material data (2 materials)
+
+==========================================================================================================================================
+
+Material "fuel":
+
+-------------------------------------------------------------------
+            a. weight   temp      m. frac      a. frac      a. dens
+-------------------------------------------------------------------
+  3007.09c    7.01600    0.0  7.85151E-02  2.83481E-01  2.24442E-02
+  3006.09c    6.01507    0.0  3.23120E-06  1.36077E-05  1.07737E-06
+  9019.09c   18.99820    0.0  4.53447E-01  6.04610E-01  4.78690E-02
+  4009.09c    9.01220    0.0  2.25069E-02  6.32624E-02  5.00869E-03
+ 90232.09c  232.03833    0.0  4.34616E-01  4.74468E-02  3.75652E-03
+ 92233.09c  233.03964    0.0  1.09123E-02  1.18617E-03  9.39132E-05
+       sum                    1.00000E+00  1.00000E+00  7.91733E-02
+------------------------------------------------------
+densities:                    3.33040E+00  7.91733E-02
+------------------------------------------------------
+
+Material "moder":
+
+-------------------------------------------------------------------
+            a. weight   temp      m. frac      a. frac      a. dens
+-------------------------------------------------------------------
+  6012.09c   11.99999  900.0  1.00000E+00  1.00000E+00  9.24887E-02  (b)
+       sum                    1.00000E+00  1.00000E+00  9.24887E-02
+
+Associated S(a,b) libraries:
+
+  grj3.12t   11.99999    N/A  1.00000E+00  1.00000E+00
+------------------------------------------------------
+densities:                    1.84300E+00  9.24887E-02
+------------------------------------------------------
+
+==========================================================================================================================================
+
+Reaction mode fractions by nuclide
+
+==========================================================================================================================================
+
+Fission (total 422909 reactions):
+
+ 90232.09c  902320   1089 0.00258
+ 92233.09c  922330 421820 0.99742
+
+==========================================================================================================================================
+
+Cell data (20 cells)
+
+==========================================================================================================================================
+
+----- Cell "1": --------------------
+
+Universe : 1
+Level    : 2
+Material : "fuel"
+
+Inside surface 1 (type  1 / cyl):
+
+Parameters      :  0.00000E+00  0.00000E+00  7.62000E-01 
+Neighbour cells :  1 2 
+
+Outside surface 12 (type  4 / pz):
+
+Parameters      :  0.00000E+00 
+Neighbour cells :  1 12 
+
+Inside surface 13 (type  4 / pz):
+
+Parameters      :  3.96240E+02 
+Neighbour cells :  1 13 
+
+----- Cell "2": --------------------
+
+Universe : 1
+Level    : 2
+Material : "moder"
+
+Outside surface 1 (type  1 / cyl):
+
+Parameters      :  0.00000E+00  0.00000E+00  7.62000E-01 
+Neighbour cells :  2 1 
+
+Inside surface 2 (type 19 / octa):
+
+Parameters      :  0.00000E+00  0.00000E+00  4.69646E+00  6.13000E+00 
+Neighbour cells :  2 3 
+
+Outside surface 4 (type  7 / hexyc):
+
+Parameters      : -3.41600E+00  3.97510E+00  1.10490E+00 
+Neighbour cells :  2 4 
+
+Outside surface 5 (type  7 / hexyc):
+
+Parameters      :  3.41600E+00 -3.97510E+00  1.10490E+00 
+Neighbour cells :  2 5 
+
+Outside surface 6 (type  8 / hexxc):
+
+Parameters      : -3.97510E+00 -3.41600E+00  1.10490E+00 
+Neighbour cells :  2 6 
+
+Outside surface 7 (type  8 / hexxc):
+
+Parameters      :  3.97510E+00  3.41600E+00  1.10490E+00 
+Neighbour cells :  2 7 
+
+Outside surface 8 (type 19 / octa):
+
+Parameters      : -3.41600E+00 -5.08000E+00  6.40000E-01  5.10000E-01 
+Neighbour cells :  2 8 
+
+Outside surface 9 (type 19 / octa):
+
+Parameters      :  3.41600E+00  5.08000E+00  6.40000E-01  5.10000E-01 
+Neighbour cells :  2 9 
+
+Outside surface 10 (type 19 / octa):
+
+Parameters      : -5.08000E+00  3.41600E+00  6.40000E-01  5.10000E-01 
+Neighbour cells :  2 10 
+
+Outside surface 11 (type 19 / octa):
+
+Parameters      :  5.08000E+00 -3.41600E+00  6.40000E-01  5.10000E-01 
+Neighbour cells :  2 11 
+
+Outside surface 12 (type  4 / pz):
+
+Parameters      :  0.00000E+00 
+Neighbour cells :  2 12 
+
+Inside surface 13 (type  4 / pz):
+
+Parameters      :  3.96240E+02 
+Neighbour cells :  2 13 
+
+----- Cell "3": --------------------
+
+Universe : 1
+Level    : 2
+Material : "fuel"
+
+Outside surface 2 (type 19 / octa):
+
+Parameters      :  0.00000E+00  0.00000E+00  4.69646E+00  6.13000E+00 
+Neighbour cells :  3 2 
+
+Inside surface 3 (type  6 / sqc):
+
+Parameters      :  0.00000E+00  0.00000E+00  5.08000E+00 
+Neighbour cells :  3 14 
+
+Outside surface 4 (type  7 / hexyc):
+
+Parameters      : -3.41600E+00  3.97510E+00  1.10490E+00 
+Neighbour cells :  3 4 
+
+Outside surface 5 (type  7 / hexyc):
+
+Parameters      :  3.41600E+00 -3.97510E+00  1.10490E+00 
+Neighbour cells :  3 5 
+
+Outside surface 6 (type  8 / hexxc):
+
+Parameters      : -3.97510E+00 -3.41600E+00  1.10490E+00 
+Neighbour cells :  3 6 
+
+Outside surface 7 (type  8 / hexxc):
+
+Parameters      :  3.97510E+00  3.41600E+00  1.10490E+00 
+Neighbour cells :  3 7 
+
+Outside surface 8 (type 19 / octa):
+
+Parameters      : -3.41600E+00 -5.08000E+00  6.40000E-01  5.10000E-01 
+Neighbour cells :  3 8 
+
+Outside surface 9 (type 19 / octa):
+
+Parameters      :  3.41600E+00  5.08000E+00  6.40000E-01  5.10000E-01 
+Neighbour cells :  3 9 
+
+Outside surface 10 (type 19 / octa):
+
+Parameters      : -5.08000E+00  3.41600E+00  6.40000E-01  5.10000E-01 
+Neighbour cells :  3 10 
+
+Outside surface 11 (type 19 / octa):
+
+Parameters      :  5.08000E+00 -3.41600E+00  6.40000E-01  5.10000E-01 
+Neighbour cells :  3 11 
+
+Outside surface 12 (type  4 / pz):
+
+Parameters      :  0.00000E+00 
+Neighbour cells :  3 12 
+
+Inside surface 13 (type  4 / pz):
+
+Parameters      :  3.96240E+02 
+Neighbour cells :  3 13 
+
+----- Cell "4": --------------------
+
+Universe : 1
+Level    : 2
+Material : "moder"
+
+Inside surface 4 (type  7 / hexyc):
+
+Parameters      : -3.41600E+00  3.97510E+00  1.10490E+00 
+Neighbour cells :  4 2 3 
+
+Outside surface 12 (type  4 / pz):
+
+Parameters      :  0.00000E+00 
+Neighbour cells :  4 12 
+
+Inside surface 13 (type  4 / pz):
+
+Parameters      :  3.96240E+02 
+Neighbour cells :  4 13 
+
+----- Cell "5": --------------------
+
+Universe : 1
+Level    : 2
+Material : "moder"
+
+Inside surface 5 (type  7 / hexyc):
+
+Parameters      :  3.41600E+00 -3.97510E+00  1.10490E+00 
+Neighbour cells :  5 2 3 
+
+Outside surface 12 (type  4 / pz):
+
+Parameters      :  0.00000E+00 
+Neighbour cells :  5 12 
+
+Inside surface 13 (type  4 / pz):
+
+Parameters      :  3.96240E+02 
+Neighbour cells :  5 13 
+
+----- Cell "6": --------------------
+
+Universe : 1
+Level    : 2
+Material : "moder"
+
+Inside surface 6 (type  8 / hexxc):
+
+Parameters      : -3.97510E+00 -3.41600E+00  1.10490E+00 
+Neighbour cells :  6 2 3 
+
+Outside surface 12 (type  4 / pz):
+
+Parameters      :  0.00000E+00 
+Neighbour cells :  6 12 
+
+Inside surface 13 (type  4 / pz):
+
+Parameters      :  3.96240E+02 
+Neighbour cells :  6 13 
+
+----- Cell "7": --------------------
+
+Universe : 1
+Level    : 2
+Material : "moder"
+
+Inside surface 7 (type  8 / hexxc):
+
+Parameters      :  3.97510E+00  3.41600E+00  1.10490E+00 
+Neighbour cells :  7 2 3 
+
+Outside surface 12 (type  4 / pz):
+
+Parameters      :  0.00000E+00 
+Neighbour cells :  7 12 
+
+Inside surface 13 (type  4 / pz):
+
+Parameters      :  3.96240E+02 
+Neighbour cells :  7 13 
+
+----- Cell "8": --------------------
+
+Universe : 1
+Level    : 2
+Material : "moder"
+
+Inside surface 8 (type 19 / octa):
+
+Parameters      : -3.41600E+00 -5.08000E+00  6.40000E-01  5.10000E-01 
+Neighbour cells :  8 2 3 
+
+Outside surface 12 (type  4 / pz):
+
+Parameters      :  0.00000E+00 
+Neighbour cells :  8 12 
+
+Inside surface 13 (type  4 / pz):
+
+Parameters      :  3.96240E+02 
+Neighbour cells :  8 13 
+
+----- Cell "9": --------------------
+
+Universe : 1
+Level    : 2
+Material : "moder"
+
+Inside surface 9 (type 19 / octa):
+
+Parameters      :  3.41600E+00  5.08000E+00  6.40000E-01  5.10000E-01 
+Neighbour cells :  9 2 3 
+
+Outside surface 12 (type  4 / pz):
+
+Parameters      :  0.00000E+00 
+Neighbour cells :  9 12 
+
+Inside surface 13 (type  4 / pz):
+
+Parameters      :  3.96240E+02 
+Neighbour cells :  9 13 
+
+----- Cell "10": --------------------
+
+Universe : 1
+Level    : 2
+Material : "moder"
+
+Inside surface 10 (type 19 / octa):
+
+Parameters      : -5.08000E+00  3.41600E+00  6.40000E-01  5.10000E-01 
+Neighbour cells :  10 2 3 
+
+Outside surface 12 (type  4 / pz):
+
+Parameters      :  0.00000E+00 
+Neighbour cells :  10 12 
+
+Inside surface 13 (type  4 / pz):
+
+Parameters      :  3.96240E+02 
+Neighbour cells :  10 13 
+
+----- Cell "11": --------------------
+
+Universe : 1
+Level    : 2
+Material : "moder"
+
+Inside surface 11 (type 19 / octa):
+
+Parameters      :  5.08000E+00 -3.41600E+00  6.40000E-01  5.10000E-01 
+Neighbour cells :  11 2 3 
+
+Outside surface 12 (type  4 / pz):
+
+Parameters      :  0.00000E+00 
+Neighbour cells :  11 12 
+
+Inside surface 13 (type  4 / pz):
+
+Parameters      :  3.96240E+02 
+Neighbour cells :  11 13 
+
+----- Cell "12": --------------------
+
+Universe : 1
+Level    : 2
+Material : ---
+
+Inside surface 12 (type  4 / pz):
+
+Parameters      :  0.00000E+00 
+Neighbour cells :  12 1 2 3 4 5 6 7 8 9 10 11 
+
+----- Cell "13": --------------------
+
+Universe : 1
+Level    : 2
+Material : ---
+
+Outside surface 13 (type  4 / pz):
+
+Parameters      :  3.96240E+02 
+Neighbour cells :  13 1 2 3 4 5 6 7 8 9 10 11 
+
+----- Cell "14": --------------------
+
+Universe : 1
+Level    : 2
+Material : ---
+
+Outside surface 3 (type  6 / sqc):
+
+Parameters      :  0.00000E+00  0.00000E+00  5.08000E+00 
+Neighbour cells :  14 3 
+
+----- Cell "300": --------------------
+
+Universe : 0
+Level    : 0
+Material : ---
+
+Inside surface 3000 (type  1 / cyl):
+
+Parameters      :  0.00000E+00  0.00000E+00  1.27000E+02 
+Neighbour cells :  300 301 
+
+Outside surface 3001 (type  4 / pz):
+
+Parameters      :  0.00000E+00 
+Neighbour cells :  300 302 
+
+Inside surface 3002 (type  4 / pz):
+
+Parameters      :  3.96240E+02 
+Neighbour cells :  300 303 
+
+----- Cell "301": --------------------
+
+Universe : 0
+Level    : 0
+Material : ---
+
+Outside surface 3000 (type  1 / cyl):
+
+Parameters      :  0.00000E+00  0.00000E+00  1.27000E+02 
+Neighbour cells :  301 300 
+
+Outside surface 3001 (type  4 / pz):
+
+Parameters      :  0.00000E+00 
+Neighbour cells :  301 302 
+
+Inside surface 3002 (type  4 / pz):
+
+Parameters      :  3.96240E+02 
+Neighbour cells :  301 303 
+
+----- Cell "302": --------------------
+
+Universe : 0
+Level    : 0
+Material : ---
+
+Inside surface 3001 (type  4 / pz):
+
+Parameters      :  0.00000E+00 
+Neighbour cells :  302 300 301 
+
+----- Cell "303": --------------------
+
+Universe : 0
+Level    : 0
+Material : ---
+
+Outside surface 3002 (type  4 / pz):
+
+Parameters      :  3.96240E+02 
+Neighbour cells :  303 300 301 
+
+----- Cell "lat300c1": --------------------
+
+Universe : 300
+Level    : 1
+Material : ---
+
+Inside surface lat300s1 (type  6 / sqc):
+
+Parameters      :  0.00000E+00  0.00000E+00  5.08000E+00 
+Neighbour cells :  lat300c1 lat300c2 
+
+----- Cell "lat300c2": --------------------
+
+Universe : 300
+Level    : 1
+Material : ---
+
+Outside surface lat300s1 (type  6 / sqc):
+
+Parameters      :  0.00000E+00  0.00000E+00  5.08000E+00 
+Neighbour cells :  lat300c2 lat300c1 
+
+==========================================================================================================================================
+
+Summary of geometry data
+
+==========================================================================================================================================
+
+List of surfaces (17):
+
+------------------------------------------------------------------------------
+ Surface |  Type | Parameters
+------------------------------------------------------------------------------
+       1 |   cyl |  0.0000E+00  0.0000E+00  7.6200E-01 
+       2 |  octa |  0.0000E+00  0.0000E+00  4.6965E+00  6.1300E+00 
+       3 |   sqc |  0.0000E+00  0.0000E+00  5.0800E+00 
+       4 | hexyc | -3.4160E+00  3.9751E+00  1.1049E+00 
+       5 | hexyc |  3.4160E+00 -3.9751E+00  1.1049E+00 
+       6 | hexxc | -3.9751E+00 -3.4160E+00  1.1049E+00 
+       7 | hexxc |  3.9751E+00  3.4160E+00  1.1049E+00 
+       8 |  octa | -3.4160E+00 -5.0800E+00  6.4000E-01  5.1000E-01 
+       9 |  octa |  3.4160E+00  5.0800E+00  6.4000E-01  5.1000E-01 
+      10 |  octa | -5.0800E+00  3.4160E+00  6.4000E-01  5.1000E-01 
+      11 |  octa |  5.0800E+00 -3.4160E+00  6.4000E-01  5.1000E-01 
+      12 |    pz |  0.0000E+00 
+      13 |    pz |  3.9624E+02 
+    3000 |   cyl |  0.0000E+00  0.0000E+00  1.2700E+02 
+    3001 |    pz |  0.0000E+00 
+    3002 |    pz |  3.9624E+02 
+lat300s1 |   sqc |  0.0000E+00  0.0000E+00  5.0800E+00 
+------------------------------------------------------------------------------
+
+Geometry has 17 surfaces in 20 cells at 3 universes at 3 levels:
+
+------------------------------------------------------------------------------
+Level | Universe |     Cell | Surfaces
+------------------------------------------------------------------------------
+    0 |        0 |      300 | -3000  3001 -3002 
+    0 |        0 |      303 |  3002 
+    0 |        0 |      301 |  3000  3001 -3002 
+    0 |        0 |      302 | -3001 
+    1 |      300 | lat300c1 | -lat300s1 
+    1 |      300 | lat300c2 |  lat300s1 
+    2 |        1 |        2 |  1 -2  4  5  6  7  8  9  10  11  12 -13 
+    2 |        1 |        3 |  2 -3  4  5  6  7  8  9  10  11  12 -13 
+    2 |        1 |        4 | -4  12 -13 
+    2 |        1 |        6 | -6  12 -13 
+    2 |        1 |        7 | -7  12 -13 
+    2 |        1 |        5 | -5  12 -13 
+    2 |        1 |       14 |  3 
+    2 |        1 |        1 | -1  12 -13 
+    2 |        1 |       11 | -11  12 -13 
+    2 |        1 |        8 | -8  12 -13 
+    2 |        1 |       10 | -10  12 -13 
+    2 |        1 |        9 | -9  12 -13 
+    2 |        1 |       12 | -12 
+    2 |        1 |       13 |  13 
+------------------------------------------------------------------------------
+
+List of cell neighbours:
+
+------------------------------------------------------------------------------
+Cell    | Neighbour cells 
+------------------------------------------------------------------------------
+1       | 1 2 1 12 1 13 
+2       | 2 1 2 3 2 4 2 5 2 6 2 7 2 8 2 9 2 10 2 11 2 12 2 13 
+3       | 3 2 3 14 3 4 3 5 3 6 3 7 3 8 3 9 3 10 3 11 3 12 3 13 
+4       | 4 2 3 4 12 4 13 
+5       | 5 2 3 5 12 5 13 
+6       | 6 2 3 6 12 6 13 
+7       | 7 2 3 7 12 7 13 
+8       | 8 2 3 8 12 8 13 
+9       | 9 2 3 9 12 9 13 
+10      | 10 2 3 10 12 10 13 
+11      | 11 2 3 11 12 11 13 
+12      | 12 1 2 3 4 5 6 7 8 9 10 11 
+13      | 13 1 2 3 4 5 6 7 8 9 10 11 
+14      | 14 3 
+300     | 300 301 300 302 300 303 
+301     | 301 300 301 302 301 303 
+302     | 302 300 301 
+303     | 303 300 301 
+lat300c1 | lat300c1 lat300c2 
+lat300c2 | lat300c2 lat300c1 
+------------------------------------------------------------------------------
+
+==========================================================================================================================================
