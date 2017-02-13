@@ -11,24 +11,24 @@ cell 11 3 moder -11
 
 % --- Fuel pin:
 
-surf 1 sqc 0 0 2.08
-surf 4 sqc 0 0 5.73
+surf 1 cyl 0 0 2.08
+surf 4 sqc 0 0 5.07
 surf 2 pz  0
 surf 3 pz  396
 
-cell	 1	 0	 fill 2		 -1	 2	-3	
+cell	 1	 0	 fill 2		 -1	 2	-3
 cell	 2	 0	 fill 3		 1	 -4	2	-3
 cell	 3	 0	 outside	 -2
 cell	 4	 0	 outside	 3
 cell	 5	 0	 outside	 4
 % --- Fuel (Thorium-uranium):
 
-mat fuel    -3.327 tmp 922 % g/cm3 from Cammi
- 3007.09c   -7.81 % fuel
- 9019.09c   -45.19 % fuel
- 4009.09c   -2.24 % fuel
-90232.09c   -43.31 % fuel
-92233.09c   -1.45 % fuel
+mat fuel    -3.327
+ 3007.09c   -7.84 % fuel
+ 9019.09c   -45.36 % fuel
+ 4009.09c   -2.25 % fuel
+90232.09c   -43.47 % fuel
+92233.09c   -1.09 % fuel
 
 % --- Moderator graphite:
 
