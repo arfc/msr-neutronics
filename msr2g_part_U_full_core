@@ -76,7 +76,7 @@ cell 303  0    outside   3002
 
 % --- Fuel (Partially enriched uranium):
 
-mat fuel    -2.047 tmp 1144 % 1200 F, pg. 17 MSRE Design and Operations, part iii, nuclear analysis
+mat fuel    -2.146 tmp 922 % 1200 F, pg. 17 MSRE Design and Operations, part iii, nuclear analysis
  3007.09c   -10.90
  3006.09c   -0.0005
  9019.09c   -66.80
@@ -87,7 +87,7 @@ mat fuel    -2.047 tmp 1144 % 1200 F, pg. 17 MSRE Design and Operations, part ii
 
 % --- Moderator graphite:
 
-mat moder    -1.85 tmp 1144 % 1200 F pg. 17, MSRE Design and Operations, part iii, nuclear analysis
+mat moder    -1.86 tmp 922 % 1200 F pg. 17, MSRE Design and Operations, part iii, nuclear analysis
  6012.09c    -1.0
 
 % --- Cross section data library file path:
@@ -105,7 +105,7 @@ set nfg  2 0.625e-6
 
 % --- Neutron population and criticality cycles:
 
-set pop 2000 500 20
+set pop 50000 500 50
 
 % --- Geometry and mesh plots:
 
