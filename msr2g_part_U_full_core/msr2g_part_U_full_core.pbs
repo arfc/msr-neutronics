@@ -55,11 +55,12 @@
 ##                                                            ##
 ################################################################
 #
-#PBS -l walltime=00:05:00
+#PBS -l walltime=01:00:00
 #PBS -l nodes=1:ppn=12
 #PBS -N serpent_job
 #PBS -q secondary
 #PBS -j oe
+#PBS -t 1-3
 ###PBS -o openmpijob.out                                                            
 ###PBS -e openmpijob.err
 ###PBS -m be
@@ -75,6 +76,11 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/projects/arfc/lib
 # Change to the directory from which the batch job was submitted
 cd $PBS_O_WORKDIR
 
+# Dictionary for getting correct file names
+declare -A dict
+dict[1]=900
+dict+=( [2]=950 [3]=1000 )
+
 # Run the MPI code
-/projects/arfc/serpent/core/src/sss -mpi 12 msr2g_part_U_full_core
+/projects/arfc/serpent/core/src/sss -mpi 12 msr2g_part_U_full_core_${dict[${PBS_ARRAYID}]}
 
