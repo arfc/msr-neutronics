@@ -82,7 +82,7 @@ therm gr grj3.12t
 
 % --- Cross section data library file path:
 
-set acelib "/home/lindsayad/serpent/core/xsdata/xsdir_serpent"
+set acelib "/projects/arfc/serpent/core/xsdata/xsdir_serpent"
 
 % --- Vacuum boundary condition:
 

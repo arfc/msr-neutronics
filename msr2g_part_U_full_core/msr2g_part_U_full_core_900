@@ -92,7 +92,7 @@ mat moder    -1.861 tmp 900
 
 % --- Cross section data library file path:
 
-set acelib "/home/lindsayad/serpent/core/xsdata/xsdir_serpent"
+set acelib "/projects/arfc/serpent/core/xsdata/xsdir_serpent"
 
 % --- boundary condition (1 for vacuum, 2 for reflective):
 
