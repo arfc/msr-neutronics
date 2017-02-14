@@ -1,0 +1,9 @@
+% --- Material volumes:
+
+% Produced Mon Feb 13 16:29:44 2017 by MC volume calculation routine by
+% sampling 100000000 random points in the geometry.
+
+set mvol
+
+fuel            0 7.42623E+06 % (0.000)
+moder           0 3.71255E+07 % (0.000)

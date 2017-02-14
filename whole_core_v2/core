@@ -1,0 +1,233 @@
+set title "MSBR whole core"
+% --- Surfaces (core pitch = 10.16 cm): Zone I-A
+
+surf 1  cyl 0.0 0.0 0.762                  % Hole with fuel salt
+surf 2  sqc 0.0 0.0 4.69646 0.99         % Graphite square outer wall 1.07
+surf 3  sqc 0.0 0.0 5.08                % Outer boundary
+surf 4  hexyc -3.3401 3.965  1.16 0.18   % Left-upper graphite element 1.15
+surf 5  hexyc 3.3401 -3.965  1.16 0.18   % Right-bottom graphite element
+surf 6  hexxc -3.965 -3.3401 1.16 0.18   % Left-bottom graphite element
+surf 7  hexxc 3.965 3.3401   1.16 0.18   % Right-up graphite element
+surf 8  cyl -3.3401 -5.49646  0.8           % replay part of left-upper graphite element
+surf 9  cyl  3.3401 5.49646   0.8           % replay part of right-bottom graphite element
+surf 10 cyl  -5.49646 3.3401  0.8           % replay part of right-upper graphite element 0.51 octa
+surf 11 cyl  5.49646 -3.3401  0.8           % replay part of left-bottom graphite element
+
+% --- Cells: Universe 1: Zone I-A
+
+cell 1  1  fuel  -1                        % Fuel hole
+cell 2  1  moder 1 -2 4 5 6 7 8 9 10 11    % Graphite block
+cell 3  1  fuel  2 -3 4 5 6 7 8 9 10 11    % Fuel salt outside graphite block
+cell 4  1  moder -4                        % Left-upper graphite element
+cell 5  1  moder -5                        % Right-bottom graphite element
+cell 6  1  moder -6                        % Left-bottom graphite element
+cell 7  1  moder -7                        % Left-bottom graphite element
+cell 8  1  moder -8                        % replay part of left-upper graphite element
+cell 9  1  moder -9                        % replay part of right-bottom graphite element
+cell 10 1  moder -10                       % replay part of right-upper graphite element
+cell 11 1  moder -11                       % replay part of left-bottom graphite element
+cell 12 1  outside   3                    % Outside world
+
+% --- Surfaces (core pitch = 10.16 cm) - Zone II-B Universe 2:
+
+surf 21  cyl 0.0 0.0 3.302                  % Hole with fuel salt
+surf 22  sqc 0.0 0.0 4.953  0.46         % Graphite square outer wall 1.07
+surf 23  sqc 0.0 0.0 5.08                % Outer boundary
+surf 24  cyl -4.28498 4.53898  0.66802      % Left-upper graphite element 1.15
+surf 25  cyl 4.28498 -4.53898  0.66802      % Right-bottom graphite element
+surf 26  cyl -4.53898 -4.28498 0.66802      % Left-bottom graphite element
+surf 27  cyl 4.53898  4.28498   0.66802   % Right-up graphite element
+surf 28  cyl -4.28498 -5.62102  0.66802   % replay part of left-upper graphite element
+surf 29  cyl  4.28498 5.62102   0.66802   % replay part of right-bottom graphite element
+surf 30 cyl  -5.62102 4.28498  0.66802    % replay part of right-upper graphite element 0.51 octa
+surf 31 cyl  5.62102 -4.28498  0.66802    % replay part of left-bottom graphite element
+
+
+% --- Cells: Universe 2: Zone II-B
+
+cell 21  2  fuel  -21                                % Fuel hole
+cell 22  2  moder 21 -22 24 25 26 27 28 29 30 31     % Graphite block
+cell 23  2  fuel  22 -23 24 25 26 27 28 29 30 31     % Fuel salt outside graphite block
+cell 24  2  moder -24                                % Left-upper graphite element
+cell 25  2  moder -25                                % Right-bottom graphite element
+cell 26  2  moder -26                                % Left-bottom graphite element
+cell 27  2  moder -27                                % Left-bottom graphite element
+cell 28  2  moder -28                                % replay part of left-upper graphite element
+cell 29  2  moder -29                                % replay part of right-bottom graphite element
+cell 30  2  moder -30                                % replay part of right-upper graphite element
+cell 31  2  moder -31                                % replay part of left-bottom graphite element
+cell 32  2  outside   23                             % Outside world
+
+% --- Surfaces (core pitch = 15.24 cm) - Control rods Universe 3:
+
+surf 41  cyl 0.0 0.0 5.08                           % Hole with fuel salt
+surf 42  sqc 0.0 0.0 7.23646 0.99             % Graphite square outer wall 1.07
+surf 43  sqc 0.0 0.0 7.62                     % Outer boundary
+surf 44  hexyc -5.8801 6.505  1.16 0.18       % Left-upper graphite element 1.15
+surf 45  hexyc 5.8801 -6.505  1.16 0.18       % Right-bottom graphite element
+surf 46  hexxc -6.505 -5.8801 1.16 0.18       % Left-bottom graphite element
+surf 47  hexxc 6.505 5.8801   1.16 0.18       % Right-up graphite element
+surf 48  cyl -5.8801 -8.03646  0.8             % replay part of left-upper graphite element
+surf 49  cyl  5.8801 8.03646   0.8             % replay part of right-bottom graphite element
+surf 50 cyl  -8.03646 5.8801  0.8              % replay part of right-upper graphite element 0.51 octa
+surf 51 cyl  8.03646 -5.8801  0.8              % replay part of left-bottom graphite element
+
+% --- Cells: Universe 3: Control rods zone
+cell 41  3  fuel  -41                                       % Fuel hole
+cell 42  3  moder 41 -42 44 45 46 47 48 49 50 51            % Graphite block
+cell 43  3  fuel  42 -43 44 45 46 47 48 49 50 51            % Fuel salt outside graphite block
+cell 44  3  moder -44                                       % Left-upper graphite element
+cell 45  3  moder -45                                       % Right-bottom graphite element
+cell 46  3  moder -46                                       % Left-bottom graphite element
+cell 47  3  moder -47                                       % Left-bottom graphite element
+cell 48  3  moder -48                                       % replay part of left-upper graphite element
+cell 49  3  moder -49                                       % replay part of right-bottom graphite element
+cell 50  3  moder -50                                       % replay part of right-upper graphite element
+cell 51  3  moder -51                                       % replay part of left-bottom graphite element
+cell 52  3  outside   43                      % Outside world
+
+% - Pure fuel cell
+
+cell 55  4  fuel -3
+
+% ------ Vacuum cell
+
+cell 57  5  void -3
+
+% ------------------------------------------------------------
+
+% --- Lattices ("array block"):
+
+% Control rod lattice
+lat 400 1 0 0 2 2 15.24
+3 3
+3 3
+
+% --- Lattice (43x43, round molten salt+fuel channel and graphite around)
+% square lattice=1, x0=0, y0=0, 17 el   | x- | ir&y-dir, grid step 10.16 cm
+lat 300 1 0 0 43 43 10.16
+5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 4 4 2 2 2 2 2 2 2 2 2 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5
+5 5 5 5 5 5 5 5 5 5 5 4 4 2 2 2 2 1 1 1 1 1 1 1 1 1 2 2 2 2 4 4 5 5 5 5 5 5 5 5 5 5 5
+5 5 5 5 5 5 5 5 5 5 4 2 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 4 5 5 5 5 5 5 5 5 5 5
+5 5 5 5 5 5 5 5 5 4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 5 5 5 5 5 5 5 5 5
+5 5 5 5 5 5 5 4 4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 4 5 5 5 5 5 5 5
+5 5 5 5 5 5 4 4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 4 5 5 5 5 5 5
+5 5 5 5 5 4 4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 4 5 5 5 5 5
+5 5 5 5 4 4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 4 5 5 5 5
+5 5 5 5 4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 5 5 5 5
+5 5 5 4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 5 5 5
+5 5 4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 5 5
+5 4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 5
+5 4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 5
+5 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 5
+5 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 5
+4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4
+4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4
+2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2
+2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2
+2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2
+2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2
+2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2
+2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2
+2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2
+2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2
+2 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2
+4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4
+4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4
+5 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 5
+5 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 5
+5 4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 5
+5 4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 5
+5 4 4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 5 5
+5 5 5 4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 5 5 5
+5 5 5 5 4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 5 5 5 5
+5 5 5 5 4 4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 4 5 5 5 5
+5 5 5 5 5 4 4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 4 5 5 5 5 5
+5 5 5 5 5 5 4 4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 4 5 5 5 5 5 5
+5 5 5 5 5 5 5 4 4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 4 5 5 5 5 5 5 5
+5 5 5 5 5 5 5 5 5 4 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 4 5 5 5 5 5 5 5 5 5
+5 5 5 5 5 5 5 5 5 5 4 2 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 4 5 5 5 5 5 5 5 5 5 5
+5 5 5 5 5 5 5 5 5 5 5 5 4 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 4 5 5 5 5 5 5 5 5 5 5 5 5
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 4 4 2 2 2 2 2 2 2 2 2 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+
+% --- Surfaces:
+surf 3000  cyl 0.0 0.0 218.44
+%surf 3000  cyl 0.0 0.0 152.4
+surf 3003  sqc 0.0 0.0 15.24
+surf 3001  pz  0.0
+%surf 3002  pz  396.24
+surf 3002  pz  297.18 % 9.75ft
+
+% --- Cells:
+
+cell 300  0    fill 300 -3000 3003 3001 -3002
+cell 304  0    fill 400 -3003 3001 -3002
+cell 301  0    outside   3000  3001 -3002
+cell 302  0    outside   -3001
+cell 303  0    outside   3002
+
+
+% --- Fuel (LiF-BeF2-ThF4-233UF4 71.7-16-12-0.3 mole %):
+
+%mat fuel    -3.3304 tmp 908 % g/cm3 for mixture
+%3007.09c   -7.851507    % Mass fraction of Li-7 
+%3006.09c   -3.2312E-4  % Mass fraction of Li-6
+%9019.09c   -45.344666  % Mass fraction of F-19
+%4009.09c   -2.250687   % Mass fraction of Be-9
+%90232.09c  -43.461587  % Mass fraction of Th-232
+%92233.09c  -1.09122968 % Mass fraction of U-233 (0.3% mole)
+
+% --- Fuel (LiF-BeF2-ThF4-233UF4-239PuF3 72-16-12-0.232-0.0006 mole %) Table 3.7 Robertson:
+
+mat fuel    -3.3304 tmp 908 % g/cm3 for mixture
+3007.09c   -7.882367    % Mass fraction of Li-7 
+3006.09c   -3.2439E-4   % Mass fraction of Li-6
+9019.09c   -45.419814   % Mass fraction of F-19
+4009.09c   -2.257411    % Mass fraction of Be-9
+90232.09c  -43.591433   % Mass fraction of Th-232
+92233.09c  -0.84640546  % Mass fraction of U-233 (0.232% mole)
+94239.09c  -2.2455E-4   % Mass fraction of Pu-239 (0.0006% mole)
+
+
+
+% --- Moderator graphite:
+
+mat moder    -1.843 tmp 908 moder gr 6012 6012.09c    -1.0
+
+% --- Thermal scattering data for graphite:
+
+therm gr grj3.12t
+
+% --- Cross section data library file path:
+
+set acelib "/home/andrei2/serpent/xsdata/endfb7/sss_endfb7.xsdata"
+
+% --- Black (vacuum) boundary condition:
+
+set bc 1
+
+% --- group constant generation:
+
+% universe = 0 (homogenization over all space)
+% symmetry = 4
+% 4-group structure (3 group boundaries)
+
+set gcu  0
+%set sym  0
+set nfg  4  0.625E-6  5.5E-3  0.821
+
+% Cross section plotter
+%set xsplot 1000 1E-10 12.0
+
+% --- Neutron population and criticality cycles:
+
+set pop 5000 500 50
+
+% --- Geometry and mesh plots:
+
+plot 3 2000 2000 1.0
+plot 2 2000 2000 0.0
+mesh 3 2000 2000
+mesh 2 2000 2000
+
+% ------------------------------------------------------------
