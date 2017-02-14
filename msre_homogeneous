@@ -1,3 +1,4 @@
+
 % --- MSR cluster ------------------------------------------
 
 set title "MSRE-Homo"
@@ -22,7 +23,7 @@ mat fuel    -1.91 tmp 922 % 1200 F, pg. 17 MSRE Design and Operations, part iii,
 
 % --- Cross section data library file path:
 
-set acelib "/home/lindsayad/serpent/core/xsdata/xsdir_serpent"
+set acelib "/projects/arfc/serpent/core/xsdata/xsdir_serpent"
 
 % --- boundary condition (1 for vacuum, 2 for reflective):
 

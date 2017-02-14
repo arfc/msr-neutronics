@@ -1,6 +1,7 @@
 from shutil import copyfile
 import fileinput
 import re
+from math import exp
 
 # These functions for density are based on volumetric expansion coefficients
 # given on page 40 of MSRE Design and Operations Report, Part iii, Nuclear
@@ -25,14 +26,14 @@ def mdens(temperature):
 start = 900
 stop = 1000
 step = 50
-root = "msre2g_part_U_fulle_core"
+root = "msr2g_part_U_full_core"
 for temperature in range(start, stop + step, step):
-    file_name = root + "_" + str(temp)
+    file_name = root + "_" + str(temperature)
     copyfile(root, file_name)
-        for line in fileinput.input(file_name, inplace=True):
-            if re.search(r'2\.146 tmp 922', line):
-                print(line.replace(line, re.sub(r'2\.146.*', '{:.3f}'.format(fdens(temperature)) + " tmp " + str(temperature), line)), end="")
-            if re.search(r'1\.86 tmp 922', line):
-                print(line.replace(line, re.sub(r'1\.86.*', '{:.3f}'.format(mdens(temperature)) + " tmp " + str(temperature), line)), end="")
-            else:
-                print(line, end="")
+    for line in fileinput.input(file_name, inplace=True):
+        if re.search(r'2\.146 tmp 922', line):
+            print(line.replace(line, re.sub(r'2\.146.*', '{:.3f}'.format(fdens(temperature)) + " tmp " + str(temperature), line)), end="")
+        elif re.search(r'1\.86 tmp 922', line):
+            print(line.replace(line, re.sub(r'1\.86.*', '{:.3f}'.format(mdens(temperature)) + " tmp " + str(temperature), line)), end="")
+        else:
+            print(line, end="")

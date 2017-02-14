@@ -1,6 +1,0 @@
-onefish
-onechicken
-twofish
-twochicken
-threechicken
-twocows
