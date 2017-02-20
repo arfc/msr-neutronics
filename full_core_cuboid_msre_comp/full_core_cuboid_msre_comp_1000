@@ -1,0 +1,101 @@
+% --- MSR cluster ------------------------------------------
+
+set title "MSR2G"
+
+% --- Dummy structures
+surf 10 inf
+surf 11 inf
+
+cell 10 2 fuel -10
+cell 11 3 moder -11
+
+% --- Fuel pin:
+
+surf 1 sqc 0 0 2.54
+surf 2 pz  0
+surf 3 pz  162.56
+
+cell  1  1  fill 2   -1   2  -3
+cell  2  1  fill 3    1   2  -3
+cell  3  1  outside  -2
+cell  4  1  outside   3
+
+% --- Lattice
+
+lat 300 1 0 0 22 22 5.7694
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+
+
+% --- Surfaces:
+
+surf 3000  sqc 0.0 0.0 63.4639
+surf 3001  pz  0
+surf 3002  pz  162.56
+
+% --- Cells:
+
+cell 300  0    fill 300  -3000 3001 -3002
+cell 301  0    outside   3000  3001 -3002
+cell 302  0    outside   -3001
+cell 303  0    outside   3002
+
+% --- Fuel (Partially enriched uranium):
+
+mat fuel    -2.111 tmp 1000
+ 3007.09c   -10.90
+ 3006.09c   -0.0005
+ 9019.09c   -66.80
+ 4009.09c   -6.27
+40000.09c   -10.92
+92235.09c   -1.67
+92238.09c   -3.44
+
+% --- Moderator graphite:
+
+mat moder    -1.857 tmp 1000
+ 6012.09c    -1.0
+
+% --- Cross section data library file path:
+
+set acelib "/projects/arfc/serpent/core/xsdata/xsdir_serpent"
+
+% --- boundary condition (1 for vacuum, 2 for reflective):
+
+set bc 1
+
+% --- group constant generation:
+
+set gcu  2 3
+set nfg  2 0.625e-6
+
+% --- Neutron population and criticality cycles:
+
+set pop 50000 500 50
+
+% --- Geometry and mesh plots:
+
+plot 3 500 500 81.28
+mesh 3 500 500
+
+% ------------------------------------------------------------
