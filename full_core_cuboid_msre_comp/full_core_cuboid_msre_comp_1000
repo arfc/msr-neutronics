@@ -1,6 +1,4 @@
-% --- MSR cluster ------------------------------------------
-
-set title "MSR2G"
+set title "full_core_cuboid_msre_comp"
 
 % --- Dummy structures
 surf 10 inf
@@ -15,8 +13,8 @@ surf 1 sqc 0 0 2.54
 surf 2 pz  0
 surf 3 pz  162.56
 
-cell  1  1  fill 2   -1   2  -3
-cell  2  1  fill 3    1   2  -3
+cell  1  1  fill 3   -1   2  -3
+cell  2  1  fill 2    1   2  -3
 cell  3  1  outside  -2
 cell  4  1  outside   3
 
@@ -49,7 +47,7 @@ lat 300 1 0 0 22 22 5.7694
 
 % --- Surfaces:
 
-surf 3000  sqc 0.0 0.0 63.4639
+surf 3000  sqc 0.0 0.0 63.4634
 surf 3001  pz  0
 surf 3002  pz  162.56
 
@@ -68,8 +66,16 @@ mat fuel    -2.111 tmp 1000
  9019.09c   -66.80
  4009.09c   -6.27
 40000.09c   -10.92
-92235.09c   -1.67
-92238.09c   -3.44
+92235.09c   -2.07 % 1.67 for 33% enrichment. See MSRE-properties.ods
+92238.09c   -3.04 % 3.44 for 33% enrichment. See MSRE-properties.ods
+
+% sum uranium % should be 5.11
+% 2.77 U235, 2.34 U238 -> k = 1.07319 after 6 inactive cycles
+% 1.77 U235, 3.34 U238 -> k = 0.97346 after 6 inactive cycles
+% 1.67 U235, 3.44 U238 -> k = 0.96341 after 6 inactive cycles
+% 2.27 U235, 2.84 U238 -> k = 1.03599 after 6 inactive cycles
+% 1.97 U235, 3.14 U238 -> k = 0.99424 after 6 inactive cycles
+% 2.07 U235, 3.04 U238 -> k = 1.00249 after 6 inactive cycles
 
 % --- Moderator graphite:
 
