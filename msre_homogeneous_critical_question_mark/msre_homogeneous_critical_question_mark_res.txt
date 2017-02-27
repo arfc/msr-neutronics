@@ -1,0 +1,295 @@
+
+% Increase counter:
+
+if (exist('idx', 'var'));
+  idx = idx + 1;
+else;
+  idx = 1;
+end;
+
+% Version, title and date:
+
+VERSION                   (idx, [1: 14])  = 'Serpent 1.1.19' ;
+TITLE                     (idx, [1:  9])  = 'MSRE-Homo' ;
+DATE                      (idx, [1: 24])  = 'Thu Feb 23 11:57:44 2017' ;
+
+% Run parameters:
+
+POP                       (idx, 1)        = 49992 ;
+CYCLES                    (idx, 1)        = 500 ;
+SKIP                      (idx, 1)        = 50 ;
+SRC_NORM_MODE             (idx, 1)        = 1 ;
+SEED                      (idx, 1)        = 1487872664 ;
+MPI_TASKS                 (idx, 1)        = 12 ;
+MPI_MODE                  (idx, 1)        = 1 ;
+DEBUG                     (idx, 1)        = 0 ;
+CPU_TYPE                  (idx, [1: 47])  = 'Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz' ;
+CPU_MHZ                   (idx, 1)        = 26.0 ;
+AVAIL_MEM                 (idx, 1)        = 96865.6 ;
+
+% File paths:
+
+XS_DATA_FILE_PATH         (idx, [1: 48])  = '/projects/arfc/serpent/core/xsdata/xsdir_serpent' ;
+DECAY_DATA_FILE_PATH      (idx, [1:  3])  = 'N/A' ;
+NFY_DATA_FILE_PATH        (idx, [1:  3])  = 'N/A' ;
+
+% Delta-tracking parameters:
+
+DT_THRESH                 (idx, 1)        = 9.00000E-01 ;
+DT_FRAC                   (idx, 1)        = 1.00000E+00 ;
+DT_EFF                    (idx, 1)        = 1.00000E+00 ;
+MIN_MACROXS               (idx, 1)        = 8.18677E-02 ;
+
+% Run statistics:
+
+TOT_CPU_TIME              (idx, 1)        = 9.52763E+01 ;
+RUNNING_TIME              (idx, 1)        = 7.95598E+00 ;
+CPU_USAGE                 (idx, 1)        = 11.97543 ;
+INIT_TIME                 (idx, 1)        = 8.42500E-02 ;
+TRANSPORT_CYCLE_TIME      (idx, 1)        = 7.87117E+00 ;
+BURNUP_CYCLE_TIME         (idx, 1)        = 0.00000E+00 ;
+PROCESS_TIME              (idx, 1)        = 5.33330E-04 ;
+CYCLE_IDX                 (idx, 1)        = 500 ;
+SOURCE_NEUTRONS           (idx, 1)        = 24996000 ;
+MEAN_POP_SIZE             (idx, [1:  2])  = [  4.99920E+04 0.00000 ];
+MEMSIZE                   (idx, 1)        = 49.0;
+SIMULATION_COMPLETED      (idx, 1)        = 1 ;
+
+% Energy grid parameters:
+
+ERG_EMIN                  (idx, 1)        = 1.00000E-11 ;
+ERG_EMAX                  (idx, 1)        = 2.00000E+01 ;
+ERG_TOL                   (idx, 1)        = 0.00000E+00 ;
+ERG_NE                    (idx, 1)        = 89960 ;
+ERG_NE_INI                (idx, 1)        = 89980 ;
+ERG_NE_IMP                (idx, 1)        = 10884 ;
+ERG_DIX                   (idx, 1)        = 0 ;
+USE_DBRC                  (idx, 1)        = 0 ;
+URES_MODE                 (idx, 1)        = 1 ;
+URES_DILU_CUT             (idx, 1)        = 0.00000E+00 ;
+URES_EMIN                 (idx, 1)        = 1.00000E+37 ;
+URES_EMAX                 (idx, 1)        = -1.00000E+37 ;
+URES_AVAIL                (idx, 1)        = 3 ;
+URES_USED                 (idx, 1)        = 0 ;
+
+% Nuclides and reaction channels:
+
+TOT_ISOTOPES              (idx, 1)        = 8 ;
+TOT_TRANSPORT_ISOTOPES    (idx, 1)        = 8 ;
+TOT_DECAY_ISOTOPES        (idx, 1)        = 0 ;
+TOT_REA_CHANNELS          (idx, 1)        = 267 ;
+TOT_TRANSMU_REA           (idx, 1)        = 0 ;
+
+% Reaction mode counters:
+
+COLLISIONS                (idx, 1)        = 220070862 ;
+FISSION_FRACTION          (idx, 1)        = 3.97487E-03 ;
+CAPTURE_FRACTION          (idx, 1)        = 2.28611E-03 ;
+ELASTIC_FRACTION          (idx, 1)        = 9.87666E-01 ;
+INELASTIC_FRACTION        (idx, 1)        = 6.07272E-03 ;
+ALPHA_FRACTION            (idx, 1)        = 0.00000E+00 ;
+BOUND_SCATTERING_FRACTION (idx, 1)        = 0.00000E+00 ;
+NXN_FRACTION              (idx, 1)        = 1.77216E-07 ;
+UNKNOWN_FRACTION          (idx, 1)        = 0.00000E+00 ;
+VIRTUAL_FRACTION          (idx, 1)        = 0.00000E+00 ;
+
+FREEGAS_FRACTION          (idx, 1)        = 4.48677E-01 ;
+TOTAL_ELASTIC_FRACTION    (idx, 1)        = 9.87666E-01 ;
+FISSILE_FISSION_FRACTION  (idx, 1)        = 9.99273E-01 ;
+LEAKAGE_REACTIONS         (idx, 1)        = 705178 ;
+
+REA_SAMPLING_EFF          (idx, 1)        = 6.53843E-01 ;
+
+% Slowing-down and thermalization:
+
+COL_SLOW                  (idx, [1:   2]) = [  9.50256E+01 2.8E-05 ];
+COL_THERM                 (idx, [1:   2]) = [  5.89709E+01 0.00027 ];
+COL_TOT                   (idx, [1:   2]) = [  1.27810E+02 0.00012 ];
+SLOW_TIME                 (idx, [1:   2]) = [  3.09565E-05 8.0E-05 ];
+THERM_TIME                (idx, [1:   2]) = [  2.87553E-04 0.00029 ];
+SLOW_DIST                 (idx, [1:   2]) = [  3.36280E+01 0.00012 ];
+THERM_DIST                (idx, [1:   2]) = [  2.14224E+01 0.00019 ];
+THERM_FRAC                (idx, [1:   2]) = [  5.39167E-01 0.00020 ];
+
+% Parameters for burnup calculation:
+
+BURN_MODE                 (idx, 1)        = 2 ;
+BURN_STEP                 (idx, 1)        = 1 ;
+BURN_TOT_STEPS            (idx, 1)        = 1 ;
+BURNUP                    (idx, 1)        = 0.00000E+00 ;
+BURN_DAYS                 (idx, 1)        = 0.00000E+00 ;
+ENERGY_OUTPUT             (idx, 1)        = 0.00000E+00 ;
+DEP_TTA_CUTOFF            (idx, 1)        = 1.00000E-15 ;
+DEP_STABILITY_CUTOFF      (idx, 1)        = 1.00000E-22 ;
+DEP_FP_YIELD_CUTOFF       (idx, 1)        = 1.00000E-22 ;
+DEP_XS_FRAC_CUTOFF        (idx, 1)        = 0.00000E+00 ;
+DEP_XS_ENERGY_CUTOFF      (idx, 1)        = -1.00000E+00 ;
+BURN_MATERIALS            (idx, 1)        = 0 ;
+FP_NUCLIDES_INCLUDED      (idx, 1)        = 0 ;
+FP_NUCLIDES_AVAILABLE     (idx, 1)        = 0 ;
+TOT_ACTIVITY              (idx, 1)        = 0.00000E+00 ;
+TOT_DECAY_HEAT            (idx, 1)        = 0.00000E+00 ;
+TOT_SF_RATE               (idx, 1)        = 0.00000E+00 ;
+ACTINIDE_ACTIVITY         (idx, 1)        = 0.00000E+00 ;
+ACTINIDE_DECAY_HEAT       (idx, 1)        = 0.00000E+00 ;
+FISSION_PRODUCT_ACTIVITY  (idx, 1)        = 0.00000E+00 ;
+FISSION_PRODUCT_DECAY_HEAT(idx, 1)        = 0.00000E+00 ;
+
+% Fission source entropies:
+
+ENTROPY_X                 (idx, [1:   2]) = [  8.97908E-01 0.00011 ];
+ENTROPY_Y                 (idx, [1:   2]) = [  8.97901E-01 0.00011 ];
+ENTROPY_Z                 (idx, [1:   2]) = [  9.40839E-01 9.4E-05 ];
+ENTROPY_TOT               (idx, [1:   2]) = [  9.02638E-01 5.9E-05 ];
+
+% Fission source centre:
+
+SOURCE_X0                 (idx, [1:   2]) = [ -4.98935E-04 22.53891 ];
+SOURCE_Y0                 (idx, [1:   2]) = [ -1.29785E-02 0.84132 ];
+SOURCE_Z0                 (idx, [1:   2]) = [  9.90540E+01 0.00020 ];
+
+% Criticality eigenvalues:
+
+ANA_KEFF                  (idx, [1:   2]) = [  1.02379E+00 0.00026 ];
+IMP_KEFF                  (idx, [1:   2]) = [  1.02334E+00 0.00020 ];
+COL_KEFF                  (idx, [1:   2]) = [  1.02340E+00 0.00031 ];
+ABS_KEFF                  (idx, [1:   2]) = [  1.02334E+00 0.00020 ];
+ABS_KINF                  (idx, [1:   2]) = [  1.54774E+00 6.6E-05 ];
+ABS_GC_KEFF               (idx, [1:   2]) = [  1.02334E+00 0.00020 ];
+ABS_GC_KINF               (idx, [1:   2]) = [  1.54774E+00 6.6E-05 ];
+IMPL_ALPHA_EIG            (idx, [1:   2]) = [  1.34442E+02 0.00877 ];
+FIXED_ALPHA_EIG           (idx, [1:   2]) = [  0.00000E+00 0.0E+00 ];
+GEOM_ALBEDO               (idx, [1:   2]) = [  1.00000E+00 0.0E+00 ];
+
+% Normalized total reaction rates:
+
+TOT_POWER                 (idx, [1:   2]) = [  1.36113E-11 0.00020 ];
+TOT_GENRATE               (idx, [1:   2]) = [  1.02331E+00 0.00020 ];
+TOT_FISSRATE              (idx, [1:   2]) = [  4.20002E-01 0.00020 ];
+TOT_ABSRATE               (idx, [1:   2]) = [  6.61174E-01 0.00017 ];
+TOT_LEAKRATE              (idx, [1:   2]) = [  3.38826E-01 0.00033 ];
+TOT_LOSSRATE              (idx, [1:   2]) = [  1.00000E+00 0.0E+00 ];
+TOT_SRCRATE               (idx, [1:   2]) = [ -4.09402E-04 0.90083 ];
+TOT_FLUX                  (idx, [1:   2]) = [  2.76270E+02 0.00014 ];
+TOT_RR                    (idx, [1:   2]) = [  1.05607E+02 0.00014 ];
+TOT_SOLU_ABSRATE          (idx, [1:   2]) = [  0.00000E+00 0.0E+00 ];
+
+
+
+% Point-kinetic parameters:
+
+ANA_PROMPT_LIFETIME       (idx, [1:   2]) = [  2.23345E-04 0.00031 ];
+IMPL_PROMPT_LIFETIME      (idx, [1:   2]) = [  1.71693E-04 0.00021 ];
+ANA_REPROD_TIME           (idx, [1:   2]) = [  2.18222E-04 0.00036 ];
+IMPL_REPROD_TIME          (idx, [1:   2]) = [  1.67776E-04 1.4E-05 ];
+DELAYED_EMTIME            (idx, [1:   2]) = [  1.30227E+01 0.00542 ];
+
+% Six-factor formula:
+
+SIX_FF_ETA                (idx, [1:   2]) = [  1.91592E+00 0.00015 ];
+SIX_FF_F                  (idx, [1:   2]) = [  1.00000E+00 0.0E+00 ];
+SIX_FF_P                  (idx, [1:   2]) = [  6.92149E-01 0.00016 ];
+SIX_FF_EPSILON            (idx, [1:   2]) = [  1.16762E+00 0.00013 ];
+SIX_FF_LF                 (idx, [1:   2]) = [  7.39950E-01 0.00014 ];
+SIX_FF_LT                 (idx, [1:   2]) = [  8.93570E-01 8.2E-05 ];
+SIX_FF_KINF               (idx, [1:   2]) = [  1.54824E+00 0.00019 ];
+SIX_FF_KEFF               (idx, [1:   2]) = [  1.02370E+00 0.00025 ];
+
+% Delayed neutron parameters:
+
+USE_DELNU                 (idx, 1)        = 1 ;
+PRECURSOR_GROUPS          (idx, 1)        = 8 ;
+BETA_EFF                  (idx, [1:  18]) = [  7.13184E-03 0.00417  2.45980E-04 0.02418  1.06716E-03 0.01107  6.53895E-04 0.01382  1.41728E-03 0.00958  2.31841E-03 0.00738  6.52712E-04 0.01388  6.10169E-04 0.01415  1.66229E-04 0.02687 ];
+BETA_ZERO                 (idx, [1:  18]) = [  6.65771E-03 1.4E-05  2.20039E-04 9.0E-05  1.01734E-03 4.2E-05  6.20917E-04 9.4E-05  1.31554E-03 3.8E-05  2.16964E-03 4.7E-05  6.07473E-04 0.00014  5.51388E-04 9.0E-05  1.55370E-04 0.00036 ];
+DECAY_CONSTANT            (idx, [1:  18]) = [  4.15185E-01 0.00662  1.24667E-02 0.0E+00  2.82917E-02 0.0E+00  4.25244E-02 0.0E+00  1.33042E-01 0.0E+00  2.92467E-01 0.0E+00  6.66488E-01 0.0E+00  1.63478E+00 1.7E-09  3.55460E+00 0.0E+00 ];
+
+% Parameters for group constant generation
+
+GC_UNI                    (idx, 1)        = 0 ;
+GC_SYM                    (idx, 1)        = 0 ;
+GC_NE                     (idx, 1)        = 2 ;
+GC_BOUNDS                 (idx, [1:   3]) = [  2.00000E+01  6.25000E-07  1.00000E-11 ];
+GC_REMXS_INCLUDE_MULT     (idx, 1)        = 1 ;
+
+% Few-group cross sections:
+
+FLUX                      (idx, [1:   6]) = [  2.76270E+02 0.00014  2.02167E+02 0.00017  7.41034E+01 0.00022 ];
+LEAK                      (idx, [1:   6]) = [  1.22675E-03 0.00042  1.28679E-03 0.00048  1.06308E-03 0.00073 ];
+TOTXS                     (idx, [1:   6]) = [  3.82260E-01 1.3E-05  3.69638E-01 1.3E-05  4.16694E-01 4.6E-06 ];
+FISSXS                    (idx, [1:   6]) = [  1.52033E-03 0.00019  2.98045E-04 7.8E-05  4.85464E-03 5.7E-05 ];
+CAPTXS                    (idx, [1:   6]) = [  8.72969E-04 0.00012  7.09589E-04 0.00018  1.31865E-03 4.9E-05 ];
+ABSXS                     (idx, [1:   6]) = [  2.39330E-03 0.00015  1.00763E-03 0.00014  6.17328E-03 5.5E-05 ];
+RABSXS                    (idx, [1:   6]) = [  2.39321E-03 0.00015  1.00752E-03 0.00014  6.17328E-03 5.5E-05 ];
+ELAXS                     (idx, [1:   6]) = [  3.77543E-01 1.4E-05  3.65454E-01 1.4E-05  4.10521E-01 3.8E-06 ];
+INELAXS                   (idx, [1:   6]) = [  2.32436E-03 0.00015  3.17635E-03 0.00011  2.91138E-15 0.01367 ];
+SCATTXS                   (idx, [1:   6]) = [  3.79867E-01 1.3E-05  3.68631E-01 1.3E-05  4.10521E-01 3.8E-06 ];
+SCATTPRODXS               (idx, [1:   6]) = [  3.79867E-01 1.3E-05  3.68631E-01 1.3E-05  4.10521E-01 3.8E-06 ];
+N2NXS                     (idx, [1:   6]) = [  8.15323E-08 0.00312  1.11415E-07 0.00312  0.00000E+00 0.0E+00 ];
+REMXS                     (idx, [1:   6]) = [  2.39321E-03 0.00015  4.63114E-03 0.00016  8.82010E-03 0.00016 ];
+NUBAR                     (idx, [1:   6]) = [  2.43645E+00 1.9E-06  2.43793E+00 1.3E-05  2.43620E+00 1.4E-09 ];
+NSF                       (idx, [1:   6]) = [  3.70420E-03 0.00019  7.26612E-04 7.9E-05  1.18269E-02 5.7E-05 ];
+RECIPVEL                  (idx, [1:   6]) = [  6.21481E-07 0.00020  9.78484E-08 0.00011  2.04993E-06 5.1E-05 ];
+FISSE                     (idx, [1:   6]) = [  2.02273E+02 5.5E-09  2.02289E+02 2.8E-08  2.02270E+02 0.0E+00 ];
+
+% Fission spectra:
+
+CHI                       (idx, [1:   4]) = [  1.00000E+00 0.0E+00  0.00000E+00 0.0E+00 ];
+CHIP                      (idx, [1:   4]) = [  1.00000E+00 0.0E+00  0.00000E+00 0.0E+00 ];
+CHID                      (idx, [1:   4]) = [  1.00000E+00 0.0E+00  0.00000E+00 0.0E+00 ];
+
+% Group-transfer probabilities and cross sections:
+
+GTRANSFP                  (idx, [1:   8]) = [  9.90170E-01 1.9E-06  6.44746E-03 0.00054  9.82991E-03 0.00019  9.93553E-01 3.5E-06 ];
+GTRANSFXS                 (idx, [1:   8]) = [  3.65007E-01 1.3E-05  2.64681E-03 0.00054  3.62362E-03 0.00020  4.07874E-01 5.7E-06 ];
+
+% Group-production probabilities and cross sections:
+
+GPRODP                    (idx, [1:   8]) = [  9.90170E-01 1.9E-06  6.44746E-03 0.00054  9.82991E-03 0.00019  9.93553E-01 3.5E-06 ];
+GPRODXS                   (idx, [1:   8]) = [  3.65007E-01 1.3E-05  2.64681E-03 0.00054  3.62362E-03 0.00020  4.07874E-01 5.7E-06 ];
+
+% Diffusion parameters:
+
+DIFFAREA                  (idx, [1:   6]) = [  2.70065E+02 0.00023  1.49964E+02 0.00021  4.90370E+01 0.00078 ];
+DIFFCOEF                  (idx, [1:   6]) = [  6.46350E-01 0.00030  6.94456E-01 0.00021  4.32407E-01 0.00074 ];
+TRANSPXS                  (idx, [1:   6]) = [  5.15994E-01 0.00030  4.80124E-01 0.00021  7.73431E-01 0.00074 ];
+MUBAR                     (idx, [1:   6]) = [ -3.52067E-01 0.00118 -2.99721E-01 0.00094 -8.68986E-01 0.00161 ];
+
+% Material buckling:
+
+MAT_BUCKLING              (idx, [1:   2]) = [  2.02872E-03 0.00027 ];
+
+% Leakage estimate of diffusion coefficient:
+
+LEAK_DIFFCOEF             (idx, [1:   6]) = [  6.04984E-01 0.00052  6.34580E-01 0.00056  5.24294E-01 0.00080 ];
+
+% PN scattering cross sections:
+
+SCATT0                    (idx, [1:   6]) = [  3.79867E-01 1.3E-05  3.68631E-01 1.4E-05  4.10517E-01 6.8E-06 ];
+SCATT1                    (idx, [1:   6]) = [  2.39813E-02 0.00018  2.49215E-02 0.00020  2.14157E-02 0.00040 ];
+SCATT2                    (idx, [1:   6]) = [  2.60282E-03 0.00130  3.03870E-03 0.00128  1.41355E-03 0.00470 ];
+SCATT3                    (idx, [1:   6]) = [  4.19330E-04 0.00685  4.88404E-04 0.00673  2.30880E-04 0.02451 ];
+SCATT4                    (idx, [1:   6]) = [  1.20967E-04 0.02051  1.29773E-04 0.02186  9.69574E-05 0.05170 ];
+SCATT5                    (idx, [1:   6]) = [  3.41294E-05 0.06654  2.76333E-05 0.09530  5.18307E-05 0.08708 ];
+
+% P1 diffusion parameters:
+
+P1_TRANSPXS               (idx, [1:   6]) = [  3.58279E-01 1.9E-05  3.44717E-01 2.1E-05  3.95279E-01 2.2E-05 ];
+P1_DIFFCOEF               (idx, [1:   6]) = [  9.30375E-01 1.9E-05  9.66980E-01 2.1E-05  8.43289E-01 2.2E-05 ];
+P1_MUBAR                  (idx, [1:   6]) = [  6.31309E-02 0.00018  6.76057E-02 0.00020  5.21676E-02 0.00040 ];
+
+% B1 critical spectrum calculation:
+
+B1_KINF                   (idx, [1:   2]) = [  9.99999E-01 0.0E+00 ];
+B1_BUCKLING               (idx, [1:   2]) = [  1.31664E-03 0.0E+00 ];
+B1_FLUX                   (idx, [1:   6]) = [  2.71864E+02 0.0E+00  1.99517E+02 0.0E+00  7.23467E+01 0.0E+00 ];
+B1_TOTXS                  (idx, [1:   6]) = [  3.82151E-01 0.0E+00  3.69629E-01 0.0E+00  4.16684E-01 0.0E+00 ];
+B1_NSF                    (idx, [1:   6]) = [  3.67831E-03 0.0E+00  7.25165E-04 0.0E+00  1.18225E-02 0.0E+00 ];
+B1_FISSXS                 (idx, [1:   6]) = [  1.50970E-03 0.0E+00  2.97449E-04 0.0E+00  4.85283E-03 0.0E+00 ];
+B1_CHI                    (idx, [1:   4]) = [  1.00000E+00 0.0E+00  0.00000E+00 0.0E+00 ];
+B1_ABSXS                  (idx, [1:   6]) = [  2.38029E-03 0.0E+00  1.00574E-03 0.0E+00  6.17102E-03 0.0E+00 ];
+B1_RABSXS                 (idx, [1:   6]) = [  2.38021E-03 0.0E+00  1.00563E-03 0.0E+00  6.17102E-03 0.0E+00 ];
+B1_REMXS                  (idx, [1:   6]) = [  2.38021E-03 0.0E+00  4.60880E-03 0.0E+00  8.82458E-03 0.0E+00 ];
+B1_DIFFCOEF               (idx, [1:   6]) = [  9.85916E-01 0.0E+00  1.03711E+00 0.0E+00  8.44739E-01 0.0E+00 ];
+B1_SCATTXS                (idx, [1:   8]) = [  3.65020E-01 0.0E+00  2.65355E-03 0.0E+00  3.60318E-03 0.0E+00  4.07860E-01 0.0E+00 ];
+B1_SCATTPRODXS            (idx, [1:   8]) = [  3.65020E-01 0.0E+00  2.65355E-03 0.0E+00  3.60318E-03 0.0E+00  4.07860E-01 0.0E+00 ];
+
