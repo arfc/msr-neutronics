@@ -42,6 +42,7 @@ set pop 50000 500 50
 
 plot 3 500 500 99.06
 mesh 3 500 500
+mesh 1 500 500
 
 % --- B1 calculation
 
