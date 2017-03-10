@@ -103,5 +103,12 @@ set pop 50000 500 50
 
 plot 3 500 500 81.28
 mesh 3 500 500
+mesh 1 500 500
+
+% --- B1 calculation
+
+ene mygrid 4 scale44
+
+set fum mygrid
 
 % ------------------------------------------------------------

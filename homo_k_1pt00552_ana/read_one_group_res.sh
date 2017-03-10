@@ -1,17 +1,27 @@
 #!/bin/bash
 
 # Create start and stop column numbers based on number of groups and precursor groups
-num_groups=2
+num_groups=1
 num_precursor_groups=8
-start_column=9
-stop_column=$(echo "$(($start_column + ($num_groups - 1) * 2))")
+start_column=7
+stop_column=7
 precursor_stop_column=$(echo "$(($start_column + ($num_precursor_groups - 1) * 2))")
 gsxs_start_column=7
-gsxs_stop_column=$(echo "$(($gsxs_start_column + ($num_groups*$num_groups - 1) * 2))")
+gsxs_stop_column=7
 chi_start_column=7
-chi_stop_column=$(echo "$(($chi_start_column + ($num_groups - 1) * 2))")
+chi_stop_column=7
 group_names=""
 for i in $(seq $num_groups); do group_names=$group_names"Group"$i" "; done
+
+## For bivariable interpolation
+# fuel_temp_start=750
+# fuel_temp_stop=1000
+# mod_temp_start=750
+# mod_temp_stop=1000
+# fuel_step=50
+# mod_step=50
+# fuel_temp_range=($(seq $fuel_temp_start $fuel_step $fuel_temp_stop))
+# mod_temp_range=($(seq $mod_temp_start $mod_step $mod_temp_stop))
 
 # For monovariable interpolation
 temp_start=902
@@ -19,7 +29,7 @@ temp_stop=942
 temp_step=20
 temp_range=($(seq $temp_start $temp_step $temp_stop))
 
-xsecs=(B1_FLUX B1_REMXS B1_FISSXS NUBAR B1_NSF FISSE B1_DIFFCOEF RECIPVEL)
+xsecs=(FLUX REMXS FISSXS NUBAR NSF FISSE DIFFCOEF RECIPVEL)
 start_cols=()
 stop_cols=()
 for index in ${!xsecs[@]}; do
@@ -45,16 +55,12 @@ for index in $(seq $((${#lengths[@]} - 1))); do
 done
 
 # Create directory where group constant files in moltres compataible form are stored
-interp_dir=moltres_b1
+interp_dir=moltres
 rm -rf ${interp_dir}
 mkdir ${interp_dir}
 
 # root file on which both this script's input and output are based
-echo "What's root name of file?"
-read root
-# root=msre_homogeneous_critical_question_mark
-# fuel_out=${root}_fuel_data_func_of_fuel_temp
-# mod_out=${root}_mod_data_func_of_mod_temp
+root=homo_critical
 
 # Look over monovariate temperature
 for temp in ${temp_range[@]}; do
@@ -64,12 +70,5 @@ for temp in ${temp_range[@]}; do
     for index in "${!xsecs[@]}"; do
         awk -v start_column=${start_cols[index]} -v stop_column=${stop_cols[index]} -v temp=$temp -v xsec=${xsecs[index]} \
             'BEGIN {ORS = ""} $1==xsec {j++} j==1 {print temp" "; for (i=start_column; i <= stop_column; i=i+2) print $i" "; print "\n"; exit}' $res_file >> "${interp_dir}/${root}_${xsecs[index]}.txt"
-        # awk -v start_column=${start_cols[index]} -v stop_column=${stop_cols[index]} -v temp=$temp -v xsec=${xsecs[index]} \
-        #     'BEGIN {ORS = ""} $1==xsec {j++} j==1 {print temp" "; for (i=start_column; i <= stop_column; i=i+2) print $i" "; print "\n"; exit}' $res_file >> "${interp_dir}/${fuel_out}_${xsecs[index]}.txt"
-        # awk -v start_column=${start_cols[index]} -v stop_column=${stop_cols[index]} -v temp=$temp -v xsec=${xsecs[index]} \
-        #     'BEGIN {ORS = ""} $1==xsec {j++} j==2 {print temp" "; for (i=start_column; i <= stop_column; i=i+2) print $i" "; print "\n"; exit}' $res_file >> "${interp_dir}/${mod_out}_${xsecs[index]}.txt"
     done
 done
-
-cd $interp_dir
-for f in *B1*.txt; do mv "$f" "`echo $f | sed 's/_B1//'`"; done
