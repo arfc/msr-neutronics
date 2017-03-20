@@ -97,26 +97,50 @@ cell 58  6  refl -3
 
 
 % --------- Reflector zone II-B
-surf 60  pad  0.0 0.0 235.0 256.032 1.769 -1.769  % Left horizontal big element
-surf 61  pad  0.0 0.0 235.0 256.032 88.231 91.769 % Bottom vertical big element
+surf 60  pad  0.0 0.0 235.0 256.032 1.769 -1.769    % Left horizontal big element
+surf 61  pad  0.0 0.0 235.0 256.032 88.231 91.769   % Bottom vertical big element
 surf 62  pad  0.0 0.0 235.0 256.032 181.769 178.231 % Right horizontal big element
 surf 63  pad  0.0 0.0 235.0 256.032 268.231 271.769 % Top vertical big element
+surf 64  pad  0.0 0.0 235.0 256.032 46.769 43.231   % 45grad top-left
+surf 65  pad  0.0 0.0 235.0 256.032 133.231 136.769 % 45 grad bottom-left
+surf 66  pad  0.0 0.0 235.0 256.032 226.769 223.231 % 45 grad bottom-right
+surf 67  pad  0.0 0.0 235.0 256.032 313.231 316.769 % 45 grad top-right
 
-surf 70  cyl  0.0 245.516  3.0875                   % Hole in a top big element
-surf 71  cyl  0.0 -245.516 3.0875                   % Hole in a bottom big element
-surf 72  cyl  245.516  0.0 3.0875                   % Hole in a right big element
-surf 73  cyl  -245.516 0.0 3.0875                   % Hole in a left big element
+%_______________Small graphite elements__________
+surf 100 pad  0.0 0.0 235.0 256.032 2.117 3.341         % 1st small element from clock position 3 hours
+surf 101 pad  0.0 0.0 235.0 256.032 3.689 4.913         % 1st small element from clock position 3 hours
+%____________________________________________
+surf 70  cyl  0.0 245.516      3.0875                   % Hole in a top big element
+surf 71  cyl  0.0 -245.516     3.0875                   % Hole in a bottom big element
+surf 72  cyl  245.516  0.0     3.0875                   % Hole in a right big element
+surf 73  cyl  -245.516 0.0     3.0875                   % Hole in a left big element
+surf 74  cyl  173.606 173.606  3.0875                   % Hole in a top-right 45 grad element
+surf 75  cyl  173.606 -173.606 3.0875                   % Hole in a bottom-right 45 big element
+surf 76  cyl  -173.606 173.606 3.0875                   % Hole in a top-left 45 big element
+surf 77  cyl -173.606 -173.606 3.0875                   % Hole in a bottom-left element
 
 cell 60  10  moder -60 73
 cell 61  10  moder -61 71
 cell 62  10  moder -62 72
 cell 63  10  moder -63 70
+%-----45 grad shifted------
+cell 64  10  moder -64 76 
+cell 65  10  moder -65 77
+cell 66  10  moder -66 75
+cell 67  10  moder -67 74
+%-------Small elements array
+cell 100 10  moder -100
+cell 101 10  moder -101
 
-cell 80  10  fuel 60 61 62 63
+cell 80  10  fuel 60 61 62 63 64 65 66 67 100 101
 cell 81  10  fuel -70
 cell 82  10  fuel -71
 cell 83  10  fuel -72
 cell 84  10  fuel -73
+cell 85  10  fuel -74
+cell 86  10  fuel -75
+cell 87  10  fuel -76
+cell 88  10  fuel -77
 
 %----------- end of Zone II-B
 % ------------------------------------------------------------
@@ -208,7 +232,8 @@ cell 310  0    outside   3005  3011 -3012
 cell 311  0    outside   -3011
 cell 312  0    outside   3012
 
-cell 320  0    fill 10 -3002 3000 3011 -3012 
+cell 320  0    fill 10 -3002 3000 3011 -3012
+
 
 % --- Fuel (LiF-BeF2-ThF4-233UF4 71.7-16-12-0.3 mole %):
 
@@ -277,7 +302,7 @@ set pop 10000 500 50
 
 % --- Geometry and mesh plots:
 
-plot 3 8000 8000 1.0
+plot 3 4000 4000 1.0
 plot 2 2000 2000 0.0
 mesh 3 2000 2000
 mesh 2 2000 2000
