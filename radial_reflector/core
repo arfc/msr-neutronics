@@ -101,41 +101,236 @@ surf 53  plane -1.0 1.0 0.0 0.0 % Upper-left
 surf 54  plane 1.0 -1.0 0.0 0.0 % Bottom-right
 surf 55  plane -1.0 -1.0 0.0 0.0 % Bottom-left
 
-cell 200  7  moder -3 -52   % Top-right
-cell 201  7  fuel  -3  52   % Top-right
-cell 202  8  moder -3 -53   % Top-left
-cell 203  8  fuel  -3  53   % Top-left
-cell 204  9  moder -3 -54   % Bottom-right
-cell 205  9  fuel  -3  54   % Bottom-right
-cell 206  6  moder -3 -55   % Bottom-left
-cell 207  6  fuel  -3  55   % Bottom-left
-
+cell 500  7  moder -3 -52   % Top-right
+cell 501  7  fuel  -3  52   % Top-right
+cell 502  8  moder -3 -53   % Top-left
+cell 503  8  fuel  -3  53   % Top-left
+cell 504  9  moder -3 -54   % Bottom-right
+cell 505  9  fuel  -3  54   % Bottom-right
+cell 506  6  moder -3 -55   % Bottom-left
+cell 507  6  fuel  -3  55   % Bottom-left
 
 % --------- Reflector zone II-B
-surf 60  pad  0.0 0.0 235.0 256.032 1.769 -1.769    % Left horizontal big element
-surf 61  pad  0.0 0.0 235.0 256.032 88.231 91.769   % Bottom vertical big element
-surf 62  pad  0.0 0.0 228.6 256.032 181.769 178.231 % Right horizontal big element
-surf 63  pad  0.0 0.0 235.0 256.032 268.231 271.769 % Top vertical big element
-surf 64  pad  0.0 0.0 235.0 256.032 46.769 43.231   % 45grad top-left
-surf 65  pad  0.0 0.0 235.0 256.032 133.231 136.769 % 45 grad bottom-left
-surf 66  pad  0.0 0.0 235.0 256.032 226.769 223.231 % 45 grad bottom-right
-surf 67  pad  0.0 0.0 235.0 256.032 313.231 316.769 % 45 grad top-right
+surf 60  pad  0.0 0.0 228.6  256.032 1.769 -1.769    % Left horizontal big element
+surf 61  pad  0.0 0.0 228.6  256.032 88.231 91.769   % Bottom vertical big element
+surf 62  pad  0.0 0.0 228.6  256.032 181.769 178.231 % Right horizontal big element
+surf 63  pad  0.0 0.0 228.6  256.032 268.231 271.769 % Top vertical big element
+surf 64  pad  0.0 0.0 222.71 256.032 46.769 43.231   % 45grad top-left
+surf 65  pad  0.0 0.0 222.71 256.032 133.231 136.769 % 45grad bottom-left
+surf 66  pad  0.0 0.0 222.71 256.032 226.769 223.231 % 45grad bottom-right
+surf 67  pad  0.0 0.0 222.71 256.032 313.231 316.769 % 45grad top-right
+%__________Holes in big elements__________________________________
+surf 70  cyl  0.0 242.679     3.0875                   % Hole in a top big element
+surf 71  cyl  0.0 -242.679    3.0875                   % Hole in a bottom big element
+surf 72  cyl  242.679  0.0    3.0875                   % Hole in a right big element
+surf 73  cyl  -242.679 0.0    3.0875                   % Hole in a left big element
+surf 74  cyl  171.60 171.60   3.0875                   % Hole in a top-right 45 grad element
+surf 75  cyl  171.60 -171.60  3.0875                   % Hole in a bottom-right 45 big element
+surf 76  cyl  -171.60 171.60  3.0875                   % Hole in a top-left 45 big element
+surf 77  cyl  -171.60 -171.60 3.0875                   % Hole in a bottom-left element
 
 %_______________Small graphite elements__________
-surf 100 pad  0.0 0.0 218.44 256.032 2.117 3.341         % 1st small element from clock position 3 hours
-surf 101 pad  0.0 0.0 218.44 256.032 3.689 4.913         % 2nd small element from clock position 3 hours
-surf 102 pad  0.0 0.0 218.44 256.032 5.261 6.485         % 3rd small element from clock position 3 hours
-surf 103 pad  0.0 0.0 218.44 256.032 6.833 8.057         % 4th small element from clock position 4 hours
-%____________________________________________
-surf 70  cyl  0.0 245.516      3.0875                   % Hole in a top big element
-surf 71  cyl  0.0 -245.516     3.0875                   % Hole in a bottom big element
-surf 72  cyl  245.516  0.0     3.0875                   % Hole in a right big element
-surf 73  cyl  -245.516 0.0     3.0875                   % Hole in a left big element
-surf 74  cyl  173.606 173.606  3.0875                   % Hole in a top-right 45 grad element
-surf 75  cyl  173.606 -173.606 3.0875                   % Hole in a bottom-right 45 big element
-surf 76  cyl  -173.606 173.606 3.0875                   % Hole in a top-left 45 big element
-surf 77  cyl -173.606 -173.606 3.0875                   % Hole in a bottom-left element
-
+surf 100  pad .0 .0 218.44 256.032 2.187  3.411      % sector 1,small graphite element of radial reflector number 1
+surf 101  pad .0 .0 218.44 256.032 3.829  5.053      % sector 1,small graphite element of radial reflector number 2
+surf 102  pad .0 .0 218.44 256.032 5.471  6.695      % sector 1,small graphite element of radial reflector number 3
+surf 103  pad .0 .0 218.44 256.032 7.113  8.337      % sector 1,small graphite element of radial reflector number 4
+surf 104  pad .0 .0 218.44 256.032 8.755  9.979      % sector 1,small graphite element of radial reflector number 5
+surf 105  pad .0 .0 218.44 256.032 10.397  11.621      % sector 1,small graphite element of radial reflector number 6
+surf 106  pad .0 .0 218.44 256.032 12.039  13.263      % sector 1,small graphite element of radial reflector number 7
+surf 107  pad .0 .0 218.44 256.032 13.681  14.905      % sector 1,small graphite element of radial reflector number 8
+surf 108  pad .0 .0 218.44 256.032 15.323  16.547      % sector 1,small graphite element of radial reflector number 9
+surf 109  pad .0 .0 218.44 256.032 16.965  18.189      % sector 1,small graphite element of radial reflector number 10
+surf 110  pad .0 .0 218.44 256.032 18.607  19.831      % sector 1,small graphite element of radial reflector number 11
+surf 111  pad .0 .0 218.44 256.032 20.249  21.473      % sector 1,small graphite element of radial reflector number 12
+surf 112  pad .0 .0 218.44 256.032 21.891  23.115      % sector 1,small graphite element of radial reflector number 13
+surf 113  pad .0 .0 218.44 256.032 23.533  24.757      % sector 1,small graphite element of radial reflector number 14
+surf 114  pad .0 .0 218.44 256.032 25.175  26.399      % sector 1,small graphite element of radial reflector number 15
+surf 115  pad .0 .0 218.44 256.032 26.817  28.041      % sector 1,small graphite element of radial reflector number 16
+surf 116  pad .0 .0 218.44 256.032 28.459  29.683      % sector 1,small graphite element of radial reflector number 17
+surf 117  pad .0 .0 218.44 256.032 30.101  31.325      % sector 1,small graphite element of radial reflector number 18
+surf 118  pad .0 .0 218.44 256.032 31.743  32.967      % sector 1,small graphite element of radial reflector number 19
+surf 119  pad .0 .0 218.44 256.032 33.385  34.609      % sector 1,small graphite element of radial reflector number 20
+surf 120  pad .0 .0 218.44 256.032 35.027  36.251      % sector 1,small graphite element of radial reflector number 21
+surf 121  pad .0 .0 218.44 256.032 36.669  37.893      % sector 1,small graphite element of radial reflector number 22
+surf 122  pad .0 .0 218.44 256.032 38.311  39.535      % sector 1,small graphite element of radial reflector number 23
+surf 123  pad .0 .0 218.44 256.032 39.953  41.177      % sector 1,small graphite element of radial reflector number 24
+surf 124  pad .0 .0 218.44 256.032 41.595  42.819      % sector 1,small graphite element of radial reflector number 25
+surf 125  pad .0 .0 218.44 256.032 47.193  48.417      % sector 2,small graphite element of radial reflector number 1
+surf 126  pad .0 .0 218.44 256.032 48.835  50.059      % sector 2,small graphite element of radial reflector number 2
+surf 127  pad .0 .0 218.44 256.032 50.477  51.701      % sector 2,small graphite element of radial reflector number 3
+surf 128  pad .0 .0 218.44 256.032 52.119  53.343      % sector 2,small graphite element of radial reflector number 4
+surf 129  pad .0 .0 218.44 256.032 53.761  54.985      % sector 2,small graphite element of radial reflector number 5
+surf 130  pad .0 .0 218.44 256.032 55.403  56.627      % sector 2,small graphite element of radial reflector number 6
+surf 131  pad .0 .0 218.44 256.032 57.045  58.269      % sector 2,small graphite element of radial reflector number 7
+surf 132  pad .0 .0 218.44 256.032 58.687  59.911      % sector 2,small graphite element of radial reflector number 8
+surf 133  pad .0 .0 218.44 256.032 60.329  61.553      % sector 2,small graphite element of radial reflector number 9
+surf 134  pad .0 .0 218.44 256.032 61.971  63.195      % sector 2,small graphite element of radial reflector number 10
+surf 135  pad .0 .0 218.44 256.032 63.613  64.837      % sector 2,small graphite element of radial reflector number 11
+surf 136  pad .0 .0 218.44 256.032 65.255  66.479      % sector 2,small graphite element of radial reflector number 12
+surf 137  pad .0 .0 218.44 256.032 66.897  68.121      % sector 2,small graphite element of radial reflector number 13
+surf 138  pad .0 .0 218.44 256.032 68.539  69.763      % sector 2,small graphite element of radial reflector number 14
+surf 139  pad .0 .0 218.44 256.032 70.181  71.405      % sector 2,small graphite element of radial reflector number 15
+surf 140  pad .0 .0 218.44 256.032 71.823  73.047      % sector 2,small graphite element of radial reflector number 16
+surf 141  pad .0 .0 218.44 256.032 73.465  74.689      % sector 2,small graphite element of radial reflector number 17
+surf 142  pad .0 .0 218.44 256.032 75.107  76.331      % sector 2,small graphite element of radial reflector number 18
+surf 143  pad .0 .0 218.44 256.032 76.749  77.973      % sector 2,small graphite element of radial reflector number 19
+surf 144  pad .0 .0 218.44 256.032 78.391  79.615      % sector 2,small graphite element of radial reflector number 20
+surf 145  pad .0 .0 218.44 256.032 80.033  81.257      % sector 2,small graphite element of radial reflector number 21
+surf 146  pad .0 .0 218.44 256.032 81.675  82.899      % sector 2,small graphite element of radial reflector number 22
+surf 147  pad .0 .0 218.44 256.032 83.317  84.541      % sector 2,small graphite element of radial reflector number 23
+surf 148  pad .0 .0 218.44 256.032 84.959  86.183      % sector 2,small graphite element of radial reflector number 24
+surf 149  pad .0 .0 218.44 256.032 86.601  87.825      % sector 2,small graphite element of radial reflector number 25
+surf 150  pad .0 .0 218.44 256.032 92.198  93.422      % sector 3,small graphite element of radial reflector number 1
+surf 151  pad .0 .0 218.44 256.032 93.84  95.064      % sector 3,small graphite element of radial reflector number 2
+surf 152  pad .0 .0 218.44 256.032 95.482  96.706      % sector 3,small graphite element of radial reflector number 3
+surf 153  pad .0 .0 218.44 256.032 97.124  98.348      % sector 3,small graphite element of radial reflector number 4
+surf 154  pad .0 .0 218.44 256.032 98.766  99.99      % sector 3,small graphite element of radial reflector number 5
+surf 155  pad .0 .0 218.44 256.032 100.408  101.632      % sector 3,small graphite element of radial reflector number 6
+surf 156  pad .0 .0 218.44 256.032 102.05  103.274      % sector 3,small graphite element of radial reflector number 7
+surf 157  pad .0 .0 218.44 256.032 103.692  104.916      % sector 3,small graphite element of radial reflector number 8
+surf 158  pad .0 .0 218.44 256.032 105.334  106.558      % sector 3,small graphite element of radial reflector number 9
+surf 159  pad .0 .0 218.44 256.032 106.976  108.2      % sector 3,small graphite element of radial reflector number 10
+surf 160  pad .0 .0 218.44 256.032 108.618  109.842      % sector 3,small graphite element of radial reflector number 11
+surf 161  pad .0 .0 218.44 256.032 110.26  111.484      % sector 3,small graphite element of radial reflector number 12
+surf 162  pad .0 .0 218.44 256.032 111.902  113.126      % sector 3,small graphite element of radial reflector number 13
+surf 163  pad .0 .0 218.44 256.032 113.544  114.768      % sector 3,small graphite element of radial reflector number 14
+surf 164  pad .0 .0 218.44 256.032 115.186  116.41      % sector 3,small graphite element of radial reflector number 15
+surf 165  pad .0 .0 218.44 256.032 116.828  118.052      % sector 3,small graphite element of radial reflector number 16
+surf 166  pad .0 .0 218.44 256.032 118.47  119.694      % sector 3,small graphite element of radial reflector number 17
+surf 167  pad .0 .0 218.44 256.032 120.112  121.336      % sector 3,small graphite element of radial reflector number 18
+surf 168  pad .0 .0 218.44 256.032 121.754  122.978      % sector 3,small graphite element of radial reflector number 19
+surf 169  pad .0 .0 218.44 256.032 123.396  124.62      % sector 3,small graphite element of radial reflector number 20
+surf 170  pad .0 .0 218.44 256.032 125.038  126.262      % sector 3,small graphite element of radial reflector number 21
+surf 171  pad .0 .0 218.44 256.032 126.68  127.904      % sector 3,small graphite element of radial reflector number 22
+surf 172  pad .0 .0 218.44 256.032 128.322  129.546      % sector 3,small graphite element of radial reflector number 23
+surf 173  pad .0 .0 218.44 256.032 129.964  131.188      % sector 3,small graphite element of radial reflector number 24
+surf 174  pad .0 .0 218.44 256.032 131.606  132.83      % sector 3,small graphite element of radial reflector number 25
+surf 175  pad .0 .0 218.44 256.032 137.204  138.428      % sector 4,small graphite element of radial reflector number 1
+surf 176  pad .0 .0 218.44 256.032 138.846  140.07      % sector 4,small graphite element of radial reflector number 2
+surf 177  pad .0 .0 218.44 256.032 140.488  141.712      % sector 4,small graphite element of radial reflector number 3
+surf 178  pad .0 .0 218.44 256.032 142.13  143.354      % sector 4,small graphite element of radial reflector number 4
+surf 179  pad .0 .0 218.44 256.032 143.772  144.996      % sector 4,small graphite element of radial reflector number 5
+surf 180  pad .0 .0 218.44 256.032 145.414  146.638      % sector 4,small graphite element of radial reflector number 6
+surf 181  pad .0 .0 218.44 256.032 147.056  148.28      % sector 4,small graphite element of radial reflector number 7
+surf 182  pad .0 .0 218.44 256.032 148.698  149.922      % sector 4,small graphite element of radial reflector number 8
+surf 183  pad .0 .0 218.44 256.032 150.34  151.564      % sector 4,small graphite element of radial reflector number 9
+surf 184  pad .0 .0 218.44 256.032 151.982  153.206      % sector 4,small graphite element of radial reflector number 10
+surf 185  pad .0 .0 218.44 256.032 153.624  154.848      % sector 4,small graphite element of radial reflector number 11
+surf 186  pad .0 .0 218.44 256.032 155.266  156.49      % sector 4,small graphite element of radial reflector number 12
+surf 187  pad .0 .0 218.44 256.032 156.908  158.132      % sector 4,small graphite element of radial reflector number 13
+surf 188  pad .0 .0 218.44 256.032 158.55  159.774      % sector 4,small graphite element of radial reflector number 14
+surf 189  pad .0 .0 218.44 256.032 160.192  161.416      % sector 4,small graphite element of radial reflector number 15
+surf 190  pad .0 .0 218.44 256.032 161.834  163.058      % sector 4,small graphite element of radial reflector number 16
+surf 191  pad .0 .0 218.44 256.032 163.476  164.7      % sector 4,small graphite element of radial reflector number 17
+surf 192  pad .0 .0 218.44 256.032 165.118  166.342      % sector 4,small graphite element of radial reflector number 18
+surf 193  pad .0 .0 218.44 256.032 166.76  167.984      % sector 4,small graphite element of radial reflector number 19
+surf 194  pad .0 .0 218.44 256.032 168.402  169.626      % sector 4,small graphite element of radial reflector number 20
+surf 195  pad .0 .0 218.44 256.032 170.044  171.268      % sector 4,small graphite element of radial reflector number 21
+surf 196  pad .0 .0 218.44 256.032 171.686  172.91      % sector 4,small graphite element of radial reflector number 22
+surf 197  pad .0 .0 218.44 256.032 173.328  174.552      % sector 4,small graphite element of radial reflector number 23
+surf 198  pad .0 .0 218.44 256.032 174.97  176.194      % sector 4,small graphite element of radial reflector number 24
+surf 199  pad .0 .0 218.44 256.032 176.612  177.836      % sector 4,small graphite element of radial reflector number 25
+surf 200  pad .0 .0 218.44 256.032 182.209  183.433      % sector 5,small graphite element of radial reflector number 1
+surf 201  pad .0 .0 218.44 256.032 183.851  185.075      % sector 5,small graphite element of radial reflector number 2
+surf 202  pad .0 .0 218.44 256.032 185.493  186.717      % sector 5,small graphite element of radial reflector number 3
+surf 203  pad .0 .0 218.44 256.032 187.135  188.359      % sector 5,small graphite element of radial reflector number 4
+surf 204  pad .0 .0 218.44 256.032 188.777  190.001      % sector 5,small graphite element of radial reflector number 5
+surf 205  pad .0 .0 218.44 256.032 190.419  191.643      % sector 5,small graphite element of radial reflector number 6
+surf 206  pad .0 .0 218.44 256.032 192.061  193.285      % sector 5,small graphite element of radial reflector number 7
+surf 207  pad .0 .0 218.44 256.032 193.703  194.927      % sector 5,small graphite element of radial reflector number 8
+surf 208  pad .0 .0 218.44 256.032 195.345  196.569      % sector 5,small graphite element of radial reflector number 9
+surf 209  pad .0 .0 218.44 256.032 196.987  198.211      % sector 5,small graphite element of radial reflector number 10
+surf 210  pad .0 .0 218.44 256.032 198.629  199.853      % sector 5,small graphite element of radial reflector number 11
+surf 211  pad .0 .0 218.44 256.032 200.271  201.495      % sector 5,small graphite element of radial reflector number 12
+surf 212  pad .0 .0 218.44 256.032 201.913  203.137      % sector 5,small graphite element of radial reflector number 13
+surf 213  pad .0 .0 218.44 256.032 203.555  204.779      % sector 5,small graphite element of radial reflector number 14
+surf 214  pad .0 .0 218.44 256.032 205.197  206.421      % sector 5,small graphite element of radial reflector number 15
+surf 215  pad .0 .0 218.44 256.032 206.839  208.063      % sector 5,small graphite element of radial reflector number 16
+surf 216  pad .0 .0 218.44 256.032 208.481  209.705      % sector 5,small graphite element of radial reflector number 17
+surf 217  pad .0 .0 218.44 256.032 210.123  211.347      % sector 5,small graphite element of radial reflector number 18
+surf 218  pad .0 .0 218.44 256.032 211.765  212.989      % sector 5,small graphite element of radial reflector number 19
+surf 219  pad .0 .0 218.44 256.032 213.407  214.631      % sector 5,small graphite element of radial reflector number 20
+surf 220  pad .0 .0 218.44 256.032 215.049  216.273      % sector 5,small graphite element of radial reflector number 21
+surf 221  pad .0 .0 218.44 256.032 216.691  217.915      % sector 5,small graphite element of radial reflector number 22
+surf 222  pad .0 .0 218.44 256.032 218.333  219.557      % sector 5,small graphite element of radial reflector number 23
+surf 223  pad .0 .0 218.44 256.032 219.975  221.199      % sector 5,small graphite element of radial reflector number 24
+surf 224  pad .0 .0 218.44 256.032 221.617  222.841      % sector 5,small graphite element of radial reflector number 25
+surf 225  pad .0 .0 218.44 256.032 227.215  228.439      % sector 6,small graphite element of radial reflector number 1
+surf 226  pad .0 .0 218.44 256.032 228.857  230.081      % sector 6,small graphite element of radial reflector number 2
+surf 227  pad .0 .0 218.44 256.032 230.499  231.723      % sector 6,small graphite element of radial reflector number 3
+surf 228  pad .0 .0 218.44 256.032 232.141  233.365      % sector 6,small graphite element of radial reflector number 4
+surf 229  pad .0 .0 218.44 256.032 233.783  235.007      % sector 6,small graphite element of radial reflector number 5
+surf 230  pad .0 .0 218.44 256.032 235.425  236.649      % sector 6,small graphite element of radial reflector number 6
+surf 231  pad .0 .0 218.44 256.032 237.067  238.291      % sector 6,small graphite element of radial reflector number 7
+surf 232  pad .0 .0 218.44 256.032 238.709  239.933      % sector 6,small graphite element of radial reflector number 8
+surf 233  pad .0 .0 218.44 256.032 240.351  241.575      % sector 6,small graphite element of radial reflector number 9
+surf 234  pad .0 .0 218.44 256.032 241.993  243.217      % sector 6,small graphite element of radial reflector number 10
+surf 235  pad .0 .0 218.44 256.032 243.635  244.859      % sector 6,small graphite element of radial reflector number 11
+surf 236  pad .0 .0 218.44 256.032 245.277  246.501      % sector 6,small graphite element of radial reflector number 12
+surf 237  pad .0 .0 218.44 256.032 246.919  248.143      % sector 6,small graphite element of radial reflector number 13
+surf 238  pad .0 .0 218.44 256.032 248.561  249.785      % sector 6,small graphite element of radial reflector number 14
+surf 239  pad .0 .0 218.44 256.032 250.203  251.427      % sector 6,small graphite element of radial reflector number 15
+surf 240  pad .0 .0 218.44 256.032 251.845  253.069      % sector 6,small graphite element of radial reflector number 16
+surf 241  pad .0 .0 218.44 256.032 253.487  254.711      % sector 6,small graphite element of radial reflector number 17
+surf 242  pad .0 .0 218.44 256.032 255.129  256.353      % sector 6,small graphite element of radial reflector number 18
+surf 243  pad .0 .0 218.44 256.032 256.771  257.995      % sector 6,small graphite element of radial reflector number 19
+surf 244  pad .0 .0 218.44 256.032 258.413  259.637      % sector 6,small graphite element of radial reflector number 20
+surf 245  pad .0 .0 218.44 256.032 260.055  261.279      % sector 6,small graphite element of radial reflector number 21
+surf 246  pad .0 .0 218.44 256.032 261.697  262.921      % sector 6,small graphite element of radial reflector number 22
+surf 247  pad .0 .0 218.44 256.032 263.339  264.563      % sector 6,small graphite element of radial reflector number 23
+surf 248  pad .0 .0 218.44 256.032 264.981  266.205      % sector 6,small graphite element of radial reflector number 24
+surf 249  pad .0 .0 218.44 256.032 266.623  267.847      % sector 6,small graphite element of radial reflector number 25
+surf 250  pad .0 .0 218.44 256.032 272.22  273.444      % sector 7,small graphite element of radial reflector number 1
+surf 251  pad .0 .0 218.44 256.032 273.862  275.086      % sector 7,small graphite element of radial reflector number 2
+surf 252  pad .0 .0 218.44 256.032 275.504  276.728      % sector 7,small graphite element of radial reflector number 3
+surf 253  pad .0 .0 218.44 256.032 277.146  278.37      % sector 7,small graphite element of radial reflector number 4
+surf 254  pad .0 .0 218.44 256.032 278.788  280.012      % sector 7,small graphite element of radial reflector number 5
+surf 255  pad .0 .0 218.44 256.032 280.43  281.654      % sector 7,small graphite element of radial reflector number 6
+surf 256  pad .0 .0 218.44 256.032 282.072  283.296      % sector 7,small graphite element of radial reflector number 7
+surf 257  pad .0 .0 218.44 256.032 283.714  284.938      % sector 7,small graphite element of radial reflector number 8
+surf 258  pad .0 .0 218.44 256.032 285.356  286.58      % sector 7,small graphite element of radial reflector number 9
+surf 259  pad .0 .0 218.44 256.032 286.998  288.222      % sector 7,small graphite element of radial reflector number 10
+surf 260  pad .0 .0 218.44 256.032 288.64  289.864      % sector 7,small graphite element of radial reflector number 11
+surf 261  pad .0 .0 218.44 256.032 290.282  291.506      % sector 7,small graphite element of radial reflector number 12
+surf 262  pad .0 .0 218.44 256.032 291.924  293.148      % sector 7,small graphite element of radial reflector number 13
+surf 263  pad .0 .0 218.44 256.032 293.566  294.79      % sector 7,small graphite element of radial reflector number 14
+surf 264  pad .0 .0 218.44 256.032 295.208  296.432      % sector 7,small graphite element of radial reflector number 15
+surf 265  pad .0 .0 218.44 256.032 296.85  298.074      % sector 7,small graphite element of radial reflector number 16
+surf 266  pad .0 .0 218.44 256.032 298.492  299.716      % sector 7,small graphite element of radial reflector number 17
+surf 267  pad .0 .0 218.44 256.032 300.134  301.358      % sector 7,small graphite element of radial reflector number 18
+surf 268  pad .0 .0 218.44 256.032 301.776  303.0      % sector 7,small graphite element of radial reflector number 19
+surf 269  pad .0 .0 218.44 256.032 303.418  304.642      % sector 7,small graphite element of radial reflector number 20
+surf 270  pad .0 .0 218.44 256.032 305.06  306.284      % sector 7,small graphite element of radial reflector number 21
+surf 271  pad .0 .0 218.44 256.032 306.702  307.926      % sector 7,small graphite element of radial reflector number 22
+surf 272  pad .0 .0 218.44 256.032 308.344  309.568      % sector 7,small graphite element of radial reflector number 23
+surf 273  pad .0 .0 218.44 256.032 309.986  311.21      % sector 7,small graphite element of radial reflector number 24
+surf 274  pad .0 .0 218.44 256.032 311.628  312.852      % sector 7,small graphite element of radial reflector number 25
+surf 275  pad .0 .0 218.44 256.032 317.226  318.45      % sector 8,small graphite element of radial reflector number 1
+surf 276  pad .0 .0 218.44 256.032 318.868  320.092      % sector 8,small graphite element of radial reflector number 2
+surf 277  pad .0 .0 218.44 256.032 320.51  321.734      % sector 8,small graphite element of radial reflector number 3
+surf 278  pad .0 .0 218.44 256.032 322.152  323.376      % sector 8,small graphite element of radial reflector number 4
+surf 279  pad .0 .0 218.44 256.032 323.794  325.018      % sector 8,small graphite element of radial reflector number 5
+surf 280  pad .0 .0 218.44 256.032 325.436  326.66      % sector 8,small graphite element of radial reflector number 6
+surf 281  pad .0 .0 218.44 256.032 327.078  328.302      % sector 8,small graphite element of radial reflector number 7
+surf 282  pad .0 .0 218.44 256.032 328.72  329.944      % sector 8,small graphite element of radial reflector number 8
+surf 283  pad .0 .0 218.44 256.032 330.362  331.586      % sector 8,small graphite element of radial reflector number 9
+surf 284  pad .0 .0 218.44 256.032 332.004  333.228      % sector 8,small graphite element of radial reflector number 10
+surf 285  pad .0 .0 218.44 256.032 333.646  334.87      % sector 8,small graphite element of radial reflector number 11
+surf 286  pad .0 .0 218.44 256.032 335.288  336.512      % sector 8,small graphite element of radial reflector number 12
+surf 287  pad .0 .0 218.44 256.032 336.93  338.154      % sector 8,small graphite element of radial reflector number 13
+surf 288  pad .0 .0 218.44 256.032 338.572  339.796      % sector 8,small graphite element of radial reflector number 14
+surf 289  pad .0 .0 218.44 256.032 340.214  341.438      % sector 8,small graphite element of radial reflector number 15
+surf 290  pad .0 .0 218.44 256.032 341.856  343.08      % sector 8,small graphite element of radial reflector number 16
+surf 291  pad .0 .0 218.44 256.032 343.498  344.722      % sector 8,small graphite element of radial reflector number 17
+surf 292  pad .0 .0 218.44 256.032 345.14  346.364      % sector 8,small graphite element of radial reflector number 18
+surf 293  pad .0 .0 218.44 256.032 346.782  348.006      % sector 8,small graphite element of radial reflector number 19
+surf 294  pad .0 .0 218.44 256.032 348.424  349.648      % sector 8,small graphite element of radial reflector number 20
+surf 295  pad .0 .0 218.44 256.032 350.066  351.29      % sector 8,small graphite element of radial reflector number 21
+surf 296  pad .0 .0 218.44 256.032 351.708  352.932      % sector 8,small graphite element of radial reflector number 22
+surf 297  pad .0 .0 218.44 256.032 353.35  354.574      % sector 8,small graphite element of radial reflector number 23
+surf 298  pad .0 .0 218.44 256.032 354.992  356.216      % sector 8,small graphite element of radial reflector number 24
+surf 299  pad .0 .0 218.44 256.032 356.634  357.858      % sector 8,small graphite element of radial reflector number 25
+%------Big elements array---------
 cell 60  10  moder -60 73
 cell 61  10  moder -61 71
 cell 62  10  moder -62 72
@@ -146,12 +341,208 @@ cell 65  10  moder -65 77
 cell 66  10  moder -66 75
 cell 67  10  moder -67 74
 %-------Small elements array
-cell 100 10  moder -100
-cell 101 10  moder -101
-cell 102 10  moder -102
-cell 103 10  moder -103
+cell 100  10  moder -100     % # 1
+cell 101  10  moder -101     % # 2
+cell 102  10  moder -102     % # 3
+cell 103  10  moder -103     % # 4
+cell 104  10  moder -104     % # 5
+cell 105  10  moder -105     % # 6
+cell 106  10  moder -106     % # 7
+cell 107  10  moder -107     % # 8
+cell 108  10  moder -108     % # 9
+cell 109  10  moder -109     % # 10
+cell 110  10  moder -110     % # 11
+cell 111  10  moder -111     % # 12
+cell 112  10  moder -112     % # 13
+cell 113  10  moder -113     % # 14
+cell 114  10  moder -114     % # 15
+cell 115  10  moder -115     % # 16
+cell 116  10  moder -116     % # 17
+cell 117  10  moder -117     % # 18
+cell 118  10  moder -118     % # 19
+cell 119  10  moder -119     % # 20
+cell 120  10  moder -120     % # 21
+cell 121  10  moder -121     % # 22
+cell 122  10  moder -122     % # 23
+cell 123  10  moder -123     % # 24
+cell 124  10  moder -124     % # 25
+cell 125  10  moder -125     % # 26
+cell 126  10  moder -126     % # 27
+cell 127  10  moder -127     % # 28
+cell 128  10  moder -128     % # 29
+cell 129  10  moder -129     % # 30
+cell 130  10  moder -130     % # 31
+cell 131  10  moder -131     % # 32
+cell 132  10  moder -132     % # 33
+cell 133  10  moder -133     % # 34
+cell 134  10  moder -134     % # 35
+cell 135  10  moder -135     % # 36
+cell 136  10  moder -136     % # 37
+cell 137  10  moder -137     % # 38
+cell 138  10  moder -138     % # 39
+cell 139  10  moder -139     % # 40
+cell 140  10  moder -140     % # 41
+cell 141  10  moder -141     % # 42
+cell 142  10  moder -142     % # 43
+cell 143  10  moder -143     % # 44
+cell 144  10  moder -144     % # 45
+cell 145  10  moder -145     % # 46
+cell 146  10  moder -146     % # 47
+cell 147  10  moder -147     % # 48
+cell 148  10  moder -148     % # 49
+cell 149  10  moder -149     % # 50
+cell 150  10  moder -150     % # 51
+cell 151  10  moder -151     % # 52
+cell 152  10  moder -152     % # 53
+cell 153  10  moder -153     % # 54
+cell 154  10  moder -154     % # 55
+cell 155  10  moder -155     % # 56
+cell 156  10  moder -156     % # 57
+cell 157  10  moder -157     % # 58
+cell 158  10  moder -158     % # 59
+cell 159  10  moder -159     % # 60
+cell 160  10  moder -160     % # 61
+cell 161  10  moder -161     % # 62
+cell 162  10  moder -162     % # 63
+cell 163  10  moder -163     % # 64
+cell 164  10  moder -164     % # 65
+cell 165  10  moder -165     % # 66
+cell 166  10  moder -166     % # 67
+cell 167  10  moder -167     % # 68
+cell 168  10  moder -168     % # 69
+cell 169  10  moder -169     % # 70
+cell 170  10  moder -170     % # 71
+cell 171  10  moder -171     % # 72
+cell 172  10  moder -172     % # 73
+cell 173  10  moder -173     % # 74
+cell 174  10  moder -174     % # 75
+cell 175  10  moder -175     % # 76
+cell 176  10  moder -176     % # 77
+cell 177  10  moder -177     % # 78
+cell 178  10  moder -178     % # 79
+cell 179  10  moder -179     % # 80
+cell 180  10  moder -180     % # 81
+cell 181  10  moder -181     % # 82
+cell 182  10  moder -182     % # 83
+cell 183  10  moder -183     % # 84
+cell 184  10  moder -184     % # 85
+cell 185  10  moder -185     % # 86
+cell 186  10  moder -186     % # 87
+cell 187  10  moder -187     % # 88
+cell 188  10  moder -188     % # 89
+cell 189  10  moder -189     % # 90
+cell 190  10  moder -190     % # 91
+cell 191  10  moder -191     % # 92
+cell 192  10  moder -192     % # 93
+cell 193  10  moder -193     % # 94
+cell 194  10  moder -194     % # 95
+cell 195  10  moder -195     % # 96
+cell 196  10  moder -196     % # 97
+cell 197  10  moder -197     % # 98
+cell 198  10  moder -198     % # 99
+cell 199  10  moder -199     % # 100
+cell 200  10  moder -200     % # 101
+cell 201  10  moder -201     % # 102
+cell 202  10  moder -202     % # 103
+cell 203  10  moder -203     % # 104
+cell 204  10  moder -204     % # 105
+cell 205  10  moder -205     % # 106
+cell 206  10  moder -206     % # 107
+cell 207  10  moder -207     % # 108
+cell 208  10  moder -208     % # 109
+cell 209  10  moder -209     % # 110
+cell 210  10  moder -210     % # 111
+cell 211  10  moder -211     % # 112
+cell 212  10  moder -212     % # 113
+cell 213  10  moder -213     % # 114
+cell 214  10  moder -214     % # 115
+cell 215  10  moder -215     % # 116
+cell 216  10  moder -216     % # 117
+cell 217  10  moder -217     % # 118
+cell 218  10  moder -218     % # 119
+cell 219  10  moder -219     % # 120
+cell 220  10  moder -220     % # 121
+cell 221  10  moder -221     % # 122
+cell 222  10  moder -222     % # 123
+cell 223  10  moder -223     % # 124
+cell 224  10  moder -224     % # 125
+cell 225  10  moder -225     % # 126
+cell 226  10  moder -226     % # 127
+cell 227  10  moder -227     % # 128
+cell 228  10  moder -228     % # 129
+cell 229  10  moder -229     % # 130
+cell 230  10  moder -230     % # 131
+cell 231  10  moder -231     % # 132
+cell 232  10  moder -232     % # 133
+cell 233  10  moder -233     % # 134
+cell 234  10  moder -234     % # 135
+cell 235  10  moder -235     % # 136
+cell 236  10  moder -236     % # 137
+cell 237  10  moder -237     % # 138
+cell 238  10  moder -238     % # 139
+cell 239  10  moder -239     % # 140
+cell 240  10  moder -240     % # 141
+cell 241  10  moder -241     % # 142
+cell 242  10  moder -242     % # 143
+cell 243  10  moder -243     % # 144
+cell 244  10  moder -244     % # 145
+cell 245  10  moder -245     % # 146
+cell 246  10  moder -246     % # 147
+cell 247  10  moder -247     % # 148
+cell 248  10  moder -248     % # 149
+cell 249  10  moder -249     % # 150
+cell 250  10  moder -250     % # 151
+cell 251  10  moder -251     % # 152
+cell 252  10  moder -252     % # 153
+cell 253  10  moder -253     % # 154
+cell 254  10  moder -254     % # 155
+cell 255  10  moder -255     % # 156
+cell 256  10  moder -256     % # 157
+cell 257  10  moder -257     % # 158
+cell 258  10  moder -258     % # 159
+cell 259  10  moder -259     % # 160
+cell 260  10  moder -260     % # 161
+cell 261  10  moder -261     % # 162
+cell 262  10  moder -262     % # 163
+cell 263  10  moder -263     % # 164
+cell 264  10  moder -264     % # 165
+cell 265  10  moder -265     % # 166
+cell 266  10  moder -266     % # 167
+cell 267  10  moder -267     % # 168
+cell 268  10  moder -268     % # 169
+cell 269  10  moder -269     % # 170
+cell 270  10  moder -270     % # 171
+cell 271  10  moder -271     % # 172
+cell 272  10  moder -272     % # 173
+cell 273  10  moder -273     % # 174
+cell 274  10  moder -274     % # 175
+cell 275  10  moder -275     % # 176
+cell 276  10  moder -276     % # 177
+cell 277  10  moder -277     % # 178
+cell 278  10  moder -278     % # 179
+cell 279  10  moder -279     % # 180
+cell 280  10  moder -280     % # 181
+cell 281  10  moder -281     % # 182
+cell 282  10  moder -282     % # 183
+cell 283  10  moder -283     % # 184
+cell 284  10  moder -284     % # 185
+cell 285  10  moder -285     % # 186
+cell 286  10  moder -286     % # 187
+cell 287  10  moder -287     % # 188
+cell 288  10  moder -288     % # 189
+cell 289  10  moder -289     % # 190
+cell 290  10  moder -290     % # 191
+cell 291  10  moder -291     % # 192
+cell 292  10  moder -292     % # 193
+cell 293  10  moder -293     % # 194
+cell 294  10  moder -294     % # 195
+cell 295  10  moder -295     % # 196
+cell 296  10  moder -296     % # 197
+cell 297  10  moder -297     % # 198
+cell 298  10  moder -298     % # 199
+cell 299  10  moder -299     % # 200
 
-cell 80  10  fuel 60 61 62 63 64 65 66 67 100 101 102 103
+cell 80  10  fuel 60 61 62 63 64 65 66 67 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 267 268 269 270 271 272 273 274 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289 290 291 292 293 294 295 296 297 298 299
 cell 81  10  fuel -70
 cell 82  10  fuel -71
 cell 83  10  fuel -72
@@ -160,17 +551,14 @@ cell 85  10  fuel -74
 cell 86  10  fuel -75
 cell 87  10  fuel -76
 cell 88  10  fuel -77
-
 %----------- end of Zone II-B
 % ------------------------------------------------------------
 
 % --- Lattices ("array block"):
-
 % Control rod lattice
 lat 400 1 0 0 2 2 15.24
 3 3
 3 3
-
 % --- Lattice (45x45, round molten salt+fuel channel and graphite around)
 % square lattice=1, x0=0, y0=0, 17 el   | x- | ir&y-dir, grid step 10.16 cm
 lat 300 1 0 0 51 51 10.16
@@ -229,8 +617,6 @@ lat 300 1 0 0 51 51 10.16
 % ----------Reflector zone II-B circular lattice
 %lat 500  4  0.0 0.0  1
 % 4 247.5 0.0 10 10 10 10
-
-
 % --- Surfaces:
 surf 3003  sqc 0.0 0.0 15.24           % Control rods lattice
 surf 3000  cyl 0.0 0.0 235.0           % This Zone-I radius
@@ -239,15 +625,12 @@ surf 3004  cyl 0.0 0.0 261.112         % Annulus with 100% salt (Table 3.1 2in)
 surf 3005  cyl 0.0 0.0 338.328	       % Radial reflector   (Table 3.2, 22.2ft outer diameter)
 surf 3011  pz  0.0
 surf 3012  pz  396.24
-
-%___________Planes set for outer Zone-I surface
-surf 3100 octa 0.0 0.0 208.28 222.71
-surf 3101 cuboid 208.28 218.44 -86.36 86.36 0 396.24     % right cuboid (1st)
-surf 3102 cuboid 218.44 228.6  -45.72 45.72 0 396.24     % right cuboid (2st)
-
+%___________Set of cuboid for outer Zone-I surface
+surf 3100 octa 0.0 0.0 208.28 222.71       % base octader
+surf 3103 octa 0.0 0.0 218.44 215.53       % smaller octader, which cover 8 triangle elements
+surf 3104 octa 0.0 0.0 228.60 193.97       % smallest octader, which cover 8 triangle elements
 % --- Cells:
 %cell 300  0    fill 300 -3000 3003 3011 -3012
-cell 300  0    fill 300 -3100 3003 3011 -3012
 cell 303  0    fill 400 -3003 3011 -3012
 cell 305  0    fuel -3004 3002 3011 -3012
 cell 306  0    moder -3005 3004 3011 -3012
@@ -255,10 +638,12 @@ cell 310  0    outside   3005  3011 -3012
 cell 311  0    outside   -3011
 cell 312  0    outside   3012
 
-cell 330  0    fill 300 -3101 3011 -3012
-cell 331  0    fill 300 -3102 3011 -3012
+cell 330  0    fill 300 3104 -3103 3003 3011 -3012        % inside smaller octader, smallest
+cell 331  0    fill 300 -3104 3003 3011 -3012	          % inside smallest
 
-cell 350  0    fill 10  -3002 3100 3101 3102 3011 -3012
+cell 300  0    fill 300 -3100 3103 3104 3003 3011 -3012   % inside base octader, deducted smaller and smallest
+
+cell 350  0    fill 10  -3002 3103 3104 3100 3011 -3012   % radial reflector lattice
 
 % --- Fuel (LiF-BeF2-ThF4-233UF4 71.7-16-12-0.3 mole %):
 
@@ -327,9 +712,9 @@ set pop 10000 500 50
 
 % --- Geometry and mesh plots:
 
-plot 3 8000 8000 1.0
+plot 3 9000 9000 1.0
 plot 2 2000 2000 0.0
-mesh 3 2000 2000
+mesh 3 5000 5000
 mesh 2 2000 2000
 
 % ------------------------------------------------------------
