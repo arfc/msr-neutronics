@@ -67,9 +67,9 @@ set pop 10000 500 20 1.0
 
 % --- Geometry and mesh plots:
 
-plot 3 2000 2000 1.0
+%plot 3 2000 2000 1.0
 %plot 2 2000 2000 0.0
-mesh 3 2000 2000
+%mesh 3 2000 2000
 %mesh 2 2000 2000
 
 % --- Decay and fission yield libraries:
