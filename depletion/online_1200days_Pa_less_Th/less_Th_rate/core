@@ -95,7 +95,8 @@ set pcc     0  % Predictor-corrector calculation off
 % --- Mass flows:
 mflow feed
 %Th-232 1.25E-9
-Th-232 1.25E-11
+%Th-232 1.25E-11     keff=0.9454 after 48days
+Th-232 1.25E-12
 
 mflow rem1
 %Pa-233 3.5E-12
@@ -107,7 +108,7 @@ Ne 0.3
 Ar 0.1
 Kr 0.1
 Xe 0.1
-Ra 0.12
+Ra 0.1
 % --- Reprocessing scheme:
 
 rep r1
@@ -117,7 +118,7 @@ rc fuel nobelgs rem2 1
 
 % --- Irradiation cycle:
 %set powdens 22.2E-3
-set power 2250000000.0
+set power 2250000000.0 % 2.25 GW(th)
 
 dep pro r1
 daystep % 1200days = 3 x 400 steps
