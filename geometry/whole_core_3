@@ -23,16 +23,38 @@ cell 9  11  moder -9                        % replay part of right-bottom graphi
 cell 10 11  moder -10                       % replay part of right-upper graphite element
 cell 11 11  moder -11                       % replay part of left-bottom graphite element
 cell 12 11  outside   3                     % Outside world
-% ============ Bottom part (Universe 12) ========================
-surf 12 cyl 0.0 0.0 4.953               % Graphite round outer wall
+% ============ Bottom part: Zone I-A (Universe 12) ========================
+surf 12 cyl 0.0 0.0 4.953                     % Graphite round outer wall
 cell 601  12  fuel  -1                        % Fuel hole
 cell 602  12  moder 1 -12                     % Graphite block
 cell 603  12  fuel  12 -3                     % Fuel salt outside graphite block
 cell 612 12  outside   3                     % Outside world
+% ============ Upper part 1: Zone I-A (Universe 13) ========================
+surf 13 cyl 0.0 0.0 4.953                   % Graphite round outer wall above main 13-feet part
+cell 604  13  fuel  -1                        % Fuel hole
+cell 605  13  moder 1 -13                     % Graphite block
+cell 606  13  fuel  13 -3                     % Fuel salt outside graphite block
+cell 613  13  outside   3                     % Outside world
+% ============ Upper part 2: Zone I-A (Universe 14) ========================
+surf 14 cone 0.0 0.0 0.0 4.953 12.66          % Graphite cone outer wall part
+cell 607  14  fuel  -1                        % Fuel hole
+cell 608  14  moder 1 -14                     % Graphite block
+cell 609  14  fuel  14 -3                     % Fuel salt outside graphite block
+cell 614  14  outside   3                     % Outside world
+% ============ Upper part 3: Zone I-A (Universe 15) ========================
+surf 15  cyl  0.0 0.0 2.2225                  % Graphite outer wall part
+surf 16  cyl  0.0 0.0 0.762                   % Fuel hole 0.6 in
+cell 616  15  hast  -1                        % Hastelloy N
+cell 617  15  moder 1 -15                     % Graphite block
+cell 618  15  fuel  15 -3                     % Fuel salt outside graphite block
+cell 615  15  outside   3                     % Outside world
 % ======== Vertical stack ===========================================
-lat 1 9 0.0 0.0 2
- 0.0  12
-22.86 11
+lat 1 9 0.0 0.0 5
+ 0.0    12
+22.86   11
+419.10  13
+438.15  14
+445.135 15
 %=============== Fill cell to make substitute for 1-type cell ============================
 %cell 33303  1    fill 600 -3 % 3011 -3012
 
@@ -619,8 +641,8 @@ surf 3002  cyl 0.0 0.0 256.032         % This Zone-IIB radius (Table 3.2, 16.8ft
 surf 3004  cyl 0.0 0.0 261.112         % Annulus with 100% salt (Table 3.1 2in)
 surf 3005  cyl 0.0 0.0 338.328	       % Radial reflector   (Table 3.2, 22.2ft outer diameter)
 surf 3011  pz  0.0
-surf 3012  pz  396.24                  % Core heigh without axial reflectors (13 ft)
-%surf 3012  pz  441.96                  % Core heigh with axial reflectors
+surf 3012  pz  449.58                  % Core heigh without axial reflectors (13 ft)
+
 %___________Set of cuboid for outer Zone-I surface
 surf 3100 octa 0.0 0.0 208.28 222.71       % base octader
 surf 3103 octa 0.0 0.0 218.44 215.53       % smaller octader, which cover 8 triangle elements
