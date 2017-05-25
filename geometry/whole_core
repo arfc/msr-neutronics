@@ -10,22 +10,53 @@ surf 8  cyl -4.28498 -5.62102  0.66802   % replay part of left-upper graphite el
 surf 9  cyl  4.28498 5.62102   0.66802   % replay part of right-bottom graphite element
 surf 10 cyl  -5.62102 4.28498  0.66802   % replay part of right-upper graphite element 0.51 octa
 surf 11 cyl  5.62102 -4.28498  0.66802   % replay part of left-bottom graphite element
-% --- Cells: Universe 1: Zone I-A
-cell 1  1  fuel  -1                        % Fuel hole
-cell 2  1  moder 1 -2 4 5 6 7 8 9 10 11    % Graphite block
-cell 3  1  fuel  2 -3 4 5 6 7 8 9 10 11    % Fuel salt outside graphite block
-cell 4  1  moder -4                        % Left-upper graphite element
-cell 5  1  moder -5                        % Right-bottom graphite element
-cell 6  1  moder -6                        % Left-bottom graphite element
-cell 7  1  moder -7                        % Left-bottom graphite element
-cell 8  1  moder -8                        % replay part of left-upper graphite element
-cell 9  1  moder -9                        % replay part of right-bottom graphite element
-cell 10 1  moder -10                       % replay part of right-upper graphite element
-cell 11 1  moder -11                       % replay part of left-bottom graphite element
-cell 12 1  outside   3                     % Outside world
+% --- Cells: Universe 11: Zone I-A
+cell 1  11  fuel  -1                        % Fuel hole
+cell 2  11  moder 1 -2 4 5 6 7 8 9 10 11    % Graphite block
+cell 3  11  fuel  2 -3 4 5 6 7 8 9 10 11    % Fuel salt outside graphite block
+cell 4  11  moder -4                        % Left-upper graphite element
+cell 5  11  moder -5                        % Right-bottom graphite element
+cell 6  11  moder -6                        % Left-bottom graphite element
+cell 7  11  moder -7                        % Left-bottom graphite element
+cell 8  11  moder -8                        % replay part of left-upper graphite element
+cell 9  11  moder -9                        % replay part of right-bottom graphite element
+cell 10 11  moder -10                       % replay part of right-upper graphite element
+cell 11 11  moder -11                       % replay part of left-bottom graphite element
+cell 12 11  outside   3                     % Outside world
+% ============ Bottom part: Zone I-A (Universe 12) ========================
+surf 12 cyl 0.0 0.0 4.953                     % Graphite round outer wall
+cell 601  12  fuel  -1                        % Fuel hole
+cell 602  12  moder 1 -12                     % Graphite block
+cell 603  12  fuel  12 -3                     % Fuel salt outside graphite block
+cell 612 12  outside   3                     % Outside world
+% ============ Upper part 1: Zone I-A (Universe 13) ========================
+surf 13 cyl 0.0 0.0 4.953                   % Graphite round outer wall above main 13-feet part
+cell 604  13  fuel  -1                        % Fuel hole
+cell 605  13  moder 1 -13                     % Graphite block
+cell 606  13  fuel  13 -3                     % Fuel salt outside graphite block
+cell 613  13  outside   3                     % Outside world
+% ============ Upper part 2: Zone I-A (Universe 14) ========================
+surf 14 cone 0.0 0.0 0.0 4.953 12.66          % Graphite cone outer wall part
+cell 607  14  fuel  -1                        % Fuel hole
+cell 608  14  moder 1 -14                     % Graphite block
+cell 609  14  fuel  14 -3                     % Fuel salt outside graphite block
+cell 614  14  outside   3                     % Outside world
+% ============ Upper part 3: Zone I-A (Universe 15) ========================
+surf 15  cyl  0.0 0.0 2.2225                  % Graphite outer wall part
+surf 16  cyl  0.0 0.0 0.762                   % Fuel hole 0.6 in
+cell 616  15  hast  -1                        % Hastelloy N
+cell 617  15  moder 1 -15                     % Graphite block
+cell 618  15  fuel  15 -3                     % Fuel salt outside graphite block
+cell 615  15  outside   3                     % Outside world
+% ======== Vertical stack Zone I-A cell (marked as 1 in main lattice) ===========================================
+lat 1 9 0.0 0.0 5
+ 0.0    12
+22.86   11
+419.10  13
+438.15  14
+445.135 15
 
 % --- Surfaces (core pitch = 10.16 cm) - Zone II-A Universe 2:
-
 surf 21  cyl 0.0 0.0 3.302                 % Hole with fuel salt (Fig.3.5 Robertson) 3.27787 - p. 47
 surf 22  sqc 0.0 0.0 4.953  0.46           % Graphite square outer wall 1.07
 surf 23  sqc 0.0 0.0 5.08                  % Outer boundary
@@ -37,22 +68,59 @@ surf 28  cyl -4.28498 -5.62102  0.66802    % replay part of left-upper graphite 
 surf 29  cyl  4.28498 5.62102   0.66802    % replay part of right-bottom graphite element
 surf 30 cyl  -5.62102 4.28498  0.66802     % replay part of right-upper graphite element 0.51 octa
 surf 31 cyl  5.62102 -4.28498  0.66802     % replay part of left-bottom graphite element
-% --- Cells: Universe 2: Zone I-A
-cell 21  2  fuel  -21                                % Fuel hole
-cell 22  2  moder 21 -22 24 25 26 27 28 29 30 31     % Graphite block
-cell 23  2  fuel  22 -23 24 25 26 27 28 29 30 31     % Fuel salt outside graphite block
-cell 24  2  moder -24                                % Left-upper graphite element
-cell 25  2  moder -25                                % Right-bottom graphite element
-cell 26  2  moder -26                                % Left-bottom graphite element
-cell 27  2  moder -27                                % Left-bottom graphite element
-cell 28  2  moder -28                                % replay part of left-upper graphite element
-cell 29  2  moder -29                                % replay part of right-bottom graphite element
-cell 30  2  moder -30                                % replay part of right-upper graphite element
-cell 31  2  moder -31                                % replay part of left-bottom graphite element
-cell 32  2  outside   23                             % Outside world
+% --- Cells: Universe 21: Bottom(main) part: Zone I-A =======================================
+cell 21  21  fuel  -21                                % Fuel hole
+cell 22  21  moder 21 -22 24 25 26 27 28 29 30 31     % Graphite block
+cell 23  21  fuel  22 -23 24 25 26 27 28 29 30 31     % Fuel salt outside graphite block
+cell 24  21  moder -24                                % Left-upper graphite element
+cell 25  21  moder -25                                % Right-bottom graphite element
+cell 26  21  moder -26                                % Left-bottom graphite element
+cell 27  21  moder -27                                % Left-bottom graphite element
+cell 28  21  moder -28                                % replay part of left-upper graphite element
+cell 29  21  moder -29                                % replay part of right-bottom graphite element
+cell 30  21  moder -30                                % replay part of right-upper graphite element
+cell 31  21  moder -31                                % replay part of left-bottom graphite element
+cell 32  21  outside   23                             % Outside world
+% =====Cells: Universe 22: Upper part 1 (from H=434.34cm to 436.88cm): Zone II-A ============
+surf 32  cyl 0.0 0.0 0.635                            % Hole with fuel salt (Fig.3.5 Robertson p. 47) d=0.5in
+cell 721  22  fuel  -32                                % Fuel hole
+cell 722  22  moder 32 -22 24 25 26 27 28 29 30 31     % Graphite block
+cell 723  22  fuel  22 -23 24 25 26 27 28 29 30 31     % Fuel salt outside graphite block
+cell 724  22  moder -24                                % Left-upper graphite element
+cell 725  22  moder -25                                % Right-bottom graphite element
+cell 726  22  moder -26                                % Left-bottom graphite element
+cell 727  22  moder -27                                % Left-bottom graphite element
+cell 728  22  moder -28                                % replay part of left-upper graphite element
+cell 729  22  moder -29                                % replay part of right-bottom graphite element
+cell 730  22  moder -30                                % replay part of right-upper graphite element
+cell 731  22  moder -31                                % replay part of left-bottom graphite element
+cell 732  22  outside   23                             % Outside world
+%===========Cells: Universe 23: Upper part 2 (from H=436.88cm to 439.42cm): Zone II-A ===========================
+surf 33  cyl 0.0 0.0 3.65125                           % Outer cylindrical surface (Fig.3.5 Robertson p. 47) d=2 7/8 in
+cell 733  23  fuel  -32                                % Fuel hole
+cell 734  23  moder 32 -33                             % Graphite block
+cell 735  23  fuel  33 -23                             % Fuel salt outside graphite block
+cell 736  23  outside   23                             % Outside world
+%===========Cells: Universe 24: Upper part 3 (from H=439.42cm to 441.96cm): Zone II-A ===========================
+surf 34  cone 0.0 0.0 0.0 3.65125 6.16                % Outer cone surface (Fig.3.5 Robertson p. 47) 
+cell 737  24  moder -34                                % Graphite block
+cell 738  24  fuel  34 -23                             % Fuel salt outside graphite block
+cell 739  24  outside   23                             % Outside world
+%===========Cells: Universe 25: Upper part 4 (from H=441.96cm to 449.58cm): Zone II-A ===========================
+surf 35  cyl 0.0 0.0 2.2225                            % Outer cylindrical surface (Fig.3.5 Robertson p. 47) 
+cell 740  25  moder -35                                % Graphite block
+cell 741  25  fuel  35 -23                             % Fuel salt outside graphite block
+cell 742  25  outside   23                             % Outside world
+
+% ======== Vertical stack Zone II-A cell (marked as 2 in main lattice) ===========================================
+lat 2 9 0.0 0.0 5
+ 0.0    21
+434.34  22
+436.88  23
+439.42  24
+441.96  25
 
 % --- Surfaces (core pitch = 15.24 cm) - Control rods Universe 3:
-
 surf 41  cyl 0.0 0.0 5.08                           % Hole with fuel salt
 surf 42  sqc 0.0 0.0 7.23646 0.99             % Graphite square outer wall 1.07
 surf 43  sqc 0.0 0.0 7.62                     % Outer boundary
@@ -78,9 +146,6 @@ cell 49  3  moder -49                                       % replay part of rig
 cell 50  3  moder -50                                       % replay part of right-upper graphite element
 cell 51  3  moder -51                                       % replay part of left-bottom graphite element
 cell 52  3  outside   43                      		    % Outside world
-
-% - Pure fuel cell
-cell 55  4  fuel -3
 
 % ------ Vacuum cell
 cell 57  5  void -3
@@ -609,9 +674,10 @@ surf 3000  cyl 0.0 0.0 235.0           % This Zone-I radius
 surf 3002  cyl 0.0 0.0 256.032         % This Zone-IIB radius (Table 3.2, 16.8ft diameter)
 surf 3004  cyl 0.0 0.0 261.112         % Annulus with 100% salt (Table 3.1 2in)
 surf 3005  cyl 0.0 0.0 338.328	       % Radial reflector   (Table 3.2, 22.2ft outer diameter)
+surf 3006  cyl 0.0 0.0 343.408         % Vessel wall
 surf 3011  pz  0.0
-surf 3012  pz  396.24                  % Core heigh without axial reflectors (13 ft)
-%surf 3012  pz  441.96                  % Core heigh with axial reflectors
+surf 3012  pz  449.58                  % Core heigh without axial reflectors (13 ft)
+
 %___________Set of cuboid for outer Zone-I surface
 surf 3100 octa 0.0 0.0 208.28 222.71       % base octader
 surf 3103 octa 0.0 0.0 218.44 215.53       % smaller octader, which cover 8 triangle elements
@@ -621,7 +687,8 @@ surf 3104 octa 0.0 0.0 228.60 193.97       % smallest octader, which cover 8 tri
 cell 303  0    fill 400 -3003 3011 -3012
 cell 305  0    fuel -3004 3002 3011 -3012
 cell 306  0    moder -3005 3004 3011 -3012
-cell 310  0    outside   3005  3011 -3012
+cell 307  0    hast -3006 3005 3011 -3012
+cell 310  0    outside   3006  3011 -3012
 cell 311  0    outside   -3011
 cell 312  0    outside   3012
 
