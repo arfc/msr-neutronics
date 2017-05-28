@@ -10,7 +10,7 @@ rgb 253 231 37 vol 1.95057E+07
 9019.09c   -45.419814   % Mass fraction of F-19
 4009.09c   -2.257411    % Mass fraction of Be-9
 90232.09c  -43.591433   % Mass fraction of Th-232
-91233.09c  0.00         % fraction of Pa-233
+91233.09c  0.00         % Mass fraction of Pa-233
 92233.09c  -0.84640546  % Mass fraction of U-233 (0.232% mole)
 94239.09c  -2.2455E-4   % Mass fraction of Pu-239 (0.0006% mole)
 % --- Moderator graphite:
@@ -23,7 +23,7 @@ rgb 127 205 187
 24000.06c    -7.0       % Mass fraction of Cr
 26000.06c    -5.0       % Mass fraction of Fe
 % --- Refill from 20000 kg lump of Th232:
-mat refill     -11.72 burn 1 vol 10000000.0
+mat refill -11.72 burn 1 vol 1.95057E+07
 3007.09c   0.00   % fraction of Li-7 
 3006.09c   0.00   % fraction of Li-6
 9019.09c   0.00   % fraction of F-19
@@ -33,17 +33,17 @@ mat refill     -11.72 burn 1 vol 10000000.0
 92233.09c  0.00   % fraction of U-233 (0.232% mole)
 94239.09c  0.00   % fraction of Pu-239 (0.0006% mole)
 % --- Tank for Pa-233 decay -------
-mat tank   0.00 burn 1 vol 10000000.0
+mat tank  -19.10 burn 1 vol 1.95057E+07
 3007.09c   0.00   % fraction of Li-7 
 3006.09c   0.00   % fraction of Li-6
 9019.09c   0.00   % fraction of F-19
 4009.09c   0.00   % fraction of Be-9
 90232.09c  0.00   % fraction of Th-232
-91233.09c  50.00   % fraction of Pa-233
-92233.09c  50.00   % fraction of U-233
+91233.09c  0.00   % fraction of Pa-233
+92233.09c  100.00   % fraction of U-233
 94239.09c  0.00   % fraction of Pu-239
 % --- Outflow to two different streams:
-mat outflow     0.00 burn 1 vol 1.95057E+07
+mat outflow 0.00 burn 1 vol 1.95057E+07
 3007.09c   0.00   % fraction of Li-7 
 3006.09c   0.00   % fraction of Li-6
 9019.09c   0.00   % fraction of F-19
@@ -53,8 +53,16 @@ mat outflow     0.00 burn 1 vol 1.95057E+07
 92233.09c  0.00   % fraction of U-233 (0.232% mole)
 94239.09c  0.00   % fraction of Pu-239 (0.0006% mole)
 
-mat nobelgs   0.00 burn 1 vol 1.0
-
+mat nobelgs -1.00 burn 1 vol 1.0
+3007.09c   0.00   % fraction of Li-7 
+3006.09c   0.00   % fraction of Li-6
+9019.09c   0.00   % fraction of F-19
+4009.09c   0.00   % fraction of Be-9
+90232.09c  0.00   % fraction of Th-232
+91233.09c  0.00   % fraction of Pa-233
+92233.09c  0.00   % fraction of U-233 (0.232% mole)
+94239.09c  0.00   % fraction of Pu-239 (0.0006% mole)
+54130.09c 100.00  % Xe
 % --- Thermal scattering data for graphite:
 
 therm gr grj3.12t
@@ -113,27 +121,34 @@ mflow feed
 %Th-232 1.25E-9
 %Th-232 1.25E-11     keff=0.9454 after 48days
 %Th-232 1.25E-12     keff=0.9466 after 48days
-Th-232 3.5E-12      %keff=0.9289 after 48days
+Th-232 1.75E-9      %keff=0.9289 after 48days
 
 mflow feed2
-U-233 3.5E-12
+%U-233 3.5E-12
+U-233 1.75E-9
 
 mflow rem1
-Pa-233 3.5E-12
+%Pa-233 3.5E-12
+Pa-233 1.75E-9
 
 mflow rem2
-He 0.3
-Ne 0.1
-Ar 0.1
-Kr 0.3
-Xe 0.2
-Ra 0.1
+He 1
+Ne 1
+Ar 1
+Kr 1
+Xe 1
+Ra 1
+%He 0.3
+%Ne 0.1
+%Ar 0.1
+%Kr 0.3
+%Xe 0.2
+%Ra 0.1
 % --- Reprocessing scheme:
-
 rep r1
-rc refill fuel feed   2
-rc tank   fuel feed2  2
+%rc refill fuel feed   2
 rc fuel tank   rem1   2
+rc tank fuel feed2  2
 rc fuel nobelgs rem2  1
 
 % --- Irradiation cycle:
@@ -142,13 +157,11 @@ set power 2250000000.0 % 2.25 GW(th)
 
 dep pro r1
 daystep % 1200days = 3 x 400 steps
-10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 %60 steps
-10 10
-%3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 % 100 steps
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 % 100 steps
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 % 100 steps
 %3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 % 100 steps
 %3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 % 100 steps
-%3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 % 100 steps
-%3 3 3
+3 3 3
 
 % --- Inventory:
 set inventory
