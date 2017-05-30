@@ -10,7 +10,7 @@ rgb 253 231 37 vol 1.95057E+07
 9019.09c   -45.419814   % Mass fraction of F-19
 4009.09c   -2.257411    % Mass fraction of Be-9
 90232.09c  -43.591433   % Mass fraction of Th-232
-91233.09c  0.00         % Mass fraction of Pa-233
+91233.09c  -0.00         % Mass fraction of Pa-233
 92233.09c  -0.84640546  % Mass fraction of U-233 (0.232% mole)
 94239.09c  -2.2455E-4   % Mass fraction of Pu-239 (0.0006% mole)
 % --- Moderator graphite:
@@ -24,23 +24,23 @@ rgb 127 205 187
 26000.06c    -5.0       % Mass fraction of Fe
 % --- Refill from 20000 kg lump of Th232:
 mat refill -11.72 burn 1 vol 1.95057E+07
-3007.09c   0.00   % fraction of Li-7 
-3006.09c   0.00   % fraction of Li-6
-9019.09c   0.00   % fraction of F-19
-4009.09c   0.00   % fraction of Be-9
-90232.09c  100.00 % fraction of Th-232
-91233.09c  0.00   % fraction of Pa-233
-92233.09c  0.00   % fraction of U-233 (0.232% mole)
-94239.09c  0.00   % fraction of Pu-239 (0.0006% mole)
+3007.09c   -0.00   % fraction of Li-7 
+3006.09c   -0.00   % fraction of Li-6
+9019.09c   -0.00   % fraction of F-19
+4009.09c   -0.00   % fraction of Be-9
+90232.09c  -100.00 % fraction of Th-232
+91233.09c  -0.00   % fraction of Pa-233
+92233.09c  -0.00   % fraction of U-233 (0.232% mole)
+94239.09c  -0.00   % fraction of Pu-239 (0.0006% mole)
 % --- Tank for Pa-233 decay -------
 mat tank  -19.10 burn 1 vol 1.95057E+07
-3007.09c   0.00   % fraction of Li-7 
-3006.09c   0.00   % fraction of Li-6
-9019.09c   0.00   % fraction of F-19
-4009.09c   0.00   % fraction of Be-9
-90232.09c  0.00   % fraction of Th-232
-91233.09c  0.00   % fraction of Pa-233
-92233.09c  100.00   % fraction of U-233
+3007.09c   -0.00   % fraction of Li-7 
+3006.09c   -0.00   % fraction of Li-6
+9019.09c   -0.00   % fraction of F-19
+4009.09c   -0.00   % fraction of Be-9
+90232.09c  -0.00   % fraction of Th-232
+91233.09c  -100.00   % fraction of Pa-233
+92233.09c  -0.00   % fraction of U-233
 94239.09c  0.00   % fraction of Pu-239
 % --- Outflow to two different streams:
 mat outflow 0.00 burn 1 vol 1.95057E+07
@@ -121,15 +121,15 @@ mflow feed
 %Th-232 1.25E-9
 %Th-232 1.25E-11     keff=0.9454 after 48days
 %Th-232 1.25E-12     keff=0.9466 after 48days
-Th-232 1.75E-9      %keff=0.9289 after 48days
+Th-232 1.25E-11      %keff=0.9289 after 48days
 
 mflow feed2
 %U-233 3.5E-12
-U-233 1.75E-9
+U-233 1.75E-11
 
 mflow rem1
 %Pa-233 3.5E-12
-Pa-233 1.75E-9
+Pa-233 3.0E-11
 
 mflow rem2
 He 1
@@ -138,17 +138,11 @@ Ar 1
 Kr 1
 Xe 1
 Ra 1
-%He 0.3
-%Ne 0.1
-%Ar 0.1
-%Kr 0.3
-%Xe 0.2
-%Ra 0.1
 % --- Reprocessing scheme:
 rep r1
-%rc refill fuel feed   2
+rc refill fuel feed   2
 rc fuel tank   rem1   2
-rc tank fuel feed2  2
+rc tank fuel feed2    2
 rc fuel nobelgs rem2  1
 
 % --- Irradiation cycle:
