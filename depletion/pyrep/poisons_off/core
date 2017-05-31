@@ -1,10 +1,10 @@
-set title "MSBR changing fuel composition manually for each step"
+set title "MSBR 2 cycles 10 and 100 power level"
 
-include "../../../geometry/channel"
+include "../../../geometry/whole_core"
 
 % --- Fuel (LiF-BeF2-ThF4-233UF4-239PuF3 72-16-12-0.232-0.0006 mole %) Table 3.7 Robertson:
 mat fuel    -3.3304 burn 1 % g/cm3 for mixture
-rgb 253 231 37 tmp 922 vol 1.95057E+07 
+rgb 253 231 37 vol 1.95057E+07 %tmp 922
 3007.09c   -7.882367    % Mass fraction of Li-7 
 3006.09c   -3.2439E-4   % Mass fraction of Li-6
 9019.09c   -45.419814   % Mass fraction of F-19
@@ -53,16 +53,7 @@ mat outflow 0.00 burn 1 vol 1.95057E+07
 92233.09c  0.00   % fraction of U-233 (0.232% mole)
 94239.09c  0.00   % fraction of Pu-239 (0.0006% mole)
 
-mat nobelgs -1.00 burn 1 vol 1.0
-3007.09c   0.00   % fraction of Li-7 
-3006.09c   0.00   % fraction of Li-6
-9019.09c   0.00   % fraction of F-19
-4009.09c   0.00   % fraction of Be-9
-90232.09c  0.00   % fraction of Th-232
-91233.09c  0.00   % fraction of Pa-233
-92233.09c  0.00   % fraction of U-233 (0.232% mole)
-94239.09c  0.00   % fraction of Pu-239 (0.0006% mole)
-54130.09c 100.00  % Xe
+mat nobelgs 0.0 burn 1 vol 1.0
 % --- Thermal scattering data for graphite:
 
 therm gr grj3.12t
@@ -72,9 +63,9 @@ therm gr grj3.12t
 set acelib "/home/andrei2/serpent/xsdata/endfb7/sss_endfb7.xsdata"
 %set acelib "/projects/arfc/serpent/core/xsdata/endfb7/sss_endfb7.xsdata" % this for RCaaS
 
-% --- Periodic boundary condition:
+% --- Vacuum boundary condition:
 
-set bc 2
+set bc 1
 
 % --- group constant generation:
 
@@ -97,8 +88,8 @@ set pop 10000 500 20
 
 %plot 3 2000 2000 1.0
 %plot 2 2000 2000 0.0
-mesh 3 2000 2000
-mesh 2 2000 2000
+%mesh 3 2000 2000
+%mesh 2 2000 2000
 
 % --- Decay and fission yield libraries:
 set declib "/home/andrei2/serpent/xsdata/endfb7/sss_endfb7.dec"
@@ -112,16 +103,36 @@ set egrid 5E-5 1E-9 15.0
 set fpcut   1E-6
 % --- Options for burnup calculation:
 set bumode  2  % CRAM method
-set pcc     1  % Predictor-corrector calculation on
+set pcc     0  % Predictor-corrector calculation off
 %set xscalc  2  % Cross sections from spectrum
 
-% --- Irradiation cycle:
-%set powdens 22.2E-3
-set power 2250000000.0 % 2.25 GW(th)
+% --- Mass flows:
+mflow rem2
+He 1
+Ne 1
+Ar 1
+Kr 1
+Xe 1
+Ra 1
+% --- Reprocessing scheme:
+rep r1
+rc fuel nobelgs rem2  1
 
-dep
+
+% --- Irradiation cycle:
+% First cycle (10% of power, only gas removing)
+set power 225000000.0 % 0.225 GW(th)
+
+dep pro r1
 daystep
-10
+3 3 3 3 3 3 3 3 3 3
+
+% Second  cycle (100% of power)
+set power 2250000000.0 % 2.25 Gw(th)
+dep pro r1
+daystep
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+
 
 % --- Inventory:
 set inventory
@@ -144,5 +155,5 @@ Xe
 Rn
 
 %---- Print compositions of depleted materials after each step
-set printm 1
+%set printm 1
 
