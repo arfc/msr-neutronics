@@ -1,4 +1,4 @@
-set title "MSBR burnup one inflow, one outflow"
+set title "MSBR burnup inflow Th+U233, outflow Pa"
 
 include "../../../geometry/test_IB_lat"
 
@@ -125,26 +125,26 @@ Th-232 1.25E-11      %keff=0.9289 after 48days
 
 mflow feed2
 %U-233 3.5E-12
-U-233  1.25E-10
-%Th-232 1.25E-9
+U-233  0.35E-10
+Th-232 0.90E-10
 
 mflow rem1
 %Pa-233 3.5E-12
 Pa-233 1.25E-10
 
 mflow rem2
-Kr 1e-03
-Xe 1e-03   
-Se 1e-03
-Nb 1e-03
-Mo 1e-03
-Tc 1e-03
-Ru 1e-03
-Rh 1e-03
-Pd 1e-03
-Ag 1e-03
-Sb 1e-03
-Te 1e-03
+Kr 1
+Xe 1   
+Se 1
+Nb 1
+Mo 1
+Tc 1
+Ru 1
+Rh 1
+Pd 1
+Ag 1
+Sb 1
+Te 1
 % --- Reprocessing scheme:
 rep r1
 %rc refill fuel feed   2
