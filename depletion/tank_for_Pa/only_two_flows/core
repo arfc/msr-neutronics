@@ -40,7 +40,7 @@ mat tank  -19.1 burn 1 vol 1.95057E+07
 4009.09c   -0.00   % fraction of Be-9
 90232.09c  -0.00   % fraction of Th-232
 91233.09c  -0.00   % fraction of Pa-233
-92233.09c  -100.00   % fraction of U-233
+92233.09c  -100.0  % fraction of U-233
 94239.09c  -0.00   % fraction of Pu-239
 % --- Outflow to two different streams:
 mat outflow -15.4 burn 1 vol 1.95057E+07
@@ -117,12 +117,13 @@ set pcc     0  % Predictor-corrector calculation off
 %set xscalc  2  % Cross sections from spectrum
 
 % --- Mass flows:
+mflow feed
+Th-232 1.5
 
 mflow feed2
 %U-233 3.5E-12
 U-233  8.5E-11
 %Th-232 1.25E-8
-Th-232 1.5
 
 mflow rem1
 %Pa-233 3.5E-12
@@ -144,8 +145,8 @@ Sb 1
 Te 1
 % --- Reprocessing scheme:
 rep r1
-%rc refill fuel feed   2
-rc tank fuel    feed2  1 % inflow into the core
+rc refill fuel  feed   1 % inflow Th-232 into the core
+rc tank fuel    feed2  1 % inflow U-233 into the core
 rc fuel outflow rem1   1 % outflow from the core to tank
 rc fuel nobelgs rem2   1 % removing poisons
 
