@@ -81,12 +81,15 @@ set pop 10000 500 20
 %plot 3 3000 3000 434.0
 %plot 3 3000 3000 435.5
 %plot 3 3000 3000 438.5
-plot 3 3000 3000 448.5
+%plot 3 3000 3000 48.5
 
-plot 2 3000 300 0.0 0.0 250.0 425.0 450.0 
-plot 2 2030 9000 0.0 218.44 228.6 405.0 450.0
-mesh 3 2000 2000
-mesh 2 2000 2000
+%plot 2 3000 3000 0.0
+%plot 2 3000 300 0.0 0.0 250.0 425.0 450.0 
+%plot 2 1016 4000 0.0 218.44 228.6 0.0 40.0
+plot 2 1016 4000 0.0 15.24 25.4 409.58 449.58  % Zone I-A top
+plot 2 1016 4000 0.0 15.24 25.4 0.0 40.0       % Zone I-A bottom
+%mesh 3 2000 2000
+%mesh 2 2000 2000
 
 % --- Decay and fission yield libraries:
 %set declib "/home/andrei2/serpent/xsdata/endfb7/sss_endfb7.dec"
