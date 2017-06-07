@@ -43,17 +43,7 @@ mat tank  -19.1 burn 1 vol 1.95057E+07
 92233.09c  -100.0  % fraction of U-233
 94239.09c  -0.00   % fraction of Pu-239
 % --- Outflow to two different streams:
-mat outflow -15.4 burn 1 vol 1.95057E+07
-3007.09c   -0.00   % fraction of Li-7 
-3006.09c   -0.00   % fraction of Li-6
-9019.09c   -0.00   % fraction of F-19
-4009.09c   -0.00   % fraction of Be-9
-90232.09c  -0.00   % fraction of Th-232
-91233.09c  -100.00   % fraction of Pa-233
-92233.09c  -0.00   % fraction of U-233 (0.232% mole)
-94239.09c  -0.00   % fraction of Pu-239 (0.0006% mole)
-
-mat nobelgs 1.00 burn 1 vol 1.95057E+07
+mat outflow 0.0 burn 1 vol 1.95057E+07
 3007.09c   0.00   % fraction of Li-7 
 3006.09c   0.00   % fraction of Li-6
 9019.09c   0.00   % fraction of F-19
@@ -62,7 +52,17 @@ mat nobelgs 1.00 burn 1 vol 1.95057E+07
 91233.09c  0.00   % fraction of Pa-233
 92233.09c  0.00   % fraction of U-233 (0.232% mole)
 94239.09c  0.00   % fraction of Pu-239 (0.0006% mole)
-54130.09c  100000.0  % Xe
+
+mat nobelgs 0.00 burn 1 vol 1.0
+3007.09c   0.00   % fraction of Li-7 
+3006.09c   0.00   % fraction of Li-6
+9019.09c   0.00   % fraction of F-19
+4009.09c   0.00   % fraction of Be-9
+90232.09c  0.00   % fraction of Th-232
+91233.09c  0.00   % fraction of Pa-233
+92233.09c  0.00   % fraction of U-233 (0.232% mole)
+94239.09c  0.00   % fraction of Pu-239 (0.0006% mole)
+%54130.09c  100000.0  % Xe
 % --- Thermal scattering data for graphite:
 
 therm gr grj3.12t
@@ -122,7 +122,7 @@ Th-232 1.15E-10
 
 mflow feed2
 %U-233 3.5E-12
-U-233  8.5E-11
+U-233  1.0E-10
 %Th-232 1.25E-8
 
 mflow rem1
@@ -131,10 +131,10 @@ mflow rem1
 Pa-233  2.0E-10
 
 mflow rem2
-Kr 0.4
-Xe 0.4   
+Kr 0.5
+Xe 0.7   
 Se 0.2
-Nb 0.2
+Nb 0.5
 Mo 0.2
 Tc 0.2
 Ru 0.2
@@ -150,10 +150,21 @@ rc tank fuel    feed2  1 % inflow U-233 into the core
 rc fuel outflow rem1   1 % outflow from the core to tank
 rc fuel nobelgs rem2   1 % removing poisons
 
-% --- Irradiation cycle:
-%set powdens 22.2E-3
-set power 2250000000.0 % 2.25 GW(th)
+% --- Irradiation cycle 1:
+set power 180000000.0 % 8% full power 2.25 GW(th) 180MW
+dep pro r1
+daystep 
+3 3 3 
 
+% --- Irradiation cycle 2:
+set power 450000000.0 % 20% full power 2.25 GW(th) 450MW
+dep pro r1
+daystep 
+3 3 3 3 3 3 3
+
+% --- Irradiation cycle 3:
+%set powdens 6.66586596E-3  %  22.2kW/l
+set power 2250000000.0 % 2.25 GW(th)
 dep pro r1
 daystep % 1200days = 3 x 400 steps
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 % 100 steps
