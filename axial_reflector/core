@@ -94,7 +94,7 @@ set pop 10000 500 20
 mesh 3 3000 3000
 mesh 2 3000 3000
 
-set cpd 2
+%set cpd 2
 
 % --- Decay and fission yield libraries:
 %set declib "/home/andrei2/serpent/xsdata/endfb7/sss_endfb7.dec"
