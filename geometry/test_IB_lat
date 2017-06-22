@@ -42,7 +42,7 @@ lat 300 1 0 0 2 2 10.16
 
 surf 3000  sqc 0.0 0.0 10.16                  % r=(grid step/2) * number of elements
 surf 3001  pz  0.0
-surf 3002  pz  396.24
+surf 3002  pz  265
 
 % --- Cells:
 

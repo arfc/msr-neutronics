@@ -12,4 +12,4 @@ export OMP_NUM_THREADS=24
 
 # Run the hello world executable (a.out)
 cd ~/depletion/performance_test/
-$sss2 -omp 24 core
+/projects/arfc/serpent2/sss2_src/sss2 -omp 24 core
