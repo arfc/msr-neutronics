@@ -102,7 +102,7 @@ cell 734  23  moder 32 -33                             % Graphite block
 cell 735  23  fuel  33 -23                             % Fuel salt outside graphite block
 cell 736  23  outside   23                             % Outside world
 %===========Cells: Universe 24: Upper part 3 (from H=439.42cm to 441.96cm): Zone II-A ===========================
-surf 34  cone 0.0 0.0 0.0 3.65125 6.16                % Outer cone surface (Fig.3.5 Robertson p. 47) 
+surf 34  cone 0.0 0.0 0.0 3.65125 6.5                % Outer cone surface (Fig.3.5 Robertson p. 47) 
 cell 737  24  moder -34                                % Graphite block
 cell 738  24  fuel  34 -23                             % Fuel salt outside graphite block
 cell 739  24  outside   23                             % Outside world
