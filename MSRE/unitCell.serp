@@ -8,17 +8,25 @@ cell 113 4 tank  -13
 
 % --- Single unit cell
 
-surf 1 cuboid -1.524 1.524 2.032 2.54 0 198.12
-surf 2 cuboid -1.524 1.524 -2.54 -2.032 0 198.12
-surf 3 cuboid 2.032 2.54 -1.524 1.524 0 198.12
-surf 4 cuboid -2.54 -2.032 -1.524 1.524 0 198.12
-surf 6 pz 0
-surf 7 pz 157.7975 % p. 84; this is the stringer height exluding central 5
+% 4 bounding planes of stringer
+surf 1 px -2.54
+surf 2 px  2.54
+surf 3 py -2.54
+surf 4 py  2.54
 
-cell 11 1 fill 2 -1
-cell 12 1 fill 2 -2
-cell 13 1 fill 2 -3
-cell 14 1 fill 2 -4
-cell 15 1 fill 3 1 2 3 4 6 -7
-cell 16 1 outside -6
-cell 17 1 outside 7
+% 4 square cylinders form slot edges
+surf 5 sqc 3.556 0 1.524 0.508 
+surf 6 sqc -3.556 0 1.524 0.508 
+surf 7 sqc 0 3.556 1.524 0.508 
+surf 8 sqc 0 -3.556 1.524 0.508 
+
+cell 11 1 fill 3 1 -2 3 -4 5 6 7 8
+cell 12 1 fill 2 -5
+cell 13 1 fill 2 -6
+cell 14 1 fill 2 -7
+cell 15 1 fill 2 -8
+cell 16 1 fill 2 -1 6
+cell 17 1 fill 2 2 5
+cell 18 1 fill 2 -3 8
+cell 19 1 fill 2 4 7
+

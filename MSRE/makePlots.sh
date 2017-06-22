@@ -11,5 +11,5 @@ if $?; then
 else
 	module load serpent
 	sss2 -qp -plot msreU
-	sss2 -qp -plot unitCellPlot.serp
+	#sss2 -qp -plot unitCellPlot.serp
 fi

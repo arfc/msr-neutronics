@@ -10,7 +10,7 @@ include "materials.serp"
 
 % % --- Lattice
 
-lat 300 1 0 0 30 30 5.08
+lat 300 1 2.54 2.54 30 30 5.08
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
@@ -53,9 +53,17 @@ surf 2996  cyl 0.0 0.0 75.08875 % vessel OD
 surf 3001  pz  0
 surf 3002  pz  198.12
 
+% control rod slots:
+surf 2000 cyl  5.08  5.08 2.7
+surf 2001 cyl -5.08  5.08 2.7
+surf 2002 cyl -5.08 -5.08 2.7
+
+% experiment slot
+surf 2003 cyl  5.08 -5.08 2.7
+
 % --- Cells:
 
-cell 300  0    fill 300  -3000 3001 -3002 % central mod
+cell 300  0    fill 300  -3000 3001 -3002 2000 2001 2002 2003        % central mod
 cell 299  0    fill 2    3000 -2999 3001 -3002 % fuel around mod, between downcomer
 cell 298  0    fill 4    2999 -2998 3001 -3002 % downcomer wall
 cell 297  0    fill 2    2998 -2997 3001 -3002 % downcomer
@@ -63,6 +71,7 @@ cell 296  0    fill 4    2997 -2996 3001 -3002 % reactor vessel
 cell 301  0    outside   2996  3001 -3002
 cell 302  0    outside   -3001
 cell 303  0    outside   3002
+% surf 7 pz 157.7975 % p. 84; this is the stringer height exluding central 5
 
 % --- Cross section data library file path:
 
