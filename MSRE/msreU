@@ -5,9 +5,11 @@ set title "MSR2G-partially-enriched-U-full-core"
 % --- Dummy structures
 surf 11 inf
 surf 12 inf
+surf 13 inf
 
 cell 111 2 fuel -11
 cell 112 3 moder -12
+cell 113 4 tank  -13
 
 % --- Single unit cell
 
@@ -16,13 +18,13 @@ surf 2 cuboid -1.524 1.524 -2.54 -2.032 0 198.12
 surf 3 cuboid 2.032 2.54 -1.524 1.524 0 198.12
 surf 4 cuboid -2.54 -2.032 -1.524 1.524 0 198.12
 surf 6 pz 0
-surf 7 pz 198.12
+surf 7 pz 157.7975 % p. 84; this is the stringer height exluding central 5
 
-cell 11 1 fuel -1
-cell 12 1 fuel -2
-cell 13 1 fuel -3
-cell 14 1 fuel -4
-cell 15 1 moder 1 2 3 4 6 -7
+cell 11 1 fill 2 -1
+cell 12 1 fill 2 -2
+cell 13 1 fill 2 -3
+cell 14 1 fill 2 -4
+cell 15 1 fill 3 1 2 3 4 6 -7
 cell 16 1 outside -6
 cell 17 1 outside 7
 
@@ -63,16 +65,22 @@ lat 300 1 0 0 30 30 5.08
 
 % --- Surfaces:
 
-surf 3000  cyl 0.0 0.0 74.93
-surf 2999  cyl 0.0 0.0 76.93 % hastelloy
+surf 3000  cyl 0.0 0.0 70.1675 % p. 78
+surf 2999  cyl 0.0 0.0 70.485 % central mod -> core container : fuel
+surf 2998  cyl 0.0 0.0 71.12 % core container ID -> OD : hastelloy
+surf 2997  cyl 0.0 0.0 73.66 % vessel ID
+surf 2996  cyl 0.0 0.0 75.08875 % vessel OD
 surf 3001  pz  0
 surf 3002  pz  198.12
 
 % --- Cells:
 
-cell 300  0    fill 300  -2999 3001 -3002
-cell 394  0    tank      2999 -3000 3001 -3002
-cell 301  0    outside   3000  3001 -3002
+cell 300  0    fill 300  -3000 3001 -3002 % central mod
+cell 299  0    fill 2    3000 -2999 3001 -3002 % fuel around mod, between downcomer
+cell 298  0    fill 4    2999 -2998 3001 -3002 % downcomer wall
+cell 297  0    fill 2    2998 -2997 3001 -3002 % downcomer
+cell 296  0    fill 4    2997 -2996 3001 -3002 % reactor vessel
+cell 301  0    outside   2996  3001 -3002
 cell 302  0    outside   -3001
 cell 303  0    outside   3002
 
@@ -91,7 +99,7 @@ mat fuel    -2.146 tmp 922 rgb 50 240 50
 % --- Moderator graphite:
 % 1200 F pg. 17, MSRE Design and Operations, part iii, nuclear analysis
 
-mat moder -1.86 tmp 922 
+mat moder -1.86 tmp 922 rgb 128 128 128
 5010.09c 4e-07
 5011.09c 1.6e-06
 6000.09c 0.999998
@@ -148,8 +156,9 @@ set pop 50000 5000 50
 
 % --- Geometry and mesh plots:
 
+plot 1 1500 1500
+plot 2 1500 1500
 plot 3 1500 1500
-mesh 3 1500 1500
 
 % neutron spectrum measurement
 det spectralFuel dr 0  fuel  de eGrid
