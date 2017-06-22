@@ -1,0 +1,141 @@
+set title "MSBR burn"
+
+include "../../geometry/whole_core"
+
+% --- Fuel (LiF-BeF2-ThF4-233UF4-239PuF3 72-16-12-0.232-0.0006 mole %) Table 3.7 Robertson:
+mat fuel    -3.3304 burn 1 % g/cm3 for mixture
+rgb 253 231 37 vol 1.95057E+07 
+3007.09c   -7.882367    % Mass fraction of Li-7 
+3006.09c   -3.2439E-4   % Mass fraction of Li-6
+9019.09c   -45.419814   % Mass fraction of F-19
+4009.09c   -2.257411    % Mass fraction of Be-9
+90232.09c  -43.591433   % Mass fraction of Th-232
+92233.09c  -0.84640546  % Mass fraction of U-233 (0.232% mole)
+94239.09c  -2.2455E-4   % Mass fraction of Pu-239 (0.0006% mole)
+% --- Moderator graphite:
+mat moder    -1.843 rgb 68 1 84 tmp 908 moder gr 6012 6012.09c    -1.0
+
+% --- Refill from 100 kg lump of Th232:
+mat refill     -11.72 burn 1 vol 8532
+3007.09c   0.00   % fraction of Li-7 
+3006.09c   0.00   % fraction of Li-6
+9019.09c   0.00   % fraction of F-19
+4009.09c   0.00   % fraction of Be-9
+90232.09c  100.00 % fraction of Th-232
+92233.09c  0.00   % fraction of U-233 (0.232% mole)
+94239.09c  0.00   % fraction of Pu-239 (0.0006% mole)
+% --- Outflow to two different streams:
+mat outflow1     0.00 burn 1 vol 1.0
+3007.09c   0.00   % fraction of Li-7 
+3006.09c   0.00   % fraction of Li-6
+9019.09c   0.00   % fraction of F-19
+4009.09c   0.00   % fraction of Be-9
+90232.09c  0.00   % fraction of Th-232
+92233.09c  0.00   % fraction of U-233 (0.232% mole)
+94239.09c  0.00   % fraction of Pu-239 (0.0006% mole)
+
+mat nobelgs   0.00 burn 1 vol 10000000.0
+
+% --- Thermal scattering data for graphite:
+
+therm gr grj3.12t
+
+% --- Cross section data library file path:
+
+set acelib "/home/andrei2/serpent/xsdata/endfb7/sss_endfb7.xsdata"
+
+% --- Black (vacuum) boundary condition:
+
+set bc 1
+
+% --- group constant generation:
+
+% universe = 0 (homogenization over all space)
+% symmetry = 4
+% 4-group structure (3 group boundaries)
+
+set gcu 0  
+set sym 0
+set nfg  4  0.625E-6  5.5E-3  0.821
+
+% Cross section plotter
+%set xsplot 1000 1E-10 12.0
+
+% --- Neutron population and criticality cycles:
+
+set pop 10000 500 20 1.0
+
+% --- Geometry and mesh plots:
+
+plot 3 2000 2000 1.0
+%plot 2 2000 2000 0.0
+mesh 3 2000 2000
+%mesh 2 2000 2000
+
+% --- Decay and fission yield libraries:
+set declib "/home/andrei2/serpent/xsdata/endfb7/sss_endfb7.dec"
+set nfylib "/home/andrei2/serpent/xsdata/endfb7/sss_endfb7.nfy"
+% --- Reduce energy grid size:
+set egrid 5E-5 1E-9 15.0
+% --- Cut-offs:
+%set fpcut   1E-6
+% --- Options for burnup calculation:
+
+set bumode  2  % CRAM method
+set pcc     0  % Predictor-corrector calculation off
+%set xscalc  2  % Cross sections from spectrum
+
+% --- Mass flows:
+mflow feed
+Th-232 7E-6
+
+mflow rem1
+Pa 7E-6
+
+mflow rem2
+He 1E-05
+Ne 1E-05
+Ar 1E-05
+Kr 1E-05
+Xe 1E-05
+Ra 1E-05
+
+% --- Reprocessing scheme:
+
+rep r1
+%rc refill fuel feed 2
+%rc fuel outflow1 rem1 1
+rc fuel nobelgs rem2 1
+
+% --- Irradiation cycle:
+%set powdens 22.2E-3
+set power 2250000000.0
+
+dep pro r1
+daystep
+3 3 3 3 3 3 3 3 3 3
+%50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 
+
+% --- Inventory:
+set inventory
+Th-232
+Th-233
+Pa-232
+Pa-233
+Pa-234
+U-232
+U-233
+U-234
+U-235
+U-236
+Pu-239
+He
+Ne
+Ar
+Kr
+Xe
+Rn
+
+%---- Print compositions of depleted materials after each step
+set printm 1
+
