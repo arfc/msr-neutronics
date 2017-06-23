@@ -1,0 +1,19 @@
+% plots the MSRE unit cell
+
+include "unitCell.serp"
+include "materials.serp"
+
+surf 1001 cuboid -5 5 -5 5 0.0 199.0
+
+cell 123 0 fill 1 -1001
+cell 124 0 outside 1001
+
+% have a pop just to make serpent happy
+set pop 100 100 30 1
+set acelib "sss_endfb7u.xsdata"
+set nfylib "sss_endfb7.nfy"
+set declib "sss_endfb7.dec"
+set bc 3
+plot 1 1500 1500
+plot 2 1500 1500
+plot 3 1500 1500

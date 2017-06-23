@@ -20,13 +20,12 @@ surf 6 sqc -3.556 0 1.524 0.508
 surf 7 sqc 0 3.556 1.524 0.508 
 surf 8 sqc 0 -3.556 1.524 0.508 
 
-cell 11 1 fill 3 1 -2 3 -4 5 6 7 8
-cell 12 1 fill 2 -5
-cell 13 1 fill 2 -6
-cell 14 1 fill 2 -7
-cell 15 1 fill 2 -8
-cell 16 1 fill 2 -1 6
-cell 17 1 fill 2 2 5
-cell 18 1 fill 2 -3 8
-cell 19 1 fill 2 4 7
-
+cell 11 1 fill 3 1 -2 3 -4 5 6 7 8 
+cell 12 1 fill 2 -1 6 -4 3% behind in x
+cell 13 1 fill 2  2 5 -4 3% in front in x
+cell 14 1 fill 2  -3 8 % behind in y
+cell 15 1 fill 2  4  7 % front of y
+cell 16 1 fill 2  -5 % salt in +x channel
+cell 17 1 fill 2 -6
+cell 18 1 fill 2 -7
+cell 19 1 fill 2 -8
