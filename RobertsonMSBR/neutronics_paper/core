@@ -24,7 +24,7 @@ rgb 127 205 187
 
 % --- Thermal scattering data for graphite:
 
-therm gr gre7.18t  % 900K C-12
+therm gr 950 gre7.18t gre7.20t  % 900K C-12
 
 % --- Cross section data library file path:
 

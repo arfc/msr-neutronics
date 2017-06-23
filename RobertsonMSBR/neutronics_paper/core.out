@@ -71,7 +71,7 @@
 
  Nuclide    1 / 13 : 3006.09c -- lithium 6 (Li-6)
 
- Pointers                     : 427215 3218
+ Pointers                     : 427342 3299
  Primary type                 : Transport
  Nuclide ZAI                  : 30060
  Library ID                   : 09c
@@ -158,7 +158,7 @@
 
  Nuclide    2 / 13 : 3007.09c -- lithium 7 (Li-7)
 
- Pointers                     : 424012 3494
+ Pointers                     : 424136 3575
  Primary type                 : Transport
  Nuclide ZAI                  : 30070
  Library ID                   : 09c
@@ -247,7 +247,7 @@
 
  Nuclide    3 / 13 : 4009.09c -- beryllium 9 (Be-9)
 
- Pointers                     : 432963 4046
+ Pointers                     : 433096 4127
  Primary type                 : Transport
  Nuclide ZAI                  : 40090
  Library ID                   : 09c
@@ -309,7 +309,7 @@
 
  Nuclide    4 / 13 : 6012.09c -- carbon 12 (C-12)
 
- Pointers                     : 445395 5150
+ Pointers                     : 445540 5231
  Primary type                 : Transport
  Nuclide ZAI                  : 60120
  Library ID                   : 09c
@@ -390,7 +390,7 @@
 
  Nuclide    5 / 13 : 6012.09s -- carbon 12 (C-12)
 
- Pointers                     : 460767 5150
+ Pointers                     : 461428 5231
  Primary type                 : Transport
  Nuclide ZAI                  : 60120
  Library ID                   : 09s
@@ -474,7 +474,7 @@
 
  Nuclide    6 / 13 : 9019.09c -- fluorine 19 (F-19)
 
- Pointers                     : 430269 6530
+ Pointers                     : 430399 6611
  Primary type                 : Transport
  Nuclide ZAI                  : 90190
  Library ID                   : 09c
@@ -556,7 +556,7 @@
 
  Nuclide    7 / 13 : 24000.06c -- natural chromium (Cr-nat)
 
- Pointers                     : 452901 18628
+ Pointers                     : 453055 18709
  Primary type                 : Transport
  Nuclide ZAI                  : 240000
  Library ID                   : 06c
@@ -653,7 +653,7 @@
 
  Nuclide    8 / 13 : 26000.06c -- natural iron (Fe-nat)
 
- Pointers                     : 456675 20284
+ Pointers                     : 456832 20365
  Primary type                 : Transport
  Nuclide ZAI                  : 260000
  Library ID                   : 06c
@@ -751,7 +751,7 @@
 
  Nuclide    9 / 13 : 28000.06c -- natural nickel (Ni-nat)
 
- Pointers                     : 448017 22492
+ Pointers                     : 448165 22573
  Primary type                 : Transport
  Nuclide ZAI                  : 280000
  Library ID                   : 06c
@@ -856,7 +856,7 @@
 
  Nuclide   10 / 13 : 42000.06c -- natural molybdenum (Mo-nat)
 
- Pointers                     : 452367 39604
+ Pointers                     : 452518 39685
  Primary type                 : Transport
  Nuclide ZAI                  : 420000
  Library ID                   : 06c
@@ -908,7 +908,7 @@
 
  Nuclide   11 / 13 : 90232.09c -- thorium 232 (Th-232)
 
- Pointers                     : 434217 103958
+ Pointers                     : 434353 104039
  Primary type                 : Transport
  Nuclide ZAI                  : 902320
  Library ID                   : 09c
@@ -1012,7 +1012,7 @@
 
  Nuclide   12 / 13 : 92233.09c -- uranium 233 (U-233)
 
- Pointers                     : 438423 105890
+ Pointers                     : 438562 105971
  Primary type                 : Transport
  Nuclide ZAI                  : 922330
  Library ID                   : 09c
@@ -1105,7 +1105,7 @@
 
  Nuclide   13 / 13 : 94239.09c -- plutonium 239 (Pu-239)
 
- Pointers                     : 441837 110582
+ Pointers                     : 441979 110663
  Primary type                 : Transport
  Nuclide ZAI                  : 942390
  Library ID                   : 09c
@@ -1212,9 +1212,10 @@ Material "fuel":
  - Volume 1.9506E+07 cm3
  - Mass 6.4962E+07 g
  - Photon emission rate 0.0000E+00 1/s
+ - Neutron emission rate 0.0000E+00 1/s
  - 7 nuclides in composition
  - No nuclides associated with S(a,b) data
- - 4.79 Mb of memory allocated for data
+ - 4.78 Mb of memory allocated for data
 
 Isotopic composition (non-zero densities):
 
@@ -1240,6 +1241,7 @@ Material "moder":
  - Volume 6.6068E+07 cm3
  - Mass 1.2176E+08 g
  - Photon emission rate 0.0000E+00 1/s
+ - Neutron emission rate 0.0000E+00 1/s
  - 1 nuclides in composition
  - 1 nuclides associated with S(a,b) data
  - 2.05 Mb of memory allocated for data
@@ -1262,9 +1264,10 @@ Material "hast":
  - Volume 4.9313E+06 cm3
  - Mass 4.2759E+07 g
  - Photon emission rate 0.0000E+00 1/s
+ - Neutron emission rate 0.0000E+00 1/s
  - 4 nuclides in composition
  - No nuclides associated with S(a,b) data
- - 2.74 Mb of memory allocated for data
+ - 2.73 Mb of memory allocated for data
 
 Isotopic composition (non-zero densities):
 
