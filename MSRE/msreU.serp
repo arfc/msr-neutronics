@@ -90,25 +90,25 @@ surf 9002 pz 190.0
 
 % CR surfaces
 pin CR1
-void 1.0033
+air 1.0033
 tank 1.0668
 ctrlPois 1.3716
 tank 1.4478
-void
+air
 
 pin CR2
-void 1.0033
+air 1.0033
 tank 1.0668
 ctrlPois 1.3716
 tank 1.4478
-void
+air
 
 pin CR3
-void 1.0033
+air 1.0033
 tank 1.0668
 ctrlPois 1.3716
 tank 1.4478
-void
+air
 
 % bring CRs into correct positions
 trans CR1 5.08 5.08 0
@@ -131,9 +131,9 @@ cell 706  0    fuel    1236 -2001
 cell 707  0    fill CR3  -1233 9002
 cell 708  0    tank      1233 -1237
 cell 709  0    fuel    1237 -2002
-cell 800  0    void      -1231 -9000
-cell 801  0    void      -1232 -9001
-cell 803  0    void      -1233 -9002
+cell 800  0    air      -1231 -9000
+cell 801  0    air      -1232 -9001
+cell 803  0    air      -1233 -9002
 
 % approximate the experiment tube as a tube full of graphite
 cell 710  0    moder   -1234
