@@ -74,71 +74,74 @@ surf 1236 cyl -5.08 5.08  2.54
 surf 1237 cyl -5.08 -5.08 2.54
 surf 1238 cyl 5.08 -5.08  2.54
 
-
-% CONTROL ROD POSITIONS
-% ordered like quadrants are
-% 0 corresponds to bottom of moderator, but the poison is only 
-% 59.4" long (p. 107, msre ops i). ie 150.876 cm
-% so, the dropped rod is 
-% surf asdf pz 47.244
-%ROD 1 
-surf 9000 pz 190.0
-%ROD 2
-surf 9001 pz 190.0
-%ROD 3
-surf 9002 pz 190.0
+% top of control rods
+surf 9000 pz 150.876
 
 % CR surfaces
-pin CR1
-air 1.0033
-tank 1.0668
-ctrlPois 1.3716
-tank 1.4478
-air
-
-pin CR2
-air 1.0033
-tank 1.0668
-ctrlPois 1.3716
-tank 1.4478
-air
-
-pin CR3
-air 1.0033
-tank 1.0668
-ctrlPois 1.3716
-tank 1.4478
-air
-
-% bring CRs into correct positions
-trans CR1 5.08 5.08 0
-trans CR2 -5.08 5.08 0
-trans CR3 -5.08 -5.08 0
+surf cr11 cyl 0 0 1.0033
+surf cr12 cyl 0 0 1.0668
+surf cr13 cyl 0 0 1.3716
+surf cr14 cyl 0 0 1.4478
 
 % --- Cells:
-
 cell 300  0    fill 300  -3000 3001 -3002 2000 2001 2002 2003 % central mod
 cell 401  0    fill 2    -2996 3002 -5000 2000 2001 2002 2003 % upper plenum
 cell 402  0    fill 2    -2996 -3001 5001 % lower plenum
 
 % CR cells
-cell 701  0    fill CR1  -1231 9000
-cell 702  0    tank      1231 -1235
-cell 703  0    fuel    1235 -2000
-cell 704  0    fill CR2  -1232 9001
-cell 705  0    tank      1232 -1236
-cell 706  0    fuel    1236 -2001
-cell 707  0    fill CR3  -1233 9002
-cell 708  0    tank      1233 -1237
-cell 709  0    fuel    1237 -2002
-cell 800  0    air      -1231 -9000
-cell 801  0    air      -1232 -9001
-cell 803  0    air      -1233 -9002
+cell cr21 CR1 fill 6     -cr11       -9000 3001
+cell cr31 CR2 fill 6     -cr11       -9000 3001
+cell cr41 CR3 fill 6     -cr11       -9000 3001
+cell cr22 CR1 fill 4      cr11 -cr12 -9000 3001
+cell cr32 CR2 fill 4      cr11 -cr12 -9000 3001
+cell cr42 CR3 fill 4      cr11 -cr12 -9000 3001
+cell cr23 CR1 fill 5      cr12 -cr13 -9000 3001
+cell cr33 CR2 fill 5      cr12 -cr13 -9000 3001
+cell cr43 CR3 fill 5      cr12 -cr13 -9000 3001
+cell cr24 CR1 fill 4      cr13 -cr14 -9000 3001
+cell cr34 CR2 fill 4      cr13 -cr14 -9000 3001
+cell cr44 CR3 fill 4      cr13 -cr14 -9000 3001
+cell cr25 CR1 fill 6      cr14       -9000 3001
+cell cr35 CR2 fill 6      cr14       -9000 3001
+cell cr45 CR3 fill 6      cr14       -9000 3001
+cell cr26 CR1 fill 6      9000
+cell cr36 CR2 fill 6      9000
+cell cr46 CR3 fill 6      9000
+cell cr27 CR1 fill 6      -3001
+cell cr37 CR2 fill 6      -3001
+cell cr47 CR3 fill 6      -3001
+
+% CONTROL ROD POSITIONS
+% ordered like quadrants are
+% 0 corresponds to bottom of moderator, but the poison is only 
+% 59.4" long (p. 107, msre ops i). ie 150.876 cm
+% so, the dropped rod for max worth is z-translated up 23.622 cm
+% for a pulled rod, just move it out of the core. z=208.0 works well
+trans CR1 5.08 5.08      208.0
+trans CR2 -5.08 5.08     208.0
+trans CR3 -5.08 -5.08    208.0
 
 % approximate the experiment tube as a tube full of graphite
-cell 710  0    moder   -1234
-cell 711  0    tank     1234 -1238
-cell 712  0    fill 2   1238 -2003
+cell 710  0    fill 3   -1234 -5000 5001
+cell 711  0    tank     1234 -1238 -5000 5001
+cell 712  0    fill 2   1238 -2003  -5000 5001
+
+% CR 1 guide tube
+cell 1999 0    fill CR1 -1231 -5000 5001
+cell 1998 0    fill 4 1231 -1235 -5000 5001
+cell 1997 0    fill 2 1235 -2000 -5000 5001
+
+% CR 2 guide tube
+cell 1996 0    fill CR2 -1232 -5000 5001
+cell 1995 0    fill 4 1232 -1236 -5000 5001
+cell 1994 0    fill 2 1236 -2001 -5000 5001
+
+% CR 3 guide tube
+cell 1993 0    fill CR3 -1233 -5000 5001
+cell 1992 0    fill 4 1233 -1237 -5000 5001
+cell 1991 0    fill 2 1237 -2002 -5000 5001
+
+% rest of the vessel + outside
 cell 299  0    fill 2    3000 -2999 3001 -3002 % fuel around mod, between downcomer
 cell 298  0    fill 4    2999 -2998 3001 -3002 % downcomer wall
 cell 297  0    fill 2    2998 -2997 3001 -3002 % downcomer
@@ -155,12 +158,12 @@ set declib "sss_endfb7.dec"
 
 % --- group constant generation:
 
-set gcu 0
-set nfg  2 0.625e-6
+%set gcu 0
+%set nfg  2 0.625e-6
 
 % --- Neutron population and criticality cycles:
 
-set pop 50000 100 50
+set pop 50000 200 50
 
 % --- Geometry and mesh plots:
 

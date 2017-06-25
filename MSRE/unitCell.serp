@@ -1,10 +1,14 @@
 surf 11 inf
 surf 12 inf
 surf 13 inf
+surf 14 inf
+surf 15 inf
 
 cell 111 2 fuel -11
 cell 112 3 moder -12
 cell 113 4 tank  -13
+cell 114 5 ctrlPois  -14
+cell 115 6 air -15
 
 % --- Single unit cell
 
@@ -29,3 +33,7 @@ cell 16 1 fill 2  -5 % salt in +x channel
 cell 17 1 fill 2 -6
 cell 18 1 fill 2 -7
 cell 19 1 fill 2 -8
+cell 20 1 outside -1 -2 3
+cell 21 1 outside  2 -2 3
+cell 22 1 outside  4
+cell 23 1 outside  -3
