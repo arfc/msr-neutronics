@@ -1,4 +1,4 @@
-set title "MSBR burnup inflow Th+U233, outflow Pa, stable case when Keff drops to 1.0 and then grows to 1.14"
+set title "MSBR burnup, new thermal scattering data, higher Th rate"
 
 include "../../../../geometry/test_IB_lat"
 
@@ -63,12 +63,9 @@ mat nobelgs 1.00 burn 1 vol 1.0
 92233.09c  0.00   % fraction of U-233 (0.232% mole)
 94239.09c  0.00   % fraction of Pu-239 (0.0006% mole)
 54130.09c  100000.0  % Xe
-% --- Thermal scattering data for graphite:
-
-therm gr grj3.12t
-
+% --- Thermal scattering data for graphite
+therm gr 907 gre7.18t gre7.20t
 % --- Cross section data library file path:
-
 set acelib "/home/andrei2/serpent/xsdata/endfb7/sss_endfb7.xsdata"
 %set acelib "/projects/arfc/serpent/core/xsdata/endfb7/sss_endfb7.xsdata" % this for RCaaS
 
@@ -121,15 +118,16 @@ mflow feed
 %Th-232 1.25E-9
 %Th-232 1.25E-11     keff=0.9454 after 48days
 %Th-232 1.25E-12     keff=0.9466 after 48days
-Th-232 1.25E-11      %keff=0.9289 after 48days
+Th-232 1.25E-10      %keff=0.9289 after 48days
 
 mflow feed2
 %U-233 3.5E-12
 U-233  0.35E-10
-Th-232 0.90E-10
+Th-232 9.0E-8
 
 mflow feed3 % for second cycle
-Th-232 9.0E-9
+U-233  2.0E-11
+Th-232 9.0E-7
 
 mflow rem1
 %Pa-233 3.5E-12

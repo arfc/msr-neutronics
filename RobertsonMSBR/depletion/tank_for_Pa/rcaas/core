@@ -150,7 +150,7 @@ Ag 1
 Sb 1
 Te 1
 % --- Reprocessing scheme:
-rep r1 % first 45 days
+rep r1 % first 69 days
 rc tank fuel    feed2  1 % inflow into the core
 rc fuel outflow rem1   1 % outflow from the core to tank
 rc fuel nobelgs rem2   1 % removing poisons
@@ -165,8 +165,8 @@ rc fuel nobelgs rem2   1 % removing poisons
 set power 2250000000.0 % 2.25 GW(th)
 
 dep pro r1
-daystep % 45days = 3 x 16 steps
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+daystep % 45days = 3 x 23 steps
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
 %3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 % 100 steps
 %3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 % 100 steps
 dep pro r2
