@@ -1,0 +1,113 @@
+% --- MSR cluster ------------------------------------------
+
+set title "MSR2G-partially-enriched-U-full-core"
+
+% --- get the stringer unit cell
+include "unitCell.serp"
+
+% --- problem materials
+include "materials.serp"
+
+% % --- Lattice
+
+lat 300 1 2.54 2.54 30 30 5.08
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+
+
+% --- Surfaces:
+
+surf 3000  cyl 0.0 0.0 70.1675 % p. 78
+surf 2999  cyl 0.0 0.0 70.485 % central mod -> core container : fuel
+surf 2998  cyl 0.0 0.0 71.12 % core container ID -> OD : hastelloy
+surf 2997  cyl 0.0 0.0 73.66 % vessel ID
+surf 2996  cyl 0.0 0.0 75.08875 % vessel OD
+surf 3001  pz  0
+surf 3002  pz  198.12
+
+% vessel top lid
+surf 3003 quadratic -0.004694287672783223 -0.004694287672783223 0 0 0 0 0 0 -1 225.9278
+surf 3004 quadratic -0.005125110131314196 -0.005125110131314196 0 0 0 0 0 0 -1 224.5879
+
+% control rod slots:
+surf 2000 cyl  5.08  5.08 2.7
+surf 2001 cyl -5.08  5.08 2.7
+surf 2002 cyl -5.08 -5.08 2.7
+
+% experiment slot
+surf 2003 cyl  5.08 -5.08 2.7
+
+% --- Cells:
+
+cell 300  0    fill 300  -3000 3001 -3002 2000 2001 2002 2003        % central mod
+cell 500  0    fill 2    -2000 % CR slots
+cell 501  0    fill 2    -2001
+cell 502  0    fill 2    -2002
+cell 503  0    fill 2    -2003
+cell 299  0    fill 2    3000 -2999 3001 -3002 % fuel around mod, between downcomer
+cell 298  0    fill 4    2999 -2998 3001 -3002 % downcomer wall
+cell 297  0    fill 2    2998 -2997 3001 -3002 % downcomer
+cell 296  0    fill 4    2997 -2996 3001 -3002 % reactor vessel
+cell 402  0    fill 2    3004 3002
+cell 410  0    fill 4    3003 -3004 3002
+cell 403  0    outside    -3003
+cell 301  0    outside   2996  3001 -3002
+cell 302  0    outside   -3001
+% surf 7 pz 157.7975 % p. 84; this is the stringer height exluding central 5
+
+% --- Cross section data library file path:
+
+set acelib "sss_endfb7u.xsdata"
+set nfylib "sss_endfb7.nfy"
+set declib "sss_endfb7.dec"
+
+% --- group constant generation:
+
+set gcu 0
+set nfg  2 0.625e-6
+
+% --- Neutron population and criticality cycles:
+
+set pop 50000 5000 50
+
+% --- Geometry and mesh plots:
+
+plot 1 1500 1500
+plot 2 1500 1500
+plot 3 1500 1500
+
+% neutron spectrum measurement
+det spectralFuel dr 0  fuel  de eGrid
+det spectralMod  dr 0  moder   de eGrid
+
+ene eGrid 4 scale238
+
+% ------------------------------------------------------------
