@@ -3,13 +3,10 @@
 set title "MSR2G-partially-enriched-U-full-core"
 
 % --- get the stringer unit cell
-include "unitCell.serp"
+include "../unitCell.serp"
 
 % --- problem materials
-include "materials.serp"
-
-% --- group structure
-include "gentryGroups.serp"
+include "../materials.serp"
 
 % % --- Lattice
 
@@ -120,9 +117,9 @@ cell cr47 CR3 fill 6      -3001
 % 59.4" long (p. 107, msre ops i). ie 150.876 cm
 % so, the dropped rod for max worth is z-translated up 23.622 cm
 % for a pulled rod, just move it out of the core. z=208.0 works well
-trans CR1 5.08 5.08      208.0
-trans CR2 -5.08 5.08     208.0
-trans CR3 -5.08 -5.08    208.0
+trans CR1 5.08 5.08     23.622 
+trans CR2 -5.08 5.08    23.622 
+trans CR3 -5.08 -5.08   23.622 
 
 % approximate the experiment tube as a tube full of graphite
 cell 710  0    fill 3   -1234 -5000 5001
@@ -161,11 +158,12 @@ set declib "sss_endfb7.dec"
 
 % --- group constant generation:
 
-set gcu 2 3
+%set gcu 0
+%set nfg  2 0.625e-6
 
 % --- Neutron population and criticality cycles:
 
-set pop 50000 600 100
+set pop 50000 200 50
 
 % --- Geometry and mesh plots:
 

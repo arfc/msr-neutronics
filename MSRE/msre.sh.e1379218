@@ -1,0 +1,25 @@
+Error connecting to agent: No such file or directory
+[node13:08789] *** Process received signal ***
+[node13:08789] Signal: Segmentation fault (11)
+[node13:08789] Signal code: Address not mapped (1)
+[node13:08789] Failing at address: 0x7f577f7206a0
+[node11:13877] *** Process received signal ***
+[node11:13877] Signal: Segmentation fault (11)
+[node11:13877] Signal code: Address not mapped (1)
+[node11:13877] Failing at address: 0x7fc9c5dbb6a0
+[node8:27535] *** Process received signal ***
+[node8:27535] Signal: Segmentation fault (11)
+[node8:27535] Signal code: Address not mapped (1)
+[node8:27535] Failing at address: 0x7fd70e0a06a0
+[node10:01127] *** Process received signal ***
+[node10:01127] Signal: Segmentation fault (11)
+[node10:01127] Signal code: Address not mapped (1)
+[node10:01127] Failing at address: 0x7fdf801e86a0
+[node5:00365] *** Process received signal ***
+[node5:00365] Signal: Segmentation fault (11)
+[node5:00365] Signal code: Address not mapped (1)
+[node5:00365] Failing at address: 0x7fa6735e36a0
+[node6:01505] *** Process received signal ***
+[node6:01505] Signal: Segmentation fault (11)
+[node6:01505] Signal code: Address not mapped (1)
+[node6:01505] Failing at address: 0x7fce350c76a0
