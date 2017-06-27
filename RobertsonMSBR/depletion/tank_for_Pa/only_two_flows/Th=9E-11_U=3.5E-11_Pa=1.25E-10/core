@@ -1,4 +1,4 @@
-set title "MSBR burnup, new thermal scattering data, higher Th rate"
+set title "MSBR burnup, U-233 2.0E-11 ------> 1.15E-11"
 
 include "../../../../geometry/test_IB_lat"
 
@@ -126,8 +126,8 @@ U-233  0.35E-10
 Th-232 9.0E-8
 
 mflow feed3 % for second cycle
-U-233  2.0E-11
-Th-232 9.0E-7
+U-233  1.15E-11
+Th-232 9.0E-8
 
 mflow rem1
 %Pa-233 3.5E-12
