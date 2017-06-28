@@ -1,0 +1,207 @@
+
+  _                   .-=-.           .-=-.          .-==-.       
+ { }      __        .' O o '.       .' O o '.       /  -<' )--<   
+ { }    .' O'.     / o .-. O \     / o .-. O \     /  .---`       
+ { }   / .-. o\   /O  /   \  o\   /O  /   \  o\   /O /            
+  \ `-` /   \ O`-'o  /     \  O`-'o  /     \  O`-`o /             
+   `-.-`     '.____.'       `._____.'       `.____.'              
+
+Serpent 2 beta
+
+A Continuous-energy Monte Carlo Reactor Physics Burnup Calculation Code
+
+ - Version 2.1.29 (June 12, 2017) -- Contact: serpent@vtt.fi
+
+ - Reference: J. Leppanen, et al. "The Serpent Monte Carlo code: Status,
+              development and applications in 2013." Ann. Nucl. Energy,
+              82 (2015) 142-150.
+
+ - Compiled Jun 13 2017 15:11:28
+
+ - MPI Parallel calculation mode available
+
+ - OpenMP Parallel calculation mode available
+
+ - Geometry and mesh plotting available
+
+ - Default data path set to: "/opt/serpent/xsdata"
+
+Begin calculation on Tue Jun 27 14:06:17 2017
+
+Reading input file "msreU.serp"...
+Reading input file "unitCell.serp"...
+Reading input file "materials.serp"...
+Reading input file "gentryGroups.serp"...
+
+Checking duplicate input definitions...
+OK.
+
+Creating geometry...
+OK.
+
+Counting geometry zones...
+
+
+ ***** Warning: Universe 2 is used at multiple levels (1 and 3)
+
+
+ ***** Warning: Universe 3 is used at multiple levels (1 and 3)
+
+
+ ***** Warning: Universe 4 is used at multiple levels (1 and 2)
+
+The geometry consists of 4 levels:
+
+Level 0 size: max 22 zones
+Level 1 size: max 900 zones
+Level 2 size: max 13 zones
+Level 3 size: max 1 zones
+
+Processing cells...
+OK.
+
+Linking materials to geometry...
+OK.
+
+Counting cells...
+OK.
+
+Processing data for group constant generation:
+
+ - 70 energy groups in micro-group structure
+ - 4 energy groups in macro-group structure
+ - B1 fundamental mode calculation is not run
+ - Group constants generated in 2 universes
+ - Discontinuity factors are not calculated
+ - Pin-power distributions are not calculated
+ - Albedos are not calculated
+ - Poison cross sections are not calculated
+
+Plotting geometry:
+
+   0% complete
+  33% complete
+  67% complete
+ 100% complete
+
+Reading ACE directory files...
+OK.
+
+Reading neutron-induced fission yields...
+OK.
+
+Adding nuclides in material fuel...
+
+Nuclide   3007.09c -- lithium 7 at 922K (Li-7)
+Nuclide   3006.09c -- lithium 6 at 922K (Li-6)
+Nuclide   9019.09c -- fluorine 19 at 922K (F-19)
+Nuclide   4009.09c -- beryllium 9 at 922K (Be-9)
+Nuclide  40000.09c -- natural zirconium at 922K (Zr-nat)
+Nuclide  92235.09c -- uranium 235 at 922K (U-235)
+Nuclide  92238.09c -- uranium 238 at 922K (U-238)
+
+Adding nuclides in material moder...
+
+Nuclide   5010.09c -- boron 10 at 900K (B-10)
+Nuclide   5011.09c -- boron 11 at 900K (B-11)
+Nuclide  23000.09c -- natural vanadium at 900K (V-nat)
+Nuclide  16000.09c -- natural sulfur at 900K (S-nat)
+Nuclide   6000.09c -- natural carbon at 900K (C-nat)
+
+Adding nuclides in material tank...
+
+Nuclide  14030.09c -- silicon 30 at 900K (Si-30)
+Nuclide  74186.09c -- tungsten 186 at 900K (W-186)
+Nuclide  25055.09c -- manganese 55 at 900K (Mn-55)
+Nuclide  74184.09c -- tungsten 184 at 900K (W-184)
+Nuclide  74183.09c -- tungsten 183 at 900K (W-183)
+Nuclide  74182.09c -- tungsten 182 at 900K (W-182)
+Nuclide  28058.09c -- nickel 58 at 900K (Ni-58)
+Nuclide  42092.09c -- molybdenum 92 at 900K (Mo-92)
+Nuclide  26058.09c -- iron 58 at 900K (Fe-58)
+Nuclide  42094.09c -- molybdenum 94 at 900K (Mo-94)
+Nuclide  42095.09c -- molybdenum 95 at 900K (Mo-95)
+Nuclide  42096.09c -- molybdenum 96 at 900K (Mo-96)
+Nuclide  42097.09c -- molybdenum 97 at 900K (Mo-97)
+Nuclide  42098.09c -- molybdenum 98 at 900K (Mo-98)
+Nuclide  26056.09c -- iron 56 at 900K (Fe-56)
+Nuclide  26057.09c -- iron 57 at 900K (Fe-57)
+Nuclide  26054.09c -- iron 54 at 900K (Fe-54)
+Nuclide  42100.09c -- molybdenum 100 at 900K (Mo-100)
+Nuclide  14028.09c -- silicon 28 at 900K (Si-28)
+Nuclide  14029.09c -- silicon 29 at 900K (Si-29)
+Nuclide  24050.09c -- chromium 50 at 900K (Cr-50)
+Nuclide  24052.09c -- chromium 52 at 900K (Cr-52)
+Nuclide  24053.09c -- chromium 53 at 900K (Cr-53)
+Nuclide  24054.09c -- chromium 54 at 900K (Cr-54)
+Nuclide  29065.09c -- copper 65 at 900K (Cu-65)
+Nuclide  29063.09c -- copper 63 at 900K (Cu-63)
+Nuclide  28064.09c -- nickel 64 at 900K (Ni-64)
+Nuclide  28061.09c -- nickel 61 at 900K (Ni-61)
+Nuclide  28060.09c -- nickel 60 at 900K (Ni-60)
+Nuclide  28062.09c -- nickel 62 at 900K (Ni-62)
+
+Adding nuclides in material ctrlPois...
+
+Nuclide  64000.09c -- natural gadolinium at 900K (Gd-nat)
+Nuclide  13027.09c -- aluminum 27 at 900K (Al-27)
+Nuclide   8016.09c -- oxygen 16 at 900K (O-16)
+
+Adding nuclides in material air...
+
+Nuclide   7014.09c -- nitrogen 14 at 900K (N-14)
+
+Running Doppler-broadening preprocessor:
+
+Adjusting nuclide   3007.09c temperature from 900K to 922K...
+Adjusting nuclide   3006.09c temperature from 900K to 922K...
+Adjusting nuclide   9019.09c temperature from 900K to 922K...
+Adjusting nuclide   4009.09c temperature from 900K to 922K...
+Adjusting nuclide  40000.09c temperature from 900K to 922K...
+Adjusting nuclide  92235.09c temperature from 900K to 922K...
+Adjusting nuclide  92238.09c temperature from 900K to 922K...
+
+Checking data and printing output...
+
+***** Tue Jun 27 14:06:28 2017 (seed = 1498586777, MPI task = 0)
+Warning message from function CheckNuclideData:
+
+Stable nuclide 74186.09c has 1 decay modes
+
+
+***** Tue Jun 27 14:06:28 2017 (seed = 1498586777, MPI task = 0)
+Warning message from function CheckNuclideData:
+
+Stable nuclide 74184.09c has 1 decay modes
+
+
+***** Tue Jun 27 14:06:28 2017 (seed = 1498586777, MPI task = 0)
+Warning message from function CheckNuclideData:
+
+Stable nuclide 74183.09c has 1 decay modes
+
+
+***** Tue Jun 27 14:06:28 2017 (seed = 1498586777, MPI task = 0)
+Warning message from function CheckNuclideData:
+
+Stable nuclide 74182.09c has 1 decay modes
+
+OK.
+
+
+***** Tue Jun 27 14:06:28 2017 (seed = 1498586777, MPI task = 0)
+Warning message from function ProcessNuclides:
+
+Minimum photon cross section energy 1.000000E+37 MeV is
+above the energy grid minimum 1.000000E-03 MeV.
+The energy grid minimum is set to 1.000000E+37 MeV.
+Possible changes in energy cutoff cards (warned if any).
+
+
+***** Tue Jun 27 14:06:28 2017 (seed = 1498586777, MPI task = 0)
+Warning message from function ProcessNuclides:
+
+Photon energy cutoff 1.000000E-03 MeV is changed to 1.000000E+37.
+
+
+Sharing input data to MPI tasks...

@@ -1,0 +1,28 @@
+% plots the MSRE unit cell
+
+include "../unitCell.serp"
+include "../materials.serp"
+include "../gentryGroups.serp"
+
+surf 1001 cuboid -2.54 2.54 -2.54 2.54 0.0 198.12
+
+cell 123 0 fill 1 -1001
+cell 124 0 outside 1001
+
+set pop 50000 600 100 1
+
+set acelib "sss_endfb7u.xsdata"
+set nfylib "sss_endfb7.nfy"
+set declib "sss_endfb7.dec"
+set bc 3 % periodic
+
+set gcu 2 3
+
+ene mygrid 4 scale44
+
+% no leakage correction?
+%set fum mygrid
+
+plot 1 1500 1500
+plot 2 1500 1500
+plot 3 1500 1500

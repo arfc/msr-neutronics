@@ -3,13 +3,10 @@
 set title "MSR2G-partially-enriched-U-full-core"
 
 % --- get the stringer unit cell
-include "unitCell.serp"
+include "../unitCell.serp"
 
 % --- problem materials
-include "materials.serp"
-
-% --- group structure
-include "gentryGroups.serp"
+include "../materials.serp"
 
 % % --- Lattice
 
@@ -120,9 +117,9 @@ cell cr47 CR3 fill 6      -3001
 % 59.4" long (p. 107, msre ops i). ie 150.876 cm
 % so, the dropped rod for max worth is z-translated up 23.622 cm
 % for a pulled rod, just move it out of the core. z=208.0 works well
-trans CR1 5.08 5.08      208.0
-trans CR2 -5.08 5.08     208.0
-trans CR3 -5.08 -5.08    208.0
+trans CR1 5.08 5.08     23.622 
+trans CR2 -5.08 5.08    23.622 
+trans CR3 -5.08 -5.08   23.622 
 
 % approximate the experiment tube as a tube full of graphite
 cell 710  0    fill 3   -1234 -5000 5001
@@ -161,11 +158,12 @@ set declib "sss_endfb7.dec"
 
 % --- group constant generation:
 
-set gcu 2 3
+%set gcu 0
+%set nfg  2 0.625e-6
 
 % --- Neutron population and criticality cycles:
 
-set pop 50000 600 100
+set pop 50000 200 50
 
 % --- Geometry and mesh plots:
 
@@ -177,50 +175,9 @@ mesh 2 1500 1500
 mesh 3 1500 1500
 
 % neutron spectrum measurement
-ene eGrid 4 scale238
 det spectralFuel dr 0  fuel  de eGrid
 det spectralMod  dr 0  moder   de eGrid
 
+ene eGrid 4 scale238
 
-% ----REST IN PEACE, CPUs ------------
-branch fuel0 stp fuel -2.2818562220275704 633.0
-branch fuel1 stp fuel -2.2496135461743254 700.0
-branch fuel2 stp fuel -2.2023356233843003 800.0
-branch fuel3 stp fuel -2.1560512943549197 900.0
-branch fuel4 stp fuel -2.1107396777000536 1000.0
-branch fuel5 stp fuel -2.066380330877196 1100.0
-branch fuel6 stp fuel -2.022953240964719 1200.0
-branch fuel7 stp fuel -1.9804388156329515 1300.0
-branch fuel8 stp fuel -1.9388178743050104 1400.0
-branch fuel9 stp fuel -1.8980716395033954 1500.0
-branch fuel10 stp fuel -1.8581817283784454 1600.0
-branch fuel11 stp fuel -1.819130144414831 1700.0
-branch fuel12 stp fuel -1.7808992693123449 1800.0
-branch fuel13 stp fuel -1.7434718550373258 1900.0
-branch fuel14 stp fuel -1.7068310160411293 2000.0
-branch moder0 stp moder -1.8697009302433254 633.0 gre7.12t  gre7.16t
-branch moder1 stp moder -1.8674474300551962 700.0 gre7.12t  gre7.16t
-branch moder2 stp moder -1.864089048131591 800.0 gre7.12t  gre7.16t
-branch moder3 stp moder -1.860736705858133 900.0 gre7.12t  gre7.16t
-branch moder4 stp moder -1.8573903923732291 1000.0 gre7.12t  gre7.16t
-branch moder5 stp moder -1.8540500968348215 1100.0 gre7.12t  gre7.16t
-branch moder6 stp moder -1.8507158084203499 1200.0 gre7.12t  gre7.16t
-branch moder7 stp moder -1.8473875163267162 1300.0 gre7.12t  gre7.16t
-branch moder8 stp moder -1.8440652097702517 1400.0 gre7.12t  gre7.16t
-branch moder9 stp moder -1.8407488779866799 1500.0 gre7.12t  gre7.16t
-branch moder10 stp moder -1.8374385102310833 1600.0 gre7.12t  gre7.16t
-branch moder11 stp moder -1.8341340957778671 1700.0 gre7.12t  gre7.16t
-branch moder12 stp moder -1.8308356239207257 1800.0 gre7.12t  gre7.16t
-branch moder13 stp moder -1.8275430839726075 1900.0 gre7.12t  gre7.16t
-branch moder14 stp moder -1.8242564652656799 2000.0 gre7.12t  gre7.16t
-branch rod0 tra CR1 208.0
-branch rod1 tra CR1 161.90550000000002
-branch rod2 tra CR1 115.811
-branch rod3 tra CR1 69.7165
-branch rod4 tra CR1 23.622
-
-coef 1
-0
-15  fuel0 fuel1 fuel2 fuel3 fuel4 fuel5 fuel6 fuel7 fuel8 fuel9 fuel10 fuel11 fuel12 fuel13 fuel14 
-15  moder0 moder1 moder2 moder3 moder4 moder5 moder6 moder7 moder8 moder9 moder10 moder11 moder12 moder13 moder14 
-5  rod0 rod1 rod2 rod3 rod4 
+% ------------------------------------------------------------

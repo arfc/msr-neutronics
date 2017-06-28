@@ -1,0 +1,1349 @@
+
+  _                   .-=-.           .-=-.          .-==-.       
+ { }      __        .' O o '.       .' O o '.       /  -<' )--<   
+ { }    .' O'.     / o .-. O \     / o .-. O \     /  .---`       
+ { }   / .-. o\   /O  /   \  o\   /O  /   \  o\   /O /            
+  \ `-` /   \ O`-'o  /     \  O`-'o  /     \  O`-`o /             
+   `-.-`     '.____.'       `._____.'       `.____.'              
+
+Serpent 2 beta
+
+A Continuous-energy Monte Carlo Reactor Physics Burnup Calculation Code
+
+ - Version 2.1.29 (June 12, 2017) -- Contact: serpent@vtt.fi
+
+ - Reference: J. Leppanen, et al. "The Serpent Monte Carlo code: Status,
+              development and applications in 2013." Ann. Nucl. Energy,
+              82 (2015) 142-150.
+
+ - Compiled Jun 13 2017 15:11:28
+
+ - MPI Parallel calculation mode available
+
+ - OpenMP Parallel calculation mode available
+
+ - Geometry and mesh plotting available
+
+ - Default data path set to: "/opt/serpent/xsdata"
+
+Begin calculation on Tue Jun 27 14:06:42 2017
+
+Reading input file "msreU.serp"...
+Reading input file "unitCell.serp"...
+Reading input file "materials.serp"...
+Reading input file "gentryGroups.serp"...
+
+Checking duplicate input definitions...
+OK.
+
+Creating geometry...
+OK.
+
+Counting geometry zones...
+
+
+ ***** Warning: Universe 2 is used at multiple levels (1 and 3)
+
+
+ ***** Warning: Universe 3 is used at multiple levels (1 and 3)
+
+
+ ***** Warning: Universe 4 is used at multiple levels (1 and 2)
+
+The geometry consists of 4 levels:
+
+Level 0 size: max 22 zones
+Level 1 size: max 900 zones
+Level 2 size: max 13 zones
+Level 3 size: max 1 zones
+
+Processing cells...
+OK.
+
+Linking materials to geometry...
+OK.
+
+Counting cells...
+OK.
+
+Processing data for group constant generation:
+
+ - 70 energy groups in micro-group structure
+ - 4 energy groups in macro-group structure
+ - B1 fundamental mode calculation is not run
+ - Group constants generated in 2 universes
+ - Discontinuity factors are not calculated
+ - Pin-power distributions are not calculated
+ - Albedos are not calculated
+ - Poison cross sections are not calculated
+
+Plotting geometry:
+
+   0% complete
+  33% complete
+  67% complete
+ 100% complete
+
+Reading ACE directory files...
+OK.
+
+Reading neutron-induced fission yields...
+OK.
+
+Adding nuclides in material fuel...
+
+Nuclide   3007.09c -- lithium 7 at 922K (Li-7)
+Nuclide   3006.09c -- lithium 6 at 922K (Li-6)
+Nuclide   9019.09c -- fluorine 19 at 922K (F-19)
+Nuclide   4009.09c -- beryllium 9 at 922K (Be-9)
+Nuclide  40000.09c -- natural zirconium at 922K (Zr-nat)
+Nuclide  92235.09c -- uranium 235 at 922K (U-235)
+Nuclide  92238.09c -- uranium 238 at 922K (U-238)
+
+Adding nuclides in material moder...
+
+Nuclide   5010.09c -- boron 10 at 900K (B-10)
+Nuclide   5011.09c -- boron 11 at 900K (B-11)
+Nuclide  23000.09c -- natural vanadium at 900K (V-nat)
+Nuclide  16000.09c -- natural sulfur at 900K (S-nat)
+Nuclide   6000.09c -- natural carbon at 900K (C-nat)
+
+Adding nuclides in material tank...
+
+Nuclide  14030.09c -- silicon 30 at 900K (Si-30)
+Nuclide  74186.09c -- tungsten 186 at 900K (W-186)
+Nuclide  25055.09c -- manganese 55 at 900K (Mn-55)
+Nuclide  74184.09c -- tungsten 184 at 900K (W-184)
+Nuclide  74183.09c -- tungsten 183 at 900K (W-183)
+Nuclide  74182.09c -- tungsten 182 at 900K (W-182)
+Nuclide  28058.09c -- nickel 58 at 900K (Ni-58)
+Nuclide  42092.09c -- molybdenum 92 at 900K (Mo-92)
+Nuclide  26058.09c -- iron 58 at 900K (Fe-58)
+Nuclide  42094.09c -- molybdenum 94 at 900K (Mo-94)
+Nuclide  42095.09c -- molybdenum 95 at 900K (Mo-95)
+Nuclide  42096.09c -- molybdenum 96 at 900K (Mo-96)
+Nuclide  42097.09c -- molybdenum 97 at 900K (Mo-97)
+Nuclide  42098.09c -- molybdenum 98 at 900K (Mo-98)
+Nuclide  26056.09c -- iron 56 at 900K (Fe-56)
+Nuclide  26057.09c -- iron 57 at 900K (Fe-57)
+Nuclide  26054.09c -- iron 54 at 900K (Fe-54)
+Nuclide  42100.09c -- molybdenum 100 at 900K (Mo-100)
+Nuclide  14028.09c -- silicon 28 at 900K (Si-28)
+Nuclide  14029.09c -- silicon 29 at 900K (Si-29)
+Nuclide  24050.09c -- chromium 50 at 900K (Cr-50)
+Nuclide  24052.09c -- chromium 52 at 900K (Cr-52)
+Nuclide  24053.09c -- chromium 53 at 900K (Cr-53)
+Nuclide  24054.09c -- chromium 54 at 900K (Cr-54)
+Nuclide  29065.09c -- copper 65 at 900K (Cu-65)
+Nuclide  29063.09c -- copper 63 at 900K (Cu-63)
+Nuclide  28064.09c -- nickel 64 at 900K (Ni-64)
+Nuclide  28061.09c -- nickel 61 at 900K (Ni-61)
+Nuclide  28060.09c -- nickel 60 at 900K (Ni-60)
+Nuclide  28062.09c -- nickel 62 at 900K (Ni-62)
+
+Adding nuclides in material ctrlPois...
+
+Nuclide  64000.09c -- natural gadolinium at 900K (Gd-nat)
+Nuclide  13027.09c -- aluminum 27 at 900K (Al-27)
+Nuclide   8016.09c -- oxygen 16 at 900K (O-16)
+
+Adding nuclides in material air...
+
+Nuclide   7014.09c -- nitrogen 14 at 900K (N-14)
+
+Running Doppler-broadening preprocessor:
+
+Adjusting nuclide   3007.09c temperature from 900K to 922K...
+Adjusting nuclide   3006.09c temperature from 900K to 922K...
+Adjusting nuclide   9019.09c temperature from 900K to 922K...
+Adjusting nuclide   4009.09c temperature from 900K to 922K...
+Adjusting nuclide  40000.09c temperature from 900K to 922K...
+Adjusting nuclide  92235.09c temperature from 900K to 922K...
+Adjusting nuclide  92238.09c temperature from 900K to 922K...
+
+Checking data and printing output...
+
+***** Tue Jun 27 14:06:50 2017 (seed = 1498586802, MPI task = 0)
+Warning message from function CheckNuclideData:
+
+Stable nuclide 74186.09c has 1 decay modes
+
+
+***** Tue Jun 27 14:06:50 2017 (seed = 1498586802, MPI task = 0)
+Warning message from function CheckNuclideData:
+
+Stable nuclide 74184.09c has 1 decay modes
+
+
+***** Tue Jun 27 14:06:50 2017 (seed = 1498586802, MPI task = 0)
+Warning message from function CheckNuclideData:
+
+Stable nuclide 74183.09c has 1 decay modes
+
+
+***** Tue Jun 27 14:06:50 2017 (seed = 1498586802, MPI task = 0)
+Warning message from function CheckNuclideData:
+
+Stable nuclide 74182.09c has 1 decay modes
+
+OK.
+
+
+***** Tue Jun 27 14:06:50 2017 (seed = 1498586802, MPI task = 0)
+Warning message from function ProcessNuclides:
+
+Minimum photon cross section energy 1.000000E+37 MeV is
+above the energy grid minimum 1.000000E-03 MeV.
+The energy grid minimum is set to 1.000000E+37 MeV.
+Possible changes in energy cutoff cards (warned if any).
+
+
+***** Tue Jun 27 14:06:50 2017 (seed = 1498586802, MPI task = 0)
+Warning message from function ProcessNuclides:
+
+Photon energy cutoff 1.000000E-03 MeV is changed to 1.000000E+37.
+
+
+Sharing input data to MPI tasks...
+OK.
+
+Generating unionize energy grids...
+
+Adding points:
+
+  3006.09c -- Points added in neutron grid: 520
+  3007.09c -- Points added in neutron grid: 86
+  4009.09c -- Points added in neutron grid: 101
+  5010.09c -- Points added in neutron grid: 219
+  5011.09c -- Points added in neutron grid: 2610
+  6000.09c -- Points added in neutron grid: 582
+  7014.09c -- Points added in neutron grid: 1017
+  8016.09c -- Points added in neutron grid: 1487
+  9019.09c -- Points added in neutron grid: 1031
+ 13027.09c -- Points added in neutron grid: 1870
+ 14028.09c -- Points added in neutron grid: 4129
+ 14029.09c -- Points added in neutron grid: 900
+ 14030.09c -- Points added in neutron grid: 1331
+ 16000.09c -- Points added in neutron grid: 6002
+ 23000.09c -- Points added in neutron grid: 7103
+ 24050.09c -- Points added in neutron grid: 11356
+ 24052.09c -- Points added in neutron grid: 8695
+ 24053.09c -- Points added in neutron grid: 6483
+ 24054.09c -- Points added in neutron grid: 4955
+ 25055.09c -- Points added in neutron grid: 4433
+ 26054.09c -- Points added in neutron grid: 7804
+ 26056.09c -- Points added in neutron grid: 10661
+ 26057.09c -- Points added in neutron grid: 7001
+ 26058.09c -- Points added in neutron grid: 2804
+ 28058.09c -- Points added in neutron grid: 19905
+ 28060.09c -- Points added in neutron grid: 9173
+ 28061.09c -- Points added in neutron grid: 4001
+ 28062.09c -- Points added in neutron grid: 2332
+ 28064.09c -- Points added in neutron grid: 1698
+ 29063.09c -- Points added in neutron grid: 10696
+ 29065.09c -- Points added in neutron grid: 7786
+ 40000.09c -- Points added in neutron grid: 7806
+ 42092.09c -- Points added in neutron grid: 5085
+ 42094.09c -- Points added in neutron grid: 3652
+ 42095.09c -- Points added in neutron grid: 4105
+ 42096.09c -- Points added in neutron grid: 4516
+ 42097.09c -- Points added in neutron grid: 4465
+ 42098.09c -- Points added in neutron grid: 6805
+ 42100.09c -- Points added in neutron grid: 6696
+ 64000.09c -- Points added in neutron grid: 13242
+ 74182.09c -- Points added in neutron grid: 5851
+ 74183.09c -- Points added in neutron grid: 3705
+ 74184.09c -- Points added in neutron grid: 3369
+ 74186.09c -- Points added in neutron grid: 3652
+ 92235.09c -- Points added in neutron grid: 24964
+ 92238.09c -- Points added in neutron grid: 53754
+
+Generating unionized energy grid:
+
+ - Unionization performed without grid thinning
+   between 1.00E-11 and 20.0 MeV.
+
+ - Final neutron grid size: 299230 points.
+
+ - 9.82 Mb of memory allocated for grid data
+
+OK.
+
+Processing cross sections and ENDF reaction laws...
+
+Nuclide   3006.09c -- lithium 6 at 922K (Li-6)
+Nuclide   3007.09c -- lithium 7 at 922K (Li-7)
+Nuclide   4009.09c -- beryllium 9 at 922K (Be-9)
+Nuclide   5010.09c -- boron 10 at 900K (B-10)
+Nuclide   5011.09c -- boron 11 at 900K (B-11)
+Nuclide   6000.09c -- natural carbon at 900K (C-nat)
+Nuclide   7014.09c -- nitrogen 14 at 900K (N-14)
+Nuclide   8016.09c -- oxygen 16 at 900K (O-16)
+Nuclide   9019.09c -- fluorine 19 at 922K (F-19)
+Nuclide  13027.09c -- aluminum 27 at 900K (Al-27)
+Nuclide  14028.09c -- silicon 28 at 900K (Si-28)
+Nuclide  14029.09c -- silicon 29 at 900K (Si-29)
+Nuclide  14030.09c -- silicon 30 at 900K (Si-30)
+Nuclide  16000.09c -- natural sulfur at 900K (S-nat)
+Nuclide  23000.09c -- natural vanadium at 900K (V-nat)
+Nuclide  24050.09c -- chromium 50 at 900K (Cr-50)
+Nuclide  24052.09c -- chromium 52 at 900K (Cr-52)
+Nuclide  24053.09c -- chromium 53 at 900K (Cr-53)
+Nuclide  24054.09c -- chromium 54 at 900K (Cr-54)
+Nuclide  25055.09c -- manganese 55 at 900K (Mn-55)
+Nuclide  26054.09c -- iron 54 at 900K (Fe-54)
+Nuclide  26056.09c -- iron 56 at 900K (Fe-56)
+Nuclide  26057.09c -- iron 57 at 900K (Fe-57)
+Nuclide  26058.09c -- iron 58 at 900K (Fe-58)
+Nuclide  28058.09c -- nickel 58 at 900K (Ni-58)
+Nuclide  28060.09c -- nickel 60 at 900K (Ni-60)
+Nuclide  28061.09c -- nickel 61 at 900K (Ni-61)
+Nuclide  28062.09c -- nickel 62 at 900K (Ni-62)
+Nuclide  28064.09c -- nickel 64 at 900K (Ni-64)
+Nuclide  29063.09c -- copper 63 at 900K (Cu-63)
+Nuclide  29065.09c -- copper 65 at 900K (Cu-65)
+Nuclide  40000.09c -- natural zirconium at 922K (Zr-nat)
+Nuclide  42092.09c -- molybdenum 92 at 900K (Mo-92)
+Nuclide  42094.09c -- molybdenum 94 at 900K (Mo-94)
+Nuclide  42095.09c -- molybdenum 95 at 900K (Mo-95)
+Nuclide  42096.09c -- molybdenum 96 at 900K (Mo-96)
+Nuclide  42097.09c -- molybdenum 97 at 900K (Mo-97)
+Nuclide  42098.09c -- molybdenum 98 at 900K (Mo-98)
+Nuclide  42100.09c -- molybdenum 100 at 900K (Mo-100)
+Nuclide  64000.09c -- natural gadolinium at 900K (Gd-nat)
+Nuclide  74182.09c -- tungsten 182 at 900K (W-182)
+Nuclide  74183.09c -- tungsten 183 at 900K (W-183)
+Nuclide  74184.09c -- tungsten 184 at 900K (W-184)
+Nuclide  74186.09c -- tungsten 186 at 900K (W-186)
+Nuclide  92235.09c -- uranium 235 at 922K (U-235)
+Nuclide  92238.09c -- uranium 238 at 922K (U-238)
+
+SUMMARY -- 46 nuclides included in calculation:
+
+ - 46 transport nuclides
+ - Neutron energy cut-offs at 1.00E-11 and 20.0 MeV
+ - 1237 transport reactions
+ - 470 special reactions
+ - 9 decay reactions
+ - 730.30 Mb of memory allocated for data
+
+Processing mesh plots...
+OK.
+
+Normalizing compositions and processing mixtures...
+OK.
+
+Allocating memory for macroscopic cross section data...
+OK.
+
+Allocating memory for particle structures...
+OK.
+
+Calculating maximum densities...
+OK.
+
+Performing density cut-off...
+OK.
+
+Sorting material-wise reaction lists:
+
+   0% complete
+  20% complete
+ 100% complete
+
+Calculating macroscopic cross sections:
+
+   0% complete
+ 100% complete
+
+Waiting for results from other MPI tasks...
+OK.
+
+Calculating DT neutron majorant cross section:
+
+   0% complete
+ 100% complete
+
+Clearing results and statistics...
+OK.
+
+Sampling initial source...
+OK.
+
+Inactive cycle   1 / 100: k-eff = 1.00000
+Inactive cycle   2 / 100: k-eff = 0.55880
+Inactive cycle   3 / 100: k-eff = 0.95398
+Inactive cycle   4 / 100: k-eff = 1.03011
+Inactive cycle   5 / 100: k-eff = 1.04268
+Inactive cycle   6 / 100: k-eff = 1.03183
+Inactive cycle   7 / 100: k-eff = 1.02709
+Inactive cycle   8 / 100: k-eff = 1.02996
+Inactive cycle   9 / 100: k-eff = 1.07281
+Inactive cycle  10 / 100: k-eff = 1.03998
+Inactive cycle  11 / 100: k-eff = 1.06889
+Inactive cycle  12 / 100: k-eff = 1.04666
+Inactive cycle  13 / 100: k-eff = 1.07681
+Inactive cycle  14 / 100: k-eff = 1.01672
+Inactive cycle  15 / 100: k-eff = 1.07366
+Inactive cycle  16 / 100: k-eff = 1.04681
+Inactive cycle  17 / 100: k-eff = 1.04221
+Inactive cycle  18 / 100: k-eff = 1.05868
+Inactive cycle  19 / 100: k-eff = 1.02480
+Inactive cycle  20 / 100: k-eff = 1.10883
+Inactive cycle  21 / 100: k-eff = 1.04918
+Inactive cycle  22 / 100: k-eff = 1.06135
+Inactive cycle  23 / 100: k-eff = 1.06729
+Inactive cycle  24 / 100: k-eff = 1.04701
+Inactive cycle  25 / 100: k-eff = 1.01832
+Inactive cycle  26 / 100: k-eff = 1.00916
+Inactive cycle  27 / 100: k-eff = 1.04730
+Inactive cycle  28 / 100: k-eff = 1.04814
+Inactive cycle  29 / 100: k-eff = 1.04332
+Inactive cycle  30 / 100: k-eff = 1.09090
+Inactive cycle  31 / 100: k-eff = 1.03875
+Inactive cycle  32 / 100: k-eff = 1.06742
+Inactive cycle  33 / 100: k-eff = 1.03497
+Inactive cycle  34 / 100: k-eff = 1.04905
+Inactive cycle  35 / 100: k-eff = 1.04464
+Inactive cycle  36 / 100: k-eff = 1.04318
+Inactive cycle  37 / 100: k-eff = 1.03817
+Inactive cycle  38 / 100: k-eff = 1.03111
+Inactive cycle  39 / 100: k-eff = 1.04864
+Inactive cycle  40 / 100: k-eff = 1.04591
+Inactive cycle  41 / 100: k-eff = 1.06830
+Inactive cycle  42 / 100: k-eff = 1.09522
+Inactive cycle  43 / 100: k-eff = 1.04330
+Inactive cycle  44 / 100: k-eff = 1.07335
+Inactive cycle  45 / 100: k-eff = 1.06519
+Inactive cycle  46 / 100: k-eff = 1.07563
+Inactive cycle  47 / 100: k-eff = 1.03691
+Inactive cycle  48 / 100: k-eff = 1.05412
+Inactive cycle  49 / 100: k-eff = 1.05223
+Inactive cycle  50 / 100: k-eff = 1.05854
+Inactive cycle  51 / 100: k-eff = 1.01937
+Inactive cycle  52 / 100: k-eff = 1.04139
+Inactive cycle  53 / 100: k-eff = 1.05764
+Inactive cycle  54 / 100: k-eff = 1.04812
+Inactive cycle  55 / 100: k-eff = 1.02338
+Inactive cycle  56 / 100: k-eff = 1.07803
+Inactive cycle  57 / 100: k-eff = 1.07113
+Inactive cycle  58 / 100: k-eff = 1.06385
+Inactive cycle  59 / 100: k-eff = 1.02278
+Inactive cycle  60 / 100: k-eff = 1.02912
+Inactive cycle  61 / 100: k-eff = 1.01410
+Inactive cycle  62 / 100: k-eff = 1.03114
+Inactive cycle  63 / 100: k-eff = 1.06805
+Inactive cycle  64 / 100: k-eff = 1.03195
+Inactive cycle  65 / 100: k-eff = 1.03505
+Inactive cycle  66 / 100: k-eff = 1.02966
+Inactive cycle  67 / 100: k-eff = 1.04202
+Inactive cycle  68 / 100: k-eff = 1.05077
+Inactive cycle  69 / 100: k-eff = 1.07872
+Inactive cycle  70 / 100: k-eff = 1.01530
+Inactive cycle  71 / 100: k-eff = 1.04596
+Inactive cycle  72 / 100: k-eff = 1.05453
+Inactive cycle  73 / 100: k-eff = 1.05580
+Inactive cycle  74 / 100: k-eff = 1.02940
+Inactive cycle  75 / 100: k-eff = 1.02179
+Inactive cycle  76 / 100: k-eff = 1.00953
+Inactive cycle  77 / 100: k-eff = 1.04082
+Inactive cycle  78 / 100: k-eff = 1.05310
+Inactive cycle  79 / 100: k-eff = 1.05668
+Inactive cycle  80 / 100: k-eff = 1.04062
+Inactive cycle  81 / 100: k-eff = 1.04291
+Inactive cycle  82 / 100: k-eff = 1.03332
+Inactive cycle  83 / 100: k-eff = 1.07155
+Inactive cycle  84 / 100: k-eff = 1.06533
+Inactive cycle  85 / 100: k-eff = 1.04296
+Inactive cycle  86 / 100: k-eff = 1.06320
+Inactive cycle  87 / 100: k-eff = 1.03024
+Inactive cycle  88 / 100: k-eff = 1.04878
+Inactive cycle  89 / 100: k-eff = 1.03431
+Inactive cycle  90 / 100: k-eff = 1.05044
+Inactive cycle  91 / 100: k-eff = 1.02481
+Inactive cycle  92 / 100: k-eff = 1.04469
+Inactive cycle  93 / 100: k-eff = 1.03822
+Inactive cycle  94 / 100: k-eff = 1.06396
+Inactive cycle  95 / 100: k-eff = 1.06120
+Inactive cycle  96 / 100: k-eff = 1.04974
+Inactive cycle  97 / 100: k-eff = 1.05184
+Inactive cycle  98 / 100: k-eff = 1.03858
+Inactive cycle  99 / 100: k-eff = 1.03671
+Inactive cycle 100 / 100: k-eff = 1.05765
+
+----- Begin active cycles -----
+
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle    1 / 600  Source neutrons :  5075
+
+Running time :                  0:01:55
+Estimated running time :        -:--:--
+Estimated running time left :   -:--:--
+
+Estimated relative CPU usage :   784.3%
+
+k-eff (analog)    = 1.07352 +/- 0.00000  [1.07352  1.07352]
+k-eff (implicit)  = 1.04376 +/- 0.00000  [1.04376  1.04376]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle    2 / 600  Source neutrons :  4858
+
+Running time :                  0:01:56
+Estimated running time :        0:12:41
+Estimated running time left :   0:10:44
+
+Estimated relative CPU usage :   792.3%
+
+k-eff (analog)    = 1.05828 +/- 0.01524  [1.02840  1.08815]
+k-eff (implicit)  = 1.03853 +/- 0.00522  [1.02830  1.04877]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle    3 / 600  Source neutrons :  5076
+
+Running time :                  0:01:57
+Estimated running time :        0:12:43
+Estimated running time left :   0:10:45
+
+Estimated relative CPU usage :   792.3%
+
+k-eff (analog)    = 1.05848 +/- 0.00880  [1.04122  1.07573]
+k-eff (implicit)  = 1.03278 +/- 0.00649  [1.02006  1.04551]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle    4 / 600  Source neutrons :  4814
+
+Running time :                  0:01:58
+Estimated running time :        0:12:39
+Estimated running time left :   0:10:40
+
+Estimated relative CPU usage :   791.5%
+
+k-eff (analog)    = 1.04873 +/- 0.01156  [1.02607  1.07140]
+k-eff (implicit)  = 1.04053 +/- 0.00900  [1.02288  1.05818]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle    5 / 600  Source neutrons :  5235
+
+Running time :                  0:01:59
+Estimated running time :        0:12:45
+Estimated running time left :   0:10:45
+
+Estimated relative CPU usage :   791.7%
+
+k-eff (analog)    = 1.05247 +/- 0.00971  [1.03345  1.07149]
+k-eff (implicit)  = 1.03789 +/- 0.00746  [1.02328  1.05251]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle    6 / 600  Source neutrons :  4782
+
+Running time :                  0:02:00
+Estimated running time :        0:12:43
+Estimated running time left :   0:10:42
+
+Estimated relative CPU usage :   792.1%
+
+k-eff (analog)    = 1.04720 +/- 0.00951  [1.02855  1.06585]
+k-eff (implicit)  = 1.04063 +/- 0.00668  [1.02755  1.05372]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle    7 / 600  Source neutrons :  5100
+
+Running time :                  0:02:02
+Estimated running time :        0:12:47
+Estimated running time left :   0:10:45
+
+Estimated relative CPU usage :   791.8%
+
+k-eff (analog)    = 1.04636 +/- 0.00809  [1.03051  1.06221]
+k-eff (implicit)  = 1.04410 +/- 0.00662  [1.03112  1.05707]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle    8 / 600  Source neutrons :  5020
+
+Running time :                  0:02:03
+Estimated running time :        0:12:49
+Estimated running time left :   0:10:46
+
+Estimated relative CPU usage :   792.4%
+
+k-eff (analog)    = 1.04625 +/- 0.00700  [1.03252  1.05997]
+k-eff (implicit)  = 1.04487 +/- 0.00579  [1.03353  1.05621]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle    9 / 600  Source neutrons :  5010
+
+Running time :                  0:02:04
+Estimated running time :        0:12:51
+Estimated running time left :   0:10:46
+
+Estimated relative CPU usage :   790.9%
+
+k-eff (analog)    = 1.04639 +/- 0.00618  [1.03428  1.05850]
+k-eff (implicit)  = 1.04591 +/- 0.00521  [1.03570  1.05611]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   10 / 600  Source neutrons :  4955
+
+Running time :                  0:02:05
+Estimated running time :        0:12:48
+Estimated running time left :   0:10:43
+
+Estimated relative CPU usage :   792.2%
+
+k-eff (analog)    = 1.04556 +/- 0.00559  [1.03461  1.05651]
+k-eff (implicit)  = 1.04274 +/- 0.00563  [1.03170  1.05378]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   11 / 600  Source neutrons :  4853
+
+Running time :                  0:02:06
+Estimated running time :        0:12:48
+Estimated running time left :   0:10:41
+
+Estimated relative CPU usage :   792.2%
+
+k-eff (analog)    = 1.04211 +/- 0.00612  [1.03012  1.05411]
+k-eff (implicit)  = 1.04397 +/- 0.00524  [1.03370  1.05425]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   12 / 600  Source neutrons :  5234
+
+Running time :                  0:02:07
+Estimated running time :        0:12:50
+Estimated running time left :   0:10:42
+
+Estimated relative CPU usage :   792.3%
+
+k-eff (analog)    = 1.04316 +/- 0.00569  [1.03202  1.05431]
+k-eff (implicit)  = 1.04396 +/- 0.00479  [1.03458  1.05334]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   13 / 600  Source neutrons :  4958
+
+Running time :                  0:02:08
+Estimated running time :        0:12:48
+Estimated running time left :   0:10:40
+
+Estimated relative CPU usage :   792.2%
+
+k-eff (analog)    = 1.04337 +/- 0.00523  [1.03312  1.05363]
+k-eff (implicit)  = 1.04153 +/- 0.00503  [1.03167  1.05139]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   14 / 600  Source neutrons :  4829
+
+Running time :                  0:02:09
+Estimated running time :        0:12:46
+Estimated running time left :   0:10:36
+
+Estimated relative CPU usage :   791.9%
+
+k-eff (analog)    = 1.04100 +/- 0.00540  [1.03042  1.05158]
+k-eff (implicit)  = 1.04062 +/- 0.00474  [1.03132  1.04992]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   15 / 600  Source neutrons :  5020
+
+Running time :                  0:02:10
+Estimated running time :        0:12:46
+Estimated running time left :   0:10:35
+
+Estimated relative CPU usage :   792.1%
+
+k-eff (analog)    = 1.03921 +/- 0.00533  [1.02876  1.04966]
+k-eff (implicit)  = 1.04050 +/- 0.00442  [1.03184  1.04916]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   16 / 600  Source neutrons :  5055
+
+Running time :                  0:02:11
+Estimated running time :        0:12:46
+Estimated running time left :   0:10:34
+
+Estimated relative CPU usage :   792.2%
+
+k-eff (analog)    = 1.03834 +/- 0.00506  [1.02842  1.04827]
+k-eff (implicit)  = 1.04019 +/- 0.00414  [1.03206  1.04831]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   17 / 600  Source neutrons :  5099
+
+Running time :                  0:02:12
+Estimated running time :        0:12:47
+Estimated running time left :   0:10:34
+
+Estimated relative CPU usage :   792.4%
+
+k-eff (analog)    = 1.03877 +/- 0.00478  [1.02941  1.04813]
+k-eff (implicit)  = 1.03969 +/- 0.00393  [1.03199  1.04738]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   18 / 600  Source neutrons :  4923
+
+Running time :                  0:02:14
+Estimated running time :        0:12:47
+Estimated running time left :   0:10:33
+
+Estimated relative CPU usage :   792.2%
+
+k-eff (analog)    = 1.03826 +/- 0.00453  [1.02937  1.04714]
+k-eff (implicit)  = 1.04041 +/- 0.00377  [1.03302  1.04780]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   19 / 600  Source neutrons :  5156
+
+Running time :                  0:02:15
+Estimated running time :        0:12:47
+Estimated running time left :   0:10:32
+
+Estimated relative CPU usage :   792.4%
+
+k-eff (analog)    = 1.03949 +/- 0.00446  [1.03075  1.04823]
+k-eff (implicit)  = 1.03967 +/- 0.00364  [1.03254  1.04681]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   20 / 600  Source neutrons :  4888
+
+Running time :                  0:02:16
+Estimated running time :        0:12:47
+Estimated running time left :   0:10:31
+
+Estimated relative CPU usage :   789.2%
+
+k-eff (analog)    = 1.03941 +/- 0.00423  [1.03111  1.04770]
+k-eff (implicit)  = 1.04003 +/- 0.00347  [1.03322  1.04683]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   21 / 600  Source neutrons :  5054
+
+Running time :                  0:02:17
+Estimated running time :        0:12:48
+Estimated running time left :   0:10:30
+
+Estimated relative CPU usage :   791.2%
+
+k-eff (analog)    = 1.03987 +/- 0.00405  [1.03193  1.04781]
+k-eff (implicit)  = 1.04090 +/- 0.00342  [1.03421  1.04760]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   22 / 600  Source neutrons :  4961
+
+Running time :                  0:02:18
+Estimated running time :        0:12:47
+Estimated running time left :   0:10:29
+
+Estimated relative CPU usage :   792.1%
+
+k-eff (analog)    = 1.03991 +/- 0.00386  [1.03234  1.04748]
+k-eff (implicit)  = 1.04137 +/- 0.00329  [1.03492  1.04782]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   23 / 600  Source neutrons :  5093
+
+Running time :                  0:02:19
+Estimated running time :        0:12:47
+Estimated running time left :   0:10:28
+
+Estimated relative CPU usage :   792.3%
+
+k-eff (analog)    = 1.04080 +/- 0.00380  [1.03336  1.04824]
+k-eff (implicit)  = 1.04068 +/- 0.00322  [1.03437  1.04699]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   24 / 600  Source neutrons :  4976
+
+Running time :                  0:02:20
+Estimated running time :        0:12:47
+Estimated running time left :   0:10:27
+
+Estimated relative CPU usage :   791.7%
+
+k-eff (analog)    = 1.04139 +/- 0.00368  [1.03418  1.04861]
+k-eff (implicit)  = 1.04111 +/- 0.00311  [1.03501  1.04722]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   25 / 600  Source neutrons :  4950
+
+Running time :                  0:02:21
+Estimated running time :        0:12:47
+Estimated running time left :   0:10:25
+
+Estimated relative CPU usage :   792.3%
+
+k-eff (analog)    = 1.04152 +/- 0.00353  [1.03459  1.04845]
+k-eff (implicit)  = 1.04107 +/- 0.00299  [1.03522  1.04693]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   26 / 600  Source neutrons :  4994
+
+Running time :                  0:02:22
+Estimated running time :        0:12:47
+Estimated running time left :   0:10:24
+
+Estimated relative CPU usage :   792.3%
+
+k-eff (analog)    = 1.04159 +/- 0.00340  [1.03494  1.04825]
+k-eff (implicit)  = 1.04069 +/- 0.00289  [1.03502  1.04636]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   27 / 600  Source neutrons :  5027
+
+Running time :                  0:02:23
+Estimated running time :        0:12:47
+Estimated running time left :   0:10:23
+
+Estimated relative CPU usage :   792.4%
+
+k-eff (analog)    = 1.04187 +/- 0.00328  [1.03544  1.04830]
+k-eff (implicit)  = 1.04095 +/- 0.00280  [1.03547  1.04643]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   28 / 600  Source neutrons :  4981
+
+Running time :                  0:02:24
+Estimated running time :        0:12:47
+Estimated running time left :   0:10:22
+
+Estimated relative CPU usage :   792.2%
+
+k-eff (analog)    = 1.04198 +/- 0.00316  [1.03578  1.04818]
+k-eff (implicit)  = 1.04166 +/- 0.00279  [1.03620  1.04712]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   29 / 600  Source neutrons :  4967
+
+Running time :                  0:02:26
+Estimated running time :        0:12:47
+Estimated running time left :   0:10:21
+
+Estimated relative CPU usage :   792.4%
+
+k-eff (analog)    = 1.04185 +/- 0.00305  [1.03586  1.04783]
+k-eff (implicit)  = 1.04178 +/- 0.00269  [1.03650  1.04706]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   30 / 600  Source neutrons :  5112
+
+Running time :                  0:02:27
+Estimated running time :        0:12:48
+Estimated running time left :   0:10:21
+
+Estimated relative CPU usage :   791.7%
+
+k-eff (analog)    = 1.04250 +/- 0.00302  [1.03657  1.04842]
+k-eff (implicit)  = 1.04153 +/- 0.00261  [1.03641  1.04665]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   31 / 600  Source neutrons :  4910
+
+Running time :                  0:02:28
+Estimated running time :        0:12:47
+Estimated running time left :   0:10:19
+
+Estimated relative CPU usage :   791.2%
+
+k-eff (analog)    = 1.04249 +/- 0.00292  [1.03676  1.04822]
+k-eff (implicit)  = 1.04139 +/- 0.00253  [1.03643  1.04635]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   32 / 600  Source neutrons :  5000
+
+Running time :                  0:02:29
+Estimated running time :        0:12:48
+Estimated running time left :   0:10:18
+
+Estimated relative CPU usage :   792.1%
+
+k-eff (analog)    = 1.04248 +/- 0.00283  [1.03693  1.04803]
+k-eff (implicit)  = 1.04184 +/- 0.00249  [1.03696  1.04673]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   33 / 600  Source neutrons :  5042
+
+Running time :                  0:02:30
+Estimated running time :        0:12:48
+Estimated running time left :   0:10:17
+
+Estimated relative CPU usage :   791.4%
+
+k-eff (analog)    = 1.04274 +/- 0.00276  [1.03734  1.04814]
+k-eff (implicit)  = 1.04226 +/- 0.00245  [1.03746  1.04706]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   34 / 600  Source neutrons :  5070
+
+Running time :                  0:02:31
+Estimated running time :        0:12:48
+Estimated running time left :   0:10:16
+
+Estimated relative CPU usage :   792.3%
+
+k-eff (analog)    = 1.04341 +/- 0.00276  [1.03801  1.04882]
+k-eff (implicit)  = 1.04202 +/- 0.00239  [1.03734  1.04671]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   35 / 600  Source neutrons :  4843
+
+Running time :                  0:02:32
+Estimated running time :        0:12:48
+Estimated running time left :   0:10:15
+
+Estimated relative CPU usage :   792.4%
+
+k-eff (analog)    = 1.04310 +/- 0.00270  [1.03781  1.04838]
+k-eff (implicit)  = 1.04291 +/- 0.00249  [1.03804  1.04779]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   36 / 600  Source neutrons :  5168
+
+Running time :                  0:02:33
+Estimated running time :        0:12:48
+Estimated running time left :   0:10:15
+
+Estimated relative CPU usage :   792.1%
+
+k-eff (analog)    = 1.04376 +/- 0.00270  [1.03846  1.04905]
+k-eff (implicit)  = 1.04285 +/- 0.00242  [1.03811  1.04759]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   37 / 600  Source neutrons :  4825
+
+Running time :                  0:02:34
+Estimated running time :        0:12:48
+Estimated running time left :   0:10:13
+
+Estimated relative CPU usage :   791.5%
+
+k-eff (analog)    = 1.04338 +/- 0.00266  [1.03817  1.04858]
+k-eff (implicit)  = 1.04307 +/- 0.00236  [1.03844  1.04769]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   38 / 600  Source neutrons :  5222
+
+Running time :                  0:02:35
+Estimated running time :        0:12:49
+Estimated running time left :   0:10:13
+
+Estimated relative CPU usage :   789.5%
+
+k-eff (analog)    = 1.04422 +/- 0.00272  [1.03889  1.04954]
+k-eff (implicit)  = 1.04312 +/- 0.00230  [1.03862  1.04763]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   39 / 600  Source neutrons :  4937
+
+Running time :                  0:02:37
+Estimated running time :        0:12:48
+Estimated running time left :   0:10:11
+
+Estimated relative CPU usage :   792.0%
+
+k-eff (analog)    = 1.04467 +/- 0.00269  [1.03940  1.04993]
+k-eff (implicit)  = 1.04309 +/- 0.00224  [1.03870  1.04748]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   40 / 600  Source neutrons :  4830
+
+Running time :                  0:02:38
+Estimated running time :        0:12:48
+Estimated running time left :   0:10:10
+
+Estimated relative CPU usage :   789.2%
+
+k-eff (analog)    = 1.04419 +/- 0.00266  [1.03898  1.04941]
+k-eff (implicit)  = 1.04301 +/- 0.00218  [1.03873  1.04729]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   41 / 600  Source neutrons :  4993
+
+Running time :                  0:02:39
+Estimated running time :        0:12:48
+Estimated running time left :   0:10:09
+
+Estimated relative CPU usage :   792.6%
+
+k-eff (analog)    = 1.04370 +/- 0.00264  [1.03853  1.04888]
+k-eff (implicit)  = 1.04312 +/- 0.00213  [1.03894  1.04730]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   42 / 600  Source neutrons :  5146
+
+Running time :                  0:02:40
+Estimated running time :        0:12:48
+Estimated running time left :   0:10:08
+
+Estimated relative CPU usage :   792.2%
+
+k-eff (analog)    = 1.04395 +/- 0.00259  [1.03888  1.04903]
+k-eff (implicit)  = 1.04281 +/- 0.00210  [1.03868  1.04694]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   43 / 600  Source neutrons :  4893
+
+Running time :                  0:02:41
+Estimated running time :        0:12:48
+Estimated running time left :   0:10:06
+
+Estimated relative CPU usage :   791.1%
+
+k-eff (analog)    = 1.04366 +/- 0.00254  [1.03868  1.04865]
+k-eff (implicit)  = 1.04269 +/- 0.00206  [1.03865  1.04673]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   44 / 600  Source neutrons :  4829
+
+Running time :                  0:02:42
+Estimated running time :        0:12:47
+Estimated running time left :   0:10:05
+
+Estimated relative CPU usage :   792.2%
+
+k-eff (analog)    = 1.04259 +/- 0.00271  [1.03728  1.04790]
+k-eff (implicit)  = 1.04263 +/- 0.00201  [1.03869  1.04658]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   45 / 600  Source neutrons :  5327
+
+Running time :                  0:02:43
+Estimated running time :        0:12:48
+Estimated running time left :   0:10:04
+
+Estimated relative CPU usage :   791.9%
+
+k-eff (analog)    = 1.04301 +/- 0.00268  [1.03775  1.04826]
+k-eff (implicit)  = 1.04223 +/- 0.00201  [1.03829  1.04616]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
+------------------------------------------------------------
+
+Serpent 2.1.29 -- Static criticality source simulation
+
+Title: "MSR2G-partially-enriched-U-full-core" 
+
+Active cycle   46 / 600  Source neutrons :  4892
+
+Running time :                  0:02:44
+Estimated running time :        0:12:48
+Estimated running time left :   0:10:03
+
+Estimated relative CPU usage :   792.2%
+
+k-eff (analog)    = 1.04291 +/- 0.00262  [1.03777  1.04805]
+k-eff (implicit)  = 1.04263 +/- 0.00201  [1.03870  1.04656]
+
+(O4) (MPI=10) (OMP=8) 
+------------------------------------------------------------
