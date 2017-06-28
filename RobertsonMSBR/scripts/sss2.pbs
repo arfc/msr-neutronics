@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+#PBS -l walltime=02:30:00
+#PBS -l nodes=1:ppn=24
+#PBS -N serpent2 
+#PBS -q secondary
+#
+# End of embedded QSUB options
+#
+module load openmpi/1.6.5-gcc-4.7.1
+export OMP_NUM_THREADS=24
+
+# Run the hello world executable (a.out)
+cd ~/depletion/3flows_with_tank_/
+#mpiexec /projects/arfc/serpent2/sss2_src/sss2 -omp 12 core
+$sss2 -omp 24 core

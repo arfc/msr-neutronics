@@ -1,4 +1,4 @@
-set title "MSBR burnup inflow Th+U233, outflow Pa, stable case when Keff drops to 1.0 and then grows to 1.14"
+set title "MSBR burnup, U-233 2.0E-11 ------> 1.15E-11"
 
 include "../../../../geometry/test_IB_lat"
 
@@ -63,12 +63,9 @@ mat nobelgs 1.00 burn 1 vol 1.0
 92233.09c  0.00   % fraction of U-233 (0.232% mole)
 94239.09c  0.00   % fraction of Pu-239 (0.0006% mole)
 54130.09c  100000.0  % Xe
-% --- Thermal scattering data for graphite:
-
-therm gr grj3.12t
-
+% --- Thermal scattering data for graphite
+therm gr 907 gre7.18t gre7.20t
 % --- Cross section data library file path:
-
 set acelib "/home/andrei2/serpent/xsdata/endfb7/sss_endfb7.xsdata"
 %set acelib "/projects/arfc/serpent/core/xsdata/endfb7/sss_endfb7.xsdata" % this for RCaaS
 
@@ -121,12 +118,16 @@ mflow feed
 %Th-232 1.25E-9
 %Th-232 1.25E-11     keff=0.9454 after 48days
 %Th-232 1.25E-12     keff=0.9466 after 48days
-Th-232 1.25E-11      %keff=0.9289 after 48days
+Th-232 1.25E-10      %keff=0.9289 after 48days
 
 mflow feed2
 %U-233 3.5E-12
 U-233  0.35E-10
-Th-232 0.90E-10
+Th-232 9.0E-8
+
+mflow feed3 % for second cycle
+U-233  1.15E-11
+Th-232 9.0E-8
 
 mflow rem1
 %Pa-233 3.5E-12
@@ -146,9 +147,13 @@ Ag 1
 Sb 1
 Te 1
 % --- Reprocessing scheme:
-rep r1
-%rc refill fuel feed   2
+rep r1 % first 45 days
 rc tank fuel    feed2  1 % inflow into the core
+rc fuel outflow rem1   1 % outflow from the core to tank
+rc fuel nobelgs rem2   1 % removing poisons
+
+rep r2 % rest
+rc tank fuel    feed3  1 % inflow into the core
 rc fuel outflow rem1   1 % outflow from the core to tank
 rc fuel nobelgs rem2   1 % removing poisons
 
@@ -157,12 +162,14 @@ rc fuel nobelgs rem2   1 % removing poisons
 set power 2250000000.0 % 2.25 GW(th)
 
 dep pro r1
-daystep % 1200days = 3 x 400 steps
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 % 100 steps
+daystep % 45days = 3 x 16 steps
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+%3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 % 100 steps
+%3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 % 100 steps
+dep pro r2
+daystep % 300days = 3 x 400 steps
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 % 100 steps
-%3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 % 100 steps
-%3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 % 100 steps
-3 3 3
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 % 87 steps
 
 % --- Inventory:
 set inventory
