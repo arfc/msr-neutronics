@@ -1,4 +1,4 @@
-set title "MSBR burnup, U-233 2.0E-11 ------> 1.15E-11"
+set title "MSBR burnup, U-233 1.15E-11 ------> 1.17E-11, cycles from 16 to 10"
 
 include "../../../../geometry/test_IB_lat"
 
@@ -126,7 +126,7 @@ U-233  0.35E-10
 Th-232 9.0E-8
 
 mflow feed3 % for second cycle
-U-233  1.15E-11
+U-233  1.17E-11
 Th-232 9.0E-8
 
 mflow rem1
@@ -162,8 +162,8 @@ rc fuel nobelgs rem2   1 % removing poisons
 set power 2250000000.0 % 2.25 GW(th)
 
 dep pro r1
-daystep % 45days = 3 x 16 steps
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+daystep % 45days = 3 x 10 steps
+3 3 3 3 3 3 3 3 3 3
 %3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 % 100 steps
 %3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 % 100 steps
 dep pro r2
