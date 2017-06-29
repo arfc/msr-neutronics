@@ -1,4 +1,4 @@
-set title "MSBR burnup, U-233 1.15E-11 ------> 1.17E-11, cycles from 16 to 10"
+set title "MSBR burnup, U-233 1.17E-11 ------> 1.24E-11"
 
 include "../../../../geometry/test_IB_lat"
 
@@ -122,11 +122,11 @@ Th-232 1.25E-10      %keff=0.9289 after 48days
 
 mflow feed2
 %U-233 3.5E-12
-U-233  0.35E-10
+U-233  0.40E-10
 Th-232 9.0E-8
 
 mflow feed3 % for second cycle
-U-233  1.17E-11
+U-233  1.24E-11
 Th-232 9.0E-8
 
 mflow rem1

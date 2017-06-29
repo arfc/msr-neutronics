@@ -70,8 +70,9 @@ set pop 10000 500 20
 %plot 2 4064 16000 0.0 15.24 25.4 0.0 40.0       % Zone I-A bottom
 %plot 2 4064 16000 0.0 218.44 228.6 409.58 449.58  % Zone II  top
 %plot 2 4064 16000 0.0 218.44 228.6 0.0 40.0       % Zone II  bottom
-mesh 3 3000 3000
-mesh 2 3000 3000
+mesh 3 5000 5000 0 419.0 438.0 24.50 37.40 -6.0 6.0        % Zone I-A cell mesh
+mesh 3 5000 5000
+%mesh 2 3000 3000
 
 set cpd 2
 
