@@ -53,29 +53,29 @@
             P - nuclide has photon transport cross section data
             T - nuclide has supplementary transmutation cross section data
 
-    1   0  3006.09c      09c  TRA    3   6 0    6.01507   900.0          N/A  I-----T-------------  lithium 6 (Li-6)
-    2   0  3007.09c      09c  TRA    3   7 0    7.01600   900.0          N/A  I-----T-------------  lithium 7 (Li-7)
-    3   0  4009.09c      09c  TRA    4   9 0    9.01220   900.0          N/A  I-----T-------------  beryllium 9 (Be-9)
-    4   0  6012.09c      09c  TRA    6  12 0   11.99999   900.0          N/A  I-----T-------------  carbon 12 (C-12)
-    5   0  6012.09s      09s  TRA    6  12 0   11.99999   900.0          N/A  I-----TS------------  carbon 12 (C-12)
-    6   0  9019.09c      09c  TRA    9  19 0   18.99820   900.0          N/A  I-----T-------------  fluorine 19 (F-19)
-    7   0  90232.09c     09c  TRA   90 232 0  232.03833   900.0          N/A  I-----T--F-D--------  thorium 232 (Th-232)
-    8   0  92233.09c     09c  TRA   92 233 0  233.03964   900.0          N/A  I-----T--F-D--------  uranium 233 (U-233)
-    9   0  94239.09c     09c  TRA   94 239 0  239.05218   900.0          N/A  I-----T--F-D--------  plutonium 239 (Pu-239)
+    1   0  3006.09c      09c  TRA    3   6 0    6.01507   908.0          N/A  I-----T-------------  lithium 6 (Li-6)
+    2   0  3007.09c      09c  TRA    3   7 0    7.01600   908.0          N/A  I-----T-------------  lithium 7 (Li-7)
+    3   0  4009.09c      09c  TRA    4   9 0    9.01220   908.0          N/A  I-----T-------------  beryllium 9 (Be-9)
+    4   0  6012.09c      09c  TRA    6  12 0   11.99999   908.0          N/A  I-----T-------------  carbon 12 (C-12)
+    5   0  6012.09s      09s  TRA    6  12 0   11.99999   908.0          N/A  I-----TS------------  carbon 12 (C-12)
+    6   0  9019.09c      09c  TRA    9  19 0   18.99820   908.0          N/A  I-----T-------------  fluorine 19 (F-19)
+    7   0  90232.09c     09c  TRA   90 232 0  232.03833   908.0          N/A  I-----T--F-D--------  thorium 232 (Th-232)
+    8   0  92233.09c     09c  TRA   92 233 0  233.03964   908.0          N/A  I-----T--F-D--------  uranium 233 (U-233)
+    9   0  94239.09c     09c  TRA   94 239 0  239.05218   908.0          N/A  I-----T--F-D--------  plutonium 239 (Pu-239)
 
  --- Table  2: Reaction and decay data: 
 
  Nuclide    1 / 9 : 3006.09c -- lithium 6 (Li-6)
 
- Pointers                     : 16123 3299
+ Pointers                     : 16237 3645346
  Primary type                 : Transport
  Nuclide ZAI                  : 30060
  Library ID                   : 09c
  Cross section data file      : /home/andrei2/serpent/xsdata/endfb7/acedata/3006ENDF7.ace
  Atomic weight (AW)           : 6.01507
  Atomic weight ratio (AWR)    : 5.96340
- Temperature                  : 900.0 Kelvin
- XS temperature               : 900.0 Kelvin
+ Temperature                  : 908.0 Kelvin
+ XS temperature               : 908.0 Kelvin
  Minimum and maximum energy   : 1.00000E-11 2.00000E+01
  Half-life                    : N/A
  Specific ingestion toxicity  : N/A
@@ -154,15 +154,15 @@
 
  Nuclide    2 / 9 : 3007.09c -- lithium 7 (Li-7)
 
- Pointers                     : 12917 3575
+ Pointers                     : 13031 3628886
  Primary type                 : Transport
  Nuclide ZAI                  : 30070
  Library ID                   : 09c
  Cross section data file      : /home/andrei2/serpent/xsdata/endfb7/acedata/3007ENDF7.ace
  Atomic weight (AW)           : 7.01600
  Atomic weight ratio (AWR)    : 6.95573
- Temperature                  : 900.0 Kelvin
- XS temperature               : 900.0 Kelvin
+ Temperature                  : 908.0 Kelvin
+ XS temperature               : 908.0 Kelvin
  Minimum and maximum energy   : 1.00000E-11 2.00000E+01
  Half-life                    : N/A
  Specific ingestion toxicity  : N/A
@@ -243,15 +243,15 @@
 
  Nuclide    3 / 9 : 4009.09c -- beryllium 9 (Be-9)
 
- Pointers                     : 21877 4127
+ Pointers                     : 21991 3794575
  Primary type                 : Transport
  Nuclide ZAI                  : 40090
  Library ID                   : 09c
  Cross section data file      : /home/andrei2/serpent/xsdata/endfb7/acedata/4009ENDF7.ace
  Atomic weight (AW)           : 9.01220
  Atomic weight ratio (AWR)    : 8.93478
- Temperature                  : 900.0 Kelvin
- XS temperature               : 900.0 Kelvin
+ Temperature                  : 908.0 Kelvin
+ XS temperature               : 908.0 Kelvin
  Minimum and maximum energy   : 1.00000E-11 2.00000E+01
  Half-life                    : N/A
  Specific ingestion toxicity  : N/A
@@ -305,15 +305,15 @@
 
  Nuclide    4 / 9 : 6012.09c -- carbon 12 (C-12)
 
- Pointers                     : 34321 5231
+ Pointers                     : 34435 7098448
  Primary type                 : Transport
  Nuclide ZAI                  : 60120
  Library ID                   : 09c
  Cross section data file      : /home/andrei2/serpent/xsdata/endfb7/acedata/6012JNDL32.ace
  Atomic weight (AW)           : 11.99999
  Atomic weight ratio (AWR)    : 11.89690
- Temperature                  : 900.0 Kelvin
- XS temperature               : 900.0 Kelvin
+ Temperature                  : 908.0 Kelvin
+ XS temperature               : 908.0 Kelvin
  Minimum and maximum energy   : 1.00000E-11 2.00000E+01
  Half-life                    : N/A
  Specific ingestion toxicity  : N/A
@@ -386,15 +386,15 @@
 
  Nuclide    5 / 9 : 6012.09s -- carbon 12 (C-12)
 
- Pointers                     : 37693 5231
+ Pointers                     : 37807 7098448
  Primary type                 : Transport
  Nuclide ZAI                  : 60120
  Library ID                   : 09s
  Cross section data file      : /home/andrei2/serpent/xsdata/endfb7/acedata/6012JNDL32.ace
  Atomic weight (AW)           : 11.99999
  Atomic weight ratio (AWR)    : 11.89690
- Temperature                  : 900.0 Kelvin
- XS temperature               : 900.0 Kelvin
+ Temperature                  : 908.0 Kelvin
+ XS temperature               : 908.0 Kelvin
  Minimum and maximum energy   : 1.00000E-11 2.00000E+01
  Half-life                    : N/A
  Specific ingestion toxicity  : N/A
@@ -470,15 +470,15 @@
 
  Nuclide    6 / 9 : 9019.09c -- fluorine 19 (F-19)
 
- Pointers                     : 19180 6611
+ Pointers                     : 19294 3676104
  Primary type                 : Transport
  Nuclide ZAI                  : 90190
  Library ID                   : 09c
  Cross section data file      : /home/andrei2/serpent/xsdata/endfb7/acedata/9019ENDF7.ace
  Atomic weight (AW)           : 18.99820
  Atomic weight ratio (AWR)    : 18.83500
- Temperature                  : 900.0 Kelvin
- XS temperature               : 900.0 Kelvin
+ Temperature                  : 908.0 Kelvin
+ XS temperature               : 908.0 Kelvin
  Minimum and maximum energy   : 1.00000E-11 2.00000E+01
  Half-life                    : N/A
  Specific ingestion toxicity  : N/A
@@ -552,15 +552,15 @@
 
  Nuclide    7 / 9 : 90232.09c -- thorium 232 (Th-232)
 
- Pointers                     : 23134 104039
+ Pointers                     : 23248 4372085
  Primary type                 : Transport
  Nuclide ZAI                  : 902320
  Library ID                   : 09c
  Cross section data file      : /home/andrei2/serpent/xsdata/endfb7/acedata/90232ENDF7.ace
  Atomic weight (AW)           : 232.03833
  Atomic weight ratio (AWR)    : 230.04500
- Temperature                  : 900.0 Kelvin
- XS temperature               : 900.0 Kelvin
+ Temperature                  : 908.0 Kelvin
+ XS temperature               : 908.0 Kelvin
  Minimum and maximum energy   : 1.00000E-11 6.00000E+01
  Half-life                    : N/A
  Specific ingestion toxicity  : N/A
@@ -656,15 +656,15 @@
 
  Nuclide    8 / 9 : 92233.09c -- uranium 233 (U-233)
 
- Pointers                     : 27343 105971
+ Pointers                     : 27457 6488279
  Primary type                 : Transport
  Nuclide ZAI                  : 922330
  Library ID                   : 09c
  Cross section data file      : /home/andrei2/serpent/xsdata/endfb7/acedata/92233ENDF7.ace
  Atomic weight (AW)           : 233.03964
  Atomic weight ratio (AWR)    : 231.03770
- Temperature                  : 900.0 Kelvin
- XS temperature               : 900.0 Kelvin
+ Temperature                  : 908.0 Kelvin
+ XS temperature               : 908.0 Kelvin
  Minimum and maximum energy   : 1.00000E-11 3.00000E+01
  Half-life                    : N/A
  Specific ingestion toxicity  : N/A
@@ -749,15 +749,15 @@
 
  Nuclide    9 / 9 : 94239.09c -- plutonium 239 (Pu-239)
 
- Pointers                     : 30760 110663
+ Pointers                     : 30874 6771003
  Primary type                 : Transport
  Nuclide ZAI                  : 942390
  Library ID                   : 09c
  Cross section data file      : /home/andrei2/serpent/xsdata/endfb7/acedata/94239ENDF7.ace
  Atomic weight (AW)           : 239.05218
  Atomic weight ratio (AWR)    : 236.99860
- Temperature                  : 900.0 Kelvin
- XS temperature               : 900.0 Kelvin
+ Temperature                  : 908.0 Kelvin
+ XS temperature               : 908.0 Kelvin
  Minimum and maximum energy   : 1.00000E-11 2.00000E+01
  Half-life                    : N/A
  Specific ingestion toxicity  : N/A
@@ -866,13 +866,13 @@ Isotopic composition (non-zero densities):
 -------------------------------------------------------------------
  Nuclide    a. weight   temp      a. dens      a. frac      m. frac
 -------------------------------------------------------------------
-  3007.09c    7.01600  900.0  2.25328E-02  2.83976E-01  7.88253E-02    
-  3006.09c    6.01507  900.0  1.08162E-06  1.36314E-05  3.24397E-06    
-  9019.09c   18.99820  900.0  4.79493E-02  6.04294E-01  4.54207E-01    
-  4009.09c    9.01220  900.0  5.02376E-03  6.33133E-02  2.25746E-02    
- 90232.09c  232.03833  900.0  3.76782E-03  4.74850E-02  4.35923E-01    
- 92233.09c  233.03964  900.0  7.28447E-05  9.18045E-04  8.46423E-03    
- 94239.09c  239.05218  900.0  1.88395E-08  2.37430E-07  2.24555E-06    
+  3007.09c    7.01600  908.0  2.25328E-02  2.83976E-01  7.88253E-02    
+  3006.09c    6.01507  908.0  1.08162E-06  1.36314E-05  3.24397E-06    
+  9019.09c   18.99820  908.0  4.79493E-02  6.04294E-01  4.54207E-01    
+  4009.09c    9.01220  908.0  5.02376E-03  6.33133E-02  2.25746E-02    
+ 90232.09c  232.03833  908.0  3.76782E-03  4.74850E-02  4.35923E-01    
+ 92233.09c  233.03964  908.0  7.28447E-05  9.18045E-04  8.46423E-03    
+ 94239.09c  239.05218  908.0  1.88395E-08  2.37430E-07  2.24555E-06    
        sum                    7.93476E-02  1.00000E+00  1.00000E+00
 -------------------------------------------------------------------
 
@@ -895,6 +895,6 @@ Isotopic composition (non-zero densities):
 -------------------------------------------------------------------
  Nuclide    a. weight   temp      a. dens      a. frac      m. frac
 -------------------------------------------------------------------
-  6012.09s   11.99999  900.0  9.24887E-02  1.00000E+00  1.00000E+00 (s)
+  6012.09s   11.99999  908.0  9.24887E-02  1.00000E+00  1.00000E+00 (s)
        sum                    9.24887E-02  1.00000E+00  1.00000E+00
 -------------------------------------------------------------------
