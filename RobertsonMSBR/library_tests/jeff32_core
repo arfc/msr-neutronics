@@ -34,7 +34,7 @@ mat hast     -1.84 rgb 127 205 187
 therm gr 900 gr05.32t gr06.32t       % 900K C-12
 
 % --- Cross section data library file path:
-set acelib "/home/andrei2/serpent/xsdata/jeff32/sss_jeff32u.xsdata"
+set acelib "/home/andrei2/serpent/xsdata/jeff32/sss_jeff32.xsdata"
 %set acelib "/home/andrei2/serpent/xsdata/endfb7/sss_endfb7.xsdata"
 %set acelib "/projects/arfc/serpent/core/xsdata/endfb7/sss_endfb7.xsdata" % this for RCaaS
 
@@ -57,7 +57,7 @@ set nfg  4  0.625E-6  5.5E-3  0.821
 
 % --- Neutron population and criticality cycles:
 
-set pop 10000 500 20 
+set pop 100000 500 20 
 
 % --- Geometry and mesh plots:
 %plot 3 3000 3000 1.0 218.44 228.6 -5.08 5.08

@@ -30,11 +30,12 @@ mat hast     -1.84 rgb 127 205 187
 
 % --- Thermal scattering data for graphite:
 
-therm gr 900 gre7.18t gre7.20t  % 900K C-12
+%therm gr 900 gre7.18t gre7.20t  % 900K C-12
+therm gr 900 gr05.32t gr06.32t       % 900K C-12
 
 % --- Cross section data library file path:
 
-set acelib "/home/andrei2/serpent/xsdata/endfb7/sss_endfb7.xsdata"
+set acelib "/home/andrei2/serpent/xsdata/jeff32/sss_jeff32.xsdata"
 %set acelib "/projects/arfc/serpent/core/xsdata/endfb7/sss_endfb7.xsdata" % this for RCaaS
 
 % --- Black (vacuum) boundary condition:
@@ -85,8 +86,8 @@ set pop 10000 500 20
 % --- Decay and fission yield libraries:
 % --- Decay and fission yield libraries:
 
-set declib "/home/andrei2/serpent/xsdata/jeff32/sss_jeff311_new.dec"
-set nfylib "/home/andrei2/serpent/xsdata/jeff32/sss_jeff311_new.nfy"
+set declib "/home/andrei2/serpent/xsdata/jeff32/sss_jeff311.dec"
+set nfylib "/home/andrei2/serpent/xsdata/jeff32/sss_jeff311.nfy"
 
 % --- Reduce energy grid size:
 

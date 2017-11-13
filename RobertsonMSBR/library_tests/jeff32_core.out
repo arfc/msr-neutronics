@@ -53,24 +53,24 @@
             P - nuclide has photon transport cross section data
             T - nuclide has supplementary transmutation cross section data
 
-    1   0  3007.09c      09c  TRA    3   7 0    6.95573   900.0          N/A  I-----T-------------  lithium 7 (Li-7)
+    1   0  3007.09c      09c  TRA    3   7 0    7.01600   900.0          N/A  I-----T-------------  lithium 7 (Li-7)
     2   0  4009.09c      09c  TRA    4   9 0    9.01220   900.0          N/A  I-----T-------------  beryllium 9 (Be-9)
     3   0  6000.09c      09c  TRA    6   0 0   12.00110   900.0          N/A  I-----T-------------  natural carbon (C-nat)
     4   0  6000.09s      09s  TRA    6   0 0   12.00110   900.0          N/A  I-----TS------------  natural carbon (C-nat)
     5   0  9019.09c      09c  TRA    9  19 0   18.99820   900.0          N/A  I-----T-------------  fluorine 19 (F-19)
     6   0  90232.09c     09c  TRA   90 232 0  232.03833   900.0          N/A  I-----T--F-D--------  thorium 232 (Th-232)
-    7   0  92233.09c     09c  TRA   92 233 0  233.03993   900.0          N/A  I-----T--F-D--------  uranium 233 (U-233)
+    7   0  92233.09c     09c  TRA   92 233 0  233.03963   900.0          N/A  I-----T--F-D--------  uranium 233 (U-233)
 
  --- Table  2: Reaction and decay data: 
 
  Nuclide    1 / 7 : 3007.09c -- lithium 7 (Li-7)
 
- Pointers                     : 424150 3575
+ Pointers                     : 424150 12131
  Primary type                 : Transport
  Nuclide ZAI                  : 30070
  Library ID                   : 09c
- Cross section data file      : /home/andrei2/serpent/xsdata/jeff32/acedata/Li7.ACE
- Atomic weight (AW)           : 6.95573
+ Cross section data file      : /home/andrei2/serpent/xsdata/jeff32/ACEs_900K/Li7.ACE
+ Atomic weight (AW)           : 7.01600
  Atomic weight ratio (AWR)    : 6.95573
  Temperature                  : 900.0 Kelvin
  XS temperature               : 900.0 Kelvin
@@ -128,11 +128,11 @@
 
  Nuclide    2 / 7 : 4009.09c -- beryllium 9 (Be-9)
 
- Pointers                     : 428253 4127
+ Pointers                     : 428253 3299
  Primary type                 : Transport
  Nuclide ZAI                  : 40090
  Library ID                   : 09c
- Cross section data file      : /home/andrei2/serpent/xsdata/jeff32/acedata/Be9.ACE
+ Cross section data file      : /home/andrei2/serpent/xsdata/jeff32/ACEs_900K/Be9.ACE
  Atomic weight (AW)           : 9.01220
  Atomic weight ratio (AWR)    : 8.93478
  Temperature                  : 900.0 Kelvin
@@ -201,11 +201,11 @@
 
  Nuclide    3 / 7 : 6000.09c -- natural carbon (C-nat)
 
- Pointers                     : 438144 4955
+ Pointers                     : 438144 3621
  Primary type                 : Transport
  Nuclide ZAI                  : 60000
  Library ID                   : 09c
- Cross section data file      : /home/andrei2/serpent/xsdata/jeff32/acedata/C0.ACE
+ Cross section data file      : /home/andrei2/serpent/xsdata/jeff32/ACEs_900K/C0.ACE
  Atomic weight (AW)           : 12.00110
  Atomic weight ratio (AWR)    : 11.89800
  Temperature                  : 900.0 Kelvin
@@ -272,11 +272,11 @@
 
  Nuclide    4 / 7 : 6000.09s -- natural carbon (C-nat)
 
- Pointers                     : 440796 4955
+ Pointers                     : 440796 3621
  Primary type                 : Transport
  Nuclide ZAI                  : 60000
  Library ID                   : 09s
- Cross section data file      : /home/andrei2/serpent/xsdata/jeff32/acedata/C0.ACE
+ Cross section data file      : /home/andrei2/serpent/xsdata/jeff32/ACEs_900K/C0.ACE
  Atomic weight (AW)           : 12.00110
  Atomic weight ratio (AWR)    : 11.89800
  Temperature                  : 900.0 Kelvin
@@ -346,11 +346,11 @@
 
  Nuclide    5 / 7 : 9019.09c -- fluorine 19 (F-19)
 
- Pointers                     : 425484 6611
+ Pointers                     : 425484 8221
  Primary type                 : Transport
  Nuclide ZAI                  : 90190
  Library ID                   : 09c
- Cross section data file      : /home/andrei2/serpent/xsdata/jeff32/acedata/F19.ACE
+ Cross section data file      : /home/andrei2/serpent/xsdata/jeff32/ACEs_900K/F19.ACE
  Atomic weight (AW)           : 18.99820
  Atomic weight ratio (AWR)    : 18.83500
  Temperature                  : 900.0 Kelvin
@@ -429,11 +429,11 @@
 
  Nuclide    6 / 7 : 90232.09c -- thorium 232 (Th-232)
 
- Pointers                     : 430302 104039
+ Pointers                     : 430302 21469
  Primary type                 : Transport
  Nuclide ZAI                  : 902320
  Library ID                   : 09c
- Cross section data file      : /home/andrei2/serpent/xsdata/jeff32/acedata/Th232.ACE
+ Cross section data file      : /home/andrei2/serpent/xsdata/jeff32/ACEs_900K/Th232.ACE
  Atomic weight (AW)           : 232.03833
  Atomic weight ratio (AWR)    : 230.04500
  Temperature                  : 900.0 Kelvin
@@ -535,12 +535,12 @@
 
  Nuclide    7 / 7 : 92233.09c -- uranium 233 (U-233)
 
- Pointers                     : 434655 105971
+ Pointers                     : 434655 22159
  Primary type                 : Transport
  Nuclide ZAI                  : 922330
  Library ID                   : 09c
- Cross section data file      : /home/andrei2/serpent/xsdata/jeff32/acedata/U233.ACE
- Atomic weight (AW)           : 233.03993
+ Cross section data file      : /home/andrei2/serpent/xsdata/jeff32/ACEs_900K/U233.ACE
+ Atomic weight (AW)           : 233.03963
  Atomic weight ratio (AWR)    : 231.03770
  Temperature                  : 900.0 Kelvin
  XS temperature               : 900.0 Kelvin
@@ -636,7 +636,7 @@ Material "fuel":
 
  - Material is included in majorant
  - Material is included in geometry
- - Atom density 7.8420E-02 1/barn*cm
+ - Atom density 7.8227E-02 1/barn*cm
  - Mass density 3.2800E+00 g/cm3
  - Volume 1.9506E+07 cm3
  - Mass 6.3979E+07 g
@@ -651,12 +651,12 @@ Isotopic composition (non-zero densities):
 -------------------------------------------------------------------
  Nuclide    a. weight   temp      a. dens      a. frac      m. frac
 -------------------------------------------------------------------
-  3007.09c    6.95573  900.0  2.24263E-02  2.85976E-01  7.89737E-02    
-  9019.09c   18.99820  900.0  4.72610E-02  6.02664E-01  4.54567E-01    
-  4009.09c    9.01220  900.0  4.95480E-03  6.31828E-02  2.26068E-02    
- 90232.09c  232.03833  900.0  3.71610E-03  4.73871E-02  4.36546E-01    
- 92233.09c  233.03993  900.0  6.19351E-05  7.89785E-04  7.30717E-03    
-       sum                    7.84201E-02  1.00000E+00  1.00000E+00
+  3007.09c    7.01600  900.0  2.22336E-02  2.84218E-01  7.89737E-02    
+  9019.09c   18.99820  900.0  4.72610E-02  6.04148E-01  4.54567E-01    
+  4009.09c    9.01220  900.0  4.95480E-03  6.33384E-02  2.26068E-02    
+ 90232.09c  232.03833  900.0  3.71610E-03  4.75038E-02  4.36546E-01    
+ 92233.09c  233.03963  900.0  6.19351E-05  7.91731E-04  7.30717E-03    
+       sum                    7.82274E-02  1.00000E+00  1.00000E+00
 -------------------------------------------------------------------
 
 Material "moder":
