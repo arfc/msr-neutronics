@@ -121,7 +121,7 @@ lat 2 9 0.0 0.0 5
 441.96  25
 
 % --- Surfaces (core pitch = 15.24 cm) - Control rods Universe 3:
-surf 41  cyl 0.0 0.0 5.08                           % Hole with fuel salt
+surf 41  cyl 0.0 0.0 5.08                     % Hole with fuel salt
 surf 42  sqc 0.0 0.0 7.23646 0.99             % Graphite square outer wall 1.07
 surf 43  sqc 0.0 0.0 7.62                     % Outer boundary
 surf 44  hexyc -5.8801 6.505  1.16 0.18       % Left-upper graphite element 1.15
@@ -132,9 +132,12 @@ surf 48  cyl -5.8801 -8.03646  0.8             % replay part of left-upper graph
 surf 49  cyl  5.8801 8.03646   0.8             % replay part of right-bottom graphite element
 surf 50 cyl  -8.03646 5.8801  0.8              % replay part of right-upper graphite element 0.51 octa
 surf 51 cyl  8.03646 -5.8801  0.8              % replay part of left-bottom graphite element
+% --- Graphite rods----
+surf 52 cyl 0.0 0.0 4.7625                    % control rod diameter 3.75in (Robertson p117)
 
 % --- Cells: Universe 3: Control rods zone
-cell 41  3  fuel  -41                                       % Fuel hole
+cell 53  3  moder -52
+cell 41  3  fuel  -41 52                                    % Fuel hole
 cell 42  3  moder 41 -42 44 45 46 47 48 49 50 51            % Graphite block
 cell 43  3  fuel  42 -43 44 45 46 47 48 49 50 51            % Fuel salt outside graphite block
 cell 44  3  moder -44                                       % Left-upper graphite element

@@ -1,4 +1,4 @@
-set title "MSBR burnup, U-233 2.0E-11 ------> 1.15E-11"
+set title "MSBR burnup, Th in separate flow (looks like Th flow doesn't work)"
 
 include "../../../../geometry/test_IB_lat"
 
@@ -118,16 +118,16 @@ mflow feed
 %Th-232 1.25E-9
 %Th-232 1.25E-11     keff=0.9454 after 48days
 %Th-232 1.25E-12     keff=0.9466 after 48days
-Th-232 1.25E-10      %keff=0.9289 after 48days
+Th-232 9.0E-8
 
 mflow feed2
 %U-233 3.5E-12
-U-233  0.35E-10
-Th-232 9.0E-8
+U-233  0.40E-10
+%Th-232 9.0E-8
 
 mflow feed3 % for second cycle
-U-233  1.15E-11
-Th-232 9.0E-8
+U-233  1.24E-11
+%Th-232 9.0E-8
 
 mflow rem1
 %Pa-233 3.5E-12
@@ -148,11 +148,13 @@ Sb 1
 Te 1
 % --- Reprocessing scheme:
 rep r1 % first 45 days
-rc tank fuel    feed2  1 % inflow into the core
+rc refill fuel feed    1 % Th refill
+rc tank fuel    feed2  1 % inflow U-233 into the core
 rc fuel outflow rem1   1 % outflow from the core to tank
 rc fuel nobelgs rem2   1 % removing poisons
 
 rep r2 % rest
+rc refill fuel feed    1 % Th refill
 rc tank fuel    feed3  1 % inflow into the core
 rc fuel outflow rem1   1 % outflow from the core to tank
 rc fuel nobelgs rem2   1 % removing poisons
@@ -162,8 +164,8 @@ rc fuel nobelgs rem2   1 % removing poisons
 set power 2250000000.0 % 2.25 GW(th)
 
 dep pro r1
-daystep % 45days = 3 x 16 steps
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+daystep % 45days = 3 x 10 steps
+3 3 3 3 3 3 3 3 3 3
 %3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 % 100 steps
 %3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 % 100 steps
 dep pro r2
