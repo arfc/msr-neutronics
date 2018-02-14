@@ -104,6 +104,8 @@ plot 1 1000 1000 0.0 -190.0 190.0 -10.0 450.0
 
 mesh 3 1000 1000 0 -190 190 -190 190 200 225
 
+mesh 1 1000 1000 0 -1 1 -190 190 -10 450
+
 % --- Neutron energy spectrum
 
 %det spectralFuel de eGrid
