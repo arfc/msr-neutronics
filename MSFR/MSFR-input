@@ -62,9 +62,9 @@ surf 3001 cyl 0.0 0.0 182.75 0.0 425.5		%Outer cylinder boundary
 cell 101 0 struc 1001 -1002 -3001		% Bottom reflector plate
 cell 102 0 struc 1003 -1004 -3001		% Top reflector plate
 
-cell 201 0 fuel  2005 -2006 -2001		% Fuel core
-cell 202 0 fuel  1002 -2005 -3001		% Fuel inlet
-cell 203 0 fuel  2006 -1003 -3001		% Fuel outlet
+cell 201 0 fill 1  2005 -2006 -2001		% Fuel core
+cell 202 0 fill 1  1002 -2005 -3001		% Fuel inlet
+cell 203 0 fill 1  2006 -1003 -3001		% Fuel outlet
 
 cell 301 0 blanket 2007 -2008 2003 -2004		% Blanket
 
@@ -78,6 +78,8 @@ cell 501 0 absorb 2005 -2006 2002 -3001		% Absorber
 cell 601 0 outside 3001 1001 -1004		% Outside cylinder
 cell 602 0 outside -1001				% Outside bottom
 cell 603 0 outside 1004					% Outside top
+
+cell 701 1 fuel  -1003 1002 -3001		% Fuel material
 
 /******************
  * Run parameters *
@@ -115,7 +117,7 @@ mesh 1 1000 1000 0 -1 1 -190 190 -10 450
 
 % --- Group constant generation
 
-set gcu 0
+set gcu 1
 set nfg  4  0.625E-6  5.5E-3  0.821
 
 % --- Fission
