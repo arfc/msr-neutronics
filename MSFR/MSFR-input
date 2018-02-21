@@ -57,6 +57,8 @@ surf 2008 pz 304.75								% Blanket upper inner surface
 
 surf 3001 cyl 0.0 0.0 182.75 0.0 425.5		%Outer cylinder boundary
 
+surf 4001 inf
+
 % --- Cells
 
 cell 101 0 struc 1001 -1002 -3001		% Bottom reflector plate
@@ -79,7 +81,7 @@ cell 601 0 outside 3001 1001 -1004		% Outside cylinder
 cell 602 0 outside -1001				% Outside bottom
 cell 603 0 outside 1004					% Outside top
 
-cell 701 1 fuel  -1003 1002 -3001		% Fuel material
+cell 701 1 fuel  -4001		% Fuel material
 
 /******************
  * Run parameters *
