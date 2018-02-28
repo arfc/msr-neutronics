@@ -61,27 +61,33 @@ surf 4001 inf
 
 % --- Cells
 
-cell 101 0 struc 1001 -1002 -3001		% Bottom reflector plate
-cell 102 0 struc 1003 -1004 -3001		% Top reflector plate
+cell 101 0 fill 2 1001 -1002 -3001		% Bottom reflector plate
+cell 102 0 fill 2 1003 -1004 -3001		% Top reflector plate
 
 cell 201 0 fill 1  2005 -2006 -2001		% Fuel core
 cell 202 0 fill 1  1002 -2005 -3001		% Fuel inlet
 cell 203 0 fill 1  2006 -1003 -3001		% Fuel outlet
 
-cell 301 0 blanket 2007 -2008 2003 -2004		% Blanket
+cell 301 0 fill 3 2007 -2008 2003 -2004		% Blanket
 
-cell 401 0 struc 2001 -2003 2007 -2008		% Blanket tank inner
-cell 402 0 struc 2004 -2002 2007 -2008		% Blanket tank outer
-cell 403 0 struc 2005 -2007 2001 -2002		% Blanket tank bottom
-cell 404 0 struc 2008 -2006 2001 -2002		% Blanket tank top
+cell 401 0 fill 2 2001 -2003 2007 -2008		% Blanket tank inner
+cell 402 0 fill 2 2004 -2002 2007 -2008		% Blanket tank outer
+cell 403 0 fill 2 2005 -2007 2001 -2002		% Blanket tank bottom
+cell 404 0 fill 2 2008 -2006 2001 -2002		% Blanket tank top
 
-cell 501 0 absorb 2005 -2006 2002 -3001		% Absorber
+cell 501 0 fill 4 2005 -2006 2002 -3001		% Absorber
 
 cell 601 0 outside 3001 1001 -1004		% Outside cylinder
 cell 602 0 outside -1001				% Outside bottom
 cell 603 0 outside 1004					% Outside top
 
 cell 701 1 fuel  -4001		% Fuel material
+
+cell 702 2 struc -4001		% Structural material
+
+cell 703 3 blanket	-4001	% Blanket material
+
+cell 704 4 absorb	-4001	% Absorber material
 
 /******************
  * Run parameters *
@@ -119,8 +125,8 @@ mesh 1 1000 1000 0 -1 1 -190 190 -10 450
 
 % --- Group constant generation
 
-set gcu 1
-set nfg  4  0.625E-6  5.5E-3  0.821
+set gcu 1 2 3 4
+set nfg  6	748.5e-6	5.5308e-3	24.7875e-3	0.4979	2.2313
 
 % --- Fission
 
