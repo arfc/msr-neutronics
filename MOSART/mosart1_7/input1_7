@@ -1,0 +1,96 @@
+set title "MOSART core v1_7"
+
+%salt composition, dim source source: Ignatiev 2014 U-Th Fuel Cycle Flexibility
+%updating r,h to CR=1 mode dim, adjusting reflector height
+
+% --- Surfaces:
+surf 1  cyl 0.0 0.0 140.0 -140 140 %core
+surf 2  cyl 0.0 0.0 160.0 -160 160 %reflector
+
+% --- Cells:
+
+cell 1 0 fuel -1
+cell 2 0 moder 1 -2
+cell 3 0 outside 2
+
+
+%------------------------------------------------------------------------------------------
+%                MATERIALS
+%------------------------------------------------------------------------------------------
+
+% --- Fuel (LiF-BeF2-ThF4+TRUF3 70.11-23.88-6.01(4.31)+/1.7/ mole %) Ignatiev 2013, Cantor 1973:
+
+mat fuel   -2.628896 tmp 993   % g/cm3 for mixture
+3006.09c   -8.639075E-06      % Mass fraction of Li-6 
+3007.09c   -8.638211E-02      % Mass fraction of Li-7
+9019.09c   -4.689527E-01      % Mass fraction of F-19
+4009.09c   -1.975735E-01      % Mass fraction of Be-9
+90232.09c  -1.760199E-01      % Mass fraction of Th-232
+94238.09c  -2.264902E-03      % Mass fraction of Pu-238
+94239.09c  -3.141988E-02      % Mass fraction of Pu-239
+94240.09c  -1.527651E-02      % Mass fraction of Pu-240
+94241.09c  -9.750775E-03      % Mass fraction of Pu-241
+94242.09c  -5.706725E-03      % Mass fraction of Pu-242
+93237.09c  -4.553326E-03      % Mass fraction of Np-237
+95241.09c  -3.966661E-04      % Mass fraction of Am-241
+95243.09c  -1.694367E-03      % Mass fraction of Am-243
+                              
+%--- Cladding (Hastelloy-Hanes)
+
+mat clad   -8.86 tmp 993   % g/cm3 for mixture
+28000.09c   -6.29060      % Mass fraction of Ni
+24000.09c   -0.62020      % Mass fraction of Cr
+42000.09c   -1.41760      % Mass fraction of Mo
+26000.09c   -0.28441      % Mass fraction of Fe
+14000.09c   -0.08063      % Mass fraction of Si
+25000.09c   -0.05316      % Mass fraction of Mn
+23000.09c   -0.04430      % Mass fraction of V
+6000.09c    -0.00532      % Mass fraction of C
+27000.09c   -0.00177      % Mass fraction of Co
+74000.09c   -0.02658      % Mass fraction of W
+13000.09c   -0.01772      % Mass fraction of Al
+22000.09c   -0.01772      % Mass fraction of Ti
+
+% --- Moderator graphite:
+
+%mat moder    -1.843 tmp 993
+%6000.09c   -1.0      % Mass fraction of C
+
+% --- Moderator graphite:
+
+mat moder    -1.8670 tmp 993 moder gr 6012 6012.09c    -1.0
+
+% --- Thermal scattering data for graphite:
+
+therm gr 993 grj3.18t grj3.20t
+
+
+% --- Cross section data library file path:
+
+set acelib "/home/anshchaube/serpent_acelib/xsdata/endfb7/sss_endfb7u.xsdata"
+
+% --- Black (vacuum) boundary condition:
+
+set bc 1
+
+% --- group constant generation:
+
+set gcu  0
+
+set nfg  4  0.625E-6  5.5E-3  0.821
+
+% Cross section plotter
+%set xsplot 1000 1E-10 12.0
+
+% --- Neutron population and criticality cycles:
+
+set pop 5000 500 50
+
+% --- Geometry and mesh plots:
+
+plot 3 2000 2000 1.0
+plot 2 2000 2000 0.0
+mesh 3 2000 2000
+mesh 2 2000 2000
+
+% ------------------------------------------------------------
