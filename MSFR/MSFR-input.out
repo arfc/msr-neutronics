@@ -53,16 +53,16 @@
             P - nuclide has photon transport cross section data
             T - nuclide has supplementary transmutation cross section data
 
-    1   0  3007.09c      09c  TRA    3   7 0    7.01600  1080.0          N/A  I-----T-------------  lithium 7 (Li-7)
-    2   0  5010.09c      09c  TRA    5  10 0   10.01294  1080.0          N/A  I-----T-------------  boron 10 (B-10)
-    3   0  6000.09c      09c  TRA    6   0 0   12.00110  1080.0          N/A  I-----T-------------  natural carbon (C-nat)
-    4   0  9019.09c      09c  TRA    9  19 0   18.99820  1080.0          N/A  I-----T-------------  fluorine 19 (F-19)
-    5   0  13027.09c     09c  TRA   13  27 0   26.98154  1080.0          N/A  I-----T-------------  aluminum 27 (Al-27)
-    6   0  24000.09c     09c  TRA   24   0 0   51.99587  1080.0          N/A  I-----T-------------  natural chromium (Cr-nat)
-    7   0  28000.09c     09c  TRA   28   0 0   58.68796  1080.0          N/A  I-----T-------------  natural nickel (Ni-nat)
-    8   0  74000.09c     09c  TRA   74   0 0  183.85642  1080.0          N/A  I-----T-------------  natural tungsten (W-nat)
-    9   0  90232.09c     09c  TRA   90 232 0  232.03833  1080.0          N/A  I-----T--F-D--------  thorium 232 (Th-232)
-   10   0  92233.09c     09c  TRA   92 233 0  233.03964  1080.0          N/A  I-----T--F-D--------  uranium 233 (U-233)
+    1   0  3007.09c      09c  TRA    3   7 0    7.01600   930.0          N/A  I-----T-------------  lithium 7 (Li-7)
+    2   0  5010.09c      09c  TRA    5  10 0   10.01294   930.0          N/A  I-----T-------------  boron 10 (B-10)
+    3   0  6000.09c      09c  TRA    6   0 0   12.00110   930.0          N/A  I-----T-------------  natural carbon (C-nat)
+    4   0  9019.09c      09c  TRA    9  19 0   18.99820   930.0          N/A  I-----T-------------  fluorine 19 (F-19)
+    5   0  13027.09c     09c  TRA   13  27 0   26.98154   930.0          N/A  I-----T-------------  aluminum 27 (Al-27)
+    6   0  24000.09c     09c  TRA   24   0 0   51.99587   930.0          N/A  I-----T-------------  natural chromium (Cr-nat)
+    7   0  28000.09c     09c  TRA   28   0 0   58.68796   930.0          N/A  I-----T-------------  natural nickel (Ni-nat)
+    8   0  74000.09c     09c  TRA   74   0 0  183.85642   930.0          N/A  I-----T-------------  natural tungsten (W-nat)
+    9   0  90232.09c     09c  TRA   90 232 0  232.03833   930.0          N/A  I-----T--F-D--------  thorium 232 (Th-232)
+   10   0  92233.09c     09c  TRA   92 233 0  233.03964   930.0          N/A  I-----T--F-D--------  uranium 233 (U-233)
 
  --- Table  2: Reaction and decay data: 
 
@@ -75,8 +75,8 @@
  Cross section data file      : /home/smpark/serpent2/xs/acedata/3007JEF311.ace
  Atomic weight (AW)           : 7.01600
  Atomic weight ratio (AWR)    : 6.95573
- Temperature                  : 1080.0 Kelvin
- XS temperature               : 1080.0 Kelvin
+ Temperature                  : 930.0 Kelvin
+ XS temperature               : 930.0 Kelvin
  Minimum and maximum energy   : 1.00000E-11 2.00000E+01
  Half-life                    : N/A
  Specific ingestion toxicity  : N/A
@@ -137,8 +137,8 @@
  Cross section data file      : /home/smpark/serpent2/xs/acedata/5010JEF311.ace
  Atomic weight (AW)           : 10.01294
  Atomic weight ratio (AWR)    : 9.92692
- Temperature                  : 1080.0 Kelvin
- XS temperature               : 1080.0 Kelvin
+ Temperature                  : 930.0 Kelvin
+ XS temperature               : 930.0 Kelvin
  Minimum and maximum energy   : 1.00000E-11 2.00000E+01
  Half-life                    : N/A
  Specific ingestion toxicity  : N/A
@@ -237,8 +237,8 @@
  Cross section data file      : /home/smpark/serpent2/xs/acedata/6000JEF311.ace
  Atomic weight (AW)           : 12.00110
  Atomic weight ratio (AWR)    : 11.89800
- Temperature                  : 1080.0 Kelvin
- XS temperature               : 1080.0 Kelvin
+ Temperature                  : 930.0 Kelvin
+ XS temperature               : 930.0 Kelvin
  Minimum and maximum energy   : 1.00000E-11 1.50000E+02
  Half-life                    : N/A
  Specific ingestion toxicity  : N/A
@@ -307,8 +307,8 @@
  Cross section data file      : /home/smpark/serpent2/xs/acedata/9019JEF311.ace
  Atomic weight (AW)           : 18.99820
  Atomic weight ratio (AWR)    : 18.83500
- Temperature                  : 1080.0 Kelvin
- XS temperature               : 1080.0 Kelvin
+ Temperature                  : 930.0 Kelvin
+ XS temperature               : 930.0 Kelvin
  Minimum and maximum energy   : 1.00000E-11 2.00000E+01
  Half-life                    : N/A
  Specific ingestion toxicity  : N/A
@@ -389,8 +389,8 @@
  Cross section data file      : /home/smpark/serpent2/xs/acedata/13027JEF311.ace
  Atomic weight (AW)           : 26.98154
  Atomic weight ratio (AWR)    : 26.74975
- Temperature                  : 1080.0 Kelvin
- XS temperature               : 1080.0 Kelvin
+ Temperature                  : 930.0 Kelvin
+ XS temperature               : 930.0 Kelvin
  Minimum and maximum energy   : 1.00000E-11 1.50000E+02
  Half-life                    : N/A
  Specific ingestion toxicity  : N/A
@@ -572,8 +572,8 @@
  Cross section data file      : /home/smpark/serpent2/xs/acedata/24000JNDL32.ace
  Atomic weight (AW)           : 51.99587
  Atomic weight ratio (AWR)    : 51.54920
- Temperature                  : 1080.0 Kelvin
- XS temperature               : 1080.0 Kelvin
+ Temperature                  : 930.0 Kelvin
+ XS temperature               : 930.0 Kelvin
  Minimum and maximum energy   : 1.00000E-11 2.00000E+01
  Half-life                    : N/A
  Specific ingestion toxicity  : N/A
@@ -669,8 +669,8 @@
  Cross section data file      : /home/smpark/serpent2/xs/acedata/28000JNDL32.ace
  Atomic weight (AW)           : 58.68796
  Atomic weight ratio (AWR)    : 58.18380
- Temperature                  : 1080.0 Kelvin
- XS temperature               : 1080.0 Kelvin
+ Temperature                  : 930.0 Kelvin
+ XS temperature               : 930.0 Kelvin
  Minimum and maximum energy   : 1.00000E-11 2.00000E+01
  Half-life                    : N/A
  Specific ingestion toxicity  : N/A
@@ -774,8 +774,8 @@
  Cross section data file      : /home/smpark/serpent2/xs/acedata/74000ENDF68.ace
  Atomic weight (AW)           : 183.85642
  Atomic weight ratio (AWR)    : 182.27700
- Temperature                  : 1080.0 Kelvin
- XS temperature               : 1080.0 Kelvin
+ Temperature                  : 930.0 Kelvin
+ XS temperature               : 930.0 Kelvin
  Minimum and maximum energy   : 1.00000E-11 2.00000E+01
  Half-life                    : N/A
  Specific ingestion toxicity  : N/A
@@ -871,8 +871,8 @@
  Cross section data file      : /home/smpark/serpent2/xs/acedata/90232JEF311.ace
  Atomic weight (AW)           : 232.03833
  Atomic weight ratio (AWR)    : 230.04500
- Temperature                  : 1080.0 Kelvin
- XS temperature               : 1080.0 Kelvin
+ Temperature                  : 930.0 Kelvin
+ XS temperature               : 930.0 Kelvin
  Minimum and maximum energy   : 1.00000E-11 2.00000E+01
  Half-life                    : N/A
  Specific ingestion toxicity  : N/A
@@ -960,8 +960,8 @@
  Cross section data file      : /home/smpark/serpent2/xs/acedata/92233JEF311.ace
  Atomic weight (AW)           : 233.03964
  Atomic weight ratio (AWR)    : 231.03800
- Temperature                  : 1080.0 Kelvin
- XS temperature               : 1080.0 Kelvin
+ Temperature                  : 930.0 Kelvin
+ XS temperature               : 930.0 Kelvin
  Minimum and maximum energy   : 1.00000E-11 2.00000E+01
  Half-life                    : N/A
  Specific ingestion toxicity  : N/A
@@ -1033,8 +1033,8 @@ Material "fuel":
 
  - Material is included in majorant
  - Material is included in geometry
- - Atom density 7.2528E-02 1/barn*cm
- - Mass density 4.0310E+00 g/cm3
+ - Atom density 7.4908E-02 1/barn*cm
+ - Mass density 4.1633E+00 g/cm3
  - Volume 0.0000E+00 cm3
  - Mass 0.0000E+00 g
  - Photon emission rate 0.0000E+00 1/s
@@ -1048,19 +1048,19 @@ Isotopic composition (non-zero densities):
 -------------------------------------------------------------------
  Nuclide    a. weight   temp      a. dens      a. frac      m. frac
 -------------------------------------------------------------------
- 92233.09c  233.03964 1080.0  7.07464E-04  9.75434E-03  6.79168E-02    
- 90232.09c  232.03833 1080.0  5.39577E-03  7.43957E-02  5.15771E-01    
-  3007.09c    7.01600 1080.0  2.09778E-02  2.89237E-01  6.06307E-02    
-  9019.09c   18.99820 1080.0  4.54470E-02  6.26613E-01  3.55682E-01    
-       sum                    7.25281E-02  1.00000E+00  1.00000E+00
+ 92233.09c  233.03964  930.0  7.30683E-04  9.75434E-03  6.79168E-02    
+ 90232.09c  232.03833  930.0  5.57287E-03  7.43957E-02  5.15771E-01    
+  3007.09c    7.01600  930.0  2.16663E-02  2.89237E-01  6.06307E-02    
+  9019.09c   18.99820  930.0  4.69386E-02  6.26613E-01  3.55682E-01    
+       sum                    7.49085E-02  1.00000E+00  1.00000E+00
 -------------------------------------------------------------------
 
 Material "blanket":
 
  - Material is included in majorant
  - Material is included in geometry
- - Atom density 7.2549E-02 1/barn*cm
- - Mass density 4.0310E+00 g/cm3
+ - Atom density 7.4930E-02 1/barn*cm
+ - Mass density 4.1633E+00 g/cm3
  - Volume 0.0000E+00 cm3
  - Mass 0.0000E+00 g
  - Photon emission rate 0.0000E+00 1/s
@@ -1074,10 +1074,10 @@ Isotopic composition (non-zero densities):
 -------------------------------------------------------------------
  Nuclide    a. weight   temp      a. dens      a. frac      m. frac
 -------------------------------------------------------------------
- 90232.09c  232.03833 1080.0  6.10502E-03  8.41500E-02  5.83566E-01    
-  3007.09c    7.01600 1080.0  2.09839E-02  2.89237E-01  6.06484E-02    
-  9019.09c   18.99820 1080.0  4.54603E-02  6.26613E-01  3.55785E-01    
-       sum                    7.25492E-02  1.00000E+00  1.00000E+00
+ 90232.09c  232.03833  930.0  6.30539E-03  8.41500E-02  5.83566E-01    
+  3007.09c    7.01600  930.0  2.16726E-02  2.89237E-01  6.06484E-02    
+  9019.09c   18.99820  930.0  4.69523E-02  6.26613E-01  3.55785E-01    
+       sum                    7.49303E-02  1.00000E+00  1.00000E+00
 -------------------------------------------------------------------
 
 Material "struc":
@@ -1099,10 +1099,10 @@ Isotopic composition (non-zero densities):
 -------------------------------------------------------------------
  Nuclide    a. weight   temp      a. dens      a. frac      m. frac
 -------------------------------------------------------------------
- 28000.09c   58.68796 1080.0  6.94678E-02  8.03717E-01  6.77000E-01    
- 74000.09c  183.85642 1080.0  8.18851E-03  9.47381E-02  2.50000E-01    
- 24000.09c   51.99587 1080.0  8.10724E-03  9.37978E-02  7.00000E-02    
- 13027.09c   26.98154 1080.0  6.69574E-04  7.74673E-03  3.00000E-03    
+ 28000.09c   58.68796  930.0  6.94678E-02  8.03717E-01  6.77000E-01    
+ 74000.09c  183.85642  930.0  8.18851E-03  9.47381E-02  2.50000E-01    
+ 24000.09c   51.99587  930.0  8.10724E-03  9.37978E-02  7.00000E-02    
+ 13027.09c   26.98154  930.0  6.69574E-04  7.74673E-03  3.00000E-03    
        sum                    8.64331E-02  1.00000E+00  1.00000E+00
 -------------------------------------------------------------------
 
@@ -1125,7 +1125,7 @@ Isotopic composition (non-zero densities):
 -------------------------------------------------------------------
  Nuclide    a. weight   temp      a. dens      a. frac      m. frac
 -------------------------------------------------------------------
-  5010.09c   10.01294 1080.0  1.16584E-01  7.99808E-01  7.69231E-01    
-  6000.09c   12.00110 1080.0  2.91811E-02  2.00192E-01  2.30769E-01    
+  5010.09c   10.01294  930.0  1.16584E-01  7.99808E-01  7.69231E-01    
+  6000.09c   12.00110  930.0  2.91811E-02  2.00192E-01  2.30769E-01    
        sum                    1.45765E-01  1.00000E+00  1.00000E+00
 -------------------------------------------------------------------
