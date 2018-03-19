@@ -1,6 +1,6 @@
-set title "MOSART core v2_1"
+set title "MOSART core v2_3"
 
-% reference case
+% density optimization for v2_1
 % dim source source: Ignatiev 2014 U-Th Fuel Cycle Flexibility
 % composition- starting comp for CR=1 mode, 2 mole % ThF4, 1.2 mole % TRUF3
 % 73LiF+27BeF2, 2mol ThF4, 1.2 mol TRUF3 added, new mass fraction/mole fraction calculated to match cited paper
@@ -25,7 +25,7 @@ cell 3 0 outside 2
 % --- Fuel (LiF-BeF2-ThF4+TRUF3 70.74+ 26.16+1.94+1.16 mole %) Ignatiev 2013, Cantor 1973:
 
 
-mat fuel   -2.628896 tmp 993   % g/cm3 for mixture
+mat fuel   -3.8 tmp 993   % g/cm3 for mixture
 3006.09c   -1.235368E-05      % Mass fraction of Li-6 
 3007.09c   -1.235245E-01      % Mass fraction of Li-7
 9019.09c   -6.366484E-01      % Mass fraction of F-19
