@@ -1,9 +1,9 @@
-set title "MOSART core v2_1"
+set title "MOSART core v2_5"
 
-% reference case
+% reference case- optimized composition
 % dim source source: Ignatiev 2014 U-Th Fuel Cycle Flexibility
-% composition- starting comp for CR=1 mode, 2 mole % ThF4, 1.2 mole % TRUF3
-% 73LiF+27BeF2, 2mol ThF4, 1.2 mol TRUF3 added, new mass fraction/mole fraction calculated to match cited paper
+% composition- starting composition for CR=1 but ThF4 minimized(2 mole%), TRUF3 increased (1.3 mole%)
+% 73LiF+27BeF2, 2mol ThF4, 1.3 mol TRUF3 added, new mass fraction/mole fraction calculated to match cited paper
 
 %updating r,h to CR=1 mode dimensions, adjusting reflector height
 
@@ -22,23 +22,23 @@ cell 3 0 outside 2
 %                MATERIALS
 %------------------------------------------------------------------------------------------
 
-% --- Fuel (LiF-BeF2-ThF4+TRUF3 70.74+ 26.16+1.94+1.16 mole %) Ignatiev 2013, Cantor 1973:
+% --- Fuel (LiF-BeF2-ThF4+TRUF3 70.60 + 26.16+1.94+`1.4 mole ) Ignatiev 2013, Cantor 1973:
 
 
 mat fuel   -2.628896 tmp 993   % g/cm3 for mixture
-3006.09c   -1.235368E-05      % Mass fraction of Li-6 
-3007.09c   -1.235245E-01      % Mass fraction of Li-7
-9019.09c   -6.366484E-01      % Mass fraction of F-19
-4009.09c   -5.874746E-02      % Mass fraction of Be-9
-90232.09c  -1.121762E-01      % Mass fraction of Th-232
-94238.09c  -2.195675E-03      % Mass fraction of Pu-238
-94239.09c  -3.045953E-02      % Mass fraction of Pu-239
-94240.09c  -1.480958E-02      % Mass fraction of Pu-240
-94241.09c  -9.452742E-03      % Mass fraction of Pu-241
-94242.09c  -5.532299E-03      % Mass fraction of Pu-242
-93237.09c  -4.414154E-03      % Mass fraction of Np-237
-95241.09c  -3.845420E-04      % Mass fraction of Am-241
-95243.09c  -1.642579E-03      % Mass fraction of Am-243
+3006.09c   -1.222316E-05      % Mass fraction of Li-6 
+3007.09c   -1.222194E-01      % Mass fraction of Li-7
+9019.09c   -6.319670E-01      % Mass fraction of F-19
+4009.09c   -5.812676E-02      % Mass fraction of Be-9
+90232.09c  -1.109910E-01      % Mass fraction of Th-232
+94238.09c  -2.444036E-03      % Mass fraction of Pu-238
+94239.09c  -3.390492E-02      % Mass fraction of Pu-239
+94240.09c  -1.648475E-02      % Mass fraction of Pu-240
+94241.09c  -1.052198E-02      % Mass fraction of Pu-241
+94242.09c  -6.158078E-03      % Mass fraction of Pu-242
+93237.09c  -4.913455E-03      % Mass fraction of Np-237
+95241.09c  -4.280390E-04      % Mass fraction of Am-241
+95243.09c  -1.828377E-03      % Mass fraction of Am-243
                               
                               
 %--- Cladding (Hastelloy-Hanes)

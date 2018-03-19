@@ -1,11 +1,13 @@
-set title "MOSART core v2_1"
+set title "MOSART core v2_4"
 
-% reference case
+% density optimization for v2_2 
 % dim source source: Ignatiev 2014 U-Th Fuel Cycle Flexibility
-% composition- starting comp for CR=1 mode, 2 mole % ThF4, 1.2 mole % TRUF3
-% 73LiF+27BeF2, 2mol ThF4, 1.2 mol TRUF3 added, new mass fraction/mole fraction calculated to match cited paper
+% composition- starting composition for CR=1, final composition set to 2%ThF4 and 1.2%TRUF3, LiF and BeF2 calculated by mass conservation
+% complete solubility of fuel in carrier salt assumed
 
-%updating r,h to CR=1 mode dimensions, adjusting reflector height
+%updating r,h to CR=1 mode dim, adjusting reflector height
+
+
 
 % --- Surfaces:
 surf 1  cyl 0.0 0.0 140.0 -140 140 %core
@@ -22,14 +24,14 @@ cell 3 0 outside 2
 %                MATERIALS
 %------------------------------------------------------------------------------------------
 
-% --- Fuel (LiF-BeF2-ThF4+TRUF3 70.74+ 26.16+1.94+1.16 mole %) Ignatiev 2013, Cantor 1973:
+% --- Fuel (LiF-BeF2-ThF4+TRUF3 65.84-30.96-2.00+1.2 mole %) Ignatiev 2013, Cantor 1973:
 
 
-mat fuel   -2.628896 tmp 993   % g/cm3 for mixture
-3006.09c   -1.235368E-05      % Mass fraction of Li-6 
-3007.09c   -1.235245E-01      % Mass fraction of Li-7
-9019.09c   -6.366484E-01      % Mass fraction of F-19
-4009.09c   -5.874746E-02      % Mass fraction of Be-9
+mat fuel   -3.8 tmp 993   % g/cm3 for mixture
+3006.09c   -1.114169E-05      % Mass fraction of Li-6 
+3007.09c   -1.114058E-01      % Mass fraction of Li-7
+9019.09c   -6.401480E-01      % Mass fraction of F-19
+4009.09c   -6.736781E-02      % Mass fraction of Be-9
 90232.09c  -1.121762E-01      % Mass fraction of Th-232
 94238.09c  -2.195675E-03      % Mass fraction of Pu-238
 94239.09c  -3.045953E-02      % Mass fraction of Pu-239
@@ -39,7 +41,6 @@ mat fuel   -2.628896 tmp 993   % g/cm3 for mixture
 93237.09c  -4.414154E-03      % Mass fraction of Np-237
 95241.09c  -3.845420E-04      % Mass fraction of Am-241
 95243.09c  -1.642579E-03      % Mass fraction of Am-243
-                              
                               
 %--- Cladding (Hastelloy-Hanes)
 
