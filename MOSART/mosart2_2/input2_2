@@ -1,7 +1,7 @@
 set title "MOSART core v2_2"
 
 % reference case 
-% dim source source: Ignatiev 2014 U-Th Fuel Cycle Flexibility
+% dim source: Ignatiev 2014 U-Th Fuel Cycle Flexibility
 % composition- starting composition for CR=1, final composition set to 2%ThF4 and 1.2%TRUF3, LiF and BeF2 calculated by mass conservation
 % complete solubility of fuel in carrier salt assumed
 
