@@ -1,7 +1,7 @@
 set title "MOSART core v2_1"
 
 % reference case
-% dim source source: Ignatiev 2014 U-Th Fuel Cycle Flexibility
+% dim source: Ignatiev 2014 U-Th Fuel Cycle Flexibility
 % composition- starting comp for CR=1 mode, 2 mole % ThF4, 1.2 mole % TRUF3
 % 73LiF+27BeF2, 2mol ThF4, 1.2 mol TRUF3 added, new mass fraction/mole fraction calculated to match cited paper
 
