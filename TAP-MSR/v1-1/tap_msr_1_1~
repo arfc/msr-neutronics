@@ -1,0 +1,117 @@
+set title "TAP MSR v1-1"
+
+%verify salt densities, assembly/mod rod numbers, change scattering xslib for ZrH
+
+% source: ORNL TM 2017, 
+% salt density: Ganz 1973 - 4.93, TAP - 5.01 -?
+
+
+
+% --- Pins - Basic:
+
+pin M                    %moderator rod  
+zrh  1.15
+sic  1.25
+fuel
+
+pin F                    %fuel in core
+fuel 
+
+pin X                    %filler fuel pin for periphery:created for readability
+fuel
+
+
+
+% ----------- IMPORT CORE LATTICE ASSEMBLY ---------------------
+
+include "/home/anshchaube/tap_msr/v1-1/core"
+
+% --- Cells (Final)
+
+surf 1000 cyl 0 0 150 -150 150
+cell 100 0 fill 42 -1000
+cell 101 0 outside 1000
+
+%------------------------------------------------------------------------------------------
+%                MATERIALS
+%------------------------------------------------------------------------------------------
+
+%properties sources from TAP Neutronics White Paper 2015-04
+
+% --- Fuel (LiF-UF4 72.5+27.5 mole %)
+
+
+
+mat fuel   -5.01 tmp 923   % g/cm3 for mixture
+3006.09c   -0.000002418        % Mass fraction of Li-6 
+3007.09c   -0.0483577563       % Mass fraction of Li-7
+9019.09c   -0.3296428341       % Mass fraction of F-19
+92235.09c  -0.0310998496       % Mass fraction of U-235
+92238.09c  -0.590897142        % Mass fraction of U-238
+
+% --- Moderator ZrH
+
+mat zrh -5.66 tmp 923         % g/cm3 UNVERIFIED
+40090.09c -0.49793        % Mass fraction of Zr -90
+40091.09c -0.10980        % Mass fraction of Zr -91
+40092.09c -0.16967        % Mass fraction of Zr -92
+40094.09c -0.17569        % Mass fraction of Zr -94
+40096.09c -0.028908        % Mass fraction of Zr -96
+1001.09c  -0.018007        % Mass fraction of H - 1
+1002.09c  -0.0000041389        % Mass fraction of H - 2
+                             
+% --- SiC Cladding for moderator rods
+
+mat sic -3.21 tmp 923       % g/cm3 UNVERIFIED
+14000.09c  -0.64365       % Mass fraction of Si - 28
+14000.09c  -0.033866       % Mass fraction of Si - 29
+14000.09c  -0.02312       % Mass fraction of Si - 30
+6000.09c   -0.29936       % Mass fraction of C
+
+%--- Hastelloy Cladd1ing (Hastelloy-Hanes)
+
+mat hast   -8.86 tmp 923   % g/cm3 for mixture
+28000.09c   -6.29060      % Mass fraction of Ni
+24000.09c   -0.62020      % Mass fraction of Cr
+42000.09c   -1.41760      % Mass fraction of Mo
+26000.09c   -0.28441      % Mass fraction of Fe
+14000.09c   -0.08063      % Mass fraction of Si
+25000.09c   -0.05316      % Mass fraction of Mn
+23000.09c   -0.04430      % Mass fraction of V
+6000.09c    -0.00532      % Mass fraction of C
+27000.09c   -0.00177      % Mass fraction of Co
+74000.09c   -0.02658      % Mass fraction of W
+13000.09c   -0.01772      % Mass fraction of Al
+22000.09c   -0.01772      % Mass fraction of Ti
+
+
+
+% --- Cross section data library file path:
+
+set acelib "/home/anshchaube/serpent_acelib/xsdata/endfb7/sss_endfb7u.xsdata"
+
+% --- Black boundary condition:
+
+set bc 1
+
+% --- group constant generation:
+
+set gcu  0
+
+set nfg  4  0.625E-6  5.5E-3  0.821
+
+% Cross section plotter
+%set xsplot 1000 1E-10 12.0
+
+% --- Neutron population and criticality cycles:
+
+set pop 5000 500 50
+
+% --- Geometry and mesh plots:
+
+plot 3 2000 2000 1.0
+plot 2 2000 2000 0.0
+mesh 3 2000 2000
+mesh 2 2000 2000
+
+% ------------------------------------------------------------
