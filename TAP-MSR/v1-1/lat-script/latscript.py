@@ -27,7 +27,7 @@ fline = ""
 
 line = "M " + ("M M M M M " * asmno) + "M " + \
     ("X X X X X " * (asmmax - asmno)) + "X"
-#fline=("F "* (5*asmmax)) + "F F F"
+# fline=("F "* (5*asmmax)) + "F F F"
 rod_no = rod_no + line.count("M")
 
 qcore.append(line)
@@ -42,7 +42,7 @@ while i > asmfinal - 1 and f2 == 0:
 
         if i == asmfinal:
             f3 = 1
-            #print("HEY THERE")
+            # print("HEY THERE")
         # print(ar)
             if ar == 1:
                 line = "M " + ("M M M M M " * (i + 1)) + "M F F F F " + \
@@ -54,8 +54,8 @@ while i > asmfinal - 1 and f2 == 0:
                 line = "M " + ("M M M M M " * (i - 1)) + "M " + \
                     "M F M F F " + ("X X X X X " * (asmmax - i)) + "X"
 
-                temp = (len(line) + 1) / 2
-                fline = ("F " * (temp - 1)) + "F"
+                # temp = (len(line) + 1) / 2
+                # fline = ("F " * (temp - 1)) + "F"
 
                 # debug code
                 if debug_view == 1:
@@ -103,8 +103,8 @@ while i > asmfinal - 1 and f2 == 0:
                 line = "M " + ("M F M F M " * i) + "M " + "X X X X X " + \
                     ("X X X X X " * (asmmax - i - 1)) + "X"
 
-        temp = (len(line) + 1) / 2
-        fline = ("F " * (temp - 1)) + "F"
+        # temp = (len(line) + 1) / 2
+        # fline = ("F " * (temp - 1)) + "F"
 
         # debug code
         if debug_view == 1:
@@ -128,12 +128,12 @@ while i > asmfinal - 1 and f2 == 0:
 # print(i)
 
 # no of pins in last line
-temp = (len(line) + 1) / 2
-
+temp = (len(line) + 1) // 2
+print(temp)
 
 for i in range(1, (asmmax - asmno + 1) * 5):
     line = ("X " * (temp - 1)) + "X"
-    #line="X "*temp
+    # line="X "*temp
     # debug code
     if debug_view == 1:
         line = line.replace(" ", "")
@@ -174,11 +174,11 @@ for word in qcore:
     file.write(word[::-1] + " " + word + "\n")
 
 qcore.reverse()
-#file.write(line[::-1]+" "+line+"\n")
+# file.write(line[::-1]+" "+line+"\n")
 
 for word in qcore:
     file.write(word[::-1] + " " + word + "\n")
 file.close()
 import sys
 import os
-#os.system("gedit /home/anshchaube/tap_msr/lat_script/"+fnm)
+# os.system("gedit /home/anshchaube/tap_msr/lat_script/"+fnm)
