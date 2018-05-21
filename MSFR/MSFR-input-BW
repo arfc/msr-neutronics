@@ -8,23 +8,23 @@ set title "MSFR simplified core"
 
 % --- Fuel salt
 
-mat fuel 		-4.18976 %tmp 1030
-
-3007.09c	-0.0607563		% Li-7
-9019.09c	-0.3555762		% F-19
-90232.09c	-0.5133169		% Th-232
-92233.09c	-0.0703517		% U-233
+mat fuel     -3.9869 tmp 1130
+92233.09c	-0.0679168		% U-233
+90232.09c	-0.5157708		% Th-232
+3007.09c	-0.0606307		% Li-7
+9019.09c	-0.3556816		% F-19
 
 % --- Blanket salt
 
-mat blanket     -4.18976 %tmp 1030
+mat blanket     -3.9869 tmp 1130
 90232.09c	-0.5835662		% Th-232
 3007.09c	-0.0606484		% Li-7
 9019.09c	-0.3557854		% F-19
 
 % --- Structural material
 
-mat struc     -10 %tmp 1030
+mat struc     -10 tmp 1030
+
 % Natural Ni
 % 28000.09c    -0.677     
 28058.09c   -0.4562614
@@ -53,7 +53,7 @@ mat struc     -10 %tmp 1030
 
 % --- Boron carbide absorber
 
-mat absorb     -2.52 %tmp 1030
+mat absorb     -2.52 tmp 1030
 5010.09c	-0.7692308			% B-10
 6000.09c	-0.2307692			% Natural C
 
