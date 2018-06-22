@@ -49,10 +49,10 @@ while i > asmfinal - 1 and f2 == 0:
                     ("X X X X X " * (asmmax - i - 2)) + "X X"
             elif ar == 3:
                 line = "M " + ("M M M M M " * (i)) + "M " + \
-                    "M F F F F " + ("X X X X X " * (asmmax - i - 1)) + "X"
+                    "F F F F " + ("X X X X X " * (asmmax - i - 1)) + "X X"
             elif ar == 5:
                 line = "M " + ("M M M M M " * (i - 1)) + "M " + \
-                    "M F M F F " + ("X X X X X " * (asmmax - i)) + "X"
+                    "F M F F " + ("X X X X X " * (asmmax - i)) + "X X"
 
                 #temp = (len(line) + 1) / 2
                 #fline = ("F " * (temp - 1)) + "F"
@@ -71,7 +71,7 @@ while i > asmfinal - 1 and f2 == 0:
             else:
                 # print("HEY THERE")
                 line = "M " + ("M F M F M " * (i - 1)) + "M " + \
-                    "M F M F F " + ("X X X X X " * (asmmax - i)) + "X"
+                    "F M F F " + ("X X X X X " * (asmmax - i)) + "X X"
 
         elif i % 2 == 0 and f3 == 0:
             if ar % 2 == 1:
