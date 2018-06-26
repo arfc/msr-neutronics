@@ -119,7 +119,7 @@ set nfg  4  0.625E-6  5.5E-3  0.821
 
 % --- Neutron population and criticality cycles:
 
-set pop 10000 500 50
+set pop 50000 500 50
 
 % --- Geometry and mesh plots:
 
@@ -127,5 +127,6 @@ plot 3 2000 2000 1.0
 plot 2 2000 2000 0.0
 mesh 3 2000 2000
 mesh 2 2000 2000
+
 
 % ------------------------------------------------------------
