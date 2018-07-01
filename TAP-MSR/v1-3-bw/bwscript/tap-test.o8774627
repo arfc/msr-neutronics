@@ -1,0 +1,21 @@
+----------------------------------------
+Begin Torque Prologue on nid25350
+at Sat Jun 30 20:14:32 CDT 2018
+Job Id:			8774627.bw
+Username:		chaube
+Group:			ILL_bahg
+Job name:		tap-test
+Requested resources:	nodes=32:ppn=32:xe,walltime=00:30:00,neednodes=32:ppn=32:xe
+Queue:			debug
+Account:		bahg
+End Torque Prologue:  0.113 elapsed
+----------------------------------------
+
+
+
+
+Invalid parameter "core".
+[NID 25766] 2018-06-30 20:14:39 Apid 68076579: initiated application termination
+Application 68076579 exit codes: 255
+Application 68076579 exit signals: Killed
+Application 68076579 resources: utime ~0s, stime ~32s, Rss ~70168, inblocks ~309329, outblocks ~739904
