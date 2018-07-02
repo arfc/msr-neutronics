@@ -26,7 +26,7 @@ fuel
 
 % ----------- IMPORT CORE LATTICE ASSEMBLY ---------------------
 
-include " /scratch/sciteam/chaube/msr-neutronics/TAP-MSR/v1-3-bw/core"
+include "/scratch/sciteam/chaube/msr-neutronics/TAP-MSR/v1-3-bw/core"
 
 % --- Cells (Final)
 
