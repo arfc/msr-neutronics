@@ -1,7 +1,7 @@
 %------------TAP MSR CORE LATTICE----------------
 %------------------- 66 X 72 -------------
 %-------- Pitch = 6cm -------------
-%-------- Mod Rod No. = 338 X 4 ---------------
+%-------- Mod Rod No. = 333 X 4 ---------------
 
 lat 42 1 0.0 0.0 66 72 6
 
@@ -19,11 +19,11 @@ X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X 
 X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X
 X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X
 X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X
-X X X X X X X X X X X X X X X X X X X X X F F M F M M M M M M M M M M M M M M M M F M F F X X X X X X X X X X X X X X X X X X X X X
-X X X X X X X X X X X X X X X X X X X X X F F M F M M M M M M M M M M M M M M M M F M F F X X X X X X X X X X X X X X X X X X X X X
-X X X X X X X X X X X X X X X X X X X X X F F M F M M M F M F M M M M F M F M M M F M F F X X X X X X X X X X X X X X X X X X X X X
-X X X X X X X X X X X X X X X X F F F F M M M M M M M M M M M M M M M M M M M M M M M M M M F F F F X X X X X X X X X X X X X X X X
-X X X X X X X X X X X X X X X X X X X X X F F M F M M M F M F M M M M F M F M M M F M F F X X X X X X X X X X X X X X X X X X X X X
+X X X X X X X X X X X X X X X X X X X X X X F F M F M M M M M M M M M M M M M M F M F F X X X X X X X X X X X X X X X X X X X X X X
+X X X X X X X X X X X X X X X X X X X X X X F F M F M M M M M M M M M M M M M M F M F F X X X X X X X X X X X X X X X X X X X X X X
+X X X X X X X X X X X X X X X X X X X X X X F F M F M M F M F M M M M F M F M M F M F F X X X X X X X X X X X X X X X X X X X X X X
+X X X X X X X X X X X X X X X X X F F F F M M M M M M M M M M M M M M M M M M M M M M M M F F F F X X X X X X X X X X X X X X X X X
+X X X X X X X X X X X X X X X X X X X X X X F F M F M M F M F M M M M F M F M M F M F F X X X X X X X X X X X X X X X X X X X X X X
 X X X X X X X X X X X X F F F F M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M F F F F X X X X X X X X X X X X
 X X X X X X X X X X X X X X X X M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M X X X X X X X X X X X X X X X X
 X X X X X X X X X X X X X X X X M M F M F M M F M F M M F M F M M M M F M F M M F M F M M F M F M M X X X X X X X X X X X X X X X X
@@ -58,11 +58,11 @@ X X X X X X X X X X X X X X X X M M M M M M M M M M M M M M M M M M M M M M M M 
 X X X X X X X X X X X X X X X X M M F M F M M F M F M M F M F M M M M F M F M M F M F M M F M F M M X X X X X X X X X X X X X X X X
 X X X X X X X X X X X X X X X X M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M X X X X X X X X X X X X X X X X
 X X X X X X X X X X X X F F F F M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M F F F F X X X X X X X X X X X X
-X X X X X X X X X X X X X X X X X X X X X F F M F M M M F M F M M M M F M F M M M F M F F X X X X X X X X X X X X X X X X X X X X X
-X X X X X X X X X X X X X X X X F F F F M M M M M M M M M M M M M M M M M M M M M M M M M M F F F F X X X X X X X X X X X X X X X X
-X X X X X X X X X X X X X X X X X X X X X F F M F M M M F M F M M M M F M F M M M F M F F X X X X X X X X X X X X X X X X X X X X X
-X X X X X X X X X X X X X X X X X X X X X F F M F M M M M M M M M M M M M M M M M F M F F X X X X X X X X X X X X X X X X X X X X X
-X X X X X X X X X X X X X X X X X X X X X F F M F M M M M M M M M M M M M M M M M F M F F X X X X X X X X X X X X X X X X X X X X X
+X X X X X X X X X X X X X X X X X X X X X X F F M F M M F M F M M M M F M F M M F M F F X X X X X X X X X X X X X X X X X X X X X X
+X X X X X X X X X X X X X X X X X F F F F M M M M M M M M M M M M M M M M M M M M M M M M F F F F X X X X X X X X X X X X X X X X X
+X X X X X X X X X X X X X X X X X X X X X X F F M F M M F M F M M M M F M F M M F M F F X X X X X X X X X X X X X X X X X X X X X X
+X X X X X X X X X X X X X X X X X X X X X X F F M F M M M M M M M M M M M M M M F M F F X X X X X X X X X X X X X X X X X X X X X X
+X X X X X X X X X X X X X X X X X X X X X X F F M F M M M M M M M M M M M M M M F M F F X X X X X X X X X X X X X X X X X X X X X X
 X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X
 X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X
 X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X

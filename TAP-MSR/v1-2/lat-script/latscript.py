@@ -128,7 +128,7 @@ while i > asmfinal - 1 and f2 == 0:
 # print(i)
 
 # no of pins in last line
-temp = (len(line) + 1) // 2
+temp = (len(line) + 1) / 2
 
 
 for i in range(1, (asmmax - asmno + 1) * 5):
@@ -145,8 +145,10 @@ for i in range(1, (asmmax - asmno + 1) * 5):
 # print(len(qcore))
 
 
-r = str(2 * len(qcore))
-c = str(len(line) + 1)
+#r = str(2 * len(qcore))
+r = str(len(qcore))
+#c = str(len(line) + 1)
+c = str((len(line) + 1)/2)
 
 
 if debug_view == 1:
@@ -169,16 +171,17 @@ fline = "lat " + latname + " " + "1 0.0 0.0 " + \
     c + " " + r + " " + str(pitch) + "\n\n"
 file.write(fline)
 
-qcore.reverse()
+# qcore.reverse()
 for word in qcore:
-    file.write(word[::-1] + " " + word + "\n")
+    #file.write(word[::-1] + " " + word + "\n")
+    file.write(word + "\n")
 
-qcore.reverse()
+# qcore.reverse()
 #file.write(line[::-1]+" "+line+"\n")
 
-for word in qcore:
-    file.write(word[::-1] + " " + word + "\n")
-file.close()
-import sys
-import os
+# for word in qcore:
+ #   file.write(word[::-1] + " " + word + "\n")
+# file.close()
+#import sys
+#import os
 #os.system("gedit /home/anshchaube/tap_msr/lat_script/"+fnm)

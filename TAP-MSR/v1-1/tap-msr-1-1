@@ -1,6 +1,6 @@
-set title "TAP MSR v1-3"
+set title "TAP MSR v1-1"
 
-% quarter core model (in development)
+%Full core model, no reflector
 %uses jeff312 modified, for ZrH data
 %verify salt densities, assembly/mod rod numbers
 
@@ -26,25 +26,13 @@ fuel
 
 % ----------- IMPORT CORE LATTICE ASSEMBLY ---------------------
 
-include "/home/anshchaube/tap_msr/v1-3/core"
+include "/home/anshchaube/tap_msr/v1-1/core"
 
 % --- Cells (Final)
 
-surf 1000 pad -99 -108 0 150 270 360
-
-surf 3000 cuboid -99 99 -108 108 0 310
-set bc 2 2 1
-
-%42 is the core lattice
-
-cell 200 2 fill 42 -1000
-cell 201 2 outside 1000
-
-lat 3 9 0 0 1
-300.0 2
-
-cell 300 0 fill 2 -3000
-cell 301 0 outside 3000
+surf 1000 cyl 0 0 150 -150 150
+cell 100 0 fill 42 -1000
+cell 101 0 outside 1000
 
 %------------------------------------------------------------------------------------------
 %                MATERIALS
@@ -106,7 +94,7 @@ set acelib "/home/anshchaube/serpent_acelib/xsdata/jeff312/sss_jeff312.xsdata"
 
 % --- Black boundary condition:
 
-%set bc 1
+set bc 1
 
 % --- group constant generation:
 
@@ -127,6 +115,5 @@ plot 3 2000 2000 1.0
 plot 2 2000 2000 0.0
 mesh 3 2000 2000
 mesh 2 2000 2000
-
 
 % ------------------------------------------------------------
