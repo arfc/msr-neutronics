@@ -74,7 +74,7 @@
 
  Nuclide    1 / 16 : 1001.09c -- hydrogen (H-1)
 
- Pointers                     : 38318 11034116
+ Pointers                     : 34754 11034116
  Primary type                 : Transport
  Nuclide ZAI                  : 10010
  Library ID                   : 09c
@@ -124,7 +124,7 @@
 
  Nuclide    2 / 16 : 1002.09c -- deuterium (H-2)
 
- Pointers                     : 38711 11044300
+ Pointers                     : 35147 11044300
  Primary type                 : Transport
  Nuclide ZAI                  : 10020
  Library ID                   : 09c
@@ -176,7 +176,7 @@
 
  Nuclide    3 / 16 : 3006.09c -- lithium 6 (Li-6)
 
- Pointers                     : 12711 5795014
+ Pointers                     : 9147 5795014
  Primary type                 : Transport
  Nuclide ZAI                  : 30060
  Library ID                   : 09c
@@ -264,7 +264,7 @@
 
  Nuclide    4 / 16 : 3007.09c -- lithium 7 (Li-7)
 
- Pointers                     : 15845 5823248
+ Pointers                     : 12281 5823248
  Primary type                 : Transport
  Nuclide ZAI                  : 30070
  Library ID                   : 09c
@@ -327,7 +327,7 @@
 
  Nuclide    5 / 16 : 6000.09c -- natural carbon (C-nat)
 
- Pointers                     : 49787 11490125
+ Pointers                     : 46223 11490125
  Primary type                 : Transport
  Nuclide ZAI                  : 60000
  Library ID                   : 09c
@@ -398,7 +398,7 @@
 
  Nuclide    6 / 16 : 9019.09c -- fluorine 19 (F-19)
 
- Pointers                     : 17174 6370409
+ Pointers                     : 13610 6370409
  Primary type                 : Transport
  Nuclide ZAI                  : 90190
  Library ID                   : 09c
@@ -481,7 +481,7 @@
 
  Nuclide    7 / 16 : 14028.09c -- silicon 28 (Si-28)
 
- Pointers                     : 39248 11055281
+ Pointers                     : 35684 11055281
  Primary type                 : Transport
  Nuclide ZAI                  : 140280
  Library ID                   : 09c
@@ -595,7 +595,7 @@
 
  Nuclide    8 / 16 : 14029.09c -- silicon 29 (Si-29)
 
- Pointers                     : 44249 11254045
+ Pointers                     : 40685 11254045
  Primary type                 : Transport
  Nuclide ZAI                  : 140290
  Library ID                   : 09c
@@ -683,7 +683,7 @@
 
  Nuclide    9 / 16 : 14030.09c -- silicon 30 (Si-30)
 
- Pointers                     : 47378 11374242
+ Pointers                     : 43814 11374242
  Primary type                 : Transport
  Nuclide ZAI                  : 140300
  Library ID                   : 09c
@@ -761,7 +761,7 @@
 
  Nuclide   10 / 16 : 40090.09c -- zirconium 90 (Zr-90)
 
- Pointers                     : 26777 9779910
+ Pointers                     : 23213 9779910
  Primary type                 : Transport
  Nuclide ZAI                  : 400900
  Library ID                   : 09c
@@ -834,7 +834,7 @@
 
  Nuclide   11 / 16 : 40091.09c -- zirconium 91 (Zr-91)
 
- Pointers                     : 28826 10042463
+ Pointers                     : 25262 10042463
  Primary type                 : Transport
  Nuclide ZAI                  : 400910
  Library ID                   : 09c
@@ -914,7 +914,7 @@
 
  Nuclide   12 / 16 : 40092.09c -- zirconium 92 (Zr-92)
 
- Pointers                     : 31379 10328510
+ Pointers                     : 27815 10328510
  Primary type                 : Transport
  Nuclide ZAI                  : 400920
  Library ID                   : 09c
@@ -996,7 +996,7 @@
 
  Nuclide   13 / 16 : 40094.09c -- zirconium 94 (Zr-94)
 
- Pointers                     : 34076 10604620
+ Pointers                     : 30512 10604620
  Primary type                 : Transport
  Nuclide ZAI                  : 400940
  Library ID                   : 09c
@@ -1074,7 +1074,7 @@
 
  Nuclide   14 / 16 : 40096.09c -- zirconium 96 (Zr-96)
 
- Pointers                     : 36485 10851625
+ Pointers                     : 32921 10851625
  Primary type                 : Transport
  Nuclide ZAI                  : 400960
  Library ID                   : 09c
@@ -1144,7 +1144,7 @@
 
  Nuclide   15 / 16 : 92235.09c -- uranium 235 (U-235)
 
- Pointers                     : 19943 6509877
+ Pointers                     : 16379 6509877
  Primary type                 : Transport
  Nuclide ZAI                  : 922350
  Library ID                   : 09c
@@ -1234,7 +1234,7 @@
 
  Nuclide   16 / 16 : 92238.09c -- uranium 238 (U-238)
 
- Pointers                     : 23144 7145978
+ Pointers                     : 19580 7145978
  Primary type                 : Transport
  Nuclide ZAI                  : 922380
  Library ID                   : 09c
@@ -1339,8 +1339,8 @@ Material "fuel":
  - Material is included in geometry
  - Atom density 8.1034E-02 1/barn*cm
  - Mass density 5.0100E+00 g/cm3
- - Volume 4.7520E+40 cm3
- - Mass 2.3808E+41 g
+ - Volume 1.1880E+40 cm3
+ - Mass 5.9519E+40 g
  - Photon emission rate 0.0000E+00 1/s
  - Neutron emission rate 0.0000E+00 1/s
  - 5 nuclides in composition
@@ -1366,8 +1366,8 @@ Material "zrh":
  - Material is included in geometry
  - Atom density 9.7597E-02 1/barn*cm
  - Mass density 5.6600E+00 g/cm3
- - Volume 5.5341E+03 cm3
- - Mass 3.1323E+04 g
+ - Volume 1.3835E+03 cm3
+ - Mass 7.8308E+03 g
  - Photon emission rate 0.0000E+00 1/s
  - Neutron emission rate 0.0000E+00 1/s
  - 7 nuclides in composition
@@ -1395,8 +1395,8 @@ Material "sic":
  - Material is included in geometry
  - Atom density 9.6441E-02 1/barn*cm
  - Mass density 3.2100E+00 g/cm3
- - Volume 1.0043E+03 cm3
- - Mass 3.2238E+03 g
+ - Volume 2.5108E+02 cm3
+ - Mass 8.0595E+02 g
  - Photon emission rate 0.0000E+00 1/s
  - Neutron emission rate 0.0000E+00 1/s
  - 4 nuclides in composition
