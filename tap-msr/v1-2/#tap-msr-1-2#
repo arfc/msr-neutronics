@@ -117,6 +117,10 @@ set nfg  4  0.625E-6  5.5E-3  0.821
 % Cross section plotter
 %set xsplot 1000 1E-10 12.0
 
+% Branch
+
+branch test1 stp fuel 4.8 700  
+
 % --- Neutron population and criticality cycles:
 
 set pop 10000 500 50
