@@ -1,6 +1,7 @@
 set title "TAP MSR v1-2"
 
 % quarter core model (in development), no reflector
+% for testing purposes
 %uses jeff312 modified, for ZrH data
 %verify salt densities, assembly/mod rod numbers
 
@@ -114,19 +115,36 @@ set gcu 0
 
 set nfg  4  0.625E-6  5.5E-3  0.821
 
+%to enable B1 calculations
+
+ene b1test 1 0 0.625E-6  5.5E-3  0.821 1000
+
+set fum b1test
+
 % Cross section plotter
 %set xsplot 1000 1E-10 12.0
 
 % --- Neutron population and criticality cycles:
 
-set pop 10000 500 50
+set pop 5000 500 50
 
 % --- Geometry and mesh plots:
 
-plot 3 2000 2000 1.0
-plot 2 2000 2000 0.0
-mesh 3 2000 2000
-mesh 2 2000 2000
+%plot 3 2000 2000 1.0
+%plot 2 2000 2000 0.0
+%mesh 3 2000 2000
+%mesh 2 2000 2000
 
 
 % ------------------------------------------------------------
+% branch test
+branch fuel0 stp fuel -5.0874 800
+branch fuel1 stp fuel -4.9602 900
+branch fuel2 stp fuel -4.833 1000
+branch fuel3 stp fuel -4.706 1100
+branch fuel4 stp fuel -4.579 1200
+branch fuel5 stp fuel -4.451 1300
+
+coef 1
+0
+6 fuel0 fuel1 fuel2 fuel3 fuel4 fuel5
