@@ -1,3 +1,0 @@
-fuel 1
-struc 2
-blanket 3

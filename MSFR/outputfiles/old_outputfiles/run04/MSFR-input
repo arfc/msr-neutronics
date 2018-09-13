@@ -1,0 +1,121 @@
+% --- MSFR
+
+set title "MSFR simplified core"
+
+/************************
+ * Material definitions *
+ ************************/
+
+% --- Fuel salt
+
+mat fuel     -4.0751 tmp 1030
+92233.09c    0.010		% U-233
+90232.09c    0.074		% Th-232
+3007.09c    0.290		% Li-7
+9019.09c    0.626		% F-19
+
+% --- Blanket salt
+
+mat blanket     -4.0751 tmp 1030
+90232.09c    0.084		% Th-232
+3007.09c    0.290		% Li-7
+9019.09c    0.626		% F-19
+
+% --- Structural material
+
+mat struc     -10 tmp 1030
+28000.09c    -0.677		% Natural Ni
+74000.09c    -0.250		% Natural W
+24000.09c    -0.070		% Natural Cr
+13027.09c    -0.003		% Al-27
+
+% --- Boron carbide absorber
+
+mat absorb     -2.52 tmp 1030
+5010.09c    0.8			% B-10
+6000.09c    0.2			% Natural C
+
+/************************
+ * Geometry definitions *
+ ************************/
+
+% --- Surfaces
+
+surf 1001 pz 0.0		% Reflector bottom outer surface
+surf 1002 pz 100.0 		% Reflector bottom inner surface
+surf 1003 pz 325.5		% Reflector top inner surface
+surf 1004 pz 425.5		% Reflector top outer surface
+
+surf 2001 cyl 0.0 0.0 112.75 118.75 306.75		% Blanket outer surface, fuel side
+surf 2002 cyl 0.0 0.0 162.75 118.75 306.75		% Blanket outer surface, boron side/absorber boundary
+surf 2003 cyl 0.0 0.0 114.75 120.75 304.75		% Blanket inner surface, fuel side
+surf 2004 cyl 0.0 0.0 160.75 120.75 304.75		% Blanket inner surface, boron side
+surf 2005 pz 118.75								% Blanket/absorber bottom surface
+surf 2006 pz 306.75 							% Blanket/absorber top surface
+surf 2007 pz 120.75								% Blanket bottom inner surface
+surf 2008 pz 304.75								% Blanket upper inner surface
+
+surf 3001 cyl 0.0 0.0 182.75 0.0 425.5		%Outer cylinder boundary
+
+% --- Cells
+
+cell 101 0 struc 1001 -1002 -3001		% Bottom reflector plate
+cell 102 0 struc 1003 -1004 -3001		% Top reflector plate
+
+cell 201 0 fuel  2005 -2006 -2001		% Fuel core
+cell 202 0 fuel  1002 -2005 -3001		% Fuel inlet
+cell 203 0 fuel  2006 -1003 -3001		% Fuel outlet
+
+cell 301 0 blanket 2007 -2008 2003 -2004		% Blanket
+
+cell 401 0 struc 2001 -2003 2007 -2008		% Blanket tank inner
+cell 402 0 struc 2004 -2002 2007 -2008		% Blanket tank outer
+cell 403 0 struc 2005 -2007 2001 -2002		% Blanket tank bottom
+cell 404 0 struc 2008 -2006 2001 -2002		% Blanket tank top
+
+cell 501 0 absorb 2005 -2006 2002 -3001		% Absorber
+
+cell 601 0 outside 3001 1001 -1004		% Outside cylinder
+cell 602 0 outside -1001				% Outside bottom
+cell 603 0 outside 1004					% Outside top
+
+/******************
+ * Run parameters *
+ ******************/
+
+% --- Neutron population 100000 500 50
+
+%set pop	20000 50 20
+set pop 100000 500 50
+
+% --- Geometry plots
+
+plot 3 1000 1000 50.0 -190.0 190.0 -190.0 190.0
+
+plot 3 1000 1000 110.0 -190.0 190.0 -190.0 190.0
+
+plot 3 1000 1000 200.0 -190.0 190.0 -190.0 190.0
+
+plot 3 1000 1000 320.0 -190.0 190.0 -190.0 190.0
+
+plot 3 1000 1000 375.0 -190.0 190.0 -190.0 190.0
+
+plot 1 1000 1000 0.0 -190.0 190.0 -10.0 450.0
+
+mesh 3 1000 1000 0 -190 190 -190 190 200 225
+
+% --- Neutron energy spectrum
+
+%det spectralFuel de eGrid
+%det spectralFuel de eGrid
+
+%ene eGrid 3 1000 1e-11 2e1
+
+% --- Group constant generation
+
+set gcu 0
+set nfg  4  0.625E-6  5.5E-3  0.821
+
+% --- Fission
+
+%det CenterFission dr -6 void dm fuel dn 1 0.0 112.75 20 0 360 1 100.0 325.5 3
