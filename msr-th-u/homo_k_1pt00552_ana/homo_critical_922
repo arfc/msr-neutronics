@@ -1,0 +1,46 @@
+
+% --- MSR cluster ------------------------------------------
+
+set title "MSRE-Homo"
+
+% --- Dummy structures
+surf 1 cyl 0 0 73.86 0 180
+
+cell 1 0 fuel -1
+cell 2 0 outside 1
+
+% --- Fuel (Partially enriched uranium):
+
+mat fuel    -1.91 tmp 922
+ 3007.09c   -2.73
+ 3006.09c   -0.00012
+ 9019.09c   -16.76
+ 4009.09c   -1.57
+40000.09c   -2.74
+92235.09c   -0.418
+92238.09c   -0.8625
+ 6012.09c   -74.90
+
+% --- Cross section data library file path:
+
+set acelib "/projects/arfc/serpent/core/xsdata/xsdir_serpent"
+
+% --- boundary condition (1 for vacuum, 2 for reflective):
+
+set bc 1
+
+% % --- group constant generation:
+
+% set gcu  0
+% set nfg  1
+
+% --- Neutron population and criticality cycles:
+
+set pop 50000 500 50
+
+% --- Geometry and mesh plots:
+
+plot 3 500 500 99.06
+mesh 3 500 500
+
+% ------------------------------------------------------------

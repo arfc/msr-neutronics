@@ -1,0 +1,33 @@
+----------------------------------------
+Begin Torque Prologue (Thu Feb 23 10:48:41 2017)
+Job ID:           5681215.cc-mgmt1.campuscluster.illinois.edu
+Username:         al007
+Group:            rcaas_arfc
+Job Name:         msre_homogeneous
+Limits:           walltime=00:10:00
+Job Queue:        secondary
+Account:          icc-account-rcaas
+Nodes:            taub103
+End Torque Prologue
+----------------------------------------
+/var/spool/torque/mom_priv/jobs/5681215.cc-mgmt1.campuscluster.illinois.edu.SC: line 11: fg: no job control
+/var/spool/torque/mom_priv/jobs/5681215.cc-mgmt1.campuscluster.illinois.edu.SC: line 15: fg: no job control
+/var/spool/torque/mom_priv/jobs/5681215.cc-mgmt1.campuscluster.illinois.edu.SC: line 16: surf: command not found
+/var/spool/torque/mom_priv/jobs/5681215.cc-mgmt1.campuscluster.illinois.edu.SC: line 18: cell: command not found
+/var/spool/torque/mom_priv/jobs/5681215.cc-mgmt1.campuscluster.illinois.edu.SC: line 19: cell: command not found
+/var/spool/torque/mom_priv/jobs/5681215.cc-mgmt1.campuscluster.illinois.edu.SC: line 21: syntax error near unexpected token `('
+/var/spool/torque/mom_priv/jobs/5681215.cc-mgmt1.campuscluster.illinois.edu.SC: line 21: `% --- Fuel (Partially enriched uranium):'
+----------------------------------------
+Begin Torque Epilogue (Thu Feb 23 10:48:42 2017)
+Job ID:           5681215.cc-mgmt1.campuscluster.illinois.edu
+Username:         al007
+Group:            rcaas_arfc
+Job Name:         msre_homogeneous
+Session:          13540
+Limits:           walltime=00:10:00
+Resources:        cput=00:00:00,energy_used=0,mem=0kb,vmem=0kb,walltime=00:00:01
+Job Queue:        secondary
+Account:          icc-account-rcaas
+Nodes:            taub103
+End Torque Epilogue
+----------------------------------------

@@ -1,0 +1,61 @@
+set title "msre_single_unit_cell"
+
+% --- Dummy structures
+surf 10 inf
+surf 11 inf
+
+cell 10 2 fuel -10
+cell 11 3 moder -11
+
+% --- Fuel pin:
+
+surf 1 sqc 0 0 2.54
+surf 2 sqc 0 0 2.8847
+
+cell  1  0  fill 3   -1
+cell  2  0  fill 2    1   -2
+cell  3  0  outside   2
+
+% --- Fuel (Partially enriched uranium):
+
+mat fuel    -2.146 tmp 922 % 1200 F, pg. 17 MSRE Design and Operations, part iii, nuclear analysis
+ 3007.09c   -10.90
+ 3006.09c   -0.0005
+ 9019.09c   -66.80
+ 4009.09c   -6.27
+40000.09c   -10.92
+92235.09c   -1.67 % 1.67 for 33% enrichment. See MSRE-properties.ods
+92238.09c   -3.44 % 3.44 for 33% enrichment. See MSRE-properties.ods
+
+% --- Moderator graphite:
+
+mat moder    -1.86 tmp 922 % 1200 F pg. 17, MSRE Design and Operations, part iii, nuclear analysis
+ 6012.09c    -1.0
+
+% --- Cross section data library file path:
+
+set acelib "/home/lindsayad/serpent/core/xsdata/xsdir_serpent"
+
+% --- boundary condition (1 for vacuum, 2 for reflective):
+
+set bc 2
+
+% --- few group generation
+set gcu 0 2 3
+
+% --- Neutron population and criticality cycles:
+
+set pop 5000 500 20
+
+% --- Geometry and mesh plots:
+
+plot 3 500 500
+mesh 3 500 500
+
+% --- B1 calculation
+
+ene mygrid 4 scale44
+
+set fum mygrid
+
+% ------------------------------------------------------------
