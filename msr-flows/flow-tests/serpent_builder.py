@@ -1,19 +1,19 @@
-##### Imports
+# Imports
 import numpy as np
 
-##### Constants
+# Constants
 
 
-##### Definitions
+# Definitions
 def make_input(inp_name, tot_time, time_step, cycle_count):
     '''
     This function will generate the input file for Serpent.
     '''
-    num_divisions = int(tot_time/time_step)
+    num_divisions = int(tot_time / time_step)
     full_input = '''
 set title "Feedback Run"
 '''
-    
+
     surface_defs = '''
 
 %__________SURFACE DEFINITIONS__________%
@@ -35,7 +35,6 @@ surf ifs cuboid -25 25 -25 25 -25 25
         surface_defs += '''
 surf {surf_name} cuboid -25 25 -25 25 {minz} {maxz}
         '''.format(**locals())
-
 
     cell_defs = '''
 
@@ -157,7 +156,7 @@ rep flowprocess
         flow_defs += '''
 rc {from_name} {to_name} cycle_pump 1
         '''.format(**locals())
-    
+
     misc_defs += '''
 
 set acelib "/home/luke/serp/xsdata/jeff312/sss_jeff312.xsdata"
@@ -187,5 +186,3 @@ daystep
     full_input += time_defs
 
     return full_input
-
-

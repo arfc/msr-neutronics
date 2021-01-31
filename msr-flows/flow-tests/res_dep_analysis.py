@@ -17,7 +17,7 @@ def keff_time_plot(RESULTS):
     '''
     Gives a plot of keff vs time
     '''
-    res = st.read(RESULTS, reader = 'results')
+    res = st.read(RESULTS, reader='results')
     res.plot('burnDays', 'absKeff')
     savename = str(RESULTS) + '_keff.png'
     plt.savefig(savename)
@@ -34,13 +34,22 @@ def delayed_precursors(DEPLETE):
     # Determine number of cores and material subdivisions
     fname = 'fuelsalt'
     extend = len(fname) + 1
-    dep = st.read(DEPLETE, reader = 'dep')
+    dep = st.read(DEPLETE, reader='dep')
     max_core = 0
     max_subd = 0
     for mat in dep.materials.keys():
         if fname in mat:
-            cur_core = int(mat[mat.index(str(fname) + '_') + len(str(fname) + '_') : mat.index('_', extend)])
-            cur_subd = int(mat.replace(str(cur_core), '', 1).replace('_', '').replace(str(fname), ''))
+            cur_core = int(mat[mat.index(str(fname) + '_') +
+                               len(str(fname) + '_'): mat.index('_', extend)])
+            cur_subd = int(
+                mat.replace(
+                    str(cur_core),
+                    '',
+                    1).replace(
+                    '_',
+                    '').replace(
+                    str(fname),
+                    ''))
             if cur_core > max_core:
                 max_core = cur_core
             if cur_subd > max_subd:
@@ -78,8 +87,8 @@ def delayed_precursors(DEPLETE):
                 else:
                     cur_sub = 0
                     cur_core += 1
-            plt.plot(times, cur_data, linestyle = '--', marker = '.',
-                     label = str(subdiv))
+            plt.plot(times, cur_data, linestyle='--', marker='.',
+                     label=str(subdiv))
             plt.xlabel('Time [d]')
             plt.ylabel('Mass [g]')
             plt.title(str(track_names))
@@ -90,27 +99,26 @@ def delayed_precursors(DEPLETE):
     return
 
 
-
 def u235_conc_diff_mats(DEPLETE):
     '''
     Iterates through the different materials and displays the mass of U235
     '''
-    dep = st.read(DEPLETE, reader = 'dep')
+    dep = st.read(DEPLETE, reader='dep')
     for mat in dep.materials.keys():
         if mat == 'total':
             pass
         else:
             current = dep.materials[str(mat)]
-            current.plot('days', 'mdens', names =
-                         'U235')
+            current.plot('days', 'mdens', names='U235')
             savename = str(DEPLETE) + '_' + str(mat) + '_U235.png'
             plt.savefig(savename)
             plt.close()
     return
 
+
 # Debugging, uncomment whichever function to debug
 if __name__ == "__main__":
-    #keff_time_plot(RESULTS)
-    #u235_conc_diff_mats(DEPLETE)
-    #delayed_precursors(DEPLETE)
+    # keff_time_plot(RESULTS)
+    # u235_conc_diff_mats(DEPLETE)
+    # delayed_precursors(DEPLETE)
     pass

@@ -1,10 +1,10 @@
-##### Imports
+# Imports
 import numpy as np
 
-##### Constants
+# Constants
 
 
-##### Definitions
+# Definitions
 def make_input(inp_name, tot_time, time_step, cycle_count):
     '''
     This function will generate the input file for Serpent.
@@ -13,13 +13,13 @@ def make_input(inp_name, tot_time, time_step, cycle_count):
     '''
     lam_cycle = 1
     setting = 1
-    num_divisions = int(tot_time/time_step)
+    num_divisions = int(tot_time / time_step)
     space_between_cores = 110
     num_cores = cycle_count + 1
     full_input = '''
 set title "Feedback Run"
 '''
-    
+
     surface_defs = '''
 %__________SURFACE DEFINITIONS__________%
 '''
@@ -59,7 +59,6 @@ set title "Feedback Run"
   surf {surf_name} cuboid {x0_fuel} {x1_fuel} {y0_fuel} {y1_fuel} {minz} {maxz}
             '''.format(**locals())
 
-
     cell_defs = '''
 %__________CELL DEFINITIONS__________%
 '''
@@ -68,7 +67,15 @@ set title "Feedback Run"
     outside_list = list()
     for each_core in range(num_cores):
         outside_list.append('ogc_' + str(each_core))
-    outside_vals = str(outside_list).replace('[', '').replace(']', '').replace(',', '').replace("'", '')
+    outside_vals = str(outside_list).replace(
+        '[',
+        '').replace(
+        ']',
+        '').replace(
+            ',',
+            '').replace(
+                "'",
+        '')
     cell_defs += '''
  % Outside
  cell 999 0 outside {outside_vals}
@@ -92,8 +99,6 @@ set title "Feedback Run"
   cell {cell_name} 0 {mat_name} -{surf_name}
             '''.format(**locals())
 
-
-
     # Saving salt composition for replicatability
     fuel_comp = '''
   4009.09c  -0.014487655439    %  Be-9
@@ -105,7 +110,7 @@ set title "Feedback Run"
  92236.09c  -0.000090911860    %  U-236
  92238.09c  -0.059524947099    %  U-238
     '''
-    
+
     fuel_storage_vol = vol_core / num_divisions
     mat_defs = '''
 
@@ -130,7 +135,6 @@ vol {fuel_storage_vol}
 burn 1
 {fuel_comp}
 '''.format(**locals())
-
 
     # Creating the materials for each core (non-geometry inclusive)
     for each_core in range(num_cores):
@@ -188,7 +192,7 @@ mflow cycle_pump
  all {lam_cycle}
 
 mflow feed_pump
- all {lam_feed} 
+ all {lam_feed}
 
 rep flowprocess
  rc fuel_storage fuelsalt_0_0 feed_pump 0
@@ -209,7 +213,6 @@ rep flowprocess
             flow_defs += '''
  rc {from_name} {to_name} cycle_pump {setting}
             '''.format(**locals())
-    
 
     misc_defs += '''
 
@@ -240,5 +243,3 @@ daystep
     full_input += time_defs
 
     return full_input
-
-
