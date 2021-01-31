@@ -2,6 +2,7 @@
 from time import time
 import serpent_builder as sb
 import complex_serpent_builder as csb
+import restart_serpent_builder as rsb
 import os
 import res_dep_analysis as rda
 import subprocess
@@ -14,10 +15,9 @@ CYCLE_TIME_SECONDS = 2
 CYCLE_STEP_SIZE_SECONDS = 1
 OUTPUT_NAME = 'output'
 PLOTTING = True
-NON_CYCLE = True
-MULTI_CORE = True
-# In progress
-# RESTART_CYCLE
+NON_CYCLE = False
+MULTI_CORE = False
+RESTART_CYCLE = True
 
 # Functions
 
@@ -77,6 +77,21 @@ if MULTI_CORE:
     print('Completed multi-core cycling case.')
     os.system('mv ./' + str(MULTI_INP_NAME) + '* ./' + str(DIR_NAME))
     os.system('mv ./' + str(MULTI_OUT_NAME) + ' ./' + str(DIR_NAME))
+    print('Files moved to ' + str(DIR_NAME))
+if RESTART_CYCLE:
+    for restart_iter in range(NUM_CYCLES):
+        REST_INP_NAME = str(INPUT_NAME) + '_rest' + str(restart_iter)
+        REST_OUT_NAME = str(OUTPUT_NAME) + '_rest' + str(restart_iter)
+        rest_input_script = rsb.make_input(
+            REST_INP_NAME,
+            CYCLE_TIME_SECONDS,
+            CYCLE_STEP_SIZE_SECONDS,
+            restart_iter)
+        run_script(REST_INP_NAME, REST_OUT_NAME, rest_input_script)
+        print(f'Completed restart cycling case {restart_iter + 1}/{NUM_CYCLES}.')
+    print('All cycles run.')
+    os.system('mv ./' + str(REST_INP_NAME) + '* ./' + str(DIR_NAME))
+    os.system('mv ./' + str(REST_OUT_NAME) + '* ./' + str(DIR_NAME))
     print('Files moved to ' + str(DIR_NAME))
 # Plotting
 if PLOTTING:
