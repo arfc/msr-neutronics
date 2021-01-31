@@ -1,0 +1,184 @@
+
+set title "Feedback Run"
+
+
+%__________SURFACE DEFINITIONS__________%
+% Outer graphite
+surf ogc cuboid -50 50 -50 50 -50 50
+% Inner Fuel Salt Cube vol of 1E6
+surf ifs cuboid -25 25 -25 25 -25 25
+% Subdivisions
+
+surf sub0 cuboid -25 25 -25 25 -25.0 0.0
+        
+surf sub1 cuboid -25 25 -25 25 0.0 25.0
+        
+
+%__________CELL DEFINITIONS__________%
+% Outside
+cell 999 0 outside ogc
+cell gr_cu 0 graphite ifs -ogc
+%cell fs_cu 0 fuelsalt -ifs
+% Subdivisions
+
+cell cell0 0 fuelsalt0 -sub0
+        
+cell cell1 0 fuelsalt1 -sub1
+        
+
+%__________MATERIAL DEFINITIONS__________%
+% Graphite Moderator
+mat graphite -1.8 % moder graph 6000
+rgb 130 130 130
+6000.09c -1
+
+% Fuel Salt
+% Using some old code for NaBe fuel salt
+% May need to change volume in core to volume total?
+mat fuelsalt -1.94
+vol 1000000
+rgb 0 255 255
+burn 1
+
+  4009.09c  -0.014487655439    %  Be-9
+  9019.09c  -0.376674024719    %  F-19
+ 11023.09c  -0.234064237192    %  Na-23
+ 90232.09c  -0.295304238725    %  Th-232
+ 92234.09c  -0.000174400907    %  U-234
+ 92235.09c  -0.019679584059    %  U-235
+ 92236.09c  -0.000090911860    %  U-236
+ 92238.09c  -0.059524947099    %  U-238
+    
+
+mat cyclemat -1.94
+vol 1000000
+rgb 10 10 10
+burn 1
+
+  4009.09c  -0.014487655439    %  Be-9
+  9019.09c  -0.376674024719    %  F-19
+ 11023.09c  -0.234064237192    %  Na-23
+ 90232.09c  -0.295304238725    %  Th-232
+ 92234.09c  -0.000174400907    %  U-234
+ 92235.09c  -0.019679584059    %  U-235
+ 92236.09c  -0.000090911860    %  U-236
+ 92238.09c  -0.059524947099    %  U-238
+    
+
+mat dump -0.001
+vol 1
+rgb 5 5 5
+burn 1
+  4009.09c -1
+
+
+mat fuelsalt0 -1.94
+rgb 10 10 10
+vol 62500.0
+burn 1
+
+  4009.09c  -0.014487655439    %  Be-9
+  9019.09c  -0.376674024719    %  F-19
+ 11023.09c  -0.234064237192    %  Na-23
+ 90232.09c  -0.295304238725    %  Th-232
+ 92234.09c  -0.000174400907    %  U-234
+ 92235.09c  -0.019679584059    %  U-235
+ 92236.09c  -0.000090911860    %  U-236
+ 92238.09c  -0.059524947099    %  U-238
+    
+
+        
+mat fuelsalt1 -1.94
+rgb 12 12 12
+vol 62500.0
+burn 1
+
+  4009.09c  -0.014487655439    %  Be-9
+  9019.09c  -0.376674024719    %  F-19
+ 11023.09c  -0.234064237192    %  Na-23
+ 90232.09c  -0.295304238725    %  Th-232
+ 92234.09c  -0.000174400907    %  U-234
+ 92235.09c  -0.019679584059    %  U-235
+ 92236.09c  -0.000090911860    %  U-236
+ 92238.09c  -0.059524947099    %  U-238
+    
+
+        
+mat fuelsalt2 -1.94
+rgb 14 14 14
+vol 62500.0
+burn 1
+
+  4009.09c  -0.014487655439    %  Be-9
+  9019.09c  -0.376674024719    %  F-19
+ 11023.09c  -0.234064237192    %  Na-23
+ 90232.09c  -0.295304238725    %  Th-232
+ 92234.09c  -0.000174400907    %  U-234
+ 92235.09c  -0.019679584059    %  U-235
+ 92236.09c  -0.000090911860    %  U-236
+ 92238.09c  -0.059524947099    %  U-238
+    
+
+        
+mat fuelsalt3 -1.94
+rgb 16 16 16
+vol 62500.0
+burn 1
+
+  4009.09c  -0.014487655439    %  Be-9
+  9019.09c  -0.376674024719    %  F-19
+ 11023.09c  -0.234064237192    %  Na-23
+ 90232.09c  -0.295304238725    %  Th-232
+ 92234.09c  -0.000174400907    %  U-234
+ 92235.09c  -0.019679584059    %  U-235
+ 92236.09c  -0.000090911860    %  U-236
+ 92238.09c  -0.059524947099    %  U-238
+    
+
+        
+
+%plot 3 2000 2000 0
+
+%set power 1000
+set pcc 0
+set powdens 1
+set mcvol 500000
+%set arr 2
+set printm 1
+set inventory
+Th
+U
+922350
+932370
+
+
+
+set acelib "/home/luke/serp/xsdata/jeff312/sss_jeff312.xsdata"
+set declib "/home/luke/serp/xsdata/jeff312/sss_jeff33.dec"
+set nfylib "/home/luke/serp/xsdata/jeff312/sss_jeff33.nfy"
+
+set pop 5000 100 40
+
+
+mflow cycle_pump
+ all 1
+
+rep flowprocess
+% rc fuelsalt cyclemat cycle_pump 1
+% rc cyclemat fuelsalt cycle_pump 1
+
+
+rc fuelsalt0 fuelsalt1 cycle_pump 1
+        
+rc fuelsalt1 fuelsalt2 cycle_pump 1
+        
+rc fuelsalt2 fuelsalt3 cycle_pump 1
+        
+rc fuelsalt3 dump cycle_pump 1
+        
+
+dep
+pro flowprocess
+daystep
+
+1.1574074074074073e-05 1.1574074074074073e-05 1.1574074074074073e-05 1.1574074074074073e-05 1.1574074074074073e-05 1.1574074074074073e-05 
