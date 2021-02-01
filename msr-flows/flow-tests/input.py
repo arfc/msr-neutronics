@@ -101,7 +101,8 @@ if RESTART_CYCLE:
             restart_iter)
         run_script(REST_INP_NAME, REST_OUT_NAME, rest_input_script)
         check_wrk_file(REST_INP_NAME)
-        print(f'Completed restart cycling case {restart_iter + 1}/{NUM_CYCLES}.')
+        print(
+            f'Completed restart cycling case {restart_iter + 1}/{NUM_CYCLES}.')
     # Moving all files
     for restart_iter in range(NUM_CYCLES):
         REST_INP_NAME = str(INPUT_NAME) + '_rest' + str(restart_iter)
@@ -125,6 +126,10 @@ if PLOTTING:
     if RESTART_CYCLE:
         RESTART_PATH = './' + str(DIR_NAME) + '/' + str(REST_INP_NAME)
         num_divisions = int(CYCLE_TIME_SECONDS / CYCLE_STEP_SIZE_SECONDS)
-        rda.restart_plots(RESTART_PATH, num_divisions, NUM_CYCLES, seconds = True)
+        rda.restart_plots(
+            RESTART_PATH,
+            num_divisions,
+            NUM_CYCLES,
+            seconds=True)
 os.system('mv ./*.png ./' + str(DIR_NAME))
 print('Done.')

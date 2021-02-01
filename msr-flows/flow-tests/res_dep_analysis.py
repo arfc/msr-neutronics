@@ -13,7 +13,7 @@ DEPLETE = FILENAME + '_dep.m'
 
 
 # FUNCTIONS
-def restart_plots(FILENAME, num_divisions, CYCLES, seconds = True):
+def restart_plots(FILENAME, num_divisions, CYCLES, seconds=True):
     '''
     This function generates various plots for the restart script
     '''
@@ -28,8 +28,8 @@ def restart_plots(FILENAME, num_divisions, CYCLES, seconds = True):
         cur_file = str(FILENAME) + str(cycle)
         res_file = str(cur_file) + '_res.m'
         dep_file = str(cur_file) + '_dep.m'
-        res = st.read(res_file, reader = 'results')
-        dep = st.read(dep_file, reader = 'dep')
+        res = st.read(res_file, reader='results')
+        dep = st.read(dep_file, reader='dep')
         # Day data
         # Conversion to seconds optional
         if seconds:
@@ -52,10 +52,12 @@ def restart_plots(FILENAME, num_divisions, CYCLES, seconds = True):
             mat_data = list()
             mat_name = 'fuelsalt' + str(mat)
             fuel = dep.materials[str(mat_name)]
-            # Iterate over each isotope in the current material in the core in the current cycle
+            # Iterate over each isotope in the current material in the core in
+            # the current cycle
             isotope_counter = 0
             for each_isotope in fuel.names:
-                iso_dens = fuel.getValues('days', 'mdens', fuel.days, each_isotope)
+                iso_dens = fuel.getValues(
+                    'days', 'mdens', fuel.days, each_isotope)
                 # List of isotope masses in current material at time step
                 iso_mass = iso_dens[0] * fuel.data['volume'][0]
                 if first_iteration:
@@ -82,7 +84,12 @@ def restart_plots(FILENAME, num_divisions, CYCLES, seconds = True):
     isotope_counter = 0
     for each_isotope in fuel.names:
         for each_mat_index in range(len(core_mats)):
-            plt.plot(days, mass_data[each_mat_index][isotope_counter], marker = '.', linestyle = '--', label = f'Material {core_mats[each_mat_index]}')
+            plt.plot(
+                days,
+                mass_data[each_mat_index][isotope_counter],
+                marker='.',
+                linestyle='--',
+                label=f'Material {core_mats[each_mat_index]}')
         plt.legend()
         plt.tight_layout()
         if seconds:

@@ -6,7 +6,7 @@ import numpy as np
 
 # Definitions
 
-def make_input(inp_name, tot_time, time_step, restart_iter = 0):
+def make_input(inp_name, tot_time, time_step, restart_iter=0):
     '''
     This function will generate the input file for Serpent.
     Each restart iteration is a cycle
@@ -140,7 +140,6 @@ set rfr -{cur_time} {restart_read_name}
 set rfw 1
 '''.format(**locals())
 
-
     flow_defs = '''
 
 mflow cycle_pump
@@ -172,7 +171,6 @@ rep flowprocess
 rc {from_name} {to_name} cycle_pump 1
             '''.format(**locals())
 
-
     misc_defs += '''
 
 set acelib "/home/luke/serp/xsdata/jeff312/sss_jeff312.xsdata"
@@ -191,7 +189,7 @@ daystep
 
     # Setting times
     time_string = str(time_step) + ' '
-    tot_time_list = time_string * num_divisions 
+    tot_time_list = time_string * num_divisions
     time_defs += tot_time_list
     full_input += surface_defs
     full_input += cell_defs
