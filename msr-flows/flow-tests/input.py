@@ -122,5 +122,9 @@ if PLOTTING:
         NON_CYCLE_PATH = './' + str(DIR_NAME) + '/' + str(NON_CYCLE_INP_NAME)
         rda.keff_time_plot(str(NON_CYCLE_PATH) + '_res.m')
         rda.u235_conc_diff_mats(str(NON_CYCLE_PATH) + '_dep.m')
+    if RESTART_CYCLE:
+        RESTART_PATH = './' + str(DIR_NAME) + '/' + str(REST_INP_NAME)
+        num_divisions = int(CYCLE_TIME_SECONDS / CYCLE_STEP_SIZE_SECONDS)
+        rda.restart_plots(RESTART_PATH, num_divisions, NUM_CYCLES, seconds = True)
 os.system('mv ./*.png ./' + str(DIR_NAME))
 print('Done.')

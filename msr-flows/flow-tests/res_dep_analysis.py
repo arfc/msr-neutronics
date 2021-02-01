@@ -13,6 +13,90 @@ DEPLETE = FILENAME + '_dep.m'
 
 
 # FUNCTIONS
+def restart_plots(FILENAME, num_divisions, CYCLES, seconds = True):
+    '''
+    This function generates various plots for the restart script
+    '''
+    # Lists of data from each cycle condensed
+    days = list()
+    keff = list()
+    keff_err = list()
+    mass_data = list()
+    first_iteration = True
+    # Iterate over each cycle
+    for cycle in range(CYCLES):
+        cur_file = str(FILENAME) + str(cycle)
+        res_file = str(cur_file) + '_res.m'
+        dep_file = str(cur_file) + '_dep.m'
+        res = st.read(res_file, reader = 'results')
+        dep = st.read(dep_file, reader = 'dep')
+        # Day data
+        # Conversion to seconds optional
+        if seconds:
+            mult = 86400
+        else:
+            mult = 1
+        # Removing from arrays to put into list
+        for each_day in res.resdata['burnDays'][:, 0] * mult:
+            days.append(each_day)
+        # Keff data
+        for each_k in res.resdata['absKeff']:
+            keff.append(each_k[0])
+            keff_err.append(each_k[1])
+        # Generate isotopic mass for each material in core
+        # Can be changed to include the other materials as well
+        core_mats = np.arange(num_divisions, 2 * num_divisions)
+        # Iterate over each material in the core for the current cycle
+        mat_counter = 0
+        for mat in core_mats:
+            mat_data = list()
+            mat_name = 'fuelsalt' + str(mat)
+            fuel = dep.materials[str(mat_name)]
+            # Iterate over each isotope in the current material in the core in the current cycle
+            isotope_counter = 0
+            for each_isotope in fuel.names:
+                iso_dens = fuel.getValues('days', 'mdens', fuel.days, each_isotope)
+                # List of isotope masses in current material at time step
+                iso_mass = iso_dens[0] * fuel.data['volume'][0]
+                if first_iteration:
+                    mat_data.append(iso_mass)
+                else:
+                    mass_data[mat_counter][isotope_counter].append(iso_mass)
+                isotope_counter += 1
+            mat_counter += 1
+            mass_data.append(mat_data)
+        first_iteration = False
+    # Data has been gathered, using to plot
+    # keff plot
+    plt.errorbar(days, keff, keff_err)
+    plt.title('Keff')
+    plt.ylabel('k')
+    if seconds:
+        plt.xlabel('Time [s]')
+    else:
+        plt.xlabel('Time [d]')
+    plt.savefig('keff.png')
+    plt.close()
+    # Mass plots
+    # Do normal plots now, change to stacked area plot later
+    isotope_counter = 0
+    for each_isotope in fuel.names:
+        for each_mat_index in range(len(core_mats)):
+            plt.plot(days, mass_data[each_mat_index][isotope_counter], marker = '.', linestyle = '--', label = f'Material {core_mats[each_mat_index]}')
+        plt.legend()
+        plt.tight_layout()
+        if seconds:
+            plt.xlabel('Time [s]')
+        else:
+            plt.xlabel('Time [d]')
+        plt.ylabel('Mass [g]')
+        plt.title('Concentation of ' + str(each_isotope))
+        plt.savefig(str(each_isotope) + '.png')
+        plt.close()
+        isotope_counter += 1
+    return
+
+
 def keff_time_plot(RESULTS):
     '''
     Gives a plot of keff vs time
@@ -121,4 +205,5 @@ if __name__ == "__main__":
     # keff_time_plot(RESULTS)
     # u235_conc_diff_mats(DEPLETE)
     # delayed_precursors(DEPLETE)
+    restart_plots(FILENAME)
     pass
