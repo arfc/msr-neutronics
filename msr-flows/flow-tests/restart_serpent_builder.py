@@ -125,7 +125,10 @@ U
 '''
 
     # Checking how many restarts have occured
-    restart_read_name = str(inp_name) + str(restart_iter) + '.wrk'
+    num_in_name = ''.join(filter(str.isdigit, inp_name))
+    restart_num = int(num_in_name) - 1
+    name_alone = inp_name.replace(num_in_name, '')
+    restart_read_name = str(name_alone) + str(restart_num) + '.wrk'
     cur_time = restart_iter * tot_time
     if restart_iter == 0:
         misc_defs += '''
@@ -135,7 +138,7 @@ set rfw 1
         misc_defs += '''
 set rfr -{cur_time} {restart_read_name}
 set rfw 1
-'''
+'''.format(**locals())
 
 
     flow_defs = '''
@@ -151,22 +154,24 @@ rep flowprocess
     for mat_sub in range(num_divisions * 3):
         from_name = 'fuelsalt' + str(mat_sub)
         if (restart_iter % 2) == 0:
-            if mat_sub == num_divisions * 2 - 1:
-                pass
+            if mat_sub == num_divisions * 3 - 1:
+                to_name = False
             else:
                 to_name = 'fuelsalt' + str(mat_sub + 1)
         else:
             if mat_sub == num_divisions - 1:
-                pass
+                to_name = False
             elif mat_sub == 2 * num_divisions - 1:
                 to_name = 'fuelsalt' + str(0)
             elif mat_sub == 3 * num_divisions - 1:
                 to_name = 'fuelsalt' + str(num_divisions)
             else:
                 to_name = 'fuelsalt' + str(mat_sub + 1)
-        flow_defs += '''
+        if to_name:
+            flow_defs += '''
 rc {from_name} {to_name} cycle_pump 1
-        '''.format(**locals())
+            '''.format(**locals())
+
 
     misc_defs += '''
 

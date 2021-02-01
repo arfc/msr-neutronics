@@ -1,11 +1,13 @@
 # Imports
-from time import time
+from time import time, sleep
 import serpent_builder as sb
 import complex_serpent_builder as csb
 import restart_serpent_builder as rsb
 import os
 import res_dep_analysis as rda
 import subprocess
+import os.path
+from os import path
 
 # User Definitions
 INPUT_NAME = 'cycle_test'
@@ -30,6 +32,16 @@ def run_script(INPUT_NAME, OUTPUT_NAME, input_script):
     with open(INPUT_NAME, 'w+') as input_file:
         input_file.write(input_script)
     os.system('./sss2 -omp 32 ' + str(INPUT_NAME) + ' > ' + str(OUTPUT_NAME))
+    return
+
+
+def check_wrk_file(INP_NAME):
+    '''
+    Allows the script to continue once the .wrk file is generated
+    '''
+    wrk_name = str(INP_NAME) + '.wrk'
+    while not path.exists(wrk_name):
+        sleep(20)
     return
 
 
@@ -88,11 +100,16 @@ if RESTART_CYCLE:
             CYCLE_STEP_SIZE_SECONDS,
             restart_iter)
         run_script(REST_INP_NAME, REST_OUT_NAME, rest_input_script)
+        check_wrk_file(REST_INP_NAME)
         print(f'Completed restart cycling case {restart_iter + 1}/{NUM_CYCLES}.')
+    # Moving all files
+    for restart_iter in range(NUM_CYCLES):
+        REST_INP_NAME = str(INPUT_NAME) + '_rest' + str(restart_iter)
+        REST_OUT_NAME = str(OUTPUT_NAME) + '_rest' + str(restart_iter)
+        os.system('mv ./' + str(REST_INP_NAME) + '* ./' + str(DIR_NAME))
+        os.system('mv ./' + str(REST_OUT_NAME) + '* ./' + str(DIR_NAME))
+        print('Files moved to ' + str(DIR_NAME))
     print('All cycles run.')
-    os.system('mv ./' + str(REST_INP_NAME) + '* ./' + str(DIR_NAME))
-    os.system('mv ./' + str(REST_OUT_NAME) + '* ./' + str(DIR_NAME))
-    print('Files moved to ' + str(DIR_NAME))
 # Plotting
 if PLOTTING:
     print('Generating plots')
