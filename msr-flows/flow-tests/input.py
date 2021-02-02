@@ -31,7 +31,7 @@ def run_script(INPUT_NAME, OUTPUT_NAME, input_script):
     '''
     with open(INPUT_NAME, 'w+') as input_file:
         input_file.write(input_script)
-    os.system('./sss2 -omp 32 ' + str(INPUT_NAME) + ' > ' + str(OUTPUT_NAME))
+    os.system('sss2 -omp 32 ' + str(INPUT_NAME) + ' > ' + str(OUTPUT_NAME))
     return
 
 
