@@ -148,7 +148,7 @@ rep flowprocess
         from_name = 'fuelsalt' + str(mat_sub)
         if mat_sub == num_divisions * 2 - 1:
             # Uncomment this line to complete cycle
-            #to_name = 'fuelsalt' + str(0)
+            # to_name = 'fuelsalt' + str(0)
             to_name = 'dump'
             pass
         else:

@@ -27,6 +27,7 @@ set title "Feedback Run"
     for each_core in range(num_cores):
         graphite_name = 'ogc_' + str(each_core)
         inner_fuel_name = 'ifs_' + str(each_core)
+        ifn = inner_fuel_name
         mult_fac = each_core * space_between_cores
         x0_fuel = -25 + mult_fac
         x1_fuel = 25 + mult_fac
@@ -36,25 +37,22 @@ set title "Feedback Run"
         x1_grap = 50 + mult_fac
         y0_grap = -50 + mult_fac
         y1_grap = 50 + mult_fac
-        min_z_core = -25
-        max_z_core = 25
+        min_z = -25
+        max_z = 25
         vol_core = 125000
         surface_defs += '''
  % Outer graphite
  surf {graphite_name} cuboid {x0_grap} {x1_grap} {y0_grap} {y1_grap} -50 50
  % Inner Fuel Salt Cube vol of 1E6
- surf {inner_fuel_name} cuboid {x0_fuel} {x1_fuel} {y0_fuel} {y1_fuel} {min_z_core} {max_z_core}
+ surf {ifn} cuboid {x0_fuel} {x1_fuel} {y0_fuel} {y1_fuel} {min_z} {max_z}
   % Subdivisions
 '''.format(**locals())
         # Subdividing fuelsalt surfaces for core
-        min_z_core = -25
-        max_z_core = 25
-        vol_core = 125000
-        fuel_salt_div_size = (max_z_core - min_z_core) / num_divisions
+        fuel_salt_div_size = (max_z - min_z) / num_divisions
         for surf_sub in range(num_divisions):
             surf_name = 'sub_' + str(each_core) + '_' + str(surf_sub)
-            minz = min_z_core + fuel_salt_div_size * surf_sub
-            maxz = min_z_core + fuel_salt_div_size * (surf_sub + 1)
+            minz = min_z + fuel_salt_div_size * surf_sub
+            maxz = min_z + fuel_salt_div_size * (surf_sub + 1)
             surface_defs += '''
   surf {surf_name} cuboid {x0_fuel} {x1_fuel} {y0_fuel} {y1_fuel} {minz} {maxz}
             '''.format(**locals())

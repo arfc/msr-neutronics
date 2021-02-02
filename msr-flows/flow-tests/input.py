@@ -12,7 +12,7 @@ from os import path
 # User Definitions
 INPUT_NAME = 'cycle_test'
 DIR_NAME = 'msr_cycle_test'
-NUM_CYCLES = 3
+NUM_CYCLES = 2
 CYCLE_TIME_SECONDS = 2
 CYCLE_STEP_SIZE_SECONDS = 1
 OUTPUT_NAME = 'output'
@@ -124,7 +124,7 @@ if PLOTTING:
         rda.keff_time_plot(str(NON_CYCLE_PATH) + '_res.m')
         rda.u235_conc_diff_mats(str(NON_CYCLE_PATH) + '_dep.m')
     if RESTART_CYCLE:
-        RESTART_PATH = './' + str(DIR_NAME) + '/' + str(REST_INP_NAME)
+        RESTART_PATH = './' + str(DIR_NAME) + '/' + str(INPUT_NAME) + '_rest'
         num_divisions = int(CYCLE_TIME_SECONDS / CYCLE_STEP_SIZE_SECONDS)
         rda.restart_plots(
             RESTART_PATH,

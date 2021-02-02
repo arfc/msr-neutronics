@@ -7,13 +7,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # USER DEFINITIONS for debugging
-FILENAME = 'test_complex.inp'
+FILENAME = 'cycle_test_rest'
 RESULTS = FILENAME + '_res.m'
 DEPLETE = FILENAME + '_dep.m'
-
+num_divisions = 2
+CYCLES = 2
 
 # FUNCTIONS
-def restart_plots(FILENAME, num_divisions, CYCLES, seconds=True):
+def restart_plots(FILENAME, num_divisions, CYCLES, seconds=True, plot_all = False):
     '''
     This function generates various plots for the restart script
     '''
@@ -45,7 +46,10 @@ def restart_plots(FILENAME, num_divisions, CYCLES, seconds=True):
             keff_err.append(each_k[1])
         # Generate isotopic mass for each material in core
         # Can be changed to include the other materials as well
-        core_mats = np.arange(num_divisions, 2 * num_divisions)
+        if plot_all:
+            core_mats = np.arange(0, 3 * num_divisions)
+        else:
+            core_mats = np.arange(num_divisions, 2 * num_divisions)
         # Iterate over each material in the core for the current cycle
         mat_counter = 0
         for mat in core_mats:
@@ -60,23 +64,30 @@ def restart_plots(FILENAME, num_divisions, CYCLES, seconds=True):
                     'days', 'mdens', fuel.days, each_isotope)
                 # List of isotope masses in current material at time step
                 iso_mass = iso_dens[0] * fuel.data['volume'][0]
+                # Converting ndarray to list
+                iso_mass_list = [val for val in iso_mass]
+                # For first cycle, generate list of lists
                 if first_iteration:
-                    mat_data.append(iso_mass)
+                    mat_data.append(iso_mass_list)
+                # For subsequent cycles, append values to the pre-existing lists
                 else:
-                    mass_data[mat_counter][isotope_counter].append(iso_mass)
+                    for each in iso_mass_list:
+                        mass_data[mat_counter][isotope_counter].append(each)
                 isotope_counter += 1
             mat_counter += 1
-            mass_data.append(mat_data)
+            if first_iteration:
+                mass_data.append(mat_data)
         first_iteration = False
     # Data has been gathered, using to plot
     # keff plot
     plt.errorbar(days, keff, keff_err)
-    plt.title('Keff')
-    plt.ylabel('k')
+    plt.title('Multiplication Factor')
+    plt.ylabel(u'absKeff \u00B1 \u03C3')
     if seconds:
         plt.xlabel('Time [s]')
     else:
         plt.xlabel('Time [d]')
+    plt.tight_layout()
     plt.savefig('keff.png')
     plt.close()
     # Mass plots
@@ -91,13 +102,13 @@ def restart_plots(FILENAME, num_divisions, CYCLES, seconds=True):
                 linestyle='--',
                 label=f'Material {core_mats[each_mat_index]}')
         plt.legend()
-        plt.tight_layout()
         if seconds:
             plt.xlabel('Time [s]')
         else:
             plt.xlabel('Time [d]')
         plt.ylabel('Mass [g]')
-        plt.title('Concentation of ' + str(each_isotope))
+        plt.title('Mass of ' + str(each_isotope))
+        plt.tight_layout()
         plt.savefig(str(each_isotope) + '.png')
         plt.close()
         isotope_counter += 1
@@ -212,5 +223,5 @@ if __name__ == "__main__":
     # keff_time_plot(RESULTS)
     # u235_conc_diff_mats(DEPLETE)
     # delayed_precursors(DEPLETE)
-    restart_plots(FILENAME)
+    restart_plots(FILENAME, num_divisions, CYCLES = 2, plot_all=True)
     pass
