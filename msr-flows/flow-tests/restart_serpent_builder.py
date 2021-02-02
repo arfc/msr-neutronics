@@ -57,7 +57,7 @@ cell gr_cu 0 graphite ifs -ogc
 cell {cell_name} 0 {mat_name} -{surf_name}
         '''.format(**locals())
 
-    # Saving salt composition for replicatability
+    # Saving salt composition for replicability
     fuel_comp = '''
   4009.09c  -0.014487655439    %  Be-9
   9019.09c  -0.376674024719    %  F-19
