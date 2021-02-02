@@ -14,7 +14,14 @@ num_divisions = 2
 CYCLES = 2
 
 # FUNCTIONS
-def restart_plots(FILENAME, num_divisions, CYCLES, seconds=True, plot_all = False):
+
+
+def restart_plots(
+        FILENAME,
+        num_divisions,
+        CYCLES,
+        seconds=True,
+        plot_all=False):
     '''
     This function generates various plots for the restart script
     '''
@@ -69,7 +76,8 @@ def restart_plots(FILENAME, num_divisions, CYCLES, seconds=True, plot_all = Fals
                 # For first cycle, generate list of lists
                 if first_iteration:
                     mat_data.append(iso_mass_list)
-                # For subsequent cycles, append values to the pre-existing lists
+                # For subsequent cycles, append values to the pre-existing
+                # lists
                 else:
                     for each in iso_mass_list:
                         mass_data[mat_counter][isotope_counter].append(each)
@@ -223,5 +231,5 @@ if __name__ == "__main__":
     # keff_time_plot(RESULTS)
     # u235_conc_diff_mats(DEPLETE)
     # delayed_precursors(DEPLETE)
-    restart_plots(FILENAME, num_divisions, CYCLES = 2, plot_all=True)
+    restart_plots(FILENAME, num_divisions, CYCLES=2, plot_all=True)
     pass
