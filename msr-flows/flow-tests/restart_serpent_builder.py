@@ -12,6 +12,7 @@ def make_input(inp_name, tot_time, time_step, restart_iter=0):
     Each restart iteration is a cycle
     '''
     num_divisions = int(tot_time / time_step)
+    core_mats = np.arange(num_divisions, 2 * num_divisions)
     full_input = '''
 set title "Feedback Run"
 '''
@@ -31,7 +32,7 @@ surf ifs cuboid -25 25 -25 25 -25 25
     vol_core = 125000
     fuel_salt_div_size = (max_z_core - min_z_core) / num_divisions
     for surf_sub in range(num_divisions):
-        surf_name = 'sub' + str(surf_sub)
+        surf_name = 'sub' + str(core_mats[surf_sub])
         minz = min_z_core + fuel_salt_div_size * surf_sub
         maxz = min_z_core + fuel_salt_div_size * (surf_sub + 1)
         surface_defs += '''
@@ -49,7 +50,7 @@ cell gr_cu 0 graphite ifs -ogc
 '''
 
     # Subdividing fuelsalt cells for core
-    for cell_sub in range(num_divisions):
+    for cell_sub in core_mats:
         cell_name = 'cell' + str(cell_sub)
         mat_name = 'fuelsalt' + str(cell_sub)
         surf_name = 'sub' + str(cell_sub)
