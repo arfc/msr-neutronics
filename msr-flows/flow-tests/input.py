@@ -12,7 +12,7 @@ from os import path
 # User Definitions
 INPUT_NAME = 'cycle_test'
 DIR_NAME = 'msr_cycle_test'
-NUM_CYCLES = 2
+NUM_CYCLES = 10
 CYCLE_TIME_SECONDS = 2
 CYCLE_STEP_SIZE_SECONDS = 1
 OUTPUT_NAME = 'output'
@@ -20,6 +20,10 @@ PLOTTING = True
 NON_CYCLE = False
 MULTI_CORE = False
 RESTART_CYCLE = True
+
+# Calculations
+# Double cycles because restart interprets as half-cycles
+RES_CYCLES = 2 * NUM_CYCLES
 
 # Functions
 
@@ -49,6 +53,7 @@ def check_wrk_file(INP_NAME):
 sec_per_day = 86400
 CYCLE_TIME_SECONDS = CYCLE_TIME_SECONDS / sec_per_day
 CYCLE_STEP_SIZE_SECONDS = CYCLE_STEP_SIZE_SECONDS / sec_per_day
+time_start = time()
 
 # Build File
 # If directory is present, remove
@@ -91,7 +96,7 @@ if MULTI_CORE:
     os.system('mv ./' + str(MULTI_OUT_NAME) + ' ./' + str(DIR_NAME))
     print('Files moved to ' + str(DIR_NAME))
 if RESTART_CYCLE:
-    for restart_iter in range(NUM_CYCLES):
+    for restart_iter in range(RES_CYCLES):
         REST_INP_NAME = str(INPUT_NAME) + '_rest' + str(restart_iter)
         REST_OUT_NAME = str(OUTPUT_NAME) + '_rest' + str(restart_iter)
         rest_input_script = rsb.make_input(
@@ -102,9 +107,13 @@ if RESTART_CYCLE:
         run_script(REST_INP_NAME, REST_OUT_NAME, rest_input_script)
         check_wrk_file(REST_INP_NAME)
         print(
-            f'Completed restart cycling case {restart_iter + 1}/{NUM_CYCLES}.')
+            f'Completed restart cycling case {restart_iter + 1}/{RES_CYCLES}.')
     # Moving all files
-    for restart_iter in range(NUM_CYCLES):
+    if RES_CYCLES > 10:
+        f_move = 10
+    else:
+        f_move = RES_CYCLES
+    for restart_iter in range(f_move):
         REST_INP_NAME = str(INPUT_NAME) + '_rest' + str(restart_iter)
         REST_OUT_NAME = str(OUTPUT_NAME) + '_rest' + str(restart_iter)
         os.system('mv ./' + str(REST_INP_NAME) + '* ./' + str(DIR_NAME))
@@ -129,7 +138,9 @@ if PLOTTING:
         rda.restart_plots(
             RESTART_PATH,
             num_divisions,
-            NUM_CYCLES,
-            seconds=True)
+            RES_CYCLES,
+            seconds=True,
+            plot_all=True,
+            stack_plot=True)
 os.system('mv ./*.png ./' + str(DIR_NAME))
-print('Done.')
+print(f'Done in {round((time() - time_start), 0)}.')

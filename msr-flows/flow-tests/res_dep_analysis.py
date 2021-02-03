@@ -21,7 +21,8 @@ def restart_plots(
         num_divisions,
         CYCLES,
         seconds=True,
-        plot_all=False):
+        plot_all=False,
+        stack_plot=True):
     '''
     This function generates various plots for the restart script
     '''
@@ -102,13 +103,24 @@ def restart_plots(
     # Do normal plots now, change to stacked area plot later
     isotope_counter = 0
     for each_isotope in fuel.names:
-        for each_mat_index in range(len(core_mats)):
-            plt.plot(
+        if stack_plot:
+            iso_stack = list()
+            iso_label = list()
+            for each_mat_index in range(len(core_mats)):
+                iso_stack.append(mass_data[each_mat_index][isotope_counter])
+                iso_label.append('Material ' + str(core_mats[each_mat_index]))
+            plt.stackplot(
                 days,
-                mass_data[each_mat_index][isotope_counter],
-                marker='.',
-                linestyle='--',
-                label=f'Material {core_mats[each_mat_index]}')
+                iso_stack,
+                labels=iso_label)
+        else:
+            for each_mat_index in range(len(core_mats)):
+                plt.plot(
+                    days,
+                    mass_data[each_mat_index][isotope_counter],
+                    marker='.',
+                    linestyle='--',
+                    label=f'Material {core_mats[each_mat_index]}')
         plt.legend()
         if seconds:
             plt.xlabel('Time [s]')
