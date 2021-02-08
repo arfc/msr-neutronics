@@ -12,7 +12,7 @@ from os import path
 # User Definitions
 INPUT_NAME = 'cycle_test'
 DIR_NAME = 'msr_cycle_test'
-NUM_CYCLES = 2
+NUM_CYCLES = 1
 CYCLE_TIME_SECONDS = 2
 CYCLE_STEP_SIZE_SECONDS = 1
 OUTPUT_NAME = 'output'
@@ -39,13 +39,22 @@ def run_script(INPUT_NAME, OUTPUT_NAME, input_script):
     return
 
 
-def check_wrk_file(INP_NAME):
+def check_wrk_file(INP_NAME, OUTPUT_NAME):
     '''
-    Allows the script to continue once the .wrk file is generated
+    Allows the script to continue once the .wrk file is generated.
+    Checks the if the length of the output file is being updated.
     '''
     wrk_name = str(INP_NAME) + '.wrk'
+    out_len = 0
     while not path.exists(wrk_name):
+        cur_out_len = 0
         sleep(20)
+        for line in open(OUTPUT_NAME).readlines():
+            cur_out_len += 1
+        if cut_out_len != out_len:
+            out_len = cur_out_len
+        else:
+            raise Exception('Error, view ' + str(OUTPUT_NAME))
     return
 
 
@@ -105,7 +114,7 @@ if RESTART_CYCLE:
             CYCLE_STEP_SIZE_SECONDS,
             restart_iter)
         run_script(REST_INP_NAME, REST_OUT_NAME, rest_input_script)
-        check_wrk_file(REST_INP_NAME)
+        check_wrk_file(REST_INP_NAME, OUTPUT_NAME)
         print(
             f'Completed restart cycling case {restart_iter + 1}/{RES_CYCLES}.')
     # Moving all files

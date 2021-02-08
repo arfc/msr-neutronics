@@ -156,7 +156,7 @@ set rfw 1
     flow_defs = '''
 
 mflow cycle_pump
- all 1
+ all 2
 
 rep flowprocess
 
