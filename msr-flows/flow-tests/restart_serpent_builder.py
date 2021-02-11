@@ -1,30 +1,22 @@
 # Imports
 import numpy as np
+from jinja2 import Environment, FileSystemLoader
 
 # Constants
 
 
 # Definitions
 
-def make_input(inp_name, tot_time, time_step, restart_iter=0):
+def make_input(inp_name, tot_time, time_step, restart_iter=0, lam_val=1):
     '''
     This function will generate the input file for Serpent.
     Each restart iteration is a cycle
     '''
     num_divisions = int(tot_time / time_step)
     core_mats = np.arange(num_divisions, 2 * num_divisions)
-    full_input = '''
-set title "Feedback Run"
-'''
-
+    env = Environment(loader=FileSystemLoader('./templates'))
+    template = env.get_template('standard.template')
     surface_defs = '''
-
-%__________SURFACE DEFINITIONS__________%
-% Outer graphite
-surf ogc cuboid -50 50 -50 50 -50 50
-% Inner Fuel Salt Cube vol of 1E6
-surf ifs cuboid -25 25 -25 25 -25 25
-% Subdivisions
 '''
     # Subdividing fuelsalt surfaces for core
     min_z_core = -25
@@ -40,13 +32,6 @@ surf {surf_name} cuboid -25 25 -25 25 {minz} {maxz}
         '''.format(**locals())
 
     cell_defs = '''
-
-%__________CELL DEFINITIONS__________%
-% Outside
-cell 999 0 outside ogc
-cell gr_cu 0 graphite ifs -ogc
-%cell fs_cu 0 fuelsalt -ifs
-% Subdivisions
 '''
 
     # Subdividing fuelsalt cells for core
@@ -71,22 +56,7 @@ cell {cell_name} 0 {mat_name} -{surf_name}
     '''
 
     mat_defs = '''
-
-%__________MATERIAL DEFINITIONS__________%
-% Graphite Moderator
-mat graphite -1.8 % moder graph 6000
-rgb 130 130 130
-6000.09c -1
-
-% Fuel Salt
-
-mat dump -0.001
-vol 1
-rgb 5 5 5
-burn 1
-  4009.09c -1
-
-'''.format(**locals())
+'''
 
     # Subdividing fuelsalt for in and out of core materials
     mat_vol = vol_core / num_divisions
@@ -107,34 +77,7 @@ burn 1
 
         '''.format(**locals())
 
-    misc_defs = '''
-
-%plot 3 2000 2000 0
-
-%set power 1000
-set pcc 0
-set powdens 1
-set mcvol 500000
-%set arr 2
-set printm 1
-set inventory
- Th
- U
- 922350
- 932370
- 350870
- 350880
- 350890
- 350900
- 350920
- 360930
- 370930
- 370940
- 531370
- 531380
- 531390
- 531400
-
+    rw_defs = '''
 '''
 
     # Checking how many restarts have occured
@@ -144,25 +87,23 @@ set inventory
     restart_read_name = str(name_alone) + str(restart_num) + '.wrk'
     cur_time = restart_iter * tot_time
     if restart_iter == 0:
-        misc_defs += '''
+        rw_defs += '''
 set rfw 1
 '''
     else:
-        misc_defs += '''
+        rw_defs += '''
 set rfr -{cur_time} {restart_read_name}
 set rfw 1
 '''.format(**locals())
 
-    flow_defs = '''
-
+    mflow_defs = '''
 mflow cycle_pump
- all 2
+ all {lam_val}
 
-rep flowprocess
-
-'''
+'''.format(**locals())
 
     # Subdividing Flows
+    rep_defs = ''
     for mat_sub in range(num_divisions * 3):
         from_name = 'fuelsalt' + str(mat_sub)
         if (restart_iter % 2) == 0:
@@ -180,35 +121,29 @@ rep flowprocess
             else:
                 to_name = 'fuelsalt' + str(mat_sub + 1)
         if to_name:
-            flow_defs += '''
+            rep_defs += '''
 rc {from_name} {to_name} cycle_pump 1
             '''.format(**locals())
-
-    misc_defs += '''
-
-set acelib "/home/luke/serp/xsdata/jeff312/sss_jeff312.xsdata"
-set declib "/home/luke/serp/xsdata/jeff312/sss_jeff33.dec"
-set nfylib "/home/luke/serp/xsdata/jeff312/sss_jeff33.nfy"
-
-set pop 5000 100 40
-'''
-    time_defs = '''
-
-dep
-pro flowprocess
-daystep
-
-'''
 
     # Setting times
     time_string = str(time_step) + ' '
     tot_time_list = time_string * num_divisions
-    time_defs += tot_time_list
-    full_input += surface_defs
-    full_input += cell_defs
-    full_input += mat_defs
-    full_input += misc_defs
-    full_input += flow_defs
-    full_input += time_defs
+    time_defs = tot_time_list
+    
+    # Loading values into template
+    full_input = template.render(
+        surfaces=surface_defs,
+        cells=cell_defs,
+        materials=mat_defs,
+        read_write=rw_defs,
+        mflows_rep=mflow_defs,
+        reprocessing_control=rep_defs,
+        time_vals=time_defs)
 
     return full_input
+
+
+if __name__ == '__main__':
+    test = make_input('test0', 5, 1)
+    with open('test_file.txt', 'w+') as f:
+        f.write(test)

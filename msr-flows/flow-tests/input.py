@@ -12,7 +12,7 @@ from os import path
 # User Definitions
 INPUT_NAME = 'cycle_test'
 DIR_NAME = 'msr_cycle_test'
-NUM_CYCLES = 1
+NUM_CYCLES = 2
 CYCLE_TIME_SECONDS = 2
 CYCLE_STEP_SIZE_SECONDS = 1
 OUTPUT_NAME = 'output'
