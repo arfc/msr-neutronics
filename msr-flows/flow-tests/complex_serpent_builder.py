@@ -11,8 +11,25 @@ def make_input(inp_name, tot_time, time_step, cycle_count):
     This function will generate the input file for Serpent.
     Naming convention is "name_core_number" for materials.
     Does not function well for a large number of cycles or time
+    
+    Parameters
+    ----------
+    inp_name : str
+        Name of the input file created.
+    tot_time : float
+        Total time to deplete for.
+    time_step : float
+        Time steps used in depletion.
+    cycle_count : int
+        Number of cycles to go through
+
+    Returns
+    -------
+    full_input : str
+        The full Serpent input text
+
     '''
-    lam_cycle = 1
+   lam_cycle = 1
     setting = 1
     num_divisions = int(tot_time / time_step)
     env = Environment(loader=FileSystemLoader('./templates'))

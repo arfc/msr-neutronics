@@ -11,6 +11,25 @@ def make_input(inp_name, tot_time, time_step, restart_iter=0, lam_val=1):
     '''
     This function will generate the input file for Serpent.
     Each restart iteration is a cycle
+    
+    Parameters
+    ----------
+    inp_name : str
+        Name of the input file created.
+    tot_time : float
+        Total time to deplete for.
+    time_step : float
+        Time steps used in depletion.
+    restart_iter : int, optional
+        Current iteration count
+    lam_val : {0, 1, 2}, optional
+        Value used in Serpent mass flow calculations
+
+    Returns
+    -------
+    full_input : str
+        The full Serpent input text
+
     '''
     num_divisions = int(tot_time / time_step)
     core_mats = np.arange(num_divisions, 2 * num_divisions)

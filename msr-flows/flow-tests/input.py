@@ -32,6 +32,19 @@ def run_script(INPUT_NAME, OUTPUT_NAME, input_script):
     '''
     Writes the input_script string to a file with the INPUT_NAME
     which is run and outputs to the OUTPUT_NAME.
+
+    Parameters
+    ----------
+    INPUT_NAME : str
+        Name of the Serpent input file
+    OUTPUT_NAME : str
+        Name of the desired Serpent output file
+    input_script : str
+        A string containing the Serpent input
+
+    Returns
+    -------
+    None
     '''
     with open(INPUT_NAME, 'w+') as input_file:
         input_file.write(input_script)
@@ -43,6 +56,23 @@ def check_wrk_file(INP_NAME, OUTPUT_NAME):
     '''
     Allows the script to continue once the .wrk file is generated.
     Checks the if the length of the output file is being updated.
+    
+    Parameters
+    ----------
+    INP_NAME : str
+        Name of the input file
+    OUTPUT_NAME : str
+        Name of the output file
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    Error, view `OUTPUT_NAME`
+        Occurs if the output does not update within 20 seconds.
+    
     '''
     wrk_name = str(INP_NAME) + '.wrk'
     out_len = 0

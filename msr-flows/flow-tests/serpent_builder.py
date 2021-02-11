@@ -9,6 +9,23 @@ from jinja2 import Environment, FileSystemLoader
 def make_input(inp_name, tot_time, time_step, cycle_count):
     '''
     This function will generate the input file for Serpent.
+
+    Parameters
+    ----------
+    inp_name : str
+        Name of the input file created.
+    tot_time : float
+        Total time to deplete for.
+    time_step : float
+        Time steps used in depletion.
+    cycle_count : int
+        Number of cycles to go through
+    
+    Returns
+    -------
+    full_input : str
+        The full Serpent input text
+
     '''
     num_divisions = int(tot_time / time_step)
     env = Environment(loader=FileSystemLoader('./templates'))

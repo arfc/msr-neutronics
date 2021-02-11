@@ -25,6 +25,25 @@ def restart_plots(
         stack_plot=True):
     '''
     This function generates various plots for the restart script
+
+    Parameters
+    ----------
+    FILENAME : str
+        Name of the input file.
+    num_divisions : int
+        Total time taken divided by the time steps used.
+    CYCLES : int
+        Number of cycles.
+    seconds : boolean, optional
+        Plot in seconds if True, otherwise use days.
+    plot_all : boolean, optional
+        Plot all materials if True, otherwise only core.
+    stacK_plot : boolean, optional
+        Plot stack plots if True, otherwise default matplotlib pyplot plots
+    
+    Returns
+    -------
+    None
     '''
     # Lists of data from each cycle condensed
     days = list()
@@ -138,6 +157,15 @@ def restart_plots(
 def keff_time_plot(RESULTS):
     '''
     Gives a plot of keff vs time
+
+    Parameters
+    ----------
+    RESULTS : str
+        Name of the results file
+
+    Returns
+    -------
+    None
     '''
     res = st.read(RESULTS, reader='results')
     res.plot('burnDays', 'absKeff')
@@ -152,6 +180,15 @@ def delayed_precursors(DEPLETE):
     Uses the spatially distributed materials to construct a
     temporal result.
     Meant to be used for multi-core (complex) input
+    
+    Parameters
+    ----------
+    DEPLETE : str
+        Name of the depletion output file
+
+    Returns
+    -------
+    None
     '''
     # Determine number of cores and material subdivisions
     fname = 'fuelsalt'
@@ -224,6 +261,15 @@ def delayed_precursors(DEPLETE):
 def u235_conc_diff_mats(DEPLETE):
     '''
     Iterates through the different materials and displays the mass of U235
+    
+    Parameters
+    ----------
+    DEPLETE : str
+        Name of the depletion output
+
+    Returns
+    -------
+    None
     '''
     dep = st.read(DEPLETE, reader='dep')
     for mat in dep.materials.keys():
