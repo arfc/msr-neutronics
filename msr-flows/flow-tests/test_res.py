@@ -83,13 +83,25 @@ def restart_plots(
             mat_data = list()
             mat_name = 'fuelsalt' + str(mat)
             # Material may not be present yet
-            fuel = dep.materials[str(mat_name)]
+            try:
+                fuel = dep.materials[str(mat_name)]
+                fuel_present = True
+            except:
+                fuel_present = False 
             # Iterate over each isotope in the current material in the core in
             # the current cycle
+            if not fuel_present:
+                # fuelsalt in core will always be present, so use it for a baseline
+                # num_division material will be bottom of core
+                # We will simply make it so any material not in the flow has no material (which should be true)
+                mat_name = 'fuelsalt' + str(num_divisions)
+                fuel = dep.materials[str(mat_name)]
             isotope_counter = 0
             for each_isotope in fuel.names:
                 iso_dens = fuel.getValues(
                     'days', 'mdens', fuel.days, each_isotope)
+                if not fuel_present:
+                    iso_dens = iso_dens * 0
                 # List of isotope masses in current material at time step
                 iso_mass = iso_dens[0] * fuel.data['volume'][0]
                 # Converting ndarray to list

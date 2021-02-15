@@ -11,7 +11,7 @@ def make_input(inp_name, tot_time, time_step, restart_iter=0, lam_val=1):
     '''
     This function will generate the input file for Serpent.
     Each restart iteration is a cycle
-    
+
     Parameters
     ----------
     inp_name : str
@@ -29,14 +29,12 @@ def make_input(inp_name, tot_time, time_step, restart_iter=0, lam_val=1):
     -------
     full_input : str
         The full Serpent input text
-
     '''
     num_divisions = int(tot_time / time_step)
     core_mats = np.arange(num_divisions, 2 * num_divisions)
     env = Environment(loader=FileSystemLoader('./templates'))
     template = env.get_template('standard.template')
-    surface_defs = '''
-'''
+    surface_defs = ''
     # Subdividing fuelsalt surfaces for core
     min_z_core = -25
     max_z_core = 25
@@ -50,8 +48,7 @@ def make_input(inp_name, tot_time, time_step, restart_iter=0, lam_val=1):
 surf {surf_name} cuboid -25 25 -25 25 {minz} {maxz}
         '''.format(**locals())
 
-    cell_defs = '''
-'''
+    cell_defs = ''
 
     # Subdividing fuelsalt cells for core
     for cell_sub in core_mats:
@@ -74,17 +71,61 @@ cell {cell_name} 0 {mat_name} -{surf_name}
  92238.09c  -0.059524947099    %  U-238
     '''
 
-    mat_defs = '''
-'''
+
+    ### So we need to compare the iteration value to each value in 2*num_divisions
+    ###     starting from the highest value, do the % thing to see if remainder.
+    ### If there is no remainder, that means we need to use that state. 
+    ### How do we make connections generic? Since we use num*2 flows, just add to start value (determined by state)
+    ### Times 2 instead of 3 here because we dont need as many connections
+    # Determine current state of flow (important for materials)
+    # Normalize restart_iter value
+    restart_use_val = restart_iter
+    while restart_use_val >= 2 * num_divisions:
+        restart_use_val -= 2 * num_divisions
+    # Loop to find state
+    for compare_val in range(num_divisions * 2):
+        compare_use = 2 * num_divisions - compare_val
+        if compare_use == 0:
+            continue
+        if (restart_use_val % compare_use) == 0:
+            current_state = compare_use
+            break
+    # Edge Case
+    if restart_use_val == 0:
+        current_state = 0
+
+    # Setting up flows for current state
+    core_mats = [mat for mat in np.arange(num_divisions, 2 * num_divisions)]
+    if current_state < num_divisions:
+        feed_mats = [mat for mat in np.arange(0, num_divisions)]
+        empty_mats = [mat for mat in np.arange(2 * num_divisions, 3 * num_divisions)]
+    else:
+        empty_mats = [mat for mat in np.arange(0, num_divisions)]
+        feed_mats = [mat for mat in np.arange(2 * num_divisions, 3 * num_divisions)]
+    feed_list = np.concatenate((feed_mats, core_mats, empty_mats))
+
+    empty_mat_list = list()
+    index_value = 0
+    # feed_list adjusts for state, so we don't need every state, only shape
+    while current_state >= num_divisions:
+        current_state -= num_divisions
+    # Iterate over number of materials minus 1 to generate empty mats list
+    for generic_index in range(num_divisions - 1):
+        index_value -= 1
+        empty_mat_list.append(feed_list[index_value + current_state])
+
+    mat_defs = ''
 
     # Subdividing fuelsalt for in and out of core materials
     mat_vol = vol_core / num_divisions
-    dens = -1.94
-    empt_dens = -0.00001
     # Triple the materials for core feed, core, and core output
+    # Calibrate masses based on num_div and restart_iter
+   
     for mat_sub in range(num_divisions * 3):
-        if mat_sub > 2 * num_divisions - 1:
+        dens = -1.94
+        if mat_sub in empty_mat_list:
             dens = -0.00001
+            print(mat_sub)
         rgb_var = 10 + mat_sub * 2
         mat_name = 'fuelsalt' + str(mat_sub)
         mat_defs += '''
@@ -100,11 +141,13 @@ burn 1
 '''
 
     # Checking how many restarts have occured
+    # Generating name for previous .wrk file
     num_in_name = ''.join(filter(str.isdigit, inp_name))
     restart_num = int(num_in_name) - 1
     name_alone = inp_name.replace(num_in_name, '')
     restart_read_name = str(name_alone) + str(restart_num) + '.wrk'
-    cur_time = restart_iter * tot_time
+    # cur_time adds 1 time step per restart iter
+    cur_time = restart_iter * time_step
     if restart_iter == 0:
         rw_defs += '''
 set rfw 1
@@ -119,36 +162,51 @@ set rfw 1
 mflow cycle_pump
  all {lam_val}
 
+mflow null_pump
+ all 0
+
 '''.format(**locals())
 
     # Subdividing Flows
     rep_defs = ''
-    for mat_sub in range(num_divisions * 3):
-        from_name = 'fuelsalt' + str(mat_sub)
-        if (restart_iter % 2) == 0:
-            if mat_sub == num_divisions * 3 - 1:
-                to_name = False
-            else:
-                to_name = 'fuelsalt' + str(mat_sub + 1)
-        else:
-            if mat_sub == num_divisions - 1:
-                to_name = False
-            elif mat_sub == 2 * num_divisions - 1:
-                to_name = 'fuelsalt' + str(0)
-            elif mat_sub == 3 * num_divisions - 1:
-                to_name = 'fuelsalt' + str(num_divisions)
-            else:
-                to_name = 'fuelsalt' + str(mat_sub + 1)
-        if to_name:
-            rep_defs += '''
-rc {from_name} {to_name} cycle_pump 1
-            '''.format(**locals())
+ 
+    # Determine value to shift index by
+    if current_state < num_divisions:
+        shift_val = current_state
+    else:
+        shift_val = current_state - num_divisions
+    # List of materials that output/input
+    io_list = list()
+    # Iterate over all flows to include null flows
+    for mat_sub in range(2 * num_divisions):
+       # shift right by current_state
+        compare_val = mat_sub + current_state + 1
+        while compare_val >= 3 * num_divisions:
+            mat_sub -= 3 * num_divisions
+            compare_val = mat_sub + current_state + 1
+        io_list.append(feed_list[mat_sub + shift_val])
+        io_list.append(feed_list[mat_sub + shift_val + 1])
+        from_name = 'fuelsalt' + str(feed_list[mat_sub + shift_val])
+        to_name = 'fuelsalt' + str(feed_list[mat_sub + shift_val + 1])
+        rep_defs += '''
+rc {from_name} {to_name} cycle_pump 2
+       '''.format(**locals())
+    clean_io = list(set(io_list))
+    # New list with all materials that don't have flows
+    missing_io = list(list(set(feed_list) - set(clean_io)) + list(set(clean_io) - set(feed_list)))
+    # Iterate over missing materials adding 0 flows to bottom of the core, which will always have flows
+
+    # Uncomment this to get Serpent "Shouldn't happen" error
+    #for mat in missing_io:
+    #    from_name = 'fuelsalt' + str(mat)
+    #    to_name = 'fuelsalt' + str(core_mats[0])
+    #    rep_defs += '''
+#rc {from_name} {to_name} null_pump 1
+    #    '''.format(**locals())
 
     # Setting times
-    time_string = str(time_step) + ' '
-    tot_time_list = time_string * num_divisions
-    time_defs = tot_time_list
-    
+    time_defs = str(time_step)
+
     # Loading values into template
     full_input = template.render(
         surfaces=surface_defs,
@@ -163,6 +221,14 @@ rc {from_name} {to_name} cycle_pump 1
 
 
 if __name__ == '__main__':
-    test = make_input('test0', 5, 1)
-    with open('test_file.txt', 'w+') as f:
-        f.write(test)
+    #rest_iter = 2
+    #test = make_input('test_file2.txt', 3, 1, rest_iter)
+    #with open('test_file2.txt', 'w+') as f:
+    #    f.write(test)
+    sec_per_day = 86400
+    time_step = 1/sec_per_day
+    tot_time = 2/sec_per_day
+    for iter_cnt in range(5):
+        test = make_input(f'cycle_test_rest{iter_cnt}', tot_time, time_step, iter_cnt)
+        with open(f'cycle_test_rest{iter_cnt}', 'w+') as f:
+            f.write(test)

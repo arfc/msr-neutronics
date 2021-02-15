@@ -4,7 +4,8 @@ import serpent_builder as sb
 import complex_serpent_builder as csb
 import restart_serpent_builder as rsb
 import os
-import res_dep_analysis as rda
+#import res_dep_analysis as rda
+import test_res as rda
 import subprocess
 import os.path
 from os import path
@@ -12,7 +13,7 @@ from os import path
 # User Definitions
 INPUT_NAME = 'cycle_test'
 DIR_NAME = 'msr_cycle_test'
-NUM_CYCLES = 2
+NUM_CYCLES = 1
 CYCLE_TIME_SECONDS = 2
 CYCLE_STEP_SIZE_SECONDS = 1
 OUTPUT_NAME = 'output'
@@ -23,7 +24,13 @@ RESTART_CYCLE = True
 
 # Calculations
 # Double cycles because restart interprets as half-cycles
-RES_CYCLES = 2 * NUM_CYCLES
+# Also one step at a time, so mutiply by number of single steps needed 
+num_divisions = int(CYCLE_TIME_SECONDS / CYCLE_STEP_SIZE_SECONDS)
+RES_CYCLES = NUM_CYCLES * 2 * num_divisions
+sec_per_day = 86400
+CYCLE_TIME_SECONDS = CYCLE_TIME_SECONDS / sec_per_day
+CYCLE_STEP_SIZE_SECONDS = CYCLE_STEP_SIZE_SECONDS / sec_per_day
+time_start = time()
 
 # Functions
 
@@ -76,23 +83,18 @@ def check_wrk_file(INP_NAME, OUTPUT_NAME):
     '''
     wrk_name = str(INP_NAME) + '.wrk'
     out_len = 0
+    # Path will exist once it has fully run
     while not path.exists(wrk_name):
         cur_out_len = 0
         sleep(20)
         for line in open(OUTPUT_NAME).readlines():
             cur_out_len += 1
-        if cut_out_len != out_len:
+        if cur_out_len != out_len:
             out_len = cur_out_len
         else:
             raise Exception('Error, view ' + str(OUTPUT_NAME))
     return
 
-
-# Calculations
-sec_per_day = 86400
-CYCLE_TIME_SECONDS = CYCLE_TIME_SECONDS / sec_per_day
-CYCLE_STEP_SIZE_SECONDS = CYCLE_STEP_SIZE_SECONDS / sec_per_day
-time_start = time()
 
 # Build File
 # If directory is present, remove
@@ -144,7 +146,7 @@ if RESTART_CYCLE:
             CYCLE_STEP_SIZE_SECONDS,
             restart_iter)
         run_script(REST_INP_NAME, REST_OUT_NAME, rest_input_script)
-        check_wrk_file(REST_INP_NAME, OUTPUT_NAME)
+        check_wrk_file(REST_INP_NAME, REST_OUT_NAME)
         print(
             f'Completed restart cycling case {restart_iter + 1}/{RES_CYCLES}.')
     # Moving all files
@@ -173,13 +175,12 @@ if PLOTTING:
         rda.u235_conc_diff_mats(str(NON_CYCLE_PATH) + '_dep.m')
     if RESTART_CYCLE:
         RESTART_PATH = './' + str(DIR_NAME) + '/' + str(INPUT_NAME) + '_rest'
-        num_divisions = int(CYCLE_TIME_SECONDS / CYCLE_STEP_SIZE_SECONDS)
         rda.restart_plots(
             RESTART_PATH,
             num_divisions,
             RES_CYCLES,
             seconds=True,
-            plot_all=True,
+            plot_all=False,
             stack_plot=True)
 os.system('mv ./*.png ./' + str(DIR_NAME))
 print(f'Done in {round((time() - time_start), 0)}.')

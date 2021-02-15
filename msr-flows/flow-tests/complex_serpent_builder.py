@@ -29,7 +29,7 @@ def make_input(inp_name, tot_time, time_step, cycle_count):
         The full Serpent input text
 
     '''
-   lam_cycle = 1
+    lam_cycle = 1
     setting = 1
     num_divisions = int(tot_time / time_step)
     env = Environment(loader=FileSystemLoader('./templates'))

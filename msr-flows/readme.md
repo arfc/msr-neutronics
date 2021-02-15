@@ -2,7 +2,7 @@ These scripts are used to analyze flows in MSRs.
 
 ### Short Term Testing
 
-Testing to see the short term effects cycle time has upon msr behaviour, particularly looking at cyclical behaviour. These files are located in the `flow_tests` directory.
+Testing to see the short term effects cycle time has upon msr behaviour, particularly looking at cyclical behaviour. These files are located in the `flow-tests` directory.
 
 The `input.py` file contains the user defined terms (i.e. cycles and such).
 
@@ -15,4 +15,6 @@ The `res_dep_analysis.py` file is used to analyze the results and depletion outp
 To run these scripts, the sss2 executable is required. The input.py script is run, and the plots will be generated along with the various Serpent output files based on the user options selected.
 
 The `./msr_cycle_test` directory contains all of the Serpent outputs as well as the generated plots.
+
+
 
