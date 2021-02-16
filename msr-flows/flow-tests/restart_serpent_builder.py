@@ -7,7 +7,7 @@ from jinja2 import Environment, FileSystemLoader
 
 # Definitions
 
-def make_input(inp_name, tot_time, time_step, restart_iter=0, lam_val=1):
+def make_input(inp_name, tot_time, time_step, restart_iter=0, lam_val=0.01):
     '''
     This function will generate the input file for Serpent.
     Each restart iteration is a cycle
@@ -110,7 +110,7 @@ cell {cell_name} 0 {mat_name} -{surf_name}
     while current_state >= num_divisions:
         current_state -= num_divisions
     # Iterate over number of materials minus 1 to generate empty mats list
-    for generic_index in range(num_divisions - 1):
+    for generic_index in range(num_divisions):
         index_value -= 1
         empty_mat_list.append(feed_list[index_value + current_state])
 
@@ -120,12 +120,10 @@ cell {cell_name} 0 {mat_name} -{surf_name}
     mat_vol = vol_core / num_divisions
     # Triple the materials for core feed, core, and core output
     # Calibrate masses based on num_div and restart_iter
-   
     for mat_sub in range(num_divisions * 3):
         dens = -1.94
         if mat_sub in empty_mat_list:
             dens = -0.00001
-            print(mat_sub)
         rgb_var = 10 + mat_sub * 2
         mat_name = 'fuelsalt' + str(mat_sub)
         mat_defs += '''
