@@ -7,7 +7,7 @@ from jinja2 import Environment, FileSystemLoader
 
 # Definitions
 
-def make_input(inp_name, tot_time, time_step, restart_iter=0, lam_val=0.01):
+def make_input(inp_name, tot_time, time_step, restart_iter=0, lam_val=1):
     '''
     This function will generate the input file for Serpent.
     Each restart iteration is a cycle
