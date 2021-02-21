@@ -7,7 +7,7 @@ from jinja2 import Environment, FileSystemLoader
 
 # Definitions
 
-def make_input(inp_name, tot_time, time_step, restart_iter=0, lam_val=0.2, flip = False):
+def make_input(inp_name, tot_time, time_step, restart_iter=0, lam_val=1, flip=False, flow_type=2):
     '''
     This function will generate the input file for Serpent.
     Each restart iteration is a cycle
@@ -22,15 +22,19 @@ def make_input(inp_name, tot_time, time_step, restart_iter=0, lam_val=0.2, flip 
         Time steps used in depletion.
     restart_iter : int, optional
         Current iteration count
-    lam_val : {0, 1, 2}, optional
+    lam_val : float, optional
         Value used in Serpent mass flow calculations
+    flip : boolean, optional
+        Whether or not the flow orientation will be flipped
+    flow_type : {0, 1, 2}, optional
+        Which flow type for Serpent to use
 
     Returns
     -------
     full_input : str
         The full Serpent input text
     '''
-    flip_mult = 1E-5
+    flip_mult = 1E-10
     num_divisions = int(tot_time / time_step)
     core_mats = np.arange(num_divisions, 2 * num_divisions)
     env = Environment(loader=FileSystemLoader('./templates'))
@@ -144,14 +148,12 @@ burn 1
     num_in_name = ''.join(filter(str.isdigit, inp_name))
     restart_num = int(num_in_name) - 1
     name_alone = inp_name.replace(num_in_name, '')
-    print(name_alone)
-    print(restart_num)
     if flip:
         name_alone = name_alone.replace('_f', '')
     restart_read_name = str(name_alone) + str(restart_num) + '.wrk'
     # Just had a flip state, need to read from that file
-    if current_state == num_divisions or current_state == 2 * num_divisions:
-        restart_read_name = str(name_alone) + str(restart_num) + '_f.wrk'
+    if current_state == num_divisions or current_state == 2 * num_divisions or current_state == 0 and restart_iter != 0 and not flip:
+        restart_read_name = str(name_alone) + str(restart_iter) + '_f.wrk'
     # cur_time adds 1 time step per restart iter
     # for num: 2 - 2(1), 4(2), 6(3)
     # for num:3 - 3(1), 6(2), 9(3)
@@ -159,8 +161,7 @@ burn 1
     # Need to still account for total flip times
     if flip:
         tot_flips -= 1
-    cur_time = restart_iter * time_step + tot_flips * flip_mult
-    print(cur_time)
+    cur_time = time_step * (restart_iter + tot_flips * flip_mult)
     if restart_iter == 0:
         rw_defs += '''
 set rfw 1
@@ -194,6 +195,8 @@ mflow null_pump
     # List of materials that output/input
     io_list = list()
     # Iterate over all flows to include null flows
+    if flip:
+        flow_type = 1
     for mat_sub in range(2 * num_divisions):
        # shift right by current_state
         compare_val = mat_sub + current_state + 1
@@ -205,7 +208,7 @@ mflow null_pump
         from_name = 'fuelsalt' + str(feed_list[mat_sub + shift_val])
         to_name = 'fuelsalt' + str(feed_list[mat_sub + shift_val + 1])
         rep_defs += '''
-rc {from_name} {to_name} cycle_pump 2
+rc {from_name} {to_name} cycle_pump {flow_type}
        '''.format(**locals())
     clean_io = list(set(io_list))
     # New list with all materials that don't have flows
