@@ -13,7 +13,7 @@ from os import path
 # User Definitions
 INPUT_NAME = 'cycle_test'
 DIR_NAME = 'msr_cycle_test'
-NUM_CYCLES = 1
+NUM_CYCLES = 3
 CYCLE_TIME_SECONDS = 2
 CYCLE_STEP_SIZE_SECONDS = 1
 OUTPUT_NAME = 'output'
@@ -55,7 +55,7 @@ def run_script(INPUT_NAME, OUTPUT_NAME, input_script):
     '''
     with open(INPUT_NAME, 'w+') as input_file:
         input_file.write(input_script)
-    os.system('sss2 -omp 32 ' + str(INPUT_NAME) + ' > ' + str(OUTPUT_NAME))
+    os.system('sss2_test -omp 32 ' + str(INPUT_NAME) + ' > ' + str(OUTPUT_NAME))
     return
 
 
@@ -197,7 +197,7 @@ if PLOTTING:
             num_divisions,
             RES_CYCLES,
             seconds=True,
-            plot_all=False,
+            plot_all=True,
             stack_plot=True)
 os.system('mv ./*.png ./' + str(DIR_NAME))
 print(f'Done in {round((time() - time_start), 0)}.')
