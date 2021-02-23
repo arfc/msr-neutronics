@@ -34,7 +34,7 @@ def make_input(inp_name, tot_time, time_step, restart_iter=0, lam_val=1, flip=Fa
     full_input : str
         The full Serpent input text
     '''
-    flip_mult = 1E-10
+    #flip_mult = 1E-10
     num_divisions = int(tot_time / time_step)
     core_mats = np.arange(num_divisions, 2 * num_divisions)
     env = Environment(loader=FileSystemLoader('./templates'))
@@ -148,20 +148,21 @@ burn 1
     num_in_name = ''.join(filter(str.isdigit, inp_name))
     restart_num = int(num_in_name) - 1
     name_alone = inp_name.replace(num_in_name, '')
-    if flip:
-        name_alone = name_alone.replace('_f', '')
+    #if flip:
+    #    name_alone = name_alone.replace('_f', '')
     restart_read_name = str(name_alone) + str(restart_num) + '.wrk'
     # Just had a flip state, need to read from that file
-    if current_state == num_divisions or current_state == 2 * num_divisions or current_state == 0 and restart_iter != 0 and not flip:
-        restart_read_name = str(name_alone) + str(restart_iter) + '_f.wrk'
+    #if current_state == num_divisions or current_state == 2 * num_divisions or current_state == 0 and restart_iter != 0 and not flip:
+    #    restart_read_name = str(name_alone) + str(restart_iter) + '_f.wrk'
     # cur_time adds 1 time step per restart iter
     # for num: 2 - 2(1), 4(2), 6(3)
     # for num:3 - 3(1), 6(2), 9(3)
-    tot_flips = int((restart_iter / num_divisions))
+    #tot_flips = int((restart_iter / num_divisions))
     # Need to still account for total flip times
-    if flip:
-        tot_flips -= 1
-    cur_time = time_step * (restart_iter + tot_flips * flip_mult)
+    #if flip:
+    #    tot_flips -= 1
+    #cur_time = time_step * (restart_iter + tot_flips * flip_mult)
+    cur_time = time_step * restart_iter
     if restart_iter == 0:
         rw_defs += '''
 set rfw 1
@@ -195,8 +196,8 @@ mflow null_pump
     # List of materials that output/input
     io_list = list()
     # Iterate over all flows to include null flows
-    if flip:
-        flow_type = 1
+    #if flip:
+    #    flow_type = 1
     for mat_sub in range(2 * num_divisions):
        # shift right by current_state
         compare_val = mat_sub + current_state + 1
@@ -224,8 +225,8 @@ rc {from_name} {to_name} cycle_pump {flow_type}
     #    '''.format(**locals())
 
     # Setting times
-    if flip:
-        time_step = flip_mult * time_step
+    #if flip:
+    #    time_step = flip_mult * time_step
     time_defs = str(time_step)
 
     # Loading values into template

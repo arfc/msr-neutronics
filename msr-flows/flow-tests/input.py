@@ -13,7 +13,7 @@ from os import path
 # User Definitions
 INPUT_NAME = 'cycle_test'
 DIR_NAME = 'msr_cycle_test'
-NUM_CYCLES = 3
+NUM_CYCLES = 10
 CYCLE_TIME_SECONDS = 2
 CYCLE_STEP_SIZE_SECONDS = 1
 OUTPUT_NAME = 'output'
@@ -138,23 +138,23 @@ if MULTI_CORE:
     print('Files moved to ' + str(DIR_NAME))
 if RESTART_CYCLE:
     for restart_iter in range(RES_CYCLES):
-        flip_check = restart_iter
+        #flip_check = restart_iter
         # Build in small fix to adjust to new flow regime
-        while flip_check > 2 * num_divisions:
-            flip_check -= 2 * num_divisions
-        if flip_check == num_divisions or flip_check == 2 * num_divisions:
-            print('Running flip fix.')
-            REST_INP_NAME = str(INPUT_NAME) + '_rest' + str(restart_iter) + '_f'
-            REST_OUT_NAME = str(OUTPUT_NAME) + '_rest' + str(restart_iter) + '_f'
-            rest_input_script = rsb.make_input(
-                REST_INP_NAME,
-                CYCLE_TIME_SECONDS,
-                CYCLE_STEP_SIZE_SECONDS,
-                restart_iter,
-                flip = True)
-            run_script(REST_INP_NAME, REST_OUT_NAME, rest_input_script)
-            check_wrk_file(REST_INP_NAME, REST_OUT_NAME)
-            print('Flip fix complete.')
+        #while flip_check > 2 * num_divisions:
+        #    flip_check -= 2 * num_divisions
+        #if flip_check == num_divisions or flip_check == 2 * num_divisions:
+        #    print('Running flip fix.')
+        #    REST_INP_NAME = str(INPUT_NAME) + '_rest' + str(restart_iter) + '_f'
+        #    REST_OUT_NAME = str(OUTPUT_NAME) + '_rest' + str(restart_iter) + '_f'
+        #    rest_input_script = rsb.make_input(
+        #        REST_INP_NAME,
+        #        CYCLE_TIME_SECONDS,
+        #        CYCLE_STEP_SIZE_SECONDS,
+        #        restart_iter,
+        #        flip = True)
+        #    run_script(REST_INP_NAME, REST_OUT_NAME, rest_input_script)
+        #    check_wrk_file(REST_INP_NAME, REST_OUT_NAME)
+        #    print('Flip fix complete.')
         REST_INP_NAME = str(INPUT_NAME) + '_rest' + str(restart_iter)
         REST_OUT_NAME = str(OUTPUT_NAME) + '_rest' + str(restart_iter)
         rest_input_script = rsb.make_input(
