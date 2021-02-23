@@ -61,7 +61,7 @@ set acelib "/home/luke/serp/xsdata/jeff312/sss_jeff312.xsdata"
 set declib "/home/luke/serp/xsdata/jeff312/sss_jeff33.dec"
 set nfylib "/home/luke/serp/xsdata/jeff312/sss_jeff33.nfy"
 
-set pop 5000 100 40
+set pop 10000 100 40
 
 
 {{mflows_rep}}
