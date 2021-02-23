@@ -22,7 +22,8 @@ def restart_plots(
         CYCLES,
         seconds=True,
         plot_all=False,
-        stack_plot=True):
+        stack_plot=True,
+        combine_outer=True):
     '''
     This function generates various plots for the restart script
 
@@ -39,8 +40,10 @@ def restart_plots(
     plot_all : boolean, optional
         Plot all materials if True, otherwise only core.
     stack_plot : boolean, optional
-        Plot stack plots if True, otherwise default matplotlib pyplot plots
-    
+        Plot stack plots if True, otherwise default matplotlib pyplot plots.
+    combine_outer : boolean, optional
+        Combines the non-core materials in a reasonable way.
+
     Returns
     -------
     None
@@ -83,13 +86,25 @@ def restart_plots(
             mat_data = list()
             mat_name = 'fuelsalt' + str(mat)
             # Material may not be present yet
-            fuel = dep.materials[str(mat_name)]
+            try:
+                fuel = dep.materials[str(mat_name)]
+                fuel_present = True
+            except:
+                fuel_present = False 
             # Iterate over each isotope in the current material in the core in
             # the current cycle
+            if not fuel_present:
+                # fuelsalt in core will always be present, so use it for a baseline
+                # num_division material will be bottom of core
+                # We will simply make it so any material not in the flow has no material (which should be true)
+                mat_name = 'fuelsalt' + str(num_divisions)
+                fuel = dep.materials[str(mat_name)]
             isotope_counter = 0
             for each_isotope in fuel.names:
                 iso_dens = fuel.getValues(
                     'days', 'mdens', fuel.days, each_isotope)
+                if not fuel_present:
+                    iso_dens = iso_dens * 0
                 # List of isotope masses in current material at time step
                 iso_mass = iso_dens[0] * fuel.data['volume'][0]
                 # Converting ndarray to list
@@ -121,13 +136,32 @@ def restart_plots(
     plt.close()
     # Mass plots
     isotope_counter = 0
+    internal_core_mats = np.arange(num_divisions, 2 * num_divisions)
     for each_isotope in fuel.names:
         if stack_plot:
             iso_stack = list()
             iso_label = list()
             for each_mat_index in range(len(core_mats)):
-                iso_stack.append(mass_data[each_mat_index][isotope_counter])
-                iso_label.append('Material ' + str(core_mats[each_mat_index]))
+                if combine_outer:
+                    if each_mat_index not in internal_core_mats:
+                        if each_mat_index < internal_core_mats[-1]:
+                            # To combine outer flows
+                            stack_val = list()
+                            for each in range(len(mass_data[each_mat_index][isotope_counter])):
+                                stack_val.append(mass_data[each_mat_index][isotope_counter][each] + mass_data[each_mat_index + 2 * num_divisions][isotope_counter][each])
+                            iso_stack.append(stack_val)
+                            iso_label.append('Material ' + str(core_mats[each_mat_index]))
+                        else:
+                            pass
+                    else:
+                        iso_stack.append(mass_data[each_mat_index][isotope_counter])
+                        iso_label.append('Material ' + str(core_mats[each_mat_index]))
+                else:
+                    iso_stack.append(mass_data[each_mat_index][isotope_counter])
+                    iso_label.append('Material ' + str(core_mats[each_mat_index]))
+            print(iso_stack)
+            print(iso_label)
+            print(days)
             plt.stackplot(
                 days,
                 iso_stack,
@@ -289,5 +323,5 @@ if __name__ == "__main__":
     # keff_time_plot(RESULTS)
     # u235_conc_diff_mats(DEPLETE)
     # delayed_precursors(DEPLETE)
-    restart_plots(FILENAME, num_divisions, CYCLES=CYCLES, plot_all=True)
+    restart_plots(FILENAME, num_divisions, CYCLES=CYCLES, plot_all=True, combine_outer = True)
     pass

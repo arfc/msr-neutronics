@@ -4,8 +4,7 @@ import serpent_builder as sb
 import complex_serpent_builder as csb
 import restart_serpent_builder as rsb
 import os
-#import res_dep_analysis as rda
-import test_res as rda
+import res_dep_analysis as rda
 import subprocess
 import os.path
 from os import path
