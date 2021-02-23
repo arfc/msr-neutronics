@@ -159,9 +159,6 @@ def restart_plots(
                 else:
                     iso_stack.append(mass_data[each_mat_index][isotope_counter])
                     iso_label.append('Material ' + str(core_mats[each_mat_index]))
-            print(iso_stack)
-            print(iso_label)
-            print(days)
             plt.stackplot(
                 days,
                 iso_stack,
