@@ -146,13 +146,22 @@ def restart_plots(
                     if each_mat_index not in internal_core_mats:
                         if each_mat_index < internal_core_mats[-1]:
                             # To combine outer flows
-                            # Ex/ num_div=2:
-                            # 0+4, 1+5, (2 and 3 are core)
-                            stack_val = mass_data[each_mat_index][isotope_counter] + mass_data[each_mat_index + 2 * num_divisions][isotope_counter]
-                    pass
+                            stack_val = list()
+                            for each in range(len(mass_data[each_mat_index][isotope_counter])):
+                                stack_val.append(mass_data[each_mat_index][isotope_counter][each] + mass_data[each_mat_index + 2 * num_divisions][isotope_counter][each])
+                            iso_stack.append(stack_val)
+                            iso_label.append('Material ' + str(core_mats[each_mat_index]))
+                        else:
+                            pass
+                    else:
+                        iso_stack.append(mass_data[each_mat_index][isotope_counter])
+                        iso_label.append('Material ' + str(core_mats[each_mat_index]))
                 else:
                     iso_stack.append(mass_data[each_mat_index][isotope_counter])
                     iso_label.append('Material ' + str(core_mats[each_mat_index]))
+            print(iso_stack)
+            print(iso_label)
+            print(days)
             plt.stackplot(
                 days,
                 iso_stack,
@@ -314,5 +323,5 @@ if __name__ == "__main__":
     # keff_time_plot(RESULTS)
     # u235_conc_diff_mats(DEPLETE)
     # delayed_precursors(DEPLETE)
-    restart_plots(FILENAME, num_divisions, CYCLES=CYCLES, plot_all=True)
+    restart_plots(FILENAME, num_divisions, CYCLES=CYCLES, plot_all=True, combine_outer = True)
     pass
