@@ -188,7 +188,7 @@ mflow null_pump
     # List of materials that output/input
     io_list = list()
     for mat_sub in range(2 * num_divisions):
-       # shift right by current_state
+        # shift right by current_state
         compare_val = mat_sub + current_state + 1
         while compare_val >= 3 * num_divisions:
             mat_sub -= 3 * num_divisions
