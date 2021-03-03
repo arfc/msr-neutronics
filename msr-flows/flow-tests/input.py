@@ -20,11 +20,11 @@ PLOTTING = True
 NON_CYCLE = False
 MULTI_CORE = False
 RESTART_CYCLE = True
-serpent_version = 'sss2'
+serpent_version = 'sss2_test'
 
 # Calculations
 # Double cycles because restart interprets as half-cycles
-# Also one step at a time, so mutiply by number of single steps needed 
+# Also one step at a time, so mutiply by number of single steps needed
 num_divisions = int(CYCLE_TIME_SECONDS / CYCLE_STEP_SIZE_SECONDS)
 RES_CYCLES = NUM_CYCLES * 2 * num_divisions
 sec_per_day = 86400
@@ -55,7 +55,12 @@ def run_script(INPUT_NAME, OUTPUT_NAME, input_script):
     '''
     with open(INPUT_NAME, 'w+') as input_file:
         input_file.write(input_script)
-    os.system(str(serpent_version) + '-omp 32 ' + str(INPUT_NAME) + ' > ' + str(OUTPUT_NAME))
+    os.system(
+        str(serpent_version) +
+        ' -omp 32 ' +
+        str(INPUT_NAME) +
+        ' > ' +
+        str(OUTPUT_NAME))
     return
 
 
@@ -63,7 +68,7 @@ def check_wrk_file(INP_NAME, OUTPUT_NAME):
     '''
     Allows the script to continue once the .wrk file is generated.
     Checks the if the length of the output file is being updated.
-    
+
     Parameters
     ----------
     INP_NAME : str
@@ -79,7 +84,7 @@ def check_wrk_file(INP_NAME, OUTPUT_NAME):
     ------
     Error, view `OUTPUT_NAME`
         Occurs if the output does not update within 20 seconds.
-    
+
     '''
     wrk_name = str(INP_NAME) + '.wrk'
     out_len = 0
@@ -140,9 +145,9 @@ if RESTART_CYCLE:
     for restart_iter in range(RES_CYCLES):
         #flip_check = restart_iter
         # Build in small fix to adjust to new flow regime
-        #while flip_check > 2 * num_divisions:
+        # while flip_check > 2 * num_divisions:
         #    flip_check -= 2 * num_divisions
-        #if flip_check == num_divisions or flip_check == 2 * num_divisions:
+        # if flip_check == num_divisions or flip_check == 2 * num_divisions:
         #    print('Running flip fix.')
         #    REST_INP_NAME = str(INPUT_NAME) + '_rest' + str(restart_iter) + '_f'
         #    REST_OUT_NAME = str(OUTPUT_NAME) + '_rest' + str(restart_iter) + '_f'

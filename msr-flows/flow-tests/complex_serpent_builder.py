@@ -11,7 +11,7 @@ def make_input(inp_name, tot_time, time_step, cycle_count):
     This function will generate the input file for Serpent.
     Naming convention is "name_core_number" for materials.
     Does not function well for a large number of cycles or time
-    
+
     Parameters
     ----------
     inp_name : str
@@ -181,7 +181,6 @@ mflow feed_pump
  rc {from_name} {to_name} cycle_pump {setting}
             '''.format(**locals())
 
-
     # Setting times
     time_string = str(time_step) + ' '
     tot_time_list = time_string * 2 * num_divisions * cycle_count
@@ -192,18 +191,15 @@ mflow feed_pump
         surfaces=surface_defs,
         cells=cell_defs,
         materials=mat_defs,
-        fuel_storage_vol = fuel_storage_vol,
+        fuel_storage_vol=fuel_storage_vol,
         mflows_rep=mflow_defs,
         reprocessing_control=rep_defs,
         time_vals=time_defs)
 
-
     return full_input
-
 
 
 if __name__ == '__main__':
     test = make_input('test0', 5, 1, 2)
     with open('test_file.txt', 'w+') as f:
         f.write(test)
-
