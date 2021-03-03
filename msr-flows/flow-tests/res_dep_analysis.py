@@ -94,13 +94,13 @@ def restart_plots(
             # Iterate over each isotope in the current material in the core in
             # the current cycle
             if not fuel_present:
-                # fuelsalt in core will always be present, so use it for a baseline
+                # fuelsalt in core will always be present, so use as baseline
                 # num_division material will be bottom of core
                 # We will simply make it so any material not in the flow has no
                 # material (which should be true)
                 mat_name = 'fuelsalt' + str(num_divisions)
                 fuel = dep.materials[str(mat_name)]
-            isotope_counter = 0
+            iso_cnt = 0
             for each_isotope in fuel.names:
                 iso_dens = fuel.getValues(
                     'days', 'mdens', fuel.days, each_isotope)
@@ -117,8 +117,8 @@ def restart_plots(
                 # lists
                 else:
                     for each in iso_mass_list:
-                        mass_data[mat_counter][isotope_counter].append(each)
-                isotope_counter += 1
+                        mass_data[mat_counter][iso_cnt].append(each)
+                iso_cnt += 1
             mat_counter += 1
             if first_iteration:
                 mass_data.append(mat_data)
@@ -136,49 +136,51 @@ def restart_plots(
     plt.savefig('keff.png')
     plt.close()
     # Mass plots
-    isotope_counter = 0
+    iso_cnt = 0
     internal_core_mats = np.arange(num_divisions, 2 * num_divisions)
     for each_isotope in fuel.names:
         if stack_plot:
             iso_stack = list()
             iso_label = list()
-            for each_mat_index in range(len(core_mats)):
+            for mat_index in range(len(core_mats)):
                 if combine_outer:
-                    if each_mat_index not in internal_core_mats:
-                        if each_mat_index < internal_core_mats[-1]:
+                    if mat_index not in internal_core_mats:
+                        if mat_index < internal_core_mats[-1]:
                             # To combine outer flows
                             stack_val = list()
                             for each in range(
-                                    len(mass_data[each_mat_index][isotope_counter])):
-                                stack_val.append(mass_data[each_mat_index][isotope_counter][each] +
-                                                 mass_data[each_mat_index + 2 * num_divisions][isotope_counter][each])
+                                    len(mass_data[mat_index][iso_cnt])):
+                                eval_pos = mat_index + 2 * num_divisions
+                                side_one = mass_data[mat_index][iso_cnt][each]
+                                side_two = mass_data[eval_pos][iso_cnt][each]
+                                stack_val.append(side_one + side_two)
                             iso_stack.append(stack_val)
                             iso_label.append(
-                                'Material ' + str(core_mats[each_mat_index]))
+                                'Material ' + str(core_mats[mat_index]))
                         else:
                             pass
                     else:
                         iso_stack.append(
-                            mass_data[each_mat_index][isotope_counter])
+                            mass_data[mat_index][iso_cnt])
                         iso_label.append(
-                            'Material ' + str(core_mats[each_mat_index]))
+                            'Material ' + str(core_mats[mat_index]))
                 else:
                     iso_stack.append(
-                        mass_data[each_mat_index][isotope_counter])
+                        mass_data[mat_index][iso_cnt])
                     iso_label.append(
-                        'Material ' + str(core_mats[each_mat_index]))
+                        'Material ' + str(core_mats[mat_index]))
             plt.stackplot(
                 days,
                 iso_stack,
                 labels=iso_label)
         else:
-            for each_mat_index in range(len(core_mats)):
+            for mat_index in range(len(core_mats)):
                 plt.plot(
                     days,
-                    mass_data[each_mat_index][isotope_counter],
+                    mass_data[mat_index][iso_cnt],
                     marker='.',
                     linestyle='--',
-                    label=f'Material {core_mats[each_mat_index]}')
+                    label=f'Material {core_mats[mat_index]}')
         plt.legend()
         if seconds:
             plt.xlabel('Time [s]')
@@ -189,7 +191,7 @@ def restart_plots(
         plt.tight_layout()
         plt.savefig(str(each_isotope) + '.png')
         plt.close()
-        isotope_counter += 1
+        iso_cnt += 1
     return
 
 
