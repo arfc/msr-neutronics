@@ -14,7 +14,8 @@ def make_input(
         restart_iter=0,
         lam_val=1,
         flip=False,
-        flow_type=2):
+        flow_type=2,
+        shouldnt_happen=False):
     '''
     This function will generate the input file for Serpent.
     Each restart iteration is a cycle
@@ -41,7 +42,6 @@ def make_input(
     full_input : str
         The full Serpent input text
     '''
-    #flip_mult = 1E-10
     num_divisions = int(tot_time / time_step)
     core_mats = np.arange(num_divisions, 2 * num_divisions)
     env = Environment(loader=FileSystemLoader('./templates'))
@@ -83,12 +83,6 @@ cell {cell_name} 0 {mat_name} -{surf_name}
  92238.09c  -0.059524947099    %  U-238
     '''
 
-    # So we need to compare the iteration value to each value in 2*num_divisions
-    # starting from the highest value, do the % thing to see if remainder.
-    # If there is no remainder, that means we need to use that state.
-    # How do we make connections generic? Since we use num*2 flows, just add to start value (determined by state)
-    # Times 2 instead of 3 here because we dont need as many connections
-    # Determine current state of flow (important for materials)
     # Normalize restart_iter value
     restart_use_val = restart_iter
     while restart_use_val >= 2 * num_divisions:
@@ -155,25 +149,11 @@ burn 1
     rw_defs = '''
 '''
 
-    # Checking how many restarts have occured
     # Generating name for previous .wrk file
     num_in_name = ''.join(filter(str.isdigit, inp_name))
     restart_num = int(num_in_name) - 1
     name_alone = inp_name.replace(num_in_name, '')
-    # if flip:
-    #    name_alone = name_alone.replace('_f', '')
     restart_read_name = str(name_alone) + str(restart_num) + '.wrk'
-    # Just had a flip state, need to read from that file
-    # if current_state == num_divisions or current_state == 2 * num_divisions or current_state == 0 and restart_iter != 0 and not flip:
-    #    restart_read_name = str(name_alone) + str(restart_iter) + '_f.wrk'
-    # cur_time adds 1 time step per restart iter
-    # for num: 2 - 2(1), 4(2), 6(3)
-    # for num:3 - 3(1), 6(2), 9(3)
-    #tot_flips = int((restart_iter / num_divisions))
-    # Need to still account for total flip times
-    # if flip:
-    #    tot_flips -= 1
-    #cur_time = time_step * (restart_iter + tot_flips * flip_mult)
     cur_time = time_step * restart_iter
     if restart_iter == 0:
         rw_defs += '''
@@ -207,9 +187,6 @@ mflow null_pump
         shift_val = current_state - num_divisions
     # List of materials that output/input
     io_list = list()
-    # Iterate over all flows to include null flows
-    # if flip:
-    #    flow_type = 1
     for mat_sub in range(2 * num_divisions):
        # shift right by current_state
         compare_val = mat_sub + current_state + 1
@@ -235,17 +212,14 @@ rc {from_name} {to_name} cycle_pump {flow_type}
     # Iterate over missing materials adding 0 flows to bottom of the core,
     # which will always have flows
 
-    # Uncomment this to get Serpent "Shouldn't happen" error
-    # for mat in missing_io:
-    #    from_name = 'fuelsalt' + str(mat)
-    #    to_name = 'fuelsalt' + str(core_mats[0])
-    #    rep_defs += '''
-# rc {from_name} {to_name} null_pump 1
-    #    '''.format(**locals())
+    if shouldnt_happen:
+        for mat in missing_io:
+            from_name = 'fuelsalt' + str(mat)
+            to_name = 'fuelsalt' + str(core_mats[0])
+            rep_defs += '''
+ rc {from_name} {to_name} null_pump 1
+            '''.format(**locals())
 
-    # Setting times
-    # if flip:
-    #    time_step = flip_mult * time_step
     time_defs = str(time_step)
 
     # Loading values into template
@@ -262,10 +236,6 @@ rc {from_name} {to_name} cycle_pump {flow_type}
 
 
 if __name__ == '__main__':
-    #rest_iter = 2
-    #test = make_input('test_file2.txt', 3, 1, rest_iter)
-    # with open('test_file2.txt', 'w+') as f:
-    #    f.write(test)
     sec_per_day = 86400
     time_step = 1 / sec_per_day
     tot_time = 2 / sec_per_day
