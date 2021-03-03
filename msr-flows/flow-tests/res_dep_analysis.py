@@ -89,14 +89,15 @@ def restart_plots(
             try:
                 fuel = dep.materials[str(mat_name)]
                 fuel_present = True
-            except:
-                fuel_present = False 
+            except BaseException:
+                fuel_present = False
             # Iterate over each isotope in the current material in the core in
             # the current cycle
             if not fuel_present:
                 # fuelsalt in core will always be present, so use it for a baseline
                 # num_division material will be bottom of core
-                # We will simply make it so any material not in the flow has no material (which should be true)
+                # We will simply make it so any material not in the flow has no
+                # material (which should be true)
                 mat_name = 'fuelsalt' + str(num_divisions)
                 fuel = dep.materials[str(mat_name)]
             isotope_counter = 0
@@ -147,18 +148,25 @@ def restart_plots(
                         if each_mat_index < internal_core_mats[-1]:
                             # To combine outer flows
                             stack_val = list()
-                            for each in range(len(mass_data[each_mat_index][isotope_counter])):
-                                stack_val.append(mass_data[each_mat_index][isotope_counter][each] + mass_data[each_mat_index + 2 * num_divisions][isotope_counter][each])
+                            for each in range(
+                                    len(mass_data[each_mat_index][isotope_counter])):
+                                stack_val.append(mass_data[each_mat_index][isotope_counter][each] +
+                                                 mass_data[each_mat_index + 2 * num_divisions][isotope_counter][each])
                             iso_stack.append(stack_val)
-                            iso_label.append('Material ' + str(core_mats[each_mat_index]))
+                            iso_label.append(
+                                'Material ' + str(core_mats[each_mat_index]))
                         else:
                             pass
                     else:
-                        iso_stack.append(mass_data[each_mat_index][isotope_counter])
-                        iso_label.append('Material ' + str(core_mats[each_mat_index]))
+                        iso_stack.append(
+                            mass_data[each_mat_index][isotope_counter])
+                        iso_label.append(
+                            'Material ' + str(core_mats[each_mat_index]))
                 else:
-                    iso_stack.append(mass_data[each_mat_index][isotope_counter])
-                    iso_label.append('Material ' + str(core_mats[each_mat_index]))
+                    iso_stack.append(
+                        mass_data[each_mat_index][isotope_counter])
+                    iso_label.append(
+                        'Material ' + str(core_mats[each_mat_index]))
             plt.stackplot(
                 days,
                 iso_stack,
@@ -211,7 +219,7 @@ def delayed_precursors(DEPLETE):
     Uses the spatially distributed materials to construct a
     temporal result.
     Meant to be used for multi-core (complex) input
-    
+
     Parameters
     ----------
     DEPLETE : str
@@ -292,7 +300,7 @@ def delayed_precursors(DEPLETE):
 def u235_conc_diff_mats(DEPLETE):
     '''
     Iterates through the different materials and displays the mass of U235
-    
+
     Parameters
     ----------
     DEPLETE : str
@@ -320,5 +328,10 @@ if __name__ == "__main__":
     # keff_time_plot(RESULTS)
     # u235_conc_diff_mats(DEPLETE)
     # delayed_precursors(DEPLETE)
-    restart_plots(FILENAME, num_divisions, CYCLES=CYCLES, plot_all=True, combine_outer = True)
+    restart_plots(
+        FILENAME,
+        num_divisions,
+        CYCLES=CYCLES,
+        plot_all=True,
+        combine_outer=True)
     pass

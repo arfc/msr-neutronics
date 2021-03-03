@@ -20,7 +20,7 @@ def make_input(inp_name, tot_time, time_step, cycle_count):
         Time steps used in depletion.
     cycle_count : int
         Number of cycles to go through
-    
+
     Returns
     -------
     full_input : str
@@ -30,7 +30,6 @@ def make_input(inp_name, tot_time, time_step, cycle_count):
     num_divisions = int(tot_time / time_step)
     env = Environment(loader=FileSystemLoader('./templates'))
     template = env.get_template('standard.template')
-
 
     surface_defs = ''
     # Subdividing fuelsalt surfaces for core
@@ -131,14 +130,10 @@ rc {from_name} {to_name} cycle_pump 1
         reprocessing_control=rep_defs,
         time_vals=time_defs)
 
-
     return full_input
-
-
 
 
 if __name__ == '__main__':
     test = make_input('test0', 5, 1, 2)
     with open('test_file.txt', 'w+') as f:
         f.write(test)
-

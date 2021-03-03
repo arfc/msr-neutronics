@@ -7,7 +7,14 @@ from jinja2 import Environment, FileSystemLoader
 
 # Definitions
 
-def make_input(inp_name, tot_time, time_step, restart_iter=0, lam_val=1, flip=False, flow_type=2):
+def make_input(
+        inp_name,
+        tot_time,
+        time_step,
+        restart_iter=0,
+        lam_val=1,
+        flip=False,
+        flow_type=2):
     '''
     This function will generate the input file for Serpent.
     Each restart iteration is a cycle
@@ -76,12 +83,11 @@ cell {cell_name} 0 {mat_name} -{surf_name}
  92238.09c  -0.059524947099    %  U-238
     '''
 
-
-    ### So we need to compare the iteration value to each value in 2*num_divisions
-    ###     starting from the highest value, do the % thing to see if remainder.
-    ### If there is no remainder, that means we need to use that state. 
-    ### How do we make connections generic? Since we use num*2 flows, just add to start value (determined by state)
-    ### Times 2 instead of 3 here because we dont need as many connections
+    # So we need to compare the iteration value to each value in 2*num_divisions
+    # starting from the highest value, do the % thing to see if remainder.
+    # If there is no remainder, that means we need to use that state.
+    # How do we make connections generic? Since we use num*2 flows, just add to start value (determined by state)
+    # Times 2 instead of 3 here because we dont need as many connections
     # Determine current state of flow (important for materials)
     # Normalize restart_iter value
     restart_use_val = restart_iter
@@ -103,10 +109,16 @@ cell {cell_name} 0 {mat_name} -{surf_name}
     core_mats = [mat for mat in np.arange(num_divisions, 2 * num_divisions)]
     if current_state < num_divisions:
         feed_mats = [mat for mat in np.arange(0, num_divisions)]
-        empty_mats = [mat for mat in np.arange(2 * num_divisions, 3 * num_divisions)]
+        empty_mats = [
+            mat for mat in np.arange(
+                2 * num_divisions,
+                3 * num_divisions)]
     else:
         empty_mats = [mat for mat in np.arange(0, num_divisions)]
-        feed_mats = [mat for mat in np.arange(2 * num_divisions, 3 * num_divisions)]
+        feed_mats = [
+            mat for mat in np.arange(
+                2 * num_divisions,
+                3 * num_divisions)]
     feed_list = np.concatenate((feed_mats, core_mats, empty_mats))
 
     empty_mat_list = list()
@@ -148,18 +160,18 @@ burn 1
     num_in_name = ''.join(filter(str.isdigit, inp_name))
     restart_num = int(num_in_name) - 1
     name_alone = inp_name.replace(num_in_name, '')
-    #if flip:
+    # if flip:
     #    name_alone = name_alone.replace('_f', '')
     restart_read_name = str(name_alone) + str(restart_num) + '.wrk'
     # Just had a flip state, need to read from that file
-    #if current_state == num_divisions or current_state == 2 * num_divisions or current_state == 0 and restart_iter != 0 and not flip:
+    # if current_state == num_divisions or current_state == 2 * num_divisions or current_state == 0 and restart_iter != 0 and not flip:
     #    restart_read_name = str(name_alone) + str(restart_iter) + '_f.wrk'
     # cur_time adds 1 time step per restart iter
     # for num: 2 - 2(1), 4(2), 6(3)
     # for num:3 - 3(1), 6(2), 9(3)
     #tot_flips = int((restart_iter / num_divisions))
     # Need to still account for total flip times
-    #if flip:
+    # if flip:
     #    tot_flips -= 1
     #cur_time = time_step * (restart_iter + tot_flips * flip_mult)
     cur_time = time_step * restart_iter
@@ -187,7 +199,7 @@ mflow null_pump
 
     # Subdividing Flows
     rep_defs = ''
- 
+
     # Determine value to shift index by
     if current_state < num_divisions:
         shift_val = current_state
@@ -196,7 +208,7 @@ mflow null_pump
     # List of materials that output/input
     io_list = list()
     # Iterate over all flows to include null flows
-    #if flip:
+    # if flip:
     #    flow_type = 1
     for mat_sub in range(2 * num_divisions):
        # shift right by current_state
@@ -213,19 +225,26 @@ rc {from_name} {to_name} cycle_pump {flow_type}
        '''.format(**locals())
     clean_io = list(set(io_list))
     # New list with all materials that don't have flows
-    missing_io = list(list(set(feed_list) - set(clean_io)) + list(set(clean_io) - set(feed_list)))
-    # Iterate over missing materials adding 0 flows to bottom of the core, which will always have flows
+    missing_io = list(
+        list(
+            set(feed_list) -
+            set(clean_io)) +
+        list(
+            set(clean_io) -
+            set(feed_list)))
+    # Iterate over missing materials adding 0 flows to bottom of the core,
+    # which will always have flows
 
     # Uncomment this to get Serpent "Shouldn't happen" error
-    #for mat in missing_io:
+    # for mat in missing_io:
     #    from_name = 'fuelsalt' + str(mat)
     #    to_name = 'fuelsalt' + str(core_mats[0])
     #    rep_defs += '''
-#rc {from_name} {to_name} null_pump 1
+# rc {from_name} {to_name} null_pump 1
     #    '''.format(**locals())
 
     # Setting times
-    #if flip:
+    # if flip:
     #    time_step = flip_mult * time_step
     time_defs = str(time_step)
 
@@ -245,12 +264,16 @@ rc {from_name} {to_name} cycle_pump {flow_type}
 if __name__ == '__main__':
     #rest_iter = 2
     #test = make_input('test_file2.txt', 3, 1, rest_iter)
-    #with open('test_file2.txt', 'w+') as f:
+    # with open('test_file2.txt', 'w+') as f:
     #    f.write(test)
     sec_per_day = 86400
-    time_step = 1/sec_per_day
-    tot_time = 2/sec_per_day
+    time_step = 1 / sec_per_day
+    tot_time = 2 / sec_per_day
     for iter_cnt in range(5):
-        test = make_input(f'cycle_test_rest{iter_cnt}', tot_time, time_step, iter_cnt)
+        test = make_input(
+            f'cycle_test_rest{iter_cnt}',
+            tot_time,
+            time_step,
+            iter_cnt)
         with open(f'cycle_test_rest{iter_cnt}', 'w+') as f:
             f.write(test)
