@@ -1,0 +1,88 @@
+
+set title "Feedback Run"
+
+
+%__________SURFACE DEFINITIONS__________%
+
+{{surfaces}}
+
+
+%__________CELL DEFINITIONS__________%
+
+{{cells}}
+
+%__________MATERIAL DEFINITIONS__________%
+% Graphite Moderator
+mat graphite -1.8 % moder graph 6000
+rgb 130 130 130
+6000.09c -1
+
+% Salt Dump
+mat salt_dump -0.0001
+burn 1
+vol 10000
+rgb 120 120 120
+ 4009.09c -1
+
+% Fuel Salt
+
+mat fuel_storage -1.94
+vol {{fuel_storage_vol}}
+burn 1
+  4009.09c  -0.014487655439    %  Be-9
+  9019.09c  -0.376674024719    %  F-19
+ 11023.09c  -0.234064237192    %  Na-23
+ 90232.09c  -0.295304238725    %  Th-232
+ 92234.09c  -0.000174400907    %  U-234
+ 92235.09c  -0.019679584059    %  U-235
+ 92236.09c  -0.000090911860    %  U-236
+ 92238.09c  -0.059524947099    %  U-238
+
+
+{{materials}}
+
+
+
+set pcc 0
+set powdens 1
+set mcvol 500000
+set printm 1
+set inventory
+ Th
+ U
+ 922350
+ 932370
+ 350870
+ 350880
+ 350890
+ 350900
+ 350920
+ 360930
+ 370930
+ 370940
+ 531370
+ 531380
+ 531390
+ 531400
+
+
+set acelib "/home/luke/serp/xsdata/jeff312/sss_jeff312.xsdata"
+set declib "/home/luke/serp/xsdata/jeff312/sss_jeff33.dec"
+set nfylib "/home/luke/serp/xsdata/jeff312/sss_jeff33.nfy"
+
+set pop 10000 100 40
+
+
+{{mflows_rep}}
+
+rep flowprocess
+
+ rc fuel_storage fuelsalt_0_0 feed_pump 0
+
+{{reprocessing_control}}
+
+dep
+pro flowprocess
+daystep
+
+{{time_vals}}

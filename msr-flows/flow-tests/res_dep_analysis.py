@@ -7,15 +7,46 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # USER DEFINITIONS for debugging
-FILENAME = 'test_complex.inp'
+FILENAME = 'cycle_test_rest'
 RESULTS = FILENAME + '_res.m'
 DEPLETE = FILENAME + '_dep.m'
-
+num_divisions = 2
+CYCLES = 2
 
 # FUNCTIONS
-def restart_plots(FILENAME, num_divisions, CYCLES, seconds=True):
+
+
+def restart_plots(
+        FILENAME,
+        num_divisions,
+        CYCLES,
+        seconds=True,
+        plot_all=False,
+        stack_plot=True,
+        combine_outer=True):
     '''
     This function generates various plots for the restart script
+
+    Parameters
+    ----------
+    FILENAME : str
+        Name of the input file.
+    num_divisions : int
+        Total time taken divided by the time steps used.
+    CYCLES : int
+        Number of cycles.
+    seconds : boolean, optional
+        Plot in seconds if True, otherwise use days.
+    plot_all : boolean, optional
+        Plot all materials if True, otherwise only core.
+    stack_plot : boolean, optional
+        Plot stack plots if True, otherwise default matplotlib pyplot plots.
+    combine_outer : boolean, optional
+        Combines the non-core materials in a reasonable way.
+
+    Returns
+    -------
+    None
     '''
     # Lists of data from each cycle condensed
     days = list()
@@ -45,59 +76,109 @@ def restart_plots(FILENAME, num_divisions, CYCLES, seconds=True):
             keff_err.append(each_k[1])
         # Generate isotopic mass for each material in core
         # Can be changed to include the other materials as well
-        core_mats = np.arange(num_divisions, 2 * num_divisions)
+        if plot_all:
+            core_mats = np.arange(0, 3 * num_divisions)
+        else:
+            core_mats = np.arange(num_divisions, 2 * num_divisions)
         # Iterate over each material in the core for the current cycle
         mat_counter = 0
         for mat in core_mats:
             mat_data = list()
             mat_name = 'fuelsalt' + str(mat)
-            fuel = dep.materials[str(mat_name)]
+            # Material may not be present yet
+            try:
+                fuel = dep.materials[str(mat_name)]
+                fuel_present = True
+            except:
+                fuel_present = False 
             # Iterate over each isotope in the current material in the core in
             # the current cycle
+            if not fuel_present:
+                # fuelsalt in core will always be present, so use it for a baseline
+                # num_division material will be bottom of core
+                # We will simply make it so any material not in the flow has no material (which should be true)
+                mat_name = 'fuelsalt' + str(num_divisions)
+                fuel = dep.materials[str(mat_name)]
             isotope_counter = 0
             for each_isotope in fuel.names:
                 iso_dens = fuel.getValues(
                     'days', 'mdens', fuel.days, each_isotope)
+                if not fuel_present:
+                    iso_dens = iso_dens * 0
                 # List of isotope masses in current material at time step
                 iso_mass = iso_dens[0] * fuel.data['volume'][0]
+                # Converting ndarray to list
+                iso_mass_list = [val for val in iso_mass]
+                # For first cycle, generate list of lists
                 if first_iteration:
-                    mat_data.append(iso_mass)
+                    mat_data.append(iso_mass_list)
+                # For subsequent cycles, append values to the pre-existing
+                # lists
                 else:
-                    mass_data[mat_counter][isotope_counter].append(iso_mass)
+                    for each in iso_mass_list:
+                        mass_data[mat_counter][isotope_counter].append(each)
                 isotope_counter += 1
             mat_counter += 1
-            mass_data.append(mat_data)
+            if first_iteration:
+                mass_data.append(mat_data)
         first_iteration = False
     # Data has been gathered, using to plot
     # keff plot
     plt.errorbar(days, keff, keff_err)
-    plt.title('Keff')
-    plt.ylabel('k')
+    plt.title('Multiplication Factor')
+    plt.ylabel(u'absKeff \u00B1 \u03C3')
     if seconds:
         plt.xlabel('Time [s]')
     else:
         plt.xlabel('Time [d]')
+    plt.tight_layout()
     plt.savefig('keff.png')
     plt.close()
     # Mass plots
-    # Do normal plots now, change to stacked area plot later
     isotope_counter = 0
+    internal_core_mats = np.arange(num_divisions, 2 * num_divisions)
     for each_isotope in fuel.names:
-        for each_mat_index in range(len(core_mats)):
-            plt.plot(
+        if stack_plot:
+            iso_stack = list()
+            iso_label = list()
+            for each_mat_index in range(len(core_mats)):
+                if combine_outer:
+                    if each_mat_index not in internal_core_mats:
+                        if each_mat_index < internal_core_mats[-1]:
+                            # To combine outer flows
+                            stack_val = list()
+                            for each in range(len(mass_data[each_mat_index][isotope_counter])):
+                                stack_val.append(mass_data[each_mat_index][isotope_counter][each] + mass_data[each_mat_index + 2 * num_divisions][isotope_counter][each])
+                            iso_stack.append(stack_val)
+                            iso_label.append('Material ' + str(core_mats[each_mat_index]))
+                        else:
+                            pass
+                    else:
+                        iso_stack.append(mass_data[each_mat_index][isotope_counter])
+                        iso_label.append('Material ' + str(core_mats[each_mat_index]))
+                else:
+                    iso_stack.append(mass_data[each_mat_index][isotope_counter])
+                    iso_label.append('Material ' + str(core_mats[each_mat_index]))
+            plt.stackplot(
                 days,
-                mass_data[each_mat_index][isotope_counter],
-                marker='.',
-                linestyle='--',
-                label=f'Material {core_mats[each_mat_index]}')
+                iso_stack,
+                labels=iso_label)
+        else:
+            for each_mat_index in range(len(core_mats)):
+                plt.plot(
+                    days,
+                    mass_data[each_mat_index][isotope_counter],
+                    marker='.',
+                    linestyle='--',
+                    label=f'Material {core_mats[each_mat_index]}')
         plt.legend()
-        plt.tight_layout()
         if seconds:
             plt.xlabel('Time [s]')
         else:
             plt.xlabel('Time [d]')
         plt.ylabel('Mass [g]')
-        plt.title('Concentation of ' + str(each_isotope))
+        plt.title('Mass of ' + str(each_isotope))
+        plt.tight_layout()
         plt.savefig(str(each_isotope) + '.png')
         plt.close()
         isotope_counter += 1
@@ -107,6 +188,15 @@ def restart_plots(FILENAME, num_divisions, CYCLES, seconds=True):
 def keff_time_plot(RESULTS):
     '''
     Gives a plot of keff vs time
+
+    Parameters
+    ----------
+    RESULTS : str
+        Name of the results file
+
+    Returns
+    -------
+    None
     '''
     res = st.read(RESULTS, reader='results')
     res.plot('burnDays', 'absKeff')
@@ -121,6 +211,15 @@ def delayed_precursors(DEPLETE):
     Uses the spatially distributed materials to construct a
     temporal result.
     Meant to be used for multi-core (complex) input
+    
+    Parameters
+    ----------
+    DEPLETE : str
+        Name of the depletion output file
+
+    Returns
+    -------
+    None
     '''
     # Determine number of cores and material subdivisions
     fname = 'fuelsalt'
@@ -193,6 +292,15 @@ def delayed_precursors(DEPLETE):
 def u235_conc_diff_mats(DEPLETE):
     '''
     Iterates through the different materials and displays the mass of U235
+    
+    Parameters
+    ----------
+    DEPLETE : str
+        Name of the depletion output
+
+    Returns
+    -------
+    None
     '''
     dep = st.read(DEPLETE, reader='dep')
     for mat in dep.materials.keys():
@@ -212,5 +320,5 @@ if __name__ == "__main__":
     # keff_time_plot(RESULTS)
     # u235_conc_diff_mats(DEPLETE)
     # delayed_precursors(DEPLETE)
-    restart_plots(FILENAME)
+    restart_plots(FILENAME, num_divisions, CYCLES=CYCLES, plot_all=True, combine_outer = True)
     pass

@@ -12,7 +12,7 @@ from os import path
 # User Definitions
 INPUT_NAME = 'cycle_test'
 DIR_NAME = 'msr_cycle_test'
-NUM_CYCLES = 3
+NUM_CYCLES = 1
 CYCLE_TIME_SECONDS = 2
 CYCLE_STEP_SIZE_SECONDS = 1
 OUTPUT_NAME = 'output'
@@ -20,6 +20,17 @@ PLOTTING = True
 NON_CYCLE = False
 MULTI_CORE = False
 RESTART_CYCLE = True
+serpent_version = 'sss2'
+
+# Calculations
+# Double cycles because restart interprets as half-cycles
+# Also one step at a time, so mutiply by number of single steps needed 
+num_divisions = int(CYCLE_TIME_SECONDS / CYCLE_STEP_SIZE_SECONDS)
+RES_CYCLES = NUM_CYCLES * 2 * num_divisions
+sec_per_day = 86400
+CYCLE_TIME_SECONDS = CYCLE_TIME_SECONDS / sec_per_day
+CYCLE_STEP_SIZE_SECONDS = CYCLE_STEP_SIZE_SECONDS / sec_per_day
+time_start = time()
 
 # Functions
 
@@ -28,27 +39,62 @@ def run_script(INPUT_NAME, OUTPUT_NAME, input_script):
     '''
     Writes the input_script string to a file with the INPUT_NAME
     which is run and outputs to the OUTPUT_NAME.
+
+    Parameters
+    ----------
+    INPUT_NAME : str
+        Name of the Serpent input file
+    OUTPUT_NAME : str
+        Name of the desired Serpent output file
+    input_script : str
+        A string containing the Serpent input
+
+    Returns
+    -------
+    None
     '''
     with open(INPUT_NAME, 'w+') as input_file:
         input_file.write(input_script)
-    os.system('./sss2 -omp 32 ' + str(INPUT_NAME) + ' > ' + str(OUTPUT_NAME))
+    os.system(str(serpent_version) + '-omp 32 ' + str(INPUT_NAME) + ' > ' + str(OUTPUT_NAME))
     return
 
 
-def check_wrk_file(INP_NAME):
+def check_wrk_file(INP_NAME, OUTPUT_NAME):
     '''
-    Allows the script to continue once the .wrk file is generated
+    Allows the script to continue once the .wrk file is generated.
+    Checks the if the length of the output file is being updated.
+    
+    Parameters
+    ----------
+    INP_NAME : str
+        Name of the input file
+    OUTPUT_NAME : str
+        Name of the output file
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    Error, view `OUTPUT_NAME`
+        Occurs if the output does not update within 20 seconds.
+    
     '''
     wrk_name = str(INP_NAME) + '.wrk'
+    out_len = 0
+    # Path will exist once it has fully run
     while not path.exists(wrk_name):
+        cur_out_len = 0
         sleep(20)
+        for line in open(OUTPUT_NAME).readlines():
+            cur_out_len += 1
+        if cur_out_len != out_len:
+            out_len = cur_out_len
+        else:
+            raise Exception('Error, view ' + str(OUTPUT_NAME))
     return
 
-
-# Calculations
-sec_per_day = 86400
-CYCLE_TIME_SECONDS = CYCLE_TIME_SECONDS / sec_per_day
-CYCLE_STEP_SIZE_SECONDS = CYCLE_STEP_SIZE_SECONDS / sec_per_day
 
 # Build File
 # If directory is present, remove
@@ -91,7 +137,24 @@ if MULTI_CORE:
     os.system('mv ./' + str(MULTI_OUT_NAME) + ' ./' + str(DIR_NAME))
     print('Files moved to ' + str(DIR_NAME))
 if RESTART_CYCLE:
-    for restart_iter in range(NUM_CYCLES):
+    for restart_iter in range(RES_CYCLES):
+        #flip_check = restart_iter
+        # Build in small fix to adjust to new flow regime
+        #while flip_check > 2 * num_divisions:
+        #    flip_check -= 2 * num_divisions
+        #if flip_check == num_divisions or flip_check == 2 * num_divisions:
+        #    print('Running flip fix.')
+        #    REST_INP_NAME = str(INPUT_NAME) + '_rest' + str(restart_iter) + '_f'
+        #    REST_OUT_NAME = str(OUTPUT_NAME) + '_rest' + str(restart_iter) + '_f'
+        #    rest_input_script = rsb.make_input(
+        #        REST_INP_NAME,
+        #        CYCLE_TIME_SECONDS,
+        #        CYCLE_STEP_SIZE_SECONDS,
+        #        restart_iter,
+        #        flip = True)
+        #    run_script(REST_INP_NAME, REST_OUT_NAME, rest_input_script)
+        #    check_wrk_file(REST_INP_NAME, REST_OUT_NAME)
+        #    print('Flip fix complete.')
         REST_INP_NAME = str(INPUT_NAME) + '_rest' + str(restart_iter)
         REST_OUT_NAME = str(OUTPUT_NAME) + '_rest' + str(restart_iter)
         rest_input_script = rsb.make_input(
@@ -100,11 +163,15 @@ if RESTART_CYCLE:
             CYCLE_STEP_SIZE_SECONDS,
             restart_iter)
         run_script(REST_INP_NAME, REST_OUT_NAME, rest_input_script)
-        check_wrk_file(REST_INP_NAME)
+        check_wrk_file(REST_INP_NAME, REST_OUT_NAME)
         print(
-            f'Completed restart cycling case {restart_iter + 1}/{NUM_CYCLES}.')
+            f'Completed restart cycling case {restart_iter + 1}/{RES_CYCLES}.')
     # Moving all files
-    for restart_iter in range(NUM_CYCLES):
+    if RES_CYCLES > 10:
+        f_move = 10
+    else:
+        f_move = RES_CYCLES
+    for restart_iter in range(f_move):
         REST_INP_NAME = str(INPUT_NAME) + '_rest' + str(restart_iter)
         REST_OUT_NAME = str(OUTPUT_NAME) + '_rest' + str(restart_iter)
         os.system('mv ./' + str(REST_INP_NAME) + '* ./' + str(DIR_NAME))
@@ -124,12 +191,13 @@ if PLOTTING:
         rda.keff_time_plot(str(NON_CYCLE_PATH) + '_res.m')
         rda.u235_conc_diff_mats(str(NON_CYCLE_PATH) + '_dep.m')
     if RESTART_CYCLE:
-        RESTART_PATH = './' + str(DIR_NAME) + '/' + str(REST_INP_NAME)
-        num_divisions = int(CYCLE_TIME_SECONDS / CYCLE_STEP_SIZE_SECONDS)
+        RESTART_PATH = './' + str(DIR_NAME) + '/' + str(INPUT_NAME) + '_rest'
         rda.restart_plots(
             RESTART_PATH,
             num_divisions,
-            NUM_CYCLES,
-            seconds=True)
+            RES_CYCLES,
+            seconds=True,
+            plot_all=True,
+            stack_plot=True)
 os.system('mv ./*.png ./' + str(DIR_NAME))
-print('Done.')
+print(f'Done in {round((time() - time_start), 0)}.')
