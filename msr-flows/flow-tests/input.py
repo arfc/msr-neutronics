@@ -20,6 +20,7 @@ PLOTTING = True
 NON_CYCLE = False
 MULTI_CORE = False
 RESTART_CYCLE = True
+serpent_version = 'sss2'
 
 # Calculations
 # Double cycles because restart interprets as half-cycles
@@ -54,7 +55,7 @@ def run_script(INPUT_NAME, OUTPUT_NAME, input_script):
     '''
     with open(INPUT_NAME, 'w+') as input_file:
         input_file.write(input_script)
-    os.system('sss2_test -omp 32 ' + str(INPUT_NAME) + ' > ' + str(OUTPUT_NAME))
+    os.system(str(serpent_version) + '-omp 32 ' + str(INPUT_NAME) + ' > ' + str(OUTPUT_NAME))
     return
 
 
