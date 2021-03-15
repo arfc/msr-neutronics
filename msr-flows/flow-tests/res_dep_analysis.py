@@ -62,11 +62,10 @@ def restart_plots(
         res = st.read(res_file, reader='results')
         dep = st.read(dep_file, reader='dep')
         # Day data
-        # Conversion to seconds optional
+        mult = 1
         if seconds:
-            mult = 86400
-        else:
-            mult = 1
+            secs_per_day = 86400
+            mult = secs_per_day
         # Removing from arrays to put into list
         for each_day in res.resdata['burnDays'][:, 0] * mult:
             days.append(each_day)

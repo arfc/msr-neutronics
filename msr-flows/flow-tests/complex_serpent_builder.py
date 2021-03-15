@@ -1,12 +1,9 @@
-# Imports
 import numpy as np
 from jinja2 import Environment, FileSystemLoader
 
-# Constants
 
 
-# Definitions
-def make_input(inp_name, tot_time, time_step, cycle_count):
+def make_input(inp_name, tot_time, time_step, cycle_count, core_delta = 110):
     '''
     This function will generate the input file for Serpent.
     Naming convention is "name_core_number" for materials.
@@ -22,6 +19,8 @@ def make_input(inp_name, tot_time, time_step, cycle_count):
         Time steps used in depletion.
     cycle_count : int
         Number of cycles to go through
+    core_delta : float
+        Distance between the center of each different core.
 
     Returns
     -------
@@ -29,12 +28,9 @@ def make_input(inp_name, tot_time, time_step, cycle_count):
         The full Serpent input text
 
     '''
-    lam_cycle = 1
-    setting = 1
     num_divisions = int(tot_time / time_step)
     env = Environment(loader=FileSystemLoader('./templates'))
     template = env.get_template('multi_core.template')
-    space_between_cores = 110
     num_cores = cycle_count + 1
     full_input = ''
 
@@ -44,7 +40,7 @@ def make_input(inp_name, tot_time, time_step, cycle_count):
         graphite_name = 'ogc_' + str(each_core)
         inner_fuel_name = 'ifs_' + str(each_core)
         ifn = inner_fuel_name
-        mult_fac = each_core * space_between_cores
+        mult_fac = each_core * core_delta
         x0_fuel = -25 + mult_fac
         x1_fuel = 25 + mult_fac
         y0_fuel = -25 + mult_fac
@@ -153,7 +149,7 @@ burn 1
 
     misc_defs = ''
 
-    lam_feed = lam_cycle * np.exp(-lam_cycle * time_step)
+    lam_feed = np.exp(-time_step)
     mflow_defs = '''
 
 mflow cycle_pump
@@ -178,7 +174,7 @@ mflow feed_pump
             else:
                 to_name = 'fuelsalt_' + str(each_core) + '_' + str(mat_sub + 1)
             rep_defs += '''
- rc {from_name} {to_name} cycle_pump {setting}
+ rc {from_name} {to_name} cycle_pump 1
             '''.format(**locals())
 
     # Setting times
