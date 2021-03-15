@@ -12,7 +12,6 @@ def make_input(
         tot_time,
         time_step,
         restart_iter=0,
-        lam_val=1,
         flip=False,
         flow_type=2,
         shouldnt_happen=False):
@@ -30,8 +29,6 @@ def make_input(
         Time steps used in depletion.
     restart_iter : int, optional
         Current iteration count
-    lam_val : float, optional
-        Value used in Serpent mass flow calculations
     flip : boolean, optional
         Whether or not the flow orientation will be flipped
     flow_type : {0, 1, 2}, optional
@@ -42,6 +39,8 @@ def make_input(
     full_input : str
         The full Serpent input text
     '''
+    sec_per_day = 86400
+    lam_val = 1/(time_step * sec_per_day)
     num_divisions = int(tot_time / time_step)
     core_mats = np.arange(num_divisions, 2 * num_divisions)
     env = Environment(loader=FileSystemLoader('./templates'))
@@ -188,7 +187,7 @@ mflow null_pump
     # List of materials that output/input
     io_list = list()
     for mat_sub in range(2 * num_divisions):
-       # shift right by current_state
+        # shift right by current_state
         compare_val = mat_sub + current_state + 1
         while compare_val >= 3 * num_divisions:
             mat_sub -= 3 * num_divisions

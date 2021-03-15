@@ -20,7 +20,7 @@ PLOTTING = True
 NON_CYCLE = False
 MULTI_CORE = False
 RESTART_CYCLE = True
-serpent_version = 'sss2_test'
+serpent_version = './sss2_debug'
 
 # Calculations
 # Double cycles because restart interprets as half-cycles
