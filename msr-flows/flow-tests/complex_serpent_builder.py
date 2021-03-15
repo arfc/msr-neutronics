@@ -2,8 +2,7 @@ import numpy as np
 from jinja2 import Environment, FileSystemLoader
 
 
-
-def make_input(inp_name, tot_time, time_step, cycle_count, core_delta = 110):
+def make_input(inp_name, tot_time, time_step, cycle_count, core_delta=110):
     '''
     This function will generate the input file for Serpent.
     Naming convention is "name_core_number" for materials.
