@@ -1,11 +1,7 @@
-# Imports
 import numpy as np
 from jinja2 import Environment, FileSystemLoader
 
-# Constants
 
-
-# Definitions
 def make_input(inp_name, tot_time, time_step, cycle_count):
     '''
     This function will generate the input file for Serpent.

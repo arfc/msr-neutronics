@@ -35,7 +35,7 @@ rgb 130 130 130
 
 
 set pcc 0
-set powdens 1
+set powdens 0
 set mcvol 500000
 set printm 1
 set inventory

@@ -1,11 +1,6 @@
-# Imports
 import numpy as np
 from jinja2 import Environment, FileSystemLoader
 
-# Constants
-
-
-# Definitions
 
 def make_input(
         inp_name,
