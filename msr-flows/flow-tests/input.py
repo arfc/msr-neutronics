@@ -75,9 +75,8 @@ def check_wrk_file(INP_NAME, OUTPUT_NAME):
     return
 
 
-
 if __name__ == '__main__':
-   
+
     INPUT_NAME = 'cycle_test'
     DIR_NAME = 'msr_cycle_test'
     NUM_CYCLES = 1
@@ -118,7 +117,10 @@ if __name__ == '__main__':
             CYCLE_TIME_SECONDS,
             CYCLE_STEP_SIZE_SECONDS,
             NUM_CYCLES)
-        run_script(NON_CYCLE_INP_NAME, NON_CYCLE_OUT_NAME, non_cycle_input_script)
+        run_script(
+            NON_CYCLE_INP_NAME,
+            NON_CYCLE_OUT_NAME,
+            non_cycle_input_script)
         print('Completed incomplete cycling case.')
         # Move associated files to directory
         os.system('mv ./' + str(NON_CYCLE_INP_NAME) + '* ./' + str(DIR_NAME))
@@ -171,11 +173,13 @@ if __name__ == '__main__':
             rda.keff_time_plot(str(MULTI_PATH) + '_res.m')
             rda.u235_conc_diff_mats(str(MULTI_PATH) + '_dep.m')
         if NON_CYCLE:
-            NON_CYCLE_PATH = './' + str(DIR_NAME) + '/' + str(NON_CYCLE_INP_NAME)
+            NON_CYCLE_PATH = './' + \
+                str(DIR_NAME) + '/' + str(NON_CYCLE_INP_NAME)
             rda.keff_time_plot(str(NON_CYCLE_PATH) + '_res.m')
             rda.u235_conc_diff_mats(str(NON_CYCLE_PATH) + '_dep.m')
         if RESTART_CYCLE:
-            RESTART_PATH = './' + str(DIR_NAME) + '/' + str(INPUT_NAME) + '_rest'
+            RESTART_PATH = './' + str(DIR_NAME) + \
+                '/' + str(INPUT_NAME) + '_rest'
             rda.restart_plots(
                 RESTART_PATH,
                 num_divisions,

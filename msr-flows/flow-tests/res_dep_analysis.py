@@ -312,7 +312,7 @@ def u235_conc_diff_mats(DEPLETE):
 
 
 # Debugging, uncomment whichever function to debug
-if __name__ == "__main__": 
+if __name__ == "__main__":
     FILENAME = 'cycle_test_rest'
     RESULTS = FILENAME + '_res.m'
     DEPLETE = FILENAME + '_dep.m'
