@@ -35,7 +35,7 @@ def make_input(
         The full Serpent input text
     '''
     sec_per_day = 86400
-    lam_val = 1/(time_step * sec_per_day)
+    lam_val = 1 / (time_step * sec_per_day)
     num_divisions = int(tot_time / time_step)
     core_mats = np.arange(num_divisions, 2 * num_divisions)
     env = Environment(loader=FileSystemLoader('./templates'))
