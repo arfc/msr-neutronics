@@ -1,19 +1,6 @@
-# Script for analysis of _res and _dep files
-
-
-# IMPORTS
 import serpentTools as st
 import matplotlib.pyplot as plt
 import numpy as np
-
-# USER DEFINITIONS for debugging
-FILENAME = 'cycle_test_rest'
-RESULTS = FILENAME + '_res.m'
-DEPLETE = FILENAME + '_dep.m'
-num_divisions = 2
-CYCLES = 2
-
-# FUNCTIONS
 
 
 def restart_plots(
@@ -325,14 +312,15 @@ def u235_conc_diff_mats(DEPLETE):
 
 
 # Debugging, uncomment whichever function to debug
-if __name__ == "__main__":
-    # keff_time_plot(RESULTS)
-    # u235_conc_diff_mats(DEPLETE)
-    # delayed_precursors(DEPLETE)
+if __name__ == "__main__": 
+    FILENAME = 'cycle_test_rest'
+    RESULTS = FILENAME + '_res.m'
+    DEPLETE = FILENAME + '_dep.m'
+    num_divisions = 2
+    CYCLES = 2
     restart_plots(
         FILENAME,
         num_divisions,
         CYCLES=CYCLES,
         plot_all=True,
         combine_outer=True)
-    pass
