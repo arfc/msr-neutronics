@@ -151,7 +151,7 @@ if __name__ == '__main__':
             run_script(REST_INP_NAME, REST_OUT_NAME, rest_input_script)
             check_wrk_file(REST_INP_NAME, REST_OUT_NAME)
             print(
-                f'Completed restart cycling case {restart_iter + 1}/{RES_CYCLES}.')
+                f'Completed restart case {restart_iter + 1}/{RES_CYCLES}.')i
         # Moving all files
         if RES_CYCLES > 10:
             f_move = 10
