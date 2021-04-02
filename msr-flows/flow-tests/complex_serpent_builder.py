@@ -148,7 +148,9 @@ burn 1
 
     misc_defs = ''
 
+    sec_per_day = 86400
     lam_feed = np.exp(-time_step)
+    lam_cycle = 1 / (time_step * sec_per_day)
     mflow_defs = '''
 
 mflow cycle_pump
@@ -173,7 +175,7 @@ mflow feed_pump
             else:
                 to_name = 'fuelsalt_' + str(each_core) + '_' + str(mat_sub + 1)
             rep_defs += '''
- rc {from_name} {to_name} cycle_pump 1
+ rc {from_name} {to_name} cycle_pump 2
             '''.format(**locals())
 
     # Setting times
