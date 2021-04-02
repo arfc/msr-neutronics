@@ -25,9 +25,9 @@ The `restart_serpent_builder.py` script uses Serpent’s built-in
  each step in order to allow for 100% of the material in each material region
  to flow, rather than the current approach used where only a percentage
  of the mass flows.
-An imporant aspect to note for the restart run is that it will not function
+An important aspect to note for the restart run is that it will not function
  properly while using a standard compiled version of Serpent v.2.1.31.
- This is indicated by the use of `sss2_test` instead of `sss2`
+ This is indicated by the use of `sss2_debug` instead of `sss2`
  in the `input.py` file.
 To run the restart script, Serpent must be recompiled with the
  `if (N[i] < -1E-12)` lines commented out from BurnMaterialsMSR in the
