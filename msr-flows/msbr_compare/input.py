@@ -92,7 +92,7 @@ if __name__ == '__main__':
         num_divisions = 1
     else:
         # 5 in series with an extra in parallel (possibly 6 then?)
-        num_divisions = 5
+        num_divisions = 6
     CYCLE_STEP_SIZE_SECONDS = CYCLE_TIME_SECONDS / num_divisions
     #num_divisions = int(CYCLE_TIME_SECONDS / CYCLE_STEP_SIZE_SECONDS)
     RES_CYCLES = NUM_CYCLES * 2 * num_divisions

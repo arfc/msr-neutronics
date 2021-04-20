@@ -45,17 +45,18 @@ def make_input(
     core_mats = np.arange(num_divisions, 2 * num_divisions)
     env = Environment(loader=FileSystemLoader('./templates'))
     template = env.get_template('msbr.serpent')
+    core_volume = 3.04E7
+    total_volume = 4.87E7
+    piping_volume = total_volume - core_volume
+    feed_pump = lam_val
 
     # Saving salt composition for replicability
     fuel_comp = '''
-  4009.09c  -0.014487655439    %  Be-9
-  9019.09c  -0.376674024719    %  F-19
- 11023.09c  -0.234064237192    %  Na-23
- 90232.09c  -0.295304238725    %  Th-232
- 92234.09c  -0.000174400907    %  U-234
- 92235.09c  -0.019679584059    %  U-235
- 92236.09c  -0.000090911860    %  U-236
- 92238.09c  -0.059524947099    %  U-238
+            3007.09c  -7.87474673879085E-02
+            4009.09c  -2.25566879138321E-02
+            9019.09c  -4.54003012179284E-01
+           90232.09c  -4.35579130482336E-01
+           92233.09c  -9.11370203663893E-03
     '''
 
     # Normalize restart_iter value
@@ -103,13 +104,19 @@ def make_input(
     mat_defs = ''
 
     # Subdividing fuelsalt for in and out of core materials
-    mat_vol = vol_core / num_divisions
+    core_sub_vol = core_volume / num_divisions
+    pipe_sub_vol = piping_volume / num_divisions
     # Triple the materials for core feed, core, and core output
     # Calibrate masses based on num_div and restart_iter
     for mat_sub in range(num_divisions * 3):
-        dens = -1.94
+        dens = -3.35
         if mat_sub in empty_mat_list:
             dens = -0.00001
+            vol = pipe_sub_vol
+        elif mat_sub in core_mats:
+            vol = core_sub_vol
+        elif mat_sub in feed_mats:
+            vol = pipe_sub_vol
         rgb_var = 10 + mat_sub * 2
         mat_name = 'fuelsalt' + str(mat_sub)
         mat_defs += '''
@@ -117,6 +124,7 @@ mat {mat_name} {dens}
 rgb {rgb_var} {rgb_var} {rgb_var}
 vol {mat_vol}
 burn 1
+fix 09c 900
 {fuel_comp}
 
         '''.format(**locals())
@@ -143,12 +151,59 @@ set rfw 1
     if flip:
         lam_val = 0
 
+    waste_removal_efficiencies = [0.6, 0.97, 1, 0.9, 0.1, 0.57]
+    norm_eff = [i * lam_val for i in waste_removal_efficiencies]
+
     mflow_defs = '''
 mflow cycle_pump
  all {lam_val}
 
 mflow null_pump
  all 0
+
+% Waste pumps
+mflow sparger_pump
+  Xe {norm_eff[0]}
+  Kr {norm_eff[0]}
+  H  {norm_eff[0]}
+
+mflow entrainment_pump
+  Xe {norm_eff[1]}
+  Kr {norm_eff[1]}
+  H {norm_eff[1]}
+
+mflow nickel_pump
+  Se {norm_eff[2]}
+  Nb {norm_eff[2]}
+  Mo {norm_eff[2]}
+  Tc {norm_eff[2]}
+  Ru {norm_eff[2]}
+  Rh {norm_eff[2]}
+  Pd {norm_eff[2]}
+  Ag {norm_eff[2]}
+  Sb {norm_eff[2]}
+  Te {norm_eff[2]}
+
+mflow bypass_pump
+  all {norm_eff[3]}
+
+mflow liquid_metal_pump
+  all {norm_eff[4]}
+
+mflow waste_metal_pump
+  Y   {norm_eff[5]}
+  La  {norm_eff[5]}
+  Ce  {norm_eff[5]}
+  Pr  {norm_eff[5]}
+  Nd  {norm_eff[5]}
+  Pm  {norm_eff[5]}
+  Sm  {norm_eff[5]}
+  Gd  {norm_eff[5]}
+  Zr  {norm_eff[5]}
+  Cd  {norm_eff[5]}
+  In  {norm_eff[5]}
+  Sn  {norm_eff[5]}
+ 
 
 '''.format(**locals())
 
@@ -168,14 +223,20 @@ mflow null_pump
         while compare_val >= 3 * num_divisions:
             mat_sub -= 3 * num_divisions
             compare_val = mat_sub + current_state + 1
+        # Parallel flow check
+        # Occurs at bypass/liq_metal (3/4 and 15/16)
         io_list.append(feed_list[mat_sub + shift_val])
         io_list.append(feed_list[mat_sub + shift_val + 1])
         from_name = 'fuelsalt' + str(feed_list[mat_sub + shift_val])
         to_name = 'fuelsalt' + str(feed_list[mat_sub + shift_val + 1])
+        if feed_list[mat_sub + shift_val] == 3 or feed_list[mat_sub + shift_val] == 15:
+            # If true, then bypass, so should flow to +2 instead of +1
+            to_name = 'fuelsalt' + str(feed_list[mat_sub + shift_val + 2])
         rep_defs += '''
 rc {from_name} {to_name} cycle_pump {flow_type}
        '''.format(**locals())
     clean_io = list(set(io_list))
+
     # New list with all materials that don't have flows
     missing_io = list(
         list(

@@ -60,51 +60,6 @@ set inventory fuel all
 % Main pumps
 {{mflows_rep}}
 
-% Waste pumps
-mflow sparger_pump
-  Xe 0.6
-  Kr 0.6
-  H  0.6
- 
-mflow entrainment_pump
-  Xe 0.97
-  Kr 0.97
-  H 0.97
- 
-mflow nickel_pump
-  Se 1
-  Nb 1
-  Mo 1
-  Tc 1
-  Ru 1
-  Rh 1
-  Pd 1
-  Ag 1
-  Sb 1
-  Te 1
- 
-mflow bypass_pump
-  all 0.9
- 
-mflow liquid_metal_pump
-  all 0.1
- 
-mflow waste_metal_pump
-  Y 0.57
-  La  0.57
-  Ce  0.57
-  Pr  0.57
-  Nd  0.57
-  Pm  0.57
-  Sm  0.57
-  Gd  0.57
-  Zr  0.57
-  Cd  0.57
-  In  0.57
-  Sn  0.57
- 
-mflow standard_pump
-  all 1
  
 mflow leu_feed_pump
   all {{feed_pump}}

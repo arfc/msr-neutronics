@@ -4,12 +4,11 @@ Some differences from the other version:
 - Added additional term to template file for the fuel inflow
 
 Things to do:
-- Define initial fuel salt within the script
-- Create materials for each section of the flow
 - Make an option to reduce complexity (i.e. core mat and reproccess mat)
 - Make an option to do realisitic reprocessing (continuous with efficiency) or bulk reprocessing (every 3 days remove percentage from all fuel salt)
-- Manually define the flow setup (10 unique states, should be able to manually define 2 and have others come about naturally)
-
+- Add feed salt material
+- Add waste flows (rc output waste) into Python to account for changing number of num_divisions
+- Add feed salt flow to rc
 
 Reminders:
 - Materials are numbered as such:
@@ -20,3 +19,7 @@ Reminders:
 -- Liquid Metal: 4 and 13
 -- Heat Exchanger: 5 and 14
 -- Additionally, the waste materials are fully named (i.e. waste_nickel_filter)
+
+
+Thoughts:
+- There could be error buildup if we ignore the small negative terms this time, so that issue should be addressed.
