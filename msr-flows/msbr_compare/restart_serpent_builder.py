@@ -9,7 +9,8 @@ def make_input(
         restart_iter=0,
         flip=False,
         flow_type=2,
-        shouldnt_happen=False):
+        shouldnt_happen=False,
+        bulk_reprocess=False):
     '''
     This function will generate the input file for Serpent.
     Each restart iteration is a cycle
@@ -28,6 +29,10 @@ def make_input(
         Whether or not the flow orientation will be flipped
     flow_type : {0, 1, 2}, optional
         Which flow type for Serpent to use
+    shouldnt_happen : boolean, optional
+        Set to true if the user wants the "Shouldn't happen" Serpent error
+    bulk_reprocess : boolean, optional
+        Continuous reprocessing if False, otherwise bulk every 3 days
 
     Returns
     -------
@@ -39,31 +44,7 @@ def make_input(
     num_divisions = int(tot_time / time_step)
     core_mats = np.arange(num_divisions, 2 * num_divisions)
     env = Environment(loader=FileSystemLoader('./templates'))
-    template = env.get_template('standard.template')
-    surface_defs = ''
-    # Subdividing fuelsalt surfaces for core
-    min_z_core = -25
-    max_z_core = 25
-    vol_core = 125000
-    fuel_salt_div_size = (max_z_core - min_z_core) / num_divisions
-    for surf_sub in range(num_divisions):
-        surf_name = 'sub' + str(core_mats[surf_sub])
-        minz = min_z_core + fuel_salt_div_size * surf_sub
-        maxz = min_z_core + fuel_salt_div_size * (surf_sub + 1)
-        surface_defs += '''
-surf {surf_name} cuboid -25 25 -25 25 {minz} {maxz}
-        '''.format(**locals())
-
-    cell_defs = ''
-
-    # Subdividing fuelsalt cells for core
-    for cell_sub in core_mats:
-        cell_name = 'cell' + str(cell_sub)
-        mat_name = 'fuelsalt' + str(cell_sub)
-        surf_name = 'sub' + str(cell_sub)
-        cell_defs += '''
-cell {cell_name} 0 {mat_name} -{surf_name}
-        '''.format(**locals())
+    template = env.get_template('msbr.serpent')
 
     # Saving salt composition for replicability
     fuel_comp = '''

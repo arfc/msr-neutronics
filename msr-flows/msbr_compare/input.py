@@ -75,11 +75,11 @@ def check_wrk_file(INP_NAME, OUTPUT_NAME):
 
 if __name__ == '__main__':
 
-    INPUT_NAME = 'cycle_test'
-    DIR_NAME = 'msr_cycle_test'
+    INPUT_NAME = 'msbr_test'
+    DIR_NAME = 'msbr_dir_test'
     NUM_CYCLES = 1
     CYCLE_TIME_SECONDS = 20
-    CYCLE_STEP_SIZE_SECONDS = 1
+    #CYCLE_STEP_SIZE_SECONDS = 1
     OUTPUT_NAME = 'output'
     PLOTTING = True
     RESTART_CYCLE = True
@@ -87,8 +87,6 @@ if __name__ == '__main__':
 
     BULK_REPR = False
     SIMPLE_REPR = False
-
-    
 
     if SIMPLE_REPR:
         num_divisions = 1
@@ -122,7 +120,8 @@ if __name__ == '__main__':
                 REST_INP_NAME,
                 CYCLE_TIME_SECONDS,
                 CYCLE_STEP_SIZE_SECONDS,
-                restart_iter)
+                restart_iter,
+                bulk_reprocess = BULK_REPR)
             run_script(REST_INP_NAME, REST_OUT_NAME, rest_input_script)
             check_wrk_file(REST_INP_NAME, REST_OUT_NAME)
             print(
