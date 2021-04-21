@@ -10,7 +10,8 @@ def make_input(
         flip=False,
         flow_type=2,
         shouldnt_happen=False,
-        bulk_reprocess=False):
+        bulk_reprocess=False,
+        feed_rate_gs=1):
     '''
     This function will generate the input file for Serpent.
     Each restart iteration is a cycle
@@ -33,6 +34,8 @@ def make_input(
         Set to true if the user wants the "Shouldn't happen" Serpent error
     bulk_reprocess : boolean, optional
         Continuous reprocessing if False, otherwise bulk every 3 days
+    feed_rate_gs : float, optional
+        The feed rate of LEU fuel salt into the system in g/s
 
     Returns
     -------
@@ -49,6 +52,8 @@ def make_input(
     total_volume = 4.87E7
     piping_volume = total_volume - core_volume
     feed_pump = lam_val
+    feed_vol = feed_rate_gs / (feed_pump * 4.9602)
+    bulk_time = 3 * (sec_per_day)
 
     # Saving salt composition for replicability
     fuel_comp = '''
@@ -208,7 +213,9 @@ mflow waste_metal_pump
 '''.format(**locals())
 
     # Subdividing Flows
-    rep_defs = ''
+    rep_defs = '''
+rc feedsalt {core_mats[0]} feed_pump 0
+'''
 
     # Determine value to shift index by
     if current_state < num_divisions:
@@ -237,6 +244,42 @@ rc {from_name} {to_name} cycle_pump {flow_type}
        '''.format(**locals())
     clean_io = list(set(io_list))
 
+    waste_flows = ''
+    # Waste Flows
+    if num_divisions == 6:
+        waste_flows += '''
+rc fuelsalt0 waste_sparger sparger_pump 2
+rc fuelsalt1 waste_entrainment_separator entrainment_pump 2
+rc fuelsalt2 waste_nickel_filter nickel_pump 2
+rc fuelsalt4 waste_liquid_metal waste_metal_pump 2
+
+rc fuelsalt12 waste_sparger sparger_pump 2
+rc fuelsalt13 waste_entrainment_separator entrainment_pump 2
+rc fuelsalt14 waste_nickel_filter nickel_pump 2
+rc fuelsalt16 waste_liquid_metal waste_metal_pump 2
+
+'''
+    elif num_divisions == 1:
+        # Only deplete if at 3 day increment
+        if cur_time % bulk_time == 0:
+            waste_flows += '''
+rc fuelsalt0 waste_sparger sparger_pump 2
+rc fuelsalt0 waste_entrainment_separator entrainment_pump 2
+rc fuelsalt0 waste_nickel_filter nickel_pump 2
+rc fuelsalt0 waste_liquid_metal waste_metal_pump 2
+
+rc fuelsalt2 waste_sparger sparger_pump 2
+rc fuelsalt2 waste_entrainment_separator entrainment_pump 2
+rc fuelsalt2 waste_nickel_filter nickel_pump 2
+rc fuelsalt2 waste_liquid_metal waste_metal_pump 2
+
+'''
+        else:
+            pass
+    else:
+        raise Exception(f'Expected 1 or 6 number of divisions. Received {num_divisons}.')
+
+
     # New list with all materials that don't have flows
     missing_io = list(
         list(
@@ -260,12 +303,13 @@ rc {from_name} {to_name} cycle_pump {flow_type}
 
     # Loading values into template
     full_input = template.render(
-        surfaces=surface_defs,
-        cells=cell_defs,
         materials=mat_defs,
+        feed_vol=feed_vol
         read_write=rw_defs,
         mflows_rep=mflow_defs,
+        feed_pump=feed_pump
         reprocessing_control=rep_defs,
+        waste_flows=waste_flows
         time_vals=time_defs)
 
     return full_input

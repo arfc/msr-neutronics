@@ -23,6 +23,12 @@ rgb 127 205 187
 % Al
 13027.09c   -0.003
 
+% Feedsalt
+mat feedsalt -4.9602
+vol {{feed_vol}}
+90232.09c   0.55
+92233.09c   0.45
+
 % --- Thermal scattering data for graphite:
 therm gr 900 gre7.18t gre7.20t  % 900K C-nat
 
@@ -61,7 +67,7 @@ set inventory fuel all
 {{mflows_rep}}
 
  
-mflow leu_feed_pump
+mflow feed_pump
   all {{feed_pump}}
 
 rep flowprocess
@@ -70,15 +76,7 @@ rep flowprocess
 {{reprocessing_control}}
 
 % Waste flows
-rc 0 waste_sparger sparger_pump 2 
-rc 1 waste_entrainment_separator entrainment_pump 2
-rc 2 waste_nickel_filter nickel_pump 2
-rc 4 waste_liquid_metal waste_metal_pump 2
- 
-rc 9 waste_sparger sparger_pump 2
-rc 10 waste_entrainment_separator entrainment_pump 2
-rc 11 waste_nickel_filter nickel_pump 2
-rc 13 waste_liquid_metal waste_metal_pump 2
+{{waste_flows}}
 
 dep
 pro flowprocess

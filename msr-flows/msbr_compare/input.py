@@ -87,6 +87,10 @@ if __name__ == '__main__':
 
     BULK_REPR = False
     SIMPLE_REPR = False
+    # If simple, then also bulk. If bulk, doesn't have to be simple
+    # Simple makes only 1 material for each region (Core/piping)
+    # Bulk makes material extracted all at once at set times (every 3 days)
+    LEU_feed_rate = 1
 
     if SIMPLE_REPR:
         num_divisions = 1
@@ -121,7 +125,8 @@ if __name__ == '__main__':
                 CYCLE_TIME_SECONDS,
                 CYCLE_STEP_SIZE_SECONDS,
                 restart_iter,
-                bulk_reprocess = BULK_REPR)
+                bulk_reprocess = BULK_REPR,
+                feed_rate_gs = LEU_feed_rate)
             run_script(REST_INP_NAME, REST_OUT_NAME, rest_input_script)
             check_wrk_file(REST_INP_NAME, REST_OUT_NAME)
             print(
