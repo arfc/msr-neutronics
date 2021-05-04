@@ -11,7 +11,8 @@ def make_input(
         flow_type=2,
         shouldnt_happen=False,
         bulk_reprocess=False,
-        feed_rate_gs=1):
+        feed_rate_gs=1,
+        core_subdivisions=False):
     '''
     This function will generate the input file for Serpent.
     Each restart iteration is a cycle
@@ -36,6 +37,8 @@ def make_input(
         Continuous reprocessing if False, otherwise bulk every 3 days
     feed_rate_gs : float, optional
         The feed rate of LEU fuel salt into the system in g/s
+    core_subdivisions : boolean, optional
+        Subdivides the core based on the number of divisions. If False, will use one material for core
 
     Returns
     -------
@@ -43,7 +46,6 @@ def make_input(
         The full Serpent input text
     '''
     sec_per_day = 86400
-    lam_val = 1 / (time_step * sec_per_day)
     num_divisions = int(tot_time / time_step)
     core_mats = np.arange(num_divisions, 2 * num_divisions)
     env = Environment(loader=FileSystemLoader('./templates'))
@@ -57,11 +59,11 @@ def make_input(
 
     # Saving salt composition for replicability
     fuel_comp = '''
-            3007.09c  -7.87474673879085E-02
-            4009.09c  -2.25566879138321E-02
-            9019.09c  -4.54003012179284E-01
-           90232.09c  -4.35579130482336E-01
-           92233.09c  -9.11370203663893E-03
+3007.09c  -7.87474673879085E-02
+4009.09c  -2.25566879138321E-02
+9019.09c  -4.54003012179284E-01
+90232.09c  -4.35579130482336E-01
+92233.09c  -9.11370203663893E-03
     '''
 
     # Normalize restart_iter value
@@ -81,7 +83,10 @@ def make_input(
         current_state = 0
 
     # Setting up flows for current state
-    core_mats = [mat for mat in np.arange(num_divisions, 2 * num_divisions)]
+    if core_subdivisions:
+        core_mats = [mat for mat in np.arange(num_divisions, 2 * num_divisions)]
+    else:
+        core_mats = [999]
     if current_state < num_divisions:
         feed_mats = [mat for mat in np.arange(0, num_divisions)]
         empty_mats = [
@@ -109,7 +114,11 @@ def make_input(
     mat_defs = ''
 
     # Subdividing fuelsalt for in and out of core materials
-    core_sub_vol = core_volume / num_divisions
+    if core_subdivisions:
+        core_divs = num_divisions
+    else:
+        core_divs = 1
+    core_sub_vol = core_volume / core_divs
     pipe_sub_vol = piping_volume / num_divisions
     # Triple the materials for core feed, core, and core output
     # Calibrate masses based on num_div and restart_iter
@@ -127,7 +136,7 @@ def make_input(
         mat_defs += '''
 mat {mat_name} {dens}
 rgb {rgb_var} {rgb_var} {rgb_var}
-vol {mat_vol}
+vol {vol}
 burn 1
 fix 09c 900
 {fuel_comp}
@@ -153,6 +162,10 @@ set rfr -{cur_time} {restart_read_name}
 set rfw 1
 '''.format(**locals())
 
+
+
+    lam_val = 1 / (time_step * sec_per_day)
+    core_lam = pipe_sub_vol / core_sub_vol * lam_val
     if flip:
         lam_val = 0
 
@@ -160,6 +173,9 @@ set rfw 1
     norm_eff = [i * lam_val for i in waste_removal_efficiencies]
 
     mflow_defs = '''
+mflow outcore_pump
+ all {core_lam}
+    
 mflow cycle_pump
  all {lam_val}
 
@@ -214,8 +230,8 @@ mflow waste_metal_pump
 
     # Subdividing Flows
     rep_defs = '''
-rc feedsalt {core_mats[0]} feed_pump 0
-'''
+rc feedsalt fuelsalt{core_mats[0]} feed_pump 0
+'''.format(**locals())
 
     # Determine value to shift index by
     if current_state < num_divisions:
@@ -224,7 +240,10 @@ rc feedsalt {core_mats[0]} feed_pump 0
         shift_val = current_state - num_divisions
     # List of materials that output/input
     io_list = list()
-    for mat_sub in range(2 * num_divisions):
+    num_mat_subs = 2 * num_divisions
+    if not core_subdivisions:
+        num_mat_subs = num_divisions + 1
+    for mat_sub in range(num_mat_subs):
         # shift right by current_state
         compare_val = mat_sub + current_state + 1
         while compare_val >= 3 * num_divisions:
@@ -233,20 +252,28 @@ rc feedsalt {core_mats[0]} feed_pump 0
         # Parallel flow check
         # Occurs at bypass/liq_metal (3/4 and 15/16)
         io_list.append(feed_list[mat_sub + shift_val])
+        # This is currently breaking because we have removed subdivisions from core
+        # The solution is to adjust indexing by number of subdivisions not present
+        # This is performed by using num_mat_subs
         io_list.append(feed_list[mat_sub + shift_val + 1])
         from_name = 'fuelsalt' + str(feed_list[mat_sub + shift_val])
         to_name = 'fuelsalt' + str(feed_list[mat_sub + shift_val + 1])
-        if feed_list[mat_sub + shift_val] == 3 or feed_list[mat_sub + shift_val] == 15:
+        if feed_list[mat_sub + shift_val] == 3 or feed_list[mat_sub + shift_val] == len(feed_list) - 2:
             # If true, then bypass, so should flow to +2 instead of +1
             to_name = 'fuelsalt' + str(feed_list[mat_sub + shift_val + 2])
+        pump_type = 'cycle_pump'
+        # Check if core output
+        if feed_list[mat_sub + shift_val] in core_mats:
+            pump_type = 'outcore_pump'
         rep_defs += '''
-rc {from_name} {to_name} cycle_pump {flow_type}
+rc {from_name} {to_name} {pump_type} {flow_type}
        '''.format(**locals())
     clean_io = list(set(io_list))
 
     waste_flows = ''
     # Waste Flows
-    if num_divisions == 6:
+    if not bulk_reprocess and num_divisions == 6:
+        # Only extract in proper locations
         waste_flows += '''
 rc fuelsalt0 waste_sparger sparger_pump 2
 rc fuelsalt1 waste_entrainment_separator entrainment_pump 2
@@ -259,6 +286,25 @@ rc fuelsalt14 waste_nickel_filter nickel_pump 2
 rc fuelsalt16 waste_liquid_metal waste_metal_pump 2
 
 '''
+    # Extract from all fuelsalt equally
+    # i.e. from fuelsalt0 - fuelsaltN, perform all 4 extractions.
+    elif bulk_reprocess and num_divisions == 6:
+        if cur_time % bulk_time == 0:
+            waste_flows += '''
+rc fuelsalt0 waste_sparger sparger_pump 2
+rc fuelsalt1 waste_entrainment_separator entrainment_pump 2
+rc fuelsalt2 waste_nickel_filter nickel_pump 2
+rc fuelsalt4 waste_liquid_metal waste_metal_pump 2
+
+rc fuelsalt12 waste_sparger sparger_pump 2
+rc fuelsalt13 waste_entrainment_separator entrainment_pump 2
+rc fuelsalt14 waste_nickel_filter nickel_pump 2
+rc fuelsalt16 waste_liquid_metal waste_metal_pump 2
+
+'''
+        else:
+            pass
+
     elif num_divisions == 1:
         # Only deplete if at 3 day increment
         if cur_time % bulk_time == 0:
@@ -275,6 +321,7 @@ rc fuelsalt2 waste_liquid_metal waste_metal_pump 2
 
 '''
         else:
+            # No online reprocessing performed
             pass
     else:
         raise Exception(f'Expected 1 or 6 number of divisions. Received {num_divisons}.')
@@ -304,12 +351,14 @@ rc fuelsalt2 waste_liquid_metal waste_metal_pump 2
     # Loading values into template
     full_input = template.render(
         materials=mat_defs,
-        feed_vol=feed_vol
+        core_sub_vol=core_sub_vol,
+        feed_vol=feed_vol,
+        pipe_sub_vol=pipe_sub_vol,
         read_write=rw_defs,
         mflows_rep=mflow_defs,
-        feed_pump=feed_pump
+        feed_pump=feed_pump,
         reprocessing_control=rep_defs,
-        waste_flows=waste_flows
+        waste_flows=waste_flows,
         time_vals=time_defs)
 
     return full_input

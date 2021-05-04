@@ -60,6 +60,8 @@ def check_wrk_file(INP_NAME, OUTPUT_NAME):
     '''
     wrk_name = str(INP_NAME) + '.wrk'
     out_len = 0
+    #print(f'Waiting for {INP_NAME}.wrk')
+    #sleep(10)
     # Path will exist once it has fully run
     while not path.exists(wrk_name):
         cur_out_len = 0
@@ -77,7 +79,7 @@ if __name__ == '__main__':
 
     INPUT_NAME = 'msbr_test'
     DIR_NAME = 'msbr_dir_test'
-    NUM_CYCLES = 1
+    NUM_CYCLES = 2
     CYCLE_TIME_SECONDS = 20
     #CYCLE_STEP_SIZE_SECONDS = 1
     OUTPUT_NAME = 'output'

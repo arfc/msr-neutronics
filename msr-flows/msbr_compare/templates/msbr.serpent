@@ -8,36 +8,99 @@ include "templates/geometry/msbr_full.ini"
 
 % --- Moderator graphite:
 mat moder    -1.84 tmp 900 rgb 68 1 84 moder gr 6000 6000.09c    -1.0 %tmp 908
+
 % --- Hastelloy N
 mat hast     -8.671
 rgb 127 205 187
 % Natural Ni
 28000.09c    -0.677
+%28058.09c   -0.4562614
+%28060.09c   -0.1804391
+%28061.09c   -0.0079425
+%28062.09c   -0.0256463
+%28064.09c   -0.0067108
 
 % Natural W
 74000.09c   -0.250
+%74180.09c   -0.0003417
+%74182.09c   -0.0757228
+%74183.09c   -0.0004134
+%74184.09c   -0.0893641
+%74186.09c   -0.0841580
 
 % Natural Cr
 24000.09c   -0.070
+%24050.09c   -0.0029250
+%24052.09c   -0.0585905
+%24053.09c   -0.0067708
+%24054.09c   -0.0017137
 
 % Al
 13027.09c   -0.003
 
+% Core Salt
+mat fuelsalt999 -3.35
+vol {{core_sub_vol}}
+burn 1
+fix 09c 900
+3007.09c  -7.87474673879085E-02
+4009.09c  -2.25566879138321E-02
+9019.09c  -4.54003012179284E-01
+90232.09c  -4.35579130482336E-01
+92233.09c  -9.11370203663893E-03
+
+
 % Feedsalt
 mat feedsalt -4.9602
 vol {{feed_vol}}
+burn 1
 90232.09c   0.55
 92233.09c   0.45
 
+% Waste Materials
+mat waste_sparger -0.0001
+vol {{pipe_sub_vol}}
+burn 1
+92238.09c 1
+
+mat waste_entrainment_separator -0.0001
+vol {{pipe_sub_vol}}
+burn 1
+92238.09c 1
+
+mat waste_nickel_filter -0.0001
+vol {{pipe_sub_vol}}
+burn 1
+92238.09c 1
+
+mat waste_liquid_metal -0.0001
+vol {{pipe_sub_vol}}
+burn 1
+92238.09c 1
+
+
 % --- Thermal scattering data for graphite:
 therm gr 900 gre7.18t gre7.20t  % 900K C-nat
+%therm gr 900 gr05.32t gr06.32t  % 900K C-nat
+%therm gr 900 gra-800.ACE gra-1000.ACE
 
 
 set title "MSBR Saltproc long-term, 91% removal, BOL, fresh fuel, ENDF"
 
-set acelib "/home/luke/serp/xsdata/jeff312/sss_jeff312.xsdata"
-set declib "/home/luke/serp/xsdata/jeff312/sss_jeff33.dec"
-set nfylib "/home/luke/serp/xsdata/jeff312/sss_jeff33.nfy"
+%set acelib "/home/luke/serp/xsdata/jeff32/sss_jeff32.xsdata"
+%set declib "/home/luke/serp/xsdata/jeff32/sss_jeff311.dec"
+%set nfylib "/home/luke/serp/xsdata/jeff32/sss_jeff311.nfy"
+%set sfylib "/home/luke/serp/xsdata/jeff32/sss_jeff33.sfy"
+
+%set acelib "/home/luke/serp/xsdata/jeff312/sss_jeff312.xsdata"
+%set declib "/home/luke/serp/xsdata/jeff312/sss_jeff33.dec"
+%set nfylib "/home/luke/serp/xsdata/jeff312/sss_jeff33.nfy"
+%set sfylib "/home/luke/serp/xsdata/jeff312/sss_jeff33.sfy"
+
+set acelib "/home/luke/xsdata/endfb7/sss_endfb7u.xsdata"
+set declib "/home/luke/xsdata/endfb7/sss_endfb7.dec"
+set nfylib "/home/luke/xsdata/endfb7/sss_endfb7.nfy"
+
 
 
 % --- Neutron population and criticality cycles:
