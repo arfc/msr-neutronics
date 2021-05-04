@@ -47,14 +47,17 @@ def make_input(
     '''
     sec_per_day = 86400
     num_divisions = int(tot_time / time_step)
+    lam_val = 1 / (time_step * sec_per_day)
     core_mats = np.arange(num_divisions, 2 * num_divisions)
     env = Environment(loader=FileSystemLoader('./templates'))
     template = env.get_template('msbr.serpent')
     core_volume = 3.04E7
     total_volume = 4.87E7
     piping_volume = total_volume - core_volume
-    feed_pump = lam_val
-    feed_vol = feed_rate_gs / (feed_pump * 4.9602)
+    feed_vol = 1E12
+    feed_pump = lam_val * feed_rate_gs / (feed_vol * 4.9602)
+    #feed_pump = lam_val
+    #feed_vol = feed_rate_gs / (feed_pump * 4.9602)
     bulk_time = 3 * (sec_per_day)
 
     # Saving salt composition for replicability
@@ -164,7 +167,6 @@ set rfw 1
 
 
 
-    lam_val = 1 / (time_step * sec_per_day)
     core_lam = pipe_sub_vol / core_sub_vol * lam_val
     if flip:
         lam_val = 0
@@ -230,7 +232,7 @@ mflow waste_metal_pump
 
     # Subdividing Flows
     rep_defs = '''
-rc feedsalt fuelsalt{core_mats[0]} feed_pump 0
+rc feedsalt fuelsalt{core_mats[0]} feed_pump 2
 '''.format(**locals())
 
     # Determine value to shift index by
@@ -261,6 +263,15 @@ rc feedsalt fuelsalt{core_mats[0]} feed_pump 0
         if feed_list[mat_sub + shift_val] == 3 or feed_list[mat_sub + shift_val] == len(feed_list) - 2:
             # If true, then bypass, so should flow to +2 instead of +1
             to_name = 'fuelsalt' + str(feed_list[mat_sub + shift_val + 2])
+        elif feed_list[mat_sub + shift_val] == 2 or feed_list[mat_sub + shift_val] == len(feed_list) - 3:
+            # If true, we need to have an additional flow going out
+            pump_type = 'cycle_pump'
+            extra_to_name = 'fuelsalt' + str(feed_list[mat_sub + shift_val + 2])
+            rep_defs += '''
+rc {from_name} {extra_to_name} {pump_type} {flow_type}
+            '''.format(**locals())
+        else:
+            pass
         pump_type = 'cycle_pump'
         # Check if core output
         if feed_list[mat_sub + shift_val] in core_mats:

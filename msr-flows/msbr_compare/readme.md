@@ -11,8 +11,10 @@ Some differences from the other version:
 Things to do:
 - For bulk_reprocessing, need to extract from core material as well as piping
 - Customize materials in geometry
-- Make default option single "fuelalt999" material for entire core,
-  maybe add in separate fuelsalt subdivisions in core later (has to be changed in geometry.ini file)
+- Change feedmat to be type 2 flow
 
 Thoughts:
 - There could be error buildup if we ignore the small negative terms this time, so that issue should be addressed.
+
+Issues:
+- Feeding a type 0 and type 2 flow into the same material causes issue. Replacing type 0 flow with 1 or 2 fixes issue. Very strange.
