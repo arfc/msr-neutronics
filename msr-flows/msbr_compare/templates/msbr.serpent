@@ -131,7 +131,8 @@ set inventory fuel all
 
  
 mflow feed_pump
-  all {{feed_pump}}
+  Th {{feed_pump}}
+  U  {{feed_pump}}
 
 rep flowprocess
 

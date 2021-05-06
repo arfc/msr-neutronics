@@ -47,18 +47,23 @@ def make_input(
     '''
     sec_per_day = 86400
     num_divisions = int(tot_time / time_step)
-    lam_val = 1 / (time_step * sec_per_day)
+    # intentionally reducing lam_val by 10% in order to not have issues with Serpent
+    ADJUSTMENT_VALUE = 0.9
+    lam_val = 1 / (time_step * sec_per_day) * ADJUSTMENT_VALUE
     core_mats = np.arange(num_divisions, 2 * num_divisions)
     env = Environment(loader=FileSystemLoader('./templates'))
     template = env.get_template('msbr.serpent')
     core_volume = 3.04E7
     total_volume = 4.87E7
     piping_volume = total_volume - core_volume
-    feed_vol = 1E12
+    feed_vol = 1E4 # 1E10
     feed_pump = lam_val * feed_rate_gs / (feed_vol * 4.9602)
     #feed_pump = lam_val
     #feed_vol = feed_rate_gs / (feed_pump * 4.9602)
     bulk_time = 3 * (sec_per_day)
+    missing_count = 0
+    if not core_subdivisions:
+        missing_count += num_divisions - 1
 
     # Saving salt composition for replicability
     fuel_comp = '''
@@ -260,18 +265,23 @@ rc feedsalt fuelsalt{core_mats[0]} feed_pump 2
         io_list.append(feed_list[mat_sub + shift_val + 1])
         from_name = 'fuelsalt' + str(feed_list[mat_sub + shift_val])
         to_name = 'fuelsalt' + str(feed_list[mat_sub + shift_val + 1])
-        if feed_list[mat_sub + shift_val] == 3 or feed_list[mat_sub + shift_val] == len(feed_list) - 2:
+        #print(feed_list[mat_sub + shift_val])
+        if feed_list[mat_sub + shift_val] == 3 or feed_list[mat_sub + shift_val] == 15:
             # If true, then bypass, so should flow to +2 instead of +1
+            #print('Value is 3 or 15')
             to_name = 'fuelsalt' + str(feed_list[mat_sub + shift_val + 2])
-        elif feed_list[mat_sub + shift_val] == 2 or feed_list[mat_sub + shift_val] == len(feed_list) - 3:
+        elif feed_list[mat_sub + shift_val] == 2 or feed_list[mat_sub + shift_val] == 14:
             # If true, we need to have an additional flow going out
+            #print('Value is 2 or 14')
             pump_type = 'cycle_pump'
-            extra_to_name = 'fuelsalt' + str(feed_list[mat_sub + shift_val + 2])
+            feed_val = feed_list[mat_sub + shift_val + 2]
+            extra_to_name = 'fuelsalt' + str(feed_val)
             rep_defs += '''
 rc {from_name} {extra_to_name} {pump_type} {flow_type}
             '''.format(**locals())
         else:
             pass
+        #print()
         pump_type = 'cycle_pump'
         # Check if core output
         if feed_list[mat_sub + shift_val] in core_mats:
