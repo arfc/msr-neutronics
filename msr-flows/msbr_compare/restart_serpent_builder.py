@@ -47,8 +47,8 @@ def make_input(
     '''
     sec_per_day = 86400
     num_divisions = int(tot_time / time_step)
-    # intentionally reducing lam_val by 10% in order to not have issues with Serpent
-    ADJUSTMENT_VALUE = 0.9
+    # intentionally reducing lam_val in order to not have issues with Serpent
+    ADJUSTMENT_VALUE = 1
     lam_val = 1 / (time_step * sec_per_day) * ADJUSTMENT_VALUE
     core_mats = np.arange(num_divisions, 2 * num_divisions)
     env = Environment(loader=FileSystemLoader('./templates'))
@@ -251,6 +251,7 @@ rc feedsalt fuelsalt{core_mats[0]} feed_pump 2
     if not core_subdivisions:
         num_mat_subs = num_divisions + 1
     for mat_sub in range(num_mat_subs):
+        pump_type = 'cycle_pump'
         # shift right by current_state
         compare_val = mat_sub + current_state + 1
         while compare_val >= 3 * num_divisions:
@@ -273,22 +274,24 @@ rc feedsalt fuelsalt{core_mats[0]} feed_pump 2
         elif feed_list[mat_sub + shift_val] == 2 or feed_list[mat_sub + shift_val] == 14:
             # If true, we need to have an additional flow going out
             #print('Value is 2 or 14')
-            pump_type = 'cycle_pump'
+            pump_type = 'liquid_metal_pump'
             feed_val = feed_list[mat_sub + shift_val + 2]
             extra_to_name = 'fuelsalt' + str(feed_val)
             rep_defs += '''
 rc {from_name} {extra_to_name} {pump_type} {flow_type}
             '''.format(**locals())
+            # Set up pump type for current to_name
+            pump_type = 'bypass_pump'
         else:
             pass
         #print()
-        pump_type = 'cycle_pump'
         # Check if core output
         if feed_list[mat_sub + shift_val] in core_mats:
             pump_type = 'outcore_pump'
         rep_defs += '''
 rc {from_name} {to_name} {pump_type} {flow_type}
        '''.format(**locals())
+        pump_type = 'cycle_pump'
     clean_io = list(set(io_list))
 
     waste_flows = ''

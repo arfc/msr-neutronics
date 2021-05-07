@@ -122,7 +122,11 @@ set pcc     2  % Predictor-corrector calculation off (Linear extrapolation)
 
 set power 2.25E+9 
 
-set inventory fuel all
+%set inventory fuel all
+set inventory
+Th
+U
+
 
 {{read_write}}
 
