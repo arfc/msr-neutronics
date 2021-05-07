@@ -12,6 +12,7 @@ Things to do:
 - For bulk_reprocessing, need to extract from core material as well as piping
 - Customize materials in geometry
 - Change feedmat to be type 2 flow
+- Appears core outflow not calculated properly, material 12 is overfilled
 
 Thoughts:
 - There could be error buildup if we ignore the small negative terms this time, so that issue should be addressed.
