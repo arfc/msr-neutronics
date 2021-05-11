@@ -133,14 +133,21 @@ def make_input(
     # Calibrate masses based on num_div and restart_iter
     for mat_sub in range(num_divisions * 3):
         dens = -3.35
+        vol_mult = 1
+        if mat_sub == 3 or mat_sub == 15:
+            vol_mult = 0.9
+        elif mat_sub == 4 or mat_sub == 16:
+            vol_mult = 0.1
+        else:
+            pass
         if mat_sub in empty_mat_list:
             dens = -0.00001
-            vol = pipe_sub_vol
+            vol = pipe_sub_vol * vol_mult
         elif mat_sub in core_mats:
-            vol = core_sub_vol
+            vol = core_sub_vol * vol_mult
         elif mat_sub in feed_mats:
-            vol = pipe_sub_vol
-        rgb_var = 10 + mat_sub * 2
+            vol = pipe_sub_vol * vol_mult
+        rgb_var = 10 + mat_sub * 2 
         mat_name = 'fuelsalt' + str(mat_sub)
         mat_defs += '''
 mat {mat_name} {dens}
@@ -309,15 +316,15 @@ rc {from_name} {to_name} {pump_type} {flow_type}
     if not bulk_reprocess and num_divisions == 6:
         # Only extract in proper locations
         waste_flows += '''
-rc fuelsalt0 waste_sparger sparger_pump {waste_flow_type}
-rc fuelsalt1 waste_entrainment_separator entrainment_pump {waste_flow_type}
-rc fuelsalt2 waste_nickel_filter nickel_pump {waste_flow_type}
-rc fuelsalt4 waste_liquid_metal waste_metal_pump {waste_flow_type}
+%rc fuelsalt0 waste_sparger sparger_pump {waste_flow_type}
+%rc fuelsalt1 waste_entrainment_separator entrainment_pump {waste_flow_type}
+%rc fuelsalt2 waste_nickel_filter nickel_pump {waste_flow_type}
+%rc fuelsalt4 waste_liquid_metal waste_metal_pump {waste_flow_type}
 
-rc fuelsalt12 waste_sparger sparger_pump {waste_flow_type}
-rc fuelsalt13 waste_entrainment_separator entrainment_pump {waste_flow_type}
-rc fuelsalt14 waste_nickel_filter nickel_pump {waste_flow_type}
-rc fuelsalt16 waste_liquid_metal waste_metal_pump {waste_flow_type}
+%rc fuelsalt12 waste_sparger sparger_pump {waste_flow_type}
+%rc fuelsalt13 waste_entrainment_separator entrainment_pump {waste_flow_type}
+%rc fuelsalt14 waste_nickel_filter nickel_pump {waste_flow_type}
+%rc fuelsalt16 waste_liquid_metal waste_metal_pump {waste_flow_type}
 
 '''.format(**locals())
     # Extract from all fuelsalt equally

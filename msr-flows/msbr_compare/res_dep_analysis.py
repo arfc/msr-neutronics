@@ -311,16 +311,45 @@ def u235_conc_diff_mats(DEPLETE):
     return
 
 
+
+def u238_conc_diff_mats(DEPLETE):
+    '''
+    Iterates through the different materials and displays the mass of U233
+
+    Parameters
+    ----------
+    DEPLETE : str
+        Name of the depletion output
+
+    Returns
+    -------
+    None
+    '''
+    dep = st.read(DEPLETE, reader='dep')
+    for mat in dep.materials.keys():
+        if mat == 'total':
+            pass
+        else:
+            current = dep.materials[str(mat)]
+            current.plot('days', 'mdens', names='U238')
+            savename = str(DEPLETE) + '_' + str(mat) + '_U238.png'
+            plt.savefig(savename)
+            plt.close()
+    return
+
+
 # Debugging, uncomment whichever function to debug
 if __name__ == "__main__":
-    FILENAME = 'cycle_test_rest'
-    RESULTS = FILENAME + '_res.m'
-    DEPLETE = FILENAME + '_dep.m'
-    num_divisions = 2
-    CYCLES = 2
-    restart_plots(
-        FILENAME,
-        num_divisions,
-        CYCLES=CYCLES,
-        plot_all=True,
-        combine_outer=True)
+    for ii in range(5):
+        FILENAME = f'msbr_test_rest{ii}'
+        RESULTS = FILENAME + '_res.m'
+        DEPLETE = FILENAME + '_dep.m'
+        num_divisions = 2
+        CYCLES = 2
+        u238_conc_diff_mats(DEPLETE)
+    #restart_plots(
+    #    FILENAME,
+    #    num_divisions,
+    #    CYCLES=CYCLES,
+    #    plot_all=True,
+    #    combine_outer=True)

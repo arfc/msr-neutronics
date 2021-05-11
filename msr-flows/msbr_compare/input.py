@@ -85,7 +85,7 @@ if __name__ == '__main__':
     OUTPUT_NAME = 'output'
     PLOTTING = True
     RESTART_CYCLE = True
-    serpent_version = 'sss2'
+    serpent_version = 'sss2'#'./sss2_debug'
 
     BULK_REPR = False
     SIMPLE_REPR = False

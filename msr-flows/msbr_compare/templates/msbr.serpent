@@ -117,16 +117,25 @@ set stabcut 1E-12
 
 % --- Depletion parameters
 % --- Options for burnup calculation:
-set bumode  2  % CRAM method
-set pcc     2  % Predictor-corrector calculation off (Linear extrapolation)
+%set bumode  2  % CRAM method
+%set pcc     2  % Predictor-corrector calculation off (Linear extrapolation)
+set pcc 0
 
-set power 2.25E+9 
+
+%set power 2.25E+9 
+set power 0
 
 %set inventory fuel all
-set inventory
-Th
-U
-
+%set inventory
+%Th
+%U
+%Xe
+%Kr
+%H
+%922330
+%922350
+%922340
+%922380
 
 {{read_write}}
 

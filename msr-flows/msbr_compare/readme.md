@@ -13,9 +13,19 @@ Things to do:
 - Customize materials in geometry
 - Change feedmat to be type 2 flow
 - Appears core outflow not calculated properly, material 12 is overfilled
+- Set power back from 0
+- Uncomment out reprocessing flows
+- Reset altered settings used to try and debug.
+- Combine bypass with liq metal to avoid this weird bug.
 
 Thoughts:
 - There could be error buildup if we ignore the small negative terms this time, so that issue should be addressed.
 
 Issues:
-- Feeding a type 0 and type 2 flow into the same material causes issue. Replacing type 0 flow with 1 or 2 fixes issue. Very strange.
+- Check _dep.m_ files. Even in rest0, there are issues with bypass material being depleted too quickly.
+- Upon using ./sss2_debug, I've found that there are very large negative values. This is bad, need to figure out cause.
+- rest3_dep.m material fuelsalt4 is gaining material from somewhere. Need to determine what (Check where this issue begins (issue begins there)) 
+  - Upon removing all other flows, fuelsalt4 feeds properly into fuelsalt5. Possibly issue due to fuelsalt3 -> 5
+  - Is it not reading the restart data, but instead resetting all materials to what they are defined in the input deck? 
+
+
