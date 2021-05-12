@@ -91,7 +91,6 @@ if __name__ == '__main__':
     core_sub_setting = False
     BULK_REPR = False
     SIMPLE_REPR = False
-    # If simple, then also bulk. If bulk, doesn't have to be simple
     # Simple makes only 1 material for each region (Core/piping)
     # Bulk makes material extracted all at once at set times (every 3 days)
     LEU_feed_rate = 1
@@ -160,7 +159,7 @@ if __name__ == '__main__':
                 RES_CYCLES,
                 seconds=True,
                 plot_all=True,
-                stack_plot=False,
+                stack_plot=True,
                 core_subdivisions=core_sub_setting)
     os.system('mv ./*.png ./' + str(DIR_NAME))
     print(f'Done in {round((time() - time_start), 0)}.')

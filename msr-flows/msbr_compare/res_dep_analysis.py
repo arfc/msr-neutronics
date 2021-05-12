@@ -65,12 +65,17 @@ def restart_plots(
             keff_err.append(each_k[1])
         # Generate isotopic mass for each material in core
         # Can be changed to include the other materials as well
-        if plot_all:
+        if plot_all and core_subdivisions:
             core_mats = np.arange(0, 3 * num_divisions)
+        elif plot_all and not core_subdivisions:
+            left = np.arange(0, num_divisions)
+            right = np.arange(2*num_divisions, 3*num_divisions)
+            left_list = np.append(left, 999)
+            core_mats = np.append(left_list, right)
+        elif not plot_all and core_subdivisions:
+            core_mats = np.arange(num_divisions, 2*num_divisions)
         else:
-            core_mats = np.arange(num_divisions, 2 * num_divisions)
-        if not core_subdivisions:
-            core_mats = [999]
+            core_mats = np.array([999])
 
         # Iterate over each material in the core for the current cycle
         mat_counter = 0
@@ -90,7 +95,10 @@ def restart_plots(
                 # num_division material will be bottom of core
                 # We will simply make it so any material not in the flow has no
                 # material (which should be true)
-                mat_name = 'fuelsalt' + str(num_divisions)
+                fuel_pres = num_divisions
+                if not core_subdivisions:
+                    fuel_pres = 999
+                mat_name = 'fuelsalt' + str(fuel_pres)
                 fuel = dep.materials[str(mat_name)]
             iso_cnt = 0
             for each_isotope in fuel.names:
@@ -139,15 +147,16 @@ def restart_plots(
             for mat_index in range(len(core_mats)):
                 if combine_outer:
                     if mat_index not in internal_core_mats:
-                        if mat_index < internal_core_mats[-1]:
+                        check_value = internal_core_mats[-1]
+                        if not core_subdivisions:
+                            check_value = 5
+                        if mat_index < check_value:
                             # To combine outer flows
                             stack_val = list()
+                            print(mat_index)
                             for each in range(
                                     len(mass_data[mat_index][iso_cnt])):
-                                eval_pos = mat_index + 2 * num_divisions
-                                print(mat_index)
-                                print(eval_pos)
-                                print(len(mass_data))
+                                eval_pos = mat_index + num_divisions + 1 #+ 2 * num_divisions
                                 side_one = mass_data[mat_index][iso_cnt][each]
                                 side_two = mass_data[eval_pos][iso_cnt][each]
                                 stack_val.append(side_one + side_two)
@@ -400,6 +409,7 @@ if __name__ == "__main__":
             RES_CYCLES,
             seconds=True,
             plot_all=True,
-            stack_plot=False,
+            stack_plot=True,
+            combine_outer=True,
             core_subdivisions=core_sub_setting)
 
