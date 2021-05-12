@@ -145,6 +145,13 @@ def restart_plots(
             iso_stack = list()
             iso_label = list()
             for mat_index in range(len(core_mats)):
+                if core_mats[mat_index] == 999:
+                    iso_stack.append(
+                            mass_data[mat_index][iso_cnt])
+                    iso_label.append(
+                            'Core Material ' + str(core_mats[mat_index]))
+                else:
+                    pass
                 if combine_outer:
                     if mat_index not in internal_core_mats:
                         check_value = internal_core_mats[-1]
@@ -153,7 +160,6 @@ def restart_plots(
                         if mat_index < check_value:
                             # To combine outer flows
                             stack_val = list()
-                            print(mat_index)
                             for each in range(
                                     len(mass_data[mat_index][iso_cnt])):
                                 eval_pos = mat_index + num_divisions + 1 #+ 2 * num_divisions
@@ -162,19 +168,19 @@ def restart_plots(
                                 stack_val.append(side_one + side_two)
                             iso_stack.append(stack_val)
                             iso_label.append(
-                                'Material ' + str(core_mats[mat_index]))
+                                'Piping Material ' + str(core_mats[mat_index]))
                         else:
                             pass
                     else:
                         iso_stack.append(
                             mass_data[mat_index][iso_cnt])
                         iso_label.append(
-                            'Material ' + str(core_mats[mat_index]))
+                            'Core Material ' + str(core_mats[mat_index]))
                 else:
                     iso_stack.append(
                         mass_data[mat_index][iso_cnt])
                     iso_label.append(
-                        'Material ' + str(core_mats[mat_index]))
+                        'Piping Material ' + str(core_mats[mat_index]))
             plt.stackplot(
                 days,
                 iso_stack,

@@ -85,7 +85,7 @@ if __name__ == '__main__':
     OUTPUT_NAME = 'output'
     PLOTTING = True
     RESTART_CYCLE = True
-    serpent_version = 'sss2'#'./sss2_debug'
+    serpent_version = './sss2_debug'
 
     # Core subdivisions (changes must be made to geometry as well)
     core_sub_setting = False
