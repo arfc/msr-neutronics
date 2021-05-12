@@ -79,7 +79,7 @@ if __name__ == '__main__':
 
     INPUT_NAME = 'msbr_test'
     DIR_NAME = 'msbr_dir_test'
-    NUM_CYCLES = 3
+    NUM_CYCLES = 2
     CYCLE_TIME_SECONDS = 20
     #CYCLE_STEP_SIZE_SECONDS = 1
     OUTPUT_NAME = 'output'

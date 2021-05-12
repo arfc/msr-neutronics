@@ -11,13 +11,8 @@ Some differences from the other version:
 Things to do:
 - For bulk_reprocessing, need to extract from core material as well as piping
 - Customize materials in geometry
-- Change feedmat to be type 2 flow
-- Appears core outflow not calculated properly, material 12 is overfilled
-- Set power back from 0
 - Uncomment out reprocessing flows
-- Reset altered settings used to try and debug.
-- Combine bypass with liq metal to avoid this weird bug.
-- Fix stackplot in res_dep_analysis, currently not functional
+- Change restart script to add only necessary reprocessing flows (having all causes bugs)
 
 Thoughts:
 - There could be error buildup if we ignore the small negative terms this time, so that issue should be addressed.
