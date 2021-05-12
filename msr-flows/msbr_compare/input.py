@@ -79,7 +79,7 @@ if __name__ == '__main__':
 
     INPUT_NAME = 'msbr_test'
     DIR_NAME = 'msbr_dir_test'
-    NUM_CYCLES = 2
+    NUM_CYCLES = 3
     CYCLE_TIME_SECONDS = 20
     #CYCLE_STEP_SIZE_SECONDS = 1
     OUTPUT_NAME = 'output'
@@ -87,6 +87,8 @@ if __name__ == '__main__':
     RESTART_CYCLE = True
     serpent_version = 'sss2'#'./sss2_debug'
 
+    # Core subdivisions (changes must be made to geometry as well)
+    core_sub_setting = False
     BULK_REPR = False
     SIMPLE_REPR = False
     # If simple, then also bulk. If bulk, doesn't have to be simple
@@ -98,7 +100,7 @@ if __name__ == '__main__':
         num_divisions = 1
     else:
         # 5 in series with an extra in parallel (possibly 6 then?)
-        num_divisions = 6
+        num_divisions = 5 #6
     CYCLE_STEP_SIZE_SECONDS = CYCLE_TIME_SECONDS / num_divisions
     #num_divisions = int(CYCLE_TIME_SECONDS / CYCLE_STEP_SIZE_SECONDS)
     RES_CYCLES = NUM_CYCLES * 2 * num_divisions
@@ -128,7 +130,8 @@ if __name__ == '__main__':
                 CYCLE_STEP_SIZE_SECONDS,
                 restart_iter,
                 bulk_reprocess = BULK_REPR,
-                feed_rate_gs = LEU_feed_rate)
+                feed_rate_gs = LEU_feed_rate,
+                core_subdivisions=core_sub_setting)
             run_script(REST_INP_NAME, REST_OUT_NAME, rest_input_script)
             check_wrk_file(REST_INP_NAME, REST_OUT_NAME)
             print(
@@ -148,16 +151,6 @@ if __name__ == '__main__':
     # Plotting
     if PLOTTING:
         print('Generating plots')
-        if MULTI_CORE:
-            MULTI_PATH = './' + str(DIR_NAME) + '/' + str(MULTI_INP_NAME)
-            rda.delayed_precursors(str(MULTI_PATH) + '_dep.m')
-            rda.keff_time_plot(str(MULTI_PATH) + '_res.m')
-            rda.u235_conc_diff_mats(str(MULTI_PATH) + '_dep.m')
-        if NON_CYCLE:
-            NON_CYCLE_PATH = './' + \
-                str(DIR_NAME) + '/' + str(NON_CYCLE_INP_NAME)
-            rda.keff_time_plot(str(NON_CYCLE_PATH) + '_res.m')
-            rda.u235_conc_diff_mats(str(NON_CYCLE_PATH) + '_dep.m')
         if RESTART_CYCLE:
             RESTART_PATH = './' + str(DIR_NAME) + \
                 '/' + str(INPUT_NAME) + '_rest'
@@ -167,6 +160,7 @@ if __name__ == '__main__':
                 RES_CYCLES,
                 seconds=True,
                 plot_all=True,
-                stack_plot=True)
+                stack_plot=False,
+                core_subdivisions=core_sub_setting)
     os.system('mv ./*.png ./' + str(DIR_NAME))
     print(f'Done in {round((time() - time_start), 0)}.')

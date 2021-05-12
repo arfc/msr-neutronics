@@ -10,7 +10,8 @@ def restart_plots(
         seconds=True,
         plot_all=False,
         stack_plot=True,
-        combine_outer=True):
+        combine_outer=True,
+        core_subdivisions=False):
     '''
     This function generates various plots for the restart script
 
@@ -30,6 +31,8 @@ def restart_plots(
         Plot stack plots if True, otherwise default matplotlib pyplot plots.
     combine_outer : boolean, optional
         Combines the non-core materials in a reasonable way.
+    core_subdivisions : boolean, optional
+        True if core is subdivided into multiple materials
 
     Returns
     -------
@@ -66,6 +69,9 @@ def restart_plots(
             core_mats = np.arange(0, 3 * num_divisions)
         else:
             core_mats = np.arange(num_divisions, 2 * num_divisions)
+        if not core_subdivisions:
+            core_mats = [999]
+
         # Iterate over each material in the core for the current cycle
         mat_counter = 0
         for mat in core_mats:
@@ -124,6 +130,8 @@ def restart_plots(
     # Mass plots
     iso_cnt = 0
     internal_core_mats = np.arange(num_divisions, 2 * num_divisions)
+    if not core_subdivisions:
+        internal_core_mats = [999]
     for each_isotope in fuel.names:
         if stack_plot:
             iso_stack = list()
@@ -137,6 +145,9 @@ def restart_plots(
                             for each in range(
                                     len(mass_data[mat_index][iso_cnt])):
                                 eval_pos = mat_index + 2 * num_divisions
+                                print(mat_index)
+                                print(eval_pos)
+                                print(len(mass_data))
                                 side_one = mass_data[mat_index][iso_cnt][each]
                                 side_two = mass_data[eval_pos][iso_cnt][each]
                                 stack_val.append(side_one + side_two)
@@ -340,16 +351,55 @@ def u238_conc_diff_mats(DEPLETE):
 
 # Debugging, uncomment whichever function to debug
 if __name__ == "__main__":
-    for ii in range(5):
-        FILENAME = f'msbr_test_rest{ii}'
-        RESULTS = FILENAME + '_res.m'
-        DEPLETE = FILENAME + '_dep.m'
-        num_divisions = 2
-        CYCLES = 2
-        u238_conc_diff_mats(DEPLETE)
+    #for ii in range(5):
+    #    FILENAME = f'msbr_test_rest{ii}'
+    #    RESULTS = FILENAME + '_res.m'
+    #    DEPLETE = FILENAME + '_dep.m'
+    #    num_divisions = 2
+    #    CYCLES = 2
+    #    u238_conc_diff_mats(DEPLETE)
     #restart_plots(
     #    FILENAME,
     #    num_divisions,
     #    CYCLES=CYCLES,
     #    plot_all=True,
     #    combine_outer=True)
+
+    INPUT_NAME = 'msbr_test'
+    DIR_NAME = 'msbr_dir_test'
+    NUM_CYCLES = 1
+    CYCLE_TIME_SECONDS = 20
+    #CYCLE_STEP_SIZE_SECONDS = 1
+    OUTPUT_NAME = 'output'
+    PLOTTING = True
+    RESTART_CYCLE = True
+    serpent_version = 'sss2'#'./sss2_debug'
+
+    # Core subdivisions (changes must be made to geometry as well)
+    core_sub_setting = False
+    BULK_REPR = False
+    SIMPLE_REPR = False
+    if SIMPLE_REPR:
+        num_divisions = 1
+    else:
+        # 5 in series with an extra in parallel (possibly 6 then?)
+        num_divisions = 5 #6
+    CYCLE_STEP_SIZE_SECONDS = CYCLE_TIME_SECONDS / num_divisions
+    #num_divisions = int(CYCLE_TIME_SECONDS / CYCLE_STEP_SIZE_SECONDS)
+    RES_CYCLES = NUM_CYCLES * 2 * num_divisions
+    sec_per_day = 86400
+    CYCLE_TIME_SECONDS = CYCLE_TIME_SECONDS / sec_per_day
+    CYCLE_STEP_SIZE_SECONDS = CYCLE_STEP_SIZE_SECONDS / sec_per_day
+
+
+    RESTART_PATH = './' + str(DIR_NAME) + \
+       '/' + str(INPUT_NAME) + '_rest'
+    restart_plots(
+            RESTART_PATH,
+            num_divisions,
+            RES_CYCLES,
+            seconds=True,
+            plot_all=True,
+            stack_plot=False,
+            core_subdivisions=core_sub_setting)
+

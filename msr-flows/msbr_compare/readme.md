@@ -17,6 +17,7 @@ Things to do:
 - Uncomment out reprocessing flows
 - Reset altered settings used to try and debug.
 - Combine bypass with liq metal to avoid this weird bug.
+- Fix stackplot in res_dep_analysis, currently not functional
 
 Thoughts:
 - There could be error buildup if we ignore the small negative terms this time, so that issue should be addressed.

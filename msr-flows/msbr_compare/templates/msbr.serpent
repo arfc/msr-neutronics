@@ -126,12 +126,12 @@ set pcc 0
 set power 0
 
 %set inventory fuel all
-%set inventory
-%Th
-%U
-%Xe
-%Kr
-%H
+set inventory
+Th
+U
+Xe
+Kr
+H
 %922330
 %922350
 %922340

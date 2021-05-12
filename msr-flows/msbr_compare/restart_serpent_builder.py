@@ -48,7 +48,7 @@ def make_input(
     sec_per_day = 86400
     num_divisions = int(tot_time / time_step)
     waste_flow_type = 2 # 1 or 2
-    # intentionally reducing lam_val in order to not have issues with Serpent
+    # intentionally reduce lam_val in order to not have issues with Serpent
     ADJUSTMENT_VALUE = 1
     lam_val = 1 / (time_step * sec_per_day) * ADJUSTMENT_VALUE
     core_mats = np.arange(num_divisions, 2 * num_divisions)
@@ -134,18 +134,14 @@ def make_input(
     for mat_sub in range(num_divisions * 3):
         dens = -3.35
         vol_mult = 1
-        if mat_sub == 3 or mat_sub == 15:
-            vol_mult = 0.9
-        elif mat_sub == 4 or mat_sub == 16:
-            vol_mult = 0.1
-        else:
-            pass
         if mat_sub in empty_mat_list:
             dens = -0.00001
             vol = pipe_sub_vol * vol_mult
         elif mat_sub in core_mats:
             vol = core_sub_vol * vol_mult
         elif mat_sub in feed_mats:
+            vol = pipe_sub_vol * vol_mult
+        else:
             vol = pipe_sub_vol * vol_mult
         rgb_var = 10 + mat_sub * 2 
         mat_name = 'fuelsalt' + str(mat_sub)
@@ -184,7 +180,7 @@ set rfw 1
     if flip:
         lam_val = 0
 
-    waste_removal_efficiencies = [0.6, 0.97, 1, 0.9, 0.1, 0.57]
+    waste_removal_efficiencies = [0.6, 0.97, 1, 0.9, 0.1, 0.057]
     norm_eff_1 = [-1/time_step * np.log(1.0000000001-i) for i in waste_removal_efficiencies]
     norm_eff_2 = [i * lam_val for i in waste_removal_efficiencies]
     if waste_flow_type == 2:
@@ -284,23 +280,6 @@ rc feedsalt fuelsalt{core_mats[0]} feed_pump 2
         from_name = 'fuelsalt' + str(feed_list[mat_sub + shift_val])
         to_name = 'fuelsalt' + str(feed_list[mat_sub + shift_val + 1])
         #print(feed_list[mat_sub + shift_val])
-        if feed_list[mat_sub + shift_val] == 3 or feed_list[mat_sub + shift_val] == 15:
-            # If true, then bypass, so should flow to +2 instead of +1
-            #print('Value is 3 or 15')
-            to_name = 'fuelsalt' + str(feed_list[mat_sub + shift_val + 2])
-        elif feed_list[mat_sub + shift_val] == 2 or feed_list[mat_sub + shift_val] == 14:
-            # If true, we need to have an additional flow going out
-            #print('Value is 2 or 14')
-            pump_type = 'liquid_metal_pump'
-            feed_val = feed_list[mat_sub + shift_val + 2]
-            extra_to_name = 'fuelsalt' + str(feed_val)
-            rep_defs += '''
-rc {from_name} {extra_to_name} {pump_type} {flow_type}
-            '''.format(**locals())
-            # Set up pump type for current to_name
-            pump_type = 'bypass_pump'
-        else:
-            pass
         #print()
         # Check if core output
         if feed_list[mat_sub + shift_val] in core_mats:
@@ -313,34 +292,34 @@ rc {from_name} {to_name} {pump_type} {flow_type}
 
     waste_flows = ''
     # Waste Flows
-    if not bulk_reprocess and num_divisions == 6:
+    if not bulk_reprocess and num_divisions == 5:
         # Only extract in proper locations
         waste_flows += '''
 %rc fuelsalt0 waste_sparger sparger_pump {waste_flow_type}
 %rc fuelsalt1 waste_entrainment_separator entrainment_pump {waste_flow_type}
 %rc fuelsalt2 waste_nickel_filter nickel_pump {waste_flow_type}
-%rc fuelsalt4 waste_liquid_metal waste_metal_pump {waste_flow_type}
+%rc fuelsalt3 waste_liquid_metal waste_metal_pump {waste_flow_type}
 
-%rc fuelsalt12 waste_sparger sparger_pump {waste_flow_type}
-%rc fuelsalt13 waste_entrainment_separator entrainment_pump {waste_flow_type}
-%rc fuelsalt14 waste_nickel_filter nickel_pump {waste_flow_type}
-%rc fuelsalt16 waste_liquid_metal waste_metal_pump {waste_flow_type}
+%rc fuelsalt11 waste_sparger sparger_pump {waste_flow_type}
+%rc fuelsalt12 waste_entrainment_separator entrainment_pump {waste_flow_type}
+%rc fuelsalt13 waste_nickel_filter nickel_pump {waste_flow_type}
+%rc fuelsalt14 waste_liquid_metal waste_metal_pump {waste_flow_type}
 
 '''.format(**locals())
     # Extract from all fuelsalt equally
     # i.e. from fuelsalt0 - fuelsaltN, perform all 4 extractions.
-    elif bulk_reprocess and num_divisions == 6:
+    elif bulk_reprocess and num_divisions == 5:
         if cur_time % bulk_time == 0:
             waste_flows += '''
 rc fuelsalt0 waste_sparger sparger_pump {waste_flow_type}
 rc fuelsalt1 waste_entrainment_separator entrainment_pump {waste_flow_type}
 rc fuelsalt2 waste_nickel_filter nickel_pump {waste_flow_type}
-rc fuelsalt4 waste_liquid_metal waste_metal_pump {waste_flow_type}
+rc fuelsalt3 waste_liquid_metal waste_metal_pump {waste_flow_type}
 
-rc fuelsalt12 waste_sparger sparger_pump {waste_flow_type}
-rc fuelsalt13 waste_entrainment_separator entrainment_pump {waste_flow_type}
-rc fuelsalt14 waste_nickel_filter nickel_pump {waste_flow_type}
-rc fuelsalt16 waste_liquid_metal waste_metal_pump {waste_flow_type}
+rc fuelsalt11 waste_sparger sparger_pump {waste_flow_type}
+rc fuelsalt12 waste_entrainment_separator entrainment_pump {waste_flow_type}
+rc fuelsalt13 waste_nickel_filter nickel_pump {waste_flow_type}
+rc fuelsalt14 waste_liquid_metal waste_metal_pump {waste_flow_type}
 
 '''.format(**locals())
         else:
