@@ -88,7 +88,7 @@ if __name__ == '__main__':
     serpent_version = './sss2_debug'
 
     # Core subdivisions (changes must be made to geometry as well)
-    core_sub_setting = False
+    core_sub_setting = False # CURRENTLY CANNOT BE ENABLED
     BULK_REPR = False
     SIMPLE_REPR = False
     # Simple makes only 1 material for each region (Core/piping)
@@ -100,9 +100,12 @@ if __name__ == '__main__':
     else:
         # 5 in series with an extra in parallel (possibly 6 then?)
         num_divisions = 5 #6
-    CYCLE_STEP_SIZE_SECONDS = CYCLE_TIME_SECONDS / num_divisions
+    CYCLE_STEP_SIZE_SECONDS = CYCLE_TIME_SECONDS / (num_divisions)
     #num_divisions = int(CYCLE_TIME_SECONDS / CYCLE_STEP_SIZE_SECONDS)
     RES_CYCLES = NUM_CYCLES * 2 * num_divisions
+    if not core_sub_setting:
+        CYCLE_STEP_SIZE_SECONDS = CYCLE_TIME_SECONDS / (num_divisions + 1)
+        RES_CYCLES = NUM_CYCLES * (num_divisions + 1)
     sec_per_day = 86400
     CYCLE_TIME_SECONDS = CYCLE_TIME_SECONDS / sec_per_day
     CYCLE_STEP_SIZE_SECONDS = CYCLE_STEP_SIZE_SECONDS / sec_per_day

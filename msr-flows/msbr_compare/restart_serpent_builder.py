@@ -47,6 +47,8 @@ def make_input(
     '''
     sec_per_day = 86400
     num_divisions = int(tot_time / time_step)
+    if not core_subdivisions:
+        num_divisions -= 1
     waste_flow_type = 2 # 1 or 2
     # intentionally reduce lam_val in order to not have issues with Serpent
     ADJUSTMENT_VALUE = 1
@@ -305,22 +307,7 @@ f'rc fuelsalt11 waste_entrainment_separator entrainment_pump {waste_flow_type}',
 f'rc fuelsalt12 waste_nickel_filter nickel_pump {waste_flow_type}',
 f'rc fuelsalt13 waste_liquid_metal waste_metal_pump {waste_flow_type}']
         
-#        waste_flows += '''
-#rc fuelsalt0 waste_sparger sparger_pump {waste_flow_type}
-#rc fuelsalt1 waste_entrainment_separator entrainment_pump {waste_flow_type}
-#rc fuelsalt2 waste_nickel_filter nickel_pump {waste_flow_type}
-#rc fuelsalt3 waste_liquid_metal waste_metal_pump {waste_flow_type}
-#
-#%rc fuelsalt10 waste_sparger sparger_pump {waste_flow_type}
-#%rc fuelsalt11 waste_entrainment_separator entrainment_pump {waste_flow_type}
-#%rc fuelsalt12 waste_nickel_filter nickel_pump {waste_flow_type}
-#%rc fuelsalt13 waste_liquid_metal waste_metal_pump {waste_flow_type}
-#
-#'''.format(**locals())
-
-
         use_state = restart_use_val
-        print(restart_use_val)
         if use_state >= 5:
             use_state -= 1 
         for flow_index in range(num_divisions - 1):
@@ -332,41 +319,39 @@ f'rc fuelsalt13 waste_liquid_metal waste_metal_pump {waste_flow_type}']
             waste_flows += '\n'
 
     # Extract from all fuelsalt equally
-    # i.e. from fuelsalt0 - fuelsaltN, perform all 4 extractions.
-    elif bulk_reprocess and num_divisions == 5:
+    # i.e. from all fuelsalt0 - fuelsaltN, perform all 4 extractions.
+    elif bulk_reprocess:# and num_divisions == 5:
         if cur_time % bulk_time == 0:
-            waste_flows += '''
-rc fuelsalt0 waste_sparger sparger_pump {waste_flow_type}
-rc fuelsalt1 waste_entrainment_separator entrainment_pump {waste_flow_type}
-rc fuelsalt2 waste_nickel_filter nickel_pump {waste_flow_type}
-rc fuelsalt3 waste_liquid_metal waste_metal_pump {waste_flow_type}
-
-rc fuelsalt10 waste_sparger sparger_pump {waste_flow_type}
-rc fuelsalt11 waste_entrainment_separator entrainment_pump {waste_flow_type}
-rc fuelsalt12 waste_nickel_filter nickel_pump {waste_flow_type}
-rc fuelsalt13 waste_liquid_metal waste_metal_pump {waste_flow_type}
-
+            extraction_bulk_list = np.concatenate((feed_mats, core_mats))
+            for from_mat in extraction_bulk_list:
+                mat_name = 'fuelsalt' + str(from_mat)
+                waste_flows += '''
+rc {mat_name} waste_sparger sparger_pump {waste_flow_type}
+rc {mat_name} waste_entrainment_separator entrainment_pump {waste_flow_type}
+rc {mat_name} waste_nickel_filter nickel_pump {waste_flow_type}
+rc {mat_name} waste_liquid_metal waste_metal_pump {waste_flow_type}
 '''.format(**locals())
+
         else:
             pass
 
-    elif bulk_reprocess and num_divisions == 1:
-        # Only deplete if at 3 day increment
-        if cur_time % bulk_time == 0:
-            waste_flows += '''
-rc fuelsalt0 waste_sparger sparger_pump {waste_flow_type}
-rc fuelsalt0 waste_entrainment_separator entrainment_pump {waste_flow_type}
-rc fuelsalt0 waste_nickel_filter nickel_pump {waste_flow_type}
-rc fuelsalt0 waste_liquid_metal waste_metal_pump {waste_flow_type}
-
-rc fuelsalt2 waste_sparger sparger_pump {waste_flow_type}
-rc fuelsalt2 waste_entrainment_separator entrainment_pump {waste_flow_type}
-rc fuelsalt2 waste_nickel_filter nickel_pump {waste_flow_type}
-rc fuelsalt2 waste_liquid_metal waste_metal_pump {waste_flow_type}
-
-'''.format(**locals())
-        else:
-            pass
+#    elif bulk_reprocess and num_divisions == 1:
+#        # Only deplete if at 3 day increment
+#        if cur_time % bulk_time == 0:
+#            waste_flows += '''
+#rc fuelsalt0 waste_sparger sparger_pump {waste_flow_type}
+#rc fuelsalt0 waste_entrainment_separator entrainment_pump {waste_flow_type}
+#rc fuelsalt0 waste_nickel_filter nickel_pump {waste_flow_type}
+#rc fuelsalt0 waste_liquid_metal waste_metal_pump {waste_flow_type}
+#
+#rc fuelsalt2 waste_sparger sparger_pump {waste_flow_type}
+#rc fuelsalt2 waste_entrainment_separator entrainment_pump {waste_flow_type}
+#rc fuelsalt2 waste_nickel_filter nickel_pump {waste_flow_type}
+#rc fuelsalt2 waste_liquid_metal waste_metal_pump {waste_flow_type}
+#
+#'''.format(**locals())
+#        else:
+#            pass
 
     elif not bulk_reprocess and num_divisions == 1:
         waste_flows += '''
@@ -383,7 +368,7 @@ rc fuelsalt2 waste_liquid_metal waste_metal_pump {waste_flow_type}
 '''.format(**locals())
     
     else:
-        raise Exception(f'Expected 1 or 6 number of divisions and True/False bulk_reprocess. Received {num_divisons} and {bulk_reprocess}.')
+        raise Exception(f'Expected 1 or 5 number of divisions and True/False bulk_reprocess. Received {num_divisions} and {bulk_reprocess}.')
 
     # New list with all materials that don't have flows
     missing_io = list(

@@ -156,7 +156,7 @@ def restart_plots(
                     if mat_index not in internal_core_mats:
                         check_value = internal_core_mats[-1]
                         if not core_subdivisions:
-                            check_value = 5
+                            check_value = num_divisions
                         if mat_index < check_value:
                             # To combine outer flows
                             stack_val = list()

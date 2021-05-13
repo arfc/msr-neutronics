@@ -125,13 +125,13 @@ set pcc 0
 set power 2.25E+9 
 %set power 0
 
-%set inventory fuel all
-set inventory
-Th
-U
-Xe
-Kr
-H
+set inventory fuel all
+%set inventory
+%Th
+%U
+%Xe
+%Kr
+%H
 %922330
 %922350
 %922340
@@ -149,11 +149,12 @@ mflow feed_pump
 
 rep flowprocess
 
+% Waste flows
+{{waste_flows}}
+
 % Main flows
 {{reprocessing_control}}
 
-% Waste flows
-{{waste_flows}}
 
 dep
 pro flowprocess
