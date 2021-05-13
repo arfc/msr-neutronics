@@ -76,10 +76,11 @@ def check_wrk_file(INP_NAME, OUTPUT_NAME):
 
 
 if __name__ == '__main__':
-
+    sec_per_day = 86400
+    
     INPUT_NAME = 'msbr_test'
     DIR_NAME = 'msbr_dir_test'
-    NUM_CYCLES = 2
+    NUM_CYCLES = 6
     CYCLE_TIME_SECONDS = 20
     #CYCLE_STEP_SIZE_SECONDS = 1
     OUTPUT_NAME = 'output'
@@ -93,7 +94,9 @@ if __name__ == '__main__':
     SIMPLE_REPR = False
     # Simple makes only 1 material for each region (Core/piping)
     # Bulk makes material extracted all at once at set times (every 3 days)
-    LEU_feed_rate = 1
+    # Feed rate average from Molten Salt Reactor Nuetronics and FUel Cycle Modeling and Simulation with SCALE in Annals 2017
+    feed_kg_day = 2.45
+    LEU_feed_rate = feed_kg_day * 1000 / sec_per_day
 
     if SIMPLE_REPR:
         num_divisions = 1
@@ -106,7 +109,6 @@ if __name__ == '__main__':
     if not core_sub_setting:
         CYCLE_STEP_SIZE_SECONDS = CYCLE_TIME_SECONDS / (num_divisions + 1)
         RES_CYCLES = NUM_CYCLES * (num_divisions + 1)
-    sec_per_day = 86400
     CYCLE_TIME_SECONDS = CYCLE_TIME_SECONDS / sec_per_day
     CYCLE_STEP_SIZE_SECONDS = CYCLE_STEP_SIZE_SECONDS / sec_per_day
     time_start = time()

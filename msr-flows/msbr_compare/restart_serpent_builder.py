@@ -61,9 +61,11 @@ def make_input(
     piping_volume = total_volume - core_volume
     feed_vol = 1E10
     feed_pump = lam_val * feed_rate_gs / (feed_vol * 4.9602)
+    bulk_time = 3 * (sec_per_day)
+    if bulk_reprocess:
+        feed_pump = feed_pump * bulk_time
     #feed_pump = lam_val
     #feed_vol = feed_rate_gs / (feed_pump * 4.9602)
-    bulk_time = 3 * (sec_per_day)
     missing_count = 0
     if not core_subdivisions:
         missing_count += num_divisions - 1
@@ -250,10 +252,19 @@ mflow waste_metal_pump
 
 '''.format(**locals())
 
-    # Subdividing Flows
-    rep_defs = '''
+    if not bulk_reprocess:
+        rep_defs = '''
 rc feedsalt fuelsalt{core_mats[0]} feed_pump 2
 '''.format(**locals())
+    elif bulk_reprocess:
+        if cur_time % bulk_time == 0:
+            rep_defs = '''
+rc feedsalt fuelsalt{core_mats[0]} feed_pump 2
+'''.format(**locals())
+        else:
+            pass
+    else:
+       raise Exception(f'Bulk reprocess defined as {bulk_reprocess}.') 
 
     # Determine value to shift index by
     if current_state < num_divisions:
