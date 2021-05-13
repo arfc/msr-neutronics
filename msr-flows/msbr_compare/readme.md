@@ -11,17 +11,14 @@ Some differences from the other version:
 Things to do:
 - For bulk_reprocessing, need to extract from core material as well as piping
 - Customize materials in geometry
-- Uncomment out reprocessing flows
-- Change restart script to add only necessary reprocessing flows (having all causes bugs)
+- Run autopep8
+- Add more any missing information to function descriptions
+- Add SaltProc matcher which uses 3 day step size
+- Make sure total salt mass is correct (SaltProc matcher would have fresh salt at 3 days?)
 
 Thoughts:
-- There could be error buildup if we ignore the small negative terms this time, so that issue should be addressed.
+- There could be error buildup if we ignore the small negative terms from sss_debug.
 
 Issues:
-- Check _dep.m_ files. Even in rest0, there are issues with bypass material being depleted too quickly.
-- Upon using ./sss2_debug, I've found that there are very large negative values. This is bad, need to figure out cause.
-- rest3_dep.m material fuelsalt4 is gaining material from somewhere. Need to determine what (Check where this issue begins (issue begins there)) 
-  - Upon removing all other flows, fuelsalt4 feeds properly into fuelsalt5. Possibly issue due to fuelsalt3 -> 5
-  - Is it not reading the restart data, but instead resetting all materials to what they are defined in the input deck? 
 
 

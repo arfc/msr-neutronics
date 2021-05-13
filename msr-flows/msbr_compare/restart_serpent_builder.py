@@ -257,12 +257,12 @@ mflow waste_metal_pump
 rc feedsalt fuelsalt{core_mats[0]} feed_pump 2
 '''.format(**locals())
     elif bulk_reprocess:
-        if cur_time % bulk_time == 0:
+        if cur_time != 0 and cur_time % bulk_time == 0:
             rep_defs = '''
 rc feedsalt fuelsalt{core_mats[0]} feed_pump 2
 '''.format(**locals())
         else:
-            pass
+            rep_defs = ''
     else:
        raise Exception(f'Bulk reprocess defined as {bulk_reprocess}.') 
 
@@ -332,7 +332,7 @@ f'rc fuelsalt13 waste_liquid_metal waste_metal_pump {waste_flow_type}']
     # Extract from all fuelsalt equally
     # i.e. from all fuelsalt0 - fuelsaltN, perform all 4 extractions.
     elif bulk_reprocess:# and num_divisions == 5:
-        if cur_time % bulk_time == 0:
+        if cur_time != 0 and cur_time % bulk_time == 0:
             extraction_bulk_list = np.concatenate((feed_mats, core_mats))
             for from_mat in extraction_bulk_list:
                 mat_name = 'fuelsalt' + str(from_mat)
