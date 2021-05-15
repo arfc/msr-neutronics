@@ -80,7 +80,7 @@ if __name__ == '__main__':
     
     INPUT_NAME = 'msbr_test'
     DIR_NAME = 'msbr_dir_test'
-    NUM_CYCLES = 6
+    NUM_CYCLES = 20
     CYCLE_TIME_SECONDS = 20
     #CYCLE_STEP_SIZE_SECONDS = 1
     OUTPUT_NAME = 'output'
@@ -90,8 +90,8 @@ if __name__ == '__main__':
 
     # Core subdivisions (changes must be made to geometry as well)
     core_sub_setting = False # CURRENTLY CANNOT BE ENABLED
-    BULK_REPR = True
-    SIMPLE_REPR = False
+    BULK_REPR = False
+    SIMPLE_REPR = True
     # Simple makes only 1 material for each region (Core/piping)
     # Bulk makes material extracted all at once at set times (every 3 days)
     # Feed rate average from Molten Salt Reactor Nuetronics and FUel Cycle Modeling and Simulation with SCALE in Annals 2017

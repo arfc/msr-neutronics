@@ -56,8 +56,8 @@ def make_input(
     core_mats = np.arange(num_divisions, 2 * num_divisions)
     env = Environment(loader=FileSystemLoader('./templates'))
     template = env.get_template('msbr.serpent')
-    core_volume = 3.04E7
-    total_volume = 4.87E7
+    core_volume = 2.28E7 #3.04E7 #p34 should this be 2.28E7
+    total_volume = 4.87E7 #p34 of Andrei's thesis
     piping_volume = total_volume - core_volume
     feed_vol = 1E10
     feed_pump = lam_val * feed_rate_gs / (feed_vol * 4.9602)
