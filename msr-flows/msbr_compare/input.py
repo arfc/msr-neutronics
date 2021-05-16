@@ -90,7 +90,7 @@ if __name__ == '__main__':
 
     # Core subdivisions (changes must be made to geometry as well)
     core_sub_setting = False # CURRENTLY CANNOT BE ENABLED
-    BULK_REPR = False
+    BULK_REPR = True
     SIMPLE_REPR = True
     # Simple makes only 1 material for each region (Core/piping)
     # Bulk makes material extracted all at once at set times (every 3 days)
