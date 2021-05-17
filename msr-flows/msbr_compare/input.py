@@ -65,7 +65,7 @@ def check_wrk_file(INP_NAME, OUTPUT_NAME):
     # Path will exist once it has fully run
     while not path.exists(wrk_name):
         cur_out_len = 0
-        sleep(20)
+        sleep(5)
         for line in open(OUTPUT_NAME).readlines():
             cur_out_len += 1
         if cur_out_len != out_len:
@@ -90,8 +90,8 @@ if __name__ == '__main__':
 
     # Core subdivisions (changes must be made to geometry as well)
     core_sub_setting = False # CURRENTLY CANNOT BE ENABLED
-    BULK_REPR = True
-    SIMPLE_REPR = True
+    BULK_REPR = False
+    SIMPLE_REPR = False
     # Simple makes only 1 material for each region (Core/piping)
     # Bulk makes material extracted all at once at set times (every 3 days)
     # Feed rate average from Molten Salt Reactor Nuetronics and FUel Cycle Modeling and Simulation with SCALE in Annals 2017
