@@ -382,7 +382,7 @@ if __name__ == "__main__":
 
     INPUT_NAME = 'msbr_test'
     DIR_NAME = 'msbr_dir_test'
-    NUM_CYCLES = 1
+    NUM_CYCLES = 50
     CYCLE_TIME_SECONDS = 20
     #CYCLE_STEP_SIZE_SECONDS = 1
     OUTPUT_NAME = 'output'
@@ -393,7 +393,7 @@ if __name__ == "__main__":
     # Core subdivisions (changes must be made to geometry as well)
     core_sub_setting = False
     BULK_REPR = False
-    SIMPLE_REPR = False
+    SIMPLE_REPR = True
     if SIMPLE_REPR:
         num_divisions = 1
     else:
@@ -409,6 +409,7 @@ if __name__ == "__main__":
 
     RESTART_PATH = './' + str(DIR_NAME) + \
        '/' + str(INPUT_NAME) + '_rest'
+    RESTART_PATH = str(INPUT_NAME) + '_rest'
     restart_plots(
             RESTART_PATH,
             num_divisions,

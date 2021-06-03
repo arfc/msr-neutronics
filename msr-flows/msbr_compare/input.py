@@ -1,5 +1,6 @@
 from time import time, sleep
 import restart_serpent_builder as rsb
+import saltproc_clone_serpent_builder as spsb
 import os
 import res_dep_analysis as rda
 import subprocess
@@ -80,18 +81,23 @@ if __name__ == '__main__':
     
     INPUT_NAME = 'msbr_test'
     DIR_NAME = 'msbr_dir_test'
-    NUM_CYCLES = 20
-    CYCLE_TIME_SECONDS = 20
+    NUM_CYCLES = 1
+    CYCLE_TIME_SECONDS = 400
     #CYCLE_STEP_SIZE_SECONDS = 1
     OUTPUT_NAME = 'output'
     PLOTTING = True
-    RESTART_CYCLE = True
+
+    # Only select one to run
+    SALTPROC_CLONE = True
+    RESTART_CYCLE = False
+    
+    
     serpent_version = './sss2_debug'
 
     # Core subdivisions (changes must be made to geometry as well)
     core_sub_setting = False # CURRENTLY CANNOT BE ENABLED
     BULK_REPR = False
-    SIMPLE_REPR = False
+    SIMPLE_REPR = True
     # Simple makes only 1 material for each region (Core/piping)
     # Bulk makes material extracted all at once at set times (every 3 days)
     # Feed rate average from Molten Salt Reactor Nuetronics and FUel Cycle Modeling and Simulation with SCALE in Annals 2017
@@ -100,12 +106,15 @@ if __name__ == '__main__':
 
     if SIMPLE_REPR:
         num_divisions = 1
+    elif SALTPROC_CLONE:
+        num_divisions = 1
     else:
         # 5 in series with an extra in parallel (possibly 6 then?)
         num_divisions = 5 #6
     CYCLE_STEP_SIZE_SECONDS = CYCLE_TIME_SECONDS / (num_divisions)
     #num_divisions = int(CYCLE_TIME_SECONDS / CYCLE_STEP_SIZE_SECONDS)
     RES_CYCLES = NUM_CYCLES * 2 * num_divisions
+    SP_CYCLES = NUM_CYCLES
     if not core_sub_setting:
         CYCLE_STEP_SIZE_SECONDS = CYCLE_TIME_SECONDS / (num_divisions + 1)
         RES_CYCLES = NUM_CYCLES * (num_divisions + 1)
@@ -124,6 +133,37 @@ if __name__ == '__main__':
     print('Created ' + str(DIR_NAME))
 
     # Check run selected options set to True
+    if SALTPROC_CLONE:
+        num_divisions = 0
+        suffix = '_saltproc'
+        for restart_iter in range(SP_CYCLES):
+            SP_INP_NAME = str(INPUT_NAME) + suffix + str(restart_iter)
+            SP_OUT_NAME = str(OUTPUT_NAME) + suffix + str(restart_iter)
+            sp_input_script = spsb.make_input(
+                SP_INP_NAME,
+                CYCLE_TIME_SECONDS,
+                CYCLE_STEP_SIZE_SECONDS,
+                restart_iter,
+                bulk_reprocess = BULK_REPR,
+                feed_rate_gs = LEU_feed_rate,
+                core_subdivisions=core_sub_setting)
+            run_script(SP_INP_NAME, SP_OUT_NAME, sp_input_script)
+            check_wrk_file(SP_INP_NAME, SP_OUT_NAME)
+            print(
+                f'Completed SaltProc case {restart_iter + 1}/{SP_CYCLES}.')
+        # Moving all files
+        if SP_CYCLES > 10:
+            f_move = 10
+        else:
+            f_move = SP_CYCLES
+        for restart_iter in range(f_move):
+            SP_INP_NAME = str(INPUT_NAME) + suffix + str(restart_iter)
+            SP_OUT_NAME = str(OUTPUT_NAME) + suffix + str(restart_iter)
+            os.system('mv ./' + str(SP_INP_NAME) + '* ./' + str(DIR_NAME))
+            os.system('mv ./' + str(SP_OUT_NAME) + '* ./' + str(DIR_NAME))
+            print('Files moved to ' + str(DIR_NAME))
+        print('All cycles run.')
+
     if RESTART_CYCLE:
         for restart_iter in range(RES_CYCLES):
             REST_INP_NAME = str(INPUT_NAME) + '_rest' + str(restart_iter)
@@ -155,6 +195,19 @@ if __name__ == '__main__':
     # Plotting
     if PLOTTING:
         print('Generating plots')
+        if SALTPROC_CLONE:
+            suffix = '_saltproc'
+            SALTPROC_PATH = './' + str(DIR_NAME) + \
+                '/' + str(INPUT_NAME) + suffix
+            rda.restart_plots(
+                SALTPROC_PATH,
+                num_divisions,
+                SP_CYCLES,
+                seconds=True,
+                plot_all=True,
+                stack_plot=True,
+                core_subdivisions=core_sub_setting)
+ 
         if RESTART_CYCLE:
             RESTART_PATH = './' + str(DIR_NAME) + \
                 '/' + str(INPUT_NAME) + '_rest'
