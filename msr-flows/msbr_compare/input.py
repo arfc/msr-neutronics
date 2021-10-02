@@ -8,7 +8,7 @@ import os.path
 from os import path
 
 
-def run_script(INPUT_NAME, OUTPUT_NAME, input_script):
+def run_script(INPUT_NAME, OUTPUT_NAME, input_script, serpent_version = 'sss2'):
     '''
     Writes the input_script string to a file with the INPUT_NAME
     which is run and outputs to the OUTPUT_NAME.

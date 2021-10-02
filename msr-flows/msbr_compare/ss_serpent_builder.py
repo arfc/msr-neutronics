@@ -1,10 +1,38 @@
 import numpy as np
-from input import run_script, check_wrk_file
+from input import run_script
 from jinja2 import Environment, FileSystemLoader
 from saltproc_read import evaluate
 import os
 import matplotlib.pyplot as plt
 import time
+import os.path
+from os import path
+import serpentTools as st
+
+
+
+def check_wrk_file(wrk_name, output_name):
+    '''
+    Allows the script to continue once the .wrk file is generated.
+    Checks the if the length of the output file is being updated.
+
+    '''
+    out_len = 0
+    #print(f'Waiting for {INP_NAME}.wrk')
+    #sleep(10)
+    # Path will exist once it has fully run
+    while not path.exists(wrk_name):
+        cur_out_len = 0
+        sleep(5)
+        for line in open(output_name).readlines():
+            cur_out_len += 1
+        if cur_out_len != out_len:
+            out_len = cur_out_len
+        else:
+            raise Exception('Error, view ' + str(output_name))
+    return
+
+
 
 
 def set_directory(target_dir):
@@ -27,25 +55,26 @@ def convert_list_to_string(input_list):
         output += '''
 {each}
 '''.format(**locals())
+    return output
 
 
 
-def deck_read_write_generator(current_time, step_size, read_write_name = 'sp_wrk_', read_from = True, write_to = True):
+def deck_read_write_generator(current_time, step_size, read_write_name, read_from = False, write_to = False):
     '''
     Function to write the particular read and write settings to be used for this particular case
     '''
     read_write_string = ''
 
-    wrk_read_name = read_write_name + str(current_time)
-    wrk_write_name = read_write_name + str(current_time + step_size)
 
     if read_from:
+        rfr_name = read_write_name + str(read_from)
         read_write_string += '''
-set rfr -{current_time} {wrk_read_name}
+set rfr -{read_from} "{rfr_name}"
 '''.format(**locals())
     if write_to:
+        rfw_name = read_write_name + str(write_to)
         read_write_string += '''
-set rfw 1 {wrk_write_name}
+set rfw 1 "{rfw_name}"
 '''.format(**locals())
 
 
@@ -56,11 +85,14 @@ def apply_reproc(reprocessing_dictionary):
     '''
 
     '''
-    mflow_defs = '''
+    mflow_defs = ''
+
+    if reprocessing_dictionary:
+        mflow_defs += '''
 mflow entrainment_pump	
 Kr	{reprocessing_dictionary['Kr']}
 Xe	{reprocessing_dictionary['Xe']}
-	
+        
 mflow nickel_pump	
 Se	{reprocessing_dictionary['Se']}
 Nb	{reprocessing_dictionary['Nb']}
@@ -77,7 +109,7 @@ In	{reprocessing_dictionary['In']}
 Sn	{reprocessing_dictionary['Sn']}
 Br	{reprocessing_dictionary['Br']}
 I	{reprocessing_dictionary['I']}
-	
+        
 mflow waste_metal_pump	
 Pa	{reprocessing_dictionary['Pa']}
 Y	{reprocessing_dictionary['Y']}
@@ -93,7 +125,14 @@ Rb	{reprocessing_dictionary['Rb']}
 Sr	{reprocessing_dictionary['Sr']}
 Cs	{reprocessing_dictionary['Cs']}
 Ba	{reprocessing_dictionary['Ba']}
+
+mflow feed_pump
+Th      {reprocessing_dictionary['Th']}
+U       {reprocessing_dictionary['U']}
 '''.format(**locals())
+
+    return mflow_defs
+
 
 
 def flow_regime(reprocess):
@@ -106,17 +145,15 @@ def flow_regime(reprocess):
 rc fuel waste_entrainment_separator entrainment_pump 2
 rc fuel waste_nickel_filter nickel_pump 2
 rc fuel waste_liquid_metal waste_metal_pump 2
+rc feedsalt fuel feed_pump 2
 '''
     else:
         pass
-    flow_setup += '''
-rc feedsalt fuel feed_pump 2
-'''
     return flow_setup
 
 
 
-def build_serpent_deck(current_time, step_size, reproc, list_inventory = ['U235', 'Xe135'], template_path = './templates', template_name = 'saltproc.msbr.serpent'):
+def build_serpent_deck(current_time, step_size, reproc = False, list_inventory = ['U235', 'Xe135'], template_path = './templates', template_name = 'saltproc.msbr.serpent', read_time = False, write_time = False, include_fuel_path = './fuel.ini', read_write_name = './ss-comparison/rw_'):
     '''
 
     '''
@@ -126,16 +163,15 @@ def build_serpent_deck(current_time, step_size, reproc, list_inventory = ['U235'
 
 
 
-    fuel_path = './fuel.ini'
     inventory = convert_list_to_string(list_inventory)
-    read_write = deck_read_write_generator(current_time, step_size)
+    read_write = deck_read_write_generator(current_time, step_size, read_write_name = read_write_name, read_from = read_time, write_to = write_time)
     mflows_rep = apply_reproc(reproc)
     rc_flows = flow_regime(reproc)
     time_vals = step_size
 
 
     deck = template.render(
-            fuel_path=fuel_path,
+            fuel_path=include_fuel_path,
             inventory=inventory,
             read_write=read_write,
             mflows_rep=mflows_rep,
@@ -198,6 +234,29 @@ def SP_data_initializer(time_list, hdf5_dir, hdf5_path, fuel_path):
 
 
 
+def extract_tot_atoms(input_path, day_value = 0):
+    '''
+    Extract the total atoms from the depletion data from the given time index
+    '''
+    dep_file = str(input_path) + '_dep.m'
+    dep = st.read(dep_file, reader='dep')
+    try:
+        total_mat = dep.materials['fuel']
+    except:
+        raise Exception('Fuel name set to non-"fuel" value.')
+    vol = total_mat.data['volume'][day_value]
+    adens = total_mat.getValues('days', 'adens', [day_value], 'total')[0][0]
+    
+    total_atoms = adens * vol
+    print(adens)
+    print(vol)
+    print(f'Evaluated at {day_value}')
+
+    return total_atoms
+
+
+def repr_calculator()
+
 
 if __name__ == '__main__':
     
@@ -209,9 +268,10 @@ if __name__ == '__main__':
     set_directory(test_name)
 
     hdf5_dir = './ss-data-test'
-
     fuel_input_path = f'{hdf5_dir}/{fuel_name}'
     hdf5_input_path = f'{hdf5_dir}/6000_day_SS_data'
+    run_name = f'./{test_name}/serp_run'
+    out_name = f'./{test_name}/output'
 
     number_runs = 1
     start_day = 3000
@@ -221,20 +281,43 @@ if __name__ == '__main__':
     sp_time_vals = np.arange(start_day, end_day+saltproc_step, saltproc_step)
     serpent_time_vals = np.arange(start_day, end_day, step_size)
 
+    list_inventory = ['Xe-135', 'U-235', 'U-233', 'Th-232', 'I-135']
+    
+
     # Initialize Materials
     #time_test = np.arange(3, end_day+saltproc_step, saltproc_step)
     #SP_data_initializer(time_test, hdf5_dir, hdf5_input_path, fuel_input_path)
 
 
-    # Let's start with something small. Generate a list of all masses of Xe135 in SaltProc for each day and plot them
-    target = 'Li-7'
-    target_mass_list = SP_target_reader(sp_time_vals, target, hdf5_dir, hdf5_input_path, fuel_input_path, SP_target_extractor)
-    print(target_mass_list)
-    plt.plot(sp_time_vals, target_mass_list)
-    plt.xlabel('Time [d]')
-    plt.ylabel('Mass [g]')
-    plt.savefig(f'./{test_name}/{target}_mass.png')
-    plt.close()
+
+    # Now we need to generate the two variations on a 1 step approach
+    # Load in SP(2997), run with reprs == 0 for 3d (rfw), calculate reprs, rfr 3d run 3000d (subtract 3 when plotting since its actually 3k days)
+    # Load in SP(3000), run with reprs == 0 for 3d (rfw), calculate reprs, rfr 3d run 2997d
+
+    input_name = run_name + '_' + str(2997)
+    output = out_name + '_' + str(2997)
+    fuel_input_SP = fuel_input_path + '_' + str(2997)
+    SP_read = '''"{fuel_input_SP}"'''.format(**locals())
+    
+    # First running no depletion for 3 days
+    read_write_path = f'./{test_name}/rw_'
+    deck_2997_variant = build_serpent_deck(current_time = start_day, step_size = saltproc_step, reproc = False, list_inventory = list_inventory, read_time = False, write_time = saltproc_step, include_fuel_path = SP_read, read_write_name = read_write_path)
+    run_script(input_name, output, deck_2997_variant)
+    wrk_file_name = read_write_path + str(saltproc_step)
+    check_wrk_file(wrk_file_name, output)
+
+    # Calculate reprocessing constants from pre (rfr -3 ./{test_name}/rw_3) and post (SP 2997). Use tot atoms from rfr -3.
+    tot_atoms = extract_tot_atoms(input_name, day_value = 3)
+    #reprocessing_constants = repr_calculator(element_list, pre_depletion_path, post_depletion_path, tot_atoms)
+    
+
+    for target in list_inventory:
+        target_mass_list = SP_target_reader(sp_time_vals, target, hdf5_dir, hdf5_input_path, fuel_input_path, SP_target_extractor)
+        plt.plot(sp_time_vals, target_mass_list)
+        plt.xlabel('Time [d]')
+        plt.ylabel('Mass [g]')
+        plt.savefig(f'./{test_name}/{target}_mass.png')
+        plt.close()
 
 
 #    for base_value in read_vals:
