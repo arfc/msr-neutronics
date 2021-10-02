@@ -26,3 +26,8 @@ Thoughts:
 Issues:
 
 
+Alterations in SaltProc Specific Variant:
+- Added different efficiency percentages for testing
+- Add custom line in res_dep to change materials iterated over
+- Commented out some of the reprocessing flows for testing
+- Manually overwrote efficiencies

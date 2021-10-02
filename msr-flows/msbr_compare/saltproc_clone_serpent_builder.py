@@ -49,7 +49,7 @@ def make_input(
     num_divisions = 0
     if not core_subdivisions:
         num_divisions -= 1
-    waste_flow_type = 2 # 1 or 2
+    waste_flow_type = flow_type # 1 or 2
     # intentionally reduce lam_val in order to not have issues with Serpent
     ADJUSTMENT_VALUE = 1
     lam_val = 1 / (time_step * sec_per_day) * ADJUSTMENT_VALUE
@@ -61,7 +61,7 @@ def make_input(
     piping_volume = total_volume - core_volume
     feed_vol = 1E10
     feed_pump = lam_val * feed_rate_gs / (feed_vol * 4.9602)
-    bulk_time = 3 * (sec_per_day)
+    bulk_time = 3 #* (sec_per_day)
     if bulk_reprocess:
         feed_pump = feed_pump * bulk_time
 
@@ -91,8 +91,10 @@ set rfw 1
     if flip:
         lam_val = 0
 
-    waste_removal_efficiencies = [0.6, 0.97, 1, 0.9, 0.1, 0.057]
-    norm_eff_1 = [-1/time_step * np.log(1.0000000001-i) for i in waste_removal_efficiencies]
+    #waste_removal_efficiencies = [0, 0, 0, 0, 0, 0]
+    waste_removal_efficiencies = [0.0001, 0.0001, 0.0001, 0.0001, 0.0001, 0.0001]
+    #waste_removal_efficiencies = [0.6, 0.97, 0.99999999999, 0.9, 0.1, 0.057]
+    norm_eff_1 = [-1/time_step * np.log(1-i) for i in waste_removal_efficiencies]
     norm_eff_2 = [i * lam_val for i in waste_removal_efficiencies]
     if waste_flow_type == 2:
         norm_eff = norm_eff_2
@@ -102,6 +104,10 @@ set rfw 1
         norm_eff[4] = norm_eff_2[4]
     else:
         raise Exception(f'Waste flow type must be 1 or 2, recieved {waste_flow_type}.')
+
+    # REMOVE THIS
+    norm_eff = [1, 1, 1, 1, 1, 1]
+
 
     mflow_defs = '''
 mflow outcore_pump
@@ -159,28 +165,32 @@ mflow waste_metal_pump
 
 '''.format(**locals())
 
+    flow_present = False
+    rep_defs = ''
     if not bulk_reprocess:
+        flow_present = True
+    elif bulk_reprocess:
+        if cur_time != 0 and cur_time % bulk_time == 0:
+            flow_present = True
+    else:
+       raise Exception(f'Bulk reprocess defined as {bulk_reprocess}.') 
+
+    if flow_present:
         rep_defs = '''
 rc feedsalt fuelsalt999 feed_pump 2
 '''
-    elif bulk_reprocess:
-        if cur_time != 0 and cur_time % bulk_time == 0:
-            rep_defs = '''
-rc feedsalt fuelsalt999 feed_pump 2
-'''
-        else:
-            rep_defs = ''
-    else:
-       raise Exception(f'Bulk reprocess defined as {bulk_reprocess}.') 
 
     waste_flows = ''
     waste_flow_list = list()
     # Waste Flows
-    waste_flows += '''
+    
+
+    if flow_present:
+        waste_flows += '''
 rc fuelsalt999 waste_sparger sparger_pump {waste_flow_type}
-rc fuelsalt999 waste_entrainment_separator entrainment_pump {waste_flow_type}
-rc fuelsalt999 waste_nickel_filter nickel_pump {waste_flow_type}
-rc fuelsalt999 waste_liquid_metal waste_metal_pump {waste_flow_type}
+%rc fuelsalt999 waste_entrainment_separator entrainment_pump {waste_flow_type}
+%rc fuelsalt999 waste_nickel_filter nickel_pump {waste_flow_type}
+%rc fuelsalt999 waste_liquid_metal waste_metal_pump {waste_flow_type}
 
 '''.format(**locals())
     

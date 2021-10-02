@@ -77,11 +77,16 @@ def restart_plots(
         else:
             core_mats = np.array([999])
 
+        material_names = ['fuelsalt999', 'waste_sparger', 'waste_entrainment_separator', 'waste_nickel_filter', 'waste_liquid_metal']
+        #material_names = core_mats
+
+
         # Iterate over each material in the core for the current cycle
         mat_counter = 0
-        for mat in core_mats:
+        for mat in material_names:
             mat_data = list()
-            mat_name = 'fuelsalt' + str(mat)
+            mat_name = mat
+            #mat_name = 'fuelsalt' + str(mat)
             # Material may not be present yet
             try:
                 fuel = dep.materials[str(mat_name)]
@@ -338,9 +343,9 @@ def u235_conc_diff_mats(DEPLETE):
 
 
 
-def u238_conc_diff_mats(DEPLETE):
+def conc_diff_mats(DEPLETE):
     '''
-    Iterates through the different materials and displays the mass of U233
+    Iterates through the different materials and displays all isotopes
 
     Parameters
     ----------
@@ -352,20 +357,36 @@ def u238_conc_diff_mats(DEPLETE):
     None
     '''
     dep = st.read(DEPLETE, reader='dep')
-    for mat in dep.materials.keys():
-        if mat == 'total':
-            pass
-        else:
+    #name_list = dep.names
+    name_list = ['U235', 'Xe135', 'total']
+    mat_list = dep.materials.keys()
+    for mat in mat_list:
+        for name in name_list:
             current = dep.materials[str(mat)]
-            current.plot('days', 'mdens', names='U238')
-            savename = str(DEPLETE) + '_' + str(mat) + '_U238.png'
-            plt.savefig(savename)
-            plt.close()
+            savename = str(DEPLETE) + '_' + str(mat) + '_' + str(name) + '.png'
+            if mat == 'total':
+                name_index = dep.names.index(name)
+                plt.plot(current.days, current.data['mass'][name_index])
+                plt.xlabel('Time [d]')
+                plt.ylabel('Mass [g]')
+                plt.savefig(savename)
+                plt.close()
+            else:
+                current.plot('days', 'mdens', names=name)
+                plt.savefig(savename)
+                plt.close()
     return
+
+
+
+
 
 
 # Debugging, uncomment whichever function to debug
 if __name__ == "__main__":
+    FILENAME = 'msbr_test_saltproc0'
+    DEPLETE = FILENAME + '_dep.m'
+    conc_diff_mats(DEPLETE)
     #for ii in range(5):
     #    FILENAME = f'msbr_test_rest{ii}'
     #    RESULTS = FILENAME + '_res.m'
@@ -380,43 +401,43 @@ if __name__ == "__main__":
     #    plot_all=True,
     #    combine_outer=True)
 
-    INPUT_NAME = 'msbr_test'
-    DIR_NAME = 'msbr_dir_test'
-    NUM_CYCLES = 50
-    CYCLE_TIME_SECONDS = 20
+    #INPUT_NAME = 'msbr_test'
+    #DIR_NAME = 'msbr_dir_test'
+    #NUM_CYCLES = 50
+    #CYCLE_TIME_SECONDS = 20
     #CYCLE_STEP_SIZE_SECONDS = 1
-    OUTPUT_NAME = 'output'
-    PLOTTING = True
-    RESTART_CYCLE = True
-    serpent_version = 'sss2'#'./sss2_debug'
+    #OUTPUT_NAME = 'output'
+    #PLOTTING = True
+    #RESTART_CYCLE = True
+    #serpent_version = 'sss2'#'./sss2_debug'
 
     # Core subdivisions (changes must be made to geometry as well)
-    core_sub_setting = False
-    BULK_REPR = False
-    SIMPLE_REPR = True
-    if SIMPLE_REPR:
-        num_divisions = 1
-    else:
-        # 5 in series with an extra in parallel (possibly 6 then?)
-        num_divisions = 5 #6
-    CYCLE_STEP_SIZE_SECONDS = CYCLE_TIME_SECONDS / num_divisions
-    #num_divisions = int(CYCLE_TIME_SECONDS / CYCLE_STEP_SIZE_SECONDS)
-    RES_CYCLES = NUM_CYCLES * 2 * num_divisions
-    sec_per_day = 86400
-    CYCLE_TIME_SECONDS = CYCLE_TIME_SECONDS / sec_per_day
-    CYCLE_STEP_SIZE_SECONDS = CYCLE_STEP_SIZE_SECONDS / sec_per_day
+    #core_sub_setting = False
+    #BULK_REPR = False
+    #SIMPLE_REPR = True
+    #if SIMPLE_REPR:
+    #    num_divisions = 1
+    #else:
+    #    # 5 in series with an extra in parallel (possibly 6 then?)
+    #    num_divisions = 5 #6
+    #CYCLE_STEP_SIZE_SECONDS = CYCLE_TIME_SECONDS / num_divisions
+    ##num_divisions = int(CYCLE_TIME_SECONDS / CYCLE_STEP_SIZE_SECONDS)
+    #RES_CYCLES = NUM_CYCLES * 2 * num_divisions
+    #sec_per_day = 86400
+    #CYCLE_TIME_SECONDS = CYCLE_TIME_SECONDS / sec_per_day
+    #CYCLE_STEP_SIZE_SECONDS = CYCLE_STEP_SIZE_SECONDS / sec_per_day
 
 
-    RESTART_PATH = './' + str(DIR_NAME) + \
-       '/' + str(INPUT_NAME) + '_rest'
-    RESTART_PATH = str(INPUT_NAME) + '_rest'
-    restart_plots(
-            RESTART_PATH,
-            num_divisions,
-            RES_CYCLES,
-            seconds=True,
-            plot_all=True,
-            stack_plot=True,
-            combine_outer=True,
-            core_subdivisions=core_sub_setting)
+    #RESTART_PATH = './' + str(DIR_NAME) + \
+    #   '/' + str(INPUT_NAME) + '_rest'
+    #RESTART_PATH = str(INPUT_NAME) + '_rest'
+    #restart_plots(
+    #        RESTART_PATH,
+    #        num_divisions,
+    #        RES_CYCLES,
+    #        seconds=True,
+    #        plot_all=True,
+    #        stack_plot=True,
+    #        combine_outer=True,
+    #        core_subdivisions=core_sub_setting)
 

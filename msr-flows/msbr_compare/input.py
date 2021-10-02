@@ -82,22 +82,25 @@ if __name__ == '__main__':
     INPUT_NAME = 'msbr_test'
     DIR_NAME = 'msbr_dir_test'
     NUM_CYCLES = 1
-    CYCLE_TIME_SECONDS = 400
+    CYCLE_TIME_SECONDS = 3 * sec_per_day
     #CYCLE_STEP_SIZE_SECONDS = 1
     OUTPUT_NAME = 'output'
     PLOTTING = True
+    FLOW_SETTING = 1
 
     # Only select one to run
     SALTPROC_CLONE = True
     RESTART_CYCLE = False
     
-    
+
     serpent_version = './sss2_debug'
 
     # Core subdivisions (changes must be made to geometry as well)
     core_sub_setting = False # CURRENTLY CANNOT BE ENABLED
     BULK_REPR = False
     SIMPLE_REPR = True
+
+    plot_seconds = False
     # Simple makes only 1 material for each region (Core/piping)
     # Bulk makes material extracted all at once at set times (every 3 days)
     # Feed rate average from Molten Salt Reactor Nuetronics and FUel Cycle Modeling and Simulation with SCALE in Annals 2017
@@ -135,6 +138,7 @@ if __name__ == '__main__':
     # Check run selected options set to True
     if SALTPROC_CLONE:
         num_divisions = 0
+        CYCLE_STEP_SIZE_SECONDS = CYCLE_TIME_SECONDS
         suffix = '_saltproc'
         for restart_iter in range(SP_CYCLES):
             SP_INP_NAME = str(INPUT_NAME) + suffix + str(restart_iter)
@@ -146,6 +150,7 @@ if __name__ == '__main__':
                 restart_iter,
                 bulk_reprocess = BULK_REPR,
                 feed_rate_gs = LEU_feed_rate,
+                flow_type=FLOW_SETTING,
                 core_subdivisions=core_sub_setting)
             run_script(SP_INP_NAME, SP_OUT_NAME, sp_input_script)
             check_wrk_file(SP_INP_NAME, SP_OUT_NAME)
@@ -203,7 +208,7 @@ if __name__ == '__main__':
                 SALTPROC_PATH,
                 num_divisions,
                 SP_CYCLES,
-                seconds=True,
+                seconds=plot_seconds,
                 plot_all=True,
                 stack_plot=True,
                 core_subdivisions=core_sub_setting)
@@ -215,7 +220,7 @@ if __name__ == '__main__':
                 RESTART_PATH,
                 num_divisions,
                 RES_CYCLES,
-                seconds=True,
+                seconds=plot_seconds,
                 plot_all=True,
                 stack_plot=True,
                 core_subdivisions=core_sub_setting)

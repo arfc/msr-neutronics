@@ -61,7 +61,7 @@ def make_input(
     piping_volume = total_volume - core_volume
     feed_vol = 1E10
     feed_pump = lam_val * feed_rate_gs / (feed_vol * 4.9602)
-    bulk_time = 3 * (sec_per_day)
+    bulk_time = 3 #* (sec_per_day)
     if bulk_reprocess:
         feed_pump = feed_pump * bulk_time
     #feed_pump = lam_val
