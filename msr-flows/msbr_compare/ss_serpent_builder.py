@@ -23,7 +23,7 @@ def check_wrk_file(wrk_name, output_name):
     # Path will exist once it has fully run
     while not path.exists(wrk_name):
         cur_out_len = 0
-        sleep(5)
+        time.sleep(5)
         for line in open(output_name).readlines():
             cur_out_len += 1
         if cur_out_len != out_len:
@@ -59,7 +59,7 @@ def convert_list_to_string(input_list):
 
 
 
-def deck_read_write_generator(current_time, step_size, read_write_name, read_from = False, write_to = False):
+def deck_read_write_generator(step_size, read_write_name, read_from = False, write_to = False):
     '''
     Function to write the particular read and write settings to be used for this particular case
     '''
@@ -90,45 +90,42 @@ def apply_reproc(reprocessing_dictionary):
     if reprocessing_dictionary:
         mflow_defs += '''
 mflow entrainment_pump	
-Kr	{reprocessing_dictionary['Kr']}
-Xe	{reprocessing_dictionary['Xe']}
+Kr	{reprocessing_dictionary[krypton]}
+Xe	{reprocessing_dictionary[xenon]}
         
 mflow nickel_pump	
-Se	{reprocessing_dictionary['Se']}
-Nb	{reprocessing_dictionary['Nb']}
-Mo	{reprocessing_dictionary['Mo']}
-Tc	{reprocessing_dictionary['Tc']}
-Ru	{reprocessing_dictionary['Ru']}
-Rh	{reprocessing_dictionary['Rh']}
-Pd	{reprocessing_dictionary['Pd']}
-Ag	{reprocessing_dictionary['Ag']}
-Sb	{reprocessing_dictionary['Sb']}
-Te	{reprocessing_dictionary['Te']}
-Cd	{reprocessing_dictionary['Cd']}
-In	{reprocessing_dictionary['In']}
-Sn	{reprocessing_dictionary['Sn']}
-Br	{reprocessing_dictionary['Br']}
-I	{reprocessing_dictionary['I']}
+Se	{reprocessing_dictionary[selenium]}
+Nb	{reprocessing_dictionary[niobium]}
+Mo	{reprocessing_dictionary[molybdenum]}
+Tc	{reprocessing_dictionary[technetium]}
+Ru	{reprocessing_dictionary[ruthenium]}
+Rh	{reprocessing_dictionary[rhodium]}
+Pd	{reprocessing_dictionary[palladium]}
+Ag	{reprocessing_dictionary[silver]}
+Sb	{reprocessing_dictionary[antimony]}
+Te	{reprocessing_dictionary[tellurium]}
+Cd	{reprocessing_dictionary[cadmium]}
+In	{reprocessing_dictionary[indium]}
+Sn	{reprocessing_dictionary[tin]}
+Br	{reprocessing_dictionary[bromine]}
+I	{reprocessing_dictionary[iodine]}
         
 mflow waste_metal_pump	
-Pa	{reprocessing_dictionary['Pa']}
-Y	{reprocessing_dictionary['Y']}
-La	{reprocessing_dictionary['La']}
-Ce	{reprocessing_dictionary['Ce']}
-Pr	{reprocessing_dictionary['Pr']}
-Nd	{reprocessing_dictionary['Nd']}
-Pm	{reprocessing_dictionary['Pm']}
-Sm	{reprocessing_dictionary['Sm']}
-Gd	{reprocessing_dictionary['Gd']}
-Eu	{reprocessing_dictionary['Eu']}
-Rb	{reprocessing_dictionary['Rb']}
-Sr	{reprocessing_dictionary['Sr']}
-Cs	{reprocessing_dictionary['Cs']}
-Ba	{reprocessing_dictionary['Ba']}
+Pa	{reprocessing_dictionary[protactinium]}
+Y	{reprocessing_dictionary[yttrium]}
+La	{reprocessing_dictionary[lanthanum]}
+Ce	{reprocessing_dictionary[cerium]}
+Pr	{reprocessing_dictionary[praseodymium]}
+Nd	{reprocessing_dictionary[neodymium]}
+Pm	{reprocessing_dictionary[promethium]}
+Sm	{reprocessing_dictionary[samarium]}
+Gd	{reprocessing_dictionary[gadolinium]}
+Eu	{reprocessing_dictionary[europium]}
+Rb	{reprocessing_dictionary[rubidium]}
+Sr	{reprocessing_dictionary[strontium]}
+Cs	{reprocessing_dictionary[cesium]}
+Ba	{reprocessing_dictionary[barium]}
 
-mflow feed_pump
-Th      {reprocessing_dictionary['Th']}
-U       {reprocessing_dictionary['U']}
 '''.format(**locals())
 
     return mflow_defs
@@ -153,7 +150,7 @@ rc feedsalt fuel feed_pump 2
 
 
 
-def build_serpent_deck(current_time, step_size, reproc = False, list_inventory = ['U235', 'Xe135'], template_path = './templates', template_name = 'saltproc.msbr.serpent', read_time = False, write_time = False, include_fuel_path = './fuel.ini', read_write_name = './ss-comparison/rw_'):
+def build_serpent_deck(step_size, reproc = False, list_inventory = ['U235', 'Xe135'], template_path = './templates', template_name = 'saltproc.msbr.serpent', read_time = False, write_time = False, include_fuel_path = './fuel.ini', read_write_name = './ss-comparison/rw_'):
     '''
 
     '''
@@ -164,7 +161,7 @@ def build_serpent_deck(current_time, step_size, reproc = False, list_inventory =
 
 
     inventory = convert_list_to_string(list_inventory)
-    read_write = deck_read_write_generator(current_time, step_size, read_write_name = read_write_name, read_from = read_time, write_to = write_time)
+    read_write = deck_read_write_generator(step_size, read_write_name = read_write_name, read_from = read_time, write_to = write_time)
     mflows_rep = apply_reproc(reproc)
     rc_flows = flow_regime(reproc)
     time_vals = step_size
@@ -241,21 +238,83 @@ def extract_tot_atoms(input_path, day_value = 0):
     dep_file = str(input_path) + '_dep.m'
     dep = st.read(dep_file, reader='dep')
     try:
-        total_mat = dep.materials['fuel']
+        fuel_mat = dep.materials['fuel']
     except:
         raise Exception('Fuel name set to non-"fuel" value.')
-    vol = total_mat.data['volume'][day_value]
-    adens = total_mat.getValues('days', 'adens', [day_value], 'total')[0][0]
+    times = dep.metadata['days']
+    day_index = np.where(times == day_value)[0][0]
+    vol = fuel_mat.data['volume'][day_index]
+    adens = fuel_mat.getValues('days', 'adens', [day_value], 'total')[0][0]
     
     total_atoms = adens * vol
-    print(adens)
-    print(vol)
-    print(f'Evaluated at {day_value}')
 
     return total_atoms
 
 
-def repr_calculator()
+def repr_calculator(pre_depletion_path, post_depletion_path, tot_atoms, step_size, pre_days, post_days):
+    '''
+    Generate a dictionary consiting of each element in element_list and its associated repr constant
+    Each constant is generated by
+    cnst = (pre_deplete - post_deplete) / (time_seconds * tot_atoms)
+
+    Note: Improve this later, opening two files at once is probably not great
+
+    '''
+    reprocessing_dictionary = dict()
+
+    step_size_seconds = step_size * 24 * 3600
+
+    pre_dep_file = str(pre_depletion_path) + '_dep.m'
+    post_dep_file = str(post_depletion_path) + '_dep.m'
+
+    pre_dep = st.read(pre_dep_file, reader='dep')
+    post_dep = st.read(post_dep_file, reader='dep')
+    try:
+        pre_fuel_mat = pre_dep.materials['fuel']
+        post_fuel_mat = post_dep.materials['fuel']
+    except:
+        raise Exception('Fuel name set to non-"fuel" value.')
+
+
+    pre_day_index = np.where(pre_dep.metadata['days'] == pre_days)[0][0]
+    post_day_index = np.where(post_dep.metadata['days'] == post_days)[0][0]
+
+    pre_vol = pre_fuel_mat.data['volume'][pre_day_index]
+    post_vol = post_fuel_mat.data['volume'][post_day_index]
+    
+    element_list = pre_fuel_mat.names
+
+    for element in element_list:
+        if element == 'lost' or element == 'total':
+            pass
+        pre_atoms = pre_fuel_mat.getValues('days', 'adens', [pre_days], element)[0][0] * pre_vol
+        post_atoms = post_fuel_mat.getValues('days', 'adens', [post_days], element)[0][0] * post_vol
+        reprocessing_constant = (pre_atoms - post_atoms) / (step_size_seconds * tot_atoms)
+        reprocessing_dictionary[element] = reprocessing_constant
+
+    return reprocessing_dictionary
+
+
+def serp_targ_reader(serpent_time_vals, target, input_name):
+    '''
+
+    '''
+    dep_file = str(input_name) + '_dep.m'
+    dep = st.read(dep_file, reader='dep')
+    try:
+        fuel_mat = dep.materials['fuel']
+    except:
+        raise Exception('Fuel name set to non-"fuel" value.')
+    times = dep.metadata['days']
+    vol = fuel_mat.data['volume'][0]
+    try:
+        target = target.replace('-', '')
+    except:
+        pass
+    mdens = fuel_mat.getValues('days', 'mdens', times, target)[0]
+    mass_list = mdens * vol
+
+    return mass_list
 
 
 if __name__ == '__main__':
@@ -278,11 +337,10 @@ if __name__ == '__main__':
     end_day = 6000
     saltproc_step = 3
     step_size = (end_day - start_day) / number_runs
-    sp_time_vals = np.arange(start_day, end_day+saltproc_step, saltproc_step)
-    serpent_time_vals = np.arange(start_day, end_day, step_size)
+    sp_time_vals = np.arange(0, end_day+saltproc_step, saltproc_step)
+    serpent_time_vals = np.arange(start_day, end_day+step_size, step_size)
 
     list_inventory = ['Xe-135', 'U-235', 'U-233', 'Th-232', 'I-135']
-    
 
     # Initialize Materials
     #time_test = np.arange(3, end_day+saltproc_step, saltproc_step)
@@ -301,19 +359,32 @@ if __name__ == '__main__':
     
     # First running no depletion for 3 days
     read_write_path = f'./{test_name}/rw_'
-    deck_2997_variant = build_serpent_deck(current_time = start_day, step_size = saltproc_step, reproc = False, list_inventory = list_inventory, read_time = False, write_time = saltproc_step, include_fuel_path = SP_read, read_write_name = read_write_path)
+    deck_2997_variant = build_serpent_deck(step_size = saltproc_step, reproc = False, list_inventory = list_inventory, read_time = False, write_time = saltproc_step, include_fuel_path = SP_read, read_write_name = read_write_path)
     run_script(input_name, output, deck_2997_variant)
     wrk_file_name = read_write_path + str(saltproc_step)
     check_wrk_file(wrk_file_name, output)
 
     # Calculate reprocessing constants from pre (rfr -3 ./{test_name}/rw_3) and post (SP 2997). Use tot atoms from rfr -3.
     tot_atoms = extract_tot_atoms(input_name, day_value = 3)
-    #reprocessing_constants = repr_calculator(element_list, pre_depletion_path, post_depletion_path, tot_atoms)
-    
+    reprocessing_constants = repr_calculator(pre_depletion_path = input_name, post_depletion_path = input_name, tot_atoms = tot_atoms, step_size = saltproc_step, pre_days = 3, post_days = 0)
+
+    # Using reprocessing constants, generate the next build
+    input_name = run_name + '_' + str(6000)
+    output = out_name + '_' + str(6000)
+
+    deck_2997_3_variant = build_serpent_deck(step_size = 3000, reproc = reprocessing_constants, list_inventory = list_inventory, template_path = './templates', template_name = 'saltproc.msbr.serpent', read_time = saltproc_step, write_time = 3003, include_fuel_path = SP_read, read_write_name = './ss-comparison/rw_')
+    run_script(input_name, output, deck_2997_3_variant)
+    wrk_file_name = read_write_path + str(3003)
+    check_wrk_file(wrk_file_name, output)
+
 
     for target in list_inventory:
         target_mass_list = SP_target_reader(sp_time_vals, target, hdf5_dir, hdf5_input_path, fuel_input_path, SP_target_extractor)
-        plt.plot(sp_time_vals, target_mass_list)
+        approx_mass_list = serp_targ_reader(serpent_time_vals, target, input_name)
+        plt.plot(sp_time_vals, target_mass_list, label = 'SaltProc Masses')
+        print(f'Time values: {serpent_time_vals}')
+        print(f'Mass list: {approx_mass_list}')
+        plt.plot(serpent_time_vals, approx_mass_list, label = 'Serpent Approximate Masses')
         plt.xlabel('Time [d]')
         plt.ylabel('Mass [g]')
         plt.savefig(f'./{test_name}/{target}_mass.png')
