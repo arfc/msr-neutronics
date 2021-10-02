@@ -155,22 +155,22 @@ def SP_target_extractor(target, mat_path):
     mass = 0
     with open(mat_path) as f:
         lines = f.readlines()
-        for line in lines:
-            res = line.find(target)
-            if res == 0:
+        for each in lines:
+            res = each.find(target)
+            if res != -1:
                 for index in range(len(each)):
-                    search_index = -(index + 1)
-                    if line[search_index] == ' ':
+                    index += 1
+                    search_index = -index
+                    if each[search_index] == ' ':
                         number_index = len(each) + search_index + 1
                         break
                     else:
                         pass
-                mass_str = line[number_index:]
+                mass_str = each[number_index:]
                 update_str = mass_str.replace('\n', '').replace('-', '')
                 mass += float(update_str)
             else:
                 pass
-    print(f'Target {target} mass: {mass}')
     return mass
 
 
@@ -180,8 +180,8 @@ def SP_target_reader(time_list, target, hdf5_dir, hdf5_path, mat_path, SP_data_e
     '''
     target_mass = []
     for day in time_list:
-        evaluate(day, hdf5_path, mat_path)
-        target_mass.append(SP_data_extract_function(target, mat_path))
+        material_path = mat_path + '_' + str(day)
+        target_mass.append(SP_data_extract_function(target, material_path))
     return target_mass
 
 
@@ -191,10 +191,9 @@ def SP_data_initializer(time_list, hdf5_dir, hdf5_path, fuel_path):
     '''
     delay = 0.01
     for day in time_list:
-        fuel = fuel_name + '_' + str(day)
-        evaluate(day, hdf5_path, fuel_path)
+        fuel = fuel_path + '_' + str(day)
+        evaluate(day, hdf5_path, fuel)
         time.sleep(delay)
-
     return
 
 
@@ -218,24 +217,25 @@ if __name__ == '__main__':
     start_day = 3000
     end_day = 6000
     saltproc_step = 3
-    read_vals = np.arange(start_day, end_day, saltproc_step)
+    step_size = (end_day - start_day) / number_runs
+    sp_time_vals = np.arange(start_day, end_day+saltproc_step, saltproc_step)
+    serpent_time_vals = np.arange(start_day, end_day, step_size)
 
-    # Initialize Test
-    time_test = np.arange(3000, 3009, 3)
-    print(fuel_input_path)
-    SP_data_initializer(time_test, hdf5_dir, hdf5_input_path, fuel_input_path)
+    # Initialize Materials
+    #time_test = np.arange(3, end_day+saltproc_step, saltproc_step)
+    #SP_data_initializer(time_test, hdf5_dir, hdf5_input_path, fuel_input_path)
 
 
-#    # Let's start with something small. Generate a list of all masses of Xe135 in SaltProc for each day and plot them
-#    target = 'U-235'
-#    target_mass_list = SP_target_reader(read_vals, target, hdf5_dir, hdf5_input_path, fuel_input_path, SP_target_extractor)
-#    print(target_mass_list)
-#    plt.plot(read_vals, target_mass_list)
-#    plt.xlabel('Time [d]')
-#    plt.ylabel('Mass [g]')
-#    plt.savefig(f'./{test_name}/{target}_mass.png')
-#    plt.close()
-#
+    # Let's start with something small. Generate a list of all masses of Xe135 in SaltProc for each day and plot them
+    target = 'Li-7'
+    target_mass_list = SP_target_reader(sp_time_vals, target, hdf5_dir, hdf5_input_path, fuel_input_path, SP_target_extractor)
+    print(target_mass_list)
+    plt.plot(sp_time_vals, target_mass_list)
+    plt.xlabel('Time [d]')
+    plt.ylabel('Mass [g]')
+    plt.savefig(f'./{test_name}/{target}_mass.png')
+    plt.close()
+
 
 #    for base_value in read_vals:
 #        pre_inp = 'pre_inp' + str(base_value)
