@@ -285,7 +285,8 @@ def repr_calculator(pre_depletion_path, post_depletion_path, tot_atoms, step_siz
         raise Exception('Fuel name set to non-"fuel" value.')
 
 
-    print(f"Day metadata: {pre_dep.metadata['days']}")
+    print(f"Pre day metadata: {pre_dep.metadata['days']}")
+    print(f"Post day metadata: {post_dep.metadata['days']}")
     print(f'pre_days: {pre_days}')
     print(f'post_days: {post_days}')
     pre_day_index = np.where(pre_dep.metadata['days'] == pre_days)[0][0]
@@ -296,17 +297,19 @@ def repr_calculator(pre_depletion_path, post_depletion_path, tot_atoms, step_siz
     
     element_list = pre_fuel_mat.names
 
-    print('Post Depletion Masses for various elements')
     for element in element_list:
         if element == 'lost' or element == 'total':
             pass
         print(element)
         pre_atoms = pre_fuel_mat.getValues('days', 'adens', [pre_days], element)[0][0] * pre_vol
         post_atoms = post_fuel_mat.getValues('days', 'adens', [post_days], element)[0][0] * post_vol
+        print(f'Pre-atoms: {pre_atoms}')
+        print(f'Post-atoms: {post_atoms}')
         reprocessing_constant = (pre_atoms - post_atoms) / (step_size_seconds * tot_atoms)
-        print(pre_atoms)
-        print(post_atoms)
+
         reprocessing_dictionary[element] = reprocessing_constant
+
+
 
 
     return reprocessing_dictionary
@@ -330,7 +333,6 @@ def serp_targ_reader(serpent_time_vals, target, input_name, material_name = 'fue
         pass
     mdens = fuel_mat.getValues('days', 'mdens', times, target)[0]
     mass_list = mdens * vol
-
 
     return mass_list
 
@@ -359,7 +361,7 @@ if __name__ == '__main__':
     serpent_time_vals = np.arange(start_day, end_day+step_size, step_size)
     serpent_print_times = [i - 3 for i in serpent_time_vals]
 
-    list_inventory = ['Xe-135', 'U-235', 'U-233', 'Th-232', 'I-135']
+    list_inventory = ['Xe-135', 'U-235', 'U-233', 'Th-232', 'I-135', 'Kr-83']
 
     element_flow_list = ['krypton', 'xenon', 'selenium', 'niobium', 'molybdenum', 'technetium', 'ruthenium', 'rhodium', 'palladium', 'silver', 'antimony', 'tellurium', 'cadmium', 'indium', 'tin', 'bromine', 'iodine', 'protactinium', 'yttrium', 'lanthanum', 'cerium', 'praseodymium', 'neodymium', 'promethium', 'samarium', 'gadolinium', 'europium', 'rubidium', 'strontium', 'cesium', 'barium']
     
@@ -385,6 +387,7 @@ if __name__ == '__main__':
     output = out_name + '_' + str(2997)
     fuel_input_SP = fuel_input_path + '_' + str(2997)
     SP_read = '''"{fuel_input_SP}"'''.format(**locals())
+    SP_read_0 = SP_read
     
     # First running no depletion for 3 days
     read_write_path = f'./{test_name}/rw_'
@@ -443,17 +446,78 @@ if __name__ == '__main__':
 #    print('These should be same for now')
 #    print(reprocessing_constants)
 #
-    total_view_list = list_inventory + element_flow_list
  
 
+    # Including control group: no online reprocessing
+
+    input_name = run_name + '_' + str(6000) + '_control'
+    input_name_ctrl = input_name
+    output = out_name + '_' + str(6000) + '_control'
+
+    deck_control = build_serpent_deck(step_size = 3000, reproc = False, list_inventory = list_inventory, template_path = './templates', template_name = 'saltproc.msbr.serpent', read_time = saltproc_step, write_time = 3007, include_fuel_path = SP_read, read_write_name = './ss-comparison/rw_')
+    run_script(input_name, output, deck_control)
+    wrk_file_name = read_write_path + str(3007)
+    check_wrk_file(wrk_file_name, output)
+ 
+    # Include control group 2: 100% match with SaltProc at 6000 days
+
+    input_name = run_name + '_ctrl2'
+    input_name_5 = input_name
+    output = out_name + '_ctrl2'
+    fuel_input_SP = fuel_input_path + '_' + str(3000)
+    SP_read = '''"{fuel_input_SP}"'''.format(**locals())
+    
+    # First running no depletion for 3000 days
+    read_write_path = f'./{test_name}/rw_'
+    deck_ctrl_2 = build_serpent_deck(step_size = 3000, reproc = False, list_inventory = list_inventory, read_time = False, write_time = 3000, include_fuel_path = SP_read, read_write_name = read_write_path)
+    run_script(input_name, output, deck_ctrl_2)
+    wrk_file_name = read_write_path + str(3000)
+    check_wrk_file(wrk_file_name, output)
+
+    # Next running SP(6000) for 3 days in order to generate a _dep.m file for it
+
+    input_name = run_name + '_ctrl2_SP'
+    input_name_6 = input_name
+    output = out_name + '_ctrl2_SP'
+    fuel_input_SP = fuel_input_path + '_' + str(6000)
+    SP_read = '''"{fuel_input_SP}"'''.format(**locals())
+
+    read_write_path = f'./{test_name}/rw_'
+    deck_ctrl_2_SP = build_serpent_deck(step_size = 3, reproc = False, list_inventory = list_inventory, read_time = False, write_time = 3001, include_fuel_path = SP_read, read_write_name = read_write_path)
+    run_script(input_name, output, deck_ctrl_2_SP)
+    wrk_file_name = read_write_path + str(3001)
+    check_wrk_file(wrk_file_name, output)
+
+    # Calculate reprocessing constants from pre (rfr -3 ./{test_name}/rw_3) and post (SP 2997). Use tot atoms from rfr -3.
+    tot_atoms = extract_tot_atoms(input_name_0, day_value = 3)
+    reprocessing_constants = repr_calculator(pre_depletion_path = input_name_5, post_depletion_path = input_name_6, tot_atoms = tot_atoms, step_size = 3000, pre_days = 3000, post_days = 0)
+
+    print(reprocessing_constants)
+
+    # Using reprocessing constants, generate the next build
+    input_name = run_name + '_ctrl2_full'
+    input_name_ctrl2 = input_name
+    output = out_name + '_ctrl2_full'
+
+    deck_ctrl2_full = build_serpent_deck(step_size = 3000, reproc = reprocessing_constants, list_inventory = list_inventory, template_path = './templates', template_name = 'saltproc.msbr.serpent', read_time = saltproc_step, write_time = 3003, include_fuel_path = SP_read_0, read_write_name = './ss-comparison/rw_')
+    run_script(input_name, output, deck_ctrl2_full)
+    wrk_file_name = read_write_path + str(3003)
+    check_wrk_file(wrk_file_name, output)
 
 
+ 
+    total_view_list = list_inventory + element_flow_list
+ 
     for target in total_view_list:
         target_mass_list = SP_target_reader(sp_time_vals, target, hdf5_dir, hdf5_input_path, fuel_input_path, SP_target_extractor, element_dictionary)
         approx_mass_list_1 = serp_targ_reader(serpent_time_vals, target, input_name_1)
         #approx_mass_list_3 = serp_targ_reader(serpent_time_vals, target, input_name_3)
+        approx_mass_ctrl = serp_targ_reader(serpent_time_vals, target, input_name_ctrl)
+        approx_mass_ctrl2 = serp_targ_reader(serpent_time_vals, target, input_name_ctrl2)
         plt.plot(sp_time_vals, target_mass_list, label = 'SaltProc Masses')
         plt.plot(serpent_print_times, approx_mass_list_1, label = 'Serpent 3 Day Deplete Approximate Masses')
+        plt.plot(serpent_print_times, approx_mass_ctrl, label = 'No Removal Masses')
+        plt.plot(serpent_print_times, approx_mass_ctrl2, label = 'Serpent SaltProc Match Masses')
         #plt.plot(serpent_print_times, approx_mass_list_3, label = f'Serpent {deplete_amount} Day Deplete Approximate Masses')
         plt.xlabel('Time [d]')
         plt.ylabel('Mass [g]')
@@ -474,6 +538,7 @@ if __name__ == '__main__':
         plt.tight_layout()
         plt.savefig(f'./{test_name}/{waste}_{target}_mass.png')
         plt.close()
+
 
 #    for base_value in read_vals:
 #        pre_inp = 'pre_inp' + str(base_value)
