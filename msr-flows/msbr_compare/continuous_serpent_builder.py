@@ -8,7 +8,7 @@ import time
 import os.path
 from os import path
 import serpentTools as st
-
+from scipy.optimize import root
 
 
 def check_wrk_file(wrk_name, output_name):
@@ -139,9 +139,9 @@ def flow_regime(reprocess):
     flow_setup = ''
     if reprocess:
         flow_setup += '''
-rc fuel waste_entrainment_separator entrainment_pump 2
-rc fuel waste_nickel_filter nickel_pump 2
-rc fuel waste_liquid_metal waste_metal_pump 2
+rc fuel waste_entrainment_separator entrainment_pump 1
+rc fuel waste_nickel_filter nickel_pump 1
+rc fuel waste_liquid_metal waste_metal_pump 1
 rc feedsalt fuel feed_pump 2
 '''
     else:
@@ -306,13 +306,75 @@ def repr_calculator(pre_depletion_path, post_depletion_path, tot_atoms, step_siz
         print(f'Pre-atoms: {pre_atoms}')
         print(f'Post-atoms: {post_atoms}')
         reprocessing_constant = (pre_atoms - post_atoms) / (step_size_seconds * tot_atoms)
-
         reprocessing_dictionary[element] = reprocessing_constant
 
 
 
 
     return reprocessing_dictionary
+
+
+def LGM_func(x, final_atoms, initial_atoms, final_time, initial_time, C):
+    '''
+    Linear Generation Method function
+
+    '''
+    return initial_atoms * np.exp(-x * final_time) + C / x - final_atoms 
+
+
+def LGM_repr_calculator(initial_path = input_name, final_path = input_name, step_size = approximation_time, initial_time = 0, final_time = approximation_time, LGM_func):
+    '''
+    Generate a dictionary consisting of each element in element in depletion output and its assocaited repr constant
+    Each constant is represented by the transcedental equation
+    N(final) = N(initial) * exp(-n * final) + C / n
+    Where C = (N(final) - N(initial)) / (final - initial)
+
+    Note: Improve this, opening two files at once isn't great
+    
+    '''
+    
+    reprocessing_dictionary = dict()
+
+    sec_per_day = 24 * 3600
+    step_size_seconds = step_size * sec_per_day
+
+    initial_file = str(initial_path) + '_dep.m'
+    final_file = str(final_path) + '_dep.m'
+
+    initial_dep = st.read(initial_file, reader='dep')
+    final_dep = st.read(final_file, reader='dep')
+    try:
+        initial_fuel_mat = initial_dep.materials['fuel']
+        final_fuel_mat = final_dep.materials['fuel']
+    except:
+        raise Exception('Fuel name set to non-"fuel" value.')
+
+    initial_day_index = np.where(pre_dep.metadata['days'] == pre_days)[0][0]
+    final_day_index = np.where(post_dep.metadata['days'] == post_days)[0][0]
+
+    initial_vol = initial_fuel_mat.data['volume'][initial_day_index]
+    final_vol = final_fuel_mat.data['volume'][final_day_index]
+    
+    element_list = pre_fuel_mat.names
+
+
+    t_f = final_time * sec_per_day
+    t_i = initial_time * sec_per_day
+
+    for element in element_list:
+        if element == 'lost' or element == 'total':
+            pass
+        initial_atoms = initial_fuel_mat.getValues('days', 'adens', [initial_days], element)[0][0] * initial_vol
+        final_atoms = final_fuel_mat.getValues('days', 'adens', [final_days], element)[0][0] * final_vol
+
+        C = (final_atoms - initial_atoms) / (step_size_seconds)
+        initial_guess = 1
+        reprocessing_constant = root(LGM_func, initial_guess, args=(final_atoms, initial_atoms, t_i, t_i, C)).x[0]
+
+        reprocessing_dictionary[element] = reprocessing_constant
+
+    return reprocessing_dictionary
+
 
 
 def serp_targ_reader(serpent_time_vals, target, input_name, material_name = 'fuel'):
@@ -375,102 +437,130 @@ if __name__ == '__main__':
     for index in range(len(element_flow_list)):
         element_dictionary[element_flow_list[index]] = [associated_symbol_list[index], associated_atomic_list[index]]
 
-    # Initialize Materials
-    #time_test = np.arange(3, end_day+saltproc_step, saltproc_step)
-    #SP_data_initializer(time_test, hdf5_dir, hdf5_input_path, fuel_input_path)
 
-
-
-    # Now we need to generate the two variations on a 1 step approach
-    # Load in SP(2997), run with reprs == 0 for 3d (rfw), calculate reprs, rfr 3d run 3000d (subtract 3 when plotting since its actually 3k days)
-    # Load in SP(3000), run with reprs == 0 for 3d (rfw), calculate reprs, rfr 3d run 2997d
-
-    input_name = run_name + '_' + str(2997)
-    input_name_0 = input_name
-    output = out_name + '_' + str(2997)
-    fuel_input_SP = fuel_input_path + '_' + str(2997)
-    SP_read = '''"{fuel_input_SP}"'''.format(**locals())
-    SP_read_0 = SP_read
-    
-    # First running no depletion for 3 days
-    read_write_path = f'./{test_name}/rw_'
-    deck_2997_variant = build_serpent_deck(step_size = saltproc_step, reproc = False, list_inventory = list_inventory, read_time = False, write_time = saltproc_step, include_fuel_path = SP_read, read_write_name = read_write_path)
-    run_script(input_name, output, deck_2997_variant)
-    wrk_file_name = read_write_path + str(saltproc_step)
-    check_wrk_file(wrk_file_name, output)
-
-    # Calculate reprocessing constants from pre (rfr -3 ./{test_name}/rw_3) and post (SP 2997). Use tot atoms from rfr -3.
-    tot_atoms = extract_tot_atoms(input_name, day_value = 3)
-    reprocessing_constants = repr_calculator(pre_depletion_path = input_name, post_depletion_path = input_name, tot_atoms = tot_atoms, step_size = saltproc_step, pre_days = 3, post_days = 0)
-
+    # Linear Growth Model
+    # initialize
+    identifier = '_LGM0'
+    SP_read_time = 3000
+    input_name0 = run_name + identifier
+    output = out_name + identifier
+    fuel_input_SP = fuel_input_path + str(SP_read_time)
+    SP_read0 = '''"{fuel_input_SP}"'''.format(**locals())
+    # run no depletion to generate linear approximation of growth
+    approximation_time = 3
+    LGM_setup_deck = build_serpent_deck(step_size = approximation_time, reproc = False, list_inventory = list_inventory, read_time = False, write_time = approximation_time, include_fuel_path = SP_read0, read_write_name = read_write_path)
+    run_script(input_name, output, LGM_setup_deck)
+    wrk_file_name = read_write_path + str(approximation_time)
+    check_wrk_file(wrk_file_name)
+    # now that it has run, calculate reprocessing constants based on linear growth model
+    reprocessing_constants = LGM_repr_calculator(initial_path = input_name, final_path = input_name, step_size = approximation_time, initial_time = 0, final_time = approximation_time)
     print(reprocessing_constants)
+    # take generated constants and plug into full running equation 
+    # initialize again
+    identifier = '_LGM1'
+    SP_read_time = 3000
+    input_name1 = run_name + identifier
+    output = out_name + identifier
+    fuel_input_SP = fuel_input_path + str(SP_read_time)
+    SP_read1 = '''"{fuel_input_SP}"'''.format(**locals())
+    # build and run deck with reprocessing
+    step_size = 3000
+    LGM_main_deck = build_serpent_deck(step_size = step_size, reproc = reprocessing_constants, list_inventory = list_inventory, read_time = False, write_time = step_size, include_fuel_path = SP_read1, read_write_name = read_write_path)
+    run_script(input_name, output, LGM_main_deck)
+    wrk_file_name = read_write_path + str(step_size)
+    check_wrk_file(wrk_file_name)
 
-    # Using reprocessing constants, generate the next build
-    input_name = run_name + '_' + str(6000)
-    input_name_1 = input_name
-    output = out_name + '_' + str(6000)
-
-    deck_2997_3_variant = build_serpent_deck(step_size = 3000, reproc = reprocessing_constants, list_inventory = list_inventory, template_path = template_path, template_name = template_name, read_time = saltproc_step, write_time = 3003, include_fuel_path = SP_read, read_write_name = './ss-comparison/rw_')
-    run_script(input_name, output, deck_2997_3_variant)
-    wrk_file_name = read_write_path + str(3003)
-    check_wrk_file(wrk_file_name, output)
- 
-
-    # Including control group: no online reprocessing
-
-    input_name = run_name + '_' + str(6000) + '_control'
-    input_name_ctrl = input_name
-    output = out_name + '_' + str(6000) + '_control'
-
-    deck_control = build_serpent_deck(step_size = 3000, reproc = False, list_inventory = list_inventory, template_path = template_path, template_name = template_name, read_time = saltproc_step, write_time = 3007, include_fuel_path = SP_read, read_write_name = './ss-comparison/rw_')
-    run_script(input_name, output, deck_control)
-    wrk_file_name = read_write_path + str(3007)
-    check_wrk_file(wrk_file_name, output)
- 
-    # Include control group 2: 100% match with SaltProc at 6000 days
-
-    input_name = run_name + '_ctrl2'
-    input_name_5 = input_name
-    output = out_name + '_ctrl2'
-    fuel_input_SP = fuel_input_path + '_' + str(3000)
-    SP_read = '''"{fuel_input_SP}"'''.format(**locals())
-    
-    # First running no depletion for 3000 days
-    read_write_path = f'./{test_name}/rw_'
-    deck_ctrl_2 = build_serpent_deck(step_size = 3000, reproc = False, list_inventory = list_inventory, read_time = False, write_time = 3000, include_fuel_path = SP_read, read_write_name = read_write_path)
-    run_script(input_name, output, deck_ctrl_2)
-    wrk_file_name = read_write_path + str(3000)
-    check_wrk_file(wrk_file_name, output)
-
-    # Next running SP(6000) for 3 days in order to generate a _dep.m file for it
-
-    input_name = run_name + '_ctrl2_SP'
-    input_name_6 = input_name
-    output = out_name + '_ctrl2_SP'
-    fuel_input_SP = fuel_input_path + '_' + str(6000)
-    SP_read = '''"{fuel_input_SP}"'''.format(**locals())
-
-    read_write_path = f'./{test_name}/rw_'
-    deck_ctrl_2_SP = build_serpent_deck(step_size = 3, reproc = False, list_inventory = list_inventory, read_time = False, write_time = 3001, include_fuel_path = SP_read, read_write_name = read_write_path)
-    run_script(input_name, output, deck_ctrl_2_SP)
-    wrk_file_name = read_write_path + str(3001)
-    check_wrk_file(wrk_file_name, output)
-
-    # Calculate reprocessing constants from pre (rfr -3 ./{test_name}/rw_3) and post (SP 2997). Use tot atoms from rfr -3.
-    tot_atoms = extract_tot_atoms(input_name_0, day_value = 3)
-    reprocessing_constants = repr_calculator(pre_depletion_path = input_name_5, post_depletion_path = input_name_6, tot_atoms = tot_atoms, step_size = 3000, pre_days = 3000, post_days = 0)
-
-    print(reprocessing_constants)
-
-    # Using reprocessing constants, generate the next build
-    input_name = run_name + '_ctrl2_full'
-    input_name_ctrl2 = input_name
-    output = out_name + '_ctrl2_full'
-
-    deck_ctrl2_full = build_serpent_deck(step_size = 3000, reproc = reprocessing_constants, list_inventory = list_inventory, template_path = template_path, template_name = template_name, read_time = saltproc_step, write_time = 3003, include_fuel_path = SP_read_0, read_write_name = './ss-comparison/rw_')
-    run_script(input_name, output, deck_ctrl2_full)
-    wrk_file_name = read_write_path + str(3003)
-    check_wrk_file(wrk_file_name, output)
+#
+#    # Now we need to generate the two variations on a 1 step approach
+#    # Load in SP(2997), run with reprs == 0 for 3d (rfw), calculate reprs, rfr 3d run 3000d (subtract 3 when plotting since its actually 3k days)
+#    # Load in SP(3000), run with reprs == 0 for 3d (rfw), calculate reprs, rfr 3d run 2997d
+#
+#    input_name = run_name + '_' + str(2997)
+#    input_name_0 = input_name
+#    output = out_name + '_' + str(2997)
+#    fuel_input_SP = fuel_input_path + '_' + str(2997)
+#    SP_read = '''"{fuel_input_SP}"'''.format(**locals())
+#    SP_read_0 = SP_read
+#    
+#    # First running no depletion for 3 days
+#    read_write_path = f'./{test_name}/rw_'
+#    deck_2997_variant = build_serpent_deck(step_size = saltproc_step, reproc = False, list_inventory = list_inventory, read_time = False, write_time = saltproc_step, include_fuel_path = SP_read, read_write_name = read_write_path)
+#    run_script(input_name, output, deck_2997_variant)
+#    wrk_file_name = read_write_path + str(saltproc_step)
+#    check_wrk_file(wrk_file_name, output)
+#
+#    # Calculate reprocessing constants from pre (rfr -3 ./{test_name}/rw_3) and post (SP 2997). Use tot atoms from rfr -3.
+#    tot_atoms = extract_tot_atoms(input_name, day_value = 3)
+#    reprocessing_constants = repr_calculator(pre_depletion_path = input_name, post_depletion_path = input_name, tot_atoms = tot_atoms, step_size = saltproc_step, pre_days = 3, post_days = 0)
+#
+#    print(reprocessing_constants)
+#
+#    # Using reprocessing constants, generate the next build
+#    input_name = run_name + '_' + str(6000)
+#    input_name_1 = input_name
+#    output = out_name + '_' + str(6000)
+#
+#    deck_2997_3_variant = build_serpent_deck(step_size = 3000, reproc = reprocessing_constants, list_inventory = list_inventory, template_path = template_path, template_name = template_name, read_time = saltproc_step, write_time = 3003, include_fuel_path = SP_read, read_write_name = './ss-comparison/rw_')
+#    run_script(input_name, output, deck_2997_3_variant)
+#    wrk_file_name = read_write_path + str(3003)
+#    check_wrk_file(wrk_file_name, output)
+# 
+#
+#    # Including control group: no online reprocessing
+#
+#    input_name = run_name + '_' + str(6000) + '_control'
+#    input_name_ctrl = input_name
+#    output = out_name + '_' + str(6000) + '_control'
+#
+#    deck_control = build_serpent_deck(step_size = 3000, reproc = False, list_inventory = list_inventory, template_path = template_path, template_name = template_name, read_time = saltproc_step, write_time = 3007, include_fuel_path = SP_read, read_write_name = './ss-comparison/rw_')
+#    run_script(input_name, output, deck_control)
+#    wrk_file_name = read_write_path + str(3007)
+#    check_wrk_file(wrk_file_name, output)
+# 
+#    # Include control group 2: 100% match with SaltProc at 6000 days
+#
+#    input_name = run_name + '_ctrl2'
+#    input_name_5 = input_name
+#    output = out_name + '_ctrl2'
+#    fuel_input_SP = fuel_input_path + '_' + str(3000)
+#    SP_read = '''"{fuel_input_SP}"'''.format(**locals())
+#    
+#    # First running no depletion for 3000 days
+#    read_write_path = f'./{test_name}/rw_'
+#    deck_ctrl_2 = build_serpent_deck(step_size = 3000, reproc = False, list_inventory = list_inventory, read_time = False, write_time = 3000, include_fuel_path = SP_read, read_write_name = read_write_path)
+#    run_script(input_name, output, deck_ctrl_2)
+#    wrk_file_name = read_write_path + str(3000)
+#    check_wrk_file(wrk_file_name, output)
+#
+#    # Next running SP(6000) for 3 days in order to generate a _dep.m file for it
+#
+#    input_name = run_name + '_ctrl2_SP'
+#    input_name_6 = input_name
+#    output = out_name + '_ctrl2_SP'
+#    fuel_input_SP = fuel_input_path + '_' + str(6000)
+#    SP_read = '''"{fuel_input_SP}"'''.format(**locals())
+#
+#    read_write_path = f'./{test_name}/rw_'
+#    deck_ctrl_2_SP = build_serpent_deck(step_size = 3, reproc = False, list_inventory = list_inventory, read_time = False, write_time = 3001, include_fuel_path = SP_read, read_write_name = read_write_path)
+#    run_script(input_name, output, deck_ctrl_2_SP)
+#    wrk_file_name = read_write_path + str(3001)
+#    check_wrk_file(wrk_file_name, output)
+#
+#    # Calculate reprocessing constants from pre (rfr -3 ./{test_name}/rw_3) and post (SP 2997). Use tot atoms from rfr -3.
+#    tot_atoms = extract_tot_atoms(input_name_0, day_value = 3)
+#    reprocessing_constants = repr_calculator(pre_depletion_path = input_name_5, post_depletion_path = input_name_6, tot_atoms = tot_atoms, step_size = 3000, pre_days = 3000, post_days = 0)
+#
+#    print(reprocessing_constants)
+#
+#    # Using reprocessing constants, generate the next build
+#    input_name = run_name + '_ctrl2_full'
+#    input_name_ctrl2 = input_name
+#    output = out_name + '_ctrl2_full'
+#
+#    deck_ctrl2_full = build_serpent_deck(step_size = 3000, reproc = reprocessing_constants, list_inventory = list_inventory, template_path = template_path, template_name = template_name, read_time = saltproc_step, write_time = 3003, include_fuel_path = SP_read_0, read_write_name = './ss-comparison/rw_')
+#    run_script(input_name, output, deck_ctrl2_full)
+#    wrk_file_name = read_write_path + str(3003)
+#    check_wrk_file(wrk_file_name, output)
 
 
  
@@ -478,14 +568,17 @@ if __name__ == '__main__':
  
     for target in total_view_list:
         target_mass_list = SP_target_reader(sp_time_vals, target, hdf5_dir, hdf5_input_path, fuel_input_path, SP_target_extractor, element_dictionary)
-        approx_mass_list_1 = serp_targ_reader(serpent_time_vals, target, input_name_1)
+        LGM_mass_list = serp_targ_reader(serpent_time_vals, target, input_name1)
+
+        #approx_mass_list_1 = serp_targ_reader(serpent_time_vals, target, input_name_1)
         #approx_mass_list_3 = serp_targ_reader(serpent_time_vals, target, input_name_3)
-        approx_mass_ctrl = serp_targ_reader(serpent_time_vals, target, input_name_ctrl)
-        approx_mass_ctrl2 = serp_targ_reader(serpent_time_vals, target, input_name_ctrl2)
+        #approx_mass_ctrl = serp_targ_reader(serpent_time_vals, target, input_name_ctrl)
+        #approx_mass_ctrl2 = serp_targ_reader(serpent_time_vals, target, input_name_ctrl2)
         plt.plot(sp_time_vals, target_mass_list, label = 'SaltProc Masses')
-        plt.plot(serpent_print_times, approx_mass_list_1, label = 'Serpent 3 Day Deplete Approximate Masses')
-        plt.plot(serpent_print_times, approx_mass_ctrl, label = 'No Removal Masses')
-        plt.plot(serpent_print_times, approx_mass_ctrl2, label = 'Serpent SaltProc Match Masses')
+        plt.plot(serpent_print_times, LGM_mass_list, label = 'Linear Generation Method')
+        #plt.plot(serpent_print_times, approx_mass_list_1, label = 'Serpent 3 Day Deplete Approximate Masses')
+        #plt.plot(serpent_print_times, approx_mass_ctrl, label = 'No Removal Masses')
+        #plt.plot(serpent_print_times, approx_mass_ctrl2, label = 'Serpent SaltProc Match Masses')
         #plt.plot(serpent_print_times, approx_mass_list_3, label = f'Serpent {deplete_amount} Day Deplete Approximate Masses')
         plt.xlabel('Time [d]')
         plt.ylabel('Mass [g]')
@@ -496,17 +589,17 @@ if __name__ == '__main__':
 
 
     # Waste checker
-    waste = 'waste_entrainment_separator'
-    for target in total_view_list:
-        approx_mass_list_1 = serp_targ_reader(serpent_time_vals, target, input_name_1, material_name = waste)
-        plt.plot(serpent_print_times, approx_mass_list_1, label = f'{waste}')
-        plt.xlabel('Time [d]')
-        plt.ylabel('Mass [g]')
-        plt.legend()
-        plt.tight_layout()
-        plt.savefig(f'./{test_name}/{waste}_{target}_mass.png')
-        plt.close()
-
+#    waste = 'waste_entrainment_separator'
+#    for target in total_view_list:
+#        approx_mass_list_1 = serp_targ_reader(serpent_time_vals, target, input_name_1, material_name = waste)
+#        plt.plot(serpent_print_times, approx_mass_list_1, label = f'{waste}')
+#        plt.xlabel('Time [d]')
+#        plt.ylabel('Mass [g]')
+#        plt.legend()
+#        plt.tight_layout()
+#        plt.savefig(f'./{test_name}/{waste}_{target}_mass.png')
+#        plt.close()
+#
 
 
 
