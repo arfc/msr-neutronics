@@ -314,25 +314,25 @@ def repr_calculator(pre_depletion_path, post_depletion_path, tot_atoms, step_siz
     return reprocessing_dictionary
 
 
-def LGM_func(x, final_atoms, initial_atoms, final_time, initial_time, C):
+def LGM_func(x, compare_atoms, final_atoms, initial_atoms, initial_time, final_time, C):
     '''
     Linear Generation Method function
 
     '''
-    print('LGM func changing initial atoms to c2')
-    print('Try doing dN/dt == 0 after this')
     c2 = initial_atoms - C / x
-    return c2 * np.exp(-x * final_time) + C / x - final_atoms 
+    #soln = c2 * np.exp(-x * final_time) + C / x - final_atoms 
+    soln = -(final_atoms - compare_atoms) + (initial_atoms - C/x) * (1 - np.exp(-x * final_time)) + C * final_time
+    return soln
 
 
-def LGM_repr_calculator(LGM_func, initial_path, final_path, step_size, initial_time, final_time):
+def LGM_repr_calculator(LGM_func, initial_path, final_path, step_size, initial_time, final_time, compare_path, compare_time = 0):
     '''
     Generate a dictionary consisting of each element in element in depletion output and its assocaited repr constant
     Each constant is represented by the transcedental equation
     N(final) = N(initial) * exp(-n * final) + C / n
     Where C = (N(final) - N(initial)) / (final - initial)
 
-    Note: Improve this, opening two files at once isn't great
+    Note: Improve this, opening more than one file at once isn't great
     
     '''
     
@@ -343,20 +343,25 @@ def LGM_repr_calculator(LGM_func, initial_path, final_path, step_size, initial_t
 
     initial_file = str(initial_path) + '_dep.m'
     final_file = str(final_path) + '_dep.m'
+    compare_file = str(compare_path) + '_dep.m'
 
     initial_dep = st.read(initial_file, reader='dep')
     final_dep = st.read(final_file, reader='dep')
+    compare_dep = st.read(compare_file, reader='dep')
     try:
         initial_fuel_mat = initial_dep.materials['fuel']
         final_fuel_mat = final_dep.materials['fuel']
+        compare_fuel_mat = compare_dep.materials['fuel']
     except:
         raise Exception('Fuel name set to non-"fuel" value.')
 
     initial_day_index = np.where(initial_dep.metadata['days'] == initial_time)[0][0]
     final_day_index = np.where(final_dep.metadata['days'] == final_time)[0][0]
+    compare_day_index = np.where(compare_dep.metadata['days'] == compare_time)[0][0]
 
     initial_vol = initial_fuel_mat.data['volume'][initial_day_index]
     final_vol = final_fuel_mat.data['volume'][final_day_index]
+    compare_vol = compare_fuel_mat.data['volume'][compare_day_index]
     
     element_list = initial_fuel_mat.names
 
@@ -369,18 +374,26 @@ def LGM_repr_calculator(LGM_func, initial_path, final_path, step_size, initial_t
             pass
         initial_atoms = initial_fuel_mat.getValues('days', 'adens', [initial_time], element)[0][0] * initial_vol
         final_atoms = final_fuel_mat.getValues('days', 'adens', [final_time], element)[0][0] * final_vol
+        compare_atoms = compare_fuel_mat.getValues('days', 'adens', [compare_time], element)[0][0] * compare_vol
 
         C = (final_atoms - initial_atoms) / (step_size_seconds)
-        initial_guess = 1
-        reprocessing_constant = root(LGM_func, initial_guess, args=(final_atoms, initial_atoms, t_i, t_f, C)).x[0]
+        initial_guess = 1E-5
+        root_info = root(LGM_func, initial_guess, args=(compare_atoms, final_atoms, initial_atoms, t_i, t_f, C), tol = 1E-7)
+        reprocessing_constant = root_info.x[0]
+        print(root_info.message)
+        print(f'Reprocessing Constant: {reprocessing_constant}')
+        if reprocessing_constant < 0:
+            reprocessing_constant = 0
         #reprocessing_constant = C / final_atoms
-        #print(f'Target: {element}')
-        #print(f'Final Atoms: {final_atoms}')
-        #print(f'Initial Atoms: {initial_atoms}')
-        #print(f't_f: {t_f}')
-        #print(f't_i: {t_i}')
-        #print(f'C: {C}')
-        #print(f'Lambda: {reprocessing_constant}')
+        print(f'Target: {element}')
+        print(f'SP Final Atoms: {compare_atoms}')
+        print(f'Final Atoms: {final_atoms}')
+        print(f'no_rem - SP: {final_atoms - compare_atoms}')
+        print(f'Initial Atoms: {initial_atoms}')
+        print(f't_f: {t_f}')
+        print(f't_i: {t_i}')
+        print(f'C: {C}')
+        print(f'Lambda: {reprocessing_constant}')
         #input()
 
         reprocessing_dictionary[element] = reprocessing_constant
@@ -389,7 +402,7 @@ def LGM_repr_calculator(LGM_func, initial_path, final_path, step_size, initial_t
 
 
 
-def serp_targ_reader(serpent_time_vals, target, input_name, material_name = 'fuel'):
+def serp_targ_reader(target, input_name, material_name = 'fuel'):
     '''
 
     '''
@@ -465,117 +478,70 @@ if __name__ == '__main__':
     run_script(input_name0, output, LGM_setup_deck)
     wrk_file_name = read_write_path + str(approximation_time)
     check_wrk_file(wrk_file_name, output)
+    # now generate SP data depletion output to compare against 
+    # initialize
+    identifier = '_SP0'
+    SP_read_time = '_' + str(3000 + approximation_time)
+    input_name_com = run_name + identifier
+    output = out_name + identifier
+    fuel_input_SP = fuel_input_path + str(SP_read_time)
+    SP_read_com = '''"{fuel_input_SP}"'''.format(**locals())
+    # build deck
+    deck_SP_compare = build_serpent_deck(step_size = 1, reproc = False, list_inventory = list_inventory, read_time = False, write_time = 1, include_fuel_path = SP_read_com, read_write_name = read_write_path)
+    run_script(input_name_com, output, deck_SP_compare)
+    wrk_file_name = read_write_path + str(1)
+    check_wrk_file(wrk_file_name, output)
+
     # now that it has run, calculate reprocessing constants based on linear growth model
-    reprocessing_constants = LGM_repr_calculator(LGM_func, initial_path = input_name0, final_path = input_name0, step_size = approximation_time, initial_time = 0, final_time = approximation_time)
+    reprocessing_constants = LGM_repr_calculator(LGM_func, initial_path = input_name0, final_path = input_name0, step_size = approximation_time, initial_time = 0, final_time = approximation_time, compare_path = input_name_com, compare_time = 0)
     print(reprocessing_constants)
     # take generated constants and plug into full running equation 
     # initialize again
     identifier = '_LGM1'
     SP_read_time = '_3000'
-    input_name1 = run_name + identifier
+    input_name_LGM = run_name + identifier
     output = out_name + identifier
     fuel_input_SP = fuel_input_path + str(SP_read_time)
     SP_read1 = '''"{fuel_input_SP}"'''.format(**locals())
     # build and run deck with reprocessing
     step_size = 3000
+
+    print('Trying with step_size of 3 instead of 3000, should match closer')
     LGM_main_deck = build_serpent_deck(step_size = step_size, reproc = reprocessing_constants, list_inventory = list_inventory, read_time = False, write_time = step_size, include_fuel_path = SP_read1, read_write_name = read_write_path)
-    run_script(input_name1, output, LGM_main_deck)
+    run_script(input_name_LGM, output, LGM_main_deck)
     wrk_file_name = read_write_path + str(step_size)
     check_wrk_file(wrk_file_name, output)
 
+    ##### Combine this all into a single function?
 
-
-    approximation_time = 30
-    LGM_setup_deck = build_serpent_deck(step_size = approximation_time, reproc = False, list_inventory = list_inventory, read_time = False, write_time = approximation_time, include_fuel_path = SP_read0, read_write_name = read_write_path)
-    run_script(input_name0, output, LGM_setup_deck)
-    wrk_file_name = read_write_path + str(approximation_time)
-    check_wrk_file(wrk_file_name, output)
-    # now that it has run, calculate reprocessing constants based on linear growth model
-    reprocessing_constants = LGM_repr_calculator(LGM_func, initial_path = input_name0, final_path = input_name0, step_size = approximation_time, initial_time = 0, final_time = approximation_time)
-    print(reprocessing_constants)
-    # take generated constants and plug into full running equation 
-    # initialize again
-    identifier = '_LGM2'
-    SP_read_time = '_3000'
-    input_name2 = run_name + identifier
+    # Control Model (uses same step size as previous part)
+    identifier = '_ctrl'
+    input_name_ctrl = run_name + identifier
     output = out_name + identifier
-    fuel_input_SP = fuel_input_path + str(SP_read_time)
-    SP_read1 = '''"{fuel_input_SP}"'''.format(**locals())
-    # build and run deck with reprocessing
-    step_size = 3000
-    LGM_main_deck = build_serpent_deck(step_size = step_size, reproc = reprocessing_constants, list_inventory = list_inventory, read_time = False, write_time = step_size, include_fuel_path = SP_read1, read_write_name = read_write_path)
-    run_script(input_name2, output, LGM_main_deck)
-    wrk_file_name = read_write_path + str(step_size)
+    control_deck = build_serpent_deck(step_size = step_size, reproc = False, list_inventory = list_inventory, read_time = False, write_time = step_size + 1, include_fuel_path = SP_read1, read_write_name = read_write_path)
+    run_script(input_name_ctrl, output, control_deck)
+    wrk_file_name = read_write_path + str(step_size + 1)
     check_wrk_file(wrk_file_name, output)
-
-
-
-
-    approximation_time = 300
-    LGM_setup_deck = build_serpent_deck(step_size = approximation_time, reproc = False, list_inventory = list_inventory, read_time = False, write_time = approximation_time, include_fuel_path = SP_read0, read_write_name = read_write_path)
-    run_script(input_name0, output, LGM_setup_deck)
-    wrk_file_name = read_write_path + str(approximation_time)
-    check_wrk_file(wrk_file_name, output)
-    # now that it has run, calculate reprocessing constants based on linear growth model
-    reprocessing_constants = LGM_repr_calculator(LGM_func, initial_path = input_name0, final_path = input_name0, step_size = approximation_time, initial_time = 0, final_time = approximation_time)
-    print(reprocessing_constants)
-    # take generated constants and plug into full running equation 
-    # initialize again
-    identifier = '_LGM3'
-    SP_read_time = '_3000'
-    input_name3 = run_name + identifier
-    output = out_name + identifier
-    fuel_input_SP = fuel_input_path + str(SP_read_time)
-    SP_read1 = '''"{fuel_input_SP}"'''.format(**locals())
-    # build and run deck with reprocessing
-    step_size = 3000
-    LGM_main_deck = build_serpent_deck(step_size = step_size, reproc = reprocessing_constants, list_inventory = list_inventory, read_time = False, write_time = step_size, include_fuel_path = SP_read1, read_write_name = read_write_path)
-    run_script(input_name3, output, LGM_main_deck)
-    wrk_file_name = read_write_path + str(step_size)
-    check_wrk_file(wrk_file_name, output)
-
-
-    approximation_time = 3000
-    LGM_setup_deck = build_serpent_deck(step_size = approximation_time, reproc = False, list_inventory = list_inventory, read_time = False, write_time = approximation_time, include_fuel_path = SP_read0, read_write_name = read_write_path)
-    run_script(input_name0, output, LGM_setup_deck)
-    wrk_file_name = read_write_path + str(approximation_time)
-    check_wrk_file(wrk_file_name, output)
-    # now that it has run, calculate reprocessing constants based on linear growth model
-    reprocessing_constants = LGM_repr_calculator(LGM_func, initial_path = input_name0, final_path = input_name0, step_size = approximation_time, initial_time = 0, final_time = approximation_time)
-    print(reprocessing_constants)
-    # take generated constants and plug into full running equation 
-    # initialize again
-    identifier = '_LGM4'
-    SP_read_time = '_3000'
-    input_name4 = run_name + identifier
-    output = out_name + identifier
-    fuel_input_SP = fuel_input_path + str(SP_read_time)
-    SP_read1 = '''"{fuel_input_SP}"'''.format(**locals())
-    # build and run deck with reprocessing
-    step_size = 3000
-    LGM_main_deck = build_serpent_deck(step_size = step_size, reproc = reprocessing_constants, list_inventory = list_inventory, read_time = False, write_time = step_size, include_fuel_path = SP_read1, read_write_name = read_write_path)
-    run_script(input_name4, output, LGM_main_deck)
-    wrk_file_name = read_write_path + str(step_size)
-    check_wrk_file(wrk_file_name, output)
-
-
-
 
  
     total_view_list = list_inventory + element_flow_list
- 
+
+
+    serpent_print_times = [3000, 3000 + step_size]
+    print('Added another time_vals and print_times statement')
+
     for target in total_view_list:
         target_mass_list = SP_target_reader(sp_time_vals, target, hdf5_dir, hdf5_input_path, fuel_input_path, SP_target_extractor, element_dictionary)
-        LGM_mass_list1 = serp_targ_reader(serpent_time_vals, target, input_name1)
-        LGM_mass_list2 = serp_targ_reader(serpent_time_vals, target, input_name2)
-        LGM_mass_list3 = serp_targ_reader(serpent_time_vals, target, input_name3)
-        LGM_mass_list4 = serp_targ_reader(serpent_time_vals, target, input_name4)
+        LGM_mass_list = serp_targ_reader(target, input_name_LGM)
+        ctrl_mass_list = serp_targ_reader(target, input_name_ctrl)
+        print()
+        print(serpent_print_times)
+        print(ctrl_mass_list)
+        print(LGM_mass_list)
 
         plt.plot(sp_time_vals, target_mass_list, label = 'SaltProc Masses')
-        plt.plot(serpent_print_times, LGM_mass_list1, label = 'Linear Generation Method: 3')
-        plt.plot(serpent_print_times, LGM_mass_list2, label = 'Linear Generation Method: 30')
-        plt.plot(serpent_print_times, LGM_mass_list3, label = 'Linear Generation Method: 300')
-        plt.plot(serpent_print_times, LGM_mass_list4, label = 'Linear Generation Method: 3000')
+        plt.plot(serpent_print_times, LGM_mass_list, label = 'Linear Generation Method: 3')
+        plt.plot(serpent_print_times, ctrl_mass_list, label = 'No Removal')
         plt.xlabel('Time [d]')
         plt.ylabel('Mass [g]')
         plt.legend()
