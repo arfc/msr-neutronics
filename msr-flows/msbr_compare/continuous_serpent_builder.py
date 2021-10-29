@@ -663,6 +663,8 @@ if __name__ == '__main__':
     serpent_print_times2 = [3000, 4500, 6000]
 
     total_view_list = list_inventory + element_flow_list
+
+    # Total plotting
     for target in total_view_list:
         target_mass_list = SP_target_reader(sp_time_vals, target, hdf5_dir, hdf5_input_path, fuel_input_path, SP_target_extractor, element_dictionary)
         LGM_mass_list = serp_targ_reader(target, input_name_LGM)
@@ -672,9 +674,9 @@ if __name__ == '__main__':
         ## Need to add initial composition to LGM_2 mass list
         #LGM_2_mass_list = np.insert(LGM_2_mass_list, 0, LGM_mass_list[0])
 
-        plt.plot(sp_time_vals, target_mass_list, label = 'SaltProc Masses')
-        plt.plot(serpent_print_times, CTD_mass_list, label = 'Cycle Time Decay Masses')
-        plt.plot(serpent_print_times, LGM_mass_list, label = 'Linear Generation Method: 3000 -> 6000')
+        plt.plot(sp_time_vals, target_mass_list, label = 'SaltProc')
+        plt.plot(serpent_print_times, CTD_mass_list, label = 'Cycle Time Decay')
+        plt.plot(serpent_print_times, LGM_mass_list, label = 'Linear Generation')
         plt.plot(serpent_print_times, ctrl_mass_list, label = 'No Removal')
         #plt.plot(serpent_print_times2, LGM_2_mass_list, label = 'Linear Generation Method: 3000 -> 4500 -> 6000')
         plt.xlabel('Time [d]')
@@ -684,6 +686,34 @@ if __name__ == '__main__':
         plt.savefig(f'./{test_name}/{target}_mass.png')
         plt.close()
 
+    # Difference plotting 
+    for target in total_view_list:
+        target_mass_list = SP_target_reader(sp_time_vals, target, hdf5_dir, hdf5_input_path, fuel_input_path, SP_target_extractor, element_dictionary)
+        LGM_mass_list = serp_targ_reader(target, input_name_LGM)
+        CTD_mass_list = serp_targ_reader(target, input_name_CTD)
+        ctrl_mass_list = serp_targ_reader(target, input_name_ctrl)
+        #LGM_2_mass_list = serp_targ_reader(target, input_name_LGM_2full)
+        ## Need to add initial composition to LGM_2 mass list
+        #LGM_2_mass_list = np.insert(LGM_2_mass_list, 0, LGM_mass_list[0])
+
+        # % diff calc
+        true_mass_list = SP_target_reader(serpent_print_times, target, hdf5_dir, hdf5_input_path, fuel_input_path, SP_target_extractor, element_dictionary)
+        CTD_diff_list = abs(true_mass_list - CTD_mass_list)
+        LGM_diff_list = abs(true_mass_list - LGM_mass_list)
+        ctrl_diff_list = abs(true_mass_list - ctrl_mass_list)
+
+        #plt.plot(sp_time_vals, target_mass_list, label = 'SaltProc')
+        plt.plot(serpent_print_times, CTD_diff_list, label = 'Cycle Time Decay')
+        plt.plot(serpent_print_times, LGM_diff_list, label = 'Linear Generation')
+        #plt.plot(serpent_print_times, ctrl_diff_list, label = 'No Removal')
+        #plt.plot(serpent_print_times2, LGM_2_mass_list, label = 'Linear Generation Method: 3000 -> 4500 -> 6000')
+        plt.xlabel('Time [d]')
+        plt.ylabel('Difference [g]')
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(f'./{test_name}/{target}_diff.png')
+        plt.close()
+    
 
     # Waste checker
 #    waste = 'waste_entrainment_separator'
