@@ -1,6 +1,4 @@
-
-
-
+# A collection of miscellaneous functions
 
 
 def list_to_print(options):
@@ -36,4 +34,16 @@ def convert_list_to_string(input_list):
 {each}
 '''.format(**locals())
     return output
+
+
+def set_directory(target_dir):
+    try:
+        os.system('rm ' + str(target_dir) + ' -r')
+        print('Removed directory ' + str(target_dir))
+    except BaseException:
+        pass
+    os.system('mkdir ' + str(target_dir))
+    print('Created ' + str(target_dir))
+    return
+
 
