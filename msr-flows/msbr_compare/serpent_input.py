@@ -1,6 +1,10 @@
 import misc_funcs
 import user_input
 from jinja2 import Environment, FileSystemLoader
+import os
+from os import path
+from time import sleep
+
 
 class create_deck:
     '''
@@ -9,7 +13,7 @@ class create_deck:
     '''
     
 
-    def __init__(self, reprocessing, read_file, read_time, write_file, base_material_file, template_name, template_path, time_step, list_inventory, identifier, deck_name):
+    def __init__(self, reprocessing, read_file, read_time, write_file, base_material_file, template_name, template_path, step_days, list_inventory, identifier, deck_name):
         '''
         Initialize the `create_deck` class. Files need proper path.
 
@@ -29,6 +33,8 @@ class create_deck:
             File name of template used in generation of input deck
         template_path : str
             Path of template used in generation of input deck
+        step_days : float
+            Time step in days to be used
         list_inventory : list
             List of strings, isotopes desired for results
         identifier : str
@@ -43,7 +49,7 @@ class create_deck:
         self.read_time = read_time
         self.template_name = template_name
         self.template_path = template_path
-        self.step = time_step
+        self.step = step_days
         self.inv_list = list_inventory
         self.name = deck_name
         self.id = identifier
@@ -218,6 +224,83 @@ rc feedsalt fuel feed_pump 2
         return flow_setup
 
 
+class run_deck:
+    '''
+    This class is used to run the constructed deck in Serpent2
+    '''
+    
+    def __init__(self, input_name, deck, write_file, version = 'sss2'):
+        '''
+        Initilizes class
+
+        Parameters
+        ----------
+        input_name : str
+            Desired name/path of the input deck
+        deck : str
+            String containing the input deck
+        version : str (optional)
+            Version to run with (defauly is using sss2)
+        write_file : str
+            Name/path of file writing binary output to
+
+        '''
+        self.version = version
+        self.deck = deck
+        self.name = input_name
+        self.out = input_name + '.output'
+        self.write = write_file
+        return
+
+
+    def run_script(self):
+        '''
+        Writes the input_script string to a file with the INPUT_NAME
+        which is run and outputs to the OUTPUT_NAME.
+
+        '''
+        
+        with open(self.name, 'w+') as input_file:
+            input_file.write(self.deck)
+        os.system(
+            str(self.version) +
+            ' -omp 64 ' +
+            str(self.name) +
+            ' > ' +
+            str(self.out))
+        if self.write:
+            self.check_wrk_file()
+        else:
+            print('Warning: no binary write file used')
+        return
+
+
+    def check_wrk_file(self):
+        '''
+        Allows the script to continue once the .wrk file is generated.
+        Checks the if the length of the output file is being updated.
+
+        Raises
+        ------
+        Error, view `OUTPUT_NAME`
+            Occurs if the output does not update within 20 seconds.
+
+        '''
+        wrk_name = self.write
+        out_len = 0
+        while not path.exists(wrk_name):
+            cur_out_len = 0
+            sleep(5)
+            for line in open(self.out).readlines():
+                cur_out_len += 1
+            if cur_out_len != out_len:
+                out_len = cur_out_len
+            else:
+                raise Exception(f'Error, view ' + str(self.out) + ' or previous.')
+        return
+
+
+
 
 
 if __name__ == '__main__':
@@ -225,17 +308,23 @@ if __name__ == '__main__':
     reprocessing = False
     read_file = False
     read_time = False
-    write_file = False
+    write_file = 'zz_test_write'
     base_material_file = './ss-data-test/ss-fuel_1380'
     template_name = 'saltproc.msbr.serpent'
     template_path = './templates'
     time_step = 3
     list_inventory = ['Xe135']
     identifier = 'test'
-    deck_name = 'generic'
+    deck_name = 'zzzzz'
     deck = create_deck(reprocessing, read_file, read_time, write_file, base_material_file, template_name, template_path, time_step, list_inventory, identifier, deck_name)
     deck_str = deck.build_serpent_deck()
-    
+    print(f'Writing deck to ./{deck_name}')
     with open(deck_name, 'w+') as f:
         f.write(deck_str)
-    print('Complete')
+    print('Complete, created_deck tested')
+
+    print('\n' * 3)
+    print('Running deck')
+    run = run_deck(deck_name, deck_str, write_file)
+    run.run_script()
+    print('Completed')
