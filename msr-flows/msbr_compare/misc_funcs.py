@@ -1,4 +1,4 @@
-# A collection of miscellaneous functions
+import os
 
 
 def list_to_print(options):

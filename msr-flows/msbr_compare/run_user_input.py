@@ -1,8 +1,7 @@
 from user_input import *
 import serpent_input
 import serpent_calculations
-
-# This script will take the data/settings from user input and the functions from other scripts to run them
+import misc_funcs
 
 
 class full_run_serp:
@@ -156,18 +155,9 @@ class full_run_serp:
 
 if __name__ == '__main__':
 
+    output_path = f'./{path_to_dump_files}/'
+    misc_funcs.set_directory(output_path)
 
-    number_serp_steps = 1
-    base_material_path = './ss-data-test/ss-fuel_'
-    template_path = './templates'
-    template_name = 'saltproc.msbr.serpent'
-    start_time = 3000
-    end_time = 6000
-    
-    list_inventory = ['Xe-135', 'U-235', 'U-233', 'Th-232', 'I-135', 'Kr-83']
-    element_flow_list = ['krypton', 'xenon', 'selenium', 'niobium', 'molybdenum', 'technetium', 'ruthenium', 'rhodium', 'palladium', 'silver', 'antimony', 'tellurium', 'cadmium', 'indium', 'tin', 'bromine', 'iodine', 'protactinium', 'yttrium', 'lanthanum', 'cerium', 'praseodymium', 'neodymium', 'promethium', 'samarium', 'gadolinium', 'europium', 'rubidium', 'strontium', 'cesium', 'barium']
-
-    output_path = './ss-comparison/'
 
     if separate_core_piping:
         print('Not yet available')
