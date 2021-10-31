@@ -1,7 +1,7 @@
 from scipy.optimize import root
 import serpentTools as st
+import numpy as np
 
-# File for calculation of different reprocessing constants
 
 class linear_generation:
     '''
@@ -171,7 +171,7 @@ class cycle_time_decay:
         return
 
 
-    def repr_cnst_cals(self):
+    def repr_cnst_calc(self):
         '''
         Calculate reprocessing calculation based on MSBR cycle time.
 

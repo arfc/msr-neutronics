@@ -155,41 +155,41 @@ set rfw 1 "{write}"
         if reprocessing_dictionary:
             mflow_defs += f'''
 mflow entrainment_pump  
-Kr      {reprocessing_dictionary[krypton]}
-Xe      {reprocessing_dictionary[xenon]}
-       7 
+Kr      {reprocessing_dictionary['krypton']}
+Xe      {reprocessing_dictionary['xenon']}
+
 mflow nickel_pump       
-Se      {reprocessing_dictionary[selenium]}
-Nb      {reprocessing_dictionary[niobium]}
-Mo      {reprocessing_dictionary[molybdenum]}
-Tc      {reprocessing_dictionary[technetium]}
-Ru      {reprocessing_dictionary[ruthenium]}
-Rh      {reprocessing_dictionary[rhodium]}
-Pd      {reprocessing_dictionary[palladium]}
-Ag      {reprocessing_dictionary[silver]}
-Sb      {reprocessing_dictionary[antimony]}
-Te      {reprocessing_dictionary[tellurium]}
-Cd      {reprocessing_dictionary[cadmium]}
-In      {reprocessing_dictionary[indium]}
-Sn      {reprocessing_dictionary[tin]}
-Br      {reprocessing_dictionary[bromine]}
-I       {reprocessing_dictionary[iodine]}
+Se      {reprocessing_dictionary['selenium']}
+Nb      {reprocessing_dictionary['niobium']}
+Mo      {reprocessing_dictionary['molybdenum']}
+Tc      {reprocessing_dictionary['technetium']}
+Ru      {reprocessing_dictionary['ruthenium']}
+Rh      {reprocessing_dictionary['rhodium']}
+Pd      {reprocessing_dictionary['palladium']}
+Ag      {reprocessing_dictionary['silver']}
+Sb      {reprocessing_dictionary['antimony']}
+Te      {reprocessing_dictionary['tellurium']}
+Cd      {reprocessing_dictionary['cadmium']}
+In      {reprocessing_dictionary['indium']}
+Sn      {reprocessing_dictionary['tin']}
+Br      {reprocessing_dictionary['bromine']}
+I       {reprocessing_dictionary['iodine']}
         
 mflow waste_metal_pump  
-Pa      {reprocessing_dictionary[protactinium]}
-Y       {reprocessing_dictionary[yttrium]}
-La      {reprocessing_dictionary[lanthanum]}
-Ce      {reprocessing_dictionary[cerium]}
-Pr      {reprocessing_dictionary[praseodymium]}
-Nd      {reprocessing_dictionary[neodymium]}
-Pm      {reprocessing_dictionary[promethium]}
-Sm      {reprocessing_dictionary[samarium]}
-Gd      {reprocessing_dictionary[gadolinium]}
-Eu      {reprocessing_dictionary[europium]}
-Rb      {reprocessing_dictionary[rubidium]}
-Sr      {reprocessing_dictionary[strontium]}
-Cs      {reprocessing_dictionary[cesium]}
-Ba      {reprocessing_dictionary[barium]}
+Pa      {reprocessing_dictionary['protactinium']}
+Y       {reprocessing_dictionary['yttrium']}
+La      {reprocessing_dictionary['lanthanum']}
+Ce      {reprocessing_dictionary['cerium']}
+Pr      {reprocessing_dictionary['praseodymium']}
+Nd      {reprocessing_dictionary['neodymium']}
+Pm      {reprocessing_dictionary['promethium']}
+Sm      {reprocessing_dictionary['samarium']}
+Gd      {reprocessing_dictionary['gadolinium']}
+Eu      {reprocessing_dictionary['europium']}
+Rb      {reprocessing_dictionary['rubidium']}
+Sr      {reprocessing_dictionary['strontium']}
+Cs      {reprocessing_dictionary['cesium']}
+Ba      {reprocessing_dictionary['barium']}
 
 '''
 
