@@ -6,7 +6,7 @@ class serpent_data:
     Analyzes data from _res.m and _dep.m files.
     '''
 
-    def __init__(self, close_bool, file_name = False):
+    def __init__(self, close_bool, file_name = False, material_name = 'fuel'):
         '''
         Initialize
 
@@ -16,15 +16,8 @@ class serpent_data:
             Set to True to close a plot. Allows for multiple datasets on a single plot
         file_name : str (optional)
             Name of the file which has results and depletion named after it.
-        actual_time_list : list
-            List of floats corresponding to the actual time of material in core.
-        serpent_time_list : list
-            List of floats corresponding to the depletion time in serpent.
-        total_view_list : list
-            List of strings of targets to manage.
-        serpent_iterations : int
-            Number of iterations Serpent has gone through.
-
+        material_name : str (optional)
+            Name of evaluated material
 
         Returns
         -------
@@ -37,11 +30,13 @@ class serpent_data:
         if file_name:
             self.deplete = file_name + '_dep.m'
             self.results = file_name + '_res.m'
+        self.time = cur_time
+        self.mat = material_name
 
         return
 
 
-    def serp_targ_reader(self, target, material_name = 'fuel'):
+    def serp_targ_reader(self, target):
         '''
         Collect the data of a particular target in a particular material from serpent
     
@@ -49,8 +44,6 @@ class serpent_data:
         ----------
         target : str
             Name of target to seek in depletion output
-        material_name : str (optional)
-            Name of material to extract data about target from
        
         Returns
         -------
@@ -59,13 +52,17 @@ class serpent_data:
         mass_list : list
             List of data corresponding to times
 
+        Exception
+        ---------
+        Material name does not exist.
+
         '''
         dep_file = self.deplete
         dep = st.read(dep_file, reader='dep')
         try:
-            fuel_mat = dep.materials[material_name]
+            fuel_mat = dep.materials[self.mat]
         except:
-            raise Exception('Material {material_name} does not exist.')
+            raise Exception(f'Material {material_name} does not exist.')
         times = dep.metadata['days']
         vol = fuel_mat.data['volume'][0]
         try:
@@ -76,6 +73,40 @@ class serpent_data:
         mass_list = mdens * vol
 
         return times, mass_list
+
+
+    def extract_tot_atoms(self, day_value = 0):
+        '''
+        Extract the total atoms from the depletion data from the given time index.
+
+        Parameters
+        ----------
+        day_value : float
+            Current Serpent depletion time
+
+        Returns
+        -------
+        total_atoms : float
+            Total number of atoms at given time
+
+        Exception
+        ---------
+        Material name does not exist.
+        '''
+        dep_file = self.deplete
+        dep = st.read(dep_file, reader='dep')
+        try:
+            fuel_mat = dep.materials[self.mat]
+        except:
+            raise Exception(f'Material name {self.mat} does not exist.')
+        times = dep.metadata['days']
+        day_index = np.where(times == day_value)[0][0]
+        vol = fuel_mat.data['volume'][day_index]
+        adens = fuel_mat.getValues('days', 'adens', [day_value], 'total')[0][0]
+
+        total_atoms = adens * vol
+
+        return total_atoms
 
 
 class saltproc_data:
