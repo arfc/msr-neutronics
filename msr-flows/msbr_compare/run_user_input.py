@@ -2,6 +2,8 @@ from user_input import *
 import serpent_input
 import serpent_calculations
 import misc_funcs
+import serpent_output
+import matplotlib.pyplot as plt
 
 
 class full_run_serp:
@@ -127,21 +129,25 @@ class full_run_serp:
         return
 
     
-    def cycle_time_decay(self):
+    def cycle_time_decay(self, identifier = 'CTD'):
         '''
         Run cycle time decay approximation
+
+        Parameters
+        ----------
+        identifier : str (optional)
+            Used to generate the file name
 
         '''
         cycle_time_decay_build = serpent_calculations.cycle_time_decay(self.element_flow_list)
         reprocessing_dict = cycle_time_decay_build.repr_cnst_calc()
-        identifier = 'CTD'
         read_file = False
         read_time = 0
         for each_step in range(self.N):
             write_file = self.output_path + identifier + str(each_step) + '.wrk'
             deck_name = self.output_path + identifier + str(each_step)
             current_actual_time = self.step_size * each_step + start_time
-            current_serpent_time = self.step_size * each_step
+            current_serpent_time = current_actual_time - start_time
             cur_deck_maker = serpent_input.create_deck(reprocessing_dict, read_file, read_time, write_file, self.base_mat_file, self.template_name, self.template_path, self.step_size, self.inv_list, identifier, deck_name)
             deck = cur_deck_maker.build_serpent_deck()
             run = serpent_input.run_deck(deck_name, deck, write_file)
@@ -158,6 +164,8 @@ if __name__ == '__main__':
     output_path = f'./{path_to_dump_files}/'
     misc_funcs.set_directory(output_path)
 
+    if multi_plot:
+        close_boolean = False
 
     if separate_core_piping:
         print('Not yet available')
@@ -170,6 +178,39 @@ if __name__ == '__main__':
 
     if cycle_time_decay:
         print('Running CTD')
+        CTD_identifier = 'CTD'
         builder = full_run_serp(number_serp_steps, base_material_path, template_path, template_name, start_time, end_time, list_inventory, element_flow_list, output_path)
-        builder.cycle_time_decay()
-        print('Done with CTD')
+        builder.cycle_time_decay(identifier = identifier)
+        print('Ran CTD')
+
+        if plotting:
+            print('CTD plotting')
+            for target in total_view_list:
+                for each_step in range(number_serp_steps):
+                    CTD_plot_builder = serpent_output.serpent_data(close_boolean, file_name = output_path + identifier + str(each_step))
+                    plot_time, plot_mass = CTD_plot_builder.serp_targ_reader(target, material_name = 'fuel')
+
+                    actual_time = plot_time - start_time
+                    plt.plot(actual_time, plot_mass)
+                plt.xlabel('Time [d]')
+                plt.ylabel('Mass [g]')
+                plt.tight_layout()
+                plt.savefig(f'{output_path}CTD_{target}_mass.png')
+                plt.close()
+    
+    if plotting:
+        print('Overall plotting')
+        for target in total_view_list:
+            for each_step in range(number_serp_steps):
+                if cycle_time_decay:
+                    CTD_plot_builder = serpent_output.serpent_data(close_boolean, file_name = output_path + CTD_identifier + str(each_step))
+                    CTD_plot_time, CTD_plot_mass = CTD_plot_builder.serp_targ_reader(target, material_name = 'fuel')
+                    CTD_actual_time = CTD_plot_time - start_time
+                    plt.plot(CTD_actual_time, CTD_plot_mass, label = CTD_identifier)
+
+            plt.xlabel('Time [d]')
+            plt.ylabel('Mass [g]')
+            plt.legend()
+            plt.tight_layout()
+            plt.savefig(f'{output_path}cumulative_{target}_mass.png')
+            plt.close()
