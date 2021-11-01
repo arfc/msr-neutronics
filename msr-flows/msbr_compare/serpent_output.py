@@ -30,7 +30,6 @@ class serpent_data:
         if file_name:
             self.deplete = file_name + '_dep.m'
             self.results = file_name + '_res.m'
-        self.time = cur_time
         self.mat = material_name
 
         return
@@ -165,8 +164,8 @@ class saltproc_data:
         with open(material_path) as f:
             lines = f.readlines()
             for each in lines:
-                for self.target in target_list:
-                    res = each.find(target)
+                for desired in target_list:
+                    res = each.find(desired)
                     if res != -1:
                         for index in range(len(each)):
                             index += 1
@@ -198,7 +197,7 @@ class saltproc_data:
         '''
         target_mass = []
         for day in self.times:
-            material_path = self.mat_path + '_' + str(day)
+            material_path = self.mat_path + str(day)
             target_mass.append(self.SP_target_extractor(material_path))
         return target_mass
 

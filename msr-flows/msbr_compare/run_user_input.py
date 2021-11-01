@@ -4,6 +4,7 @@ import serpent_calculations
 import misc_funcs
 import serpent_output
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 class full_run_serp:
@@ -55,6 +56,27 @@ class full_run_serp:
 
         self.step_size = (end_time - start_time) / number_serp_steps
         self.base_mat_file = f'{self.mat_path}{self.start_day}'
+
+        return
+
+    def control_run(self, identifier = 'CTRL'):
+        '''
+        Run Serpent with no reproccessing (except for feedsalt)
+        '''
+        reprocessing_dict = False
+        read_file = False
+        read_time = 0
+        for each_step in range(self.N):
+            write_file = self.output_path + identifier + str(each_step) + '.wrk'
+            deck_name = self.output_path + identifier + str(each_step)
+            current_actual_time = self.step_size * each_step + start_time
+            current_serpent_time = current_actual_time - start_time
+            cur_deck_maker = serpent_input.create_deck(reprocessing_dict, read_file, read_time, write_file, self.base_mat_file, self.template_name, self.template_path, self.step_size, self.inv_list, identifier, deck_name)
+            deck = cur_deck_maker.build_serpent_deck()
+            run = serpent_input.run_deck(deck_name, deck, write_file)
+            run.run_script()
+            read_file = write_file
+            read_time = current_serpent_time
 
         return
 
@@ -164,9 +186,22 @@ if __name__ == '__main__':
     output_path = f'./{path_to_dump_files}/'
     misc_funcs.set_directory(output_path)
 
+    element_dictionary = dict()
+    for index in range(len(element_flow_list)):
+        element_dictionary[element_flow_list[index]] = [associated_symbol_list[index], associated_atomic_list[index]]
+
+
     if multi_plot:
         close_boolean = False
+    
+    if control:
+        print('Running Control')
+        CTRL_identifier = 'CTRL'
+        builder = full_run_serp(number_serp_steps, base_material_path, template_path, template_name, start_time, end_time, list_inventory, element_flow_list, output_path)
+        builder.control_run(identifier = CTRL_identifier)
+        print('Ran Control')
 
+    
     if separate_core_piping:
         print('Not yet available')
     
@@ -180,33 +215,31 @@ if __name__ == '__main__':
         print('Running CTD')
         CTD_identifier = 'CTD'
         builder = full_run_serp(number_serp_steps, base_material_path, template_path, template_name, start_time, end_time, list_inventory, element_flow_list, output_path)
-        builder.cycle_time_decay(identifier = identifier)
+        builder.cycle_time_decay(identifier = CTD_identifier)
         print('Ran CTD')
 
-        if plotting:
-            print('CTD plotting')
-            for target in total_view_list:
-                for each_step in range(number_serp_steps):
-                    CTD_plot_builder = serpent_output.serpent_data(close_boolean, file_name = output_path + identifier + str(each_step))
-                    plot_time, plot_mass = CTD_plot_builder.serp_targ_reader(target, material_name = 'fuel')
-
-                    actual_time = plot_time - start_time
-                    plt.plot(actual_time, plot_mass)
-                plt.xlabel('Time [d]')
-                plt.ylabel('Mass [g]')
-                plt.tight_layout()
-                plt.savefig(f'{output_path}CTD_{target}_mass.png')
-                plt.close()
-    
     if plotting:
         print('Overall plotting')
+        SP_eval_times = np.arange(SP_start, SP_end + SP_step_size, SP_step_size)
         for target in total_view_list:
+            if saltproc:
+                SP_identifier = 'SP'
+                SP_plot_builder = serpent_output.saltproc_data(base_material_path, element_dictionary, target, SP_eval_times)
+                SP_mass = SP_plot_builder.SP_target_reader()
+                plt.plot(SP_eval_times, SP_mass, label = SP_identifier)
             for each_step in range(number_serp_steps):
                 if cycle_time_decay:
-                    CTD_plot_builder = serpent_output.serpent_data(close_boolean, file_name = output_path + CTD_identifier + str(each_step))
-                    CTD_plot_time, CTD_plot_mass = CTD_plot_builder.serp_targ_reader(target, material_name = 'fuel')
-                    CTD_actual_time = CTD_plot_time - start_time
-                    plt.plot(CTD_actual_time, CTD_plot_mass, label = CTD_identifier)
+                    CTD_plot_builder = serpent_output.serpent_data(close_boolean, file_name = output_path + CTD_identifier + str(each_step), material_name = 'fuel')
+                    CTD_plot_time, CTD_plot_mass = CTD_plot_builder.serp_targ_reader(target)
+                    CTD_actual_time = CTD_plot_time + start_time
+                    plt.plot(CTD_actual_time, CTD_plot_mass, label = CTD_identifier, markersize = 5)
+                if control:
+                    CTRL_plot_builder = serpent_output.serpent_data(close_boolean, file_name = output_path + CTRL_identifier + str(each_step), material_name = 'fuel')
+                    CTRL_plot_time, CTRL_plot_mass = CTD_plot_builder.serp_targ_reader(target)
+                    CTRL_actual_time = CTRL_plot_time + start_time
+                    plt.plot(CTRL_actual_time, CTRL_plot_mass, label = CTRL_identifier, markersize = 5)
+                
+                
 
             plt.xlabel('Time [d]')
             plt.ylabel('Mass [g]')
