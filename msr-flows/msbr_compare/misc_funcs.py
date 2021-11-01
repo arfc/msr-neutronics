@@ -1,4 +1,6 @@
 import os
+from saltproc_read import evaluate
+import time
 
 
 def list_to_print(options):
@@ -46,4 +48,25 @@ def set_directory(target_dir):
     print('Created ' + str(target_dir))
     return
 
+
+def SP_data_initializer(time_list, hdf5_path, fuel_path):
+    '''
+    This function is used to initialize the working directory with each fuel composition at each time step
+    
+    Parameters
+    ----------
+    time_list : list
+        List of times to generate SaltProc material files.
+    hdf5_path : str
+        Path to the location of hdf5 file with data.
+    fuel_path : str
+        Path to location of fuel files to be created.
+
+    '''
+    delay = 0.01
+    for day in time_list:
+        fuel = fuel_path + '_' + str(day)
+        evaluate(day, hdf5_path, fuel)
+        time.sleep(delay)
+    return
 
