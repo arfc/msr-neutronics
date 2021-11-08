@@ -7,13 +7,23 @@ import matplotlib.pyplot as plt
 import numpy as np
 import time
 
+
 class full_run_serp:
     '''
     This class combines other modules and allows for Serpent to be fully run with different flows.
     '''
 
-    
-    def __init__(self, number_serp_steps, base_material_path, template_path, template_name, start_time, end_time, list_inventory, element_flow_list, output_path):
+    def __init__(
+            self,
+            number_serp_steps,
+            base_material_path,
+            template_path,
+            template_name,
+            start_time,
+            end_time,
+            list_inventory,
+            element_flow_list,
+            output_path):
         '''
         Initialize.
 
@@ -59,7 +69,7 @@ class full_run_serp:
 
         return
 
-    def control_run(self, identifier = 'CTRL'):
+    def control_run(self, identifier='CTRL'):
         '''
         Run Serpent with no reproccessing (except for feedsalt)
         '''
@@ -67,11 +77,23 @@ class full_run_serp:
         read_file = False
         read_time = 0
         for each_step in range(self.N):
-            write_file = self.output_path + identifier + str(each_step) + '.wrk'
+            write_file = self.output_path + \
+                identifier + str(each_step) + '.wrk'
             deck_name = self.output_path + identifier + str(each_step)
             current_actual_time = self.step_size * each_step + start_time
             current_serpent_time = current_actual_time - start_time
-            cur_deck_maker = serpent_input.create_deck(reprocessing_dict, read_file, read_time, write_file, self.base_mat_file, self.template_name, self.template_path, self.step_size, self.inv_list, identifier, deck_name)
+            cur_deck_maker = serpent_input.create_deck(
+                reprocessing_dict,
+                read_file,
+                read_time,
+                write_file,
+                self.base_mat_file,
+                self.template_name,
+                self.template_path,
+                self.step_size,
+                self.inv_list,
+                identifier,
+                deck_name)
             deck = cur_deck_maker.build_serpent_deck()
             run = serpent_input.run_deck(deck_name, deck, write_file)
             run.run_script()
@@ -80,15 +102,15 @@ class full_run_serp:
 
         return
 
-    
-    def linear_generation_reprocessing_constants(self, identifier = 'LGA_repr', LGA_step_size = 3):
+    def linear_generation_reprocessing_constants(
+            self, identifier='LGA_repr', LGA_step_size=3):
         '''
         Run appropriate Serpent files to generate the desired reprocessing constants
 
         Parameters
         ----------
         identifier : str (optional)
-            Used to generate the file name. 
+            Used to generate the file name.
         LGA_step_size : int (optional)
             Size of step to use when approximating removal (3 recommended since only 1 extra SaltProc step would be needed).
 
@@ -108,8 +130,19 @@ class full_run_serp:
         read_file = False
         reprocessing_dict = False
         read_time = 0
-        
-        cur_deck_maker = serpent_input.create_deck(reprocessing_dict, read_file, read_time, write_file, self.base_mat_file, self.template_name, self.template_path, self.step_size, self.inv_list, identifier, deck_name)
+
+        cur_deck_maker = serpent_input.create_deck(
+            reprocessing_dict,
+            read_file,
+            read_time,
+            write_file,
+            self.base_mat_file,
+            self.template_name,
+            self.template_path,
+            self.step_size,
+            self.inv_list,
+            identifier,
+            deck_name)
         deck = cur_deck_maker.build_serpent_deck()
         run = serpent_input.run_deck(deck_name, deck, write_file)
         run.run_script()
@@ -123,25 +156,41 @@ class full_run_serp:
         current_serpent_time = current_actual_time - start_time
         final_time = current_serpent_time
         SP_read = self.mat_path + str(int(LGA_step_size))
-        
-        cur_deck_maker = serpent_input.create_deck(reprocessing_dict, read_file, read_time, write_file, SP_read, self.template_name, self.template_path, self.step_size, self.inv_list, identifier, deck_name)
+
+        cur_deck_maker = serpent_input.create_deck(
+            reprocessing_dict,
+            read_file,
+            read_time,
+            write_file,
+            SP_read,
+            self.template_name,
+            self.template_path,
+            self.step_size,
+            self.inv_list,
+            identifier,
+            deck_name)
         deck = cur_deck_maker.build_serpent_deck()
         run = serpent_input.run_deck(deck_name, deck, write_file)
         run.run_script()
 
-        # now that it has run, calculate reprocessing constants based on linear growth model
+        # now that it has run, calculate reprocessing constants based on linear
+        # growth model
         compare_time = 0
         final_path = initial_path
-        
 
-        repr_builder = serpent_calculations.linear_generation(initial_time, compare_time, final_time, initial_path, compare_path, final_path, LGA_step_size)
+        repr_builder = serpent_calculations.linear_generation(
+            initial_time,
+            compare_time,
+            final_time,
+            initial_path,
+            compare_path,
+            final_path,
+            LGA_step_size)
         reprocessing_constants = repr_builder.repr_cnst_calc()
 
         return reprocessing_constants
 
-
-
-    def linear_generation(self, identifier = 'LGA', LGA_step_size = 3):
+    def linear_generation(self, identifier='LGA', LGA_step_size=3):
         '''
         This function will run the linear generation approximation and generate results.
 
@@ -157,16 +206,28 @@ class full_run_serp:
         None
         '''
 
-                
-        reprocessing_dict = self.linear_generation_reprocessing_constants(identifier = identifier, LGA_step_size = LGA_step_size)
+        reprocessing_dict = self.linear_generation_reprocessing_constants(
+            identifier=identifier, LGA_step_size=LGA_step_size)
         read_file = False
         read_time = 0
         for each_step in range(self.N):
-            write_file = self.output_path + identifier + str(each_step) + '.wrk'
+            write_file = self.output_path + \
+                identifier + str(each_step) + '.wrk'
             deck_name = self.output_path + identifier + str(each_step)
             current_actual_time = self.step_size * each_step + start_time
             current_serpent_time = current_actual_time - start_time
-            cur_deck_maker = serpent_input.create_deck(reprocessing_dict, read_file, read_time, write_file, self.base_mat_file, self.template_name, self.template_path, self.step_size, self.inv_list, identifier, deck_name)
+            cur_deck_maker = serpent_input.create_deck(
+                reprocessing_dict,
+                read_file,
+                read_time,
+                write_file,
+                self.base_mat_file,
+                self.template_name,
+                self.template_path,
+                self.step_size,
+                self.inv_list,
+                identifier,
+                deck_name)
             deck = cur_deck_maker.build_serpent_deck()
             run = serpent_input.run_deck(deck_name, deck, write_file)
             run.run_script()
@@ -174,8 +235,7 @@ class full_run_serp:
             read_time = current_serpent_time
         return
 
-    
-    def cycle_time_decay(self, identifier = 'CTD'):
+    def cycle_time_decay(self, identifier='CTD'):
         '''
         Run cycle time decay approximation
 
@@ -185,16 +245,29 @@ class full_run_serp:
             Used to generate the file name.
 
         '''
-        cycle_time_decay_build = serpent_calculations.cycle_time_decay(self.element_flow_list)
+        cycle_time_decay_build = serpent_calculations.cycle_time_decay(
+            self.element_flow_list)
         reprocessing_dict = cycle_time_decay_build.repr_cnst_calc()
         read_file = False
         read_time = 0
         for each_step in range(self.N):
-            write_file = self.output_path + identifier + str(each_step) + '.wrk'
+            write_file = self.output_path + \
+                identifier + str(each_step) + '.wrk'
             deck_name = self.output_path + identifier + str(each_step)
             current_actual_time = self.step_size * each_step + start_time
             current_serpent_time = current_actual_time - start_time
-            cur_deck_maker = serpent_input.create_deck(reprocessing_dict, read_file, read_time, write_file, self.base_mat_file, self.template_name, self.template_path, self.step_size, self.inv_list, identifier, deck_name)
+            cur_deck_maker = serpent_input.create_deck(
+                reprocessing_dict,
+                read_file,
+                read_time,
+                write_file,
+                self.base_mat_file,
+                self.template_name,
+                self.template_path,
+                self.step_size,
+                self.inv_list,
+                identifier,
+                deck_name)
             deck = cur_deck_maker.build_serpent_deck()
             run = serpent_input.run_deck(deck_name, deck, write_file)
             run.run_script()
@@ -204,7 +277,6 @@ class full_run_serp:
         return
 
 
-
 if __name__ == '__main__':
 
     output_path = f'./{path_to_dump_files}/'
@@ -212,7 +284,8 @@ if __name__ == '__main__':
 
     element_dictionary = dict()
     for index in range(len(element_flow_list)):
-        element_dictionary[element_flow_list[index]] = [associated_symbol_list[index], associated_atomic_list[index]]
+        element_dictionary[element_flow_list[index]] = [
+            associated_symbol_list[index], associated_atomic_list[index]]
 
     if multi_plot:
         close_boolean = False
@@ -221,15 +294,23 @@ if __name__ == '__main__':
         start_timer_count = time.time()
         print('Running Control')
         CTRL_identifier = 'CTRL'
-        builder = full_run_serp(number_serp_steps, base_material_path, template_path, template_name, start_time, end_time, list_inventory, element_flow_list, output_path)
-        builder.control_run(identifier = CTRL_identifier)
+        builder = full_run_serp(
+            number_serp_steps,
+            base_material_path,
+            template_path,
+            template_name,
+            start_time,
+            end_time,
+            list_inventory,
+            element_flow_list,
+            output_path)
+        builder.control_run(identifier=CTRL_identifier)
         end_timer_count = time.time()
         print(f'Ran Control, took {end_timer_count - start_timer_count}s')
 
-    
     if separate_core_piping:
         print('Not yet available')
-    
+
     if type_2_removal:
         print('Not yet available')
 
@@ -237,8 +318,19 @@ if __name__ == '__main__':
         start_timer_count = time.time()
         print('Running LGA')
         LGA_identifier = 'LGA'
-        builder = full_run_serp(number_serp_steps, base_material_path, template_path, template_name, start_time, end_time, list_inventory, element_flow_list, output_path)
-        builder.linear_generation(identifier = LGA_identifier, LGA_step_size = LGA_step_size)
+        builder = full_run_serp(
+            number_serp_steps,
+            base_material_path,
+            template_path,
+            template_name,
+            start_time,
+            end_time,
+            list_inventory,
+            element_flow_list,
+            output_path)
+        builder.linear_generation(
+            identifier=LGA_identifier,
+            LGA_step_size=LGA_step_size)
         end_timer_count = time.time()
         print(f'Ran LGA, took {end_timer_count - start_timer_count}s')
 
@@ -246,48 +338,87 @@ if __name__ == '__main__':
         start_timeer_count = time.time()
         print('Running CTD')
         CTD_identifier = 'CTD'
-        builder = full_run_serp(number_serp_steps, base_material_path, template_path, template_name, start_time, end_time, list_inventory, element_flow_list, output_path)
-        builder.cycle_time_decay(identifier = CTD_identifier)
+        builder = full_run_serp(
+            number_serp_steps,
+            base_material_path,
+            template_path,
+            template_name,
+            start_time,
+            end_time,
+            list_inventory,
+            element_flow_list,
+            output_path)
+        builder.cycle_time_decay(identifier=CTD_identifier)
         end_timer_count = time.time()
         print(f'Ran CTD, took {end_timer_count - start_timer_count}s')
 
-
     if plotting:
         print('Overall plotting')
-        SP_eval_times = np.arange(SP_start, SP_end + SP_step_size, SP_step_size)
+        SP_eval_times = np.arange(
+            SP_start, SP_end + SP_step_size, SP_step_size)
         for target in total_view_list:
 
             if saltproc:
                 SP_identifier = 'SP'
-                SP_plot_builder = serpent_output.saltproc_data(base_material_path, element_dictionary, target, SP_eval_times)
+                SP_plot_builder = serpent_output.saltproc_data(
+                    base_material_path, element_dictionary, target, SP_eval_times)
                 SP_mass = SP_plot_builder.SP_target_reader()
-                plt.plot(SP_eval_times, SP_mass, label = SP_identifier)
+                plt.plot(SP_eval_times, SP_mass, label=SP_identifier)
             for each_step in range(number_serp_steps):
 
                 if cycle_time_decay:
-                    CTD_plot_builder = serpent_output.serpent_data(close_boolean, file_name = output_path + CTD_identifier + str(each_step), material_name = 'fuel')
-                    CTD_plot_time, CTD_plot_mass = CTD_plot_builder.serp_targ_reader(target)
+                    CTD_plot_builder = serpent_output.serpent_data(
+                        close_boolean,
+                        file_name=output_path +
+                        CTD_identifier +
+                        str(each_step),
+                        material_name='fuel')
+                    CTD_plot_time, CTD_plot_mass = CTD_plot_builder.serp_targ_reader(
+                        target)
                     CTD_actual_time = CTD_plot_time + start_time
-                    plt.plot(CTD_actual_time, CTD_plot_mass, label = CTD_identifier, markersize = 5)
+                    plt.plot(
+                        CTD_actual_time,
+                        CTD_plot_mass,
+                        label=CTD_identifier,
+                        markersize=5)
 
                 if control:
-                    CTRL_plot_builder = serpent_output.serpent_data(close_boolean, file_name = output_path + CTRL_identifier + str(each_step), material_name = 'fuel')
-                    CTRL_plot_time, CTRL_plot_mass = CTRL_plot_builder.serp_targ_reader(target)
+                    CTRL_plot_builder = serpent_output.serpent_data(
+                        close_boolean,
+                        file_name=output_path +
+                        CTRL_identifier +
+                        str(each_step),
+                        material_name='fuel')
+                    CTRL_plot_time, CTRL_plot_mass = CTRL_plot_builder.serp_targ_reader(
+                        target)
                     CTRL_actual_time = CTRL_plot_time + start_time
-                    plt.plot(CTRL_actual_time, CTRL_plot_mass, label = CTRL_identifier, markersize = 5)
-                
+                    plt.plot(
+                        CTRL_actual_time,
+                        CTRL_plot_mass,
+                        label=CTRL_identifier,
+                        markersize=5)
+
                 if separate_core_piping:
                     print('Not yet available')
-                
+
                 if type_2_removal:
                     print('Not yet available')
 
                 if linear_generation:
-                    LGA_plot_builder = serpent_output.serpent_data(close_boolean, file_name = output_path + LGA_identifier + str(each_step), material_name = 'fuel')
-                    LGA_plot_time, LGA_plot_mass = LGA_plot_builder.serp_targ_reader(target)
+                    LGA_plot_builder = serpent_output.serpent_data(
+                        close_boolean,
+                        file_name=output_path +
+                        LGA_identifier +
+                        str(each_step),
+                        material_name='fuel')
+                    LGA_plot_time, LGA_plot_mass = LGA_plot_builder.serp_targ_reader(
+                        target)
                     LGA_actual_time = LGA_plot_time + start_time
-                    plt.plot(LGA_actual_time, LGA_plot_mass, label = LGA_identifier, markersize = 5)
-                
+                    plt.plot(
+                        LGA_actual_time,
+                        LGA_plot_mass,
+                        label=LGA_identifier,
+                        markersize=5)
 
             plt.xlabel('Time [d]')
             plt.ylabel('Mass [g]')

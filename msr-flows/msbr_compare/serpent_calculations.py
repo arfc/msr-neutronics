@@ -12,7 +12,15 @@ class linear_generation:
 
     '''
 
-    def __init__(self, initial_time, compare_time, final_time, initial_path, compare_path, final_path, step_days):
+    def __init__(
+            self,
+            initial_time,
+            compare_time,
+            final_time,
+            initial_path,
+            compare_path,
+            final_path,
+            step_days):
         '''
         Initialize
 
@@ -51,7 +59,6 @@ class linear_generation:
 
         return
 
-    
     def root_find_func(self, x, initial_atoms, compare_atoms, final_atoms):
         '''
         The function for linear generation that can be solved to determine the root.
@@ -59,7 +66,7 @@ class linear_generation:
         Parameters
         ----------
         x : float
-            Represents the reprocessing constant to be determined. 
+            Represents the reprocessing constant to be determined.
         initial_atoms : float
             Number of initial atoms.
         compare_atoms : float
@@ -71,17 +78,17 @@ class linear_generation:
         -------
         soln : float
             Should return 0 when x is properly set such that the linear generation approximation is applied.
-        
+
 
         '''
         sec_per_day = 24 * 3600
         step_size_seconds = self.step_size * sec_per_day
         C = (final_atoms - initial_atoms) / (step_size_seconds)
         c2 = initial_atoms - C / x
-        soln = -(final_atoms - compare_atoms) + (initial_atoms - C/x) * (1 - np.exp(-x * self.final_time)) + C * self.final_time
+        soln = -(final_atoms - compare_atoms) + (initial_atoms - C / x) * \
+            (1 - np.exp(-x * self.final_time)) + C * self.final_time
         return soln
 
-    
     def repr_cnst_calc(self):
         '''
         Calculate reprocessing constants to be used for each element.
@@ -114,12 +121,15 @@ class linear_generation:
             initial_fuel_mat = initial_dep.materials['fuel']
             final_fuel_mat = final_dep.materials['fuel']
             compare_fuel_mat = compare_dep.materials['fuel']
-        except:
+        except BaseException:
             raise Exception('Fuel name set to non-"fuel" value.')
 
-        initial_day_index = np.where(initial_dep.metadata['days'] == self.initial_time)[0][0]
-        final_day_index = np.where(final_dep.metadata['days'] == self.final_time)[0][0]
-        compare_day_index = np.where(compare_dep.metadata['days'] == self.compare_time)[0][0]
+        initial_day_index = np.where(
+            initial_dep.metadata['days'] == self.initial_time)[0][0]
+        final_day_index = np.where(
+            final_dep.metadata['days'] == self.final_time)[0][0]
+        compare_day_index = np.where(
+            compare_dep.metadata['days'] == self.compare_time)[0][0]
 
         initial_vol = initial_fuel_mat.data['volume'][initial_day_index]
         final_vol = final_fuel_mat.data['volume'][final_day_index]
@@ -127,21 +137,29 @@ class linear_generation:
 
         element_list = initial_fuel_mat.names
 
-
         t_f = self.final_time * sec_per_day
         t_i = self.initial_time * sec_per_day
 
         for element in element_list:
             if element == 'lost' or element == 'total':
                 pass
-            initial_atoms = initial_fuel_mat.getValues('days', 'adens', [self.initial_time], element)[0][0] * initial_vol
-            final_atoms = final_fuel_mat.getValues('days', 'adens', [self.final_time], element)[0][0] * final_vol
-            compare_atoms = compare_fuel_mat.getValues('days', 'adens', [self.compare_time], element)[0][0] * compare_vol
-
+            initial_atoms = initial_fuel_mat.getValues(
+                'days', 'adens', [self.initial_time], element)[0][0] * initial_vol
+            final_atoms = final_fuel_mat.getValues(
+                'days', 'adens', [self.final_time], element)[0][0] * final_vol
+            compare_atoms = compare_fuel_mat.getValues(
+                'days', 'adens', [self.compare_time], element)[0][0] * compare_vol
 
             C = (final_atoms - initial_atoms) / (step_size_seconds)
             initial_guess = 1E-5
-            root_info = root(self.root_find_func, initial_guess, args=(initial_atoms, compare_atoms, final_atoms), tol = 1E-7)
+            root_info = root(
+                self.root_find_func,
+                initial_guess,
+                args=(
+                    initial_atoms,
+                    compare_atoms,
+                    final_atoms),
+                tol=1E-7)
             reprocessing_constant = root_info.x[0]
             if reprocessing_constant < 0:
                 reprocessing_constant = 0
@@ -174,7 +192,6 @@ class cycle_time_decay:
 
         return
 
-
     def repr_cnst_calc(self):
         '''
         Calculate reprocessing calculation based on MSBR cycle time.
@@ -201,12 +218,6 @@ class cycle_time_decay:
                 reprocessing_dictionary[element] = decay_const
 
         return reprocessing_dictionary
-
-
-
-
-
-
 
 
 if __name__ == '__main__':

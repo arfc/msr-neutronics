@@ -25,7 +25,6 @@ def list_to_print(options):
     return selection
 
 
-
 def convert_list_to_string(input_list):
     '''
 
@@ -52,7 +51,7 @@ def set_directory(target_dir):
 def SP_data_initializer(time_list, hdf5_path, fuel_path):
     '''
     This function is used to initialize the working directory with each fuel composition at each time step
-    
+
     Parameters
     ----------
     time_list : list
@@ -69,4 +68,3 @@ def SP_data_initializer(time_list, hdf5_path, fuel_path):
         evaluate(day, hdf5_path, fuel)
         time.sleep(delay)
     return
-

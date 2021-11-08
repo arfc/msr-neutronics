@@ -11,9 +11,20 @@ class create_deck:
     This class is used to build the deck which will be fed into Serpent2
 
     '''
-    
 
-    def __init__(self, reprocessing, read_file, read_time, write_file, base_material_file, template_name, template_path, step_days, list_inventory, identifier, deck_name):
+    def __init__(
+            self,
+            reprocessing,
+            read_file,
+            read_time,
+            write_file,
+            base_material_file,
+            template_name,
+            template_path,
+            step_days,
+            list_inventory,
+            identifier,
+            deck_name):
         '''
         Initialize the `create_deck` class. Files need proper path.
 
@@ -56,7 +67,6 @@ class create_deck:
 
         return
 
-    
     def build_serpent_deck(self):
         '''
         Generate a string containing the Serpent input deck
@@ -70,18 +80,18 @@ class create_deck:
         -------
         deck : str
             String formatted for serpent usage
-        
+
         '''
         env = Environment(loader=FileSystemLoader(self.template_path))
         template = env.get_template(self.template_name)
 
         inventory = misc_funcs.convert_list_to_string(self.inv_list)
-        read_write = self.deck_read_write_generator(self.step, self.read, self.read_time, self.write)
+        read_write = self.deck_read_write_generator(
+            self.step, self.read, self.read_time, self.write)
         self.apply_reproc(False)
         mflows_rep = self.apply_reproc(self.repr)
         rc_flows = self.flow_regime(self.repr)
         time_vals = self.step
-
 
         deck = template.render(
             fuel_path=self.base,
@@ -91,11 +101,15 @@ class create_deck:
             rc_flows=rc_flows,
             time_vals=time_vals)
 
-
         return deck
 
-
-    def deck_read_write_generator(self, step, read, read_t, write, identifier = ''):
+    def deck_read_write_generator(
+            self,
+            step,
+            read,
+            read_t,
+            write,
+            identifier=''):
         '''
         Generates the string data for the read/write binary functionality of Serpent
 
@@ -131,9 +145,7 @@ set rfr -{read_t} "{read}"
 set rfw 1 "{write}"
 '''.format(**locals())
 
-
         return read_write_string
-
 
     def apply_reproc(self, reprocessing_dictionary):
         '''
@@ -154,11 +166,11 @@ set rfw 1 "{write}"
 
         if reprocessing_dictionary:
             mflow_defs += f'''
-mflow entrainment_pump  
+mflow entrainment_pump
 Kr      {reprocessing_dictionary['krypton']}
 Xe      {reprocessing_dictionary['xenon']}
 
-mflow nickel_pump       
+mflow nickel_pump
 Se      {reprocessing_dictionary['selenium']}
 Nb      {reprocessing_dictionary['niobium']}
 Mo      {reprocessing_dictionary['molybdenum']}
@@ -174,8 +186,8 @@ In      {reprocessing_dictionary['indium']}
 Sn      {reprocessing_dictionary['tin']}
 Br      {reprocessing_dictionary['bromine']}
 I       {reprocessing_dictionary['iodine']}
-        
-mflow waste_metal_pump  
+
+mflow waste_metal_pump
 Pa      {reprocessing_dictionary['protactinium']}
 Y       {reprocessing_dictionary['yttrium']}
 La      {reprocessing_dictionary['lanthanum']}
@@ -195,7 +207,6 @@ Ba      {reprocessing_dictionary['barium']}
 
         return mflow_defs
 
-    
     def flow_regime(self, reprocessing_dictionary):
         '''
         Checks if the reprocessing dictionary is False, and if not, activates the pumps
@@ -228,8 +239,8 @@ class run_deck:
     '''
     This class is used to run the constructed deck in Serpent2
     '''
-    
-    def __init__(self, input_name, deck, write_file, version = 'sss2'):
+
+    def __init__(self, input_name, deck, write_file, version='sss2'):
         '''
         Initilizes class
 
@@ -252,14 +263,13 @@ class run_deck:
         self.write = write_file
         return
 
-
     def run_script(self):
         '''
         Writes the input_script string to a file with the INPUT_NAME
         which is run and outputs to the OUTPUT_NAME.
 
         '''
-        
+
         with open(self.name, 'w+') as input_file:
             input_file.write(self.deck)
         os.system(
@@ -273,7 +283,6 @@ class run_deck:
         else:
             print('Warning: no binary write file used')
         return
-
 
     def check_wrk_file(self):
         '''
@@ -296,11 +305,9 @@ class run_deck:
             if cur_out_len != out_len:
                 out_len = cur_out_len
             else:
-                raise Exception(f'Error, view ' + str(self.out) + ' or previous.')
+                raise Exception(f'Error, view ' +
+                                str(self.out) + ' or previous.')
         return
-
-
-
 
 
 if __name__ == '__main__':
@@ -316,7 +323,18 @@ if __name__ == '__main__':
     list_inventory = ['Xe135']
     identifier = 'test'
     deck_name = 'zzzzz'
-    deck = create_deck(reprocessing, read_file, read_time, write_file, base_material_file, template_name, template_path, time_step, list_inventory, identifier, deck_name)
+    deck = create_deck(
+        reprocessing,
+        read_file,
+        read_time,
+        write_file,
+        base_material_file,
+        template_name,
+        template_path,
+        time_step,
+        list_inventory,
+        identifier,
+        deck_name)
     deck_str = deck.build_serpent_deck()
     print(f'Writing deck to ./{deck_name}')
     with open(deck_name, 'w+') as f:

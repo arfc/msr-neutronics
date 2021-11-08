@@ -1,12 +1,13 @@
 import serpentTools as st
 import matplotlib.pyplot as plt
 
+
 class serpent_data:
     '''
     Analyzes data from _res.m and _dep.m files.
     '''
 
-    def __init__(self, close_bool, file_name = False, material_name = 'fuel'):
+    def __init__(self, close_bool, file_name=False, material_name='fuel'):
         '''
         Initialize
 
@@ -34,16 +35,15 @@ class serpent_data:
 
         return
 
-
     def serp_targ_reader(self, target):
         '''
         Collect the data of a particular target in a particular material from serpent
-    
+
         Parameters
         ----------
         target : str
             Name of target to seek in depletion output
-       
+
         Returns
         -------
         times : numpy array
@@ -60,21 +60,20 @@ class serpent_data:
         dep = st.read(dep_file, reader='dep')
         try:
             fuel_mat = dep.materials[self.mat]
-        except:
+        except BaseException:
             raise Exception(f'Material {material_name} does not exist.')
         times = dep.metadata['days']
         vol = fuel_mat.data['volume'][0]
         try:
             target = target.replace('-', '')
-        except:
+        except BaseException:
             pass
         mdens = fuel_mat.getValues('days', 'mdens', times, target)[0]
         mass_list = mdens * vol
 
         return times, mass_list
 
-
-    def extract_tot_atoms(self, day_value = 0):
+    def extract_tot_atoms(self, day_value=0):
         '''
         Extract the total atoms from the depletion data from the given time index.
 
@@ -96,7 +95,7 @@ class serpent_data:
         dep = st.read(dep_file, reader='dep')
         try:
             fuel_mat = dep.materials[self.mat]
-        except:
+        except BaseException:
             raise Exception(f'Material name {self.mat} does not exist.')
         times = dep.metadata['days']
         day_index = np.where(times == day_value)[0][0]
@@ -139,7 +138,6 @@ class saltproc_data:
         self.times = eval_times
         return
 
-
     def SP_target_extractor(self, material_path):
         '''
         Go to material input, extract mass of target. Target may be isotope or element; mass will be sum.
@@ -152,12 +150,14 @@ class saltproc_data:
         Returns
         -------
         mass : float
-            Total mass of target.        
+            Total mass of target.
         '''
 
         mass = 0
         if self.target in self.ele_dict:
-            target_list = [self.target, self.ele_dict[self.target][0], self.ele_dict[self.target][1]]
+            target_list = [self.target,
+                           self.ele_dict[self.target][0],
+                           self.ele_dict[self.target][1]]
         else:
             target_list = [self.target]
 
@@ -176,15 +176,15 @@ class saltproc_data:
                             else:
                                 pass
                         mass_str = each[number_index:]
-                        update_str = mass_str.replace('\n', '').replace('-', '', 1)
+                        update_str = mass_str.replace(
+                            '\n', '').replace('-', '', 1)
                         try:
                             mass += float(update_str)
-                        except:
+                        except BaseException:
                             pass
                     else:
                         pass
         return mass
-
 
     def SP_target_reader(self):
         '''
@@ -209,7 +209,7 @@ if __name__ == '__main__':
     test = serpent_data(True, data_path)
     start_time = 3000
     time, mass = test.serp_targ_reader('Xe135')
-    plt.plot(time + start_time, mass, label = 'serpent_data')
+    plt.plot(time + start_time, mass, label='serpent_data')
     plt.xlabel('Time [d]')
     plt.ylabel('Mass [g]')
     print('End serpent_data')
@@ -220,12 +220,14 @@ if __name__ == '__main__':
     element_dictionary['xenon'] = ['Xe', ' 54']
     eval_times = [0, 3000, 6000]
     target = 'Xe-135'
-    sp_test = saltproc_data(SP_mat_path, element_dictionary, target, eval_times)
+    sp_test = saltproc_data(
+        SP_mat_path,
+        element_dictionary,
+        target,
+        eval_times)
     mass_list = sp_test.SP_target_reader()
-    plt.plot(eval_times, mass_list, label = 'saltproc_data')
+    plt.plot(eval_times, mass_list, label='saltproc_data')
     plt.legend()
     plt.savefig(save_path + 'testing_output.png')
     plt.close()
     print('Done')
-    
-

@@ -3,8 +3,6 @@ import tables as tb
 from pyne import nucname
 
 
-
-
 def check_isotope_in_library(isotope, lib_isos):
     """ Check if an isotope is in the acelib library
          used for this simulation
@@ -45,7 +43,7 @@ def read_all_iso_at_step(db_file, time_after_startup):
     day_eds = [x['cumulative_time_at_eds'] for x in sim_param.iterrows()]
     try:
         dts = day_eds.index(time_after_startup)
-    except:
+    except BaseException:
         raise Exception(f'{day_eds} does not contain {time_after_startup}')
 
     fuel_before = db.root.materials.fuel.before_reproc.comp
@@ -90,7 +88,7 @@ def update_density(file, void):
     data = f.readlines()
     mat_str = data[2].split()
     density = mat_str[2]
-    new_density = (1-void)*float(density)
+    new_density = (1 - void) * float(density)
     mat_str[2] = str(new_density)
     data[2] = " ".join(mat_str) + '\n'
     f.close()
@@ -134,10 +132,9 @@ def filter_out_and_store(isos,
                            (convert_to_serpent_dec(iso_sss, meta), -wt_frac))
     matf.close()
     if not decay_isos:
-        update_density(file,
-                       mass_decay_isos/(mass_decay_isos+mass_no_decay_isos))
-    
-        
+        update_density(file, mass_decay_isos /
+                       (mass_decay_isos + mass_no_decay_isos))
+
 
 def evaluate(time, hdf5_path, fuel_path):
     '''
@@ -149,10 +146,10 @@ def evaluate(time, hdf5_path, fuel_path):
     db_file = hdf5_path
     new_mat_file = fuel_path
 
-
-    #time_after_startup = 6.0   # days, extract the composition after n days startup
+    # time_after_startup = 6.0   # days, extract the composition after n days
+    # startup
     time_after_startup = time
-    
+
     include_decay_isos = True
 
     xs_path = '/home/luke/xsdata/endfb7/sss_endfb7u.xsdata'
@@ -163,33 +160,29 @@ def evaluate(time, hdf5_path, fuel_path):
 
     mat_head = 'mat  fuel  -3.35 burn 1 fix 09c  900 vol 4.87100E+07\n'
 
-
     mass_before, mass_after, iso_map = read_all_iso_at_step(db_file,
-                                                        time_after_startup)
+                                                            time_after_startup)
 
     lib_isos = get_library_isotopes(xs_path)
     filter_out_and_store(mass_after,
-                     lib_isos,
-                     new_mat_file,
-                     time_after_startup,
-                     lib_temp,
-                     include_decay_isos,
-                     mat_head)
-
-
+                         lib_isos,
+                         new_mat_file,
+                         time_after_startup,
+                         lib_temp,
+                         include_decay_isos,
+                         mat_head)
 
 
 if __name__ == '__main__':
 
-
-
     fuel_input_path = './ss-data-test/mat_prepr_comp_geo_1_boc.ini'
     hdf5_input_path = './ss-data-test/6000_day_SS_data'
 
-    db_file = hdf5_input_path 
-    new_mat_file = fuel_input_path 
+    db_file = hdf5_input_path
+    new_mat_file = fuel_input_path
 
-    #time_after_startup = 6.0   # days, extract the composition after n days startup
+    # time_after_startup = 6.0   # days, extract the composition after n days
+    # startup
     time_after_startup = float(input('Time after startup:'))
 
     include_decay_isos = True
@@ -202,15 +195,14 @@ if __name__ == '__main__':
 
     mat_head = 'mat  fuel  -3.35 burn 1 fix 09c  900 vol 4.87100E+07\n'
 
-
     mass_before, mass_after, iso_map = read_all_iso_at_step(db_file,
-                                                        time_after_startup)
+                                                            time_after_startup)
 
     lib_isos = get_library_isotopes(xs_path)
     filter_out_and_store(mass_after,
-                     lib_isos,
-                     new_mat_file,
-                     time_after_startup,
-                     lib_temp,
-                     include_decay_isos,
-                     mat_head)
+                         lib_isos,
+                         new_mat_file,
+                         time_after_startup,
+                         lib_temp,
+                         include_decay_isos,
+                         mat_head)
