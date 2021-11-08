@@ -5,22 +5,19 @@ import numpy as np
 
 class linear_generation:
     '''
-    This class is used to implement the linear generation approximation for type 1 Serpent flow
+    This class is used to implement the linear generation approximation for type 1 Serpent flow.
+
+    Linear generation is approximated by running with no depletion (CTRL-run) for the time step, comparing with SaltProc result, and then using that linear approximation.
+    For N-steps, will continue using initally calculated removal constants.
 
     '''
 
-    def __init__(self, initial_atoms, compare_atoms, final_atoms, initial_time, compare_time, final_time, initial_path, compare_path, final_path, step_days):
+    def __init__(self, initial_time, compare_time, final_time, initial_path, compare_path, final_path, step_days):
         '''
         Initialize
 
         Parameters
         ----------
-        initial_atoms : float
-            Number of initial atoms.
-        compare_atoms : float
-            Number of atoms in comparison file.
-        final_atoms : float
-            Number of final atoms.
         initial_time : float
             Start time.
         compare_time : float
@@ -41,9 +38,9 @@ class linear_generation:
         None
 
         '''
-        self.compare_atoms = compare_atoms
-        self.final_atoms = final_atoms
-        self.initial_atoms = initial_atoms
+        #self.compare_atoms = compare_atoms
+        #self.final_atoms = final_atoms
+        #self.initial_atoms = initial_atoms
         self.inital_time = initial_time
         self.final_time = final_time
         self.compare_time = compare_time
@@ -55,15 +52,21 @@ class linear_generation:
         return
 
     
-    def root_find_func(self, x):
+    def root_find_func(self, x, intitial_atoms, compare_atoms, final_atoms):
         '''
         The function for linear generation that can be solved to determine the root.
 
         Parameters
         ----------
         x : float
-            Represents the reprocessing constant to be determined.
-        
+            Represents the reprocessing constant to be determined. 
+        initial_atoms : float
+            Number of initial atoms.
+        compare_atoms : float
+            Number of atoms in comparison file.
+        final_atoms : float
+            Number of final atoms.
+
         Returns
         -------
         soln : float
@@ -73,9 +76,9 @@ class linear_generation:
         '''
         sec_per_day = 24 * 3600
         step_size_seconds = self.step_size * sec_per_day
-        C = (self.final_atoms - self.initial_atoms) / (step_size_seconds)
-        c2 = self.initial_atoms - self.C / x
-        soln = -(self.final_atoms - self.compare_atoms) + (self.initial_atoms - self.C/x) * (1 - np.exp(-x * self.final_time)) + self.C * self.final_time
+        C = (final_atoms - initial_atoms) / (step_size_seconds)
+        c2 = initial_atoms - C / x
+        soln = -(final_atoms - compare_atoms) + (initial_atoms - C/x) * (1 - np.exp(-x * final_time)) + C * final_time
         return soln
 
     
@@ -135,9 +138,10 @@ class linear_generation:
             final_atoms = final_fuel_mat.getValues('days', 'adens', [final_time], element)[0][0] * final_vol
             compare_atoms = compare_fuel_mat.getValues('days', 'adens', [compare_time], element)[0][0] * compare_vol
 
+
             C = (final_atoms - initial_atoms) / (step_size_seconds)
             initial_guess = 1E-5
-            root_info = root(LGM_func, initial_guess, args=(compare_atoms, final_atoms, initial_atoms, t_i, t_f, C), tol = 1E-7)
+            root_info = root(LGM_func, initial_guess, args=(intiial_atoms, compare_atoms, final_atoms), tol = 1E-7)
             reprocessing_constant = root_info.x[0]
             if reprocessing_constant < 0:
                 reprocessing_constant = 0

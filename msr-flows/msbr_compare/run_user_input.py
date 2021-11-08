@@ -81,73 +81,93 @@ class full_run_serp:
         return
 
     
-    def linear_generation_reprocessing_constants(self):
+    def linear_generation_reprocessing_constants(self, identifier = 'LGA_repr'):
         '''
         Run appropriate Serpent files to generate the desired reprocessing constants
 
         Parameters
         ----------
+        identifier : str (optional)
+            Used to generate the file name.
 
         Returns
         -------
 
         '''
-        # Requires implementation of SaltProc analysis tools first
 
-#        # initialize
-#        identifier = '_LGMi' + str(cur_index)
-#        SP_read_time0 = '_' + str(int(SP_read_time))
-#        input_name0 = run_name + identifier
-#        output = out_name + identifier
-#        fuel_input_SP = fuel_input_path + str(SP_read_time0)
-#        SP_read0 = f'"{fuel_input_SP}"'
-#        # run no depletion to generate linear approximation of growth
-#        approximation_time = step_size
-#        read_time = cur_serp_time
-#        LGM_setup_deck = build_serpent_deck(step_size = approximation_time, reproc = False, list_inventory = list_inventory, read_time = cur_serp_time, write_time = approximation_time, include_fuel_path = SP_read0, read_write_name = read_write_path)
-#        run_script(input_name0, output, LGM_setup_deck)
-#        wrk_file_name = read_write_path + str(approximation_time)
-#        check_wrk_file(wrk_file_name, output)
-#        # now generate SP data depletion output to compare against 
-#        # initialize
-#        identifier = '_SPi'
-#        print(int(SP_read_time + approximation_time))
-#        SP_read_time = '_' + str(int(SP_read_time + approximation_time))
-#        input_name_com = run_name + identifier
-#        output = out_name + identifier
-#        fuel_input_SP = fuel_input_path + str(SP_read_time)
-#        SP_read_com = '''"{fuel_input_SP}"'''.format(**locals())
-#        # build deck
-#        deck_SP_compare = build_serpent_deck(step_size = 1, reproc = False, list_inventory = list_inventory, read_time = False, write_time = 1, include_fuel_path = SP_read_com, read_write_name = read_write_path)
-#        run_script(input_name_com, output, deck_SP_compare)
-#        wrk_file_name = read_write_path + str(1)
-#        check_wrk_file(wrk_file_name, output)
-#
-#        # now that it has run, calculate reprocessing constants based on linear growth model
-#        reprocessing_constants = LGM_repr_calculator(LGM_func, initial_path = input_name0, final_path = input_name0, step_size = approximation_time, initial_time = cur_serp_time, final_time = cur_serp_time + approximation_time, compare_path = input_name_com, compare_time = 0)
-#        print(reprocessing_constants)
-#
-#        return reprocessing_constants
-#
+        # No depletion to determine linear growth rate
+        each_step = 0
+        write_file = self.output_path + identifier + str(each_step) + '.wrk'
+        deck_name = self.output_path + identifier + str(each_step)
+        initial_path = deck_name
+        current_actual_time = self.step_size * each_step + start_time
+        current_serpent_time = current_actual_time - start_time
+        intitial_time = current_serpent_time
+        read_file = False
+        reprocessing_dict = False
+        read_time = 0
+        
+        cur_deck_maker = serpent_input.create_deck(reprocessing_dict, read_file, read_time, write_file, self.base_mat_file, self.template_name, self.template_path, self.step_size, self.inv_list, identifier, deck_name)
+        deck = cur_deck_maker.build_serpent_deck()
+        run = serpent_input.run_deck(deck_name, deck, write_file)
+        run.run_script()
+
+        # SaltProc data to determine removal rate to apply
+        each_step = 1
+        write_file = self.output_path + identifier + str(each_step) + '.wrk'
+        deck_name = self.output_path + identifier + str(each_step)
+        compare_path = deck_name
+        current_actual_time = self.step_size * each_step + start_time
+        current_serpent_time = current_actual_time - start_time
+        final_time = current_serpent_time
+        SP_read = self.mat_path + str(current_actual_time)
+        
+        cur_deck_maker = serpent_input.create_deck(reprocessing_dict, read_file, read_time, write_file, SP_read, self.template_name, self.template_path, self.step_size, self.inv_list, identifier, deck_name)
+        deck = cur_deck_maker.build_serpent_deck()
+        run = serpent_input.run_deck(deck_name, deck, write_file)
+        run.run_script()
+
+        # now that it has run, calculate reprocessing constants based on linear growth model
+        compare_time = 0
+        final_path = initial_path
+        
+
+        repr_builder = serpent_calculations.linear_generation(initial_time, compare_time, final_time, initial_path, compare_path, final_path, self.step_size)
+        reprocessing_constants = repr_builder.repr_cnst_calc()
+
+        return reprocessing_constants
 
 
-    def run_linear_generation(self):
+
+    def run_linear_generation(self, identifier = 'LGA'):
         '''
         This function will run the linear generation approximation and generate results.
 
         Parameters
         ----------
+        identifier : str (optional)
+            Used to generate the file name.
 
         Returns
         -------
         None
         '''
 
-        #for each_step in range(self.N):
-        #    current_serpent_time = self.step_size * each_step + start_time
-        #    cur_deck = 
-
-
+                
+        reprocessing_dict = self.linear_generation_reprocessing_constants()
+        read_file = False
+        read_time = 0
+        for each_step in range(self.N):
+            write_file = self.output_path + identifier + str(each_step) + '.wrk'
+            deck_name = self.output_path + identifier + str(each_step)
+            current_actual_time = self.step_size * each_step + start_time
+            current_serpent_time = current_actual_time - start_time
+            cur_deck_maker = serpent_input.create_deck(reprocessing_dict, read_file, read_time, write_file, self.base_mat_file, self.template_name, self.template_path, self.step_size, self.inv_list, identifier, deck_name)
+            deck = cur_deck_maker.build_serpent_deck()
+            run = serpent_input.run_deck(deck_name, deck, write_file)
+            run.run_script()
+            read_file = write_file
+            read_time = current_serpent_time
         return
 
     
@@ -158,7 +178,7 @@ class full_run_serp:
         Parameters
         ----------
         identifier : str (optional)
-            Used to generate the file name
+            Used to generate the file name.
 
         '''
         cycle_time_decay_build = serpent_calculations.cycle_time_decay(self.element_flow_list)
