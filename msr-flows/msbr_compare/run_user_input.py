@@ -81,14 +81,16 @@ class full_run_serp:
         return
 
     
-    def linear_generation_reprocessing_constants(self, identifier = 'LGA_repr'):
+    def linear_generation_reprocessing_constants(self, identifier = 'LGA_repr', LGA_step_size = 3):
         '''
         Run appropriate Serpent files to generate the desired reprocessing constants
 
         Parameters
         ----------
         identifier : str (optional)
-            Used to generate the file name.
+            Used to generate the file name. 
+        LGA_step_size : int (optional)
+            Size of step to use when approximating removal (3 recommended since only 1 extra SaltProc step would be needed).
 
         Returns
         -------
@@ -102,7 +104,7 @@ class full_run_serp:
         initial_path = deck_name
         current_actual_time = self.step_size * each_step + start_time
         current_serpent_time = current_actual_time - start_time
-        intitial_time = current_serpent_time
+        initial_time = current_serpent_time
         read_file = False
         reprocessing_dict = False
         read_time = 0
@@ -120,7 +122,7 @@ class full_run_serp:
         current_actual_time = self.step_size * each_step + start_time
         current_serpent_time = current_actual_time - start_time
         final_time = current_serpent_time
-        SP_read = self.mat_path + str(current_actual_time)
+        SP_read = self.mat_path + str(int(LGA_step_size))
         
         cur_deck_maker = serpent_input.create_deck(reprocessing_dict, read_file, read_time, write_file, SP_read, self.template_name, self.template_path, self.step_size, self.inv_list, identifier, deck_name)
         deck = cur_deck_maker.build_serpent_deck()
@@ -132,14 +134,14 @@ class full_run_serp:
         final_path = initial_path
         
 
-        repr_builder = serpent_calculations.linear_generation(initial_time, compare_time, final_time, initial_path, compare_path, final_path, self.step_size)
+        repr_builder = serpent_calculations.linear_generation(initial_time, compare_time, final_time, initial_path, compare_path, final_path, LGA_step_size)
         reprocessing_constants = repr_builder.repr_cnst_calc()
 
         return reprocessing_constants
 
 
 
-    def run_linear_generation(self, identifier = 'LGA'):
+    def linear_generation(self, identifier = 'LGA', LGA_step_size = 3):
         '''
         This function will run the linear generation approximation and generate results.
 
@@ -147,6 +149,8 @@ class full_run_serp:
         ----------
         identifier : str (optional)
             Used to generate the file name.
+        LGA_step_size : int (optional)
+            Size of step to use when approximating removal (3 recommended since only 1 extra SaltProc step would be needed).
 
         Returns
         -------
@@ -154,7 +158,7 @@ class full_run_serp:
         '''
 
                 
-        reprocessing_dict = self.linear_generation_reprocessing_constants()
+        reprocessing_dict = self.linear_generation_reprocessing_constants(identifier = identifier, LGA_step_size = LGA_step_size)
         read_file = False
         read_time = 0
         for each_step in range(self.N):
@@ -230,7 +234,13 @@ if __name__ == '__main__':
         print('Not yet available')
 
     if linear_generation:
-        print('Not yet available')
+        start_timer_count = time.time()
+        print('Running LGA')
+        LGA_identifier = 'LGA'
+        builder = full_run_serp(number_serp_steps, base_material_path, template_path, template_name, start_time, end_time, list_inventory, element_flow_list, output_path)
+        builder.linear_generation(identifier = LGA_identifier, LGA_step_size = LGA_step_size)
+        end_timer_count = time.time()
+        print(f'Ran LGA, took {end_timer_count - start_timer_count}s')
 
     if cycle_time_decay:
         start_timeer_count = time.time()
@@ -273,7 +283,10 @@ if __name__ == '__main__':
                     print('Not yet available')
 
                 if linear_generation:
-                    print('Not yet available')
+                    LGA_plot_builder = serpent_output.serpent_data(close_boolean, file_name = output_path + LGA_identifier + str(each_step), material_name = 'fuel')
+                    LGA_plot_time, LGA_plot_mass = LGA_plot_builder.serp_targ_reader(target)
+                    LGA_actual_time = LGA_plot_time + start_time
+                    plt.plot(LGA_actual_time, LGA_plot_mass, label = LGA_identifier, markersize = 5)
                 
 
             plt.xlabel('Time [d]')

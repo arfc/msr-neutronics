@@ -41,7 +41,7 @@ class linear_generation:
         #self.compare_atoms = compare_atoms
         #self.final_atoms = final_atoms
         #self.initial_atoms = initial_atoms
-        self.inital_time = initial_time
+        self.initial_time = initial_time
         self.final_time = final_time
         self.compare_time = compare_time
         self.initial_path = initial_path
@@ -52,7 +52,7 @@ class linear_generation:
         return
 
     
-    def root_find_func(self, x, intitial_atoms, compare_atoms, final_atoms):
+    def root_find_func(self, x, initial_atoms, compare_atoms, final_atoms):
         '''
         The function for linear generation that can be solved to determine the root.
 
@@ -78,7 +78,7 @@ class linear_generation:
         step_size_seconds = self.step_size * sec_per_day
         C = (final_atoms - initial_atoms) / (step_size_seconds)
         c2 = initial_atoms - C / x
-        soln = -(final_atoms - compare_atoms) + (initial_atoms - C/x) * (1 - np.exp(-x * final_time)) + C * final_time
+        soln = -(final_atoms - compare_atoms) + (initial_atoms - C/x) * (1 - np.exp(-x * self.final_time)) + C * self.final_time
         return soln
 
     
@@ -117,9 +117,9 @@ class linear_generation:
         except:
             raise Exception('Fuel name set to non-"fuel" value.')
 
-        initial_day_index = np.where(initial_dep.metadata['days'] == initial_time)[0][0]
-        final_day_index = np.where(final_dep.metadata['days'] == final_time)[0][0]
-        compare_day_index = np.where(compare_dep.metadata['days'] == compare_time)[0][0]
+        initial_day_index = np.where(initial_dep.metadata['days'] == self.initial_time)[0][0]
+        final_day_index = np.where(final_dep.metadata['days'] == self.final_time)[0][0]
+        compare_day_index = np.where(compare_dep.metadata['days'] == self.compare_time)[0][0]
 
         initial_vol = initial_fuel_mat.data['volume'][initial_day_index]
         final_vol = final_fuel_mat.data['volume'][final_day_index]
@@ -134,14 +134,14 @@ class linear_generation:
         for element in element_list:
             if element == 'lost' or element == 'total':
                 pass
-            initial_atoms = initial_fuel_mat.getValues('days', 'adens', [initial_time], element)[0][0] * initial_vol
-            final_atoms = final_fuel_mat.getValues('days', 'adens', [final_time], element)[0][0] * final_vol
-            compare_atoms = compare_fuel_mat.getValues('days', 'adens', [compare_time], element)[0][0] * compare_vol
+            initial_atoms = initial_fuel_mat.getValues('days', 'adens', [self.initial_time], element)[0][0] * initial_vol
+            final_atoms = final_fuel_mat.getValues('days', 'adens', [self.final_time], element)[0][0] * final_vol
+            compare_atoms = compare_fuel_mat.getValues('days', 'adens', [self.compare_time], element)[0][0] * compare_vol
 
 
             C = (final_atoms - initial_atoms) / (step_size_seconds)
             initial_guess = 1E-5
-            root_info = root(LGM_func, initial_guess, args=(intiial_atoms, compare_atoms, final_atoms), tol = 1E-7)
+            root_info = root(self.root_find_func, initial_guess, args=(initial_atoms, compare_atoms, final_atoms), tol = 1E-7)
             reprocessing_constant = root_info.x[0]
             if reprocessing_constant < 0:
                 reprocessing_constant = 0

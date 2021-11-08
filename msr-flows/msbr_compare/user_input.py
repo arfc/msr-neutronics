@@ -7,7 +7,7 @@ saltproc = True
 separate_core_piping = False
 type_2_removal = False
 
-linear_generation = False
+linear_generation = True
 cycle_time_decay = True
 
 
@@ -30,6 +30,8 @@ end_time = 6000
 SP_step_size = 3
 SP_start = 0
 SP_end = 6000
+
+LGA_step_size = 3
 
 list_inventory = ['Xe-135', 'U-235', 'U-233', 'Th-232', 'I-135', 'Kr-83']
 element_flow_list = ['krypton', 'xenon', 'selenium', 'niobium', 'molybdenum', 'technetium', 'ruthenium', 'rhodium', 'palladium', 'silver', 'antimony', 'tellurium', 'cadmium', 'indium', 'tin', 'bromine', 'iodine', 'protactinium', 'yttrium', 'lanthanum', 'cerium', 'praseodymium', 'neodymium', 'promethium', 'samarium', 'gadolinium', 'europium', 'rubidium', 'strontium', 'cesium', 'barium']
