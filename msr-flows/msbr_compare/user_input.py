@@ -4,7 +4,7 @@
 control = True
 saltproc = True
 
-separate_core_piping = False # Not implemented
+separate_core_piping = False
 type_2_removal = False
 
 linear_generation = False

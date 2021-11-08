@@ -5,7 +5,7 @@ import misc_funcs
 import serpent_output
 import matplotlib.pyplot as plt
 import numpy as np
-
+import time
 
 class full_run_serp:
     '''
@@ -190,16 +190,17 @@ if __name__ == '__main__':
     for index in range(len(element_flow_list)):
         element_dictionary[element_flow_list[index]] = [associated_symbol_list[index], associated_atomic_list[index]]
 
-
     if multi_plot:
         close_boolean = False
-    
+
     if control:
+        start_timer_count = time.time()
         print('Running Control')
         CTRL_identifier = 'CTRL'
         builder = full_run_serp(number_serp_steps, base_material_path, template_path, template_name, start_time, end_time, list_inventory, element_flow_list, output_path)
         builder.control_run(identifier = CTRL_identifier)
-        print('Ran Control')
+        end_timer_count = time.time()
+        print(f'Ran Control, took {end_timer_count - start_timer_count}s')
 
     
     if separate_core_piping:
@@ -212,33 +213,47 @@ if __name__ == '__main__':
         print('Not yet available')
 
     if cycle_time_decay:
+        start_timeer_count = time.time()
         print('Running CTD')
         CTD_identifier = 'CTD'
         builder = full_run_serp(number_serp_steps, base_material_path, template_path, template_name, start_time, end_time, list_inventory, element_flow_list, output_path)
         builder.cycle_time_decay(identifier = CTD_identifier)
-        print('Ran CTD')
+        end_timer_count = time.time()
+        print(f'Ran CTD, took {end_timer_count - start_timer_count}s')
+
 
     if plotting:
         print('Overall plotting')
         SP_eval_times = np.arange(SP_start, SP_end + SP_step_size, SP_step_size)
         for target in total_view_list:
+
             if saltproc:
                 SP_identifier = 'SP'
                 SP_plot_builder = serpent_output.saltproc_data(base_material_path, element_dictionary, target, SP_eval_times)
                 SP_mass = SP_plot_builder.SP_target_reader()
                 plt.plot(SP_eval_times, SP_mass, label = SP_identifier)
             for each_step in range(number_serp_steps):
+
                 if cycle_time_decay:
                     CTD_plot_builder = serpent_output.serpent_data(close_boolean, file_name = output_path + CTD_identifier + str(each_step), material_name = 'fuel')
                     CTD_plot_time, CTD_plot_mass = CTD_plot_builder.serp_targ_reader(target)
                     CTD_actual_time = CTD_plot_time + start_time
                     plt.plot(CTD_actual_time, CTD_plot_mass, label = CTD_identifier, markersize = 5)
+
                 if control:
                     CTRL_plot_builder = serpent_output.serpent_data(close_boolean, file_name = output_path + CTRL_identifier + str(each_step), material_name = 'fuel')
-                    CTRL_plot_time, CTRL_plot_mass = CTD_plot_builder.serp_targ_reader(target)
+                    CTRL_plot_time, CTRL_plot_mass = CTRL_plot_builder.serp_targ_reader(target)
                     CTRL_actual_time = CTRL_plot_time + start_time
                     plt.plot(CTRL_actual_time, CTRL_plot_mass, label = CTRL_identifier, markersize = 5)
                 
+                if separate_core_piping:
+                    print('Not yet available')
+                
+                if type_2_removal:
+                    print('Not yet available')
+
+                if linear_generation:
+                    print('Not yet available')
                 
 
             plt.xlabel('Time [d]')
