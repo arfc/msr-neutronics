@@ -289,6 +289,9 @@ if __name__ == '__main__':
     output_path = f'./{ui.path_to_dump_files}/'
     misc_funcs.set_directory(output_path)
 
+    overlap = 0.5
+    width = 3
+
     element_dictionary = dict()
     for index in range(len(ui.element_flow_list)):
         element_dictionary[ui.element_flow_list[index]] = [
@@ -388,7 +391,7 @@ if __name__ == '__main__':
                 SP_plot_builder = serpent_output.saltproc_data(
                     ui.base_material_path, element_dictionary, target, SP_eval_times)
                 SP_mass = SP_plot_builder.SP_target_reader()
-                plt.plot(SP_eval_times, SP_mass, label=SP_identifier)
+                plt.plot(SP_eval_times, SP_mass, label=SP_identifier, alpha=overlap, lw=width)
             for each_step in range(ui.number_serp_steps):
 
                 if ui.cycle_time_decay:
@@ -404,7 +407,7 @@ if __name__ == '__main__':
                     plt.plot(
                         CTD_actual_time,
                         CTD_plot_mass,
-                        label=CTD_identifier)
+                        label=CTD_identifier, alpha=overlap, lw=width)
 
                 if ui.control:
                     CTRL_plot_builder = serpent_output.serpent_data(
@@ -419,7 +422,7 @@ if __name__ == '__main__':
                     plt.plot(
                         CTRL_actual_time,
                         CTRL_plot_mass,
-                        label=CTRL_identifier)
+                        label=CTRL_identifier, alpha=overlap, lw=width)
 
                 if ui.separate_core_piping:
                     print('Not yet available')
@@ -437,7 +440,7 @@ if __name__ == '__main__':
                     plt.plot(
                         LIA_actual_time,
                         LIA_plot_mass,
-                        label=LIA_identifier)
+                        label=LIA_identifier, alpha=overlap, lw=width)
                 
                 if ui.linear_generation:
                     LGA_plot_builder = serpent_output.serpent_data(
@@ -452,7 +455,7 @@ if __name__ == '__main__':
                     plt.plot(
                         LGA_actual_time,
                         LGA_plot_mass,
-                        label=LGA_identifier)
+                        label=LGA_identifier, alpha=overlap, lw=width)
 
             plt.xlabel('Time [d]')
             plt.ylabel('Mass [g]')

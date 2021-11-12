@@ -144,7 +144,6 @@ class linear_generation:
         t_i = self.initial_time * sec_per_day
 
 
-        print(f'Available elements: {element_list}')
         for element in element_list:
             element_name = element
             if element == 'lost' or element == 'total':
