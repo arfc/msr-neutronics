@@ -7,6 +7,7 @@ saltproc = True
 
 linear_generation = True
 cycle_time_decay = True
+linear_isotope = True
 
 # Separate core piping is WIP
 
@@ -34,7 +35,8 @@ SP_end = 6000
 
 LGA_step_size = 3
 
-list_inventory = ['Xe-135', 'U-235', 'U-233', 'Th-232', 'I-135', 'Kr-83']
+important_isotopes = {'xenon': 'Xe135', 'iodine': 'I135', 'samarium': 'Sm149'}
+list_inventory = ['Xe-135', 'U-235', 'U-233', 'Th-232', 'I-135', 'Kr-83', 'Sm-149']
 element_flow_list = [
     'krypton',
     'xenon',

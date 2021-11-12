@@ -104,7 +104,7 @@ class full_run_serp:
         return
 
     def linear_generation_reprocessing_constants(
-            self, identifier='LGA_repr', LGA_step_size=3):
+            self, identifier='LGA_repr', LGA_step_size=3, isos_dict=False):
         '''
         Run appropriate Serpent files to generate the desired reprocessing constants
 
@@ -114,6 +114,9 @@ class full_run_serp:
             Used to generate the file name.
         LGA_step_size : int (optional)
             Size of step to use when approximating removal (3 recommended since only 1 extra SaltProc step would be needed).
+        isos_dict : dict (optional)
+            Dictionary of important isotopes to prioritize over general element mass.
+
 
         Returns
         -------
@@ -187,11 +190,11 @@ class full_run_serp:
             compare_path,
             final_path,
             LGA_step_size)
-        reprocessing_constants = repr_builder.repr_cnst_calc()
+        reprocessing_constants = repr_builder.repr_cnst_calc(isos_dict)
 
         return reprocessing_constants
 
-    def linear_generation(self, identifier='LGA', LGA_step_size=3):
+    def linear_generation(self, identifier='LGA', LGA_step_size=3, iso_dict=False):
         '''
         This function will run the linear generation approximation and generate results.
 
@@ -201,6 +204,8 @@ class full_run_serp:
             Used to generate the file name.
         LGA_step_size : int (optional)
             Size of step to use when approximating removal (3 recommended since only 1 extra SaltProc step would be needed).
+        iso_dict : dict (optional)
+            Dictionary of important isotopes to prioritize over general element mass.
 
         Returns
         -------
@@ -208,7 +213,7 @@ class full_run_serp:
         '''
 
         reprocessing_dict = self.linear_generation_reprocessing_constants(
-            identifier=identifier, LGA_step_size=LGA_step_size)
+            identifier=identifier, LGA_step_size=LGA_step_size, isos_dict=iso_dict)
         read_file = False
         read_time = 0
         for each_step in range(self.N):
@@ -235,6 +240,7 @@ class full_run_serp:
             read_file = write_file
             read_time = current_serpent_time
         return
+
 
     def cycle_time_decay(self, identifier='CTD'):
         '''
@@ -308,6 +314,27 @@ if __name__ == '__main__':
         builder.control_run(identifier=CTRL_identifier)
         end_timer_count = time.time()
         print(f'Ran Control, took {end_timer_count - start_timer_count}s')
+
+    if ui.linear_isotope:
+        start_timer_count = time.time()
+        print('Running LIA')
+        LIA_identifier = 'LIA'
+        builder = full_run_serp(
+            ui.number_serp_steps,
+            ui.base_material_path,
+            ui.template_path,
+            ui.template_name,
+            ui.start_time,
+            ui.end_time,
+            ui.list_inventory,
+            ui.element_flow_list,
+            output_path)
+        builder.linear_generation(
+            identifier=LIA_identifier,
+            LGA_step_size=ui.LGA_step_size,
+            iso_dict=ui.important_isotopes)
+        end_timer_count = time.time()
+        print(f'Ran LIA, took {end_timer_count - start_timer_count}s')
 
     if ui.separate_core_piping:
         print('Not yet available')
@@ -397,6 +424,21 @@ if __name__ == '__main__':
                 if ui.separate_core_piping:
                     print('Not yet available')
 
+                if ui.linear_isotope:
+                    LIA_plot_builder = serpent_output.serpent_data(
+                        close_boolean,
+                        file_name=output_path +
+                        LIA_identifier +
+                        str(each_step),
+                        material_name='fuel')
+                    LIA_plot_time, LIA_plot_mass = LIA_plot_builder.serp_targ_reader(
+                        target)
+                    LIA_actual_time = LIA_plot_time + ui.start_time
+                    plt.plot(
+                        LIA_actual_time,
+                        LIA_plot_mass,
+                        label=LIA_identifier)
+                
                 if ui.linear_generation:
                     LGA_plot_builder = serpent_output.serpent_data(
                         close_boolean,

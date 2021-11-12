@@ -89,7 +89,7 @@ class linear_generation:
             (1 - np.exp(-x * self.final_time)) + C * self.final_time
         return soln
 
-    def repr_cnst_calc(self):
+    def repr_cnst_calc(self, iso_dict=False):
         '''
         Calculate reprocessing constants to be used for each element.
 
@@ -97,6 +97,9 @@ class linear_generation:
         -------
         reprocessing_dictionary : dict
             Dictionary of each inventory item in Serpent depletion output and corresponding reprocessing constant.
+        iso_dict : dict (optional)
+            Dictionary of important isotopes to prioritize over general element mass.
+
 
         Exceptions
         ----------
@@ -140,15 +143,23 @@ class linear_generation:
         t_f = self.final_time * sec_per_day
         t_i = self.initial_time * sec_per_day
 
+
+        print(f'Available elements: {element_list}')
         for element in element_list:
+            element_name = element
             if element == 'lost' or element == 'total':
                 pass
+            if iso_dict:
+                if element_name in iso_dict:
+                    element_name = iso_dict[element_name]
+                else:
+                    pass
             initial_atoms = initial_fuel_mat.getValues(
-                'days', 'adens', [self.initial_time], element)[0][0] * initial_vol
+                'days', 'adens', [self.initial_time], element_name)[0][0] * initial_vol
             final_atoms = final_fuel_mat.getValues(
-                'days', 'adens', [self.final_time], element)[0][0] * final_vol
+                'days', 'adens', [self.final_time], element_name)[0][0] * final_vol
             compare_atoms = compare_fuel_mat.getValues(
-                'days', 'adens', [self.compare_time], element)[0][0] * compare_vol
+                'days', 'adens', [self.compare_time], element_name)[0][0] * compare_vol
 
             C = (final_atoms - initial_atoms) / (step_size_seconds)
             initial_guess = 1E-5
