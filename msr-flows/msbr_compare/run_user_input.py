@@ -1,4 +1,5 @@
-from user_input import *
+#from user_input import *
+import user_input as ui
 import serpent_input
 import serpent_calculations
 import misc_funcs
@@ -80,8 +81,8 @@ class full_run_serp:
             write_file = self.output_path + \
                 identifier + str(each_step) + '.wrk'
             deck_name = self.output_path + identifier + str(each_step)
-            current_actual_time = self.step_size * each_step + start_time
-            current_serpent_time = current_actual_time - start_time
+            current_actual_time = self.step_size * each_step + self.start_day
+            current_serpent_time = current_actual_time - self.start_day
             cur_deck_maker = serpent_input.create_deck(
                 reprocessing_dict,
                 read_file,
@@ -124,8 +125,8 @@ class full_run_serp:
         write_file = self.output_path + identifier + str(each_step) + '.wrk'
         deck_name = self.output_path + identifier + str(each_step)
         initial_path = deck_name
-        current_actual_time = self.step_size * each_step + start_time
-        current_serpent_time = current_actual_time - start_time
+        current_actual_time = self.step_size * each_step + self.start_day
+        current_serpent_time = current_actual_time - self.start_day
         initial_time = current_serpent_time
         read_file = False
         reprocessing_dict = False
@@ -152,8 +153,8 @@ class full_run_serp:
         write_file = self.output_path + identifier + str(each_step) + '.wrk'
         deck_name = self.output_path + identifier + str(each_step)
         compare_path = deck_name
-        current_actual_time = self.step_size * each_step + start_time
-        current_serpent_time = current_actual_time - start_time
+        current_actual_time = self.step_size * each_step + self.start_day
+        current_serpent_time = current_actual_time - self.start_day
         final_time = current_serpent_time
         SP_read = self.mat_path + str(int(LGA_step_size))
 
@@ -214,8 +215,8 @@ class full_run_serp:
             write_file = self.output_path + \
                 identifier + str(each_step) + '.wrk'
             deck_name = self.output_path + identifier + str(each_step)
-            current_actual_time = self.step_size * each_step + start_time
-            current_serpent_time = current_actual_time - start_time
+            current_actual_time = self.step_size * each_step + self.start_day
+            current_serpent_time = current_actual_time - self.start_day
             cur_deck_maker = serpent_input.create_deck(
                 reprocessing_dict,
                 read_file,
@@ -254,8 +255,8 @@ class full_run_serp:
             write_file = self.output_path + \
                 identifier + str(each_step) + '.wrk'
             deck_name = self.output_path + identifier + str(each_step)
-            current_actual_time = self.step_size * each_step + start_time
-            current_serpent_time = current_actual_time - start_time
+            current_actual_time = self.step_size * each_step + self.start_day
+            current_serpent_time = current_actual_time - self.start_day
             cur_deck_maker = serpent_input.create_deck(
                 reprocessing_dict,
                 read_file,
@@ -279,94 +280,91 @@ class full_run_serp:
 
 if __name__ == '__main__':
 
-    output_path = f'./{path_to_dump_files}/'
+    output_path = f'./{ui.path_to_dump_files}/'
     misc_funcs.set_directory(output_path)
 
     element_dictionary = dict()
-    for index in range(len(element_flow_list)):
-        element_dictionary[element_flow_list[index]] = [
-            associated_symbol_list[index], associated_atomic_list[index]]
+    for index in range(len(ui.element_flow_list)):
+        element_dictionary[ui.element_flow_list[index]] = [
+            ui.associated_symbol_list[index], ui.associated_atomic_list[index]]
 
-    if multi_plot:
+    if ui.multi_plot:
         close_boolean = False
 
-    if control:
+    if ui.control:
         start_timer_count = time.time()
         print('Running Control')
         CTRL_identifier = 'CTRL'
         builder = full_run_serp(
-            number_serp_steps,
-            base_material_path,
-            template_path,
-            template_name,
-            start_time,
-            end_time,
-            list_inventory,
-            element_flow_list,
+            ui.number_serp_steps,
+            ui.base_material_path,
+            ui.template_path,
+            ui.template_name,
+            ui.start_time,
+            ui.end_time,
+            ui.list_inventory,
+            ui.element_flow_list,
             output_path)
         builder.control_run(identifier=CTRL_identifier)
         end_timer_count = time.time()
         print(f'Ran Control, took {end_timer_count - start_timer_count}s')
 
-    if separate_core_piping:
+    if ui.separate_core_piping:
         print('Not yet available')
 
-    if type_2_removal:
-        print('Not yet available')
-
-    if linear_generation:
+    if ui.linear_generation:
         start_timer_count = time.time()
         print('Running LGA')
         LGA_identifier = 'LGA'
         builder = full_run_serp(
-            number_serp_steps,
-            base_material_path,
-            template_path,
-            template_name,
-            start_time,
-            end_time,
-            list_inventory,
-            element_flow_list,
+            ui.number_serp_steps,
+            ui.base_material_path,
+            ui.template_path,
+            ui.template_name,
+            ui.start_time,
+            ui.end_time,
+            ui.list_inventory,
+            ui.element_flow_list,
             output_path)
         builder.linear_generation(
             identifier=LGA_identifier,
-            LGA_step_size=LGA_step_size)
+            LGA_step_size=ui.LGA_step_size)
         end_timer_count = time.time()
         print(f'Ran LGA, took {end_timer_count - start_timer_count}s')
 
-    if cycle_time_decay:
-        start_timeer_count = time.time()
+    if ui.cycle_time_decay:
+        start_timer_count = time.time()
         print('Running CTD')
         CTD_identifier = 'CTD'
         builder = full_run_serp(
-            number_serp_steps,
-            base_material_path,
-            template_path,
-            template_name,
-            start_time,
-            end_time,
-            list_inventory,
-            element_flow_list,
+            ui.number_serp_steps,
+            ui.base_material_path,
+            ui.template_path,
+            ui.template_name,
+            ui.start_time,
+            ui.end_time,
+            ui.list_inventory,
+            ui.element_flow_list,
             output_path)
         builder.cycle_time_decay(identifier=CTD_identifier)
         end_timer_count = time.time()
         print(f'Ran CTD, took {end_timer_count - start_timer_count}s')
 
-    if plotting:
+    if ui.plotting:
         print('Overall plotting')
         SP_eval_times = np.arange(
-            SP_start, SP_end + SP_step_size, SP_step_size)
-        for target in total_view_list:
+            ui.SP_start, ui.SP_end + ui.SP_step_size, ui.SP_step_size)
+        for target in ui.total_view_list:
 
-            if saltproc:
+            if ui.saltproc:
                 SP_identifier = 'SP'
                 SP_plot_builder = serpent_output.saltproc_data(
-                    base_material_path, element_dictionary, target, SP_eval_times)
+                    ui.base_material_path, element_dictionary, target, SP_eval_times)
                 SP_mass = SP_plot_builder.SP_target_reader()
                 plt.plot(SP_eval_times, SP_mass, label=SP_identifier)
-            for each_step in range(number_serp_steps):
+            for each_step in range(ui.number_serp_steps):
 
-                if cycle_time_decay:
+                if ui.cycle_time_decay:
                     CTD_plot_builder = serpent_output.serpent_data(
                         close_boolean,
                         file_name=output_path +
@@ -375,14 +373,13 @@ if __name__ == '__main__':
                         material_name='fuel')
                     CTD_plot_time, CTD_plot_mass = CTD_plot_builder.serp_targ_reader(
                         target)
-                    CTD_actual_time = CTD_plot_time + start_time
+                    CTD_actual_time = CTD_plot_time + ui.start_time
                     plt.plot(
                         CTD_actual_time,
                         CTD_plot_mass,
-                        label=CTD_identifier,
-                        markersize=5)
+                        label=CTD_identifier)
 
-                if control:
+                if ui.control:
                     CTRL_plot_builder = serpent_output.serpent_data(
                         close_boolean,
                         file_name=output_path +
@@ -391,20 +388,16 @@ if __name__ == '__main__':
                         material_name='fuel')
                     CTRL_plot_time, CTRL_plot_mass = CTRL_plot_builder.serp_targ_reader(
                         target)
-                    CTRL_actual_time = CTRL_plot_time + start_time
+                    CTRL_actual_time = CTRL_plot_time + ui.start_time
                     plt.plot(
                         CTRL_actual_time,
                         CTRL_plot_mass,
-                        label=CTRL_identifier,
-                        markersize=5)
+                        label=CTRL_identifier)
 
-                if separate_core_piping:
+                if ui.separate_core_piping:
                     print('Not yet available')
 
-                if type_2_removal:
-                    print('Not yet available')
-
-                if linear_generation:
+                if ui.linear_generation:
                     LGA_plot_builder = serpent_output.serpent_data(
                         close_boolean,
                         file_name=output_path +
@@ -413,12 +406,11 @@ if __name__ == '__main__':
                         material_name='fuel')
                     LGA_plot_time, LGA_plot_mass = LGA_plot_builder.serp_targ_reader(
                         target)
-                    LGA_actual_time = LGA_plot_time + start_time
+                    LGA_actual_time = LGA_plot_time + ui.start_time
                     plt.plot(
                         LGA_actual_time,
                         LGA_plot_mass,
-                        label=LGA_identifier,
-                        markersize=5)
+                        label=LGA_identifier)
 
             plt.xlabel('Time [d]')
             plt.ylabel('Mass [g]')
