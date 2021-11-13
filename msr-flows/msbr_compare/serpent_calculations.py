@@ -131,10 +131,13 @@ class linear_generation:
         except BaseException:
             raise Exception('Fuel name set to non-"fuel" value.')
 
-        initial_day_index = np.where(
-            initial_dep.metadata['days'] == self.initial_time)[0][0]
-        final_day_index = np.where(
-            final_dep.metadata['days'] == self.final_time)[0][0]
+        initial_day_index = np.where(initial_dep.metadata['days'] == self.initial_time)[0][0]
+        try:
+            final_day_index = np.where(final_dep.metadata['days'] == self.final_time)[0][0]
+        except:
+            print(f'final time: {self.final_time}')
+            print(f'Serpent times: {final_dep.metadata["days"]}')
+            print(np.where(final_dep.metadata['days'] == self.final_time))
         compare_day_index = list()
         for each_mat in compare_dep:
             compare_day_index.append(np.where(

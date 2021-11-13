@@ -37,7 +37,7 @@ SP_start = 0
 SP_end = 6000
 
 LGA_step_size = 3
-linear_SP_count = 1
+linear_SP_count = 2
 
 important_isotopes = {'xenon': 'Xe135', 'iodine': 'I135', 'samarium': 'Sm149'}
 list_inventory = ['Xe-135', 'U-235', 'U-233', 'Th-232', 'I-135', 'Kr-83', 'Sm-149']

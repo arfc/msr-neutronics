@@ -155,18 +155,17 @@ class full_run_serp:
 
         # SaltProc data to determine removal rate to apply
         compare_path_list = list()
-        print(f'Total num_SP: {num_SP}')
         for num_SP_iteration in range(num_SP):
             each_step += 1
             write_file = self.output_path + identifier + str(each_step) + '.wrk'
             deck_name = self.output_path + identifier + str(each_step)
             compare_path = deck_name
             compare_path_list.append(compare_path)
-            current_actual_time = self.step_size * each_step + self.start_day
+            current_actual_time = self.step_size + self.start_day
             current_serpent_time = current_actual_time - self.start_day
             final_time = current_serpent_time
+
             SP_read = self.mat_path + str(int(self.start_day + LGA_step_size + 3 * (each_step - 1)))
-            print(f'Reading SaltProc file {SP_read}')
 
             cur_deck_maker = serpent_input.create_deck(
                 reprocessing_dict,
