@@ -40,7 +40,14 @@ LGA_step_size = 3
 linear_SP_count = 2
 
 important_isotopes = {'xenon': 'Xe135', 'iodine': 'I135', 'samarium': 'Sm149'}
-list_inventory = ['Xe-135', 'U-235', 'U-233', 'Th-232', 'I-135', 'Kr-83', 'Sm-149']
+list_inventory = [
+    'Xe-135',
+    'U-235',
+    'U-233',
+    'Th-232',
+    'I-135',
+    'Kr-83',
+    'Sm-149']
 element_flow_list = [
     'krypton',
     'xenon',
@@ -139,4 +146,3 @@ associated_atomic_list = [
     ' 56']
 
 total_view_list = list_inventory + element_flow_list
-

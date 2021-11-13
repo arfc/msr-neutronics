@@ -131,10 +131,12 @@ class linear_generation:
         except BaseException:
             raise Exception('Fuel name set to non-"fuel" value.')
 
-        initial_day_index = np.where(initial_dep.metadata['days'] == self.initial_time)[0][0]
+        initial_day_index = np.where(
+            initial_dep.metadata['days'] == self.initial_time)[0][0]
         try:
-            final_day_index = np.where(final_dep.metadata['days'] == self.final_time)[0][0]
-        except:
+            final_day_index = np.where(
+                final_dep.metadata['days'] == self.final_time)[0][0]
+        except BaseException:
             print(f'final time: {self.final_time}')
             print(f'Serpent times: {final_dep.metadata["days"]}')
             print(np.where(final_dep.metadata['days'] == self.final_time))
@@ -147,13 +149,13 @@ class linear_generation:
         final_vol = final_fuel_mat.data['volume'][final_day_index]
         compare_vol = list()
         for each_fuel in range(len(compare_fuel_mat)):
-            compare_vol.append(compare_fuel_mat[each_fuel].data['volume'][compare_day_index[each_fuel]])
+            compare_vol.append(
+                compare_fuel_mat[each_fuel].data['volume'][compare_day_index[each_fuel]])
 
         element_list = initial_fuel_mat.names
 
         t_f = self.final_time * sec_per_day
         t_i = self.initial_time * sec_per_day
-
 
         for element in element_list:
             element_name = element
@@ -167,11 +169,14 @@ class linear_generation:
             initial_atoms = initial_fuel_mat.getValues(
                 'days', 'adens', [self.initial_time], element_name)[0][0] * initial_vol
             final_atoms = final_fuel_mat.getValues(
-                'days', 'adens', [self.final_time], element_name)[0][0] * final_vol
+                'days', 'adens', [
+                    self.final_time], element_name)[0][0] * final_vol
             compare_atoms = list()
             for each_one in range(len(compare_fuel_mat)):
-                compare_atoms.append(compare_fuel_mat[each_one].getValues(
-                    'days', 'adens', [self.compare_time], element_name)[0][0] * compare_vol[each_one])
+                compare_atoms.append(
+                    compare_fuel_mat[each_one].getValues(
+                        'days', 'adens', [
+                            self.compare_time], element_name)[0][0] * compare_vol[each_one])
 
             avg_compare_atoms = sum(compare_atoms) / len(compare_atoms)
             C = (final_atoms - initial_atoms) / (step_size_seconds)

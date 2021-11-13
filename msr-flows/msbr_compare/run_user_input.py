@@ -104,7 +104,11 @@ class full_run_serp:
         return
 
     def linear_generation_reprocessing_constants(
-            self, identifier='LGA_repr', LGA_step_size=3, isos_dict=False, num_SP=1):
+            self,
+            identifier='LGA_repr',
+            LGA_step_size=3,
+            isos_dict=False,
+            num_SP=1):
         '''
         Run appropriate Serpent files to generate the desired reprocessing constants
 
@@ -157,7 +161,8 @@ class full_run_serp:
         compare_path_list = list()
         for num_SP_iteration in range(num_SP):
             each_step += 1
-            write_file = self.output_path + identifier + str(each_step) + '.wrk'
+            write_file = self.output_path + \
+                identifier + str(each_step) + '.wrk'
             deck_name = self.output_path + identifier + str(each_step)
             compare_path = deck_name
             compare_path_list.append(compare_path)
@@ -165,7 +170,8 @@ class full_run_serp:
             current_serpent_time = current_actual_time - self.start_day
             final_time = current_serpent_time
 
-            SP_read = self.mat_path + str(int(self.start_day + LGA_step_size + 3 * (each_step - 1)))
+            SP_read = self.mat_path + \
+                str(int(self.start_day + LGA_step_size + 3 * (each_step - 1)))
 
             cur_deck_maker = serpent_input.create_deck(
                 reprocessing_dict,
@@ -200,7 +206,12 @@ class full_run_serp:
 
         return reprocessing_constants
 
-    def linear_generation(self, identifier='LGA', LGA_step_size=3, iso_dict=False, num_SP=5):
+    def linear_generation(
+            self,
+            identifier='LGA',
+            LGA_step_size=3,
+            iso_dict=False,
+            num_SP=5):
         '''
         This function will run the linear generation approximation and generate results.
 
@@ -221,7 +232,10 @@ class full_run_serp:
         '''
 
         reprocessing_dict = self.linear_generation_reprocessing_constants(
-            identifier=identifier, LGA_step_size=LGA_step_size, isos_dict=iso_dict, num_SP=num_SP)
+            identifier=identifier,
+            LGA_step_size=LGA_step_size,
+            isos_dict=iso_dict,
+            num_SP=num_SP)
         read_file = False
         read_time = 0
         for each_step in range(self.N):
@@ -248,7 +262,6 @@ class full_run_serp:
             read_file = write_file
             read_time = current_serpent_time
         return
-
 
     def cycle_time_decay(self, identifier='CTD'):
         '''
@@ -398,7 +411,12 @@ if __name__ == '__main__':
                 SP_plot_builder = serpent_output.saltproc_data(
                     ui.base_material_path, element_dictionary, target, SP_eval_times)
                 SP_mass = SP_plot_builder.SP_target_reader()
-                plt.plot(SP_eval_times, SP_mass, label=SP_identifier, alpha=ui.overlap, lw=ui.width)
+                plt.plot(
+                    SP_eval_times,
+                    SP_mass,
+                    label=SP_identifier,
+                    alpha=ui.overlap,
+                    lw=ui.width)
             for each_step in range(ui.number_serp_steps):
 
                 if ui.cycle_time_decay:
@@ -448,7 +466,7 @@ if __name__ == '__main__':
                         LIA_actual_time,
                         LIA_plot_mass,
                         label=LIA_identifier, alpha=ui.overlap, lw=ui.width)
-                
+
                 if ui.linear_generation:
                     LGA_plot_builder = serpent_output.serpent_data(
                         close_boolean,
