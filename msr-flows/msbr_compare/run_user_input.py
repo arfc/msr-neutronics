@@ -104,7 +104,7 @@ class full_run_serp:
         return
 
     def linear_generation_reprocessing_constants(
-            self, identifier='LGA_repr', LGA_step_size=3, isos_dict=False):
+            self, identifier='LGA_repr', LGA_step_size=3, isos_dict=False, num_SP=1):
         '''
         Run appropriate Serpent files to generate the desired reprocessing constants
 
@@ -116,6 +116,8 @@ class full_run_serp:
             Size of step to use when approximating removal (3 recommended since only 1 extra SaltProc step would be needed).
         isos_dict : dict (optional)
             Dictionary of important isotopes to prioritize over general element mass.
+        num_SP : int (optional)
+            Number of SaltProc materials to compare against generating removal rate.
 
 
         Returns
@@ -152,30 +154,35 @@ class full_run_serp:
         run.run_script()
 
         # SaltProc data to determine removal rate to apply
-        each_step = 1
-        write_file = self.output_path + identifier + str(each_step) + '.wrk'
-        deck_name = self.output_path + identifier + str(each_step)
-        compare_path = deck_name
-        current_actual_time = self.step_size * each_step + self.start_day
-        current_serpent_time = current_actual_time - self.start_day
-        final_time = current_serpent_time
-        SP_read = self.mat_path + str(int(LGA_step_size))
+        compare_path_list = list()
+        print(f'Total num_SP: {num_SP}')
+        for num_SP_iteration in range(num_SP):
+            each_step += 1
+            write_file = self.output_path + identifier + str(each_step) + '.wrk'
+            deck_name = self.output_path + identifier + str(each_step)
+            compare_path = deck_name
+            compare_path_list.append(compare_path)
+            current_actual_time = self.step_size * each_step + self.start_day
+            current_serpent_time = current_actual_time - self.start_day
+            final_time = current_serpent_time
+            SP_read = self.mat_path + str(int(self.start_day + LGA_step_size + 3 * (each_step - 1)))
+            print(f'Reading SaltProc file {SP_read}')
 
-        cur_deck_maker = serpent_input.create_deck(
-            reprocessing_dict,
-            read_file,
-            read_time,
-            write_file,
-            SP_read,
-            self.template_name,
-            self.template_path,
-            self.step_size,
-            self.inv_list,
-            identifier,
-            deck_name)
-        deck = cur_deck_maker.build_serpent_deck()
-        run = serpent_input.run_deck(deck_name, deck, write_file)
-        run.run_script()
+            cur_deck_maker = serpent_input.create_deck(
+                reprocessing_dict,
+                read_file,
+                read_time,
+                write_file,
+                SP_read,
+                self.template_name,
+                self.template_path,
+                self.step_size,
+                self.inv_list,
+                identifier,
+                deck_name)
+            deck = cur_deck_maker.build_serpent_deck()
+            run = serpent_input.run_deck(deck_name, deck, write_file)
+            run.run_script()
 
         # now that it has run, calculate reprocessing constants based on linear
         # growth model
@@ -187,14 +194,14 @@ class full_run_serp:
             compare_time,
             final_time,
             initial_path,
-            compare_path,
+            compare_path_list,
             final_path,
             LGA_step_size)
         reprocessing_constants = repr_builder.repr_cnst_calc(isos_dict)
 
         return reprocessing_constants
 
-    def linear_generation(self, identifier='LGA', LGA_step_size=3, iso_dict=False):
+    def linear_generation(self, identifier='LGA', LGA_step_size=3, iso_dict=False, num_SP=5):
         '''
         This function will run the linear generation approximation and generate results.
 
@@ -206,6 +213,8 @@ class full_run_serp:
             Size of step to use when approximating removal (3 recommended since only 1 extra SaltProc step would be needed).
         iso_dict : dict (optional)
             Dictionary of important isotopes to prioritize over general element mass.
+        num_SP : int (optional)
+            Number of SaltProc materials to compare against generating removal rate.
 
         Returns
         -------
@@ -213,7 +222,7 @@ class full_run_serp:
         '''
 
         reprocessing_dict = self.linear_generation_reprocessing_constants(
-            identifier=identifier, LGA_step_size=LGA_step_size, isos_dict=iso_dict)
+            identifier=identifier, LGA_step_size=LGA_step_size, isos_dict=iso_dict, num_SP=num_SP)
         read_file = False
         read_time = 0
         for each_step in range(self.N):
@@ -289,9 +298,6 @@ if __name__ == '__main__':
     output_path = f'./{ui.path_to_dump_files}/'
     misc_funcs.set_directory(output_path)
 
-    overlap = 0.5
-    width = 3
-
     element_dictionary = dict()
     for index in range(len(ui.element_flow_list)):
         element_dictionary[ui.element_flow_list[index]] = [
@@ -335,7 +341,8 @@ if __name__ == '__main__':
         builder.linear_generation(
             identifier=LIA_identifier,
             LGA_step_size=ui.LGA_step_size,
-            iso_dict=ui.important_isotopes)
+            iso_dict=ui.important_isotopes,
+            num_SP=ui.linear_SP_count)
         end_timer_count = time.time()
         print(f'Ran LIA, took {end_timer_count - start_timer_count}s')
 
@@ -358,7 +365,8 @@ if __name__ == '__main__':
             output_path)
         builder.linear_generation(
             identifier=LGA_identifier,
-            LGA_step_size=ui.LGA_step_size)
+            LGA_step_size=ui.LGA_step_size,
+            num_SP=ui.linear_SP_count)
         end_timer_count = time.time()
         print(f'Ran LGA, took {end_timer_count - start_timer_count}s')
 
@@ -391,7 +399,7 @@ if __name__ == '__main__':
                 SP_plot_builder = serpent_output.saltproc_data(
                     ui.base_material_path, element_dictionary, target, SP_eval_times)
                 SP_mass = SP_plot_builder.SP_target_reader()
-                plt.plot(SP_eval_times, SP_mass, label=SP_identifier, alpha=overlap, lw=width)
+                plt.plot(SP_eval_times, SP_mass, label=SP_identifier, alpha=ui.overlap, lw=ui.width)
             for each_step in range(ui.number_serp_steps):
 
                 if ui.cycle_time_decay:
@@ -407,7 +415,7 @@ if __name__ == '__main__':
                     plt.plot(
                         CTD_actual_time,
                         CTD_plot_mass,
-                        label=CTD_identifier, alpha=overlap, lw=width)
+                        label=CTD_identifier, alpha=ui.overlap, lw=ui.width)
 
                 if ui.control:
                     CTRL_plot_builder = serpent_output.serpent_data(
@@ -422,7 +430,7 @@ if __name__ == '__main__':
                     plt.plot(
                         CTRL_actual_time,
                         CTRL_plot_mass,
-                        label=CTRL_identifier, alpha=overlap, lw=width)
+                        label=CTRL_identifier, alpha=ui.overlap, lw=ui.width)
 
                 if ui.separate_core_piping:
                     print('Not yet available')
@@ -440,7 +448,7 @@ if __name__ == '__main__':
                     plt.plot(
                         LIA_actual_time,
                         LIA_plot_mass,
-                        label=LIA_identifier, alpha=overlap, lw=width)
+                        label=LIA_identifier, alpha=ui.overlap, lw=ui.width)
                 
                 if ui.linear_generation:
                     LGA_plot_builder = serpent_output.serpent_data(
@@ -455,7 +463,7 @@ if __name__ == '__main__':
                     plt.plot(
                         LGA_actual_time,
                         LGA_plot_mass,
-                        label=LGA_identifier, alpha=overlap, lw=width)
+                        label=LGA_identifier, alpha=ui.overlap, lw=ui.width)
 
             plt.xlabel('Time [d]')
             plt.ylabel('Mass [g]')

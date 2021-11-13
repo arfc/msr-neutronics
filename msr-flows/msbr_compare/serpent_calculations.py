@@ -18,7 +18,7 @@ class linear_generation:
             compare_time,
             final_time,
             initial_path,
-            compare_path,
+            compare_paths,
             final_path,
             step_days):
         '''
@@ -34,8 +34,8 @@ class linear_generation:
             Time at which final file evaluated.
         initial_path : str
             Path to the initial file.
-        compare_path : str
-            Path to the comparison file.
+        compare_paths : list
+            List of paths to the comparison files.
         final_path : str
             Path to the final file.
         step_days : float
@@ -46,15 +46,12 @@ class linear_generation:
         None
 
         '''
-        #self.compare_atoms = compare_atoms
-        #self.final_atoms = final_atoms
-        #self.initial_atoms = initial_atoms
         self.initial_time = initial_time
         self.final_time = final_time
         self.compare_time = compare_time
         self.initial_path = initial_path
         self.final_path = final_path
-        self.compare_path = compare_path
+        self.compare_path = compare_paths
         self.step_size = step_days
 
         return
@@ -115,15 +112,22 @@ class linear_generation:
 
         initial_file = str(self.initial_path) + '_dep.m'
         final_file = str(self.final_path) + '_dep.m'
-        compare_file = str(self.compare_path) + '_dep.m'
+        compare_file = list()
+        for each_file in self.compare_path:
+            compare_file.append(str(each_file) + '_dep.m')
 
         initial_dep = st.read(initial_file, reader='dep')
         final_dep = st.read(final_file, reader='dep')
-        compare_dep = st.read(compare_file, reader='dep')
+        compare_dep = list()
+        for each_file in compare_file:
+            compare_dep.append(st.read(each_file, reader='dep'))
+
         try:
             initial_fuel_mat = initial_dep.materials['fuel']
             final_fuel_mat = final_dep.materials['fuel']
-            compare_fuel_mat = compare_dep.materials['fuel']
+            compare_fuel_mat = list()
+            for each_fuel in compare_dep:
+                compare_fuel_mat.append(each_fuel.materials['fuel'])
         except BaseException:
             raise Exception('Fuel name set to non-"fuel" value.')
 
@@ -131,12 +135,16 @@ class linear_generation:
             initial_dep.metadata['days'] == self.initial_time)[0][0]
         final_day_index = np.where(
             final_dep.metadata['days'] == self.final_time)[0][0]
-        compare_day_index = np.where(
-            compare_dep.metadata['days'] == self.compare_time)[0][0]
+        compare_day_index = list()
+        for each_mat in compare_dep:
+            compare_day_index.append(np.where(
+                each_mat.metadata['days'] == self.compare_time)[0][0])
 
         initial_vol = initial_fuel_mat.data['volume'][initial_day_index]
         final_vol = final_fuel_mat.data['volume'][final_day_index]
-        compare_vol = compare_fuel_mat.data['volume'][compare_day_index]
+        compare_vol = list()
+        for each_fuel in range(len(compare_fuel_mat)):
+            compare_vol.append(compare_fuel_mat[each_fuel].data['volume'][compare_day_index[each_fuel]])
 
         element_list = initial_fuel_mat.names
 
@@ -157,9 +165,12 @@ class linear_generation:
                 'days', 'adens', [self.initial_time], element_name)[0][0] * initial_vol
             final_atoms = final_fuel_mat.getValues(
                 'days', 'adens', [self.final_time], element_name)[0][0] * final_vol
-            compare_atoms = compare_fuel_mat.getValues(
-                'days', 'adens', [self.compare_time], element_name)[0][0] * compare_vol
+            compare_atoms = list()
+            for each_one in range(len(compare_fuel_mat)):
+                compare_atoms.append(compare_fuel_mat[each_one].getValues(
+                    'days', 'adens', [self.compare_time], element_name)[0][0] * compare_vol[each_one])
 
+            avg_compare_atoms = sum(compare_atoms) / len(compare_atoms)
             C = (final_atoms - initial_atoms) / (step_size_seconds)
             initial_guess = 1E-5
             root_info = root(
@@ -167,7 +178,7 @@ class linear_generation:
                 initial_guess,
                 args=(
                     initial_atoms,
-                    compare_atoms,
+                    avg_compare_atoms,
                     final_atoms),
                 tol=1E-7)
             reprocessing_constant = root_info.x[0]
