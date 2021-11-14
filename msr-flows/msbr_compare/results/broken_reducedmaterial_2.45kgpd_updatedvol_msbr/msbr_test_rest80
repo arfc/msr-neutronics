@@ -1,0 +1,285 @@
+% Include file with burnable material composition on the line below
+%include "templates/mats/msbr_saltproc_prepr_comp.ini"
+
+% Include file with geometry on the line below
+include "templates/geometry/msbr_full.ini"
+
+
+mat fuelsalt0 -3.35
+rgb 10 10 10
+vol 25900000.0
+burn 1
+fix 09c 900
+
+3007.09c  -7.87474673879085E-02
+4009.09c  -2.25566879138321E-02
+9019.09c  -4.54003012179284E-01
+90232.09c  -4.35579130482336E-01
+92233.09c  -9.11370203663893E-03
+    
+
+        
+mat fuelsalt1 -3.35
+rgb 12 12 12
+vol 25900000.0
+burn 1
+fix 09c 900
+
+3007.09c  -7.87474673879085E-02
+4009.09c  -2.25566879138321E-02
+9019.09c  -4.54003012179284E-01
+90232.09c  -4.35579130482336E-01
+92233.09c  -9.11370203663893E-03
+    
+
+        
+mat fuelsalt2 -1e-05
+rgb 14 14 14
+vol 25900000.0
+burn 1
+fix 09c 900
+
+3007.09c  -7.87474673879085E-02
+4009.09c  -2.25566879138321E-02
+9019.09c  -4.54003012179284E-01
+90232.09c  -4.35579130482336E-01
+92233.09c  -9.11370203663893E-03
+    
+
+        
+
+% --- Moderator graphite:
+mat moder    -1.84 tmp 900 rgb 68 1 84 moder gr 6000 6000.09c    -1.0 %tmp 908
+
+% --- Hastelloy N
+mat hast     -8.671
+rgb 127 205 187
+% Natural Ni
+28000.09c    -0.677
+%28058.09c   -0.4562614
+%28060.09c   -0.1804391
+%28061.09c   -0.0079425
+%28062.09c   -0.0256463
+%28064.09c   -0.0067108
+
+% Natural W
+74000.09c   -0.250
+%74180.09c   -0.0003417
+%74182.09c   -0.0757228
+%74183.09c   -0.0004134
+%74184.09c   -0.0893641
+%74186.09c   -0.0841580
+
+% Natural Cr
+24000.09c   -0.070
+%24050.09c   -0.0029250
+%24052.09c   -0.0585905
+%24053.09c   -0.0067708
+%24054.09c   -0.0017137
+
+% Al
+13027.09c   -0.003
+
+% Core Salt
+mat fuelsalt999 -3.35
+vol 22800000.0
+burn 1
+fix 09c 900
+3007.09c  -7.87474673879085E-02
+4009.09c  -2.25566879138321E-02
+9019.09c  -4.54003012179284E-01
+90232.09c  -4.35579130482336E-01
+92233.09c  -9.11370203663893E-03
+
+
+% Feedsalt
+mat feedsalt -4.9602
+vol 10000000000.0
+burn 1
+90232.09c   0.55
+92233.09c   0.45
+
+% Waste Materials
+mat waste_sparger -0.0001
+vol 25900000.0
+burn 1
+92238.09c 1
+
+mat waste_entrainment_separator -0.0001
+vol 25900000.0
+burn 1
+92238.09c 1
+
+mat waste_nickel_filter -0.0001
+vol 25900000.0
+burn 1
+92238.09c 1
+
+mat waste_liquid_metal -0.0001
+vol 25900000.0
+burn 1
+92238.09c 1
+
+
+% --- Thermal scattering data for graphite:
+therm gr 900 gre7.18t gre7.20t  % 900K C-nat
+%therm gr 900 gr05.32t gr06.32t  % 900K C-nat
+%therm gr 900 gra-800.ACE gra-1000.ACE
+
+
+set title "MSBR Saltproc long-term, 91% removal, BOL, fresh fuel, ENDF"
+
+%set acelib "/home/luke/serp/xsdata/jeff32/sss_jeff32.xsdata"
+%set declib "/home/luke/serp/xsdata/jeff32/sss_jeff311.dec"
+%set nfylib "/home/luke/serp/xsdata/jeff32/sss_jeff311.nfy"
+%set sfylib "/home/luke/serp/xsdata/jeff32/sss_jeff33.sfy"
+
+%set acelib "/home/luke/serp/xsdata/jeff312/sss_jeff312.xsdata"
+%set declib "/home/luke/serp/xsdata/jeff312/sss_jeff33.dec"
+%set nfylib "/home/luke/serp/xsdata/jeff312/sss_jeff33.nfy"
+%set sfylib "/home/luke/serp/xsdata/jeff312/sss_jeff33.sfy"
+
+set acelib "/home/luke/xsdata/endfb7/sss_endfb7u.xsdata"
+set declib "/home/luke/xsdata/endfb7/sss_endfb7.dec"
+set nfylib "/home/luke/xsdata/endfb7/sss_endfb7.nfy"
+
+
+
+% --- Neutron population and criticality cycles:
+
+set pop 300 400 10 1.0 1 %500 400 60 1.0 1  %30000 400 100 1.0 1
+
+set egrid 5e-5 1e-10 15.0
+
+% --- Cut-offs:
+
+set fpcut   1E-6
+set stabcut 1E-12
+
+
+% --- Depletion parameters
+% --- Options for burnup calculation:
+%set bumode  2  % CRAM method
+%set pcc     2  % Predictor-corrector calculation off (Linear extrapolation)
+set pcc 0
+
+
+set power 2.25E+9 
+%set power 0
+
+set inventory fuel all
+%set inventory
+%92235
+%541350
+%531350
+%90232
+%92233
+%Th
+%U
+%Xe
+%Kr
+%H
+%922330
+%922350
+%922340
+%922380
+
+
+
+set rfr -0.009259259259259259 msbr_test_rest79.wrk
+set rfw 1
+
+
+% Main pumps
+
+mflow outcore_pump
+ all 0.1135964912280702
+    
+mflow cycle_pump
+ all 0.1
+
+mflow null_pump
+ all 0
+
+% Waste pumps
+mflow sparger_pump
+  Xe 0.06
+  Kr 0.06
+  H  0.06
+
+mflow entrainment_pump
+  Xe 0.097
+  Kr 0.097
+  H 0.097
+
+mflow nickel_pump
+  Se 0.1
+  Nb 0.1
+  Mo 0.1
+  Tc 0.1
+  Ru 0.1
+  Rh 0.1
+  Pd 0.1
+  Ag 0.1
+  Sb 0.1
+  Te 0.1
+
+mflow bypass_pump
+  all 0.09000000000000001
+
+mflow liquid_metal_pump
+  all 0.010000000000000002
+
+mflow waste_metal_pump
+  Y   0.0057
+  La  0.0057
+  Ce  0.0057
+  Pr  0.0057
+  Nd  0.0057
+  Pm  0.0057
+  Sm  0.0057
+  Gd  0.0057
+  Zr  0.0057
+  Cd  0.0057
+  In  0.0057
+  Sn  0.0057
+ 
+
+
+
+ 
+mflow feed_pump
+  Th 5.716802040538986e-14
+  U  5.716802040538986e-14
+
+rep flowprocess
+
+% Waste flows
+
+rc fuelsalt0 waste_sparger sparger_pump 2
+rc fuelsalt0 waste_entrainment_separator entrainment_pump 2
+rc fuelsalt0 waste_nickel_filter nickel_pump 2
+rc fuelsalt0 waste_liquid_metal waste_metal_pump 2
+
+rc fuelsalt2 waste_sparger sparger_pump 2
+rc fuelsalt2 waste_entrainment_separator entrainment_pump 2
+rc fuelsalt2 waste_nickel_filter nickel_pump 2
+rc fuelsalt2 waste_liquid_metal waste_metal_pump 2
+
+
+
+% Main flows
+
+rc feedsalt fuelsalt999 feed_pump 2
+
+rc fuelsalt0 fuelsalt999 cycle_pump 2
+       
+rc fuelsalt999 fuelsalt2 outcore_pump 2
+       
+
+
+dep
+pro flowprocess
+daystep
+
+0.00011574074074074075
