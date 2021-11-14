@@ -47,7 +47,8 @@ list_inventory = [
     'Th-232',
     'I-135',
     'Kr-83',
-    'Sm-149']
+    'Sm-149',
+    'Xe-134']
 element_flow_list = [
     'krypton',
     'xenon',
