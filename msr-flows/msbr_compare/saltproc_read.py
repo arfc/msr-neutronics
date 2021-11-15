@@ -138,6 +138,20 @@ def filter_out_and_store(isos,
 
 def evaluate(time, hdf5_path, fuel_path):
     '''
+    Custom function added to extract SaltProc data. Writes `fuel_path` output.
+
+    Parameters
+    ----------
+    time : int
+        Time value to extract from, though the time must correspond to a SaltProc time which has been evaluated.
+    hdf5_path : str
+        Path to the hdf5 file with material data.
+    fuel_path : str
+        Path to write the output material data.
+
+    Returns
+    -------
+    None
 
     '''
 
@@ -171,6 +185,7 @@ def evaluate(time, hdf5_path, fuel_path):
                          lib_temp,
                          include_decay_isos,
                          mat_head)
+    return
 
 
 if __name__ == '__main__':
