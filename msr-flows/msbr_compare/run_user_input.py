@@ -236,7 +236,6 @@ class full_run_serp:
             LGA_step_size=LGA_step_size,
             isos_dict=iso_dict,
             num_SP=num_SP)
-        print(f'Linear repr: {reprocessing_dict}')
         read_file = False
         read_time = 0
         for each_step in range(self.N):
@@ -281,7 +280,6 @@ class full_run_serp:
         cycle_time_decay_build = serpent_calculations.cycle_time_decay(
             self.element_flow_list)
         reprocessing_dict = cycle_time_decay_build.repr_cnst_calc()
-        print(f'CTD repr: {reprocessing_dict}')
         read_file = False
         read_time = 0
         for each_step in range(self.N):

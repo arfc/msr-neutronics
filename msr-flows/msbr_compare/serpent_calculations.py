@@ -177,19 +177,12 @@ class linear_generation:
                     self.final_time], element_name)[0][0] * final_vol
             compare_atoms = list()
 
-            print(f'Element: {element}')
-            print(f'Serpent Pull Time: {self.compare_time}')
             for each_one in range(len(compare_fuel_mat)):
-                print(
-                    f'adens: {compare_fuel_mat[each_one].getValues("days", "adens", [self.compare_time], element_name)[0][0]}')
-                print(f'vol: {compare_vol[each_one]}')
                 compare_atoms.append(
                     compare_fuel_mat[each_one].getValues(
                         'days', 'adens', [
                             self.compare_time], element_name)[0][0] * compare_vol[each_one])
 
-            print(f'Compare atoms: {compare_atoms}')
-            print()
             avg_compare_atoms = sum(compare_atoms) / len(compare_atoms)
             C = (final_atoms - initial_atoms) / (step_size_seconds)
             initial_guess = 1E-5
