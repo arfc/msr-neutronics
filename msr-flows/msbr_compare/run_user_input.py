@@ -1,4 +1,3 @@
-#from user_input import *
 import user_input as ui
 import serpent_input
 import serpent_calculations
@@ -126,6 +125,8 @@ class full_run_serp:
 
         Returns
         -------
+        reprocessing_constants : dict
+            Dictionary of each inventory item in Serpent depletion output and corresponding reprocessing constant.
 
         '''
 
@@ -232,10 +233,10 @@ class full_run_serp:
         '''
 
         reprocessing_dict = self.linear_generation_reprocessing_constants(
-            identifier=identifier,
             LGA_step_size=LGA_step_size,
             isos_dict=iso_dict,
             num_SP=num_SP)
+        print(f'Linear repr: {reprocessing_dict}')
         read_file = False
         read_time = 0
         for each_step in range(self.N):
@@ -271,11 +272,16 @@ class full_run_serp:
         ----------
         identifier : str (optional)
             Used to generate the file name.
+        
+        Returns
+        -------
+        None
 
         '''
         cycle_time_decay_build = serpent_calculations.cycle_time_decay(
             self.element_flow_list)
         reprocessing_dict = cycle_time_decay_build.repr_cnst_calc()
+        print(f'CTD repr: {reprocessing_dict}')
         read_file = False
         read_time = 0
         for each_step in range(self.N):

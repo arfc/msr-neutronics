@@ -52,6 +52,11 @@ class create_deck:
             Short string to add to files for separation of results
         deck_name : str
             Full path and name of desired input file
+
+        Returns
+        -------
+        None
+
         '''
         self.repr = reprocessing
         self.read = read_file
@@ -123,8 +128,6 @@ class create_deck:
             Serpent based time to read from
         write : str
             Path to file to write, False if no write
-        write_t : float
-            Serpent based time to write to
         identifier : str (optional)
             Unique identifier to add
 
@@ -154,7 +157,7 @@ set rfw 1 "{write}"
         Parameters
         ----------
         Reprocessing_dictionary : dictionary
-        Provides element and corresponding reprocessing constant; can be False
+            Provides element and corresponding reprocessing constant; can be False
 
         Returns
         -------
@@ -254,6 +257,10 @@ class run_deck:
             Version to run with (defauly is using sss2)
         write_file : str
             Name/path of file writing binary output to
+        
+        Returns
+        -------
+        None
 
         '''
         self.version = version
@@ -267,6 +274,14 @@ class run_deck:
         '''
         Writes the input_script string to a file with the INPUT_NAME
         which is run and outputs to the OUTPUT_NAME.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        None
 
         '''
 
@@ -288,6 +303,14 @@ class run_deck:
         '''
         Allows the script to continue once the .wrk file is generated.
         Checks the if the length of the output file is being updated.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        None
 
         Raises
         ------

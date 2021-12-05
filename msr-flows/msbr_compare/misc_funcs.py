@@ -27,6 +27,17 @@ def list_to_print(options):
 
 def convert_list_to_string(input_list):
     '''
+    Converts a list to a string with each value separated with a new paragraph
+
+    Parameters
+    ----------
+    input_list : list
+        List of values
+
+    Returns
+    -------
+    output : str
+        String output with each value in `input_list` recorded
 
     '''
     output = ''
@@ -38,6 +49,19 @@ def convert_list_to_string(input_list):
 
 
 def set_directory(target_dir):
+    '''
+    Removes the indicated directory if it exists and recreates a fresh version
+
+    Parameters
+    ----------
+    target_dir : str
+        Name of the target directory to be created
+
+    Returns
+    -------
+    None
+
+    '''
     try:
         os.system('rm ' + str(target_dir) + ' -r')
         print('Removed directory ' + str(target_dir))
@@ -50,7 +74,8 @@ def set_directory(target_dir):
 
 def SP_data_initializer(time_list, hdf5_path, fuel_path):
     '''
-    This function is used to initialize the working directory with each fuel composition at each time step
+    This function is used to initialize the working directory with each fuel
+        composition at each time step
 
     Parameters
     ----------
@@ -60,6 +85,10 @@ def SP_data_initializer(time_list, hdf5_path, fuel_path):
         Path to the location of hdf5 file with data.
     fuel_path : str
         Path to location of fuel files to be created.
+    
+    Returns
+    -------
+    None
 
     '''
     delay = 0.01

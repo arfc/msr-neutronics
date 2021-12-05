@@ -138,6 +138,20 @@ def filter_out_and_store(isos,
 
 def evaluate(time, hdf5_path, fuel_path):
     '''
+    Evaluates hdf5 file at target time, generating input at target path.
+
+    Parameters
+    ----------
+    time : float
+        Time [days] within SaltProc time values
+    hdf5_path : str
+        Location of hdf5 file
+    fuel_path : str
+        Location to generate output
+
+    Returns
+    -------
+    None
 
     '''
 
@@ -171,6 +185,7 @@ def evaluate(time, hdf5_path, fuel_path):
                          lib_temp,
                          include_decay_isos,
                          mat_head)
+    return
 
 
 if __name__ == '__main__':

@@ -81,21 +81,25 @@ class linear_generation:
         sec_per_day = 24 * 3600
         step_size_seconds = self.step_size * sec_per_day
         C = (final_atoms - initial_atoms) / (step_size_seconds)
-        c2 = initial_atoms - C / x
-        soln = -(final_atoms - compare_atoms) + (initial_atoms - C / x) * \
-            (1 - np.exp(-x * self.final_time)) + C * self.final_time
+        # soln = -(final_atoms - compare_atoms) + (initial_atoms - C / x) * \
+        #    (1 - np.exp(-x * self.final_time)) + C * self.final_time
+        soln = -(final_atoms - compare_atoms) + initial_atoms * (1 - np.exp(-x * self.final_time)
+                                                                 ) + C / x * (np.exp(-x * self.final_time) - 1) + C * self.final_time
         return soln
 
     def repr_cnst_calc(self, iso_dict=False):
         '''
         Calculate reprocessing constants to be used for each element.
 
+        Parameters
+        ----------
+        iso_dict : dict (optional)
+            Dictionary containing element name and important isotope for that element. Can also take False boolean.
+
         Returns
         -------
         reprocessing_dictionary : dict
             Dictionary of each inventory item in Serpent depletion output and corresponding reprocessing constant.
-        iso_dict : dict (optional)
-            Dictionary of important isotopes to prioritize over general element mass.
 
 
         Exceptions
@@ -137,7 +141,7 @@ class linear_generation:
             final_day_index = np.where(
                 final_dep.metadata['days'] == self.final_time)[0][0]
         except BaseException:
-            print(f'final time: {self.final_time}')
+            print(f'Final time: {self.final_time}')
             print(f'Serpent times: {final_dep.metadata["days"]}')
             print(np.where(final_dep.metadata['days'] == self.final_time))
         compare_day_index = list()
@@ -172,12 +176,20 @@ class linear_generation:
                 'days', 'adens', [
                     self.final_time], element_name)[0][0] * final_vol
             compare_atoms = list()
+
+            print(f'Element: {element}')
+            print(f'Serpent Pull Time: {self.compare_time}')
             for each_one in range(len(compare_fuel_mat)):
+                print(
+                    f'adens: {compare_fuel_mat[each_one].getValues("days", "adens", [self.compare_time], element_name)[0][0]}')
+                print(f'vol: {compare_vol[each_one]}')
                 compare_atoms.append(
                     compare_fuel_mat[each_one].getValues(
                         'days', 'adens', [
                             self.compare_time], element_name)[0][0] * compare_vol[each_one])
 
+            print(f'Compare atoms: {compare_atoms}')
+            print()
             avg_compare_atoms = sum(compare_atoms) / len(compare_atoms)
             C = (final_atoms - initial_atoms) / (step_size_seconds)
             initial_guess = 1E-5
@@ -224,6 +236,10 @@ class cycle_time_decay:
     def repr_cnst_calc(self):
         '''
         Calculate reprocessing calculation based on MSBR cycle time.
+
+        Parameters
+        ----------
+        None
 
         Returns
         -------
