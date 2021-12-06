@@ -1,0 +1,77 @@
+
+set title "Feedback Run"
+
+
+%__________SURFACE DEFINITIONS__________%
+% Outer graphite
+surf ogc cuboid -50 50 -50 50 -50 50
+% Inner Fuel Salt Cube vol of 1E6
+surf ifs cuboid -25 25 -25 25 -25 25
+% Subdivisions
+
+{{surfaces}}
+
+
+%__________CELL DEFINITIONS__________%
+% Outside
+cell 999 0 outside ogc
+cell gr_cu 0 graphite ifs -ogc
+%cell fs_cu 0 fuelsalt -ifs
+% Subdivisions
+
+{{cells}}
+
+%__________MATERIAL DEFINITIONS__________%
+% Graphite Moderator
+mat graphite -1.8 % moder graph 6000
+rgb 130 130 130
+6000.09c -1
+
+% Fuel Salt
+
+{{materials}}
+
+{{read_write}}
+
+
+set pcc 0
+set powdens 0
+set mcvol 500000
+set printm 1
+set inventory
+ Th
+ U
+ 922350
+ 932370
+ 350870
+ 350880
+ 350890
+ 350900
+ 350920
+ 360930
+ 370930
+ 370940
+ 531370
+ 531380
+ 531390
+ 531400
+
+
+set acelib "/home/luke/serp/xsdata/jeff312/sss_jeff312.xsdata"
+set declib "/home/luke/serp/xsdata/jeff312/sss_jeff33.dec"
+set nfylib "/home/luke/serp/xsdata/jeff312/sss_jeff33.nfy"
+
+set pop 10000 100 40
+
+
+{{mflows_rep}}
+
+rep flowprocess
+
+{{reprocessing_control}}
+
+dep
+pro flowprocess
+daystep
+
+{{time_vals}}
