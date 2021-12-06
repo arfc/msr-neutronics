@@ -14,7 +14,8 @@ class serpent_data:
         Parameters
         ----------
         close_bool : boolean
-            Set to True to close a plot. Allows for multiple datasets on a single plot
+            Set to True to close a plot. Allows for multiple
+                    datasets on a single plot
         file_name : str (optional)
             Name of the file which has results and depletion named after it.
         material_name : str (optional)
@@ -37,7 +38,8 @@ class serpent_data:
 
     def serp_targ_reader(self, target):
         '''
-        Collect the data of a particular target in a particular material from serpent
+        Collect the data of a particular target in a particular material
+                from serpent
 
         Parameters
         ----------
@@ -75,7 +77,8 @@ class serpent_data:
 
     def extract_tot_atoms(self, day_value=0):
         '''
-        Extract the total atoms from the depletion data from the given time index.
+        Extract the total atoms from the depletion data from
+                the given time index.
 
         Parameters
         ----------
@@ -121,8 +124,10 @@ class saltproc_data:
         SP_mat_path : str
             Path to the SaltProc material path.
         element_dictionary : dict
-            Dictionary with full element names as keys and returns a list of the abbreviated name followed by atomic number.
-            (i.e. element_dictionary['xenon'] = ['Xe', ' 54']) (the space before the atomic number is needed)
+            Dictionary with full element names as keys and returns a
+                list of the abbreviated name followed by atomic number.
+            (i.e. element_dictionary['xenon'] = ['Xe', ' 54'])
+            (the space before the atomic number is needed)
         target : str
             Name of target to extract.
         eval_times : list
@@ -140,7 +145,8 @@ class saltproc_data:
 
     def SP_target_extractor(self, material_path):
         '''
-        Go to material input, extract mass of target. Target may be isotope or element; mass will be sum.
+        Go to material input, extract mass of target. Target may be isotope
+                or element; mass will be sum.
 
         Parameters
         ----------
@@ -188,7 +194,8 @@ class saltproc_data:
 
     def SP_target_reader(self):
         '''
-        Run command to generate masses for times of target. SaltProc data needs to be available in form "xxxx_{day}"
+        Run command to generate masses for times of target. SaltProc data
+                needs to be available in form "xxxx_{day}"
 
         Returns
         -------

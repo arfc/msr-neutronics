@@ -10,7 +10,8 @@ import time
 
 class full_run_serp:
     '''
-    This class combines other modules and allows for Serpent to be fully run with different flows.
+    This class combines other modules and allows for Serpent to be
+            fully run with different flows.
     '''
 
     def __init__(
@@ -32,7 +33,8 @@ class full_run_serp:
         number_serp_steps : int
             Number of steps to run the model for over the given time frame.
         base_material_path : str
-            Provides full path without indexing (i.e. ss-data-test/ss-fuel_ where #### would come after).
+            Provides full path without indexing
+                (i.e. ss-data-test/ss-fuel_ where #### would come after).
         template_path : str
             Path to template.
         template_name : str
@@ -42,9 +44,11 @@ class full_run_serp:
         end_time : float
             Time in days at which to end (limit 6000).
         list_inventory : list
-            List of strings containing extra isotopes/elements to track (i.e. ['Xe135']).
+            List of strings containing extra isotopes/elements
+                    to track (i.e. ['Xe135']).
         element_flow_list : list
-            List of strings containing each element (i.e. ['krypton', 'xenon']).
+            List of strings containing each element 
+                    (i.e. ['krypton', 'xenon']).
         output_path : str
             Path to a directory containing decks and outputs
 
@@ -109,24 +113,29 @@ class full_run_serp:
             isos_dict=False,
             num_SP=1):
         '''
-        Run appropriate Serpent files to generate the desired reprocessing constants
+        Run appropriate Serpent files to generate the desired
+                reprocessing constants
 
         Parameters
         ----------
         identifier : str (optional)
             Used to generate the file name.
         LGA_step_size : int (optional)
-            Size of step to use when approximating removal (3 recommended since only 1 extra SaltProc step would be needed).
+            Size of step to use when approximating removal (3 recommended
+                    since only 1 extra SaltProc step would be needed).
         isos_dict : dict (optional)
-            Dictionary of important isotopes to prioritize over general element mass.
+            Dictionary of important isotopes to prioritize over
+                    general element mass.
         num_SP : int (optional)
-            Number of SaltProc materials to compare against generating removal rate.
+            Number of SaltProc materials to compare against
+                    generating removal rate.
 
 
         Returns
         -------
         reprocessing_constants : dict
-            Dictionary of each inventory item in Serpent depletion output and corresponding reprocessing constant.
+            Dictionary of each inventory item in Serpent depletion output
+                        and corresponding reprocessing constant.
 
         '''
 
@@ -214,18 +223,22 @@ class full_run_serp:
             iso_dict=False,
             num_SP=5):
         '''
-        This function will run the linear generation approximation and generate results.
+        This function will run the linear generation
+            approximation and generate results.
 
         Parameters
         ----------
         identifier : str (optional)
             Used to generate the file name.
         LGA_step_size : int (optional)
-            Size of step to use when approximating removal (3 recommended since only 1 extra SaltProc step would be needed).
+            Size of step to use when approximating removal (3 recommended
+                    since only 1 extra SaltProc step would be needed).
         iso_dict : dict (optional)
-            Dictionary of important isotopes to prioritize over general element mass.
+            Dictionary of important isotopes to prioritize over
+                    general element mass.
         num_SP : int (optional)
-            Number of SaltProc materials to compare against generating removal rate.
+            Number of SaltProc materials to compare against
+                    generating removal rate.
 
         Returns
         -------
@@ -412,9 +425,10 @@ if __name__ == '__main__':
 
             if ui.saltproc:
                 SP_identifier = 'SP'
-                SP_plot_builder = serpent_output.saltproc_data(
-                    ui.base_material_path, element_dictionary, target, SP_eval_times)
-                SP_mass = SP_plot_builder.SP_target_reader()
+                SP_plt = serpent_output.saltproc_data(
+                    ui.base_material_path, element_dictionary,
+                    target, SP_eval_times)
+                SP_mass = SP_plt.SP_target_reader()
                 plt.plot(
                     SP_eval_times,
                     SP_mass,
@@ -424,13 +438,13 @@ if __name__ == '__main__':
             for each_step in range(ui.number_serp_steps):
 
                 if ui.cycle_time_decay:
-                    CTD_plot_builder = serpent_output.serpent_data(
+                    CTD_plt = serpent_output.serpent_data(
                         close_boolean,
                         file_name=output_path +
                         CTD_identifier +
                         str(each_step),
                         material_name='fuel')
-                    CTD_plot_time, CTD_plot_mass = CTD_plot_builder.serp_targ_reader(
+                    CTD_plot_time, CTD_plot_mass = CTD_plt.serp_targ_reader(
                         target)
                     CTD_actual_time = CTD_plot_time + ui.start_time
                     plt.plot(
@@ -439,13 +453,13 @@ if __name__ == '__main__':
                         label=CTD_identifier, alpha=ui.overlap, lw=ui.width)
 
                 if ui.control:
-                    CTRL_plot_builder = serpent_output.serpent_data(
+                    CTRL_plt = serpent_output.serpent_data(
                         close_boolean,
                         file_name=output_path +
                         CTRL_identifier +
                         str(each_step),
                         material_name='fuel')
-                    CTRL_plot_time, CTRL_plot_mass = CTRL_plot_builder.serp_targ_reader(
+                    CTRL_plot_time, CTRL_plot_mass = CTRL_plt.serp_targ_reader(
                         target)
                     CTRL_actual_time = CTRL_plot_time + ui.start_time
                     plt.plot(
@@ -457,13 +471,13 @@ if __name__ == '__main__':
                     print('Not yet available')
 
                 if ui.linear_isotope:
-                    LIA_plot_builder = serpent_output.serpent_data(
+                    LIA_plt = serpent_output.serpent_data(
                         close_boolean,
                         file_name=output_path +
                         LIA_identifier +
                         str(each_step),
                         material_name='fuel')
-                    LIA_plot_time, LIA_plot_mass = LIA_plot_builder.serp_targ_reader(
+                    LIA_plot_time, LIA_plot_mass = LIA_plt.serp_targ_reader(
                         target)
                     LIA_actual_time = LIA_plot_time + ui.start_time
                     plt.plot(
@@ -472,13 +486,13 @@ if __name__ == '__main__':
                         label=LIA_identifier, alpha=ui.overlap, lw=ui.width)
 
                 if ui.linear_generation:
-                    LGA_plot_builder = serpent_output.serpent_data(
+                    LGA_plt = serpent_output.serpent_data(
                         close_boolean,
                         file_name=output_path +
                         LGA_identifier +
                         str(each_step),
                         material_name='fuel')
-                    LGA_plot_time, LGA_plot_mass = LGA_plot_builder.serp_targ_reader(
+                    LGA_plot_time, LGA_plot_mass = LGA_plt.serp_targ_reader(
                         target)
                     LGA_actual_time = LGA_plot_time + ui.start_time
                     plt.plot(

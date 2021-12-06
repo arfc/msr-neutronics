@@ -31,7 +31,8 @@ class create_deck:
         Parameters
         ----------
         reprocessing : dictionary
-            Contains the different elements as well as their reprocessing constants. Can be False.
+            Contains the different elements as well as their
+                    reprocessing constants. Can be False.
         read_file : string
             Path of the file to read. False if reading does not occur.
         read_time : float
@@ -116,7 +117,8 @@ class create_deck:
             write,
             identifier=''):
         '''
-        Generates the string data for the read/write binary functionality of Serpent
+        Generates the string data for the read/write binary
+                functionality of Serpent
 
         Parameters
         ----------
@@ -157,7 +159,8 @@ set rfw 1 "{write}"
         Parameters
         ----------
         Reprocessing_dictionary : dictionary
-            Provides element and corresponding reprocessing constant; can be False
+            Provides element and corresponding reprocessing constant;
+                    can be False
 
         Returns
         -------
@@ -212,7 +215,8 @@ Ba      {reprocessing_dictionary['barium']}
 
     def flow_regime(self, reprocessing_dictionary):
         '''
-        Checks if the reprocessing dictionary is False, and if not, activates the pumps
+        Checks if the reprocessing dictionary is False, and if not,
+                activates the pumps
 
         Parameters
         ----------

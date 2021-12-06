@@ -138,16 +138,16 @@ def filter_out_and_store(isos,
 
 def evaluate(time, hdf5_path, fuel_path):
     '''
-    Evaluates hdf5 file at target time, generating input at target path.
+    Evaluates hdf5 file at target time, generating material data at target path.
 
     Parameters
     ----------
     time : float
-        Time [days] within SaltProc time values
+        Time [days] within SaltProc time values to extract from
     hdf5_path : str
-        Location of hdf5 file
+        Location of hdf5 file with material data
     fuel_path : str
-        Location to generate output
+        Location to output material data
 
     Returns
     -------
@@ -155,13 +155,9 @@ def evaluate(time, hdf5_path, fuel_path):
 
     '''
 
-    #db_file = './msbr_kl_100_saltproc.h5'
-    #new_mat_file = './mat_prepr_comp_geo_1_boc.ini'
     db_file = hdf5_path
     new_mat_file = fuel_path
 
-    # time_after_startup = 6.0   # days, extract the composition after n days
-    # startup
     time_after_startup = time
 
     include_decay_isos = True
@@ -169,8 +165,6 @@ def evaluate(time, hdf5_path, fuel_path):
     xs_path = '/home/luke/xsdata/endfb7/sss_endfb7u.xsdata'
 
     lib_temp = '.09c'
-
-    #mat_head = 'mat  fuel  -4.95 burn 1 fix 09c  900 vol 4.435305E+7\n'
 
     mat_head = 'mat  fuel  -3.35 burn 1 fix 09c  900 vol 4.87100E+07\n'
 
@@ -196,17 +190,13 @@ if __name__ == '__main__':
     db_file = hdf5_input_path
     new_mat_file = fuel_input_path
 
-    # time_after_startup = 6.0   # days, extract the composition after n days
-    # startup
-    time_after_startup = float(input('Time after startup:'))
+    time_after_startup = float(input('Time after startup [d]:'))
 
     include_decay_isos = True
 
     xs_path = '/home/luke/xsdata/endfb7/sss_endfb7u.xsdata'
 
     lib_temp = '.09c'
-
-    #mat_head = 'mat  fuel  -4.95 burn 1 fix 09c  900 vol 4.435305E+7\n'
 
     mat_head = 'mat  fuel  -3.35 burn 1 fix 09c  900 vol 4.87100E+07\n'
 
