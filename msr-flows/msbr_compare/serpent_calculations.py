@@ -5,9 +5,12 @@ import numpy as np
 
 class linear_generation:
     '''
-    This class is used to implement the linear generation approximation for type 1 Serpent flow.
+    This class is used to implement the linear generation approximation
+            for type 1 Serpent flow.
 
-    Linear generation is approximated by running with no depletion (CTRL-run) for the time step, comparing with SaltProc result, and then using that linear approximation.
+    Linear generation is approximated by running with no depletion (CTRL-run)
+        for the time step, comparing with SaltProc result, and then
+        using that linear approximation.
     For N-steps, will continue using initally calculated removal constants.
 
     '''
@@ -58,7 +61,8 @@ class linear_generation:
 
     def root_find_func(self, x, initial_atoms, compare_atoms, final_atoms):
         '''
-        The function for linear generation that can be solved to determine the root.
+        The function for linear generation that can be solved
+                to determine the root.
 
         Parameters
         ----------
@@ -74,28 +78,37 @@ class linear_generation:
         Returns
         -------
         soln : float
-            Should return 0 when x is properly set such that the linear generation approximation is applied.
+            Should return 0 when x is properly set such that the
+                    linear generation approximation is applied.
 
 
         '''
         sec_per_day = 24 * 3600
         step_size_seconds = self.step_size * sec_per_day
         C = (final_atoms - initial_atoms) / (step_size_seconds)
-        c2 = initial_atoms - C / x
-        soln = -(final_atoms - compare_atoms) + (initial_atoms - C / x) * \
-            (1 - np.exp(-x * self.final_time)) + C * self.final_time
+        # soln = -(final_atoms - compare_atoms) + (initial_atoms - C / x) * \
+        #    (1 - np.exp(-x * self.final_time)) + C * self.final_time
+        soln = (-(final_atoms - compare_atoms) +
+                initial_atoms * (1 - np.exp(-x * self.final_time)
+                    ) + C / x * (np.exp(-x * self.final_time) - 1) +
+                    C * self.final_time)
         return soln
 
     def repr_cnst_calc(self, iso_dict=False):
         '''
         Calculate reprocessing constants to be used for each element.
 
+        Parameters
+        ----------
+        iso_dict : dict (optional)
+            Dictionary containing element name and important
+                isotope for that element. Can also take False boolean.
+
         Returns
         -------
         reprocessing_dictionary : dict
-            Dictionary of each inventory item in Serpent depletion output and corresponding reprocessing constant.
-        iso_dict : dict (optional)
-            Dictionary of important isotopes to prioritize over general element mass.
+            Dictionary of each inventory item in Serpent depletion output
+                    and corresponding reprocessing constant.
 
 
         Exceptions
@@ -137,7 +150,7 @@ class linear_generation:
             final_day_index = np.where(
                 final_dep.metadata['days'] == self.final_time)[0][0]
         except BaseException:
-            print(f'final time: {self.final_time}')
+            print(f'Final time: {self.final_time}')
             print(f'Serpent times: {final_dep.metadata["days"]}')
             print(np.where(final_dep.metadata['days'] == self.final_time))
         compare_day_index = list()
@@ -150,7 +163,8 @@ class linear_generation:
         compare_vol = list()
         for each_fuel in range(len(compare_fuel_mat)):
             compare_vol.append(
-                compare_fuel_mat[each_fuel].data['volume'][compare_day_index[each_fuel]])
+                compare_fuel_mat[each_fuel].data['volume'][
+                    compare_day_index[each_fuel]])
 
         element_list = initial_fuel_mat.names
 
@@ -167,16 +181,19 @@ class linear_generation:
                 else:
                     pass
             initial_atoms = initial_fuel_mat.getValues(
-                'days', 'adens', [self.initial_time], element_name)[0][0] * initial_vol
+                'days', 'adens', [self.initial_time],
+                element_name)[0][0] * initial_vol
             final_atoms = final_fuel_mat.getValues(
                 'days', 'adens', [
                     self.final_time], element_name)[0][0] * final_vol
             compare_atoms = list()
+
             for each_one in range(len(compare_fuel_mat)):
                 compare_atoms.append(
                     compare_fuel_mat[each_one].getValues(
                         'days', 'adens', [
-                            self.compare_time], element_name)[0][0] * compare_vol[each_one])
+                            self.compare_time],
+                        element_name)[0][0] * compare_vol[each_one])
 
             avg_compare_atoms = sum(compare_atoms) / len(compare_atoms)
             C = (final_atoms - initial_atoms) / (step_size_seconds)
@@ -210,7 +227,8 @@ class cycle_time_decay:
         Parameters
         ----------
         element_flow_list : list
-            List of element strings (i.e. ['krypton', 'xenon']) to apply cycle time decay approximation.
+            List of element strings (i.e. ['krypton', 'xenon']) to apply
+                    cycle time decay approximation.
 
         Returns
         -------
@@ -225,10 +243,15 @@ class cycle_time_decay:
         '''
         Calculate reprocessing calculation based on MSBR cycle time.
 
+        Parameters
+        ----------
+        None
+
         Returns
         -------
         reprocessing_dictionary : dict
-            Dictionary containing the reprocessing constants for each element provided in `element_flow_list`.
+            Dictionary containing the reprocessing constants for
+                each element provided in `element_flow_list`.
         '''
         reprocessing_dictionary = dict()
         groups = list()
@@ -250,4 +273,4 @@ class cycle_time_decay:
 
 
 if __name__ == '__main__':
-    print('Testing not yet available for this module, requires running each method.')
+    print('Testing not yet available for this module.')

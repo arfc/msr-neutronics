@@ -31,7 +31,8 @@ class create_deck:
         Parameters
         ----------
         reprocessing : dictionary
-            Contains the different elements as well as their reprocessing constants. Can be False.
+            Contains the different elements as well as their
+                    reprocessing constants. Can be False.
         read_file : string
             Path of the file to read. False if reading does not occur.
         read_time : float
@@ -52,6 +53,11 @@ class create_deck:
             Short string to add to files for separation of results
         deck_name : str
             Full path and name of desired input file
+
+        Returns
+        -------
+        None
+
         '''
         self.repr = reprocessing
         self.read = read_file
@@ -111,7 +117,8 @@ class create_deck:
             write,
             identifier=''):
         '''
-        Generates the string data for the read/write binary functionality of Serpent
+        Generates the string data for the read/write binary
+                functionality of Serpent
 
         Parameters
         ----------
@@ -123,8 +130,6 @@ class create_deck:
             Serpent based time to read from
         write : str
             Path to file to write, False if no write
-        write_t : float
-            Serpent based time to write to
         identifier : str (optional)
             Unique identifier to add
 
@@ -154,7 +159,8 @@ set rfw 1 "{write}"
         Parameters
         ----------
         Reprocessing_dictionary : dictionary
-        Provides element and corresponding reprocessing constant; can be False
+            Provides element and corresponding reprocessing constant;
+                    can be False
 
         Returns
         -------
@@ -209,7 +215,8 @@ Ba      {reprocessing_dictionary['barium']}
 
     def flow_regime(self, reprocessing_dictionary):
         '''
-        Checks if the reprocessing dictionary is False, and if not, activates the pumps
+        Checks if the reprocessing dictionary is False, and if not,
+                activates the pumps
 
         Parameters
         ----------
@@ -255,6 +262,10 @@ class run_deck:
         write_file : str
             Name/path of file writing binary output to
 
+        Returns
+        -------
+        None
+
         '''
         self.version = version
         self.deck = deck
@@ -267,6 +278,14 @@ class run_deck:
         '''
         Writes the input_script string to a file with the INPUT_NAME
         which is run and outputs to the OUTPUT_NAME.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        None
 
         '''
 
@@ -288,6 +307,14 @@ class run_deck:
         '''
         Allows the script to continue once the .wrk file is generated.
         Checks the if the length of the output file is being updated.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        None
 
         Raises
         ------

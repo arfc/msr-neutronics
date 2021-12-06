@@ -1,29 +1,30 @@
 ## Overview
 
-These scripts are designed to generate a Serpent2 input deck, run the deck, and then generate plots. Currently, the MSBR is analyzed with SaltProc and then compared with different approximations using Serpent2's built-in reprocessing functionality. 
+
+These scripts are designed to generate a Serpent2 input deck, run the deck, and then generate plots. Currently, the MSBR is analyzed with SaltProc and then compared with different approximations using Serpent2's built-in reprocessing functionality.
 
 
 ## Explanation of Scripts
 
-### User Input
+### `user_input.py`
 Takes all run settings in a single location and pass them along.
 
-### Run User Input
+### `run_user_input.py`
 Defines the specific run cases to be used. Takes the user input data and the specific run case functions and uses them to generate output.
 
-### Serpent Input
+### `serpent_input.py`
 Builds the Serpent2 input deck based on settings provided. Runs the Serpent input deck and checks that it has run successfully.
 
-### Serpent Calculations
+### `serpent_calculations.py`
 Provides calculations for reprocessing constants of different approximations.
 
-### Serpent Output
+### `serpent_output.py`
 Deals with the depletion and results outputs Serpent2 provides. Also parses SaltProc material files.
 
-### Miscellaneous Functions
+### `misc_funcs.py`
 Contains one-time-use functions or minor functions which don't necessarily fit in one of the other major categories.
 
-### SaltProc Read
+### `saltproc_read.py`
 Renamed SaltProc post-processing script to extract data from hdf5 file into Serpent2 material composition file. Copy created here for ease of use.
 
 
