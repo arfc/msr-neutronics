@@ -5,9 +5,9 @@
 control = True
 saltproc = True
 
-linear_generation = False
+linear_generation = True
 cycle_time_decay = True
-linear_isotope = False
+linear_isotope = True
 
 # Separate core piping is WIP
 

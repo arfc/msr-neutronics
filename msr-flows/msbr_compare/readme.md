@@ -1,3 +1,7 @@
+## Overview
+
+These scripts are designed to generate a Serpent2 input deck, run the deck, and then generate plots. Currently, the MSBR is analyzed with SaltProc and then compared with different approximations using Serpent2's built-in reprocessing functionality.
+
 
 ## Explanation of Scripts
 
@@ -34,6 +38,7 @@ Renamed SaltProc post-processing script to extract data from hdf5 file into Serp
 
 ## Things to do:
 - Test running with N steps
+- Test running with different start and end points
 - Add in piping material, check improvement vs other versions
 
 

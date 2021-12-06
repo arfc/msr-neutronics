@@ -88,10 +88,10 @@ class linear_generation:
         C = (final_atoms - initial_atoms) / (step_size_seconds)
         # soln = -(final_atoms - compare_atoms) + (initial_atoms - C / x) * \
         #    (1 - np.exp(-x * self.final_time)) + C * self.final_time
-        soln = -(final_atoms - compare_atoms) + initial_atoms * (1 - 
-                    np.exp(-x * self.final_time)
-                            ) + C / x * (np.exp(-x * self.final_time) - 1) +
-                                            C * self.final_time
+        soln = (-(final_atoms - compare_atoms) +
+                initial_atoms * (1 - np.exp(-x * self.final_time)
+                    ) + C / x * (np.exp(-x * self.final_time) - 1) +
+                    C * self.final_time)
         return soln
 
     def repr_cnst_calc(self, iso_dict=False):
@@ -107,7 +107,7 @@ class linear_generation:
         Returns
         -------
         reprocessing_dictionary : dict
-            Dictionary of each inventory item in Serpent depletion output 
+            Dictionary of each inventory item in Serpent depletion output
                     and corresponding reprocessing constant.
 
 
@@ -273,5 +273,4 @@ class cycle_time_decay:
 
 
 if __name__ == '__main__':
-    print('Testing not yet available for this module,
-    requires running each method.')
+    print('Testing not yet available for this module.')

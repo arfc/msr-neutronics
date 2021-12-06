@@ -47,7 +47,7 @@ class full_run_serp:
             List of strings containing extra isotopes/elements
                     to track (i.e. ['Xe135']).
         element_flow_list : list
-            List of strings containing each element 
+            List of strings containing each element
                     (i.e. ['krypton', 'xenon']).
         output_path : str
             Path to a directory containing decks and outputs
@@ -284,7 +284,7 @@ class full_run_serp:
         ----------
         identifier : str (optional)
             Used to generate the file name.
-        
+
         Returns
         -------
         None

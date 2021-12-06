@@ -261,7 +261,7 @@ class run_deck:
             Version to run with (defauly is using sss2)
         write_file : str
             Name/path of file writing binary output to
-        
+
         Returns
         -------
         None

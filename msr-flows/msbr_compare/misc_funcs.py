@@ -85,7 +85,7 @@ def SP_data_initializer(time_list, hdf5_path, fuel_path):
         Path to the location of hdf5 file with data.
     fuel_path : str
         Path to location of fuel files to be created.
-    
+
     Returns
     -------
     None
