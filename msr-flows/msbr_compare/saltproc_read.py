@@ -143,11 +143,12 @@ def evaluate(time, hdf5_path, fuel_path):
     Parameters
     ----------
     time : float
-        Time [days] within SaltProc time values to extract from
+        Time (in days) within SaltProc time values to extract from
     hdf5_path : str
         Location of hdf5 file with material data
     fuel_path : str
         Location to output material data
+
 
     Returns
     -------
