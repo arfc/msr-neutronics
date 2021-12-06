@@ -5,9 +5,9 @@
 control = True
 saltproc = True
 
-linear_generation = True
+linear_generation = False
 cycle_time_decay = True
-linear_isotope = True
+linear_isotope = False
 
 # Separate core piping is WIP
 
@@ -29,7 +29,7 @@ template_path = './templates'
 template_name = 'saltproc.msbr.serpent'
 
 
-number_serp_steps = 1
+number_serp_steps = 3
 start_time = 3000
 end_time = 6000
 SP_step_size = 3
