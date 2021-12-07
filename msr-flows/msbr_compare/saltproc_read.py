@@ -138,7 +138,8 @@ def filter_out_and_store(isos,
 
 def evaluate(time, hdf5_path, fuel_path):
     '''
-    Evaluates hdf5 file at target time, generating material data at target path.
+    Evaluates hdf5 file at target time, generating
+        material data at target path.
 
     Parameters
     ----------

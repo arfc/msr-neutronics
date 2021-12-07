@@ -88,10 +88,11 @@ class linear_generation:
         C = (final_atoms - initial_atoms) / (step_size_seconds)
         # soln = -(final_atoms - compare_atoms) + (initial_atoms - C / x) * \
         #    (1 - np.exp(-x * self.final_time)) + C * self.final_time
-        soln = (-(final_atoms - compare_atoms) +
-                initial_atoms * (1 - np.exp(-x * self.final_time)
-                    ) + C / x * (np.exp(-x * self.final_time) - 1) +
-                    C * self.final_time)
+        waste_val = -(final_atoms - compare_atoms)
+        C_terms = C / x * (np.exp(-x * self.final_time) -
+                           1) + C * self.final_time
+        init_mult = initial_atoms * (1 - np.exp(-x * self.final_time))
+        soln = (waste_val + init_mult + C_terms)
         return soln
 
     def repr_cnst_calc(self, iso_dict=False):
