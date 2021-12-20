@@ -6,6 +6,14 @@ from pyne import nucname
 def check_isotope_in_library(isotope, lib_isos):
     """ Check if an isotope is in the acelib library
          used for this simulation
+    Parameters:
+    -----------
+    isotope : str
+        Isotope to check for (i.e. H-1.09c)
+    lib_isos : list
+        List fo strings containing possible isotopes in library
+
+
     Returns:
     --------
     bool:
@@ -23,6 +31,10 @@ def get_library_isotopes(acelib_path):
     """ Returns the isotopes in the cross section library
     Parameters:
     -----------
+    acelib_path : str
+        Path to the cross section library (i.e. /home/luke/xsdata/endfb7/sss_endfb7u.xsdata)
+
+
     Returns:
     --------
     iso_array: array
