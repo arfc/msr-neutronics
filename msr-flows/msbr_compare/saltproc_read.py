@@ -132,7 +132,8 @@ def convert_to_serpent_tra(isoname, lib_temp):
     serpent_name : str
         Name of isotope in Serpent (i.e. 'H-1.09c')
     metastable_flag : bool
-        False if not metastable, else True (also representable as 0 and 1, accordingly)
+        False if not metastable, else True
+        (also representable as 0 and 1, accordingly)
     """
     metastable_flag = 0
     if len(isoname) > 1 and isoname[-2] == 'm':

@@ -143,7 +143,8 @@ class full_run_serp:
                         and corresponding reprocessing constant.
 
                 ``key``
-                   String in Serpent format of isotopes and elements (i.e. Xe135 and xenon)
+                   String in Serpent format of isotopes and elements
+                   (i.e. Xe135 and xenon)
                 ``value``
                     Float reproessing constant
         """
