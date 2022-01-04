@@ -126,7 +126,7 @@ class full_run_serp:
         isos_dict : dict (optional)
             Dictionary of important isotopes to prioritize over
                     general element mass.
-                
+
                 ``key``
                     Name of element as string (i.e. xenon)
                 ``value``
@@ -247,7 +247,7 @@ class full_run_serp:
                 ``key``
                     Name of element as string (i.e. xenon)
                 ``value``
-                    String serpent isotope to use for that element (i.e. Xe135) 
+                    String serpent isotope to use for that element (i.e. Xe135)
         num_SP : int (optional)
             Number of SaltProc materials to compare against
                     generating removal rate.

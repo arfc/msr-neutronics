@@ -7,7 +7,7 @@ def check_isotope_in_library(isotope, lib_isos):
     """
     Check if an isotope is in the acelib library
          used for this simulation
-    
+
     Parameters
     ----------
     isotope : str
@@ -32,7 +32,7 @@ def check_isotope_in_library(isotope, lib_isos):
 def get_library_isotopes(acelib_path):
     """
     Returns the isotopes in the cross section library
-    
+
     Parameters
     ----------
     acelib_path : str
@@ -76,7 +76,7 @@ def read_all_iso_at_step(db_file, time_after_startup):
 
     mass_a : dict
         Dictionary of isotopes with compositions after removal
-        
+
         ``key``
             Isotope string in Serpent format
         ``value``
@@ -84,7 +84,7 @@ def read_all_iso_at_step(db_file, time_after_startup):
 
     isomap : ordered dict
         Ordered dictionary of isotopes with index (i.e. ('H1', 0))
-        
+
         ``key``
             Isotope string in Serpent format
         ``value``
@@ -178,7 +178,7 @@ def update_density(file, void):
         Name of the file to update the density for
     void : flaot
         Void fraction
-    
+
     Returns
     -------
     None
@@ -207,7 +207,7 @@ def filter_out_and_store(isos,
     """
     Filter out isotopes which are not in XS library and
      stores new list in Serpent input file
-    
+
     Parameters
     ----------
     isos : dict
@@ -216,7 +216,7 @@ def filter_out_and_store(isos,
         ``key``
            String of each isotope (i.e. Cd125)
         ``value``
-            Mass density of each isotope [g/cc] 
+            Mass density of each isotope [g/cc]
     lib_isos : list
         List of isotopes available to use
     file : str
@@ -258,7 +258,7 @@ def filter_out_and_store(isos,
     if not decay_isos:
         update_density(file, mass_decay_isos /
                        (mass_decay_isos + mass_no_decay_isos))
-    
+
     return
 
 

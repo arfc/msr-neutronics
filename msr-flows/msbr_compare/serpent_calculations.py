@@ -261,7 +261,7 @@ class cycle_time_decay:
         reprocessing_dictionary : dict
             Dictionary containing the reprocessing constants for
                 each element provided in `element_flow_list`.
-            
+
             ``key``
                 String name of element or isotope
             ``value``

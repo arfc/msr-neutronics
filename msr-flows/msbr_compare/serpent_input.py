@@ -33,7 +33,7 @@ class create_deck:
         reprocessing : dictionary
             Contains the different elements as well as their
                     reprocessing constants. Can be False.
-            
+
             ``key``
                 String name of element and isotope
             ``value``
