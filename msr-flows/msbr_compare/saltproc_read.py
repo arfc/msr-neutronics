@@ -15,7 +15,6 @@ def check_isotope_in_library(isotope, lib_isos):
     lib_isos : list
         List of strings containing possible isotopes in library
 
-
     Returns
     -------
     bool:
@@ -36,8 +35,8 @@ def get_library_isotopes(acelib_path):
     Parameters
     ----------
     acelib_path : str
-        Path to the cross section library (i.e. '/home/luke/xsdata/endfb7/sss_endfb7u.xsdata')
-
+        Path to the cross section library
+        (i.e. '/home/luke/xsdata/endfb7/sss_endfb7u.xsdata')
 
     Returns
     -------
@@ -229,7 +228,6 @@ def filter_out_and_store(isos,
         True to include isotopes that decay
     mat_head : str
         Header to use on material file generated
-
 
     Returns
     -------
