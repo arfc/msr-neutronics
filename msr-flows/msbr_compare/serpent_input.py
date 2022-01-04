@@ -7,10 +7,10 @@ from time import sleep
 
 
 class create_deck:
-    '''
+    """
     This class is used to build the deck which will be fed into Serpent2
 
-    '''
+    """
 
     def __init__(
             self,
@@ -25,7 +25,7 @@ class create_deck:
             list_inventory,
             identifier,
             deck_name):
-        '''
+        """
         Initialize the `create_deck` class. Files need proper path.
 
         Parameters
@@ -33,6 +33,11 @@ class create_deck:
         reprocessing : dictionary
             Contains the different elements as well as their
                     reprocessing constants. Can be False.
+
+            ``key``
+                String name of element and isotope
+            ``value``
+                Float reprocessing constant value
         read_file : string
             Path of the file to read. False if reading does not occur.
         read_time : float
@@ -58,7 +63,7 @@ class create_deck:
         -------
         None
 
-        '''
+        """
         self.repr = reprocessing
         self.read = read_file
         self.write = write_file
@@ -74,7 +79,7 @@ class create_deck:
         return
 
     def build_serpent_deck(self):
-        '''
+        """
         Generate a string containing the Serpent input deck
 
         Parameters
@@ -87,7 +92,7 @@ class create_deck:
         deck : str
             String formatted for serpent usage
 
-        '''
+        """
         env = Environment(loader=FileSystemLoader(self.template_path))
         template = env.get_template(self.template_name)
 
@@ -116,7 +121,7 @@ class create_deck:
             read_t,
             write,
             identifier=''):
-        '''
+        """
         Generates the string data for the read/write binary
                 functionality of Serpent
 
@@ -138,40 +143,46 @@ class create_deck:
         read_write_str : str
             String for Serpent to generate read/write binaries
 
-        '''
+        """
         read_write_string = ''
 
         if read:
-            read_write_string += f'''
+            read_write_string += f"""
 set rfr -{read_t} "{read}"
-'''
+"""
         if write:
-            read_write_string += '''
+            read_write_string += """
 set rfw 1 "{write}"
-'''.format(**locals())
+""".format(**locals())
 
         return read_write_string
 
     def apply_reproc(self, reprocessing_dictionary):
-        '''
+        """
         Applies the reprocessing constants to appropriate pumps
 
         Parameters
         ----------
-        Reprocessing_dictionary : dictionary
+        reprocessing_dictionary : dictionary
             Provides element and corresponding reprocessing constant;
                     can be False
+
+            ``key``
+                String name of element and isotope
+            ``value``
+                Float reprocessing constant value
+
 
         Returns
         -------
         mflow_defs : str
             String of mass flow definitions for Serpent
 
-        '''
+        """
         mflow_defs = ''
 
         if reprocessing_dictionary:
-            mflow_defs += f'''
+            mflow_defs += f"""
 mflow entrainment_pump
 Kr      {reprocessing_dictionary['krypton']}
 Xe      {reprocessing_dictionary['xenon']}
@@ -209,12 +220,12 @@ Sr      {reprocessing_dictionary['strontium']}
 Cs      {reprocessing_dictionary['cesium']}
 Ba      {reprocessing_dictionary['barium']}
 
-'''
+"""
 
         return mflow_defs
 
     def flow_regime(self, reprocessing_dictionary):
-        '''
+        """
         Checks if the reprocessing dictionary is False, and if not,
                 activates the pumps
 
@@ -223,33 +234,38 @@ Ba      {reprocessing_dictionary['barium']}
         reprocessing_dicitonary : dict
             Dictionary of reprocessing constants and element names
 
+            ``key``
+                String name of element and isotope
+            ``value``
+                Float reprocessing constant value
+
         Returns
         -------
         flow_setup : str
             Activated pumps for Serpent deck
 
-        '''
+        """
         flow_setup = ''
         if reprocessing_dictionary:
-            flow_setup += '''
+            flow_setup += """
 rc fuel waste_entrainment_separator entrainment_pump 1
 rc fuel waste_nickel_filter nickel_pump 1
 rc fuel waste_liquid_metal waste_metal_pump 1
 rc feedsalt fuel feed_pump 2
-'''
+"""
         else:
             pass
         return flow_setup
 
 
 class run_deck:
-    '''
+    """
     This class is used to run the constructed deck in Serpent2
-    '''
+    """
 
     def __init__(self, input_name, deck, write_file, version='sss2'):
-        '''
-        Initilizes class
+        """
+        Initializes class
 
         Parameters
         ----------
@@ -258,7 +274,7 @@ class run_deck:
         deck : str
             String containing the input deck
         version : str (optional)
-            Version to run with (defauly is using sss2)
+            Version to run with (default is using sss2)
         write_file : str
             Name/path of file writing binary output to
 
@@ -266,7 +282,7 @@ class run_deck:
         -------
         None
 
-        '''
+        """
         self.version = version
         self.deck = deck
         self.name = input_name
@@ -275,9 +291,9 @@ class run_deck:
         return
 
     def run_script(self):
-        '''
-        Writes the input_script string to a file with the INPUT_NAME
-        which is run and outputs to the OUTPUT_NAME.
+        """
+        Writes the ``self.deck`` string to a file ``self.name``
+        which is run and outputs to ``self.out``.
 
         Parameters
         ----------
@@ -287,7 +303,7 @@ class run_deck:
         -------
         None
 
-        '''
+        """
 
         with open(self.name, 'w+') as input_file:
             input_file.write(self.deck)
@@ -304,7 +320,7 @@ class run_deck:
         return
 
     def check_wrk_file(self):
-        '''
+        """
         Allows the script to continue once the .wrk file is generated.
         Checks the if the length of the output file is being updated.
 
@@ -318,10 +334,10 @@ class run_deck:
 
         Raises
         ------
-        Error, view `OUTPUT_NAME`
+        Error, view ``self.out``
             Occurs if the output does not update within 20 seconds.
 
-        '''
+        """
         wrk_name = self.write
         out_len = 0
         while not path.exists(wrk_name):

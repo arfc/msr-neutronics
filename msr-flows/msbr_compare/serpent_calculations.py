@@ -4,7 +4,7 @@ import numpy as np
 
 
 class linear_generation:
-    '''
+    """
     This class is used to implement the linear generation approximation
             for type 1 Serpent flow.
 
@@ -13,7 +13,7 @@ class linear_generation:
         using that linear approximation.
     For N-steps, will continue using initally calculated removal constants.
 
-    '''
+    """
 
     def __init__(
             self,
@@ -24,7 +24,7 @@ class linear_generation:
             compare_paths,
             final_path,
             step_days):
-        '''
+        """
         Initialize
 
         Parameters
@@ -48,7 +48,7 @@ class linear_generation:
         -------
         None
 
-        '''
+        """
         self.initial_time = initial_time
         self.final_time = final_time
         self.compare_time = compare_time
@@ -60,7 +60,7 @@ class linear_generation:
         return
 
     def root_find_func(self, x, initial_atoms, compare_atoms, final_atoms):
-        '''
+        """
         The function for linear generation that can be solved
                 to determine the root.
 
@@ -82,7 +82,7 @@ class linear_generation:
                     linear generation approximation is applied.
 
 
-        '''
+        """
         sec_per_day = 24 * 3600
         step_size_seconds = self.step_size * sec_per_day
         C = (final_atoms - initial_atoms) / (step_size_seconds)
@@ -96,7 +96,7 @@ class linear_generation:
         return soln
 
     def repr_cnst_calc(self, iso_dict=False):
-        '''
+        """
         Calculate reprocessing constants to be used for each element.
 
         Parameters
@@ -105,12 +105,20 @@ class linear_generation:
             Dictionary containing element name and important
                 isotope for that element. Can also take False boolean.
 
+            ``key``
+                String name of element
+            ``value``
+                String name of isotope
         Returns
         -------
         reprocessing_dictionary : dict
             Dictionary of each inventory item in Serpent depletion output
                     and corresponding reprocessing constant.
 
+            ``key``
+                String name of element or isotope
+            ``value``
+                Float reprocessing constant value
 
         Exceptions
         ----------
@@ -118,7 +126,7 @@ class linear_generation:
             This occurs when there is no material present labeled as fuel.
 
 
-        '''
+        """
         reprocessing_dictionary = dict()
 
         sec_per_day = 24 * 3600
@@ -217,12 +225,12 @@ class linear_generation:
 
 
 class cycle_time_decay:
-    '''
+    """
     Implements cycle time decay approximation.
-    '''
+    """
 
     def __init__(self, element_flow_list):
-        '''
+        """
         Initialize.
 
         Parameters
@@ -235,13 +243,13 @@ class cycle_time_decay:
         -------
         None
 
-        '''
+        """
         self.element_flow_list = element_flow_list
 
         return
 
     def repr_cnst_calc(self):
-        '''
+        """
         Calculate reprocessing calculation based on MSBR cycle time.
 
         Parameters
@@ -253,7 +261,12 @@ class cycle_time_decay:
         reprocessing_dictionary : dict
             Dictionary containing the reprocessing constants for
                 each element provided in `element_flow_list`.
-        '''
+
+            ``key``
+                String name of element or isotope
+            ``value``
+                Float reprocessing constant value
+        """
         reprocessing_dictionary = dict()
         groups = list()
         groups.append(self.element_flow_list[0:12])

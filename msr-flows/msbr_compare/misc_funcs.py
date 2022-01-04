@@ -4,7 +4,7 @@ import time
 
 
 def list_to_print(options):
-    '''
+    """
     Creates a user-friendly output based on a list of strings provided
 
     Parameters
@@ -17,7 +17,7 @@ def list_to_print(options):
     selection : int
         The integer index of the option selected
 
-    '''
+    """
     print(f'\nPlease make a numerical selection:\n')
     for each in range(len(options)):
         print(f'{each}. {options[each]}')
@@ -26,7 +26,7 @@ def list_to_print(options):
 
 
 def convert_list_to_string(input_list):
-    '''
+    """
     Converts a list to a string with each value separated with a new paragraph
 
     Parameters
@@ -39,17 +39,17 @@ def convert_list_to_string(input_list):
     output : str
         String output with each value in `input_list` recorded
 
-    '''
+    """
     output = ''
     for each in input_list:
-        output += '''
+        output += """
 {each}
-'''.format(**locals())
+""".format(**locals())
     return output
 
 
 def set_directory(target_dir):
-    '''
+    """
     Removes the indicated directory if it exists and recreates a fresh version
 
     Parameters
@@ -61,7 +61,7 @@ def set_directory(target_dir):
     -------
     None
 
-    '''
+    """
     try:
         os.system('rm ' + str(target_dir) + ' -r')
         print('Removed directory ' + str(target_dir))
@@ -73,7 +73,7 @@ def set_directory(target_dir):
 
 
 def SP_data_initializer(time_list, hdf5_path, fuel_path):
-    '''
+    """
     This function is used to initialize the working directory with each fuel
         composition at each time step
 
@@ -90,7 +90,7 @@ def SP_data_initializer(time_list, hdf5_path, fuel_path):
     -------
     None
 
-    '''
+    """
     delay = 0.01
     for day in time_list:
         fuel = fuel_path + '_' + str(day)
