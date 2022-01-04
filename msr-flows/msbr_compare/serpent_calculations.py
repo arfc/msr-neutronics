@@ -105,12 +105,20 @@ class linear_generation:
             Dictionary containing element name and important
                 isotope for that element. Can also take False boolean.
 
+            ``key``
+                String name of element
+            ``value``
+                String name of isotope
         Returns
         -------
         reprocessing_dictionary : dict
             Dictionary of each inventory item in Serpent depletion output
                     and corresponding reprocessing constant.
 
+            ``key``
+                String name of element or isotope
+            ``value``
+                Float reprocessing constant value
 
         Exceptions
         ----------
@@ -253,6 +261,11 @@ class cycle_time_decay:
         reprocessing_dictionary : dict
             Dictionary containing the reprocessing constants for
                 each element provided in `element_flow_list`.
+            
+            ``key``
+                String name of element or isotope
+            ``value``
+                Float reprocessing constant value
         """
         reprocessing_dictionary = dict()
         groups = list()

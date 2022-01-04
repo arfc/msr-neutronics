@@ -128,6 +128,11 @@ class saltproc_data:
                 list of the abbreviated name followed by atomic number.
             (i.e. element_dictionary['xenon'] = ['Xe', ' 54'])
             (the space before the atomic number is needed)
+
+            ``key``
+                String name of isotope or element
+            ``value``
+                List of strings with chemical element symbols and atomic number
         target : str
             Name of target to extract.
         eval_times : list

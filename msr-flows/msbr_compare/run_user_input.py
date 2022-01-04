@@ -126,6 +126,11 @@ class full_run_serp:
         isos_dict : dict (optional)
             Dictionary of important isotopes to prioritize over
                     general element mass.
+                
+                ``key``
+                    Name of element as string (i.e. xenon)
+                ``value``
+                    String serpent isotope to use for that element (i.e. Xe135)
         num_SP : int (optional)
             Number of SaltProc materials to compare against
                     generating removal rate.
@@ -137,8 +142,11 @@ class full_run_serp:
             Dictionary of each inventory item in Serpent depletion output
                         and corresponding reprocessing constant.
 
+                ``key``
+                   String in Serpent format of isotopes and elements (i.e. Xe135 and xenon)
+                ``value``
+                    Float reproessing constant
         """
-
         # No depletion to determine linear growth rate
         each_step = 0
         write_file = self.output_path + identifier + str(each_step) + '.wrk'
@@ -213,7 +221,6 @@ class full_run_serp:
             final_path,
             LGA_step_size)
         reprocessing_constants = repr_builder.repr_cnst_calc(isos_dict)
-
         return reprocessing_constants
 
     def linear_generation(
@@ -236,6 +243,11 @@ class full_run_serp:
         iso_dict : dict (optional)
             Dictionary of important isotopes to prioritize over
                     general element mass.
+
+                ``key``
+                    Name of element as string (i.e. xenon)
+                ``value``
+                    String serpent isotope to use for that element (i.e. Xe135) 
         num_SP : int (optional)
             Number of SaltProc materials to compare against
                     generating removal rate.

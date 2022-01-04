@@ -33,6 +33,11 @@ class create_deck:
         reprocessing : dictionary
             Contains the different elements as well as their
                     reprocessing constants. Can be False.
+            
+            ``key``
+                String name of element and isotope
+            ``value``
+                Float reprocessing constant value
         read_file : string
             Path of the file to read. False if reading does not occur.
         read_time : float
@@ -158,9 +163,15 @@ set rfw 1 "{write}"
 
         Parameters
         ----------
-        Reprocessing_dictionary : dictionary
+        reprocessing_dictionary : dictionary
             Provides element and corresponding reprocessing constant;
                     can be False
+
+            ``key``
+                String name of element and isotope
+            ``value``
+                Float reprocessing constant value
+
 
         Returns
         -------
@@ -223,6 +234,11 @@ Ba      {reprocessing_dictionary['barium']}
         reprocessing_dicitonary : dict
             Dictionary of reprocessing constants and element names
 
+            ``key``
+                String name of element and isotope
+            ``value``
+                Float reprocessing constant value
+
         Returns
         -------
         flow_setup : str
@@ -249,7 +265,7 @@ class run_deck:
 
     def __init__(self, input_name, deck, write_file, version='sss2'):
         """
-        Initilizes class
+        Initializes class
 
         Parameters
         ----------
@@ -258,7 +274,7 @@ class run_deck:
         deck : str
             String containing the input deck
         version : str (optional)
-            Version to run with (defauly is using sss2)
+            Version to run with (default is using sss2)
         write_file : str
             Name/path of file writing binary output to
 
@@ -276,8 +292,8 @@ class run_deck:
 
     def run_script(self):
         """
-        Writes the input_script string to a file with the INPUT_NAME
-        which is run and outputs to the OUTPUT_NAME.
+        Writes the ``self.deck`` string to a file ``self.name``
+        which is run and outputs to ``self.out``.
 
         Parameters
         ----------
@@ -318,7 +334,7 @@ class run_deck:
 
         Raises
         ------
-        Error, view `OUTPUT_NAME`
+        Error, view ``self.out``
             Occurs if the output does not update within 20 seconds.
 
         """

@@ -13,7 +13,7 @@ def check_isotope_in_library(isotope, lib_isos):
     isotope : str
         Isotope to check for (i.e. 'H-1.09c')
     lib_isos : list
-        List fo strings containing possible isotopes in library
+        List of strings containing possible isotopes in library
 
 
     Returns
@@ -68,10 +68,28 @@ def read_all_iso_at_step(db_file, time_after_startup):
     -------
     mass_b : dict
         Dictionary of isotopes with compositions before removal
+
+        ``key``
+            Isotope string in Serpent format
+        ``value``
+            Mass density [g/cc]
+
     mass_a : dict
         Dictionary of isotopes with compositions after removal
+        
+        ``key``
+            Isotope string in Serpent format
+        ``value``
+            Mass density [g/cc]
+
     isomap : ordered dict
         Ordered dictionary of isotopes with index (i.e. ('H1', 0))
+        
+        ``key``
+            Isotope string in Serpent format
+        ``value``
+            Index of isotope string
+
     """
     db = tb.open_file(db_file, mode='r')
     sim_param = db.root.simulation_parameters
@@ -114,8 +132,8 @@ def convert_to_serpent_tra(isoname, lib_temp):
     -------
     serpent_name : str
         Name of isotope in Serpent (i.e. 'H-1.09c')
-    metastable_flag : [0, 1]
-        0 if not metastable, else 1
+    metastable_flag : bool
+        False if not metastable, else True (also representable as 0 and 1, accordingly)
     """
     metastable_flag = 0
     if len(isoname) > 1 and isoname[-2] == 'm':
@@ -194,6 +212,11 @@ def filter_out_and_store(isos,
     ----------
     isos : dict
         Dictionary of each element and its density
+
+        ``key``
+           String of each isotope (i.e. Cd125)
+        ``value``
+            Mass density of each isotope [g/cc] 
     lib_isos : list
         List of isotopes available to use
     file : str
@@ -212,7 +235,7 @@ def filter_out_and_store(isos,
     -------
     None
     """
-
+    input(isos)
     mass_no_decay_isos = 0
     mass_decay_isos = 0
     matf = open(file, 'w')
