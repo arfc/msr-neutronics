@@ -3,12 +3,12 @@ import matplotlib.pyplot as plt
 
 
 class serpent_data:
-    '''
+    """
     Analyzes data from _res.m and _dep.m files.
-    '''
+    """
 
     def __init__(self, close_bool, file_name=False, material_name='fuel'):
-        '''
+        """
         Initialize
 
         Parameters
@@ -26,7 +26,7 @@ class serpent_data:
         None
 
 
-        '''
+        """
         self.close = close_bool
         self.file_name = file_name
         if file_name:
@@ -37,7 +37,7 @@ class serpent_data:
         return
 
     def serp_targ_reader(self, target):
-        '''
+        """
         Collect the data of a particular target in a particular material
                 from serpent
 
@@ -57,7 +57,7 @@ class serpent_data:
         ---------
         Material name does not exist.
 
-        '''
+        """
         dep_file = self.deplete
         dep = st.read(dep_file, reader='dep')
         try:
@@ -76,7 +76,7 @@ class serpent_data:
         return times, mass_list
 
     def extract_tot_atoms(self, day_value=0):
-        '''
+        """
         Extract the total atoms from the depletion data from
                 the given time index.
 
@@ -93,7 +93,7 @@ class serpent_data:
         Exception
         ---------
         Material name does not exist.
-        '''
+        """
         dep_file = self.deplete
         dep = st.read(dep_file, reader='dep')
         try:
@@ -111,12 +111,12 @@ class serpent_data:
 
 
 class saltproc_data:
-    '''
+    """
     Parses SaltProc related data
-    '''
+    """
 
     def __init__(self, SP_mat_path, element_dictionary, target, eval_times):
-        '''
+        """
         Initialize.
 
         Parameters
@@ -136,7 +136,7 @@ class saltproc_data:
         Returns
         -------
         None
-        '''
+        """
         self.mat_path = SP_mat_path
         self.ele_dict = element_dictionary
         self.target = target
@@ -144,7 +144,7 @@ class saltproc_data:
         return
 
     def SP_target_extractor(self, material_path):
-        '''
+        """
         Go to material input, extract mass of target. Target may be isotope
                 or element; mass will be sum.
 
@@ -157,7 +157,7 @@ class saltproc_data:
         -------
         mass : float
             Total mass of target.
-        '''
+        """
 
         mass = 0
         if self.target in self.ele_dict:
@@ -193,7 +193,7 @@ class saltproc_data:
         return mass
 
     def SP_target_reader(self):
-        '''
+        """
         Run command to generate masses for times of target. SaltProc data
                 needs to be available in form "xxxx_{day}"
 
@@ -201,7 +201,7 @@ class saltproc_data:
         -------
         target_mass : list
             List of masses for each time.
-        '''
+        """
         target_mass = []
         for day in self.times:
             material_path = self.mat_path + str(day)

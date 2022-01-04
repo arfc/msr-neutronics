@@ -4,7 +4,7 @@ from pyne import nucname
 
 
 def check_isotope_in_library(isotope, lib_isos):
-    '''
+    """
     Check if an isotope is in the acelib library
          used for this simulation
     
@@ -21,7 +21,7 @@ def check_isotope_in_library(isotope, lib_isos):
     bool:
          True if  in library
          False if not in library
-    '''
+    """
     if isotope not in lib_isos:
         # print(isotope)
         return False
@@ -30,8 +30,9 @@ def check_isotope_in_library(isotope, lib_isos):
 
 
 def get_library_isotopes(acelib_path):
-    '''
+    """
     Returns the isotopes in the cross section library
+    
     Parameters
     ----------
     acelib_path : str
@@ -42,7 +43,7 @@ def get_library_isotopes(acelib_path):
     -------
     iso_array: array
         array of isotopes in cross section library:
-    '''
+    """
     lib_isos_list = []
     with open(acelib_path, 'r') as f:
         lines = f.readlines()
@@ -53,7 +54,7 @@ def get_library_isotopes(acelib_path):
 
 
 def read_all_iso_at_step(db_file, time_after_startup):
-    '''
+    """
     Reads isotopes at a certain time before and after reprocessing
 
     Parameters
@@ -71,9 +72,7 @@ def read_all_iso_at_step(db_file, time_after_startup):
         Dictionary of isotopes with compositions after removal
     isomap : ordered dict
         Ordered dictionary of isotopes with index (i.e. ('H1', 0))
-
-
-    '''
+    """
     db = tb.open_file(db_file, mode='r')
     sim_param = db.root.simulation_parameters
     day_eds = [x['cumulative_time_at_eds'] for x in sim_param.iterrows()]
@@ -101,7 +100,7 @@ def read_all_iso_at_step(db_file, time_after_startup):
 
 
 def convert_to_serpent_tra(isoname, lib_temp):
-    '''
+    """
     Converts isotope into Serpent style
 
     Parameters
@@ -117,8 +116,7 @@ def convert_to_serpent_tra(isoname, lib_temp):
         Name of isotope in Serpent (i.e. 'H-1.09c')
     metastable_flag : [0, 1]
         0 if not metastable, else 1
-
-    '''
+    """
     metastable_flag = 0
     if len(isoname) > 1 and isoname[-2] == 'm':
         new_isoname = isoname[:-1]
@@ -133,7 +131,7 @@ def convert_to_serpent_tra(isoname, lib_temp):
 
 
 def convert_to_serpent_dec(isoname, meta):
-    '''
+    """
     Converts isotope name to Serpent style
 
     Parameters
@@ -147,14 +145,14 @@ def convert_to_serpent_dec(isoname, meta):
     -------
     serpent_name : str
         Name of the isotope readable by Serpent
-
-    '''
+    """
     serpent_name = str(nucname.zzzaaa(isoname.split('.')[0])) + str(meta)
     return serpent_name
 
 
 def update_density(file, void):
-    '''
+    """
+    Opens `file` provided and updates density based on `void`
 
     Parameters
     ----------
@@ -162,8 +160,11 @@ def update_density(file, void):
         Name of the file to update the density for
     void : flaot
         Void fraction
-
-    '''
+    
+    Returns
+    -------
+    None
+    """
     f = open(file, 'r')
     data = f.readlines()
     mat_str = data[2].split()
@@ -185,9 +186,10 @@ def filter_out_and_store(isos,
                          lib_temp,
                          decay_isos,
                          mat_head):
-    '''
+    """
     Filter out isotopes which are not in XS library and
      stores new list in Serpent input file
+    
     Parameters
     ----------
     isos : dict
@@ -209,7 +211,8 @@ def filter_out_and_store(isos,
     Returns
     -------
     None
-    '''
+    """
+
     mass_no_decay_isos = 0
     mass_decay_isos = 0
     matf = open(file, 'w')
@@ -237,7 +240,7 @@ def filter_out_and_store(isos,
 
 
 def evaluate(time, hdf5_path, fuel_path):
-    '''
+    """
     Evaluates hdf5 file at target time, generating
         material data at target path.
 
@@ -254,8 +257,7 @@ def evaluate(time, hdf5_path, fuel_path):
     Returns
     -------
     None
-
-    '''
+    """
 
     db_file = hdf5_path
     new_mat_file = fuel_path

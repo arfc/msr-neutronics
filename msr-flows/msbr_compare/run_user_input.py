@@ -9,10 +9,10 @@ import time
 
 
 class full_run_serp:
-    '''
+    """
     This class combines other modules and allows for Serpent to be
             fully run with different flows.
-    '''
+    """
 
     def __init__(
             self,
@@ -25,7 +25,7 @@ class full_run_serp:
             list_inventory,
             element_flow_list,
             output_path):
-        '''
+        """
         Initialize.
 
         Parameters
@@ -57,7 +57,7 @@ class full_run_serp:
         Returns
         -------
         None
-        '''
+        """
         self.N = number_serp_steps
         self.mat_path = base_material_path
         self.template_path = template_path
@@ -74,9 +74,9 @@ class full_run_serp:
         return
 
     def control_run(self, identifier='CTRL'):
-        '''
+        """
         Run Serpent with no reproccessing (except for feedsalt)
-        '''
+        """
         reprocessing_dict = False
         read_file = False
         read_time = 0
@@ -112,7 +112,7 @@ class full_run_serp:
             LGA_step_size=3,
             isos_dict=False,
             num_SP=1):
-        '''
+        """
         Run appropriate Serpent files to generate the desired
                 reprocessing constants
 
@@ -137,7 +137,7 @@ class full_run_serp:
             Dictionary of each inventory item in Serpent depletion output
                         and corresponding reprocessing constant.
 
-        '''
+        """
 
         # No depletion to determine linear growth rate
         each_step = 0
@@ -222,7 +222,7 @@ class full_run_serp:
             LGA_step_size=3,
             iso_dict=False,
             num_SP=5):
-        '''
+        """
         This function will run the linear generation
             approximation and generate results.
 
@@ -243,7 +243,7 @@ class full_run_serp:
         Returns
         -------
         None
-        '''
+        """
 
         reprocessing_dict = self.linear_generation_reprocessing_constants(
             LGA_step_size=LGA_step_size,
@@ -277,7 +277,7 @@ class full_run_serp:
         return
 
     def cycle_time_decay(self, identifier='CTD'):
-        '''
+        """
         Run cycle time decay approximation
 
         Parameters
@@ -289,7 +289,7 @@ class full_run_serp:
         -------
         None
 
-        '''
+        """
         cycle_time_decay_build = serpent_calculations.cycle_time_decay(
             self.element_flow_list)
         reprocessing_dict = cycle_time_decay_build.repr_cnst_calc()
