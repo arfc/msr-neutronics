@@ -86,6 +86,7 @@ class full_run_serp:
             deck_name = self.output_path + identifier + str(each_step)
             current_actual_time = self.step_size * each_step + self.start_day
             current_serpent_time = current_actual_time - self.start_day
+            read_time = current_serpent_time
             cur_deck_maker = serpent_input.create_deck(
                 reprocessing_dict,
                 read_file,
@@ -448,8 +449,11 @@ if __name__ == '__main__':
                     label=SP_identifier,
                     alpha=ui.overlap,
                     lw=ui.width)
-            for each_step in range(ui.number_serp_steps):
 
+
+            CTRL_time_data = list()
+            CTRL_mass_data = list()
+            for each_step in range(ui.number_serp_steps):
                 if ui.cycle_time_decay:
                     CTD_plt = serpent_output.serpent_data(
                         close_boolean,
@@ -475,10 +479,9 @@ if __name__ == '__main__':
                     CTRL_plot_time, CTRL_plot_mass = CTRL_plt.serp_targ_reader(
                         target)
                     CTRL_actual_time = CTRL_plot_time + ui.start_time
-                    plt.plot(
-                        CTRL_actual_time,
-                        CTRL_plot_mass,
-                        label=CTRL_identifier, alpha=ui.overlap, lw=ui.width)
+                    for each_ind in range(len(CTRL_actual_time)):
+                        CTRL_time_data.append(CTRL_actual_time[each_ind])
+                        CTRL_mass_data.append(CTRL_plot_mass[each_ind])
 
                 if ui.separate_core_piping:
                     print('Not yet available')
@@ -512,6 +515,12 @@ if __name__ == '__main__':
                         LGA_actual_time,
                         LGA_plot_mass,
                         label=LGA_identifier, alpha=ui.overlap, lw=ui.width)
+
+            if ui.control:
+                plt.plot(
+                    CTRL_time_data,
+                    CTRL_mass_data,
+                    label=CTRL_identifier, alpha=ui.overlap, lw=ui.width)
 
             plt.xlabel('Time [d]')
             plt.ylabel('Mass [g]')
