@@ -5,9 +5,9 @@
 control = False
 saltproc = True
 
-linear_generation = False
-cycle_time_decay = True
-linear_isotope = False
+linear_generation = True
+cycle_time_decay = False
+linear_isotope = True
 
 # Basic model using ln(1 / (1 - X)) WIP
 natural_removal = False
@@ -32,7 +32,7 @@ template_path = './templates'
 template_name = 'saltproc.msbr.serpent'
 
 
-number_serp_steps = 10
+number_serp_steps = 2
 start_time = 3000
 end_time = 6000
 SP_step_size = 3

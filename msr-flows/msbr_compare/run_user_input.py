@@ -189,7 +189,7 @@ class full_run_serp:
             current_actual_time = self.step_size + self.start_day
             current_serpent_time = current_actual_time - self.start_day
             final_time = current_serpent_time
-
+            read_time = current_serpent_time
             SP_read = self.mat_path + \
                 str(int(self.start_day + LGA_step_size + 3 * (each_step - 1)))
 
@@ -271,6 +271,7 @@ class full_run_serp:
             deck_name = self.output_path + identifier + str(each_step)
             current_actual_time = self.step_size * each_step + self.start_day
             current_serpent_time = current_actual_time - self.start_day
+            read_time = current_serpent_time
             cur_deck_maker = serpent_input.create_deck(
                 reprocessing_dict,
                 read_file,
@@ -456,6 +457,10 @@ if __name__ == '__main__':
             CTRL_mass_data = list()
             CTD_time_data = list()
             CTD_mass_data = list()
+            LIA_time_data = list()
+            LIA_mass_data = list()
+            LGA_time_data = list()
+            LGA_mass_data = list()
             for each_step in range(ui.number_serp_steps):
                 if ui.cycle_time_decay:
                     CTD_plt = serpent_output.serpent_data(
@@ -470,10 +475,6 @@ if __name__ == '__main__':
                     for each_ind in range(len(CTD_actual_time)):
                         CTD_time_data.append(CTD_actual_time[each_ind])
                         CTD_mass_data.append(CTD_plot_mass[each_ind])
-                    #plt.plot(
-                    #    CTD_actual_time,
-                    #    CTD_plot_mass,
-                    #    label=CTD_identifier, alpha=ui.overlap, lw=ui.width)
 
                 if ui.control:
                     CTRL_plt = serpent_output.serpent_data(
@@ -502,10 +503,13 @@ if __name__ == '__main__':
                     LIA_plot_time, LIA_plot_mass = LIA_plt.serp_targ_reader(
                         target)
                     LIA_actual_time = LIA_plot_time + ui.start_time
-                    plt.plot(
-                        LIA_actual_time,
-                        LIA_plot_mass,
-                        label=LIA_identifier, alpha=ui.overlap, lw=ui.width)
+                    for each_ind in range(len(LIA_actual_time)):
+                        LIA_time_data.append(LIA_actual_time[each_ind])
+                        LIA_mass_data.append(LIA_plot_mass[each_ind])
+                    #plt.plot(
+                    #    LIA_actual_time,
+                    #    LIA_plot_mass,
+                    #    label=LIA_identifier, alpha=ui.overlap, lw=ui.width)
 
                 if ui.linear_generation:
                     LGA_plt = serpent_output.serpent_data(
@@ -517,10 +521,13 @@ if __name__ == '__main__':
                     LGA_plot_time, LGA_plot_mass = LGA_plt.serp_targ_reader(
                         target)
                     LGA_actual_time = LGA_plot_time + ui.start_time
-                    plt.plot(
-                        LGA_actual_time,
-                        LGA_plot_mass,
-                        label=LGA_identifier, alpha=ui.overlap, lw=ui.width)
+                    for each_ind in range(len(LGA_actual_time)):
+                        LGA_time_data.append(LGA_actual_time[each_ind])
+                        LGA_mass_data.append(LGA_plot_mass[each_ind])
+                    #plt.plot(
+                    #    LGA_actual_time,
+                    #    LGA_plot_mass,
+                    #    label=LGA_identifier, alpha=ui.overlap, lw=ui.width)
 
             if ui.cycle_time_decay: 
                 plt.plot(
@@ -533,7 +540,20 @@ if __name__ == '__main__':
                     CTRL_time_data,
                     CTRL_mass_data,
                     label=CTRL_identifier, alpha=ui.overlap, lw=ui.width)
-
+        
+            if ui.linear_isotope:
+                plt.plot(
+                    LIA_time_data,
+                    LIA_mass_data,
+                    label=LIA_identifier, alpha=ui.overlap, lw=ui.width)
+ 
+            if ui.linear_generation:
+                plt.plot(
+                    LGA_time_data,
+                    LGA_mass_data,
+                    label=LGA_identifier, alpha=ui.overlap, lw=ui.width)
+            
+            
             plt.xlabel('Time [d]')
             plt.ylabel('Mass [g]')
             plt.legend()
