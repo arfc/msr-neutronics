@@ -3,6 +3,7 @@ import serpent_input
 import serpent_calculations
 import misc_funcs
 import serpent_output
+import serpent_plotting
 import matplotlib.pyplot as plt
 import numpy as np
 import time
@@ -342,14 +343,12 @@ if __name__ == '__main__':
 
     output_path = f'./{ui.path_to_dump_files}/'
     misc_funcs.set_directory(output_path)
-
+    close_boolean = False
     element_dictionary = dict()
+
     for index in range(len(ui.element_flow_list)):
         element_dictionary[ui.element_flow_list[index]] = [
             ui.associated_symbol_list[index], ui.associated_atomic_list[index]]
-
-    if ui.multi_plot:
-        close_boolean = False
 
     if ui.control:
         start_timer_count = time.time()
@@ -452,108 +451,46 @@ if __name__ == '__main__':
                     alpha=ui.overlap,
                     lw=ui.width)
 
-
-            CTRL_time_data = list()
-            CTRL_mass_data = list()
-            CTD_time_data = list()
-            CTD_mass_data = list()
-            LIA_time_data = list()
-            LIA_mass_data = list()
-            LGA_time_data = list()
-            LGA_mass_data = list()
-            for each_step in range(ui.number_serp_steps):
-                if ui.cycle_time_decay:
-                    CTD_plt = serpent_output.serpent_data(
-                        close_boolean,
-                        file_name=output_path +
-                        CTD_identifier +
-                        str(each_step),
-                        material_name='fuel')
-                    CTD_plot_time, CTD_plot_mass = CTD_plt.serp_targ_reader(
-                        target)
-                    CTD_actual_time = CTD_plot_time + ui.start_time
-                    for each_ind in range(len(CTD_actual_time)):
-                        CTD_time_data.append(CTD_actual_time[each_ind])
-                        CTD_mass_data.append(CTD_plot_mass[each_ind])
-
-                if ui.control:
-                    CTRL_plt = serpent_output.serpent_data(
-                        close_boolean,
-                        file_name=output_path +
-                        CTRL_identifier +
-                        str(each_step),
-                        material_name='fuel')
-                    CTRL_plot_time, CTRL_plot_mass = CTRL_plt.serp_targ_reader(
-                        target)
-                    CTRL_actual_time = CTRL_plot_time + ui.start_time
-                    for each_ind in range(len(CTRL_actual_time)):
-                        CTRL_time_data.append(CTRL_actual_time[each_ind])
-                        CTRL_mass_data.append(CTRL_plot_mass[each_ind])
-
-                if ui.separate_core_piping:
-                    print('Not yet available')
-
-                if ui.linear_isotope:
-                    LIA_plt = serpent_output.serpent_data(
-                        close_boolean,
-                        file_name=output_path +
-                        LIA_identifier +
-                        str(each_step),
-                        material_name='fuel')
-                    LIA_plot_time, LIA_plot_mass = LIA_plt.serp_targ_reader(
-                        target)
-                    LIA_actual_time = LIA_plot_time + ui.start_time
-                    for each_ind in range(len(LIA_actual_time)):
-                        LIA_time_data.append(LIA_actual_time[each_ind])
-                        LIA_mass_data.append(LIA_plot_mass[each_ind])
-                    #plt.plot(
-                    #    LIA_actual_time,
-                    #    LIA_plot_mass,
-                    #    label=LIA_identifier, alpha=ui.overlap, lw=ui.width)
-
-                if ui.linear_generation:
-                    LGA_plt = serpent_output.serpent_data(
-                        close_boolean,
-                        file_name=output_path +
-                        LGA_identifier +
-                        str(each_step),
-                        material_name='fuel')
-                    LGA_plot_time, LGA_plot_mass = LGA_plt.serp_targ_reader(
-                        target)
-                    LGA_actual_time = LGA_plot_time + ui.start_time
-                    for each_ind in range(len(LGA_actual_time)):
-                        LGA_time_data.append(LGA_actual_time[each_ind])
-                        LGA_mass_data.append(LGA_plot_mass[each_ind])
-                    #plt.plot(
-                    #    LGA_actual_time,
-                    #    LGA_plot_mass,
-                    #    label=LGA_identifier, alpha=ui.overlap, lw=ui.width)
-
-            if ui.cycle_time_decay: 
+            if ui.cycle_time_decay:
+                CTD_time, CTD_mass = serpent_plotting.plotting_tools(
+                    output_path, CTD_identifier, target).plt_gen_mass_time()
                 plt.plot(
-                        CTD_time_data,
-                        CTD_mass_data,
-                        label=CTD_identifier, alpha=ui.overlap, lw=ui.width)
+                    CTD_time,
+                    CTD_mass,
+                    label=CTD_identifier,
+                    alpha=ui.overlap,
+                    lw=ui.width)
 
             if ui.control:
+                CTRL_time, CTRL_mass = serpent_plotting.plotting_tools(
+                    output_path, CTRL_identifier, target).plt_gen_mass_time()
                 plt.plot(
-                    CTRL_time_data,
-                    CTRL_mass_data,
-                    label=CTRL_identifier, alpha=ui.overlap, lw=ui.width)
-        
+                    CTRL_time,
+                    CTRL_mass,
+                    label=CTRL_identifier,
+                    alpha=ui.overlap,
+                    lw=ui.width)
+
             if ui.linear_isotope:
+                LIA_time, LIA_mass = serpent_plotting.plotting_tools(
+                    output_path, LIA_identifier, target).plt_gen_mass_time()
                 plt.plot(
-                    LIA_time_data,
-                    LIA_mass_data,
-                    label=LIA_identifier, alpha=ui.overlap, lw=ui.width)
- 
+                    LIA_time,
+                    LIA_mass,
+                    label=LIA_identifier,
+                    alpha=ui.overlap,
+                    lw=ui.width)
+
             if ui.linear_generation:
+                LGA_time, LGA_mass = serpent_plotting.plotting_tools(
+                    output_path, LGA_identifier, target).plt_gen_mass_time()
                 plt.plot(
-                    LGA_time_data,
-                    LGA_mass_data,
-                    label=LGA_identifier, alpha=ui.overlap, lw=ui.width)
-            
-            
+                    LGA_time,
+                    LGA_mass,
+                    label=LGA_identifier,
+                    alpha=ui.overlap,
+                    lw=ui.width)
+
             plt.xlabel('Time [d]')
             plt.ylabel('Mass [g]')
             plt.legend()

@@ -7,15 +7,12 @@ class serpent_data:
     Analyzes data from _res.m and _dep.m files.
     """
 
-    def __init__(self, close_bool, file_name=False, material_name='fuel'):
+    def __init__(self, file_name=False, material_name='fuel'):
         """
         Initialize
 
         Parameters
         ----------
-        close_bool : boolean
-            Set to True to close a plot. Allows for multiple
-                    datasets on a single plot
         file_name : str (optional)
             Name of the file which has results and depletion named after it.
         material_name : str (optional)
@@ -27,7 +24,6 @@ class serpent_data:
 
 
         """
-        self.close = close_bool
         self.file_name = file_name
         if file_name:
             self.deplete = file_name + '_dep.m'
@@ -218,7 +214,7 @@ if __name__ == '__main__':
     print('Start serpent_data')
     data_path = './ss-comparison/CTD0'
     save_path = './ss-comparison/'
-    test = serpent_data(True, data_path)
+    test = serpent_data(data_path)
     start_time = 3000
     time, mass = test.serp_targ_reader('Xe135')
     plt.plot(time + start_time, mass, label='serpent_data')
