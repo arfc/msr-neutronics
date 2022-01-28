@@ -2,12 +2,12 @@
 
 # Runs to perform
 
-control = False
+control = True
 saltproc = True
 
-linear_generation = True
+linear_generation = False
 cycle_time_decay = True
-linear_isotope = True
+linear_isotope = False
 
 # Basic model using ln(1 / (1 - X)) WIP
 efficiency_based = False
@@ -22,7 +22,7 @@ separate_core_piping = False
 
 model_plotting = True
 compare_plotting = True
-
+N_plotting = True
 
 overlap = 0.5
 width = 3
@@ -33,9 +33,9 @@ template_path = './templates'
 template_name = 'saltproc.msbr.serpent'
 
 
-number_serp_steps = 1
+number_serp_steps_list = [1, 10]
 start_time = 3000
-end_time = 3030
+end_time = 6000
 SP_step_size = 3
 SP_start = 0
 SP_end = 6000

@@ -341,156 +341,176 @@ class full_run_serp:
 
 if __name__ == '__main__':
 
-    output_path = f'./{ui.path_to_dump_files}/'
-    misc_funcs.set_directory(output_path)
+    base_output_path = f'./{ui.path_to_dump_files}/'
+    misc_funcs.set_directory(base_output_path)
+
     element_dictionary = dict()
     active_identifiers = list()
 
     for index in range(len(ui.element_flow_list)):
         element_dictionary[ui.element_flow_list[index]] = [
             ui.associated_symbol_list[index], ui.associated_atomic_list[index]]
+    for N_steps in ui.number_serp_steps_list:
+        output_path = str(base_output_path) + f'{N_steps}/'
+        misc_funcs.set_directory(output_path)
 
-    if ui.control:
-        start_timer_count = time.time()
-        print('Running Control')
-        CTRL_identifier = 'CTRL'
-        active_identifiers.append(CTRL_identifier)
-        builder = full_run_serp(
-            ui.number_serp_steps,
-            ui.base_material_path,
-            ui.template_path,
-            ui.template_name,
-            ui.start_time,
-            ui.end_time,
-            ui.list_inventory,
-            ui.element_flow_list,
-            output_path)
-        builder.control_run(identifier=CTRL_identifier)
-        end_timer_count = time.time()
-        print(f'Ran Control, took {end_timer_count - start_timer_count}s')
+        if ui.control:
+            start_timer_count = time.time()
+            print('Running Control')
+            CTRL_identifier = 'CTRL'
+            active_identifiers.append(CTRL_identifier)
+            builder = full_run_serp(
+                N_steps,
+                ui.base_material_path,
+                ui.template_path,
+                ui.template_name,
+                ui.start_time,
+                ui.end_time,
+                ui.list_inventory,
+                ui.element_flow_list,
+                output_path)
+            builder.control_run(identifier=CTRL_identifier)
+            end_timer_count = time.time()
+            print(f'Ran Control, took {end_timer_count - start_timer_count}s')
 
-    if ui.linear_isotope:
-        start_timer_count = time.time()
-        print('Running LIA')
-        LIA_identifier = 'LIA'
-        active_identifiers.append(LIA_identifier)
-        builder = full_run_serp(
-            ui.number_serp_steps,
-            ui.base_material_path,
-            ui.template_path,
-            ui.template_name,
-            ui.start_time,
-            ui.end_time,
-            ui.list_inventory,
-            ui.element_flow_list,
-            output_path)
-        builder.linear_generation(
-            identifier=LIA_identifier,
-            LGA_step_size=ui.LGA_step_size,
-            iso_dict=ui.important_isotopes,
-            num_SP=ui.linear_SP_count)
-        end_timer_count = time.time()
-        print(f'Ran LIA, took {end_timer_count - start_timer_count}s')
+        if ui.linear_isotope:
+            start_timer_count = time.time()
+            print('Running LIA')
+            LIA_identifier = 'LIA'
+            active_identifiers.append(LIA_identifier)
+            builder = full_run_serp(
+                N_steps,
+                ui.base_material_path,
+                ui.template_path,
+                ui.template_name,
+                ui.start_time,
+                ui.end_time,
+                ui.list_inventory,
+                ui.element_flow_list,
+                output_path)
+            builder.linear_generation(
+                identifier=LIA_identifier,
+                LGA_step_size=ui.LGA_step_size,
+                iso_dict=ui.important_isotopes,
+                num_SP=ui.linear_SP_count)
+            end_timer_count = time.time()
+            print(f'Ran LIA, took {end_timer_count - start_timer_count}s')
 
-    if ui.separate_core_piping:
-        print('Not yet available')
+        if ui.separate_core_piping:
+            print('Not yet available')
 
-    if ui.linear_generation:
-        start_timer_count = time.time()
-        print('Running LGA')
-        LGA_identifier = 'LGA'
-        active_identifiers.append(LGA_identifier)
-        builder = full_run_serp(
-            ui.number_serp_steps,
-            ui.base_material_path,
-            ui.template_path,
-            ui.template_name,
-            ui.start_time,
-            ui.end_time,
-            ui.list_inventory,
-            ui.element_flow_list,
-            output_path)
-        builder.linear_generation(
-            identifier=LGA_identifier,
-            LGA_step_size=ui.LGA_step_size,
-            num_SP=ui.linear_SP_count)
-        end_timer_count = time.time()
-        print(f'Ran LGA, took {end_timer_count - start_timer_count}s')
+        if ui.linear_generation:
+            start_timer_count = time.time()
+            print('Running LGA')
+            LGA_identifier = 'LGA'
+            active_identifiers.append(LGA_identifier)
+            builder = full_run_serp(
+                N_steps,
+                ui.base_material_path,
+                ui.template_path,
+                ui.template_name,
+                ui.start_time,
+                ui.end_time,
+                ui.list_inventory,
+                ui.element_flow_list,
+                output_path)
+            builder.linear_generation(
+                identifier=LGA_identifier,
+                LGA_step_size=ui.LGA_step_size,
+                num_SP=ui.linear_SP_count)
+            end_timer_count = time.time()
+            print(f'Ran LGA, took {end_timer_count - start_timer_count}s')
 
-    if ui.cycle_time_decay:
-        start_timer_count = time.time()
-        print('Running CTD')
-        CTD_identifier = 'CTD'
-        active_identifiers.append(CTD_identifier)
-        builder = full_run_serp(
-            ui.number_serp_steps,
-            ui.base_material_path,
-            ui.template_path,
-            ui.template_name,
-            ui.start_time,
-            ui.end_time,
-            ui.list_inventory,
-            ui.element_flow_list,
-            output_path)
-        builder.cycle_time_decay(identifier=CTD_identifier)
-        end_timer_count = time.time()
-        print(f'Ran CTD, took {end_timer_count - start_timer_count}s')
+        if ui.cycle_time_decay:
+            start_timer_count = time.time()
+            print('Running CTD')
+            CTD_identifier = 'CTD'
+            active_identifiers.append(CTD_identifier)
+            builder = full_run_serp(
+                N_steps,
+                ui.base_material_path,
+                ui.template_path,
+                ui.template_name,
+                ui.start_time,
+                ui.end_time,
+                ui.list_inventory,
+                ui.element_flow_list,
+                output_path)
+            builder.cycle_time_decay(identifier=CTD_identifier)
+            end_timer_count = time.time()
+            print(f'Ran CTD, took {end_timer_count - start_timer_count}s')
 
-    if ui.model_plotting:
-        print('Plotting different models together')
-        SP_eval_times = np.arange(
-            ui.SP_start, ui.SP_end + ui.SP_step_size, ui.SP_step_size)
-        for target in ui.total_view_list:
-            if ui.saltproc:
-                SP_identifier = 'SP'
-                SP_plt = serpent_output.saltproc_data(
-                    ui.base_material_path, element_dictionary,
-                    target, SP_eval_times)
-                SP_mass = SP_plt.SP_target_reader()
-                plt.plot(
-                    SP_eval_times,
-                    SP_mass,
-                    label=SP_identifier,
-                    alpha=ui.overlap,
-                    lw=ui.width)
-            
-            for identifier in active_identifiers:
-                cur_time, cur_mass = serpent_plotting.plotting_tools(output_path, identifier, target).plt_gen_mass_time()
-                plt.plot(cur_time, cur_mass, label=identifier, alpha=ui.overlap, lw=ui.width)
-
-            plt.xlabel('Time [d]')
-            plt.ylabel('Mass [g]')
-            plt.legend()
-            plt.tight_layout()
-            plt.savefig(f'{output_path}cumulative_{target}_mass.png')
-            plt.close()
-
-
-    if ui.compare_plotting:
-        print('Plotting each model compared to SaltProc')
-        SP_eval_times = np.arange(
-            ui.SP_start, ui.SP_end + ui.SP_step_size, ui.SP_step_size)
-        for target in ui.total_view_list:
-            if ui.saltproc:
-                SP_identifier = 'SP'
-                SP_plt = serpent_output.saltproc_data(
-                    ui.base_material_path, element_dictionary,
-                    target, SP_eval_times)
-                SP_mass = SP_plt.SP_target_reader()
-            
-            for identifier in active_identifiers:
-                cur_time, cur_mass = serpent_plotting.plotting_tools(output_path, identifier, target).plt_gen_mass_time()
-                plt.plot(cur_time, cur_mass, label=identifier, alpha=ui.overlap, lw=ui.width)
-                plt.plot(
-                    SP_eval_times,
-                    SP_mass,
-                    label=SP_identifier,
-                    alpha=ui.overlap,
-                    lw=ui.width)
+        if ui.model_plotting:
+            print('Plotting different models together')
+            SP_eval_times = np.arange(
+                ui.SP_start, ui.SP_end + ui.SP_step_size, ui.SP_step_size)
+            for target in ui.total_view_list:
+                if ui.saltproc:
+                    SP_identifier = 'SP'
+                    SP_plt = serpent_output.saltproc_data(
+                        ui.base_material_path, element_dictionary,
+                        target, SP_eval_times)
+                    SP_mass = SP_plt.SP_target_reader()
+                    plt.plot(
+                        SP_eval_times,
+                        SP_mass,
+                        label=SP_identifier,
+                        alpha=ui.overlap,
+                        lw=ui.width)
+                
+                for identifier in active_identifiers:
+                    cur_time, cur_mass = serpent_plotting.plotting_tools(output_path, identifier, target, N_steps).plt_gen_mass_time()
+                    plt.plot(cur_time, cur_mass, label=identifier, alpha=ui.overlap, lw=ui.width)
 
                 plt.xlabel('Time [d]')
                 plt.ylabel('Mass [g]')
                 plt.legend()
                 plt.tight_layout()
-                plt.savefig(f'{output_path}{identifier}_{target}_mass.png')
+                plt.savefig(f'{output_path}cumulative_{target}_mass.png')
+                plt.close()
+
+
+        if ui.compare_plotting:
+            print('Plotting each model compared to SaltProc')
+            SP_eval_times = np.arange(
+                ui.SP_start, ui.SP_end + ui.SP_step_size, ui.SP_step_size)
+            for target in ui.total_view_list:
+                if ui.saltproc:
+                    SP_identifier = 'SP'
+                    SP_plt = serpent_output.saltproc_data(
+                        ui.base_material_path, element_dictionary,
+                        target, SP_eval_times)
+                    SP_mass = SP_plt.SP_target_reader()
+                
+                for identifier in active_identifiers:
+                    cur_time, cur_mass = serpent_plotting.plotting_tools(output_path, identifier, target, N_steps).plt_gen_mass_time()
+                    plt.plot(cur_time, cur_mass, label=identifier, alpha=ui.overlap, lw=ui.width)
+                    plt.plot(
+                        SP_eval_times,
+                        SP_mass,
+                        label=SP_identifier,
+                        alpha=ui.overlap,
+                        lw=ui.width)
+
+                    plt.xlabel('Time [d]')
+                    plt.ylabel('Mass [g]')
+                    plt.legend()
+                    plt.tight_layout()
+                    plt.savefig(f'{output_path}{identifier}_{target}_mass.png')
+                    plt.close()
+
+    if ui.N_plotting:
+        print('Plotting each model compared to different step sizes') 
+        for target in ui.total_view_list:
+            for identifier in active_identifiers:
+                for N_steps in ui.number_serp_steps_list:
+                    output_path = str(base_output_path) + f'{N_steps}/'
+                    cur_time, cur_mass = serpent_plotting.plotting_tools(output_path, identifier, target, N_steps).plt_gen_mass_time()
+                    plt.plot(cur_time, cur_mass, label=str(N_steps) + ' steps', alpha=ui.overlap, lw=ui.width)
+
+                plt.xlabel('Time [d]')
+                plt.ylabel('Mass [g]')
+                plt.legend()
+                plt.tight_layout()
+                plt.savefig(f'{base_output_path}{identifier}_NSTEP_{target}_mass.png')
                 plt.close()

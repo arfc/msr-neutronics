@@ -10,7 +10,7 @@ class plotting_tools:
 
     """
 
-    def __init__(self, output_path, identifier, target, mat_name='fuel'):
+    def __init__(self, output_path, identifier, target, num_steps, mat_name='fuel'):
         """
         Initialize the plotting tools class.
 
@@ -23,6 +23,8 @@ class plotting_tools:
         target : str
             Name of isotope or element to collect data for
                 (i.e. Xe-135 or xenon)
+        num_steps : int
+            Number of steps that Serpent2 is run for
         mat_name : str (optional)
             Name of the material to pull data from
 
@@ -35,6 +37,7 @@ class plotting_tools:
         self.path = output_path + identifier
         self.target = target
         self.mat = mat_name
+        self.steps = num_steps
 
         return
 
@@ -57,7 +60,7 @@ class plotting_tools:
         """
         time_data = list()
         mass_data = list()
-        for each_step in range(ui.number_serp_steps):
+        for each_step in range(self.steps):
             plot_tool = serpent_output.serpent_data(
                 file_name=self.path + str(each_step), material_name=self.mat)
             time, mass = plot_tool.serp_targ_reader(self.target)
