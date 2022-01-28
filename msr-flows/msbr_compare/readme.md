@@ -21,6 +21,9 @@ Provides calculations for reprocessing constants of different approximations.
 ### `serpent_output.py`
 Deals with the depletion and results outputs Serpent2 provides. Also parses SaltProc material files.
 
+### `serpent_plotting.py`
+Handles the plotting of Serpent2 outputs.
+
 ### `misc_funcs.py`
 Contains one-time-use functions or minor functions which don't necessarily fit in one of the other major categories.
 
