@@ -41,7 +41,6 @@ Renamed SaltProc post-processing script to extract data from hdf5 file into Serp
 - The lambda terms of core flow assume constant density (core and piping same densities)
 
 ## Things to do:
-- Test running with N steps
 - Test running with different start and end points
 - Add in piping material, check improvement vs other versions
 

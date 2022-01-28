@@ -5,9 +5,9 @@
 control = True
 saltproc = True
 
-linear_generation = True
+linear_generation = False
 cycle_time_decay = True
-linear_isotope = True
+linear_isotope = False
 
 # Basic model using ln(1 / (1 - X)) WIP
 efficiency_based = False
