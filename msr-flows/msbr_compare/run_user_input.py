@@ -306,9 +306,102 @@ class full_run_serp:
         None
 
         """
-        cycle_time_decay_build = serpent_calculations.cycle_time_decay(
+        cycle_time_decay_build = serpent_calculations.cycle_time_model(
             self.element_flow_list)
-        reprocessing_dict = cycle_time_decay_build.repr_cnst_calc()
+        reprocessing_dict = cycle_time_decay_build.cycle_time_decay()
+        read_file = False
+        read_time = 0
+        for each_step in range(self.N):
+            write_file = self.output_path + \
+                identifier + str(each_step) + '.wrk'
+            deck_name = self.output_path + identifier + str(each_step)
+            current_actual_time = self.step_size * each_step + self.start_day
+            current_serpent_time = current_actual_time - self.start_day
+            read_time = current_serpent_time
+            cur_deck_maker = serpent_input.create_deck(
+                reprocessing_dict,
+                read_file,
+                read_time,
+                write_file,
+                self.base_mat_file,
+                self.template_name,
+                self.template_path,
+                self.step_size,
+                self.inv_list,
+                identifier,
+                deck_name)
+            deck = cur_deck_maker.build_serpent_deck()
+            run = serpent_input.run_deck(deck_name, deck, write_file)
+            run.run_script()
+            read_file = write_file
+            read_time = current_serpent_time
+
+        return
+
+    def cycle_rate(self, identifier='CR'):
+        """
+        Run cycle rate approximation
+
+        Parameters
+        ----------
+        identifier : str (optional)
+            Used to generate the file name.
+
+        Returns
+        -------
+        None
+
+        """
+        cycle_rate_build = serpent_calculations.cycle_time_model(
+            self.element_flow_list)
+        reprocessing_dict = cycle_rate_build.cycle_rate()
+        read_file = False
+        read_time = 0
+        for each_step in range(self.N):
+            write_file = self.output_path + \
+                identifier + str(each_step) + '.wrk'
+            deck_name = self.output_path + identifier + str(each_step)
+            current_actual_time = self.step_size * each_step + self.start_day
+            current_serpent_time = current_actual_time - self.start_day
+            read_time = current_serpent_time
+            cur_deck_maker = serpent_input.create_deck(
+                reprocessing_dict,
+                read_file,
+                read_time,
+                write_file,
+                self.base_mat_file,
+                self.template_name,
+                self.template_path,
+                self.step_size,
+                self.inv_list,
+                identifier,
+                deck_name)
+            deck = cur_deck_maker.build_serpent_deck()
+            run = serpent_input.run_deck(deck_name, deck, write_file)
+            run.run_script()
+            read_file = write_file
+            read_time = current_serpent_time
+
+        return
+
+
+    def SP_cycle_rate(self, identifier='SPCR'):
+        """
+        Run SaltProc cycle rate approximation
+
+        Parameters
+        ----------
+        identifier : str (optional)
+            Used to generate the file name.
+
+        Returns
+        -------
+        None
+
+        """
+        SP_cycle_rate_build = serpent_calculations.cycle_time_model(
+            self.element_flow_list)
+        reprocessing_dict = SP_cycle_rate_build.SP_cycle_rate()
         read_file = False
         read_time = 0
         for each_step in range(self.N):
@@ -439,6 +532,46 @@ if __name__ == '__main__':
             builder.cycle_time_decay(identifier=CTD_identifier)
             end_timer_count = time.time()
             print(f'Ran CTD, took {end_timer_count - start_timer_count}s')
+
+        if ui.cycle_rate:
+            start_timer_count = time.time()
+            print('Running CR')
+            CR_identifier = 'CR'
+            active_identifiers.append(CR_identifier)
+            builder = full_run_serp(
+                N_steps,
+                ui.base_material_path,
+                ui.template_path,
+                ui.template_name,
+                ui.start_time,
+                ui.end_time,
+                ui.list_inventory,
+                ui.element_flow_list,
+                output_path)
+            builder.cycle_rate(identifier=CR_identifier)
+            end_timer_count = time.time()
+            print(f'Ran CR, took {end_timer_count - start_timer_count}s')
+
+        if ui.saltproc_cycle_rate:
+            start_timer_count = time.time()
+            print('Running SPCR')
+            SPCR_identifier = 'SPCR'
+            active_identifiers.append(SPCR_identifier)
+            builder = full_run_serp(
+                N_steps,
+                ui.base_material_path,
+                ui.template_path,
+                ui.template_name,
+                ui.start_time,
+                ui.end_time,
+                ui.list_inventory,
+                ui.element_flow_list,
+                output_path)
+            builder.SP_cycle_rate(identifier=SPCR_identifier)
+            end_timer_count = time.time()
+            print(f'Ran SPCR, took {end_timer_count - start_timer_count}s')
+
+        # Plotting
 
         if ui.model_plotting:
             print('Plotting different models together')
