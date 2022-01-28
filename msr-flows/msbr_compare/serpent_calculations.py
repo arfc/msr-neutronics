@@ -320,9 +320,7 @@ class cycle_time_model:
             cycle_val = cycle_times[each]
             efficiency_rate = 1 / cycle_val
             repr_const = np.log(1 / (1 - efficiency_rate))
-            print('Cycle time based removal')
             for element in groups[each]:
-                print(f'{element}: {repr_const}')
                 reprocessing_dictionary[element] = repr_const
 
         return reprocessing_dictionary
@@ -352,21 +350,19 @@ class cycle_time_model:
         groups.append(self.element_flow_list[0:1])
         groups.append(self.element_flow_list[1:2])
         groups.append(self.element_flow_list[2:12])
-        groups.append(self.element_flow_list[12:15])
-        groups.append(self.element_flow_list[15:16])
-        groups.append(self.element_flow_list[16:17]) 
-        groups.append(self.element_flow_list[17:26])
+        groups.append(self.element_flow_list[12:16])
+        groups.append(self.element_flow_list[16:17])
+        groups.append(self.element_flow_list[17:18]) 
+        groups.append(self.element_flow_list[18:26])
         groups.append(self.element_flow_list[26:27])
-        groups.append(self.element_flow_list[27:32])
+        groups.append(self.element_flow_list[27:31])
         SP_values = [0.911522, 0.914857, 1, 0.015, 0.05, 0.95, 0.6, 0.06, 0.09]
 
         for each in range(len(SP_values)):
             SP_rem = SP_values[each]
             per_sec_rem = SP_rem / 3 / 24 / 3600
-            repr_const = np.log(1 / (1 - pre_sec_rem))
-            print('SaltProc based removal')
+            repr_const = np.log(1 / (1 - per_sec_rem))
             for element in groups[each]:
-                print(f'{element}: {repr_const}')
                 reprocessing_dictionary[element] = repr_const
 
         return reprocessing_dictionary
