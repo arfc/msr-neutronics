@@ -35,7 +35,7 @@ template_name = 'saltproc.msbr.serpent'
 
 number_serp_steps_list = [1]
 start_time = 3000
-end_time = 6000
+end_time = 3060#6000
 SP_step_size = 3
 SP_start = 0
 SP_end = 6000
