@@ -3,6 +3,7 @@ import serpent_input
 import serpent_calculations
 import misc_funcs
 import serpent_output
+import serpent_plotting
 import matplotlib.pyplot as plt
 import numpy as np
 import time
@@ -86,6 +87,7 @@ class full_run_serp:
             deck_name = self.output_path + identifier + str(each_step)
             current_actual_time = self.step_size * each_step + self.start_day
             current_serpent_time = current_actual_time - self.start_day
+            read_time = current_serpent_time
             cur_deck_maker = serpent_input.create_deck(
                 reprocessing_dict,
                 read_file,
@@ -188,7 +190,7 @@ class full_run_serp:
             current_actual_time = self.step_size + self.start_day
             current_serpent_time = current_actual_time - self.start_day
             final_time = current_serpent_time
-
+            read_time = current_serpent_time
             SP_read = self.mat_path + \
                 str(int(self.start_day + LGA_step_size + 3 * (each_step - 1)))
 
@@ -270,6 +272,7 @@ class full_run_serp:
             deck_name = self.output_path + identifier + str(each_step)
             current_actual_time = self.step_size * each_step + self.start_day
             current_serpent_time = current_actual_time - self.start_day
+            read_time = current_serpent_time
             cur_deck_maker = serpent_input.create_deck(
                 reprocessing_dict,
                 read_file,
@@ -314,6 +317,7 @@ class full_run_serp:
             deck_name = self.output_path + identifier + str(each_step)
             current_actual_time = self.step_size * each_step + self.start_day
             current_serpent_time = current_actual_time - self.start_day
+            read_time = current_serpent_time
             cur_deck_maker = serpent_input.create_deck(
                 reprocessing_dict,
                 read_file,
@@ -339,14 +343,12 @@ if __name__ == '__main__':
 
     output_path = f'./{ui.path_to_dump_files}/'
     misc_funcs.set_directory(output_path)
-
+    close_boolean = False
     element_dictionary = dict()
+
     for index in range(len(ui.element_flow_list)):
         element_dictionary[ui.element_flow_list[index]] = [
             ui.associated_symbol_list[index], ui.associated_atomic_list[index]]
-
-    if ui.multi_plot:
-        close_boolean = False
 
     if ui.control:
         start_timer_count = time.time()
@@ -448,70 +450,46 @@ if __name__ == '__main__':
                     label=SP_identifier,
                     alpha=ui.overlap,
                     lw=ui.width)
-            for each_step in range(ui.number_serp_steps):
 
-                if ui.cycle_time_decay:
-                    CTD_plt = serpent_output.serpent_data(
-                        close_boolean,
-                        file_name=output_path +
-                        CTD_identifier +
-                        str(each_step),
-                        material_name='fuel')
-                    CTD_plot_time, CTD_plot_mass = CTD_plt.serp_targ_reader(
-                        target)
-                    CTD_actual_time = CTD_plot_time + ui.start_time
-                    plt.plot(
-                        CTD_actual_time,
-                        CTD_plot_mass,
-                        label=CTD_identifier, alpha=ui.overlap, lw=ui.width)
+            if ui.cycle_time_decay:
+                CTD_time, CTD_mass = serpent_plotting.plotting_tools(
+                    output_path, CTD_identifier, target).plt_gen_mass_time()
+                plt.plot(
+                    CTD_time,
+                    CTD_mass,
+                    label=CTD_identifier,
+                    alpha=ui.overlap,
+                    lw=ui.width)
 
-                if ui.control:
-                    CTRL_plt = serpent_output.serpent_data(
-                        close_boolean,
-                        file_name=output_path +
-                        CTRL_identifier +
-                        str(each_step),
-                        material_name='fuel')
-                    CTRL_plot_time, CTRL_plot_mass = CTRL_plt.serp_targ_reader(
-                        target)
-                    CTRL_actual_time = CTRL_plot_time + ui.start_time
-                    plt.plot(
-                        CTRL_actual_time,
-                        CTRL_plot_mass,
-                        label=CTRL_identifier, alpha=ui.overlap, lw=ui.width)
+            if ui.control:
+                CTRL_time, CTRL_mass = serpent_plotting.plotting_tools(
+                    output_path, CTRL_identifier, target).plt_gen_mass_time()
+                plt.plot(
+                    CTRL_time,
+                    CTRL_mass,
+                    label=CTRL_identifier,
+                    alpha=ui.overlap,
+                    lw=ui.width)
 
-                if ui.separate_core_piping:
-                    print('Not yet available')
+            if ui.linear_isotope:
+                LIA_time, LIA_mass = serpent_plotting.plotting_tools(
+                    output_path, LIA_identifier, target).plt_gen_mass_time()
+                plt.plot(
+                    LIA_time,
+                    LIA_mass,
+                    label=LIA_identifier,
+                    alpha=ui.overlap,
+                    lw=ui.width)
 
-                if ui.linear_isotope:
-                    LIA_plt = serpent_output.serpent_data(
-                        close_boolean,
-                        file_name=output_path +
-                        LIA_identifier +
-                        str(each_step),
-                        material_name='fuel')
-                    LIA_plot_time, LIA_plot_mass = LIA_plt.serp_targ_reader(
-                        target)
-                    LIA_actual_time = LIA_plot_time + ui.start_time
-                    plt.plot(
-                        LIA_actual_time,
-                        LIA_plot_mass,
-                        label=LIA_identifier, alpha=ui.overlap, lw=ui.width)
-
-                if ui.linear_generation:
-                    LGA_plt = serpent_output.serpent_data(
-                        close_boolean,
-                        file_name=output_path +
-                        LGA_identifier +
-                        str(each_step),
-                        material_name='fuel')
-                    LGA_plot_time, LGA_plot_mass = LGA_plt.serp_targ_reader(
-                        target)
-                    LGA_actual_time = LGA_plot_time + ui.start_time
-                    plt.plot(
-                        LGA_actual_time,
-                        LGA_plot_mass,
-                        label=LGA_identifier, alpha=ui.overlap, lw=ui.width)
+            if ui.linear_generation:
+                LGA_time, LGA_mass = serpent_plotting.plotting_tools(
+                    output_path, LGA_identifier, target).plt_gen_mass_time()
+                plt.plot(
+                    LGA_time,
+                    LGA_mass,
+                    label=LGA_identifier,
+                    alpha=ui.overlap,
+                    lw=ui.width)
 
             plt.xlabel('Time [d]')
             plt.ylabel('Mass [g]')

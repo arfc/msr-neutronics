@@ -21,6 +21,9 @@ Provides calculations for reprocessing constants of different approximations.
 ### `serpent_output.py`
 Deals with the depletion and results outputs Serpent2 provides. Also parses SaltProc material files.
 
+### `serpent_plotting.py`
+Handles the plotting of Serpent2 outputs.
+
 ### `misc_funcs.py`
 Contains one-time-use functions or minor functions which don't necessarily fit in one of the other major categories.
 
@@ -38,7 +41,6 @@ Renamed SaltProc post-processing script to extract data from hdf5 file into Serp
 - The lambda terms of core flow assume constant density (core and piping same densities)
 
 ## Things to do:
-- Test running with N steps
 - Test running with different start and end points
 - Add in piping material, check improvement vs other versions
 
