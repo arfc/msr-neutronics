@@ -443,7 +443,7 @@ if __name__ == '__main__':
     for index in range(len(ui.element_flow_list)):
         element_dictionary[ui.element_flow_list[index]] = [
             ui.associated_symbol_list[index], ui.associated_atomic_list[index]]
-    for N_steps in ui.number_serp_steps_list:
+    for N_index, N_steps in ui.number_serp_steps_list:
         output_path = str(base_output_path) + f'{N_steps}/'
         misc_funcs.set_directory(output_path)
 
@@ -451,7 +451,8 @@ if __name__ == '__main__':
             start_timer_count = time.time()
             print('Running Control')
             CTRL_identifier = 'CTRL'
-            active_identifiers.append(CTRL_identifier)
+            if N_index == 0:
+                active_identifiers.append(CTRL_identifier)
             builder = full_run_serp(
                 N_steps,
                 ui.base_material_path,
@@ -470,7 +471,8 @@ if __name__ == '__main__':
             start_timer_count = time.time()
             print('Running LIA')
             LIA_identifier = 'LIA'
-            active_identifiers.append(LIA_identifier)
+            if N_index == 0:
+                active_identifiers.append(LIA_identifier)
             builder = full_run_serp(
                 N_steps,
                 ui.base_material_path,
@@ -496,7 +498,8 @@ if __name__ == '__main__':
             start_timer_count = time.time()
             print('Running LGA')
             LGA_identifier = 'LGA'
-            active_identifiers.append(LGA_identifier)
+            if N_index == 0:
+                active_identifiers.append(LGA_identifier)
             builder = full_run_serp(
                 N_steps,
                 ui.base_material_path,
@@ -518,7 +521,8 @@ if __name__ == '__main__':
             start_timer_count = time.time()
             print('Running CTD')
             CTD_identifier = 'CTD'
-            active_identifiers.append(CTD_identifier)
+            if N_index == 0:
+                active_identifiers.append(CTD_identifier)
             builder = full_run_serp(
                 N_steps,
                 ui.base_material_path,
@@ -537,7 +541,8 @@ if __name__ == '__main__':
             start_timer_count = time.time()
             print('Running CR')
             CR_identifier = 'CR'
-            active_identifiers.append(CR_identifier)
+            if N_index == 0:
+                active_identifiers.append(CR_identifier)
             builder = full_run_serp(
                 N_steps,
                 ui.base_material_path,
@@ -556,7 +561,8 @@ if __name__ == '__main__':
             start_timer_count = time.time()
             print('Running SPCR')
             SPCR_identifier = 'SPCR'
-            active_identifiers.append(SPCR_identifier)
+            if N_index == 0:
+                active_identifiers.append(SPCR_identifier)
             builder = full_run_serp(
                 N_steps,
                 ui.base_material_path,

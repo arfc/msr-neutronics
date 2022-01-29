@@ -33,12 +33,12 @@ template_path = './templates'
 template_name = 'saltproc.msbr.serpent'
 
 
-number_serp_steps_list = [1]
+number_serp_steps_list = [1, 3]
 start_time = 3000
-end_time = 3060#6000
+end_time = 3060 #6000
 SP_step_size = 3
-SP_start = 0
-SP_end = 6000
+SP_start = start_time #0
+SP_end = end_time #6000
 
 LGA_step_size = 3
 linear_SP_count = 2
