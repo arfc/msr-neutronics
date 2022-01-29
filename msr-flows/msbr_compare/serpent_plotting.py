@@ -69,3 +69,30 @@ class plotting_tools:
                 time_data.append(actual_time[each_ind])
                 mass_data.append(mass[each_ind])
         return time_data, mass_data
+
+if __name__ == '__main__':
+    print('Plotting each model compared to different step sizes')
+    active_identifiers = list()
+    if ui.cycle_rate:
+        active_identifiers.append('CR')
+    if ui.saltproc_cycle_rate:
+        active_identifiers.append('SPCR')
+    if ui.cycle_time_decay:
+        active_identifiers.append('CTD')
+    if ui.control:
+        active_identifiers.append('CTRL')
+    base_output_path = f'./{ui.path_to_dump_files}/'
+    for target in ui.total_view_list:
+        for identifier in active_identifiers:
+            for N_steps in ui.number_serp_steps_list:
+                output_path = str(base_output_path) + f'{N_steps}/'
+                cur_time, cur_mass = plotting_tools(output_path, identifier, target, N_steps).plt_gen_mass_time()
+                plt.plot(cur_time, cur_mass, label=str(N_steps) + ' steps', alpha=ui.overlap, lw=ui.width)
+
+            plt.xlabel('Time [d]')
+            plt.ylabel('Mass [g]')
+            plt.legend()
+            plt.tight_layout()
+            plt.savefig(f'{base_output_path}{identifier}_NSTEP_{target}_mass.png')
+            plt.close()
+
