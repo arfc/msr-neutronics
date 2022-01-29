@@ -443,7 +443,7 @@ if __name__ == '__main__':
     for index in range(len(ui.element_flow_list)):
         element_dictionary[ui.element_flow_list[index]] = [
             ui.associated_symbol_list[index], ui.associated_atomic_list[index]]
-    for N_index, N_steps in ui.number_serp_steps_list:
+    for N_index, N_steps in enumerate(ui.number_serp_steps_list):
         output_path = str(base_output_path) + f'{N_steps}/'
         misc_funcs.set_directory(output_path)
 
