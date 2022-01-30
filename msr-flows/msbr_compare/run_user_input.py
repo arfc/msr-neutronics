@@ -681,16 +681,17 @@ if __name__ == '__main__':
 
     if ui.N_keff_plotting:
         print('Plotting each model keff compared to different step sizes') 
-        for target in ui.total_view_list:
-            for identifier in active_identifiers:
-                for N_steps in ui.number_serp_steps_list:
-                    output_path = str(base_output_path) + f'{N_steps}/'
-                    cur_time, cur_mass, cur_err = serpent_plotting.plotting_tools(output_path, identifier, target, N_steps).keff_plot()
-                    plt.errorbar(cur_time, cur_mass, yerr=cur_err, label=str(N_steps) + ' steps', alpha=ui.overlap, lw=ui.width)
+        for identifier in active_identifiers:
+            for N_steps in ui.number_serp_steps_list:
+                output_path = str(base_output_path) + f'{N_steps}/'
+                cur_time, cur_mass, cur_err = plotting_tools(output_path, identifier, target, N_steps).keff_plot()
+                plt.errorbar(cur_time, cur_mass, yerr=cur_err, label=str(N_steps) + ' steps', marker='.')
 
-                plt.xlabel('Time [d]')
-                plt.ylabel('Keff')
-                plt.legend()
-                plt.tight_layout()
-                plt.savefig(f'{base_output_path}{identifier}_KEFF_{target}_mass.png')
-                plt.close()
+            plt.xlabel('Time [d]')
+            plt.ylabel('Keff')
+            plt.legend()
+            plt.tight_layout()
+            plt.savefig(f'{base_output_path}{identifier}_NSTEP_keff.png')
+            plt.close()
+
+
