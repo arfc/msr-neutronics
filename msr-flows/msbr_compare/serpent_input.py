@@ -335,7 +335,7 @@ class run_deck:
 
         Raises
         ------
-        Error, view ``self.out``
+        WRK_fail
             Occurs if the output does not update within 20 seconds.
 
         """
@@ -349,8 +349,9 @@ class run_deck:
             if cur_out_len != out_len:
                 out_len = cur_out_len
             else:
-                raise Exception(f'Error, view ' +
-                                str(self.out) + ' or previous.')
+                print(f'Error, view ' + 
+                        str(self.out) + ' or previous.')
+                raise Exception('WRK_fail')
         return
 
 
