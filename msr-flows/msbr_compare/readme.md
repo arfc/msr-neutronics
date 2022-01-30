@@ -39,10 +39,11 @@ Renamed SaltProc post-processing script to extract data from hdf5 file into Serp
 - The core is not yet subdivided into multiple materials since this would require work to be done on the geometry
 - Using ENDF instead of Jeff
 - The lambda terms of core flow assume constant density (core and piping same densities)
+- The current build has the uranium feed built in using an average value of 4000g per 3 days. This value is from SaltProc at steady-state, so is only really useable at steady-state.
 
 ## Things to do:
-- Test running with different start and end points
 - Add in piping material, check improvement vs other versions
+- Add in optional selector for using SaltProc protactinium approximation or "decay" based, which will store the removed protactinium and pump in the uranium as it decays.
 
 
 ## Thoughts:
