@@ -251,7 +251,8 @@ Ba      {reprocessing_dictionary['barium']}
 rc fuel waste_entrainment_separator entrainment_pump 1
 rc fuel waste_nickel_filter nickel_pump 1
 rc fuel waste_liquid_metal waste_metal_pump 1
-rc feedsalt fuel feed_pump 1
+rc thorium_feed fuel feed_pump 1
+rc decay_tank fuel uranium_pump 1
 """
         else:
             pass
