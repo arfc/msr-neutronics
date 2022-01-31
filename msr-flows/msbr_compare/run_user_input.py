@@ -467,7 +467,7 @@ if __name__ == '__main__':
                 builder.control_run(identifier=CTRL_identifier) 
             except Exception:
                 print('CTRL failed, removing from active identifiers.')
-                active_identifiers.remove('CTRL_identifier')
+                active_identifiers.remove(CTRL_identifier)
             end_timer_count = time.time()
             print(f'Ran Control, took {end_timer_count - start_timer_count}s')
 
@@ -495,7 +495,7 @@ if __name__ == '__main__':
                     num_SP=ui.linear_SP_count) 
             except Exception:
                 print('LIA failed, removing from active identifiers.')
-                active_identifiers.remove('LIA_identifier')
+                active_identifiers.remove(LIA_identifier)
             end_timer_count = time.time()
             print(f'Ran LIA, took {end_timer_count - start_timer_count}s')
 
@@ -525,7 +525,7 @@ if __name__ == '__main__':
                     num_SP=ui.linear_SP_count) 
             except Exception:
                 print('LGA failed, removing from active identifiers.')
-                active_identifiers.remove('LGA_identifier')
+                active_identifiers.remove(LGA_identifier)
             end_timer_count = time.time()
             print(f'Ran LGA, took {end_timer_count - start_timer_count}s')
 
@@ -549,7 +549,7 @@ if __name__ == '__main__':
                 builder.cycle_time_decay(identifier=CTD_identifier)
             except Exception:
                 print('CTD failed, removing from active identifiers.')
-                active_identifiers.remove('CTD_identifier')
+                active_identifiers.remove(CTD_identifier)
             end_timer_count = time.time()
             print(f'Ran CTD, took {end_timer_count - start_timer_count}s')
 
@@ -573,7 +573,7 @@ if __name__ == '__main__':
                 builder.cycle_rate(identifier=CR_identifier)
             except Exception:
                 print('CR failed, removing from active identifiers.')
-                active_identifiers.remove('CR_identifier')
+                active_identifiers.remove(CR_identifier)
             end_timer_count = time.time()
             print(f'Ran CR, took {end_timer_count - start_timer_count}s')
 
@@ -597,7 +597,7 @@ if __name__ == '__main__':
                 builder.SP_cycle_rate(identifier=SPCR_identifier) 
             except Exception:
                 print('SPCR failed, removing from active identifiers.')
-                active_identifiers.remove('SPCR_identifier')
+                active_identifiers.remove(SPCR_identifier)
             end_timer_count = time.time()
             print(f'Ran SPCR, took {end_timer_count - start_timer_count}s')
 
@@ -631,6 +631,21 @@ if __name__ == '__main__':
                 plt.tight_layout()
                 plt.savefig(f'{output_path}cumulative_{target}_mass.png')
                 plt.close()
+
+
+        if ui.cumulative_keff_plotting:
+            print('Plotting different models keff together')
+            
+            for identifier in active_identifiers:
+                cur_time, cur_mass, cur_err = serpent_plotting.plotting_tools(output_path, identifier, target, N_steps).keff_plot()
+                plt.errorbar(cur_time, cur_mass, yerr=cur_err, label=identifier, marker='.')
+
+            plt.xlabel('Time [d]')
+            plt.ylabel('Keff')
+            plt.legend()
+            plt.tight_layout()
+            plt.savefig(f'{output_path}cumulative_keff.png')
+            plt.close()
 
 
         if ui.compare_plotting:
@@ -684,7 +699,7 @@ if __name__ == '__main__':
         for identifier in active_identifiers:
             for N_steps in ui.number_serp_steps_list:
                 output_path = str(base_output_path) + f'{N_steps}/'
-                cur_time, cur_mass, cur_err = plotting_tools(output_path, identifier, target, N_steps).keff_plot()
+                cur_time, cur_mass, cur_err = serpent_plotting.plotting_tools(output_path, identifier, target, N_steps).keff_plot()
                 plt.errorbar(cur_time, cur_mass, yerr=cur_err, label=str(N_steps) + ' steps', marker='.')
 
             plt.xlabel('Time [d]')

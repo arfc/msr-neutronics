@@ -24,6 +24,7 @@ model_plotting = True
 compare_plotting = True
 N_plotting = True
 N_keff_plotting = True
+cumulative_keff_plotting = True
 
 overlap = 0.5
 width = 3
@@ -34,7 +35,7 @@ template_path = './templates'
 template_name = 'saltproc.msbr.serpent'
 
 
-number_serp_steps_list = [1, 3]#, 100, 200, 500, 1000]
+number_serp_steps_list = [1, 10, 100, 200, 500, 1000]
 start_time = 3000
 end_time = 6000
 SP_step_size = 3
