@@ -176,11 +176,11 @@ rep flowprocess
 
 % Waste Flows
 % Pumps here are from SaltProc data and ORNL data
-mflow feed_pump
-  Th-232 5.7168020405E-13
+%mflow feed_pump
+%  Th-232 5.7168020405E-13
 
-mflow uranium_pump
-  U-233 3.11118E-13
+%mflow uranium_pump
+%  U-233 3.11118E-13
 
 dep
 pro flowprocess

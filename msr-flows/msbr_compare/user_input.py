@@ -9,7 +9,6 @@ linear_generation = False
 cycle_time_decay = True
 linear_isotope = False
 
-# Basic model using ln(1 / (1 - X)) WIP
 cycle_rate = True
 saltproc_cycle_rate = True
 
@@ -35,7 +34,7 @@ template_path = './templates'
 template_name = 'saltproc.msbr.serpent'
 
 
-number_serp_steps_list = [1, 10, 100, 200, 500, 1000]
+number_serp_steps_list = [1, 10]#, 100, 200, 500, 1000]
 start_time = 3000
 end_time = 6000
 SP_step_size = 3
@@ -44,6 +43,11 @@ SP_end = end_time #6000
 
 LGA_step_size = 3
 linear_SP_count = 2
+
+
+thorium_232_feed_kg_day = 2.39
+uranium_233_feed_kg_day = 4 / 3
+realistic_Pa_decay_u233_model = False
 
 important_isotopes = {'xenon': 'Xe135', 'iodine': 'I135', 'samarium': 'Sm149'}
 list_inventory = [

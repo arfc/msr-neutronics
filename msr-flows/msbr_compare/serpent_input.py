@@ -182,6 +182,14 @@ set rfw 1 "{write}"
         mflow_defs = ''
 
         if reprocessing_dictionary:
+            th_feed_g_s = ui.thorium_232_feed_kg_day * 1000 / 24 / 3600
+            th_repr = th_feed_g_s / (4.9602 * 1E10)
+            if ui.realistic_Pa_decay_u233_model:
+                u_repr = 9999
+            else:
+                u_feed_g_s = ui.uranium_233_feed_kg_day * 1000 / 24 / 3600
+                u_repr = u_feed_g_s / (4.9602 * 1E10)
+
             mflow_defs += f"""
 mflow entrainment_pump
 Kr      {reprocessing_dictionary['krypton']}
@@ -220,6 +228,13 @@ Sr      {reprocessing_dictionary['strontium']}
 Cs      {reprocessing_dictionary['cesium']}
 Ba      {reprocessing_dictionary['barium']}
 
+% Feed flows
+
+mflow feed_pump
+Th-232      {th_repr}
+
+mflow uranium_pump
+U-233      {u_repr}
 """
 
         return mflow_defs
@@ -252,6 +267,13 @@ rc fuel waste_entrainment_separator entrainment_pump 1
 rc fuel waste_nickel_filter nickel_pump 1
 rc fuel waste_liquid_metal waste_metal_pump 1
 rc thorium_feed fuel feed_pump 1
+"""
+            if ui.realistic_Pa_decay_u233_model:
+                flow_setup += """
+rc waste_liquid_metal fuel uranium_pump 1
+"""
+            else:
+                flow_setup += """
 rc decay_tank fuel uranium_pump 1
 """
         else:
