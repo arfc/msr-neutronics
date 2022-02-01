@@ -465,7 +465,8 @@ if __name__ == '__main__':
                 output_path)
             try:
                 builder.control_run(identifier=CTRL_identifier) 
-            except Exception:
+            except Exception as e:
+                print(e)
                 print('CTRL failed, removing from active identifiers.')
                 active_identifiers.remove(CTRL_identifier)
             end_timer_count = time.time()
@@ -493,7 +494,8 @@ if __name__ == '__main__':
                     LGA_step_size=ui.LGA_step_size,
                     iso_dict=ui.important_isotopes,
                     num_SP=ui.linear_SP_count) 
-            except Exception:
+            except Exception as e:
+                print(e)
                 print('LIA failed, removing from active identifiers.')
                 active_identifiers.remove(LIA_identifier)
             end_timer_count = time.time()
@@ -523,7 +525,8 @@ if __name__ == '__main__':
                     identifier=LGA_identifier,
                     LGA_step_size=ui.LGA_step_size,
                     num_SP=ui.linear_SP_count) 
-            except Exception:
+            except Exception as e:
+                print(e)
                 print('LGA failed, removing from active identifiers.')
                 active_identifiers.remove(LGA_identifier)
             end_timer_count = time.time()
@@ -547,7 +550,8 @@ if __name__ == '__main__':
                 output_path)
             try:
                 builder.cycle_time_decay(identifier=CTD_identifier)
-            except Exception:
+            except Exception as e:
+                print(e)
                 print('CTD failed, removing from active identifiers.')
                 active_identifiers.remove(CTD_identifier)
             end_timer_count = time.time()
@@ -571,7 +575,8 @@ if __name__ == '__main__':
                 output_path)
             try:
                 builder.cycle_rate(identifier=CR_identifier)
-            except Exception:
+            except Exception as e:
+                print(e)
                 print('CR failed, removing from active identifiers.')
                 active_identifiers.remove(CR_identifier)
             end_timer_count = time.time()
@@ -595,7 +600,8 @@ if __name__ == '__main__':
                 output_path)
             try:
                 builder.SP_cycle_rate(identifier=SPCR_identifier) 
-            except Exception:
+            except Exception as e:
+                print(e)
                 print('SPCR failed, removing from active identifiers.')
                 active_identifiers.remove(SPCR_identifier)
             end_timer_count = time.time()

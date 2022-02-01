@@ -1,5 +1,5 @@
 import misc_funcs
-import user_input
+import user_input as ui
 from jinja2 import Environment, FileSystemLoader
 import os
 from os import path
