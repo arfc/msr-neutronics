@@ -34,9 +34,9 @@ template_path = './templates'
 template_name = 'saltproc.msbr.serpent'
 
 
-number_serp_steps_list = [1, 10]#, 100, 200, 500, 1000]
+number_serp_steps_list = [1, 10, 50]#[1, 10, 50] #[1, 10, 50, 100, 200]
 start_time = 3000
-end_time = 6000
+end_time = 3150
 SP_step_size = 3
 SP_start = start_time #0
 SP_end = end_time #6000
@@ -45,8 +45,10 @@ LGA_step_size = 3
 linear_SP_count = 2
 
 
-thorium_232_feed_kg_day = 2.39
-uranium_233_feed_kg_day = 4 / 3
+thorium_232_feed_kg_day = 2.39 #2.45#2.39
+uranium_233_feed_kg_day = 1.31878 #1.33333 * 1.65
+feed_vol = 1E30
+feed_mdens = 4.9602 / 2
 realistic_Pa_decay_u233_model = False
 
 important_isotopes = {'xenon': 'Xe135', 'iodine': 'I135', 'samarium': 'Sm149'}

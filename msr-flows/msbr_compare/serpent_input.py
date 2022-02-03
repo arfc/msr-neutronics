@@ -183,12 +183,12 @@ set rfw 1 "{write}"
 
         if reprocessing_dictionary:
             th_feed_g_s = ui.thorium_232_feed_kg_day * 1000 / 24 / 3600
-            th_repr = th_feed_g_s / (4.9602 * 1E10)
+            th_repr = th_feed_g_s / (ui.feed_mdens * ui.feed_vol)
             if ui.realistic_Pa_decay_u233_model:
                 u_repr = 9999
             else:
                 u_feed_g_s = ui.uranium_233_feed_kg_day * 1000 / 24 / 3600
-                u_repr = u_feed_g_s / (4.9602 * 1E10)
+                u_repr = u_feed_g_s / (ui.feed_mdens * ui.feed_vol)
 
             mflow_defs += f"""
 mflow entrainment_pump
@@ -231,9 +231,11 @@ Ba      {reprocessing_dictionary['barium']}
 % Feed flows
 
 mflow feed_pump
+%all         {th_repr}
 Th-232      {th_repr}
 
 mflow uranium_pump
+%all        {u_repr}
 U-233      {u_repr}
 """
 
@@ -274,7 +276,7 @@ rc waste_liquid_metal fuel uranium_pump 1
 """
             else:
                 flow_setup += """
-rc decay_tank fuel uranium_pump 1
+rc thorium_feed fuel uranium_pump 1
 """
         else:
             pass

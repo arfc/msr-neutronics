@@ -38,17 +38,18 @@ rgb 127 205 187
 
 % Thorium Feed
 mat thorium_feed -4.9602
-vol 10000000000.0 % 10,000,000,000.0 
+vol 1E30
 burn 1
 fix 09c 900
- Th-232.09c   1
+ Th-232.09c   -1
+ U-233.09c    -1
 
-% Protactinium decay tank (Pa233 -> U233)
-mat decay_tank -4.9602
-vol 10000000000.0 % 10,000,000,000.0 
-burn 1
-fix 09c 900
-  U-233.09c   1
+%% Protactinium decay tank (Pa233 -> U233)
+%mat decay_tank -4.9602
+%vol 1E20 
+%burn 1
+%fix 09c 900
+%  U-233.09c   1
 
 % Waste Materials
 mat waste_sparger -0.0001

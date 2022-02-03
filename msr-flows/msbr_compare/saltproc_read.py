@@ -1,6 +1,8 @@
 # Import modules
 import tables as tb
 from pyne import nucname
+import user_input as ui
+import numpy as np
 
 
 def check_isotope_in_library(isotope, lib_isos):
@@ -102,6 +104,8 @@ def read_all_iso_at_step(db_file, time_after_startup):
     isomap = fuel_before.attrs.iso_map
 
     fuel_after = db.root.materials.fuel.after_reproc.comp
+
+    input(dts)
 
     composition_at_time_before = fuel_before[dts, :]
     composition_at_time_after = fuel_after[dts, :]
@@ -234,7 +238,6 @@ def filter_out_and_store(isos,
     -------
     None
     """
-    input(isos)
     mass_no_decay_isos = 0
     mass_decay_isos = 0
     matf = open(file, 'w')
@@ -307,14 +310,64 @@ def evaluate(time, hdf5_path, fuel_path):
                          mat_head)
     return
 
+def iso_removal_rate(db_file, iso = 'Pa233'):
+    """
+    Generates the average removal rate for a given isotope from the
+        start time to the end time given in user_input
+
+    Parameters
+    ----------
+    db_file : str
+        Path to the database hdf5 file
+    iso : str
+        Name of the isotope to generate the removal rate for
+
+    Returns
+    -------
+    avg_kg_day : float
+        Average kg/day removal rate of the isotope
+
+    """
+
+    db = tb.open_file(db_file)
+    pre_fuel = db.root.materials.fuel.before_reproc.comp
+    isomap = pre_fuel.attrs.iso_map
+    post_fuel = db.root.materials.fuel.after_reproc.comp
+    sim_param = db.root.simulation_parameters
+    iso = 'Pa233'
+    pre_mass = list()
+    post_mass = list()
+    removal_mass = list()
+    possible_times = [x['cumulative_time_at_eds'] for x in sim_param.iterrows()]
+    for time in range(len(possible_times)):
+        comp_pre = pre_fuel[time, :]
+        mass_pre = comp_pre[isomap[iso]]
+        comp_post = post_fuel[time, :]
+        mass_post = comp_post[isomap[iso]]
+        pre_mass.append(mass_pre)
+        post_mass.append(mass_post)
+        removed = (mass_pre - mass_post) / 3
+        removal_mass.append(removed)
+    start_index = possible_times.index(ui.start_time)
+    end_index = possible_times.index(ui.end_time)
+    print(f'Average removal per day of {iso}')
+    removal_mass = removal_mass[start_index:end_index]
+    avg_kg_day = np.mean(removal_mass) / 1000
+    print(f'{avg_kg_day} kg per day')
+    return avg_kg_day
+
 
 if __name__ == '__main__':
+
 
     fuel_input_path = './ss-data-test/mat_prepr_comp_geo_1_boc.ini'
     hdf5_input_path = './ss-data-test/6000_day_SS_data'
 
     db_file = hdf5_input_path
     new_mat_file = fuel_input_path
+
+    iso_removal_rate(db_file)
+
 
     time_after_startup = float(input('Time after startup [d]:'))
 
