@@ -354,6 +354,7 @@ def iso_removal_rate(db_file, iso = 'Pa233'):
     removal_mass = removal_mass[start_index:end_index]
     avg_kg_day = np.mean(removal_mass) / 1000
     print(f'{avg_kg_day} kg per day')
+    db.close()
     return avg_kg_day
 
 

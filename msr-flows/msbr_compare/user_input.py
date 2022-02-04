@@ -1,4 +1,4 @@
-
+from saltproc_read import iso_removal_rate
 
 # Runs to perform
 
@@ -49,7 +49,7 @@ linear_SP_count = 2
 
 
 thorium_232_feed_kg_day = 2.39 #2.45#2.39
-uranium_233_feed_kg_day = 1.2649547258098548 #1.33333 * 1.65
+uranium_233_feed_kg_day = iso_removal_rate(database, iso='Pa233')#1.2649547258098548 #1.33333 * 1.65
 feed_vol = 1E30
 feed_mdens = 4.9602 / 2
 realistic_Pa_decay_u233_model = False
