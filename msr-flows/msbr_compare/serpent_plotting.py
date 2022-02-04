@@ -119,12 +119,16 @@ if __name__ == '__main__':
     if ui.control:
         active_identifiers.append('CTRL')
     base_output_path = f'./{ui.path_to_dump_files}/'
+    line_counter = 0
+    marker_counter = 0
     for target in ui.total_view_list:
         for identifier in active_identifiers:
             for N_steps in ui.number_serp_steps_list:
                 output_path = str(base_output_path) + f'{N_steps}/'
                 cur_time, cur_mass = plotting_tools(output_path, identifier, target, N_steps).plt_gen_mass_time()
-                plt.plot(cur_time, cur_mass, label=str(N_steps) + ' steps', marker='.')
+                plt.plot(cur_time, cur_mass, linestyle=ui.lines[line_counter%len(lines)], label=str(N_steps) + ' steps', marker=ui.markers[marker_counter%len(lines)])
+                line_counter += 1
+                marker_counter += 1
 
             plt.xlabel('Time [d]')
             plt.ylabel('Mass [g]')
@@ -132,12 +136,15 @@ if __name__ == '__main__':
             plt.tight_layout()
             plt.savefig(f'{base_output_path}{identifier}_NSTEP_{target}_mass.png')
             plt.close()
-
+    line_counter = 0
+    marker_counter = 0
     for identifier in active_identifiers:
         for N_steps in ui.number_serp_steps_list:
             output_path = str(base_output_path) + f'{N_steps}/'
             cur_time, cur_mass, cur_err = plotting_tools(output_path, identifier, target, N_steps).keff_plot()
-            plt.errorbar(cur_time, cur_mass, yerr=cur_err, label=str(N_steps) + ' steps', marker='.')
+            plt.errorbar(cur_time, cur_mass, linestyle=ui.lines[line_counter%len(lines)], yerr=cur_err, label=str(N_steps) + ' steps', marker=ui.markers[marker_counter%len(lines)])
+            line_counter += 1
+            marker_counter += 1
 
         plt.xlabel('Time [d]')
         plt.ylabel('Keff')
