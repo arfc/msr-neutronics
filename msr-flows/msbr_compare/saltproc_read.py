@@ -3,6 +3,7 @@ import tables as tb
 from pyne import nucname
 import user_input as ui
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 def check_isotope_in_library(isotope, lib_isos):
@@ -357,6 +358,51 @@ def iso_removal_rate(db_file, iso = 'Pa233'):
     db.close()
     return avg_kg_day
 
+def check_total_mass(db_file):
+    """
+    Iterate through every isotope in each time step 
+        and generate a plot of the net mass difference each step
+    
+    Parameters
+    ----------
+    db_file : str
+        Path to the database hdf5 file.
+
+    Returns
+    -------
+    None
+
+    """
+ 
+    db = tb.open_file(db_file, mode='r')
+    pre_fuel = db.root.materials.fuel.before_reproc.comp
+    isomap = pre_fuel.attrs.iso_map
+    sim_param = db.root.simulation_parameters
+    day_eds = [x['cumulative_time_at_eds'] for x in sim_param.iterrows()]
+    fuel_after = db.root.materials.fuel.after_reproc.comp
+    isomap = fuel_after.attrs.iso_map
+    mass_over_time = list()
+    time_list = list()
+    prev_mass = 0
+    for dts in range(len(day_eds)):
+        net_mass_cur_time = 0
+        composition_at_time_after = fuel_after[dts, :]
+        for iso in isomap:
+            net_mass_cur_time += composition_at_time_after[isomap[iso]]
+        if dts == 0:
+            mass_over_time.append(0)
+        else:
+            mass_over_time.append(net_mass_cur_time - prev_mass)
+        prev_mass = net_mass_cur_time
+    db.close()
+    plt.plot(day_eds, mass_over_time)
+    plt.xlabel('Time [d]')
+    plt.ylabel('Mass [g]')
+    plt.savefig('SaltProc_netmass.png')
+    plt.close()
+
+    return
+
 
 if __name__ == '__main__':
 
@@ -369,6 +415,7 @@ if __name__ == '__main__':
 
     iso_removal_rate(db_file)
 
+    check_total_mass(db_file)
 
     time_after_startup = float(input('Time after startup [d]:'))
 
