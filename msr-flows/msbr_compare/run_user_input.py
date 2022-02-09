@@ -653,6 +653,20 @@ if __name__ == '__main__':
                 plt.savefig(f'{output_path}cumulative_{target}_mass.png')
                 plt.close()
 
+        if ui.tot_mass_plotting:
+            print('Plotting net mass over time')
+            target = 'total'
+            line_counter = 0
+            for identifier in active_identifiers:
+                cur_time, cur_mass = serpent_plotting.plotting_tools(output_path, identifier, target, N_steps).plt_gen_mass_time()
+                plt.plot(cur_time, cur_mass, linestyle=ui.lines[line_counter%len(ui.lines)], label=identifier, alpha=ui.overlap, lw=ui.width)
+                plt.xlabel('Time [d]')
+                plt.ylabel('Net Mass [g]')
+                plt.legend()
+                plt.tight_layout()
+                plt.savefig(f'{output_path}{identifier}net_mass.png')
+                plt.close()
+
 
         if ui.cumulative_keff_plotting:
             print('Plotting different models keff together')

@@ -19,11 +19,16 @@ separate_core_piping = False
 
 # Options
 
-model_plotting = True
-compare_plotting = True
-N_plotting = True
-N_keff_plotting = True
-cumulative_keff_plotting = True
+model_plotting = False
+compare_plotting = False
+N_plotting = False
+N_keff_plotting = False
+cumulative_keff_plotting = False
+
+# Total mass plotting is currently mutually exclusive from other run types
+tot_mass_plotting = True
+
+
 lines = ['-', '--', '-.', ':']
 markers = ['.', ',', 'o', 'v', '^', '8', 's', 'p', '*', 'x', '+']
 
@@ -37,7 +42,7 @@ template_name = 'saltproc.msbr.serpent'
 database = './ss-data-test/6000_day_SS_data'
 
 
-number_serp_steps_list = [1, 10, 50, 100, 200, 1000]#[1, 10, 50] #[1, 10, 50, 100, 200]
+number_serp_steps_list = [3]#[1, 10, 50, 100, 200, 1000]#[1, 10, 50] #[1, 10, 50, 100, 200]
 start_time = 3000
 end_time = 6000
 SP_step_size = 3
@@ -55,15 +60,18 @@ feed_mdens = 4.9602 / 2
 realistic_Pa_decay_u233_model = False
 
 important_isotopes = {'xenon': 'Xe135', 'iodine': 'I135', 'samarium': 'Sm149'}
-list_inventory = [
-    'Xe-135',
-    'U-235',
-    'U-233',
-    'Th-232',
-    'I-135',
-    'Kr-83',
-    'Sm-149',
-    'Xe-134']
+if tot_mass_plotting:
+    list_inventory = ['fuel all']
+else:
+    list_inventory = [
+        'Xe-135',
+        'U-235',
+        'U-233',
+        'Th-232',
+        'I-135',
+        'Kr-83',
+        'Sm-149',
+        'Xe-134']
 element_flow_list = [
     'krypton',
     'xenon',
