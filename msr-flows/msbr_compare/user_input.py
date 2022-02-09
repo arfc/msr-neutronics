@@ -42,7 +42,7 @@ template_name = 'saltproc.msbr.serpent'
 database = './ss-data-test/6000_day_SS_data'
 
 
-number_serp_steps_list = [3]#[1, 10, 50, 100, 200, 1000]#[1, 10, 50] #[1, 10, 50, 100, 200]
+number_serp_steps_list = [5]#[1, 10, 50, 100, 200, 1000]#[1, 10, 50] #[1, 10, 50, 100, 200]
 start_time = 3000
 end_time = 6000
 SP_step_size = 3
@@ -54,7 +54,7 @@ linear_SP_count = 2
 
 
 thorium_232_feed_kg_day = 2.39 #2.45#2.39
-uranium_233_feed_kg_day = iso_removal_rate(database, iso='Pa233')#1.2649547258098548 #1.33333 * 1.65
+uranium_233_feed_kg_day = iso_removal_rate(database, iso='Pa233') * 1.5 # *2 too big
 feed_vol = 1E30
 feed_mdens = 4.9602 / 2
 realistic_Pa_decay_u233_model = False
