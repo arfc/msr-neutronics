@@ -9,8 +9,8 @@ linear_generation = False
 cycle_time_decay = True
 linear_isotope = False
 
-cycle_rate = True
-saltproc_cycle_rate = True
+cycle_rate = False
+saltproc_cycle_rate = False
 
 # Separate core piping is WIP
 
@@ -19,14 +19,15 @@ separate_core_piping = False
 
 # Options
 
-model_plotting = False
-compare_plotting = False
-N_plotting = False
-N_keff_plotting = False
-cumulative_keff_plotting = False
+model_plotting = True
+compare_plotting = True
+N_plotting = True
+N_keff_plotting = True
+cumulative_keff_plotting = True
 
 # Total mass plotting is currently mutually exclusive from other run types
-tot_mass_plotting = True
+# To make always usable, have Serpent run an extra time with "fuel all" inventory
+tot_mass_plotting = False
 
 
 lines = ['-', '--', '-.', ':']
@@ -42,7 +43,7 @@ template_name = 'saltproc.msbr.serpent'
 database = './ss-data-test/6000_day_SS_data'
 
 
-number_serp_steps_list = [5]#[1, 10, 50, 100, 200, 1000]#[1, 10, 50] #[1, 10, 50, 100, 200]
+number_serp_steps_list = [6]#[1, 10, 50, 100, 200, 1000]#[1, 10, 50] #[1, 10, 50, 100, 200]
 start_time = 3000
 end_time = 6000
 SP_step_size = 3
@@ -53,8 +54,8 @@ LGA_step_size = 3
 linear_SP_count = 2
 
 
-thorium_232_feed_kg_day = 2.39 #2.45#2.39
-uranium_233_feed_kg_day = iso_removal_rate(database, iso='Pa233') * 1.5 # *2 too big
+thorium_232_feed_kg_day = 2.39 #-1 * iso_removal_rate(database, iso='Th232') #2.39 #2.45
+uranium_233_feed_kg_day = iso_removal_rate(database, iso='Pa233') * 1.84 #1.74
 feed_vol = 1E30
 feed_mdens = 4.9602 / 2
 realistic_Pa_decay_u233_model = False

@@ -335,7 +335,6 @@ def iso_removal_rate(db_file, iso = 'Pa233'):
     isomap = pre_fuel.attrs.iso_map
     post_fuel = db.root.materials.fuel.after_reproc.comp
     sim_param = db.root.simulation_parameters
-    iso = 'Pa233'
     pre_mass = list()
     post_mass = list()
     removal_mass = list()
@@ -347,13 +346,21 @@ def iso_removal_rate(db_file, iso = 'Pa233'):
         mass_post = comp_post[isomap[iso]]
         pre_mass.append(mass_pre)
         post_mass.append(mass_post)
-        removed = (mass_pre - mass_post) / 3
+        # Divide by 3000 b/c 3 day step and 1000 kg/g
+        removed = abs(mass_pre - mass_post) / 3000
         removal_mass.append(removed)
     start_index = possible_times.index(ui.start_time)
     end_index = possible_times.index(ui.end_time)
     print(f'Average removal per day of {iso}')
+    print(f'Total average: {np.mean(removal_mass)} kg/day')
+    print('Plotting average vs actual over time')
+    plt.plot(possible_times, removal_mass)
+    plt.xlabel('Time [d]')
+    plt.ylabel('Refill Rate [kg/day]')
+    plt.savefig(f'{iso}rem_mass.png')
+    plt.close()
     removal_mass = removal_mass[start_index:end_index]
-    avg_kg_day = np.mean(removal_mass) / 1000
+    avg_kg_day = np.mean(removal_mass)
     print(f'{avg_kg_day} kg per day')
     db.close()
     return avg_kg_day
@@ -413,7 +420,7 @@ if __name__ == '__main__':
     db_file = hdf5_input_path
     new_mat_file = fuel_input_path
 
-    iso_removal_rate(db_file)
+    iso_removal_rate(db_file, iso="Th232")
 
     check_total_mass(db_file)
 
