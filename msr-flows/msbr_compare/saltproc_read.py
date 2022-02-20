@@ -106,8 +106,6 @@ def read_all_iso_at_step(db_file, time_after_startup):
 
     fuel_after = db.root.materials.fuel.after_reproc.comp
 
-    input(dts)
-
     composition_at_time_before = fuel_before[dts, :]
     composition_at_time_after = fuel_after[dts, :]
     db.close()
