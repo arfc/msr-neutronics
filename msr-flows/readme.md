@@ -1,5 +1,9 @@
 These scripts are used to analyze flows in MSRs.
 
+## Notes
+Directory which contains documentation on different approaches to modeling continuous reprocessing, as well as analysis of mass balance using only continuous reprocessing.
+
+
 ## Flow Tests
 
 This is the initial version which contains the separated core and piping materials for a simple case. This was to test Serpent2 flow functionality, potential bugs and pitfalls, etc. 
@@ -8,7 +12,7 @@ This is the initial version which contains the separated core and piping materia
 
 This is the current working directory for generating the comparison against SaltProc's analysis of the MSBR. Type 1 flows are used to continuously remove fission products from a single core material, as well as to continuously add uranium and thorium feed.
 
-There is a `Notes` directory within which contains documentation on different approaches to modeling continuous reprocessing, as well as analysis of mass balance using only continuous reprocessing.
+
 
 In Progress:
 - Get current SaltProc MSBR simulation results to more closely match expected results.
