@@ -23,7 +23,7 @@ model_plotting = False
 compare_plotting = False
 N_plotting = False
 N_keff_plotting = False
-cumulative_keff_plotting = False
+cumulative_keff_plotting = True
 
 # Total mass plotting is currently mutually exclusive from other run types
 # To make always usable, have Serpent run an extra time with "fuel all" inventory
@@ -43,9 +43,9 @@ template_name = 'saltproc.msbr.serpent'
 database = './ss-data-test/7002_day_SS_data'
 
 
-number_serp_steps_list = [20]#[1, 10, 50, 100, 200, 1000]#[1, 10, 50] #[1, 10, 50, 100, 200]
-start_time = 3
-end_time = 7002
+number_serp_steps_list = [10]#[1, 10, 50, 100, 200, 1000]#[1, 10, 50] #[1, 10, 50, 100, 200]
+start_time = 3000#3
+end_time = 6000#7002
 SP_step_size = 3
 SP_start = start_time #0
 SP_end = end_time #6000
@@ -54,8 +54,8 @@ LGA_step_size = 3
 linear_SP_count = 2
 
 
-thorium_232_feed_kg_day = iso_removal_rate(database, iso='Th232')#2.39 #2.39 #-1 * iso_removal_rate(database, iso='Th232') #2.39 #2.45
-uranium_233_feed_kg_day = iso_removal_rate(database, iso='Pa233')#2.12 #iso_removal_rate(database, iso='Pa233') * 1.84 #1.74
+thorium_232_feed_kg_day = 2.39#iso_removal_rate(database, iso='Th232')#2.39 #2.39 #-1 * iso_removal_rate(database, iso='Th232') #2.39 #2.45
+uranium_233_feed_kg_day = 2.12 #iso_removal_rate(database, iso='Pa233')#2.12 #iso_removal_rate(database, iso='Pa233') * 1.84 #1.74
 print(f'Th232 feed: {thorium_232_feed_kg_day}')
 print(f'U233 feed: {uranium_233_feed_kg_day}')
 feed_vol = 1E30
