@@ -6,6 +6,17 @@ This is the initial version which contains the separated core and piping materia
 
 ## MSBR Compare
 
-This is the current working directory for generating the comparison against SaltProc's analysis of the MSBR. Type 1 flows are used to continuously remove fission products from a single core material.
+This is the current working directory for generating the comparison against SaltProc's analysis of the MSBR. Type 1 flows are used to continuously remove fission products from a single core material, as well as to continuously add uranium and thorium feed.
 
-The next step is to incorporate multiple approximations for type 1 flow to match SaltProc's percent removal design. After these are incorporated, the piping material of the MSBR can be included (non-geometrically, only material based). This will give a good short-term validation analysis since an approximation of material flow between core and piping will limit the time step down to ~10 seconds (since it takes material 20 seconds to travel through the entire loop). The results should align within a reasonable amount to SaltProc and type 1 continuous removal in a single material, though there may be some slight compositional differences by allowing material time to decay outside of the core and using such short time steps. An additional analysis can be performed by using the single core material MSBR design with short time steps and type 1 removal to see only the effects of including the piping material.
+There is a `Notes` directory within which contains documentation on different approaches to modeling continuous reprocessing, as well as analysis of mass balance using only continuous reprocessing.
+
+In Progress:
+- Get current SaltProc MSBR simulation results to more closely match expected results.
+- Use same feed rates as documented SaltProc MSBR documentation, analyze continuous reprocessing vs batchwise reprocessing.
+- Analysis of mass balance with smaller time steps, determine impact of mass imbalance.
+- Allow Pa233 to decay and be fed in as U233 instead of SaltProc approach (removed Pa233 == added U233), effects on startup.
+
+Potential Future Work:
+- Adding separate piping/core subdivisions to model DNP drift. This could be approximated using slug flow or some other approximation based on each DNP group's half life (issue is using 20 second cycle time means short time steps may be required?).
+- To account for DNP drift, use continuous reprocessing to move DNPs into expected positions in the core based on flow rate?
+
