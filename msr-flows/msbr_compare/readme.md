@@ -32,7 +32,6 @@ Renamed SaltProc post-processing script to extract data from hdf5 file into Serp
 
 
 ## Notes on Current Version:
-- Changed "fuel" in geometry.ini to "fuelsalt999"
 - Changed Hastelloy-N materials to specific isotopes instead of natural concentrations (cross section data missing)
 - Using ENDF instead of Jeff cross section libraries.
 - Optional selector available for using SaltProc protactinium approximation or "decay" based, which will store the removed protactinium and pump in the uranium as it decays.

@@ -54,8 +54,8 @@ LGA_step_size = 3
 linear_SP_count = 2
 
 
-thorium_232_feed_kg_day = 2.39#iso_removal_rate(database, iso='Th232')#2.39 #2.39 #-1 * iso_removal_rate(database, iso='Th232') #2.39 #2.45
-uranium_233_feed_kg_day = 2.12 #iso_removal_rate(database, iso='Pa233')#2.12 #iso_removal_rate(database, iso='Pa233') * 1.84 #1.74
+thorium_232_feed_kg_day = 1.9#iso_removal_rate(database, iso='Th232')#2.39 #2.39 #-1 * iso_removal_rate(database, iso='Th232') #2.39 #2.45
+uranium_233_feed_kg_day = 2.16 #iso_removal_rate(database, iso='Pa233')#2.12 #iso_removal_rate(database, iso='Pa233') * 1.84 #1.74
 print(f'Th232 feed: {thorium_232_feed_kg_day}')
 print(f'U233 feed: {uranium_233_feed_kg_day}')
 feed_vol = 1E30
