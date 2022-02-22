@@ -2,15 +2,15 @@ from saltproc_read import iso_removal_rate
 
 # Runs to perform
 
-control = False
-saltproc = False
+control = True
+saltproc = True
 
 linear_generation = False
-cycle_time_decay = False
+cycle_time_decay = True
 linear_isotope = False
 
 cycle_rate = True
-saltproc_cycle_rate = False
+saltproc_cycle_rate = True
 
 # Separate core piping is WIP
 
@@ -19,15 +19,15 @@ separate_core_piping = False
 
 # Options
 
-model_plotting = False
-compare_plotting = False
-N_plotting = False
-N_keff_plotting = False
+model_plotting = True
+compare_plotting = True
+N_plotting = True
+N_keff_plotting = True
 cumulative_keff_plotting = True
 
 # Total mass plotting is currently mutually exclusive from other run types
 # To make always usable, have Serpent run an extra time with "fuel all" inventory
-tot_mass_plotting = True
+tot_mass_plotting = False
 
 
 lines = ['-', '--', '-.', ':']
@@ -43,7 +43,7 @@ template_name = 'saltproc.msbr.serpent'
 database = './ss-data-test/7002_day_SS_data'
 
 
-number_serp_steps_list = [10]#[1, 10, 50, 100, 200, 1000]#[1, 10, 50] #[1, 10, 50, 100, 200]
+number_serp_steps_list = [2, 3, 5]#[1, 10, 50, 100, 200, 1000]#[1, 10, 50] #[1, 10, 50, 100, 200]
 start_time = 3000#3
 end_time = 6000#7002
 SP_step_size = 3
@@ -63,18 +63,6 @@ feed_mdens = 4.9602 / 2
 realistic_Pa_decay_u233_model = False
 
 important_isotopes = {'xenon': 'Xe135', 'iodine': 'I135', 'samarium': 'Sm149'}
-if tot_mass_plotting:
-    list_inventory = ['fuel all']
-else:
-    list_inventory = [
-        'Xe-135',
-        'U-235',
-        'U-233',
-        'Th-232',
-        'I-135',
-        'Kr-83',
-        'Sm-149',
-        'Xe-134']
 element_flow_list = [
     'krypton',
     'xenon',
@@ -107,6 +95,18 @@ element_flow_list = [
     'strontium',
     'cesium',
     'barium']
+if tot_mass_plotting:
+    list_inventory = ['fuel all']
+else:
+    list_inventory = [
+        'Xe-135',
+        'U-235',
+        'U-233',
+        'Th-232',
+        'I-135',
+        'Kr-83',
+        'Sm-149',
+        'Xe-134']
 associated_symbol_list = [
     'Kr',
     'Xe',
@@ -173,3 +173,4 @@ associated_atomic_list = [
     ' 56']
 
 total_view_list = list_inventory + element_flow_list
+list_inventory += associated_symbol_list

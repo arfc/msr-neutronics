@@ -132,37 +132,6 @@ set power 2.25E+9
 
 set inventory
 {{inventory}}
-Kr
-Xe
-Se
-Nb
-Mo
-Tc
-Ru
-Rh
-Pd
-Ag
-Sb
-Te
-Cd
-In
-Sn
-Br
-I
-Pa
-Y
-La
-Ce
-Pr
-Nd
-Pm
-Sm
-Gd
-Eu
-Rb
-Sr
-Cs
-Ba
 
 {{read_write}}
 
