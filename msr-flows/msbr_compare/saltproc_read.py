@@ -363,6 +363,71 @@ def iso_removal_rate(db_file, iso = 'Pa233'):
     db.close()
     return avg_kg_day
 
+def iso_removal_rate_v01(db_file, iso = 'Pa233'):
+    """
+    Generates the average removal rate for a given isotope from the
+        start time to the end time given in user_input.
+        Works for v0.1 of SaltProc database files.
+
+    Parameters
+    ----------
+    db_file : str
+        Path to the database hdf5 file
+    iso : str
+        Name of the isotope to generate the removal rate for. Only
+            certain isotopes can be used.
+
+    Returns
+    -------
+    avg_kg_day : float
+        Average kg/day removal rate of the isotope
+
+    """
+
+    if iso == 'Pa233':
+        iso_index = 1088
+        mol_weight = 233.04025
+    elif iso == 'Th232':
+        iso_index = 1080
+        mol_weight = 232.03805
+    else:
+        print(f'Isotope {iso} data not recorded.')
+        raise Exception
+
+    db = tb.open_file(db_file)
+    pre_fuel = db.root.core_adensity_before_reproc
+    post_fuel = db.root.core_adensity_after_reproc
+    pre_atoms = list()
+    post_atoms = list()
+    removal_mass = list()
+    possible_times = [3*x for x in range(0, 2270)]
+    for time_index in range(len(possible_times)):
+        comp_pre = pre_fuel[time_index, :]
+        atoms_pre = comp_pre[iso_index]
+        comp_post = post_fuel[time_index, :]
+        atoms_post = comp_post[iso_index]
+        pre_atoms.append(atoms_pre)
+        post_atoms.append(atoms_post)
+        # mol/cc -> kg/cc Divide by 3000 b/c 3 day step and 1000 kg/g
+        removed = abs(atoms_pre - atoms_post) * 4.871E7 * mol_weight / (ui.SP_step_size * 1000)
+        removal_mass.append(removed)
+    start_index = possible_times.index(ui.start_time)
+    end_index = possible_times.index(ui.end_time)
+    print(f'Average removal per day of {iso}')
+    print(f'Total average: {np.mean(removal_mass)} kg/day')
+    print('Plotting average vs actual over time')
+    plt.plot(possible_times, removal_mass)
+    plt.xlabel('Time [d]')
+    plt.ylabel('Refill Rate [kg/day]')
+    plt.ylim(0, 3)
+    plt.savefig(f'{iso}rem_massv01.png')
+    plt.close()
+    removal_mass = removal_mass[start_index:end_index]
+    avg_kg_day = np.mean(removal_mass)
+    print(f'{avg_kg_day} kg per day')
+    db.close()
+    return avg_kg_day
+
 def check_total_mass(db_file):
     """
     Iterate through every isotope in each time step 
@@ -412,11 +477,16 @@ def check_total_mass(db_file):
 if __name__ == '__main__':
 
 
-    fuel_input_path = './ss-data-test/mat_prepr_comp_geo_1_boc.ini'
-    hdf5_input_path = './ss-data-test/6000_day_SS_data'
+    fuel_input_path = './ss-data-test/mat_prepr_comp_geo_1_boc.ini' 
+    hdf5_input_path = './ss-data-test/db_saltproc_2270.hdf5'
 
     db_file = hdf5_input_path
     new_mat_file = fuel_input_path
+
+    iso_removal_rate_v01(db_file, iso='Pa233')
+    
+    iso_removal_rate_v01(db_file, iso='Th232')
+    input()
 
     iso_removal_rate(db_file, iso="Th232")
 

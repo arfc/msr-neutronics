@@ -446,6 +446,7 @@ if __name__ == '__main__':
     for N_index, N_steps in enumerate(ui.number_serp_steps_list):
         output_path = str(base_output_path) + f'{N_steps}/'
         misc_funcs.set_directory(output_path)
+        print(f'Step size: {(ui.end_time - ui.start_time) / N_steps}')
 
         if ui.control:
             start_timer_count = time.time()
@@ -645,7 +646,6 @@ if __name__ == '__main__':
                         scale = 'g'
                     plt.plot(cur_time, cur_mass, linestyle=ui.lines[line_counter%len(ui.lines)], label=identifier, alpha=ui.overlap, lw=ui.width)
                     line_counter += 1
-
                 plt.xlabel('Time [d]')
                 plt.ylabel(f'Mass [{scale}]')
                 plt.legend()
@@ -673,7 +673,7 @@ if __name__ == '__main__':
             line_counter = 0
             for identifier in active_identifiers:
                 cur_time, cur_keff, cur_err = serpent_plotting.plotting_tools(output_path, identifier, target, N_steps).keff_plot()
-                plt.errorbar(cur_time, cur_keff, linestyle=ui.lines[line_counter%len(ui.lines)], yerr=cur_err, label=identifier, marker='.')
+                plt.errorbar(cur_time, cur_keff, capsize=4, linestyle=ui.lines[line_counter%len(ui.lines)], yerr=cur_err, label=identifier, marker='.')
                 line_counter += 1
             plt.xlabel('Time [d]')
             plt.ylabel('Keff')
@@ -707,19 +707,20 @@ if __name__ == '__main__':
                     else:
                         scale = 'g'
                     line_counter += 1
-                    if (kilo):
-                        SP_mass = [x / 1000 for x in SP_mass]
-                        scale = 'kg'
-                    else:
-                        scale = 'g'
-                    plt.plot(
-                        SP_eval_times,
-                        SP_mass,
-                        linestyle=ui.lines[line_counter%len(ui.lines)],
-                        label=SP_identifier,
-                        alpha=ui.overlap,
-                        lw=ui.width)
-                    line_counter += 1
+                    if ui.saltproc:
+                        if (kilo):
+                            SP_mass = [x / 1000 for x in SP_mass]
+                            scale = 'kg'
+                        else:
+                            scale = 'g'
+                        plt.plot(
+                            SP_eval_times,
+                            SP_mass,
+                            linestyle=ui.lines[line_counter%len(ui.lines)],
+                            label=SP_identifier,
+                            alpha=ui.overlap,
+                            lw=ui.width)
+                        line_counter += 1
 
                     plt.xlabel('Time [d]')
                     plt.ylabel(f'Mass [{scale}]')
@@ -759,8 +760,8 @@ if __name__ == '__main__':
             line_counter = 0
             for N_steps in ui.number_serp_steps_list:
                 output_path = str(base_output_path) + f'{N_steps}/'
-                cur_time, cur_mass, cur_err = serpent_plotting.plotting_tools(output_path, identifier, target, N_steps).keff_plot()
-                plt.errorbar(cur_time, cur_mass, linestyle=ui.lines[line_counter%len(ui.lines)], yerr=cur_err, label=str(N_steps) + ' steps', marker='.')
+                cur_time, cur_keff, cur_err = serpent_plotting.plotting_tools(output_path, identifier, target, N_steps).keff_plot()
+                plt.errorbar(cur_time, cur_keff, yerr=cur_err, linestyle=ui.lines[line_counter%len(ui.lines)], capsize=4, label=str(N_steps) + ' steps', marker='.')
                 line_counter += 1
             plt.xlabel('Time [d]')
             plt.ylabel('Keff')
