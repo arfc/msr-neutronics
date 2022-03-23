@@ -718,9 +718,9 @@ if __name__ == '__main__':
                         target,
                         N_steps).plt_gen_mass_time()
                     plt.plot(cur_time,
-                            cur_mass,
-                            linestyle=ui.lines[line_counter % len(ui.lines)],
-                            label=identifier, alpha=ui.overlap, lw=ui.width)
+                             cur_mass,
+                             linestyle=ui.lines[line_counter % len(ui.lines)],
+                             label=identifier, alpha=ui.overlap, lw=ui.width)
                     if (kilo) or (
                             line_counter == 1 and np.mean(cur_mass) > 1000):
                         kilo = True
