@@ -772,11 +772,12 @@ if __name__ == '__main__':
                     else:
                         scale = 'g'
                     plt.plot(cur_time,
-                            cur_mass,
-                            linestyle=ui.lines[line_counter % len(ui.lines)],
-                            label=str(N_steps) + ' steps',
-                            alpha=ui.overlap,
-                            lw=ui.width)
+                                cur_mass,
+                                linestyle=ui.lines[line_counter % len(
+                                    ui.lines)],
+                                label=str(N_steps) + ' steps',
+                                alpha=ui.overlap,
+                                lw=ui.width)
                     line_counter += 1
                 plt.xlabel('Time [d]')
                 plt.ylabel(f'Mass [{scale}]')
