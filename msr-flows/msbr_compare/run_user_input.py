@@ -638,14 +638,18 @@ if __name__ == '__main__':
                     line_counter += 1
                 for identifier in active_identifiers:
                     cur_time, cur_mass = serpent_plotting.plotting_tools(
-                        output_path, identifier, target, N_steps).plt_gen_mass_time()
+                        output_path,
+                        identifier,
+                        target,
+                        N_steps).plt_gen_mass_time()
                     if (kilo):
                         cur_mass = [x / 1000 for x in cur_mass]
                         scale = 'kg'
                     else:
                         scale = 'g'
-                    plt.plot(cur_time, cur_mass, linestyle=ui.lines[line_counter % len(
-                        ui.lines)], label=identifier, alpha=ui.overlap, lw=ui.width)
+                    plt.plot(cur_time, cur_mass,
+                            linestyle=ui.lines[line_counter % len(ui.lines)],
+                            label=identifier, alpha=ui.overlap, lw=ui.width)
                     line_counter += 1
                 plt.xlabel('Time [d]')
                 plt.ylabel(f'Mass [{scale}]')
@@ -660,9 +664,11 @@ if __name__ == '__main__':
             line_counter = 0
             for identifier in active_identifiers:
                 cur_time, cur_mass = serpent_plotting.plotting_tools(
-                    output_path, identifier, target, N_steps).plt_gen_mass_time()
-                plt.plot(cur_time, cur_mass, linestyle=ui.lines[line_counter % len(
-                    ui.lines)], label=identifier, alpha=ui.overlap, lw=ui.width)
+                    output_path, identifier, target,
+                    N_steps).plt_gen_mass_time()
+                plt.plot(cur_time, cur_mass,
+                        linestyle=ui.lines[line_counter % len(ui.lines)],
+                        label=identifier, alpha=ui.overlap, lw=ui.width)
                 plt.xlabel('Time [d]')
                 plt.ylabel('Net Mass [g]')
                 plt.legend()
@@ -707,9 +713,14 @@ if __name__ == '__main__':
 
                 for identifier in active_identifiers:
                     cur_time, cur_mass = serpent_plotting.plotting_tools(
-                        output_path, identifier, target, N_steps).plt_gen_mass_time()
-                    plt.plot(cur_time, cur_mass, linestyle=ui.lines[line_counter % len(
-                        ui.lines)], label=identifier, alpha=ui.overlap, lw=ui.width)
+                        output_path,
+                        identifier,
+                        target,
+                        N_steps).plt_gen_mass_time()
+                    plt.plot(cur_time,
+                            cur_mass,
+                            linestyle=ui.lines[line_counter % len(ui.lines)],
+                            label=identifier, alpha=ui.overlap, lw=ui.width)
                     if (kilo) or (
                             line_counter == 1 and np.mean(cur_mass) > 1000):
                         kilo = True
@@ -749,7 +760,10 @@ if __name__ == '__main__':
                 for N_steps in ui.number_serp_steps_list:
                     output_path = str(base_output_path) + f'{N_steps}/'
                     cur_time, cur_mass = serpent_plotting.plotting_tools(
-                        output_path, identifier, target, N_steps).plt_gen_mass_time()
+                            output_path,
+                            identifier,
+                            target,
+                            N_steps).plt_gen_mass_time()
                     if (kilo) or (
                             line_counter == 0 and np.mean(cur_mass) > 1000):
                         kilo = True
@@ -757,8 +771,12 @@ if __name__ == '__main__':
                         scale = 'kg'
                     else:
                         scale = 'g'
-                    plt.plot(cur_time, cur_mass, linestyle=ui.lines[line_counter % len(
-                        ui.lines)], label=str(N_steps) + ' steps', alpha=ui.overlap, lw=ui.width)
+                    plt.plot(cur_time,
+                            cur_mass,
+                            linestyle=ui.lines[line_counter % len(ui.lines)],
+                            label=str(N_steps) + ' steps',
+                            alpha=ui.overlap,
+                            lw=ui.width)
                     line_counter += 1
                 plt.xlabel('Time [d]')
                 plt.ylabel(f'Mass [{scale}]')
