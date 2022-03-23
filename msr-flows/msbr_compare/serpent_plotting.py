@@ -133,7 +133,8 @@ if __name__ == '__main__':
             for N_steps in ui.number_serp_steps_list:
                 output_path = str(base_output_path) + f'{N_steps}/'
                 cur_time, cur_mass = plotting_tools(
-                    output_path, identifier, target, N_steps).plt_gen_mass_time()
+                    output_path,
+                    identifier, target, N_steps).plt_gen_mass_time()
                 plt.plot(cur_time,
                          cur_mass,
                          linestyle=ui.lines[line_counter % len(lines)],
