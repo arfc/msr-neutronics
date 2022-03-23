@@ -101,7 +101,7 @@ def SP_data_initializer(time_list, hdf5_path, fuel_path):
 
 
 if __name__ == '__main__':
-    times = np.arange(3, (7002+3), 3)
+    times = np.arange(3, (7002 + 3), 3)
     hdf5_path = './ss-data-test/db_saltproc_20y.hdf5'
     fuel_path = './ss-data-test/ss-fuel'
     SP_data_initializer(times, hdf5_path, fuel_path)

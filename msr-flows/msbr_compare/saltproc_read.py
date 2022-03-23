@@ -309,7 +309,8 @@ def evaluate(time, hdf5_path, fuel_path):
                          mat_head)
     return
 
-def iso_removal_rate(db_file, iso = 'Pa233'):
+
+def iso_removal_rate(db_file, iso='Pa233'):
     """
     Generates the average removal rate for a given isotope from the
         start time to the end time given in user_input
@@ -336,7 +337,8 @@ def iso_removal_rate(db_file, iso = 'Pa233'):
     pre_mass = list()
     post_mass = list()
     removal_mass = list()
-    possible_times = [x['cumulative_time_at_eds'] for x in sim_param.iterrows()]
+    possible_times = [x['cumulative_time_at_eds']
+                      for x in sim_param.iterrows()]
     for time in range(len(possible_times)):
         comp_pre = pre_fuel[time, :]
         mass_pre = comp_pre[isomap[iso]]
@@ -363,7 +365,8 @@ def iso_removal_rate(db_file, iso = 'Pa233'):
     db.close()
     return avg_kg_day
 
-def iso_removal_rate_v01(db_file, iso = 'Pa233'):
+
+def iso_removal_rate_v01(db_file, iso='Pa233'):
     """
     Generates the average removal rate for a given isotope from the
         start time to the end time given in user_input.
@@ -400,7 +403,7 @@ def iso_removal_rate_v01(db_file, iso = 'Pa233'):
     pre_atoms = list()
     post_atoms = list()
     removal_mass = list()
-    possible_times = [3*x for x in range(0, 2270)]
+    possible_times = [3 * x for x in range(0, 2270)]
     for time_index in range(len(possible_times)):
         comp_pre = pre_fuel[time_index, :]
         atoms_pre = comp_pre[iso_index]
@@ -409,7 +412,8 @@ def iso_removal_rate_v01(db_file, iso = 'Pa233'):
         pre_atoms.append(atoms_pre)
         post_atoms.append(atoms_post)
         # mol/cc -> kg/cc Divide by 3000 b/c 3 day step and 1000 kg/g
-        removed = abs(atoms_pre - atoms_post) * 4.871E7 * mol_weight / (ui.SP_step_size * 1000)
+        removed = abs(atoms_pre - atoms_post) * 4.871E7 * \
+            mol_weight / (ui.SP_step_size * 1000)
         removal_mass.append(removed)
     start_index = possible_times.index(ui.start_time)
     end_index = possible_times.index(ui.end_time)
@@ -428,11 +432,12 @@ def iso_removal_rate_v01(db_file, iso = 'Pa233'):
     db.close()
     return avg_kg_day
 
+
 def check_total_mass(db_file):
     """
-    Iterate through every isotope in each time step 
+    Iterate through every isotope in each time step
         and generate a plot of the net mass difference each step
-    
+
     Parameters
     ----------
     db_file : str
@@ -443,7 +448,7 @@ def check_total_mass(db_file):
     None
 
     """
- 
+
     db = tb.open_file(db_file, mode='r')
     pre_fuel = db.root.materials.fuel.before_reproc.comp
     isomap = pre_fuel.attrs.iso_map
@@ -476,15 +481,14 @@ def check_total_mass(db_file):
 
 if __name__ == '__main__':
 
-
-    fuel_input_path = './ss-data-test/mat_prepr_comp_geo_1_boc.ini' 
+    fuel_input_path = './ss-data-test/mat_prepr_comp_geo_1_boc.ini'
     hdf5_input_path = './ss-data-test/db_saltproc_2270.hdf5'
 
     db_file = hdf5_input_path
     new_mat_file = fuel_input_path
 
     iso_removal_rate_v01(db_file, iso='Pa233')
-    
+
     iso_removal_rate_v01(db_file, iso='Th232')
     input()
 

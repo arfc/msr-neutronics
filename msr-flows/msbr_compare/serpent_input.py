@@ -373,8 +373,8 @@ class run_deck:
             if cur_out_len != out_len:
                 out_len = cur_out_len
             else:
-                print(f'Error, view ' + 
-                        str(self.out) + ' or previous.')
+                print(f'Error, view ' +
+                      str(self.out) + ' or previous.')
                 raise Exception('WRK_fail')
         return
 

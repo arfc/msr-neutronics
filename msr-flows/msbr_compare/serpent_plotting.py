@@ -11,7 +11,13 @@ class plotting_tools:
 
     """
 
-    def __init__(self, output_path, identifier, target, num_steps, mat_name='fuel'):
+    def __init__(
+            self,
+            output_path,
+            identifier,
+            target,
+            num_steps,
+            mat_name='fuel'):
         """
         Initialize the plotting tools class.
 
@@ -89,7 +95,7 @@ class plotting_tools:
         err_data : list
             List of floats containing error of each keff
 
-        """ 
+        """
         time_data = list()
         keff_data = list()
         err_data = list()
@@ -106,6 +112,7 @@ class plotting_tools:
                 err_data.append(err[each_ind])
 
         return time_data, keff_data, err_data
+
 
 if __name__ == '__main__':
     print('Plotting each model compared to different step sizes')
@@ -125,8 +132,13 @@ if __name__ == '__main__':
         for identifier in active_identifiers:
             for N_steps in ui.number_serp_steps_list:
                 output_path = str(base_output_path) + f'{N_steps}/'
-                cur_time, cur_mass = plotting_tools(output_path, identifier, target, N_steps).plt_gen_mass_time()
-                plt.plot(cur_time, cur_mass, linestyle=ui.lines[line_counter%len(lines)], label=str(N_steps) + ' steps', marker=ui.markers[marker_counter%len(lines)])
+                cur_time, cur_mass = plotting_tools(
+                    output_path, identifier, target, N_steps).plt_gen_mass_time()
+                plt.plot(cur_time,
+                         cur_mass,
+                         linestyle=ui.lines[line_counter % len(lines)],
+                         label=str(N_steps) + ' steps',
+                         marker=ui.markers[marker_counter % len(lines)])
                 line_counter += 1
                 marker_counter += 1
 
@@ -134,15 +146,22 @@ if __name__ == '__main__':
             plt.ylabel('Mass [g]')
             plt.legend()
             plt.tight_layout()
-            plt.savefig(f'{base_output_path}{identifier}_NSTEP_{target}_mass.png')
+            plt.savefig(
+                f'{base_output_path}{identifier}_NSTEP_{target}_mass.png')
             plt.close()
     line_counter = 0
     marker_counter = 0
     for identifier in active_identifiers:
         for N_steps in ui.number_serp_steps_list:
             output_path = str(base_output_path) + f'{N_steps}/'
-            cur_time, cur_mass, cur_err = plotting_tools(output_path, identifier, target, N_steps).keff_plot()
-            plt.errorbar(cur_time, cur_mass, linestyle=ui.lines[line_counter%len(lines)], yerr=cur_err, label=str(N_steps) + ' steps', marker=ui.markers[marker_counter%len(lines)])
+            cur_time, cur_mass, cur_err = plotting_tools(
+                output_path, identifier, target, N_steps).keff_plot()
+            plt.errorbar(cur_time,
+                         cur_mass,
+                         linestyle=ui.lines[line_counter % len(lines)],
+                         yerr=cur_err,
+                         label=str(N_steps) + ' steps',
+                         marker=ui.markers[marker_counter % len(lines)])
             line_counter += 1
             marker_counter += 1
 
@@ -152,4 +171,3 @@ if __name__ == '__main__':
         plt.tight_layout()
         plt.savefig(f'{base_output_path}{identifier}_NSTEP_keff.png')
         plt.close()
-
