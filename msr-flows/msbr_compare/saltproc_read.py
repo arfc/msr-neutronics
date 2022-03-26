@@ -434,10 +434,11 @@ def iso_removal_rate_v01(db_file):
     return avg_kg_day
 
 
-def check_total_mass(db_file):
+def plot_total_mass_difference(db_file):
     """
     Iterate through every isotope in each time step
-        and generate a plot of the net mass difference each step
+        and generate a plot of the net mass difference each step.
+        Works for SaltProc v0.3 database files.
 
     Parameters
     ----------
@@ -495,7 +496,7 @@ if __name__ == '__main__':
 
     iso_removal_rate(db_file, iso="Th232")
 
-    check_total_mass(db_file)
+    plot_total_mass_difference(db_file)
 
     time_after_startup = float(input('Time after startup [d]:'))
 
