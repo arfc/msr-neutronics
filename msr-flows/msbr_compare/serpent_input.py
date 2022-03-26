@@ -359,8 +359,9 @@ class run_deck:
 
         Raises
         ------
-        WRK_fail
-            Occurs if the output does not update within 20 seconds.
+        No binary burnup restart file present
+            Occurs if the .wrk file does not update within 5 seconds after
+            being generated.
 
         """
         wrk_name = self.write
@@ -375,7 +376,7 @@ class run_deck:
             else:
                 print(f'Error, view ' +
                       str(self.out) + ' or previous.')
-                raise Exception('WRK_fail')
+                raise Exception('No binary burnup restart file present')
         return
 
 
