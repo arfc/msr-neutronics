@@ -250,7 +250,7 @@ class cycle_time_model:
 
     def cycle_time_decay(self):
         """
-        Calculate reprocessing calculation based on MSBR cycle time
+        Reprocessing calculation based on MSBR cycle time
             using half lives and linear approximation.
 
         Parameters
@@ -288,7 +288,7 @@ class cycle_time_model:
 
     def cycle_rate(self):
         """
-        Calculate reprocessing calculation based on MSBR cycle time
+        Reprocessing calculation based on MSBR cycle time
             using linear approximation.
 
         Parameters
@@ -327,8 +327,8 @@ class cycle_time_model:
 
     def SP_cycle_rate(self):
         """
-        Calculate reprocessing calculation based on MSBR SaltProc efficiencies
-            using linear approximation.
+        Calculate reprocessing calculation based on MSBR SaltProc removal
+            efficiencies using linear approximation.
 
         Parameters
         ----------
@@ -356,10 +356,10 @@ class cycle_time_model:
         groups.append(self.element_flow_list[18:26])
         groups.append(self.element_flow_list[26:27])
         groups.append(self.element_flow_list[27:31])
-        SP_values = [0.911522, 0.914857, 1, 0.015, 0.05, 0.95, 0.6, 0.06, 0.09]
+        SP_rem_efficiencies = [0.911522, 0.914857, 1, 0.015, 0.05, 0.95, 0.6, 0.06, 0.09]
 
-        for each in range(len(SP_values)):
-            SP_rem = SP_values[each]
+        for each in range(len(SP_rem_efficiencies)):
+            SP_rem = SP_rem_efficiencies[each]
             per_sec_rem = SP_rem / 3 / 24 / 3600
             repr_const = np.log(1 / (1 - per_sec_rem))
             for element in groups[each]:
