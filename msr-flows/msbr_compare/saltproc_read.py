@@ -310,10 +310,11 @@ def evaluate(time, hdf5_path, fuel_path):
     return
 
 
-def iso_removal_rate(db_file, iso='Pa233'):
+def iso_removal_rate(db_file):
     """
     Generates the average removal rate for a given isotope from the
-        start time to the end time given in user_input
+        start time to the end time given in user_input. Functions for
+        SaltProc v0.3 database files.
 
     Parameters
     ----------
@@ -366,7 +367,7 @@ def iso_removal_rate(db_file, iso='Pa233'):
     return avg_kg_day
 
 
-def iso_removal_rate_v01(db_file, iso='Pa233'):
+def iso_removal_rate_v01(db_file):
     """
     Generates the average removal rate for a given isotope from the
         start time to the end time given in user_input.
