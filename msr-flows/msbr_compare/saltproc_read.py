@@ -4,6 +4,7 @@ from pyne import nucname
 import user_input as ui
 import numpy as np
 import matplotlib.pyplot as plt
+import h5py
 
 
 def check_isotope_in_library(isotope, lib_isos):
@@ -310,7 +311,7 @@ def evaluate(time, hdf5_path, fuel_path):
     return
 
 
-def iso_removal_rate(db_file):
+def iso_removal_rate(db_file, iso):
     """
     Generates the average removal rate for a given isotope from the
         start time to the end time given in user_input. Functions for
@@ -367,7 +368,7 @@ def iso_removal_rate(db_file):
     return avg_kg_day
 
 
-def iso_removal_rate_v01(db_file):
+def iso_removal_rate_v01(db_file, iso):
     """
     Generates the average removal rate for a given isotope from the
         start time to the end time given in user_input.
@@ -489,9 +490,9 @@ if __name__ == '__main__':
     db_file = hdf5_input_path
     new_mat_file = fuel_input_path
 
-    iso_removal_rate_v01(db_file, iso='Pa233')
+    iso_removal_rate_v01(db_file, 'Pa233')
 
-    iso_removal_rate_v01(db_file, iso='Th232')
+    iso_removal_rate_v01(db_file, 'Th232')
     input()
 
     iso_removal_rate(db_file, iso="Th232")
