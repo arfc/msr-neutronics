@@ -1,5 +1,3 @@
-# from saltproc_read import iso_removal_rate
-
 # Runs to perform
 
 control = True
@@ -45,23 +43,18 @@ template_name = 'saltproc.msbr.serpent'
 database = './ss-data-test/7002_day_SS_data'
 
 
-# [1, 10, 50, 100, 200, 1000]#[1, 10, 50] #[1, 10, 50, 100, 200]
 number_serp_steps_list = [2]
-start_time = 3000  # 3
-end_time = 3006  # 6000#7002
+start_time = 3000
+end_time = 3006
 SP_step_size = 3
-SP_start = start_time  # 0
-SP_end = end_time  # 6000
+SP_start = start_time
+SP_end = end_time
 
 LGA_step_size = 3
 linear_SP_count = 2
 
 
-# 1.9#iso_removal_rate(database, iso='Th232')#2.39 #2.39 #-1 *
-# iso_removal_rate(database, iso='Th232') #2.39 #2.45
 thorium_232_feed_kg_day = 2.39
-# 2.16 #iso_removal_rate(database, iso='Pa233')#2.12
-# #iso_removal_rate(database, iso='Pa233') * 1.84 #1.74
 uranium_233_feed_kg_day = 1.915
 print(f'Th232 feed: {thorium_232_feed_kg_day}')
 print(f'U233 feed: {uranium_233_feed_kg_day}')
