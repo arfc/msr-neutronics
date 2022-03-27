@@ -168,7 +168,7 @@ class plotting_tools:
             plt.ylabel(f'Mass [{scale}]')
             plt.legend()
             plt.tight_layout()
-            plt.savefig(f'{output_path}cumulative_{target}_mass.png')
+            plt.savefig(f'{self.outpath}cumulative_{target}_mass.png')
             plt.close()
         self.id = base_id
         return
@@ -199,7 +199,7 @@ class plotting_tools:
             plt.ylabel('Net Mass [g]')
             plt.legend()
             plt.tight_layout()
-            plt.savefig(f'{output_path}{identifier}net_mass.png')
+            plt.savefig(f'{self.outpath}{identifier}net_mass.png')
             plt.close()
         self.id = base_id
         return
@@ -234,7 +234,7 @@ class plotting_tools:
         plt.ylabel('Keff')
         plt.legend()
         plt.tight_layout()
-        plt.savefig(f'{output_path}cumulative_keff.png')
+        plt.savefig(f'{self.outpath}cumulative_keff.png')
         plt.close()
         self.id = base_id
         return
@@ -298,7 +298,7 @@ class plotting_tools:
                 plt.ylabel(f'Mass [{scale}]')
                 plt.legend()
                 plt.tight_layout()
-                plt.savefig(f'{output_path}{identifier}_{target}_mass.png')
+                plt.savefig(f'{self.outpath}{identifier}_{target}_mass.png')
                 plt.close()
         self.id = base_id
         return
@@ -348,7 +348,7 @@ class plotting_tools:
                 plt.legend()
                 plt.tight_layout()
                 plt.savefig(
-                    f'{base_output_path}{identifier}_NSTEP_{target}_mass.png')
+                    f'./{ui.path_to_dump_files}/{identifier}_NSTEP_{target}_mass.png')
                 plt.close()
         self.steps = preserved_steps
         self.id = base_id
@@ -389,7 +389,7 @@ class plotting_tools:
             plt.ylabel('Keff')
             plt.legend()
             plt.tight_layout()
-            plt.savefig(f'{base_output_path}{identifier}_NSTEP_keff.png')
+            plt.savefig(f'./{ui.path_to_dump_files}/{identifier}_NSTEP_keff.png')
             plt.close()
         self.steps = base_steps
         self.id = base_id

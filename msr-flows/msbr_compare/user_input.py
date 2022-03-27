@@ -197,8 +197,6 @@ if cycle_rate:
     active_identifiers.append(CR_identifier)
 if saltproc_cycle_rate:
     active_identifiers.append(SPCR_identifier)
-if saltproc:
-    active_identifiers.append(SP_identifier)
 
 
 element_dictionary = dict()
