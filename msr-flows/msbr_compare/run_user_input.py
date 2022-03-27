@@ -519,8 +519,6 @@ if __name__ == '__main__':
     base_output_path = f'./{ui.path_to_dump_files}/'
     misc_funcs.set_directory(base_output_path)
 
-    element_dictionary = dict()
-
     for N_index, N_steps in enumerate(ui.number_serp_steps_list):
         output_path = str(base_output_path) + f'{N_steps}/'
         misc_funcs.set_directory(output_path)
@@ -540,6 +538,9 @@ if __name__ == '__main__':
 
 
         # Plotting
+        identifier = 'none'
+        target = 'none'
+        N_steps = 0
         plotter = serpent_plotting.plotting_tools(
                 output_path,
                 identifier,
