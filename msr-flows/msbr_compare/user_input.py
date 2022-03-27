@@ -174,3 +174,24 @@ associated_atomic_list = [
 
 total_view_list = list_inventory + element_flow_list
 list_inventory += associated_symbol_list
+
+active_identifiers = list()
+CTRL_identifier = 'CTRL'
+LIA_identifier = 'LIA'
+LGA_identifier = 'LGA'
+CTD_identifier = 'CTD'
+CR_identifier = 'CR'
+SPCR_identifier = 'SPCR'
+
+if control:
+    active_identifiers.append(CTRL_identifier)
+if linear_isotope:
+    active_identifiers.append(LIA_identifier)
+if linear_generation:
+    active_identifiers.append(LGA_identifier)
+if cycle_time_decay:
+    active_identifiers.append(CTD_identifier)
+if cycle_rate:
+    active_identifiers.append(CR_identifier)
+if saltproc_cycle_rate:
+    active_identifiers.append(SPCR_identifier)

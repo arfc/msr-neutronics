@@ -261,6 +261,7 @@ class full_run_serp:
         """
 
         reprocessing_dict = self.linear_generation_reprocessing_constants(
+            identifier=identifier,
             LGA_step_size=LGA_step_size,
             isos_dict=iso_dict,
             num_SP=num_SP)
@@ -430,6 +431,88 @@ class full_run_serp:
 
         return
 
+    def build_and_run(self, identifier):
+        """
+        Creates run, checks for errors,
+            and times the process.
+
+        Parameters
+        ----------
+        identifier : str
+            Name of the run type to execute
+
+        Returns
+        -------
+        None
+
+        Raises
+        ------
+        Current identifier not recognized
+            Occurs if function is provided identifier which is not in
+                user_input active identifier list.
+
+        """
+
+        start_timer_count = time.time()
+        if identifier not in ui.active_identifiers:
+            raise Exception('Current identifier not recognized')
+        print(f'Running {identifier}')
+        try:
+            self.id_run(identifier)
+        except Exception as e:
+            print(e)
+            print(f'{identifier} failed, removing from active identifiers.')
+            ui.active_identifiers.remove(identifier)
+        end_timer_count = time.time()
+        print(f'Ran {identifier}, took {end_timer_count - start_timer_count}s')
+        return
+
+    def id_run(self, identifier):
+        """
+        Takes the identifier and builds the run based on default identifier
+            options. Compares current identifier against defined terms in
+            user_input.
+
+        Parameters
+        ----------
+        identifier : str
+            Name of the run type to execute
+
+        Returns
+        -------
+        None
+
+        Raises
+        ------
+        Identifier run fail
+            Occurs if the identifier does not match any in user_input but still 
+                called this function.
+        """
+        if identifier is ui.CTRL_identifier:
+            self.control_run(identifier)
+        elif identifier is ui.LIA_identifier:
+            self.linear_generation(
+                    identifier=identifier,
+                    LGA_step_size=ui.LGA_step_size,
+                    iso_dict=ui.important_isotopes,
+                    num_SP=ui.linear_SP_count)
+        elif identifier is ui.LGA_identifier:
+            self.linear_generation(
+                    identifier=identifier,
+                    LGA_step_size=ui.LGA_step_size,
+                    num_SP=ui.linear_SP_count)
+        elif identifier is ui.CTD_identifier:
+            self.cycle_time_decay(identifier)
+        elif identifier is ui.CR_identifier:
+            self.cycle_rate(identifier)
+        elif identifier is ui.SPCR_identifier:
+            self.SP_cycle_rate(identifier)
+        else:
+            raise Exception('Identifier run fail')
+
+        return
+
+
 
 if __name__ == '__main__':
 
@@ -437,7 +520,6 @@ if __name__ == '__main__':
     misc_funcs.set_directory(base_output_path)
 
     element_dictionary = dict()
-    active_identifiers = list()
 
     for index in range(len(ui.element_flow_list)):
         element_dictionary[ui.element_flow_list[index]] = [
@@ -446,166 +528,19 @@ if __name__ == '__main__':
         output_path = str(base_output_path) + f'{N_steps}/'
         misc_funcs.set_directory(output_path)
         print(f'Step size: {(ui.end_time - ui.start_time) / N_steps}')
+        builder = full_run_serp(
+            N_steps,
+            ui.base_material_path,
+            ui.template_path,
+            ui.template_name,
+            ui.start_time,
+            ui.end_time,
+            ui.list_inventory,
+            ui.element_flow_list,
+            output_path)
+        for each_id in ui.active_identifiers:
+            builder.build_and_run(each_id)
 
-        if ui.control:
-            start_timer_count = time.time()
-            print('Running Control')
-            CTRL_identifier = 'CTRL'
-            active_identifiers.append(CTRL_identifier)
-            active_identifiers = list(set(active_identifiers))
-            builder = full_run_serp(
-                N_steps,
-                ui.base_material_path,
-                ui.template_path,
-                ui.template_name,
-                ui.start_time,
-                ui.end_time,
-                ui.list_inventory,
-                ui.element_flow_list,
-                output_path)
-            try:
-                builder.control_run(identifier=CTRL_identifier)
-            except Exception as e:
-                print(e)
-                print('CTRL failed, removing from active identifiers.')
-                active_identifiers.remove(CTRL_identifier)
-            end_timer_count = time.time()
-            print(f'Ran Control, took {end_timer_count - start_timer_count}s')
-
-        if ui.linear_isotope:
-            start_timer_count = time.time()
-            print('Running LIA')
-            LIA_identifier = 'LIA'
-            active_identifiers.append(LIA_identifier)
-            active_identifiers = list(set(active_identifiers))
-            builder = full_run_serp(
-                N_steps,
-                ui.base_material_path,
-                ui.template_path,
-                ui.template_name,
-                ui.start_time,
-                ui.end_time,
-                ui.list_inventory,
-                ui.element_flow_list,
-                output_path)
-            try:
-                builder.linear_generation(
-                    identifier=LIA_identifier,
-                    LGA_step_size=ui.LGA_step_size,
-                    iso_dict=ui.important_isotopes,
-                    num_SP=ui.linear_SP_count)
-            except Exception as e:
-                print(e)
-                print('LIA failed, removing from active identifiers.')
-                active_identifiers.remove(LIA_identifier)
-            end_timer_count = time.time()
-            print(f'Ran LIA, took {end_timer_count - start_timer_count}s')
-
-        if ui.separate_core_piping:
-            print('Not yet available')
-
-        if ui.linear_generation:
-            start_timer_count = time.time()
-            print('Running LGA')
-            LGA_identifier = 'LGA'
-            active_identifiers.append(LGA_identifier)
-            active_identifiers = list(set(active_identifiers))
-            builder = full_run_serp(
-                N_steps,
-                ui.base_material_path,
-                ui.template_path,
-                ui.template_name,
-                ui.start_time,
-                ui.end_time,
-                ui.list_inventory,
-                ui.element_flow_list,
-                output_path)
-            try:
-                builder.linear_generation(
-                    identifier=LGA_identifier,
-                    LGA_step_size=ui.LGA_step_size,
-                    num_SP=ui.linear_SP_count)
-            except Exception as e:
-                print(e)
-                print('LGA failed, removing from active identifiers.')
-                active_identifiers.remove(LGA_identifier)
-            end_timer_count = time.time()
-            print(f'Ran LGA, took {end_timer_count - start_timer_count}s')
-
-        if ui.cycle_time_decay:
-            start_timer_count = time.time()
-            print('Running CTD')
-            CTD_identifier = 'CTD'
-            active_identifiers.append(CTD_identifier)
-            active_identifiers = list(set(active_identifiers))
-            builder = full_run_serp(
-                N_steps,
-                ui.base_material_path,
-                ui.template_path,
-                ui.template_name,
-                ui.start_time,
-                ui.end_time,
-                ui.list_inventory,
-                ui.element_flow_list,
-                output_path)
-            try:
-                builder.cycle_time_decay(identifier=CTD_identifier)
-            except Exception as e:
-                print(e)
-                print('CTD failed, removing from active identifiers.')
-                active_identifiers.remove(CTD_identifier)
-            end_timer_count = time.time()
-            print(f'Ran CTD, took {end_timer_count - start_timer_count}s')
-
-        if ui.cycle_rate:
-            start_timer_count = time.time()
-            print('Running CR')
-            CR_identifier = 'CR'
-            active_identifiers.append(CR_identifier)
-            active_identifiers = list(set(active_identifiers))
-            builder = full_run_serp(
-                N_steps,
-                ui.base_material_path,
-                ui.template_path,
-                ui.template_name,
-                ui.start_time,
-                ui.end_time,
-                ui.list_inventory,
-                ui.element_flow_list,
-                output_path)
-            try:
-                builder.cycle_rate(identifier=CR_identifier)
-            except Exception as e:
-                print(e)
-                print('CR failed, removing from active identifiers.')
-                active_identifiers.remove(CR_identifier)
-            end_timer_count = time.time()
-            print(f'Ran CR, took {end_timer_count - start_timer_count}s')
-
-        if ui.saltproc_cycle_rate:
-            start_timer_count = time.time()
-            print('Running SPCR')
-            SPCR_identifier = 'SPCR'
-            active_identifiers.append(SPCR_identifier)
-            active_identifiers = list(set(active_identifiers))
-            builder = full_run_serp(
-                N_steps,
-                ui.base_material_path,
-                ui.template_path,
-                ui.template_name,
-                ui.start_time,
-                ui.end_time,
-                ui.list_inventory,
-                ui.element_flow_list,
-                output_path)
-            try:
-                builder.SP_cycle_rate(identifier=SPCR_identifier)
-            except Exception as e:
-                print(e)
-                print('SPCR failed, removing from active identifiers.')
-                active_identifiers.remove(SPCR_identifier)
-            end_timer_count = time.time()
-            print(f'Ran SPCR, took {end_timer_count - start_timer_count}s')
 
         # Plotting
 
