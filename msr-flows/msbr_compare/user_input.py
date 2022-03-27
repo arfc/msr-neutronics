@@ -10,6 +10,14 @@ linear_isotope = False
 cycle_rate = False
 saltproc_cycle_rate = False
 
+CTRL_identifier = 'CTRL'
+LIA_identifier = 'LIA'
+LGA_identifier = 'LGA'
+CTD_identifier = 'CTD'
+CR_identifier = 'CR'
+SPCR_identifier = 'SPCR'
+SP_identifier = 'SP'
+
 # Separate core piping is WIP
 
 separate_core_piping = False
@@ -176,12 +184,6 @@ total_view_list = list_inventory + element_flow_list
 list_inventory += associated_symbol_list
 
 active_identifiers = list()
-CTRL_identifier = 'CTRL'
-LIA_identifier = 'LIA'
-LGA_identifier = 'LGA'
-CTD_identifier = 'CTD'
-CR_identifier = 'CR'
-SPCR_identifier = 'SPCR'
 
 if control:
     active_identifiers.append(CTRL_identifier)
@@ -195,3 +197,11 @@ if cycle_rate:
     active_identifiers.append(CR_identifier)
 if saltproc_cycle_rate:
     active_identifiers.append(SPCR_identifier)
+if saltproc:
+    active_identifiers.append(SP_identifier)
+
+
+element_dictionary = dict()
+for index in range(len(element_flow_list)): 
+    element_dictionary[element_flow_list[index]] = [ 
+        associated_symbol_list[index], associated_atomic_list[index]] 
