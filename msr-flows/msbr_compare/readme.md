@@ -1,8 +1,6 @@
 ## Overview
 
-
-These scripts are designed to generate a Serpent2 input deck, run the deck, and then generate plots. Currently, the MSBR is analyzed with SaltProc and then compared with different approximations using Serpent2's built-in reprocessing functionality.
-
+These scripts generate Serpent2 input files with continuous reprocessing, run the input, and generate plots from the resulting depletion and result files. The current build is designed with the MSBR in mind, particularly using a SaltProc batchwise reprocessing run of the MSBR and then comparing continuous reprocessing results with it.
 
 ## Explanation of Scripts
 
