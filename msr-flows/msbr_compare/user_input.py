@@ -66,6 +66,7 @@ thorium_232_feed_kg_day = 2.39
 uranium_233_feed_kg_day = 1.915
 print(f'Th232 feed: {thorium_232_feed_kg_day}')
 print(f'U233 feed: {uranium_233_feed_kg_day}')
+core_vol = 4.871E7
 feed_vol = 1E30
 feed_mdens = 4.9602 / 2
 realistic_Pa_decay_u233_model = False

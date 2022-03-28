@@ -5,6 +5,8 @@ import user_input as ui
 import numpy as np
 import matplotlib.pyplot as plt
 import h5py
+from pyne import nucname
+from pyne.data import atomic_mass
 
 
 def check_isotope_in_library(isotope, lib_isos):
@@ -389,49 +391,49 @@ def iso_removal_rate_v01(db_file, iso):
 
     """
 
-    if iso == 'Pa233':
-        iso_index = 1088
-        mol_weight = 233.04025
-    elif iso == 'Th232':
-        iso_index = 1080
-        mol_weight = 232.03805
-    else:
-        print(f'Isotope {iso} data not recorded.')
-        raise Exception
-
-    db = tb.open_file(db_file)
-    pre_fuel = db.root.core_adensity_before_reproc
-    post_fuel = db.root.core_adensity_after_reproc
-    pre_atoms = list()
-    post_atoms = list()
-    removal_mass = list()
-    possible_times = [3 * x for x in range(0, 2270)]
-    for time_index in range(len(possible_times)):
-        comp_pre = pre_fuel[time_index, :]
-        atoms_pre = comp_pre[iso_index]
-        comp_post = post_fuel[time_index, :]
-        atoms_post = comp_post[iso_index]
-        pre_atoms.append(atoms_pre)
-        post_atoms.append(atoms_post)
-        # mol/cc -> kg/cc Divide by 3000 b/c 3 day step and 1000 kg/g
-        removed = abs(atoms_pre - atoms_post) * 4.871E7 * \
-            mol_weight / (ui.SP_step_size * 1000)
-        removal_mass.append(removed)
-    start_index = possible_times.index(ui.start_time)
-    end_index = possible_times.index(ui.end_time)
+    db_py = h5py.File(db_file, 'r')
+    iso_id = db_py['iso_codes']
+    core_boc = db_py['core_adensity_before_reproc']
+    core_eoc = db_py['core_adensity_after_reproc']
+    print(f'Checking for {iso}')
+    
+    # Code snippet from Andrei's SaltProc plotter
+    for i in range (len(iso_id)-1):
+        isotope_id = iso_id[i].decode().split(".")
+        if len(isotope_id) == 2:
+            final_id = ''.join((isotope_id[0],isotope_id[1][0]))
+            if nucname.name(final_id) == iso:
+                index_val = i
+                pre_adens_data = core_boc[1:, i]
+                post_adens_data = core_eoc[1:, i]
+        else:
+            if nucname.name(iso_id[i].decode()) == iso:
+                index_val = i
+                pre_adens_data = core_boc[1:, i]
+                post_adens_data = core_eoc[1:, i]
+    mol_mass = atomic_mass(iso)
+    db_py.close()
+    end_time = ui.SP_step_size * len(pre_adens_data)
+    time_vals = np.arange(0, end_time, ui.SP_step_size)
+    removed_mass = list()
+    avogadro = 6.022140857E23
     print(f'Average removal per day of {iso}')
-    print(f'Total average: {np.mean(removal_mass)} kg/day')
+    for each in range(len(pre_adens_data)):
+        pre_mass = pre_adens_data[each] * ui.core_vol * mol_mass * 1E24 * 1/(avogadro)
+        post_mass = post_adens_data[each] * ui.core_vol * mol_mass * 1E24 * 1/(avogadro) 
+        mass_diff = abs(pre_mass - post_mass)
+        mass_kg_day = mass_diff / (ui.SP_step_size * 1E3)
+        removed_mass.append(mass_kg_day)
+    avg_kg_day = np.mean(removed_mass)
+    print(f'Total average: {avg_kg_day} kg/day')
     print('Plotting average vs actual over time')
-    plt.plot(possible_times, removal_mass)
+
+    plt.plot(time_vals, removed_mass)
     plt.xlabel('Time [d]')
     plt.ylabel('Refill Rate [kg/day]')
     plt.ylim(0, 3)
     plt.savefig(f'{iso}rem_massv01.png')
     plt.close()
-    removal_mass = removal_mass[start_index:end_index]
-    avg_kg_day = np.mean(removal_mass)
-    print(f'{avg_kg_day} kg per day')
-    db.close()
     return avg_kg_day
 
 
@@ -485,7 +487,7 @@ def plot_total_mass_difference(db_file):
 if __name__ == '__main__':
 
     fuel_input_path = './ss-data-test/mat_prepr_comp_geo_1_boc.ini'
-    hdf5_input_path = './ss-data-test/db_saltproc_2270.hdf5'
+    hdf5_input_path = './saltproc-data/saltproc-msbr-v01.hdf5'
 
     db_file = hdf5_input_path
     new_mat_file = fuel_input_path
