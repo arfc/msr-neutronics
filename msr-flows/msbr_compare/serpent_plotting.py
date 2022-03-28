@@ -349,7 +349,8 @@ class plotting_tools:
                 plt.legend()
                 plt.tight_layout()
                 plt.savefig(
-                    f'./{ui.path_to_dump_files}/{identifier}_NSTEP_{target}_mass.png')
+                    f'./{ui.path_to_dump_files}/{identifier}\
+                            _NSTEP_{target}_mass.png')
                 plt.close()
         self.steps = preserved_steps
         self.id = base_id
