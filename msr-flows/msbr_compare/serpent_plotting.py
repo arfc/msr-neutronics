@@ -70,7 +70,8 @@ class plotting_tools:
         mass_data = list()
         for each_step in range(self.steps):
             plot_tool = serpent_output.serpent_data(
-                file_name=self.outpath + self.id + str(each_step), material_name=self.mat)
+                file_name=self.outpath + self.id + str(each_step),
+                material_name=self.mat)
             time, mass = plot_tool.serp_targ_reader(self.target)
             actual_time = time + ui.start_time
             for each_ind in range(len(actual_time)):
@@ -180,7 +181,7 @@ class plotting_tools:
         Parameters
         ----------
         None
-        
+
         Returns
         -------
         None
@@ -362,7 +363,7 @@ class plotting_tools:
         Parameters
         ----------
         None
-            
+
         Returns
         -------
         None
@@ -389,7 +390,8 @@ class plotting_tools:
             plt.ylabel('Keff')
             plt.legend()
             plt.tight_layout()
-            plt.savefig(f'./{ui.path_to_dump_files}/{identifier}_NSTEP_keff.png')
+            plt.savefig(
+                f'./{ui.path_to_dump_files}/{identifier}_NSTEP_keff.png')
             plt.close()
         self.steps = base_steps
         self.id = base_id
@@ -406,15 +408,13 @@ if __name__ == '__main__':
         target = 'none'
         N_steps = 0
         plotter = plotting_tools(
-                output_path,
-                identifier,
-                target,
-                N_steps)
+            output_path,
+            identifier,
+            target,
+            N_steps)
         plotter.multi_model_plot()
         plotter.net_mass_plot()
         plotter.multi_keff_plot()
         plotter.separated_plot()
     plotter.N_mass_plot()
     plotter.N_keff_plot()
-
-

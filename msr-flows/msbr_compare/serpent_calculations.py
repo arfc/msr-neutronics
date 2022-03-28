@@ -356,7 +356,8 @@ class cycle_time_model:
         groups.append(self.element_flow_list[18:26])
         groups.append(self.element_flow_list[26:27])
         groups.append(self.element_flow_list[27:31])
-        SP_rem_efficiencies = [0.911522, 0.914857, 1, 0.015, 0.05, 0.95, 0.6, 0.06, 0.09]
+        SP_rem_efficiencies = [0.911522, 0.914857,
+                               1, 0.015, 0.05, 0.95, 0.6, 0.06, 0.09]
 
         for each in range(len(SP_rem_efficiencies)):
             SP_rem = SP_rem_efficiencies[each]

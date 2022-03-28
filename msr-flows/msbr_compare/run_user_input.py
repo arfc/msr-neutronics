@@ -485,22 +485,22 @@ class full_run_serp:
         Raises
         ------
         Identifier run fail
-            Occurs if the identifier does not match any in user_input but still 
+            Occurs if the identifier does not match any in user_input but still
                 called this function.
         """
         if identifier is ui.CTRL_identifier:
             self.control_run(identifier)
         elif identifier is ui.LIA_identifier:
             self.linear_generation(
-                    identifier=identifier,
-                    LGA_step_size=ui.LGA_step_size,
-                    iso_dict=ui.important_isotopes,
-                    num_SP=ui.linear_SP_count)
+                identifier=identifier,
+                LGA_step_size=ui.LGA_step_size,
+                iso_dict=ui.important_isotopes,
+                num_SP=ui.linear_SP_count)
         elif identifier is ui.LGA_identifier:
             self.linear_generation(
-                    identifier=identifier,
-                    LGA_step_size=ui.LGA_step_size,
-                    num_SP=ui.linear_SP_count)
+                identifier=identifier,
+                LGA_step_size=ui.LGA_step_size,
+                num_SP=ui.linear_SP_count)
         elif identifier is ui.CTD_identifier:
             self.cycle_time_decay(identifier)
         elif identifier is ui.CR_identifier:
@@ -511,7 +511,6 @@ class full_run_serp:
             raise Exception('Identifier run fail')
 
         return
-
 
 
 if __name__ == '__main__':
@@ -536,16 +535,15 @@ if __name__ == '__main__':
         for each_id in ui.active_identifiers:
             builder.build_and_run(each_id)
 
-
         # Plotting
         identifier = 'none'
         target = 'none'
         N_steps = 0
         plotter = serpent_plotting.plotting_tools(
-                output_path,
-                identifier,
-                target,
-                N_steps)
+            output_path,
+            identifier,
+            target,
+            N_steps)
         if ui.model_plotting:
             print('Plotting different models together')
             plotter.multi_model_plot()

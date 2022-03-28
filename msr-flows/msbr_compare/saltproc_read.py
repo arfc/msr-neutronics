@@ -396,12 +396,12 @@ def iso_removal_rate_v01(db_file, iso):
     core_boc = db_py['core_adensity_before_reproc']
     core_eoc = db_py['core_adensity_after_reproc']
     print(f'Checking for {iso}')
-    
+
     # Code snippet from Andrei's SaltProc plotter
-    for i in range (len(iso_id)-1):
+    for i in range(len(iso_id) - 1):
         isotope_id = iso_id[i].decode().split(".")
         if len(isotope_id) == 2:
-            final_id = ''.join((isotope_id[0],isotope_id[1][0]))
+            final_id = ''.join((isotope_id[0], isotope_id[1][0]))
             if nucname.name(final_id) == iso:
                 index_val = i
                 pre_adens_data = core_boc[1:, i]
@@ -419,8 +419,10 @@ def iso_removal_rate_v01(db_file, iso):
     avogadro = 6.022140857E23
     print(f'Average removal per day of {iso}')
     for each in range(len(pre_adens_data)):
-        pre_mass = pre_adens_data[each] * ui.core_vol * mol_mass * 1E24 * 1/(avogadro)
-        post_mass = post_adens_data[each] * ui.core_vol * mol_mass * 1E24 * 1/(avogadro) 
+        pre_mass = pre_adens_data[each] * \
+            ui.core_vol * mol_mass * 1E24 * 1 / (avogadro)
+        post_mass = post_adens_data[each] * \
+            ui.core_vol * mol_mass * 1E24 * 1 / (avogadro)
         mass_diff = abs(pre_mass - post_mass)
         mass_kg_day = mass_diff / (ui.SP_step_size * 1E3)
         removed_mass.append(mass_kg_day)

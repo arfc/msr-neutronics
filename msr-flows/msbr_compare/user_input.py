@@ -201,6 +201,6 @@ if saltproc_cycle_rate:
 
 
 element_dictionary = dict()
-for index in range(len(element_flow_list)): 
-    element_dictionary[element_flow_list[index]] = [ 
-        associated_symbol_list[index], associated_atomic_list[index]] 
+for index in range(len(element_flow_list)):
+    element_dictionary[element_flow_list[index]] = [
+        associated_symbol_list[index], associated_atomic_list[index]]
