@@ -1,6 +1,12 @@
 # Import modules
 import tables as tb
 from pyne import nucname
+import user_input as ui
+import numpy as np
+import matplotlib.pyplot as plt
+import h5py
+from pyne import nucname
+from pyne.data import atomic_mass
 
 
 def check_isotope_in_library(isotope, lib_isos):
@@ -234,7 +240,6 @@ def filter_out_and_store(isos,
     -------
     None
     """
-    input(isos)
     mass_no_decay_isos = 0
     mass_decay_isos = 0
     matf = open(file, 'w')
@@ -308,13 +313,195 @@ def evaluate(time, hdf5_path, fuel_path):
     return
 
 
+def iso_removal_rate(db_file, iso):
+    """
+    Generates the average removal rate for a given isotope from the
+        start time to the end time given in user_input. Functions for
+        SaltProc v0.3 database files.
+
+    Parameters
+    ----------
+    db_file : str
+        Path to the database hdf5 file
+    iso : str
+        Name of the isotope to generate the removal rate for
+
+    Returns
+    -------
+    avg_kg_day : float
+        Average kg/day removal rate of the isotope
+
+    """
+
+    db = tb.open_file(db_file)
+    pre_fuel = db.root.materials.fuel.before_reproc.comp
+    isomap = pre_fuel.attrs.iso_map
+    post_fuel = db.root.materials.fuel.after_reproc.comp
+    sim_param = db.root.simulation_parameters
+    pre_mass = list()
+    post_mass = list()
+    removal_mass = list()
+    possible_times = [x['cumulative_time_at_eds']
+                      for x in sim_param.iterrows()]
+    for time in range(len(possible_times)):
+        comp_pre = pre_fuel[time, :]
+        mass_pre = comp_pre[isomap[iso]]
+        comp_post = post_fuel[time, :]
+        mass_post = comp_post[isomap[iso]]
+        pre_mass.append(mass_pre)
+        post_mass.append(mass_post)
+        # Divide by 3000 b/c 3 day step and 1000 kg/g
+        removed = abs(mass_pre - mass_post) / 3000
+        removal_mass.append(removed)
+    start_index = possible_times.index(ui.start_time)
+    end_index = possible_times.index(ui.end_time)
+    print(f'Average removal per day of {iso}')
+    print(f'Total average: {np.mean(removal_mass)} kg/day')
+    print('Plotting average vs actual over time')
+    plt.plot(possible_times, removal_mass)
+    plt.xlabel('Time [d]')
+    plt.ylabel('Refill Rate [kg/day]')
+    plt.savefig(f'{iso}rem_mass.png')
+    plt.close()
+    removal_mass = removal_mass[start_index:end_index]
+    avg_kg_day = np.mean(removal_mass)
+    print(f'{avg_kg_day} kg per day')
+    db.close()
+    return avg_kg_day
+
+
+def iso_removal_rate_v01(db_file, iso):
+    """
+    Generates the average removal rate for a given isotope from the
+        start time to the end time given in user_input.
+        Works for v0.1 of SaltProc database files.
+
+    Parameters
+    ----------
+    db_file : str
+        Path to the database hdf5 file
+    iso : str
+        Name of the isotope to generate the removal rate for. Only
+            certain isotopes can be used.
+
+    Returns
+    -------
+    avg_kg_day : float
+        Average kg/day removal rate of the isotope
+
+    """
+
+    db_py = h5py.File(db_file, 'r')
+    iso_id = db_py['iso_codes']
+    core_boc = db_py['core_adensity_before_reproc']
+    core_eoc = db_py['core_adensity_after_reproc']
+    print(f'Checking for {iso}')
+
+    # Code snippet from Andrei's SaltProc plotter
+    for i in range(len(iso_id) - 1):
+        isotope_id = iso_id[i].decode().split(".")
+        if len(isotope_id) == 2:
+            final_id = ''.join((isotope_id[0], isotope_id[1][0]))
+            if nucname.name(final_id) == iso:
+                index_val = i
+                pre_adens_data = core_boc[1:, i]
+                post_adens_data = core_eoc[1:, i]
+        else:
+            if nucname.name(iso_id[i].decode()) == iso:
+                index_val = i
+                pre_adens_data = core_boc[1:, i]
+                post_adens_data = core_eoc[1:, i]
+    mol_mass = atomic_mass(iso)
+    db_py.close()
+    end_time = ui.SP_step_size * len(pre_adens_data)
+    time_vals = np.arange(0, end_time, ui.SP_step_size)
+    removed_mass = list()
+    avogadro = 6.022140857E23
+    print(f'Average removal per day of {iso}')
+    for each in range(len(pre_adens_data)):
+        pre_mass = pre_adens_data[each] * \
+            ui.core_vol * mol_mass * 1E24 * 1 / (avogadro)
+        post_mass = post_adens_data[each] * \
+            ui.core_vol * mol_mass * 1E24 * 1 / (avogadro)
+        mass_diff = abs(pre_mass - post_mass)
+        mass_kg_day = mass_diff / (ui.SP_step_size * 1E3)
+        removed_mass.append(mass_kg_day)
+    avg_kg_day = np.mean(removed_mass)
+    print(f'Total average: {avg_kg_day} kg/day')
+    print('Plotting average vs actual over time')
+
+    plt.plot(time_vals, removed_mass)
+    plt.xlabel('Time [d]')
+    plt.ylabel('Refill Rate [kg/day]')
+    plt.ylim(0, 3)
+    plt.savefig(f'{iso}rem_massv01.png')
+    plt.close()
+    return avg_kg_day
+
+
+def plot_total_mass_difference(db_file):
+    """
+    Iterate through every isotope in each time step
+        and generate a plot of the net mass difference each step.
+        Works for SaltProc v0.3 database files.
+
+    Parameters
+    ----------
+    db_file : str
+        Path to the database hdf5 file.
+
+    Returns
+    -------
+    None
+
+    """
+
+    db = tb.open_file(db_file, mode='r')
+    pre_fuel = db.root.materials.fuel.before_reproc.comp
+    isomap = pre_fuel.attrs.iso_map
+    sim_param = db.root.simulation_parameters
+    day_eds = [x['cumulative_time_at_eds'] for x in sim_param.iterrows()]
+    fuel_after = db.root.materials.fuel.after_reproc.comp
+    isomap = fuel_after.attrs.iso_map
+    mass_over_time = list()
+    time_list = list()
+    prev_mass = 0
+    for dts in range(len(day_eds)):
+        net_mass_cur_time = 0
+        composition_at_time_after = fuel_after[dts, :]
+        for iso in isomap:
+            net_mass_cur_time += composition_at_time_after[isomap[iso]]
+        if dts == 0:
+            mass_over_time.append(0)
+        else:
+            mass_over_time.append(net_mass_cur_time - prev_mass)
+        prev_mass = net_mass_cur_time
+    db.close()
+    plt.plot(day_eds, mass_over_time)
+    plt.xlabel('Time [d]')
+    plt.ylabel('Mass [g]')
+    plt.savefig('SaltProc_netmass.png')
+    plt.close()
+
+    return
+
+
 if __name__ == '__main__':
 
     fuel_input_path = './ss-data-test/mat_prepr_comp_geo_1_boc.ini'
-    hdf5_input_path = './ss-data-test/6000_day_SS_data'
+    hdf5_input_path = './saltproc-data/saltproc-msbr-v01.hdf5'
 
     db_file = hdf5_input_path
     new_mat_file = fuel_input_path
+
+    iso_removal_rate_v01(db_file, 'Pa233')
+
+    iso_removal_rate_v01(db_file, 'Th232')
+    input()
+
+    iso_removal_rate(db_file, iso="Th232")
+
+    plot_total_mass_difference(db_file)
 
     time_after_startup = float(input('Time after startup [d]:'))
 

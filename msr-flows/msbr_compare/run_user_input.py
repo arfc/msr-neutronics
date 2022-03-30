@@ -261,6 +261,7 @@ class full_run_serp:
         """
 
         reprocessing_dict = self.linear_generation_reprocessing_constants(
+            identifier=identifier,
             LGA_step_size=LGA_step_size,
             isos_dict=iso_dict,
             num_SP=num_SP)
@@ -306,9 +307,9 @@ class full_run_serp:
         None
 
         """
-        cycle_time_decay_build = serpent_calculations.cycle_time_decay(
+        cycle_time_decay_build = serpent_calculations.cycle_time_model(
             self.element_flow_list)
-        reprocessing_dict = cycle_time_decay_build.repr_cnst_calc()
+        reprocessing_dict = cycle_time_decay_build.cycle_time_decay()
         read_file = False
         read_time = 0
         for each_step in range(self.N):
@@ -338,24 +339,191 @@ class full_run_serp:
 
         return
 
+    def cycle_rate(self, identifier='CR'):
+        """
+        Run cycle rate approximation
+
+        Parameters
+        ----------
+        identifier : str (optional)
+            Used to generate the file name.
+
+        Returns
+        -------
+        None
+
+        """
+        cycle_rate_build = serpent_calculations.cycle_time_model(
+            self.element_flow_list)
+        reprocessing_dict = cycle_rate_build.cycle_rate()
+        read_file = False
+        read_time = 0
+        for each_step in range(self.N):
+            write_file = self.output_path + \
+                identifier + str(each_step) + '.wrk'
+            deck_name = self.output_path + identifier + str(each_step)
+            current_actual_time = self.step_size * each_step + self.start_day
+            current_serpent_time = current_actual_time - self.start_day
+            read_time = current_serpent_time
+            cur_deck_maker = serpent_input.create_deck(
+                reprocessing_dict,
+                read_file,
+                read_time,
+                write_file,
+                self.base_mat_file,
+                self.template_name,
+                self.template_path,
+                self.step_size,
+                self.inv_list,
+                identifier,
+                deck_name)
+            deck = cur_deck_maker.build_serpent_deck()
+            run = serpent_input.run_deck(deck_name, deck, write_file)
+            run.run_script()
+            read_file = write_file
+            read_time = current_serpent_time
+
+        return
+
+    def SP_cycle_rate(self, identifier='SPCR'):
+        """
+        Run SaltProc cycle rate approximation
+
+        Parameters
+        ----------
+        identifier : str (optional)
+            Used to generate the file name.
+
+        Returns
+        -------
+        None
+
+        """
+        SP_cycle_rate_build = serpent_calculations.cycle_time_model(
+            self.element_flow_list)
+        reprocessing_dict = SP_cycle_rate_build.SP_cycle_rate()
+        read_file = False
+        read_time = 0
+        for each_step in range(self.N):
+            write_file = self.output_path + \
+                identifier + str(each_step) + '.wrk'
+            deck_name = self.output_path + identifier + str(each_step)
+            current_actual_time = self.step_size * each_step + self.start_day
+            current_serpent_time = current_actual_time - self.start_day
+            read_time = current_serpent_time
+            cur_deck_maker = serpent_input.create_deck(
+                reprocessing_dict,
+                read_file,
+                read_time,
+                write_file,
+                self.base_mat_file,
+                self.template_name,
+                self.template_path,
+                self.step_size,
+                self.inv_list,
+                identifier,
+                deck_name)
+            deck = cur_deck_maker.build_serpent_deck()
+            run = serpent_input.run_deck(deck_name, deck, write_file)
+            run.run_script()
+            read_file = write_file
+            read_time = current_serpent_time
+
+        return
+
+    def build_and_run(self, identifier):
+        """
+        Creates run, checks for errors,
+            and times the process.
+
+        Parameters
+        ----------
+        identifier : str
+            Name of the run type to execute
+
+        Returns
+        -------
+        None
+
+        Raises
+        ------
+        Current identifier not recognized
+            Occurs if function is provided identifier which is not in
+                user_input active identifier list.
+
+        """
+
+        start_timer_count = time.time()
+        if identifier not in ui.active_identifiers:
+            raise Exception('Current identifier not recognized')
+        print(f'Running {identifier}')
+        try:
+            self.id_run(identifier)
+        except Exception as e:
+            print(e)
+            print(f'{identifier} failed, removing from active identifiers.')
+            ui.active_identifiers.remove(identifier)
+        end_timer_count = time.time()
+        print(f'Ran {identifier}, took {end_timer_count - start_timer_count}s')
+        return
+
+    def id_run(self, identifier):
+        """
+        Takes the identifier and builds the run based on default identifier
+            options. Compares current identifier against defined terms in
+            user_input.
+
+        Parameters
+        ----------
+        identifier : str
+            Name of the run type to execute
+
+        Returns
+        -------
+        None
+
+        Raises
+        ------
+        Identifier run fail
+            Occurs if the identifier does not match any in user_input but still
+                called this function.
+        """
+        if identifier is ui.CTRL_identifier:
+            self.control_run(identifier)
+        elif identifier is ui.LIA_identifier:
+            self.linear_generation(
+                identifier=identifier,
+                LGA_step_size=ui.LGA_step_size,
+                iso_dict=ui.important_isotopes,
+                num_SP=ui.linear_SP_count)
+        elif identifier is ui.LGA_identifier:
+            self.linear_generation(
+                identifier=identifier,
+                LGA_step_size=ui.LGA_step_size,
+                num_SP=ui.linear_SP_count)
+        elif identifier is ui.CTD_identifier:
+            self.cycle_time_decay(identifier)
+        elif identifier is ui.CR_identifier:
+            self.cycle_rate(identifier)
+        elif identifier is ui.SPCR_identifier:
+            self.SP_cycle_rate(identifier)
+        else:
+            raise Exception('Identifier run fail')
+
+        return
+
 
 if __name__ == '__main__':
 
-    output_path = f'./{ui.path_to_dump_files}/'
-    misc_funcs.set_directory(output_path)
-    close_boolean = False
-    element_dictionary = dict()
+    base_output_path = f'./{ui.path_to_dump_files}/'
+    misc_funcs.set_directory(base_output_path)
 
-    for index in range(len(ui.element_flow_list)):
-        element_dictionary[ui.element_flow_list[index]] = [
-            ui.associated_symbol_list[index], ui.associated_atomic_list[index]]
-
-    if ui.control:
-        start_timer_count = time.time()
-        print('Running Control')
-        CTRL_identifier = 'CTRL'
+    for N_index, N_steps in enumerate(ui.number_serp_steps_list):
+        output_path = str(base_output_path) + f'{N_steps}/'
+        misc_funcs.set_directory(output_path)
+        print(f'Step size: {(ui.end_time - ui.start_time) / N_steps}')
         builder = full_run_serp(
-            ui.number_serp_steps,
+            N_steps,
             ui.base_material_path,
             ui.template_path,
             ui.template_name,
@@ -364,136 +532,38 @@ if __name__ == '__main__':
             ui.list_inventory,
             ui.element_flow_list,
             output_path)
-        builder.control_run(identifier=CTRL_identifier)
-        end_timer_count = time.time()
-        print(f'Ran Control, took {end_timer_count - start_timer_count}s')
+        for each_id in ui.active_identifiers:
+            builder.build_and_run(each_id)
 
-    if ui.linear_isotope:
-        start_timer_count = time.time()
-        print('Running LIA')
-        LIA_identifier = 'LIA'
-        builder = full_run_serp(
-            ui.number_serp_steps,
-            ui.base_material_path,
-            ui.template_path,
-            ui.template_name,
-            ui.start_time,
-            ui.end_time,
-            ui.list_inventory,
-            ui.element_flow_list,
-            output_path)
-        builder.linear_generation(
-            identifier=LIA_identifier,
-            LGA_step_size=ui.LGA_step_size,
-            iso_dict=ui.important_isotopes,
-            num_SP=ui.linear_SP_count)
-        end_timer_count = time.time()
-        print(f'Ran LIA, took {end_timer_count - start_timer_count}s')
+        # Plotting
+        identifier = 'none'
+        target = 'none'
+        N_steps = 0
+        plotter = serpent_plotting.plotting_tools(
+            output_path,
+            identifier,
+            target,
+            N_steps)
+        if ui.model_plotting:
+            print('Plotting different models together')
+            plotter.multi_model_plot()
 
-    if ui.separate_core_piping:
-        print('Not yet available')
+        if ui.tot_mass_plotting:
+            print('Plotting net mass over time')
+            plotter.net_mass_plot()
 
-    if ui.linear_generation:
-        start_timer_count = time.time()
-        print('Running LGA')
-        LGA_identifier = 'LGA'
-        builder = full_run_serp(
-            ui.number_serp_steps,
-            ui.base_material_path,
-            ui.template_path,
-            ui.template_name,
-            ui.start_time,
-            ui.end_time,
-            ui.list_inventory,
-            ui.element_flow_list,
-            output_path)
-        builder.linear_generation(
-            identifier=LGA_identifier,
-            LGA_step_size=ui.LGA_step_size,
-            num_SP=ui.linear_SP_count)
-        end_timer_count = time.time()
-        print(f'Ran LGA, took {end_timer_count - start_timer_count}s')
+        if ui.cumulative_keff_plotting:
+            print('Plotting different models keff together')
+            plotter.multi_keff_plot()
 
-    if ui.cycle_time_decay:
-        start_timer_count = time.time()
-        print('Running CTD')
-        CTD_identifier = 'CTD'
-        builder = full_run_serp(
-            ui.number_serp_steps,
-            ui.base_material_path,
-            ui.template_path,
-            ui.template_name,
-            ui.start_time,
-            ui.end_time,
-            ui.list_inventory,
-            ui.element_flow_list,
-            output_path)
-        builder.cycle_time_decay(identifier=CTD_identifier)
-        end_timer_count = time.time()
-        print(f'Ran CTD, took {end_timer_count - start_timer_count}s')
+        if ui.compare_plotting:
+            print('Plotting each model compared to SaltProc')
+            plotter.separated_plot()
 
-    if ui.plotting:
-        print('Overall plotting')
-        SP_eval_times = np.arange(
-            ui.SP_start, ui.SP_end + ui.SP_step_size, ui.SP_step_size)
-        for target in ui.total_view_list:
+    if ui.N_plotting:
+        print('Plotting each model compared to different step sizes')
+        plotter.N_mass_plot()
 
-            if ui.saltproc:
-                SP_identifier = 'SP'
-                SP_plt = serpent_output.saltproc_data(
-                    ui.base_material_path, element_dictionary,
-                    target, SP_eval_times)
-                SP_mass = SP_plt.SP_target_reader()
-                plt.plot(
-                    SP_eval_times,
-                    SP_mass,
-                    label=SP_identifier,
-                    alpha=ui.overlap,
-                    lw=ui.width)
-
-            if ui.cycle_time_decay:
-                CTD_time, CTD_mass = serpent_plotting.plotting_tools(
-                    output_path, CTD_identifier, target).plt_gen_mass_time()
-                plt.plot(
-                    CTD_time,
-                    CTD_mass,
-                    label=CTD_identifier,
-                    alpha=ui.overlap,
-                    lw=ui.width)
-
-            if ui.control:
-                CTRL_time, CTRL_mass = serpent_plotting.plotting_tools(
-                    output_path, CTRL_identifier, target).plt_gen_mass_time()
-                plt.plot(
-                    CTRL_time,
-                    CTRL_mass,
-                    label=CTRL_identifier,
-                    alpha=ui.overlap,
-                    lw=ui.width)
-
-            if ui.linear_isotope:
-                LIA_time, LIA_mass = serpent_plotting.plotting_tools(
-                    output_path, LIA_identifier, target).plt_gen_mass_time()
-                plt.plot(
-                    LIA_time,
-                    LIA_mass,
-                    label=LIA_identifier,
-                    alpha=ui.overlap,
-                    lw=ui.width)
-
-            if ui.linear_generation:
-                LGA_time, LGA_mass = serpent_plotting.plotting_tools(
-                    output_path, LGA_identifier, target).plt_gen_mass_time()
-                plt.plot(
-                    LGA_time,
-                    LGA_mass,
-                    label=LGA_identifier,
-                    alpha=ui.overlap,
-                    lw=ui.width)
-
-            plt.xlabel('Time [d]')
-            plt.ylabel('Mass [g]')
-            plt.legend()
-            plt.tight_layout()
-            plt.savefig(f'{output_path}cumulative_{target}_mass.png')
-            plt.close()
+    if ui.N_keff_plotting:
+        print('Plotting each model keff compared to different step sizes')
+        plotter.N_keff_plot()

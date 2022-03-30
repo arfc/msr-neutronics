@@ -1,6 +1,7 @@
 import os
 from saltproc_read import evaluate
 import time
+import numpy as np
 
 
 def list_to_print(options):
@@ -97,3 +98,10 @@ def SP_data_initializer(time_list, hdf5_path, fuel_path):
         evaluate(day, hdf5_path, fuel)
         time.sleep(delay)
     return
+
+
+if __name__ == '__main__':
+    times = np.arange(3, (7002 + 3), 3)
+    hdf5_path = './ss-data-test/db_saltproc_20y.hdf5'
+    fuel_path = './ss-data-test/ss-fuel'
+    SP_data_initializer(times, hdf5_path, fuel_path)

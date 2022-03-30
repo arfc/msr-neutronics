@@ -1,5 +1,5 @@
 import misc_funcs
-import user_input
+import user_input as ui
 from jinja2 import Environment, FileSystemLoader
 import os
 from os import path
@@ -182,6 +182,14 @@ set rfw 1 "{write}"
         mflow_defs = ''
 
         if reprocessing_dictionary:
+            th_feed_g_s = ui.thorium_232_feed_kg_day * 1000 / 24 / 3600
+            th_repr = th_feed_g_s / (ui.feed_mdens * ui.feed_vol)
+            if ui.realistic_Pa_decay_u233_model:
+                u_repr = 9999
+            else:
+                u_feed_g_s = ui.uranium_233_feed_kg_day * 1000 / 24 / 3600
+                u_repr = u_feed_g_s / (ui.feed_mdens * ui.feed_vol)
+
             mflow_defs += f"""
 mflow entrainment_pump
 Kr      {reprocessing_dictionary['krypton']}
@@ -220,6 +228,15 @@ Sr      {reprocessing_dictionary['strontium']}
 Cs      {reprocessing_dictionary['cesium']}
 Ba      {reprocessing_dictionary['barium']}
 
+% Feed flows
+
+mflow feed_pump
+%all         {th_repr}
+Th-232      {th_repr}
+
+mflow uranium_pump
+%all        {u_repr}
+U-233      {u_repr}
 """
 
         return mflow_defs
@@ -251,7 +268,15 @@ Ba      {reprocessing_dictionary['barium']}
 rc fuel waste_entrainment_separator entrainment_pump 1
 rc fuel waste_nickel_filter nickel_pump 1
 rc fuel waste_liquid_metal waste_metal_pump 1
-rc feedsalt fuel feed_pump 2
+rc thorium_feed fuel feed_pump 1
+"""
+            if ui.realistic_Pa_decay_u233_model:
+                flow_setup += """
+rc waste_liquid_metal fuel uranium_pump 1
+"""
+            else:
+                flow_setup += """
+rc thorium_feed fuel uranium_pump 1
 """
         else:
             pass
@@ -334,8 +359,9 @@ class run_deck:
 
         Raises
         ------
-        Error, view ``self.out``
-            Occurs if the output does not update within 20 seconds.
+        No binary burnup restart file present
+            Occurs if the .wrk file does not update within 5 seconds after
+            being generated.
 
         """
         wrk_name = self.write
@@ -348,8 +374,9 @@ class run_deck:
             if cur_out_len != out_len:
                 out_len = cur_out_len
             else:
-                raise Exception(f'Error, view ' +
-                                str(self.out) + ' or previous.')
+                print(f'Error, view ' +
+                      str(self.out) + ' or previous.')
+                raise Exception('No binary burnup restart file present')
         return
 
 
