@@ -1,4 +1,4 @@
-# anl-msr-safeguards-23
+# OpenMC MSR Models
 
 ## Running a model
 These scripts have been built and tested using OpenMC version 0.13.4, Git Sha1: 1cb22075efdb90570f233a3d26151f7b763f8529.
