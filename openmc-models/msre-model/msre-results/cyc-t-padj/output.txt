@@ -1,0 +1,3362 @@
+                                %%%%%%%%%%%%%%%
+                           %%%%%%%%%%%%%%%%%%%%%%%%
+                        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                    %%%%%%%%%%%%%%%%%%%%%%%%
+                                     %%%%%%%%%%%%%%%%%%%%%%%%
+                 ###############      %%%%%%%%%%%%%%%%%%%%%%%%
+                ##################     %%%%%%%%%%%%%%%%%%%%%%%
+                ###################     %%%%%%%%%%%%%%%%%%%%%%%
+                ####################     %%%%%%%%%%%%%%%%%%%%%%
+                #####################     %%%%%%%%%%%%%%%%%%%%%
+                ######################     %%%%%%%%%%%%%%%%%%%%
+                #######################     %%%%%%%%%%%%%%%%%%
+                 #######################     %%%%%%%%%%%%%%%%%
+                 ######################     %%%%%%%%%%%%%%%%%
+                  ####################     %%%%%%%%%%%%%%%%%
+                    #################     %%%%%%%%%%%%%%%%%
+                     ###############     %%%%%%%%%%%%%%%%
+                       ############     %%%%%%%%%%%%%%%
+                          ########     %%%%%%%%%%%%%%
+                                      %%%%%%%%%%%
+
+                 | The OpenMC Monte Carlo Code
+       Copyright | 2011-2023 MIT, UChicago Argonne LLC, and contributors
+         License | https://docs.openmc.org/en/latest/license.html
+         Version | 0.13.4-dev
+        Git SHA1 | 5659564a5dbe8c3069c24c3aa95c8f41deb59ce9
+       Date/Time | 2023-08-08 12:17:39
+   MPI Processes | 1
+  OpenMP Threads | 80
+
+ Reading settings XML file...
+ Reading cross sections XML file...
+ Reading materials XML file...
+ Reading geometry XML file...
+ Reading B10 from /software/openmc/data/v0.13.3/endfb71/B10.h5
+ Reading B10 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/005010.h5
+ Reading B11 from /software/openmc/data/v0.13.3/endfb71/B11.h5
+ Reading B11 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/005011.h5
+ Reading O16 from /software/openmc/data/v0.13.3/endfb71/O16.h5
+ Reading O16 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/008016.h5
+ Reading O17 from /software/openmc/data/v0.13.3/endfb71/O17.h5
+ Reading O17 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/008017.h5
+ Reading Mg24 from /software/openmc/data/v0.13.3/endfb71/Mg24.h5
+ Reading Mg24 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/012024.h5
+ Reading Mg25 from /software/openmc/data/v0.13.3/endfb71/Mg25.h5
+ Reading Mg25 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/012025.h5
+ Reading Mg26 from /software/openmc/data/v0.13.3/endfb71/Mg26.h5
+ Reading Mg26 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/012026.h5
+ Reading Al27 from /software/openmc/data/v0.13.3/endfb71/Al27.h5
+ Reading Al27 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/013027.h5
+ Reading Si28 from /software/openmc/data/v0.13.3/endfb71/Si28.h5
+ Reading Si28 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/014028.h5
+ Reading Si29 from /software/openmc/data/v0.13.3/endfb71/Si29.h5
+ Reading Si29 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/014029.h5
+ Reading Si30 from /software/openmc/data/v0.13.3/endfb71/Si30.h5
+ Reading Si30 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/014030.h5
+ Reading S32 from /software/openmc/data/v0.13.3/endfb71/S32.h5
+ Reading S32 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/016032.h5
+ Reading S33 from /software/openmc/data/v0.13.3/endfb71/S33.h5
+ Reading S33 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/016033.h5
+ Reading S34 from /software/openmc/data/v0.13.3/endfb71/S34.h5
+ Reading S34 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/016034.h5
+ Reading S36 from /software/openmc/data/v0.13.3/endfb71/S36.h5
+ Reading S36 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/016036.h5
+ Reading Ca40 from /software/openmc/data/v0.13.3/endfb71/Ca40.h5
+ Reading Ca40 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/020040.h5
+ Reading Ca42 from /software/openmc/data/v0.13.3/endfb71/Ca42.h5
+ Reading Ca42 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/020042.h5
+ Reading Ca43 from /software/openmc/data/v0.13.3/endfb71/Ca43.h5
+ Reading Ca43 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/020043.h5
+ Reading Ca44 from /software/openmc/data/v0.13.3/endfb71/Ca44.h5
+ Reading Ca44 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/020044.h5
+ Reading Ca48 from /software/openmc/data/v0.13.3/endfb71/Ca48.h5
+ Reading Ca48 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/020048.h5
+ Reading Ti46 from /software/openmc/data/v0.13.3/endfb71/Ti46.h5
+ Reading Ti46 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/022046.h5
+ Reading Ti47 from /software/openmc/data/v0.13.3/endfb71/Ti47.h5
+ Reading Ti47 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/022047.h5
+ Reading Ti48 from /software/openmc/data/v0.13.3/endfb71/Ti48.h5
+ Reading Ti48 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/022048.h5
+ Reading Ti49 from /software/openmc/data/v0.13.3/endfb71/Ti49.h5
+ Reading Ti49 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/022049.h5
+ Reading Ti50 from /software/openmc/data/v0.13.3/endfb71/Ti50.h5
+ Reading Ti50 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/022050.h5
+ Reading V50 from /software/openmc/data/v0.13.3/endfb71/V50.h5
+ Reading V50 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/023050.h5
+ Reading V51 from /software/openmc/data/v0.13.3/endfb71/V51.h5
+ Reading V51 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/023051.h5
+ Reading Fe54 from /software/openmc/data/v0.13.3/endfb71/Fe54.h5
+ Reading Fe54 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/026054.h5
+ Reading Fe56 from /software/openmc/data/v0.13.3/endfb71/Fe56.h5
+ Reading Fe56 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/026056.h5
+ Reading Fe57 from /software/openmc/data/v0.13.3/endfb71/Fe57.h5
+ Reading Fe57 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/026057.h5
+ Reading Fe58 from /software/openmc/data/v0.13.3/endfb71/Fe58.h5
+ Reading Fe58 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/026058.h5
+ Reading C0 from /software/openmc/data/v0.13.3/endfb71/C0.h5
+ Reading C0 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/006000.h5
+ Reading Li6 from /software/openmc/data/v0.13.3/endfb71/Li6.h5
+ Reading Li6 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/003006.h5
+ Reading Li7 from /software/openmc/data/v0.13.3/endfb71/Li7.h5
+ Reading Li7 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/003007.h5
+ Reading Be9 from /software/openmc/data/v0.13.3/endfb71/Be9.h5
+ Reading Be9 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/004009.h5
+ Reading F19 from /software/openmc/data/v0.13.3/endfb71/F19.h5
+ Reading F19 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/009019.h5
+ Reading Cr50 from /software/openmc/data/v0.13.3/endfb71/Cr50.h5
+ Reading Cr50 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/024050.h5
+ Reading Cr52 from /software/openmc/data/v0.13.3/endfb71/Cr52.h5
+ Reading Cr52 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/024052.h5
+ Reading Cr53 from /software/openmc/data/v0.13.3/endfb71/Cr53.h5
+ Reading Cr53 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/024053.h5
+ Reading Cr54 from /software/openmc/data/v0.13.3/endfb71/Cr54.h5
+ Reading Cr54 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/024054.h5
+ Reading Ni58 from /software/openmc/data/v0.13.3/endfb71/Ni58.h5
+ Reading Ni58 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/028058.h5
+ Reading Ni60 from /software/openmc/data/v0.13.3/endfb71/Ni60.h5
+ Reading Ni60 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/028060.h5
+ Reading Ni61 from /software/openmc/data/v0.13.3/endfb71/Ni61.h5
+ Reading Ni61 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/028061.h5
+ Reading Ni62 from /software/openmc/data/v0.13.3/endfb71/Ni62.h5
+ Reading Ni62 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/028062.h5
+ Reading Ni64 from /software/openmc/data/v0.13.3/endfb71/Ni64.h5
+ Reading Ni64 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/028064.h5
+ Reading Zr90 from /software/openmc/data/v0.13.3/endfb71/Zr90.h5
+ Reading Zr90 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/040090.h5
+ Reading Zr91 from /software/openmc/data/v0.13.3/endfb71/Zr91.h5
+ Reading Zr91 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/040091.h5
+ Reading Zr92 from /software/openmc/data/v0.13.3/endfb71/Zr92.h5
+ Reading Zr92 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/040092.h5
+ Reading Zr94 from /software/openmc/data/v0.13.3/endfb71/Zr94.h5
+ Reading Zr94 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/040094.h5
+ Reading Zr96 from /software/openmc/data/v0.13.3/endfb71/Zr96.h5
+ Reading Zr96 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/040096.h5
+ Reading Hf174 from /software/openmc/data/v0.13.3/endfb71/Hf174.h5
+ Reading Hf174 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/072174.h5
+ Reading Hf176 from /software/openmc/data/v0.13.3/endfb71/Hf176.h5
+ Reading Hf176 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/072176.h5
+ Reading Hf177 from /software/openmc/data/v0.13.3/endfb71/Hf177.h5
+ Reading Hf177 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/072177.h5
+ Reading Hf178 from /software/openmc/data/v0.13.3/endfb71/Hf178.h5
+ Reading Hf178 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/072178.h5
+ Reading Hf179 from /software/openmc/data/v0.13.3/endfb71/Hf179.h5
+ Reading Hf179 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/072179.h5
+ Reading Hf180 from /software/openmc/data/v0.13.3/endfb71/Hf180.h5
+ Reading Hf180 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/072180.h5
+ Reading U234 from /software/openmc/data/v0.13.3/endfb71/U234.h5
+ Reading U234 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/092234.h5
+ Reading U235 from /software/openmc/data/v0.13.3/endfb71/U235.h5
+ Reading U235 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/092235.h5
+ Reading U236 from /software/openmc/data/v0.13.3/endfb71/U236.h5
+ Reading U236 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/092236.h5
+ Reading U238 from /software/openmc/data/v0.13.3/endfb71/U238.h5
+ Reading U238 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/092238.h5
+ Reading Pb208 from /software/openmc/data/v0.13.3/endfb71/Pb208.h5
+ Reading Pb208 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/082208.h5
+ Reading c_Graphite from /software/openmc/data/v0.13.3/endfb71/c_Graphite.h5
+ Minimum neutron data temperature: 900 K
+ Maximum neutron data temperature: 1200 K
+ Reading tallies XML file...
+ Preparing distributed cell instances...
+ Reading plot XML file...
+ Writing summary.h5 file...
+ Reading H1 from /software/openmc/data/v0.13.3/endfb71/H1.h5
+ Reading H1 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/001001.h5
+ Reading H2 from /software/openmc/data/v0.13.3/endfb71/H2.h5
+ Reading H2 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/001002.h5
+ Reading H3 from /software/openmc/data/v0.13.3/endfb71/H3.h5
+ Reading H3 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/001003.h5
+ Reading He3 from /software/openmc/data/v0.13.3/endfb71/He3.h5
+ Reading He3 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/002003.h5
+ Reading He4 from /software/openmc/data/v0.13.3/endfb71/He4.h5
+ Reading He4 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/002004.h5
+ Reading N14 from /software/openmc/data/v0.13.3/endfb71/N14.h5
+ Reading N14 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/007014.h5
+ Reading N15 from /software/openmc/data/v0.13.3/endfb71/N15.h5
+ Reading N15 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/007015.h5
+ Reading Na22 from /software/openmc/data/v0.13.3/endfb71/Na22.h5
+ Reading Na22 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/011022.h5
+ Reading Na23 from /software/openmc/data/v0.13.3/endfb71/Na23.h5
+ Reading Na23 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/011023.h5
+ Reading P31 from /software/openmc/data/v0.13.3/endfb71/P31.h5
+ Reading P31 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/015031.h5
+ Reading Cl35 from /software/openmc/data/v0.13.3/endfb71/Cl35.h5
+ Reading Cl35 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/017035.h5
+ Reading Cl37 from /software/openmc/data/v0.13.3/endfb71/Cl37.h5
+ Reading Cl37 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/017037.h5
+ Reading Ar36 from /software/openmc/data/v0.13.3/endfb71/Ar36.h5
+ Reading Ar36 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/018036.h5
+ Reading Ar38 from /software/openmc/data/v0.13.3/endfb71/Ar38.h5
+ Reading Ar38 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/018038.h5
+ Reading Ar40 from /software/openmc/data/v0.13.3/endfb71/Ar40.h5
+ Reading Ar40 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/018040.h5
+ Reading K39 from /software/openmc/data/v0.13.3/endfb71/K39.h5
+ Reading K39 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/019039.h5
+ Reading K40 from /software/openmc/data/v0.13.3/endfb71/K40.h5
+ Reading K40 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/019040.h5
+ Reading K41 from /software/openmc/data/v0.13.3/endfb71/K41.h5
+ Reading K41 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/019041.h5
+ Reading Ca46 from /software/openmc/data/v0.13.3/endfb71/Ca46.h5
+ Reading Ca46 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/020046.h5
+ Reading Sc45 from /software/openmc/data/v0.13.3/endfb71/Sc45.h5
+ Reading Sc45 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/021045.h5
+ Reading Mn55 from /software/openmc/data/v0.13.3/endfb71/Mn55.h5
+ Reading Mn55 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/025055.h5
+ Reading Co58 from /software/openmc/data/v0.13.3/endfb71/Co58.h5
+ Reading Co58 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/027058.h5
+ Reading Co58_m1 from /software/openmc/data/v0.13.3/endfb71/Co58_m1.h5
+ Reading Co58_m1 WMP data from
+ /software/openmc/data/v0.13.3/endfb71/wmp/027058m1.h5
+ Reading Co59 from /software/openmc/data/v0.13.3/endfb71/Co59.h5
+ Reading Co59 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/027059.h5
+ Reading Ni59 from /software/openmc/data/v0.13.3/endfb71/Ni59.h5
+ Reading Ni59 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/028059.h5
+ Reading Cu63 from /software/openmc/data/v0.13.3/endfb71/Cu63.h5
+ Reading Cu63 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/029063.h5
+ Reading Cu65 from /software/openmc/data/v0.13.3/endfb71/Cu65.h5
+ Reading Cu65 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/029065.h5
+ Reading Zn64 from /software/openmc/data/v0.13.3/endfb71/Zn64.h5
+ Reading Zn64 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/030064.h5
+ Reading Zn65 from /software/openmc/data/v0.13.3/endfb71/Zn65.h5
+ Reading Zn65 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/030065.h5
+ Reading Zn66 from /software/openmc/data/v0.13.3/endfb71/Zn66.h5
+ Reading Zn66 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/030066.h5
+ Reading Zn67 from /software/openmc/data/v0.13.3/endfb71/Zn67.h5
+ Reading Zn67 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/030067.h5
+ Reading Zn68 from /software/openmc/data/v0.13.3/endfb71/Zn68.h5
+ Reading Zn68 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/030068.h5
+ Reading Zn70 from /software/openmc/data/v0.13.3/endfb71/Zn70.h5
+ Reading Zn70 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/030070.h5
+ Reading Ga69 from /software/openmc/data/v0.13.3/endfb71/Ga69.h5
+ Reading Ga69 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/031069.h5
+ Reading Ga71 from /software/openmc/data/v0.13.3/endfb71/Ga71.h5
+ Reading Ga71 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/031071.h5
+ Reading Ge70 from /software/openmc/data/v0.13.3/endfb71/Ge70.h5
+ Reading Ge70 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/032070.h5
+ Reading Ge72 from /software/openmc/data/v0.13.3/endfb71/Ge72.h5
+ Reading Ge72 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/032072.h5
+ Reading Ge73 from /software/openmc/data/v0.13.3/endfb71/Ge73.h5
+ Reading Ge73 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/032073.h5
+ Reading Ge74 from /software/openmc/data/v0.13.3/endfb71/Ge74.h5
+ Reading Ge74 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/032074.h5
+ Reading Ge76 from /software/openmc/data/v0.13.3/endfb71/Ge76.h5
+ Reading Ge76 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/032076.h5
+ Reading As74 from /software/openmc/data/v0.13.3/endfb71/As74.h5
+ Reading As74 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/033074.h5
+ Reading As75 from /software/openmc/data/v0.13.3/endfb71/As75.h5
+ Reading As75 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/033075.h5
+ Reading Se74 from /software/openmc/data/v0.13.3/endfb71/Se74.h5
+ Reading Se74 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/034074.h5
+ Reading Se76 from /software/openmc/data/v0.13.3/endfb71/Se76.h5
+ Reading Se76 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/034076.h5
+ Reading Se77 from /software/openmc/data/v0.13.3/endfb71/Se77.h5
+ Reading Se77 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/034077.h5
+ Reading Se78 from /software/openmc/data/v0.13.3/endfb71/Se78.h5
+ Reading Se78 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/034078.h5
+ Reading Se79 from /software/openmc/data/v0.13.3/endfb71/Se79.h5
+ Reading Se79 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/034079.h5
+ Reading Se80 from /software/openmc/data/v0.13.3/endfb71/Se80.h5
+ Reading Se80 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/034080.h5
+ Reading Se82 from /software/openmc/data/v0.13.3/endfb71/Se82.h5
+ Reading Se82 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/034082.h5
+ Reading Br79 from /software/openmc/data/v0.13.3/endfb71/Br79.h5
+ Reading Br79 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/035079.h5
+ Reading Br81 from /software/openmc/data/v0.13.3/endfb71/Br81.h5
+ Reading Br81 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/035081.h5
+ Reading Kr78 from /software/openmc/data/v0.13.3/endfb71/Kr78.h5
+ Reading Kr78 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/036078.h5
+ Reading Kr80 from /software/openmc/data/v0.13.3/endfb71/Kr80.h5
+ Reading Kr80 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/036080.h5
+ Reading Kr82 from /software/openmc/data/v0.13.3/endfb71/Kr82.h5
+ Reading Kr82 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/036082.h5
+ Reading Kr83 from /software/openmc/data/v0.13.3/endfb71/Kr83.h5
+ Reading Kr83 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/036083.h5
+ Reading Kr84 from /software/openmc/data/v0.13.3/endfb71/Kr84.h5
+ Reading Kr84 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/036084.h5
+ Reading Kr85 from /software/openmc/data/v0.13.3/endfb71/Kr85.h5
+ Reading Kr85 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/036085.h5
+ Reading Kr86 from /software/openmc/data/v0.13.3/endfb71/Kr86.h5
+ Reading Kr86 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/036086.h5
+ Reading Rb85 from /software/openmc/data/v0.13.3/endfb71/Rb85.h5
+ Reading Rb85 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/037085.h5
+ Reading Rb86 from /software/openmc/data/v0.13.3/endfb71/Rb86.h5
+ Reading Rb86 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/037086.h5
+ Reading Rb87 from /software/openmc/data/v0.13.3/endfb71/Rb87.h5
+ Reading Rb87 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/037087.h5
+ Reading Sr84 from /software/openmc/data/v0.13.3/endfb71/Sr84.h5
+ Reading Sr84 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/038084.h5
+ Reading Sr86 from /software/openmc/data/v0.13.3/endfb71/Sr86.h5
+ Reading Sr86 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/038086.h5
+ Reading Sr87 from /software/openmc/data/v0.13.3/endfb71/Sr87.h5
+ Reading Sr87 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/038087.h5
+ Reading Sr88 from /software/openmc/data/v0.13.3/endfb71/Sr88.h5
+ Reading Sr88 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/038088.h5
+ Reading Sr89 from /software/openmc/data/v0.13.3/endfb71/Sr89.h5
+ Reading Sr89 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/038089.h5
+ Reading Sr90 from /software/openmc/data/v0.13.3/endfb71/Sr90.h5
+ Reading Sr90 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/038090.h5
+ Reading Y89 from /software/openmc/data/v0.13.3/endfb71/Y89.h5
+ Reading Y89 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/039089.h5
+ Reading Y90 from /software/openmc/data/v0.13.3/endfb71/Y90.h5
+ Reading Y90 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/039090.h5
+ Reading Y91 from /software/openmc/data/v0.13.3/endfb71/Y91.h5
+ Reading Y91 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/039091.h5
+ Reading Zr93 from /software/openmc/data/v0.13.3/endfb71/Zr93.h5
+ Reading Zr93 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/040093.h5
+ Reading Zr95 from /software/openmc/data/v0.13.3/endfb71/Zr95.h5
+ Reading Zr95 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/040095.h5
+ Reading Nb93 from /software/openmc/data/v0.13.3/endfb71/Nb93.h5
+ Reading Nb93 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/041093.h5
+ Reading Nb94 from /software/openmc/data/v0.13.3/endfb71/Nb94.h5
+ Reading Nb94 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/041094.h5
+ Reading Nb95 from /software/openmc/data/v0.13.3/endfb71/Nb95.h5
+ Reading Nb95 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/041095.h5
+ Reading Mo92 from /software/openmc/data/v0.13.3/endfb71/Mo92.h5
+ Reading Mo92 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/042092.h5
+ Reading Mo94 from /software/openmc/data/v0.13.3/endfb71/Mo94.h5
+ Reading Mo94 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/042094.h5
+ Reading Mo95 from /software/openmc/data/v0.13.3/endfb71/Mo95.h5
+ Reading Mo95 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/042095.h5
+ Reading Mo96 from /software/openmc/data/v0.13.3/endfb71/Mo96.h5
+ Reading Mo96 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/042096.h5
+ Reading Mo97 from /software/openmc/data/v0.13.3/endfb71/Mo97.h5
+ Reading Mo97 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/042097.h5
+ Reading Mo98 from /software/openmc/data/v0.13.3/endfb71/Mo98.h5
+ Reading Mo98 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/042098.h5
+ Reading Mo99 from /software/openmc/data/v0.13.3/endfb71/Mo99.h5
+ Reading Mo99 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/042099.h5
+ Reading Mo100 from /software/openmc/data/v0.13.3/endfb71/Mo100.h5
+ Reading Mo100 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/042100.h5
+ Reading Tc99 from /software/openmc/data/v0.13.3/endfb71/Tc99.h5
+ Reading Tc99 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/043099.h5
+ Reading Ru96 from /software/openmc/data/v0.13.3/endfb71/Ru96.h5
+ Reading Ru96 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/044096.h5
+ Reading Ru98 from /software/openmc/data/v0.13.3/endfb71/Ru98.h5
+ Reading Ru98 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/044098.h5
+ Reading Ru99 from /software/openmc/data/v0.13.3/endfb71/Ru99.h5
+ Reading Ru99 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/044099.h5
+ Reading Ru100 from /software/openmc/data/v0.13.3/endfb71/Ru100.h5
+ Reading Ru100 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/044100.h5
+ Reading Ru101 from /software/openmc/data/v0.13.3/endfb71/Ru101.h5
+ Reading Ru101 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/044101.h5
+ Reading Ru102 from /software/openmc/data/v0.13.3/endfb71/Ru102.h5
+ Reading Ru102 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/044102.h5
+ Reading Ru103 from /software/openmc/data/v0.13.3/endfb71/Ru103.h5
+ Reading Ru103 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/044103.h5
+ Reading Ru104 from /software/openmc/data/v0.13.3/endfb71/Ru104.h5
+ Reading Ru104 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/044104.h5
+ Reading Ru105 from /software/openmc/data/v0.13.3/endfb71/Ru105.h5
+ Reading Ru105 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/044105.h5
+ Reading Ru106 from /software/openmc/data/v0.13.3/endfb71/Ru106.h5
+ Reading Ru106 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/044106.h5
+ Reading Rh103 from /software/openmc/data/v0.13.3/endfb71/Rh103.h5
+ Reading Rh103 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/045103.h5
+ Reading Rh105 from /software/openmc/data/v0.13.3/endfb71/Rh105.h5
+ Reading Rh105 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/045105.h5
+ Reading Pd102 from /software/openmc/data/v0.13.3/endfb71/Pd102.h5
+ Reading Pd102 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/046102.h5
+ Reading Pd104 from /software/openmc/data/v0.13.3/endfb71/Pd104.h5
+ Reading Pd104 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/046104.h5
+ Reading Pd105 from /software/openmc/data/v0.13.3/endfb71/Pd105.h5
+ Reading Pd105 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/046105.h5
+ Reading Pd106 from /software/openmc/data/v0.13.3/endfb71/Pd106.h5
+ Reading Pd106 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/046106.h5
+ Reading Pd107 from /software/openmc/data/v0.13.3/endfb71/Pd107.h5
+ Reading Pd107 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/046107.h5
+ Reading Pd108 from /software/openmc/data/v0.13.3/endfb71/Pd108.h5
+ Reading Pd108 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/046108.h5
+ Reading Pd110 from /software/openmc/data/v0.13.3/endfb71/Pd110.h5
+ Reading Pd110 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/046110.h5
+ Reading Ag107 from /software/openmc/data/v0.13.3/endfb71/Ag107.h5
+ Reading Ag107 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/047107.h5
+ Reading Ag109 from /software/openmc/data/v0.13.3/endfb71/Ag109.h5
+ Reading Ag109 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/047109.h5
+ Reading Ag110_m1 from /software/openmc/data/v0.13.3/endfb71/Ag110_m1.h5
+ Reading Ag110_m1 WMP data from
+ /software/openmc/data/v0.13.3/endfb71/wmp/047110m1.h5
+ Reading Ag111 from /software/openmc/data/v0.13.3/endfb71/Ag111.h5
+ Reading Ag111 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/047111.h5
+ Reading Cd106 from /software/openmc/data/v0.13.3/endfb71/Cd106.h5
+ Reading Cd106 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/048106.h5
+ Reading Cd108 from /software/openmc/data/v0.13.3/endfb71/Cd108.h5
+ Reading Cd108 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/048108.h5
+ Reading Cd110 from /software/openmc/data/v0.13.3/endfb71/Cd110.h5
+ Reading Cd110 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/048110.h5
+ Reading Cd111 from /software/openmc/data/v0.13.3/endfb71/Cd111.h5
+ Reading Cd111 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/048111.h5
+ Reading Cd112 from /software/openmc/data/v0.13.3/endfb71/Cd112.h5
+ Reading Cd112 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/048112.h5
+ Reading Cd113 from /software/openmc/data/v0.13.3/endfb71/Cd113.h5
+ Reading Cd113 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/048113.h5
+ Reading Cd114 from /software/openmc/data/v0.13.3/endfb71/Cd114.h5
+ Reading Cd114 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/048114.h5
+ Reading Cd115_m1 from /software/openmc/data/v0.13.3/endfb71/Cd115_m1.h5
+ Reading Cd115_m1 WMP data from
+ /software/openmc/data/v0.13.3/endfb71/wmp/048115m1.h5
+ Reading Cd116 from /software/openmc/data/v0.13.3/endfb71/Cd116.h5
+ Reading Cd116 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/048116.h5
+ Reading In113 from /software/openmc/data/v0.13.3/endfb71/In113.h5
+ Reading In113 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/049113.h5
+ Reading In115 from /software/openmc/data/v0.13.3/endfb71/In115.h5
+ Reading In115 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/049115.h5
+ Reading Sn112 from /software/openmc/data/v0.13.3/endfb71/Sn112.h5
+ Reading Sn112 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/050112.h5
+ Reading Sn113 from /software/openmc/data/v0.13.3/endfb71/Sn113.h5
+ Reading Sn113 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/050113.h5
+ Reading Sn114 from /software/openmc/data/v0.13.3/endfb71/Sn114.h5
+ Reading Sn114 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/050114.h5
+ Reading Sn115 from /software/openmc/data/v0.13.3/endfb71/Sn115.h5
+ Reading Sn115 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/050115.h5
+ Reading Sn116 from /software/openmc/data/v0.13.3/endfb71/Sn116.h5
+ Reading Sn116 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/050116.h5
+ Reading Sn117 from /software/openmc/data/v0.13.3/endfb71/Sn117.h5
+ Reading Sn117 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/050117.h5
+ Reading Sn118 from /software/openmc/data/v0.13.3/endfb71/Sn118.h5
+ Reading Sn118 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/050118.h5
+ Reading Sn119 from /software/openmc/data/v0.13.3/endfb71/Sn119.h5
+ Reading Sn119 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/050119.h5
+ Reading Sn120 from /software/openmc/data/v0.13.3/endfb71/Sn120.h5
+ Reading Sn120 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/050120.h5
+ Reading Sn122 from /software/openmc/data/v0.13.3/endfb71/Sn122.h5
+ Reading Sn122 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/050122.h5
+ Reading Sn123 from /software/openmc/data/v0.13.3/endfb71/Sn123.h5
+ Reading Sn123 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/050123.h5
+ Reading Sn124 from /software/openmc/data/v0.13.3/endfb71/Sn124.h5
+ Reading Sn124 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/050124.h5
+ Reading Sn125 from /software/openmc/data/v0.13.3/endfb71/Sn125.h5
+ Reading Sn125 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/050125.h5
+ Reading Sn126 from /software/openmc/data/v0.13.3/endfb71/Sn126.h5
+ Reading Sn126 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/050126.h5
+ Reading Sb121 from /software/openmc/data/v0.13.3/endfb71/Sb121.h5
+ Reading Sb121 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/051121.h5
+ Reading Sb123 from /software/openmc/data/v0.13.3/endfb71/Sb123.h5
+ Reading Sb123 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/051123.h5
+ Reading Sb124 from /software/openmc/data/v0.13.3/endfb71/Sb124.h5
+ Reading Sb124 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/051124.h5
+ Reading Sb125 from /software/openmc/data/v0.13.3/endfb71/Sb125.h5
+ Reading Sb125 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/051125.h5
+ Reading Sb126 from /software/openmc/data/v0.13.3/endfb71/Sb126.h5
+ Reading Sb126 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/051126.h5
+ Reading Te120 from /software/openmc/data/v0.13.3/endfb71/Te120.h5
+ Reading Te120 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/052120.h5
+ Reading Te122 from /software/openmc/data/v0.13.3/endfb71/Te122.h5
+ Reading Te122 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/052122.h5
+ Reading Te123 from /software/openmc/data/v0.13.3/endfb71/Te123.h5
+ Reading Te123 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/052123.h5
+ Reading Te124 from /software/openmc/data/v0.13.3/endfb71/Te124.h5
+ Reading Te124 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/052124.h5
+ Reading Te125 from /software/openmc/data/v0.13.3/endfb71/Te125.h5
+ Reading Te125 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/052125.h5
+ Reading Te126 from /software/openmc/data/v0.13.3/endfb71/Te126.h5
+ Reading Te126 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/052126.h5
+ Reading Te127_m1 from /software/openmc/data/v0.13.3/endfb71/Te127_m1.h5
+ Reading Te127_m1 WMP data from
+ /software/openmc/data/v0.13.3/endfb71/wmp/052127m1.h5
+ Reading Te128 from /software/openmc/data/v0.13.3/endfb71/Te128.h5
+ Reading Te128 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/052128.h5
+ Reading Te129_m1 from /software/openmc/data/v0.13.3/endfb71/Te129_m1.h5
+ Reading Te129_m1 WMP data from
+ /software/openmc/data/v0.13.3/endfb71/wmp/052129m1.h5
+ Reading Te130 from /software/openmc/data/v0.13.3/endfb71/Te130.h5
+ Reading Te130 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/052130.h5
+ Reading Te132 from /software/openmc/data/v0.13.3/endfb71/Te132.h5
+ Reading Te132 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/052132.h5
+ Reading I127 from /software/openmc/data/v0.13.3/endfb71/I127.h5
+ Reading I127 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/053127.h5
+ Reading I129 from /software/openmc/data/v0.13.3/endfb71/I129.h5
+ Reading I129 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/053129.h5
+ Reading I130 from /software/openmc/data/v0.13.3/endfb71/I130.h5
+ Reading I130 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/053130.h5
+ Reading I131 from /software/openmc/data/v0.13.3/endfb71/I131.h5
+ Reading I131 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/053131.h5
+ Reading I135 from /software/openmc/data/v0.13.3/endfb71/I135.h5
+ Reading I135 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/053135.h5
+ Reading Xe123 from /software/openmc/data/v0.13.3/endfb71/Xe123.h5
+ Reading Xe123 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/054123.h5
+ Reading Xe124 from /software/openmc/data/v0.13.3/endfb71/Xe124.h5
+ Reading Xe124 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/054124.h5
+ Reading Xe126 from /software/openmc/data/v0.13.3/endfb71/Xe126.h5
+ Reading Xe126 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/054126.h5
+ Reading Xe128 from /software/openmc/data/v0.13.3/endfb71/Xe128.h5
+ Reading Xe128 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/054128.h5
+ Reading Xe129 from /software/openmc/data/v0.13.3/endfb71/Xe129.h5
+ Reading Xe129 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/054129.h5
+ Reading Xe130 from /software/openmc/data/v0.13.3/endfb71/Xe130.h5
+ Reading Xe130 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/054130.h5
+ Reading Xe131 from /software/openmc/data/v0.13.3/endfb71/Xe131.h5
+ Reading Xe131 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/054131.h5
+ Reading Xe132 from /software/openmc/data/v0.13.3/endfb71/Xe132.h5
+ Reading Xe132 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/054132.h5
+ Reading Xe133 from /software/openmc/data/v0.13.3/endfb71/Xe133.h5
+ Reading Xe133 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/054133.h5
+ Reading Xe134 from /software/openmc/data/v0.13.3/endfb71/Xe134.h5
+ Reading Xe134 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/054134.h5
+ Reading Xe135 from /software/openmc/data/v0.13.3/endfb71/Xe135.h5
+ Reading Xe135 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/054135.h5
+ Reading Xe136 from /software/openmc/data/v0.13.3/endfb71/Xe136.h5
+ Reading Xe136 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/054136.h5
+ Reading Cs133 from /software/openmc/data/v0.13.3/endfb71/Cs133.h5
+ Reading Cs133 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/055133.h5
+ Reading Cs134 from /software/openmc/data/v0.13.3/endfb71/Cs134.h5
+ Reading Cs134 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/055134.h5
+ Reading Cs135 from /software/openmc/data/v0.13.3/endfb71/Cs135.h5
+ Reading Cs135 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/055135.h5
+ Reading Cs136 from /software/openmc/data/v0.13.3/endfb71/Cs136.h5
+ Reading Cs136 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/055136.h5
+ Reading Cs137 from /software/openmc/data/v0.13.3/endfb71/Cs137.h5
+ Reading Cs137 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/055137.h5
+ Reading Ba130 from /software/openmc/data/v0.13.3/endfb71/Ba130.h5
+ Reading Ba130 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/056130.h5
+ Reading Ba132 from /software/openmc/data/v0.13.3/endfb71/Ba132.h5
+ Reading Ba132 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/056132.h5
+ Reading Ba133 from /software/openmc/data/v0.13.3/endfb71/Ba133.h5
+ Reading Ba133 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/056133.h5
+ Reading Ba134 from /software/openmc/data/v0.13.3/endfb71/Ba134.h5
+ Reading Ba134 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/056134.h5
+ Reading Ba135 from /software/openmc/data/v0.13.3/endfb71/Ba135.h5
+ Reading Ba135 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/056135.h5
+ Reading Ba136 from /software/openmc/data/v0.13.3/endfb71/Ba136.h5
+ Reading Ba136 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/056136.h5
+ Reading Ba137 from /software/openmc/data/v0.13.3/endfb71/Ba137.h5
+ Reading Ba137 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/056137.h5
+ Reading Ba138 from /software/openmc/data/v0.13.3/endfb71/Ba138.h5
+ Reading Ba138 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/056138.h5
+ Reading Ba140 from /software/openmc/data/v0.13.3/endfb71/Ba140.h5
+ Reading Ba140 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/056140.h5
+ Reading La138 from /software/openmc/data/v0.13.3/endfb71/La138.h5
+ Reading La138 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/057138.h5
+ Reading La139 from /software/openmc/data/v0.13.3/endfb71/La139.h5
+ Reading La139 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/057139.h5
+ Reading La140 from /software/openmc/data/v0.13.3/endfb71/La140.h5
+ Reading La140 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/057140.h5
+ Reading Ce136 from /software/openmc/data/v0.13.3/endfb71/Ce136.h5
+ Reading Ce136 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/058136.h5
+ Reading Ce138 from /software/openmc/data/v0.13.3/endfb71/Ce138.h5
+ Reading Ce138 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/058138.h5
+ Reading Ce139 from /software/openmc/data/v0.13.3/endfb71/Ce139.h5
+ Reading Ce139 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/058139.h5
+ Reading Ce140 from /software/openmc/data/v0.13.3/endfb71/Ce140.h5
+ Reading Ce140 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/058140.h5
+ Reading Ce141 from /software/openmc/data/v0.13.3/endfb71/Ce141.h5
+ Reading Ce141 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/058141.h5
+ Reading Ce142 from /software/openmc/data/v0.13.3/endfb71/Ce142.h5
+ Reading Ce142 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/058142.h5
+ Reading Ce143 from /software/openmc/data/v0.13.3/endfb71/Ce143.h5
+ Reading Ce143 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/058143.h5
+ Reading Ce144 from /software/openmc/data/v0.13.3/endfb71/Ce144.h5
+ Reading Ce144 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/058144.h5
+ Reading Pr141 from /software/openmc/data/v0.13.3/endfb71/Pr141.h5
+ Reading Pr141 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/059141.h5
+ Reading Pr142 from /software/openmc/data/v0.13.3/endfb71/Pr142.h5
+ Reading Pr142 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/059142.h5
+ Reading Pr143 from /software/openmc/data/v0.13.3/endfb71/Pr143.h5
+ Reading Pr143 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/059143.h5
+ Reading Nd142 from /software/openmc/data/v0.13.3/endfb71/Nd142.h5
+ Reading Nd142 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/060142.h5
+ Reading Nd143 from /software/openmc/data/v0.13.3/endfb71/Nd143.h5
+ Reading Nd143 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/060143.h5
+ Reading Nd144 from /software/openmc/data/v0.13.3/endfb71/Nd144.h5
+ Reading Nd144 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/060144.h5
+ Reading Nd145 from /software/openmc/data/v0.13.3/endfb71/Nd145.h5
+ Reading Nd145 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/060145.h5
+ Reading Nd146 from /software/openmc/data/v0.13.3/endfb71/Nd146.h5
+ Reading Nd146 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/060146.h5
+ Reading Nd147 from /software/openmc/data/v0.13.3/endfb71/Nd147.h5
+ Reading Nd147 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/060147.h5
+ Reading Nd148 from /software/openmc/data/v0.13.3/endfb71/Nd148.h5
+ Reading Nd148 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/060148.h5
+ Reading Nd150 from /software/openmc/data/v0.13.3/endfb71/Nd150.h5
+ Reading Nd150 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/060150.h5
+ Reading Pm147 from /software/openmc/data/v0.13.3/endfb71/Pm147.h5
+ Reading Pm147 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/061147.h5
+ Reading Pm148 from /software/openmc/data/v0.13.3/endfb71/Pm148.h5
+ Reading Pm148 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/061148.h5
+ Reading Pm148_m1 from /software/openmc/data/v0.13.3/endfb71/Pm148_m1.h5
+ Reading Pm148_m1 WMP data from
+ /software/openmc/data/v0.13.3/endfb71/wmp/061148m1.h5
+ Reading Pm149 from /software/openmc/data/v0.13.3/endfb71/Pm149.h5
+ Reading Pm149 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/061149.h5
+ Reading Pm151 from /software/openmc/data/v0.13.3/endfb71/Pm151.h5
+ Reading Pm151 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/061151.h5
+ Reading Sm144 from /software/openmc/data/v0.13.3/endfb71/Sm144.h5
+ Reading Sm144 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/062144.h5
+ Reading Sm147 from /software/openmc/data/v0.13.3/endfb71/Sm147.h5
+ Reading Sm147 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/062147.h5
+ Reading Sm148 from /software/openmc/data/v0.13.3/endfb71/Sm148.h5
+ Reading Sm148 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/062148.h5
+ Reading Sm149 from /software/openmc/data/v0.13.3/endfb71/Sm149.h5
+ Reading Sm149 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/062149.h5
+ Reading Sm150 from /software/openmc/data/v0.13.3/endfb71/Sm150.h5
+ Reading Sm150 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/062150.h5
+ Reading Sm151 from /software/openmc/data/v0.13.3/endfb71/Sm151.h5
+ Reading Sm151 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/062151.h5
+ Reading Sm152 from /software/openmc/data/v0.13.3/endfb71/Sm152.h5
+ Reading Sm152 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/062152.h5
+ Reading Sm153 from /software/openmc/data/v0.13.3/endfb71/Sm153.h5
+ Reading Sm153 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/062153.h5
+ Reading Sm154 from /software/openmc/data/v0.13.3/endfb71/Sm154.h5
+ Reading Sm154 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/062154.h5
+ Reading Eu151 from /software/openmc/data/v0.13.3/endfb71/Eu151.h5
+ Reading Eu151 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/063151.h5
+ Reading Eu152 from /software/openmc/data/v0.13.3/endfb71/Eu152.h5
+ Reading Eu152 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/063152.h5
+ Reading Eu153 from /software/openmc/data/v0.13.3/endfb71/Eu153.h5
+ Reading Eu153 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/063153.h5
+ Reading Eu154 from /software/openmc/data/v0.13.3/endfb71/Eu154.h5
+ Reading Eu154 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/063154.h5
+ Reading Eu155 from /software/openmc/data/v0.13.3/endfb71/Eu155.h5
+ Reading Eu155 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/063155.h5
+ Reading Eu156 from /software/openmc/data/v0.13.3/endfb71/Eu156.h5
+ Reading Eu156 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/063156.h5
+ Reading Eu157 from /software/openmc/data/v0.13.3/endfb71/Eu157.h5
+ Reading Eu157 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/063157.h5
+ Reading Gd152 from /software/openmc/data/v0.13.3/endfb71/Gd152.h5
+ Reading Gd152 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/064152.h5
+ Reading Gd153 from /software/openmc/data/v0.13.3/endfb71/Gd153.h5
+ Reading Gd153 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/064153.h5
+ Reading Gd154 from /software/openmc/data/v0.13.3/endfb71/Gd154.h5
+ Reading Gd154 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/064154.h5
+ Reading Gd155 from /software/openmc/data/v0.13.3/endfb71/Gd155.h5
+ Reading Gd155 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/064155.h5
+ Reading Gd156 from /software/openmc/data/v0.13.3/endfb71/Gd156.h5
+ Reading Gd156 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/064156.h5
+ Reading Gd157 from /software/openmc/data/v0.13.3/endfb71/Gd157.h5
+ Reading Gd157 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/064157.h5
+ Reading Gd158 from /software/openmc/data/v0.13.3/endfb71/Gd158.h5
+ Reading Gd158 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/064158.h5
+ Reading Gd160 from /software/openmc/data/v0.13.3/endfb71/Gd160.h5
+ Reading Gd160 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/064160.h5
+ Reading Tb159 from /software/openmc/data/v0.13.3/endfb71/Tb159.h5
+ Reading Tb159 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/065159.h5
+ Reading Tb160 from /software/openmc/data/v0.13.3/endfb71/Tb160.h5
+ Reading Tb160 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/065160.h5
+ Reading Dy156 from /software/openmc/data/v0.13.3/endfb71/Dy156.h5
+ Reading Dy156 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/066156.h5
+ Reading Dy158 from /software/openmc/data/v0.13.3/endfb71/Dy158.h5
+ Reading Dy158 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/066158.h5
+ Reading Dy160 from /software/openmc/data/v0.13.3/endfb71/Dy160.h5
+ Reading Dy160 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/066160.h5
+ Reading Dy161 from /software/openmc/data/v0.13.3/endfb71/Dy161.h5
+ Reading Dy161 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/066161.h5
+ Reading Dy162 from /software/openmc/data/v0.13.3/endfb71/Dy162.h5
+ Reading Dy162 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/066162.h5
+ Reading Dy163 from /software/openmc/data/v0.13.3/endfb71/Dy163.h5
+ Reading Dy163 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/066163.h5
+ Reading Dy164 from /software/openmc/data/v0.13.3/endfb71/Dy164.h5
+ Reading Dy164 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/066164.h5
+ Reading Ho165 from /software/openmc/data/v0.13.3/endfb71/Ho165.h5
+ Reading Ho165 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/067165.h5
+ Reading Ho166_m1 from /software/openmc/data/v0.13.3/endfb71/Ho166_m1.h5
+ Reading Ho166_m1 WMP data from
+ /software/openmc/data/v0.13.3/endfb71/wmp/067166m1.h5
+ Reading Er162 from /software/openmc/data/v0.13.3/endfb71/Er162.h5
+ Reading Er162 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/068162.h5
+ Reading Er164 from /software/openmc/data/v0.13.3/endfb71/Er164.h5
+ Reading Er164 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/068164.h5
+ Reading Er166 from /software/openmc/data/v0.13.3/endfb71/Er166.h5
+ Reading Er166 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/068166.h5
+ Reading Er167 from /software/openmc/data/v0.13.3/endfb71/Er167.h5
+ Reading Er167 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/068167.h5
+ Reading Er168 from /software/openmc/data/v0.13.3/endfb71/Er168.h5
+ Reading Er168 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/068168.h5
+ Reading Er170 from /software/openmc/data/v0.13.3/endfb71/Er170.h5
+ Reading Er170 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/068170.h5
+ Reading Tm168 from /software/openmc/data/v0.13.3/endfb71/Tm168.h5
+ Reading Tm168 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/069168.h5
+ Reading Tm169 from /software/openmc/data/v0.13.3/endfb71/Tm169.h5
+ Reading Tm169 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/069169.h5
+ Reading Tm170 from /software/openmc/data/v0.13.3/endfb71/Tm170.h5
+ Reading Tm170 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/069170.h5
+ Reading Lu175 from /software/openmc/data/v0.13.3/endfb71/Lu175.h5
+ Reading Lu175 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/071175.h5
+ Reading Lu176 from /software/openmc/data/v0.13.3/endfb71/Lu176.h5
+ Reading Lu176 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/071176.h5
+ Reading Ta180 from /software/openmc/data/v0.13.3/endfb71/Ta180.h5
+ Reading Ta180 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/073180.h5
+ Reading Ta181 from /software/openmc/data/v0.13.3/endfb71/Ta181.h5
+ Reading Ta181 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/073181.h5
+ Reading Ta182 from /software/openmc/data/v0.13.3/endfb71/Ta182.h5
+ Reading Ta182 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/073182.h5
+ Reading W180 from /software/openmc/data/v0.13.3/endfb71/W180.h5
+ Reading W180 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/074180.h5
+ Reading W182 from /software/openmc/data/v0.13.3/endfb71/W182.h5
+ Reading W182 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/074182.h5
+ Reading W183 from /software/openmc/data/v0.13.3/endfb71/W183.h5
+ Reading W183 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/074183.h5
+ Reading W184 from /software/openmc/data/v0.13.3/endfb71/W184.h5
+ Reading W184 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/074184.h5
+ Reading W186 from /software/openmc/data/v0.13.3/endfb71/W186.h5
+ Reading W186 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/074186.h5
+ Reading Re185 from /software/openmc/data/v0.13.3/endfb71/Re185.h5
+ Reading Re185 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/075185.h5
+ Reading Re187 from /software/openmc/data/v0.13.3/endfb71/Re187.h5
+ Reading Re187 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/075187.h5
+ Reading Ir191 from /software/openmc/data/v0.13.3/endfb71/Ir191.h5
+ Reading Ir191 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/077191.h5
+ Reading Ir193 from /software/openmc/data/v0.13.3/endfb71/Ir193.h5
+ Reading Ir193 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/077193.h5
+ Reading Au197 from /software/openmc/data/v0.13.3/endfb71/Au197.h5
+ Reading Au197 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/079197.h5
+ Reading Hg196 from /software/openmc/data/v0.13.3/endfb71/Hg196.h5
+ Reading Hg196 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/080196.h5
+ Reading Hg198 from /software/openmc/data/v0.13.3/endfb71/Hg198.h5
+ Reading Hg198 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/080198.h5
+ Reading Hg199 from /software/openmc/data/v0.13.3/endfb71/Hg199.h5
+ Reading Hg199 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/080199.h5
+ Reading Hg200 from /software/openmc/data/v0.13.3/endfb71/Hg200.h5
+ Reading Hg200 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/080200.h5
+ Reading Hg201 from /software/openmc/data/v0.13.3/endfb71/Hg201.h5
+ Reading Hg201 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/080201.h5
+ Reading Hg202 from /software/openmc/data/v0.13.3/endfb71/Hg202.h5
+ Reading Hg202 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/080202.h5
+ Reading Hg204 from /software/openmc/data/v0.13.3/endfb71/Hg204.h5
+ Reading Hg204 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/080204.h5
+ Reading Tl203 from /software/openmc/data/v0.13.3/endfb71/Tl203.h5
+ Reading Tl203 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/081203.h5
+ Reading Tl205 from /software/openmc/data/v0.13.3/endfb71/Tl205.h5
+ Reading Tl205 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/081205.h5
+ Reading Pb204 from /software/openmc/data/v0.13.3/endfb71/Pb204.h5
+ Reading Pb204 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/082204.h5
+ Reading Pb206 from /software/openmc/data/v0.13.3/endfb71/Pb206.h5
+ Reading Pb206 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/082206.h5
+ Reading Pb207 from /software/openmc/data/v0.13.3/endfb71/Pb207.h5
+ Reading Pb207 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/082207.h5
+ Reading Bi209 from /software/openmc/data/v0.13.3/endfb71/Bi209.h5
+ Reading Bi209 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/083209.h5
+ Reading Ra223 from /software/openmc/data/v0.13.3/endfb71/Ra223.h5
+ Reading Ra223 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/088223.h5
+ Reading Ra224 from /software/openmc/data/v0.13.3/endfb71/Ra224.h5
+ Reading Ra224 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/088224.h5
+ Reading Ra225 from /software/openmc/data/v0.13.3/endfb71/Ra225.h5
+ Reading Ra225 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/088225.h5
+ Reading Ra226 from /software/openmc/data/v0.13.3/endfb71/Ra226.h5
+ Reading Ra226 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/088226.h5
+ Reading Ac225 from /software/openmc/data/v0.13.3/endfb71/Ac225.h5
+ Reading Ac225 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/089225.h5
+ Reading Ac226 from /software/openmc/data/v0.13.3/endfb71/Ac226.h5
+ Reading Ac226 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/089226.h5
+ Reading Ac227 from /software/openmc/data/v0.13.3/endfb71/Ac227.h5
+ Reading Ac227 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/089227.h5
+ Reading Th227 from /software/openmc/data/v0.13.3/endfb71/Th227.h5
+ Reading Th227 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/090227.h5
+ Reading Th228 from /software/openmc/data/v0.13.3/endfb71/Th228.h5
+ Reading Th228 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/090228.h5
+ Reading Th229 from /software/openmc/data/v0.13.3/endfb71/Th229.h5
+ Reading Th229 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/090229.h5
+ Reading Th230 from /software/openmc/data/v0.13.3/endfb71/Th230.h5
+ Reading Th230 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/090230.h5
+ Reading Th231 from /software/openmc/data/v0.13.3/endfb71/Th231.h5
+ Reading Th231 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/090231.h5
+ Reading Th232 from /software/openmc/data/v0.13.3/endfb71/Th232.h5
+ Reading Th232 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/090232.h5
+ Reading Th233 from /software/openmc/data/v0.13.3/endfb71/Th233.h5
+ Reading Th233 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/090233.h5
+ Reading Th234 from /software/openmc/data/v0.13.3/endfb71/Th234.h5
+ Reading Th234 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/090234.h5
+ Reading Pa229 from /software/openmc/data/v0.13.3/endfb71/Pa229.h5
+ Reading Pa229 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/091229.h5
+ Reading Pa230 from /software/openmc/data/v0.13.3/endfb71/Pa230.h5
+ Reading Pa230 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/091230.h5
+ Reading Pa231 from /software/openmc/data/v0.13.3/endfb71/Pa231.h5
+ Reading Pa231 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/091231.h5
+ Reading Pa232 from /software/openmc/data/v0.13.3/endfb71/Pa232.h5
+ Reading Pa232 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/091232.h5
+ Reading Pa233 from /software/openmc/data/v0.13.3/endfb71/Pa233.h5
+ Reading Pa233 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/091233.h5
+ Reading U230 from /software/openmc/data/v0.13.3/endfb71/U230.h5
+ Reading U230 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/092230.h5
+ Reading U231 from /software/openmc/data/v0.13.3/endfb71/U231.h5
+ Reading U231 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/092231.h5
+ Reading U232 from /software/openmc/data/v0.13.3/endfb71/U232.h5
+ Reading U232 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/092232.h5
+ Reading U233 from /software/openmc/data/v0.13.3/endfb71/U233.h5
+ Reading U233 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/092233.h5
+ Reading U237 from /software/openmc/data/v0.13.3/endfb71/U237.h5
+ Reading U237 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/092237.h5
+ Reading U239 from /software/openmc/data/v0.13.3/endfb71/U239.h5
+ Reading U239 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/092239.h5
+ Reading U240 from /software/openmc/data/v0.13.3/endfb71/U240.h5
+ Reading U240 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/092240.h5
+ Reading U241 from /software/openmc/data/v0.13.3/endfb71/U241.h5
+ Reading U241 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/092241.h5
+ Reading Np234 from /software/openmc/data/v0.13.3/endfb71/Np234.h5
+ Reading Np234 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/093234.h5
+ Reading Np235 from /software/openmc/data/v0.13.3/endfb71/Np235.h5
+ Reading Np235 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/093235.h5
+ Reading Np236 from /software/openmc/data/v0.13.3/endfb71/Np236.h5
+ Reading Np236 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/093236.h5
+ Reading Np237 from /software/openmc/data/v0.13.3/endfb71/Np237.h5
+ Reading Np237 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/093237.h5
+ Reading Np238 from /software/openmc/data/v0.13.3/endfb71/Np238.h5
+ Reading Np238 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/093238.h5
+ Reading Np239 from /software/openmc/data/v0.13.3/endfb71/Np239.h5
+ Reading Np239 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/093239.h5
+ Reading Pu236 from /software/openmc/data/v0.13.3/endfb71/Pu236.h5
+ Reading Pu236 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/094236.h5
+ Reading Pu237 from /software/openmc/data/v0.13.3/endfb71/Pu237.h5
+ Reading Pu237 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/094237.h5
+ Reading Pu238 from /software/openmc/data/v0.13.3/endfb71/Pu238.h5
+ Reading Pu238 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/094238.h5
+ Reading Pu239 from /software/openmc/data/v0.13.3/endfb71/Pu239.h5
+ Reading Pu239 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/094239.h5
+ Reading Pu240 from /software/openmc/data/v0.13.3/endfb71/Pu240.h5
+ Reading Pu240 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/094240.h5
+ Reading Pu241 from /software/openmc/data/v0.13.3/endfb71/Pu241.h5
+ Reading Pu241 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/094241.h5
+ Reading Pu242 from /software/openmc/data/v0.13.3/endfb71/Pu242.h5
+ Reading Pu242 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/094242.h5
+ Reading Pu243 from /software/openmc/data/v0.13.3/endfb71/Pu243.h5
+ Reading Pu243 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/094243.h5
+ Reading Pu244 from /software/openmc/data/v0.13.3/endfb71/Pu244.h5
+ Reading Pu244 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/094244.h5
+ Reading Pu246 from /software/openmc/data/v0.13.3/endfb71/Pu246.h5
+ Reading Pu246 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/094246.h5
+ Reading Am240 from /software/openmc/data/v0.13.3/endfb71/Am240.h5
+ Reading Am240 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/095240.h5
+ Reading Am241 from /software/openmc/data/v0.13.3/endfb71/Am241.h5
+ Reading Am241 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/095241.h5
+ Reading Am242 from /software/openmc/data/v0.13.3/endfb71/Am242.h5
+ Reading Am242 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/095242.h5
+ Reading Am242_m1 from /software/openmc/data/v0.13.3/endfb71/Am242_m1.h5
+ Reading Am242_m1 WMP data from
+ /software/openmc/data/v0.13.3/endfb71/wmp/095242m1.h5
+ Reading Am243 from /software/openmc/data/v0.13.3/endfb71/Am243.h5
+ Reading Am243 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/095243.h5
+ Reading Am244 from /software/openmc/data/v0.13.3/endfb71/Am244.h5
+ Reading Am244 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/095244.h5
+ Reading Am244_m1 from /software/openmc/data/v0.13.3/endfb71/Am244_m1.h5
+ Reading Am244_m1 WMP data from
+ /software/openmc/data/v0.13.3/endfb71/wmp/095244m1.h5
+ Reading Cm240 from /software/openmc/data/v0.13.3/endfb71/Cm240.h5
+ Reading Cm240 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/096240.h5
+ Reading Cm241 from /software/openmc/data/v0.13.3/endfb71/Cm241.h5
+ Reading Cm241 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/096241.h5
+ Reading Cm242 from /software/openmc/data/v0.13.3/endfb71/Cm242.h5
+ Reading Cm242 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/096242.h5
+ Reading Cm243 from /software/openmc/data/v0.13.3/endfb71/Cm243.h5
+ Reading Cm243 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/096243.h5
+ Reading Cm244 from /software/openmc/data/v0.13.3/endfb71/Cm244.h5
+ Reading Cm244 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/096244.h5
+ Reading Cm245 from /software/openmc/data/v0.13.3/endfb71/Cm245.h5
+ Reading Cm245 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/096245.h5
+ Reading Cm246 from /software/openmc/data/v0.13.3/endfb71/Cm246.h5
+ Reading Cm246 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/096246.h5
+ Reading Cm247 from /software/openmc/data/v0.13.3/endfb71/Cm247.h5
+ Reading Cm247 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/096247.h5
+ Reading Cm248 from /software/openmc/data/v0.13.3/endfb71/Cm248.h5
+ Reading Cm248 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/096248.h5
+ Reading Cm249 from /software/openmc/data/v0.13.3/endfb71/Cm249.h5
+ Reading Cm249 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/096249.h5
+ Reading Cm250 from /software/openmc/data/v0.13.3/endfb71/Cm250.h5
+ Reading Cm250 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/096250.h5
+ Reading Bk245 from /software/openmc/data/v0.13.3/endfb71/Bk245.h5
+ Reading Bk245 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/097245.h5
+ Reading Bk246 from /software/openmc/data/v0.13.3/endfb71/Bk246.h5
+ Reading Bk246 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/097246.h5
+ Reading Bk247 from /software/openmc/data/v0.13.3/endfb71/Bk247.h5
+ Reading Bk247 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/097247.h5
+ Reading Bk248 from /software/openmc/data/v0.13.3/endfb71/Bk248.h5
+ Reading Bk248 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/097248.h5
+ Reading Bk249 from /software/openmc/data/v0.13.3/endfb71/Bk249.h5
+ Reading Bk249 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/097249.h5
+ Reading Bk250 from /software/openmc/data/v0.13.3/endfb71/Bk250.h5
+ Reading Bk250 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/097250.h5
+ Reading Cf246 from /software/openmc/data/v0.13.3/endfb71/Cf246.h5
+ Reading Cf246 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/098246.h5
+ Reading Cf248 from /software/openmc/data/v0.13.3/endfb71/Cf248.h5
+ Reading Cf248 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/098248.h5
+ Reading Cf249 from /software/openmc/data/v0.13.3/endfb71/Cf249.h5
+ Reading Cf249 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/098249.h5
+ Reading Cf250 from /software/openmc/data/v0.13.3/endfb71/Cf250.h5
+ Reading Cf250 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/098250.h5
+ Reading Cf251 from /software/openmc/data/v0.13.3/endfb71/Cf251.h5
+ Reading Cf251 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/098251.h5
+ Reading Cf252 from /software/openmc/data/v0.13.3/endfb71/Cf252.h5
+ Reading Cf252 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/098252.h5
+ Reading Cf253 from /software/openmc/data/v0.13.3/endfb71/Cf253.h5
+ Reading Cf253 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/098253.h5
+ Reading Cf254 from /software/openmc/data/v0.13.3/endfb71/Cf254.h5
+ Reading Cf254 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/098254.h5
+ Reading Es251 from /software/openmc/data/v0.13.3/endfb71/Es251.h5
+ Reading Es251 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/099251.h5
+ Reading Es252 from /software/openmc/data/v0.13.3/endfb71/Es252.h5
+ Reading Es252 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/099252.h5
+ Reading Es253 from /software/openmc/data/v0.13.3/endfb71/Es253.h5
+ Reading Es253 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/099253.h5
+ Reading Es254 from /software/openmc/data/v0.13.3/endfb71/Es254.h5
+ Reading Es254 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/099254.h5
+ Reading Es254_m1 from /software/openmc/data/v0.13.3/endfb71/Es254_m1.h5
+ Reading Es254_m1 WMP data from
+ /software/openmc/data/v0.13.3/endfb71/wmp/099254m1.h5
+ Reading Es255 from /software/openmc/data/v0.13.3/endfb71/Es255.h5
+ Reading Es255 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/099255.h5
+ Reading Fm255 from /software/openmc/data/v0.13.3/endfb71/Fm255.h5
+ Reading Fm255 WMP data from /software/openmc/data/v0.13.3/endfb71/wmp/100255.h5
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    1.27854
+        2/1    1.41976
+        3/1    1.43762
+        4/1    1.45131
+        5/1    1.46767
+        6/1    1.45476
+        7/1    1.44554
+        8/1    1.46710
+        9/1    1.46259
+       10/1    1.45579
+       11/1    1.46045
+       12/1    1.46212
+       13/1    1.46116
+       14/1    1.45562
+       15/1    1.45874
+       16/1    1.46151
+       17/1    1.45355
+       18/1    1.45373
+       19/1    1.43983
+       20/1    1.45773
+       21/1    1.45494
+       22/1    1.44767
+       23/1    1.46227
+       24/1    1.46349
+       25/1    1.45326
+       26/1    1.45036
+       27/1    1.46221
+       28/1    1.45740
+       29/1    1.45715
+       30/1    1.45695
+       31/1    1.45585
+       32/1    1.45743
+       33/1    1.45183
+       34/1    1.45580
+       35/1    1.46506
+       36/1    1.46118
+       37/1    1.45255
+       38/1    1.45827
+       39/1    1.46151
+       40/1    1.46188
+       41/1    1.46103
+       42/1    1.45704
+       43/1    1.44932
+       44/1    1.45438
+       45/1    1.46187
+       46/1    1.45750
+       47/1    1.45298
+       48/1    1.45148
+       49/1    1.45880
+       50/1    1.45247
+       51/1    1.45384
+       52/1    1.45907    1.45646 +/- 0.00262
+       53/1    1.45377    1.45556 +/- 0.00176
+       54/1    1.46210    1.45720 +/- 0.00205
+       55/1    1.46384    1.45852 +/- 0.00207
+       56/1    1.45703    1.45828 +/- 0.00171
+       57/1    1.45082    1.45721 +/- 0.00179
+       58/1    1.45317    1.45671 +/- 0.00163
+       59/1    1.46295    1.45740 +/- 0.00160
+       60/1    1.45026    1.45669 +/- 0.00160
+       61/1    1.45924    1.45692 +/- 0.00146
+       62/1    1.44816    1.45619 +/- 0.00152
+       63/1    1.44604    1.45541 +/- 0.00160
+       64/1    1.46516    1.45610 +/- 0.00164
+       65/1    1.44884    1.45562 +/- 0.00160
+       66/1    1.45548    1.45561 +/- 0.00150
+       67/1    1.45727    1.45571 +/- 0.00141
+       68/1    1.45652    1.45575 +/- 0.00133
+       69/1    1.44863    1.45538 +/- 0.00131
+       70/1    1.45427    1.45532 +/- 0.00125
+       71/1    1.44690    1.45492 +/- 0.00125
+       72/1    1.45889    1.45510 +/- 0.00121
+       73/1    1.44981    1.45487 +/- 0.00118
+       74/1    1.44267    1.45436 +/- 0.00124
+       75/1    1.45626    1.45444 +/- 0.00119
+       76/1    1.45672    1.45453 +/- 0.00114
+       77/1    1.45816    1.45466 +/- 0.00111
+       78/1    1.45650    1.45473 +/- 0.00107
+       79/1    1.45861    1.45486 +/- 0.00104
+       80/1    1.45377    1.45483 +/- 0.00101
+       81/1    1.44105    1.45438 +/- 0.00107
+       82/1    1.45791    1.45449 +/- 0.00104
+       83/1    1.44409    1.45418 +/- 0.00106
+       84/1    1.45930    1.45433 +/- 0.00104
+       85/1    1.45375    1.45431 +/- 0.00101
+       86/1    1.46119    1.45450 +/- 0.00100
+       87/1    1.46308    1.45473 +/- 0.00100
+       88/1    1.45802    1.45482 +/- 0.00098
+       89/1    1.45048    1.45471 +/- 0.00096
+       90/1    1.45789    1.45479 +/- 0.00094
+       91/1    1.45322    1.45475 +/- 0.00091
+       92/1    1.45871    1.45484 +/- 0.00090
+       93/1    1.45815    1.45492 +/- 0.00088
+       94/1    1.44264    1.45464 +/- 0.00090
+       95/1    1.45183    1.45458 +/- 0.00088
+       96/1    1.45629    1.45462 +/- 0.00087
+       97/1    1.45900    1.45471 +/- 0.00085
+       98/1    1.44559    1.45452 +/- 0.00086
+       99/1    1.45118    1.45445 +/- 0.00084
+      100/1    1.45465    1.45446 +/- 0.00082
+      101/1    1.46408    1.45464 +/- 0.00083
+      102/1    1.45322    1.45462 +/- 0.00081
+      103/1    1.44910    1.45451 +/- 0.00081
+      104/1    1.45274    1.45448 +/- 0.00079
+      105/1    1.45500    1.45449 +/- 0.00078
+      106/1    1.44329    1.45429 +/- 0.00079
+      107/1    1.45152    1.45424 +/- 0.00078
+      108/1    1.44902    1.45415 +/- 0.00077
+      109/1    1.46580    1.45435 +/- 0.00078
+      110/1    1.45313    1.45433 +/- 0.00077
+      111/1    1.45618    1.45436 +/- 0.00075
+      112/1    1.46675    1.45456 +/- 0.00077
+      113/1    1.45083    1.45450 +/- 0.00076
+      114/1    1.44877    1.45441 +/- 0.00075
+      115/1    1.44634    1.45429 +/- 0.00075
+      116/1    1.44995    1.45422 +/- 0.00074
+      117/1    1.45127    1.45418 +/- 0.00073
+      118/1    1.45274    1.45415 +/- 0.00072
+      119/1    1.45294    1.45414 +/- 0.00071
+      120/1    1.46377    1.45427 +/- 0.00071
+      121/1    1.45257    1.45425 +/- 0.00071
+      122/1    1.45218    1.45422 +/- 0.00070
+      123/1    1.45660    1.45425 +/- 0.00069
+      124/1    1.45671    1.45429 +/- 0.00068
+      125/1    1.45018    1.45423 +/- 0.00067
+      126/1    1.45166    1.45420 +/- 0.00066
+      127/1    1.44486    1.45408 +/- 0.00067
+      128/1    1.46066    1.45416 +/- 0.00066
+      129/1    1.45054    1.45412 +/- 0.00066
+      130/1    1.44946    1.45406 +/- 0.00065
+      131/1    1.45121    1.45402 +/- 0.00064
+      132/1    1.45456    1.45403 +/- 0.00064
+      133/1    1.45007    1.45398 +/- 0.00063
+      134/1    1.45510    1.45400 +/- 0.00062
+      135/1    1.45314    1.45398 +/- 0.00061
+      136/1    1.44504    1.45388 +/- 0.00062
+      137/1    1.44980    1.45383 +/- 0.00061
+      138/1    1.46766    1.45399 +/- 0.00062
+      139/1    1.45305    1.45398 +/- 0.00062
+      140/1    1.45952    1.45404 +/- 0.00061
+      141/1    1.45487    1.45405 +/- 0.00061
+      142/1    1.45921    1.45411 +/- 0.00060
+      143/1    1.45445    1.45411 +/- 0.00060
+      144/1    1.45004    1.45407 +/- 0.00059
+      145/1    1.45691    1.45410 +/- 0.00059
+      146/1    1.45694    1.45413 +/- 0.00058
+      147/1    1.45186    1.45410 +/- 0.00058
+      148/1    1.46230    1.45419 +/- 0.00058
+      149/1    1.45204    1.45417 +/- 0.00057
+      150/1    1.44813    1.45411 +/- 0.00057
+ Creating state point statepoint.150.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 6.5956e+01 seconds
+   Reading cross sections          = 4.5982e+01 seconds
+ Total time in simulation          = 1.0270e+04 seconds
+   Time in transport only          = 1.0216e+04 seconds
+   Time in inactive batches        = 8.5035e+01 seconds
+   Time in active batches          = 1.0185e+04 seconds
+   Time synchronizing fission bank = 2.9376e+00 seconds
+     Sampling source sites         = 2.3774e+00 seconds
+     SEND/RECV source sites        = 5.3276e-01 seconds
+   Time accumulating tallies       = 9.1229e+00 seconds
+   Time writing statepoints        = 4.0099e+01 seconds
+ Total time for finalization       = 2.0617e-02 seconds
+ Total time elapsed                = 1.0337e+04 seconds
+ Calculation Rate (inactive)       = 58799.7 particles/second
+ Calculation Rate (active)         = 981.842 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.45418 +/- 0.00057
+ k-effective (Track-length)  = 1.45411 +/- 0.00057
+ k-effective (Absorption)    = 1.45499 +/- 0.00032
+ Combined k-effective        = 1.45484 +/- 0.00030
+ Leakage Fraction            = 0.09822 +/- 0.00011
+
+ Creating state point openmc_simulation_n0.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    1.22972
+        2/1    1.35978
+        3/1    1.38097
+        4/1    1.38772
+        5/1    1.39818
+        6/1    1.40594
+        7/1    1.40435
+        8/1    1.39899
+        9/1    1.40461
+       10/1    1.40917
+       11/1    1.40671
+       12/1    1.40571
+       13/1    1.39662
+       14/1    1.40959
+       15/1    1.41474
+       16/1    1.40080
+       17/1    1.39807
+       18/1    1.41157
+       19/1    1.40118
+       20/1    1.40393
+       21/1    1.40823
+       22/1    1.40037
+       23/1    1.40246
+       24/1    1.39835
+       25/1    1.40962
+       26/1    1.40283
+       27/1    1.40203
+       28/1    1.40037
+       29/1    1.40222
+       30/1    1.40426
+       31/1    1.40526
+       32/1    1.41031
+       33/1    1.40506
+       34/1    1.40262
+       35/1    1.40498
+       36/1    1.39859
+       37/1    1.40585
+       38/1    1.39919
+       39/1    1.40559
+       40/1    1.40686
+       41/1    1.40575
+       42/1    1.40958
+       43/1    1.40037
+       44/1    1.41506
+       45/1    1.41569
+       46/1    1.40435
+       47/1    1.40821
+       48/1    1.39473
+       49/1    1.41022
+       50/1    1.40476
+       51/1    1.40756
+       52/1    1.40369    1.40563 +/- 0.00194
+       53/1    1.40100    1.40409 +/- 0.00190
+       54/1    1.40129    1.40339 +/- 0.00152
+       55/1    1.40331    1.40337 +/- 0.00118
+       56/1    1.40289    1.40329 +/- 0.00096
+       57/1    1.39615    1.40227 +/- 0.00130
+       58/1    1.39994    1.40198 +/- 0.00117
+       59/1    1.40606    1.40243 +/- 0.00112
+       60/1    1.39866    1.40206 +/- 0.00107
+       61/1    1.39808    1.40169 +/- 0.00104
+       62/1    1.40846    1.40226 +/- 0.00110
+       63/1    1.40421    1.40241 +/- 0.00102
+       64/1    1.41080    1.40301 +/- 0.00112
+       65/1    1.39619    1.40255 +/- 0.00114
+       66/1    1.39538    1.40210 +/- 0.00116
+       67/1    1.40372    1.40220 +/- 0.00109
+       68/1    1.39954    1.40205 +/- 0.00104
+       69/1    1.41127    1.40254 +/- 0.00110
+       70/1    1.40115    1.40247 +/- 0.00104
+       71/1    1.39508    1.40212 +/- 0.00105
+       72/1    1.40042    1.40204 +/- 0.00101
+       73/1    1.40955    1.40237 +/- 0.00101
+       74/1    1.40644    1.40254 +/- 0.00099
+       75/1    1.39150    1.40209 +/- 0.00104
+       76/1    1.39650    1.40188 +/- 0.00103
+       77/1    1.40015    1.40181 +/- 0.00099
+       78/1    1.40694    1.40200 +/- 0.00097
+       79/1    1.40929    1.40225 +/- 0.00097
+       80/1    1.40154    1.40223 +/- 0.00094
+       81/1    1.41776    1.40273 +/- 0.00104
+       82/1    1.40542    1.40281 +/- 0.00101
+       83/1    1.40129    1.40276 +/- 0.00098
+       84/1    1.40484    1.40283 +/- 0.00095
+       85/1    1.39816    1.40269 +/- 0.00093
+       86/1    1.39635    1.40252 +/- 0.00092
+       87/1    1.39568    1.40233 +/- 0.00092
+       88/1    1.40553    1.40242 +/- 0.00089
+       89/1    1.41033    1.40262 +/- 0.00090
+       90/1    1.39994    1.40255 +/- 0.00087
+       91/1    1.39547    1.40238 +/- 0.00087
+       92/1    1.40247    1.40238 +/- 0.00085
+       93/1    1.41071    1.40257 +/- 0.00085
+       94/1    1.40241    1.40257 +/- 0.00083
+       95/1    1.40286    1.40258 +/- 0.00081
+       96/1    1.39954    1.40251 +/- 0.00080
+       97/1    1.40240    1.40251 +/- 0.00078
+       98/1    1.40683    1.40260 +/- 0.00077
+       99/1    1.40687    1.40269 +/- 0.00076
+      100/1    1.40292    1.40269 +/- 0.00074
+      101/1    1.39989    1.40264 +/- 0.00073
+      102/1    1.40720    1.40272 +/- 0.00072
+      103/1    1.41094    1.40288 +/- 0.00073
+      104/1    1.41093    1.40303 +/- 0.00073
+      105/1    1.39685    1.40292 +/- 0.00072
+      106/1    1.40607    1.40297 +/- 0.00071
+      107/1    1.40536    1.40301 +/- 0.00070
+      108/1    1.40290    1.40301 +/- 0.00069
+      109/1    1.40425    1.40303 +/- 0.00068
+      110/1    1.39888    1.40296 +/- 0.00067
+      111/1    1.40856    1.40306 +/- 0.00066
+      112/1    1.41588    1.40326 +/- 0.00069
+      113/1    1.41446    1.40344 +/- 0.00070
+      114/1    1.39872    1.40337 +/- 0.00069
+      115/1    1.40376    1.40337 +/- 0.00068
+      116/1    1.39953    1.40331 +/- 0.00067
+      117/1    1.41145    1.40344 +/- 0.00067
+      118/1    1.40781    1.40350 +/- 0.00067
+      119/1    1.40848    1.40357 +/- 0.00066
+      120/1    1.41715    1.40377 +/- 0.00068
+      121/1    1.41477    1.40392 +/- 0.00069
+      122/1    1.41083    1.40402 +/- 0.00068
+      123/1    1.40816    1.40407 +/- 0.00068
+      124/1    1.39922    1.40401 +/- 0.00067
+      125/1    1.40448    1.40401 +/- 0.00066
+      126/1    1.40904    1.40408 +/- 0.00066
+      127/1    1.40477    1.40409 +/- 0.00065
+      128/1    1.40092    1.40405 +/- 0.00064
+      129/1    1.40531    1.40406 +/- 0.00063
+      130/1    1.41262    1.40417 +/- 0.00063
+      131/1    1.40593    1.40419 +/- 0.00063
+      132/1    1.40716    1.40423 +/- 0.00062
+      133/1    1.40512    1.40424 +/- 0.00061
+      134/1    1.39884    1.40418 +/- 0.00061
+      135/1    1.40290    1.40416 +/- 0.00060
+      136/1    1.41361    1.40427 +/- 0.00060
+      137/1    1.40695    1.40430 +/- 0.00060
+      138/1    1.41053    1.40437 +/- 0.00060
+      139/1    1.39579    1.40428 +/- 0.00060
+      140/1    1.40295    1.40426 +/- 0.00059
+      141/1    1.40924    1.40432 +/- 0.00059
+      142/1    1.40653    1.40434 +/- 0.00058
+      143/1    1.40337    1.40433 +/- 0.00057
+      144/1    1.40627    1.40435 +/- 0.00057
+      145/1    1.39430    1.40424 +/- 0.00057
+      146/1    1.39803    1.40418 +/- 0.00057
+      147/1    1.40920    1.40423 +/- 0.00057
+      148/1    1.41441    1.40434 +/- 0.00057
+      149/1    1.40774    1.40437 +/- 0.00057
+      150/1    1.40623    1.40439 +/- 0.00056
+ Creating state point statepoint.150.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 1.0899e+04 seconds
+   Time in transport only          = 1.0840e+04 seconds
+   Time in inactive batches        = 5.0884e+02 seconds
+   Time in active batches          = 1.0390e+04 seconds
+   Time synchronizing fission bank = 2.7091e+00 seconds
+     Sampling source sites         = 2.1726e+00 seconds
+     SEND/RECV source sites        = 5.1454e-01 seconds
+   Time accumulating tallies       = 1.3608e+01 seconds
+   Time writing statepoints        = 4.0213e+01 seconds
+ Total time for finalization       = 1.4378e-01 seconds
+ Total time elapsed                = 1.0900e+04 seconds
+ Calculation Rate (inactive)       = 9826.2 particles/second
+ Calculation Rate (active)         = 962.464 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.40431 +/- 0.00056
+ k-effective (Track-length)  = 1.40439 +/- 0.00056
+ k-effective (Absorption)    = 1.40375 +/- 0.00030
+ Combined k-effective        = 1.40381 +/- 0.00030
+ Leakage Fraction            = 0.09725 +/- 0.00011
+
+ Creating state point openmc_simulation_n1.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    1.21885
+        2/1    1.35009
+        3/1    1.37354
+        4/1    1.38824
+        5/1    1.39886
+        6/1    1.39702
+        7/1    1.40004
+        8/1    1.38580
+        9/1    1.39033
+       10/1    1.38680
+       11/1    1.39315
+       12/1    1.39180
+       13/1    1.39365
+       14/1    1.39537
+       15/1    1.39185
+       16/1    1.39634
+       17/1    1.40075
+       18/1    1.39029
+       19/1    1.38898
+       20/1    1.39263
+       21/1    1.39859
+       22/1    1.39857
+       23/1    1.39909
+       24/1    1.39160
+       25/1    1.39485
+       26/1    1.39448
+       27/1    1.40026
+       28/1    1.39751
+       29/1    1.40119
+       30/1    1.39089
+       31/1    1.39823
+       32/1    1.39561
+       33/1    1.39424
+       34/1    1.39288
+       35/1    1.40081
+       36/1    1.39809
+       37/1    1.39430
+       38/1    1.39227
+       39/1    1.39547
+       40/1    1.39762
+       41/1    1.39887
+       42/1    1.39483
+       43/1    1.40226
+       44/1    1.39266
+       45/1    1.39930
+       46/1    1.39338
+       47/1    1.39611
+       48/1    1.39359
+       49/1    1.38537
+       50/1    1.39012
+       51/1    1.39205
+       52/1    1.38431    1.38818 +/- 0.00387
+       53/1    1.39032    1.38889 +/- 0.00235
+       54/1    1.38960    1.38907 +/- 0.00167
+       55/1    1.39864    1.39098 +/- 0.00231
+       56/1    1.39478    1.39162 +/- 0.00199
+       57/1    1.39574    1.39220 +/- 0.00178
+       58/1    1.38794    1.39167 +/- 0.00163
+       59/1    1.39441    1.39198 +/- 0.00147
+       60/1    1.39311    1.39209 +/- 0.00132
+       61/1    1.39373    1.39224 +/- 0.00120
+       62/1    1.39836    1.39275 +/- 0.00121
+       63/1    1.40966    1.39405 +/- 0.00171
+       64/1    1.38940    1.39372 +/- 0.00162
+       65/1    1.39216    1.39361 +/- 0.00151
+       66/1    1.39300    1.39358 +/- 0.00142
+       67/1    1.39865    1.39387 +/- 0.00136
+       68/1    1.39277    1.39381 +/- 0.00129
+       69/1    1.40134    1.39421 +/- 0.00128
+       70/1    1.40361    1.39468 +/- 0.00130
+       71/1    1.39384    1.39464 +/- 0.00124
+       72/1    1.39719    1.39476 +/- 0.00119
+       73/1    1.39550    1.39479 +/- 0.00113
+       74/1    1.39516    1.39480 +/- 0.00109
+       75/1    1.39539    1.39483 +/- 0.00104
+       76/1    1.39383    1.39479 +/- 0.00100
+       77/1    1.40172    1.39505 +/- 0.00100
+       78/1    1.40261    1.39532 +/- 0.00100
+       79/1    1.39822    1.39542 +/- 0.00097
+       80/1    1.39205    1.39530 +/- 0.00094
+       81/1    1.38752    1.39505 +/- 0.00095
+       82/1    1.39727    1.39512 +/- 0.00092
+       83/1    1.39686    1.39517 +/- 0.00089
+       84/1    1.40097    1.39534 +/- 0.00088
+       85/1    1.40415    1.39560 +/- 0.00089
+       86/1    1.39448    1.39557 +/- 0.00087
+       87/1    1.39595    1.39558 +/- 0.00084
+       88/1    1.39204    1.39548 +/- 0.00083
+       89/1    1.39344    1.39543 +/- 0.00081
+       90/1    1.39915    1.39552 +/- 0.00079
+       91/1    1.40377    1.39572 +/- 0.00080
+       92/1    1.39489    1.39570 +/- 0.00078
+       93/1    1.39904    1.39578 +/- 0.00076
+       94/1    1.39752    1.39582 +/- 0.00075
+       95/1    1.39399    1.39578 +/- 0.00073
+       96/1    1.39410    1.39574 +/- 0.00072
+       97/1    1.39151    1.39565 +/- 0.00071
+       98/1    1.39073    1.39555 +/- 0.00070
+       99/1    1.38899    1.39542 +/- 0.00070
+      100/1    1.39814    1.39547 +/- 0.00069
+      101/1    1.39476    1.39546 +/- 0.00067
+      102/1    1.39711    1.39549 +/- 0.00066
+      103/1    1.38611    1.39531 +/- 0.00067
+      104/1    1.38490    1.39512 +/- 0.00069
+      105/1    1.39407    1.39510 +/- 0.00067
+      106/1    1.38962    1.39500 +/- 0.00067
+      107/1    1.38873    1.39489 +/- 0.00067
+      108/1    1.39421    1.39488 +/- 0.00066
+      109/1    1.39316    1.39485 +/- 0.00065
+      110/1    1.39331    1.39483 +/- 0.00063
+      111/1    1.40051    1.39492 +/- 0.00063
+      112/1    1.39287    1.39489 +/- 0.00062
+      113/1    1.39355    1.39487 +/- 0.00061
+      114/1    1.38908    1.39477 +/- 0.00061
+      115/1    1.39634    1.39480 +/- 0.00060
+      116/1    1.39167    1.39475 +/- 0.00059
+      117/1    1.38863    1.39466 +/- 0.00059
+      118/1    1.39198    1.39462 +/- 0.00058
+      119/1    1.39498    1.39463 +/- 0.00058
+      120/1    1.38863    1.39454 +/- 0.00057
+      121/1    1.39287    1.39452 +/- 0.00057
+      122/1    1.40111    1.39461 +/- 0.00057
+      123/1    1.38745    1.39451 +/- 0.00057
+      124/1    1.39148    1.39447 +/- 0.00056
+      125/1    1.39531    1.39448 +/- 0.00055
+      126/1    1.39090    1.39443 +/- 0.00055
+      127/1    1.40296    1.39454 +/- 0.00055
+      128/1    1.39460    1.39454 +/- 0.00054
+      129/1    1.38994    1.39449 +/- 0.00054
+      130/1    1.39121    1.39445 +/- 0.00054
+      131/1    1.38632    1.39435 +/- 0.00054
+      132/1    1.39171    1.39431 +/- 0.00053
+      133/1    1.40192    1.39440 +/- 0.00053
+      134/1    1.39525    1.39441 +/- 0.00053
+      135/1    1.38516    1.39431 +/- 0.00053
+      136/1    1.39292    1.39429 +/- 0.00053
+      137/1    1.39286    1.39427 +/- 0.00052
+      138/1    1.39921    1.39433 +/- 0.00052
+      139/1    1.39526    1.39434 +/- 0.00051
+      140/1    1.39460    1.39434 +/- 0.00051
+      141/1    1.39733    1.39438 +/- 0.00050
+      142/1    1.38994    1.39433 +/- 0.00050
+      143/1    1.39219    1.39430 +/- 0.00049
+      144/1    1.38897    1.39425 +/- 0.00049
+      145/1    1.40097    1.39432 +/- 0.00049
+      146/1    1.40619    1.39444 +/- 0.00050
+      147/1    1.39921    1.39449 +/- 0.00050
+      148/1    1.40283    1.39458 +/- 0.00050
+      149/1    1.39466    1.39458 +/- 0.00050
+      150/1    1.39634    1.39459 +/- 0.00049
+ Creating state point statepoint.150.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 1.1049e+04 seconds
+   Time in transport only          = 1.0991e+04 seconds
+   Time in inactive batches        = 4.3293e+02 seconds
+   Time in active batches          = 1.0616e+04 seconds
+   Time synchronizing fission bank = 3.3104e+00 seconds
+     Sampling source sites         = 2.7308e+00 seconds
+     SEND/RECV source sites        = 5.5720e-01 seconds
+   Time accumulating tallies       = 1.3094e+01 seconds
+   Time writing statepoints        = 4.0118e+01 seconds
+ Total time for finalization       = 3.9266e-03 seconds
+ Total time elapsed                = 1.1051e+04 seconds
+ Calculation Rate (inactive)       = 11549.1 particles/second
+ Calculation Rate (active)         = 941.94 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.39444 +/- 0.00051
+ k-effective (Track-length)  = 1.39459 +/- 0.00049
+ k-effective (Absorption)    = 1.39425 +/- 0.00029
+ Combined k-effective        = 1.39435 +/- 0.00028
+ Leakage Fraction            = 0.09747 +/- 0.00010
+
+ Creating state point openmc_simulation_n2.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    1.20150
+        2/1    1.33865
+        3/1    1.36050
+        4/1    1.37771
+        5/1    1.36840
+        6/1    1.38050
+        7/1    1.37383
+        8/1    1.38508
+        9/1    1.37276
+       10/1    1.37845
+       11/1    1.37851
+       12/1    1.38069
+       13/1    1.37315
+       14/1    1.37507
+       15/1    1.38731
+       16/1    1.38621
+       17/1    1.37777
+       18/1    1.37761
+       19/1    1.37427
+       20/1    1.38255
+       21/1    1.37203
+       22/1    1.37158
+       23/1    1.37589
+       24/1    1.37545
+       25/1    1.38011
+       26/1    1.38203
+       27/1    1.38027
+       28/1    1.37914
+       29/1    1.38093
+       30/1    1.37561
+       31/1    1.37995
+       32/1    1.38497
+       33/1    1.37655
+       34/1    1.37458
+       35/1    1.37948
+       36/1    1.38145
+       37/1    1.37677
+       38/1    1.37983
+       39/1    1.37772
+       40/1    1.38276
+       41/1    1.37567
+       42/1    1.37387
+       43/1    1.38767
+       44/1    1.38196
+       45/1    1.38161
+       46/1    1.36518
+       47/1    1.37759
+       48/1    1.37989
+       49/1    1.37643
+       50/1    1.38485
+       51/1    1.38404
+       52/1    1.39029    1.38717 +/- 0.00313
+       53/1    1.37629    1.38354 +/- 0.00405
+       54/1    1.37114    1.38044 +/- 0.00422
+       55/1    1.38353    1.38106 +/- 0.00333
+       56/1    1.38302    1.38139 +/- 0.00274
+       57/1    1.37286    1.38017 +/- 0.00261
+       58/1    1.37292    1.37926 +/- 0.00244
+       59/1    1.38420    1.37981 +/- 0.00222
+       60/1    1.37995    1.37982 +/- 0.00199
+       61/1    1.38442    1.38024 +/- 0.00184
+       62/1    1.38202    1.38039 +/- 0.00169
+       63/1    1.37603    1.38005 +/- 0.00159
+       64/1    1.37308    1.37956 +/- 0.00155
+       65/1    1.37393    1.37918 +/- 0.00149
+       66/1    1.38415    1.37949 +/- 0.00143
+       67/1    1.38015    1.37953 +/- 0.00135
+       68/1    1.37505    1.37928 +/- 0.00129
+       69/1    1.37173    1.37888 +/- 0.00129
+       70/1    1.37832    1.37886 +/- 0.00122
+       71/1    1.38326    1.37907 +/- 0.00118
+       72/1    1.38319    1.37925 +/- 0.00114
+       73/1    1.38123    1.37934 +/- 0.00109
+       74/1    1.37680    1.37923 +/- 0.00105
+       75/1    1.37880    1.37922 +/- 0.00101
+       76/1    1.37742    1.37915 +/- 0.00097
+       77/1    1.37929    1.37915 +/- 0.00093
+       78/1    1.38007    1.37918 +/- 0.00090
+       79/1    1.38207    1.37928 +/- 0.00088
+       80/1    1.37638    1.37919 +/- 0.00085
+       81/1    1.38345    1.37932 +/- 0.00083
+       82/1    1.37678    1.37925 +/- 0.00081
+       83/1    1.36664    1.37886 +/- 0.00088
+       84/1    1.38232    1.37896 +/- 0.00086
+       85/1    1.37306    1.37880 +/- 0.00085
+       86/1    1.38433    1.37895 +/- 0.00084
+       87/1    1.38805    1.37920 +/- 0.00085
+       88/1    1.38255    1.37928 +/- 0.00083
+       89/1    1.37910    1.37928 +/- 0.00081
+       90/1    1.37396    1.37915 +/- 0.00080
+       91/1    1.37190    1.37897 +/- 0.00080
+       92/1    1.38676    1.37916 +/- 0.00080
+       93/1    1.37654    1.37909 +/- 0.00079
+       94/1    1.37599    1.37902 +/- 0.00077
+       95/1    1.37831    1.37901 +/- 0.00076
+       96/1    1.37821    1.37899 +/- 0.00074
+       97/1    1.37063    1.37881 +/- 0.00074
+       98/1    1.37732    1.37878 +/- 0.00073
+       99/1    1.37738    1.37875 +/- 0.00072
+      100/1    1.37944    1.37877 +/- 0.00070
+      101/1    1.37941    1.37878 +/- 0.00069
+      102/1    1.37513    1.37871 +/- 0.00068
+      103/1    1.37799    1.37870 +/- 0.00066
+      104/1    1.38788    1.37887 +/- 0.00067
+      105/1    1.38406    1.37896 +/- 0.00067
+      106/1    1.38099    1.37900 +/- 0.00066
+      107/1    1.37857    1.37899 +/- 0.00065
+      108/1    1.37907    1.37899 +/- 0.00063
+      109/1    1.38341    1.37907 +/- 0.00063
+      110/1    1.38155    1.37911 +/- 0.00062
+      111/1    1.38379    1.37918 +/- 0.00061
+      112/1    1.39367    1.37942 +/- 0.00065
+      113/1    1.38065    1.37944 +/- 0.00064
+      114/1    1.37877    1.37943 +/- 0.00063
+      115/1    1.36933    1.37927 +/- 0.00064
+      116/1    1.38388    1.37934 +/- 0.00063
+      117/1    1.37964    1.37935 +/- 0.00062
+      118/1    1.38152    1.37938 +/- 0.00061
+      119/1    1.37179    1.37927 +/- 0.00061
+      120/1    1.38451    1.37934 +/- 0.00061
+      121/1    1.37229    1.37924 +/- 0.00061
+      122/1    1.38088    1.37927 +/- 0.00060
+      123/1    1.38697    1.37937 +/- 0.00060
+      124/1    1.37757    1.37935 +/- 0.00059
+      125/1    1.37145    1.37924 +/- 0.00060
+      126/1    1.37319    1.37916 +/- 0.00059
+      127/1    1.36992    1.37904 +/- 0.00060
+      128/1    1.38439    1.37911 +/- 0.00059
+      129/1    1.39234    1.37928 +/- 0.00061
+      130/1    1.37299    1.37920 +/- 0.00061
+      131/1    1.38391    1.37926 +/- 0.00060
+      132/1    1.38597    1.37934 +/- 0.00060
+      133/1    1.37337    1.37927 +/- 0.00060
+      134/1    1.36898    1.37914 +/- 0.00060
+      135/1    1.37330    1.37908 +/- 0.00060
+      136/1    1.37611    1.37904 +/- 0.00059
+      137/1    1.37851    1.37904 +/- 0.00059
+      138/1    1.37978    1.37904 +/- 0.00058
+      139/1    1.37575    1.37901 +/- 0.00058
+      140/1    1.37270    1.37894 +/- 0.00057
+      141/1    1.37106    1.37885 +/- 0.00057
+      142/1    1.37511    1.37881 +/- 0.00057
+      143/1    1.38052    1.37883 +/- 0.00056
+      144/1    1.38484    1.37889 +/- 0.00056
+      145/1    1.38435    1.37895 +/- 0.00056
+      146/1    1.37768    1.37894 +/- 0.00055
+      147/1    1.37612    1.37891 +/- 0.00055
+      148/1    1.37596    1.37888 +/- 0.00054
+      149/1    1.37428    1.37883 +/- 0.00054
+      150/1    1.37348    1.37878 +/- 0.00054
+ Creating state point statepoint.150.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 1.0459e+04 seconds
+   Time in transport only          = 1.0403e+04 seconds
+   Time in inactive batches        = 4.1957e+02 seconds
+   Time in active batches          = 1.0039e+04 seconds
+   Time synchronizing fission bank = 2.6365e+00 seconds
+     Sampling source sites         = 2.1061e+00 seconds
+     SEND/RECV source sites        = 5.1136e-01 seconds
+   Time accumulating tallies       = 1.1784e+01 seconds
+   Time writing statepoints        = 4.0166e+01 seconds
+ Total time for finalization       = 4.5233e-03 seconds
+ Total time elapsed                = 1.0460e+04 seconds
+ Calculation Rate (inactive)       = 11916.9 particles/second
+ Calculation Rate (active)         = 996.11 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.37866 +/- 0.00049
+ k-effective (Track-length)  = 1.37878 +/- 0.00054
+ k-effective (Absorption)    = 1.37853 +/- 0.00030
+ Combined k-effective        = 1.37856 +/- 0.00029
+ Leakage Fraction            = 0.09766 +/- 0.00010
+
+ Creating state point openmc_simulation_n3.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    1.18979
+        2/1    1.31548
+        3/1    1.34137
+        4/1    1.35536
+        5/1    1.37049
+        6/1    1.36102
+        7/1    1.35495
+        8/1    1.35915
+        9/1    1.37402
+       10/1    1.35957
+       11/1    1.35818
+       12/1    1.36202
+       13/1    1.35925
+       14/1    1.35492
+       15/1    1.36823
+       16/1    1.35415
+       17/1    1.36203
+       18/1    1.36863
+       19/1    1.36493
+       20/1    1.36457
+       21/1    1.35796
+       22/1    1.36135
+       23/1    1.36799
+       24/1    1.35523
+       25/1    1.35636
+       26/1    1.36390
+       27/1    1.35381
+       28/1    1.35650
+       29/1    1.36215
+       30/1    1.36365
+       31/1    1.34798
+       32/1    1.36456
+       33/1    1.36119
+       34/1    1.36328
+       35/1    1.35364
+       36/1    1.36114
+       37/1    1.37190
+       38/1    1.36311
+       39/1    1.36322
+       40/1    1.37039
+       41/1    1.36532
+       42/1    1.35780
+       43/1    1.35789
+       44/1    1.36890
+       45/1    1.36026
+       46/1    1.35581
+       47/1    1.36616
+       48/1    1.36156
+       49/1    1.35807
+       50/1    1.36333
+       51/1    1.35617
+       52/1    1.35569    1.35593 +/- 0.00024
+       53/1    1.36453    1.35880 +/- 0.00287
+       54/1    1.37661    1.36325 +/- 0.00489
+       55/1    1.36040    1.36268 +/- 0.00383
+       56/1    1.36295    1.36272 +/- 0.00313
+       57/1    1.34543    1.36025 +/- 0.00362
+       58/1    1.35695    1.35984 +/- 0.00316
+       59/1    1.35796    1.35963 +/- 0.00280
+       60/1    1.35650    1.35932 +/- 0.00252
+       61/1    1.35950    1.35933 +/- 0.00228
+       62/1    1.35709    1.35915 +/- 0.00209
+       63/1    1.36359    1.35949 +/- 0.00195
+       64/1    1.35429    1.35912 +/- 0.00185
+       65/1    1.36761    1.35968 +/- 0.00181
+       66/1    1.35898    1.35964 +/- 0.00169
+       67/1    1.37305    1.36043 +/- 0.00177
+       68/1    1.36511    1.36069 +/- 0.00169
+       69/1    1.35784    1.36054 +/- 0.00161
+       70/1    1.35896    1.36046 +/- 0.00153
+       71/1    1.36146    1.36051 +/- 0.00145
+       72/1    1.36108    1.36053 +/- 0.00139
+       73/1    1.36829    1.36087 +/- 0.00137
+       74/1    1.35382    1.36058 +/- 0.00134
+       75/1    1.35951    1.36053 +/- 0.00129
+       76/1    1.36544    1.36072 +/- 0.00125
+       77/1    1.35591    1.36055 +/- 0.00122
+       78/1    1.35200    1.36024 +/- 0.00121
+       79/1    1.36487    1.36040 +/- 0.00118
+       80/1    1.35561    1.36024 +/- 0.00115
+       81/1    1.36711    1.36046 +/- 0.00114
+       82/1    1.35894    1.36041 +/- 0.00110
+       83/1    1.34679    1.36000 +/- 0.00114
+       84/1    1.35857    1.35996 +/- 0.00111
+       85/1    1.35667    1.35987 +/- 0.00108
+       86/1    1.35551    1.35974 +/- 0.00106
+       87/1    1.37171    1.36007 +/- 0.00108
+       88/1    1.35637    1.35997 +/- 0.00105
+       89/1    1.36581    1.36012 +/- 0.00104
+       90/1    1.36110    1.36014 +/- 0.00101
+       91/1    1.36126    1.36017 +/- 0.00099
+       92/1    1.35964    1.36016 +/- 0.00096
+       93/1    1.36193    1.36020 +/- 0.00094
+       94/1    1.35248    1.36002 +/- 0.00094
+       95/1    1.36101    1.36005 +/- 0.00092
+       96/1    1.36120    1.36007 +/- 0.00090
+       97/1    1.36181    1.36011 +/- 0.00088
+       98/1    1.36585    1.36023 +/- 0.00087
+       99/1    1.35686    1.36016 +/- 0.00085
+      100/1    1.36475    1.36025 +/- 0.00084
+      101/1    1.35770    1.36020 +/- 0.00083
+      102/1    1.36608    1.36031 +/- 0.00082
+      103/1    1.36248    1.36036 +/- 0.00080
+      104/1    1.36259    1.36040 +/- 0.00079
+      105/1    1.36060    1.36040 +/- 0.00077
+      106/1    1.36110    1.36041 +/- 0.00076
+      107/1    1.35497    1.36032 +/- 0.00075
+      108/1    1.36979    1.36048 +/- 0.00076
+      109/1    1.36218    1.36051 +/- 0.00075
+      110/1    1.35882    1.36048 +/- 0.00073
+      111/1    1.36652    1.36058 +/- 0.00073
+      112/1    1.36866    1.36071 +/- 0.00073
+      113/1    1.36169    1.36073 +/- 0.00072
+      114/1    1.35704    1.36067 +/- 0.00071
+      115/1    1.36579    1.36075 +/- 0.00070
+      116/1    1.35724    1.36069 +/- 0.00069
+      117/1    1.35987    1.36068 +/- 0.00068
+      118/1    1.36560    1.36075 +/- 0.00068
+      119/1    1.35302    1.36064 +/- 0.00068
+      120/1    1.36023    1.36064 +/- 0.00067
+      121/1    1.36573    1.36071 +/- 0.00066
+      122/1    1.36797    1.36081 +/- 0.00066
+      123/1    1.36402    1.36085 +/- 0.00065
+      124/1    1.36921    1.36097 +/- 0.00065
+      125/1    1.35497    1.36089 +/- 0.00065
+      126/1    1.35915    1.36086 +/- 0.00064
+      127/1    1.36431    1.36091 +/- 0.00063
+      128/1    1.36289    1.36093 +/- 0.00063
+      129/1    1.35904    1.36091 +/- 0.00062
+      130/1    1.36619    1.36098 +/- 0.00061
+      131/1    1.35532    1.36091 +/- 0.00061
+      132/1    1.36217    1.36092 +/- 0.00060
+      133/1    1.35900    1.36090 +/- 0.00060
+      134/1    1.36089    1.36090 +/- 0.00059
+      135/1    1.36151    1.36091 +/- 0.00058
+      136/1    1.36026    1.36090 +/- 0.00058
+      137/1    1.35993    1.36089 +/- 0.00057
+      138/1    1.35963    1.36087 +/- 0.00056
+      139/1    1.35711    1.36083 +/- 0.00056
+      140/1    1.35619    1.36078 +/- 0.00055
+      141/1    1.35884    1.36076 +/- 0.00055
+      142/1    1.37250    1.36088 +/- 0.00056
+      143/1    1.35494    1.36082 +/- 0.00055
+      144/1    1.36503    1.36087 +/- 0.00055
+      145/1    1.35436    1.36080 +/- 0.00055
+      146/1    1.35942    1.36078 +/- 0.00054
+      147/1    1.36682    1.36085 +/- 0.00054
+      148/1    1.35142    1.36075 +/- 0.00054
+      149/1    1.35502    1.36069 +/- 0.00054
+      150/1    1.35984    1.36068 +/- 0.00054
+ Creating state point statepoint.150.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 1.1029e+04 seconds
+   Time in transport only          = 1.0974e+04 seconds
+   Time in inactive batches        = 4.2123e+02 seconds
+   Time in active batches          = 1.0607e+04 seconds
+   Time synchronizing fission bank = 2.7694e+00 seconds
+     Sampling source sites         = 2.1883e+00 seconds
+     SEND/RECV source sites        = 5.3841e-01 seconds
+   Time accumulating tallies       = 9.8966e+00 seconds
+   Time writing statepoints        = 4.0110e+01 seconds
+ Total time for finalization       = 4.8300e-03 seconds
+ Total time elapsed                = 1.1030e+04 seconds
+ Calculation Rate (inactive)       = 11870.1 particles/second
+ Calculation Rate (active)         = 942.736 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.36078 +/- 0.00053
+ k-effective (Track-length)  = 1.36068 +/- 0.00054
+ k-effective (Absorption)    = 1.36050 +/- 0.00030
+ Combined k-effective        = 1.36048 +/- 0.00030
+ Leakage Fraction            = 0.09804 +/- 0.00010
+
+ Creating state point openmc_simulation_n4.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    1.17661
+        2/1    1.30132
+        3/1    1.32196
+        4/1    1.33661
+        5/1    1.33022
+        6/1    1.33480
+        7/1    1.33804
+        8/1    1.33429
+        9/1    1.34106
+       10/1    1.34500
+       11/1    1.34328
+       12/1    1.33706
+       13/1    1.33172
+       14/1    1.33892
+       15/1    1.34285
+       16/1    1.34548
+       17/1    1.34235
+       18/1    1.34684
+       19/1    1.32946
+       20/1    1.35072
+       21/1    1.34018
+       22/1    1.34344
+       23/1    1.35027
+       24/1    1.33519
+       25/1    1.35157
+       26/1    1.34846
+       27/1    1.34985
+       28/1    1.34532
+       29/1    1.33906
+       30/1    1.33600
+       31/1    1.34891
+       32/1    1.34874
+       33/1    1.34272
+       34/1    1.34757
+       35/1    1.34864
+       36/1    1.33443
+       37/1    1.34426
+       38/1    1.34416
+       39/1    1.33194
+       40/1    1.34075
+       41/1    1.34658
+       42/1    1.34697
+       43/1    1.33657
+       44/1    1.34167
+       45/1    1.34088
+       46/1    1.34007
+       47/1    1.33949
+       48/1    1.34796
+       49/1    1.34799
+       50/1    1.34344
+       51/1    1.33797
+       52/1    1.33797    1.33797 +/- 0.00000
+       53/1    1.35122    1.34239 +/- 0.00442
+       54/1    1.34379    1.34274 +/- 0.00314
+       55/1    1.34988    1.34417 +/- 0.00282
+       56/1    1.34865    1.34491 +/- 0.00242
+       57/1    1.35036    1.34569 +/- 0.00219
+       58/1    1.34256    1.34530 +/- 0.00194
+       59/1    1.33680    1.34436 +/- 0.00195
+       60/1    1.33082    1.34300 +/- 0.00221
+       61/1    1.34538    1.34322 +/- 0.00201
+       62/1    1.34305    1.34320 +/- 0.00183
+       63/1    1.34184    1.34310 +/- 0.00169
+       64/1    1.34531    1.34326 +/- 0.00157
+       65/1    1.33478    1.34269 +/- 0.00157
+       66/1    1.34337    1.34273 +/- 0.00147
+       67/1    1.33633    1.34236 +/- 0.00143
+       68/1    1.34598    1.34256 +/- 0.00136
+       69/1    1.34618    1.34275 +/- 0.00130
+       70/1    1.34631    1.34293 +/- 0.00125
+       71/1    1.33909    1.34274 +/- 0.00120
+       72/1    1.33518    1.34240 +/- 0.00120
+       73/1    1.33767    1.34220 +/- 0.00116
+       74/1    1.34908    1.34248 +/- 0.00115
+       75/1    1.34962    1.34277 +/- 0.00114
+       76/1    1.34779    1.34296 +/- 0.00111
+       77/1    1.34334    1.34298 +/- 0.00107
+       78/1    1.35107    1.34326 +/- 0.00107
+       79/1    1.34203    1.34322 +/- 0.00103
+       80/1    1.33945    1.34310 +/- 0.00101
+       81/1    1.34069    1.34302 +/- 0.00098
+       82/1    1.34200    1.34299 +/- 0.00095
+       83/1    1.34380    1.34301 +/- 0.00092
+       84/1    1.33617    1.34281 +/- 0.00091
+       85/1    1.34740    1.34294 +/- 0.00090
+       86/1    1.34156    1.34290 +/- 0.00087
+       87/1    1.33761    1.34276 +/- 0.00086
+       88/1    1.34776    1.34289 +/- 0.00085
+       89/1    1.34110    1.34284 +/- 0.00083
+       90/1    1.34378    1.34287 +/- 0.00081
+       91/1    1.34473    1.34291 +/- 0.00079
+       92/1    1.34500    1.34296 +/- 0.00077
+       93/1    1.33067    1.34268 +/- 0.00080
+       94/1    1.34416    1.34271 +/- 0.00079
+       95/1    1.34484    1.34276 +/- 0.00077
+       96/1    1.34872    1.34289 +/- 0.00076
+       97/1    1.33999    1.34283 +/- 0.00075
+       98/1    1.34401    1.34285 +/- 0.00073
+       99/1    1.34990    1.34300 +/- 0.00073
+      100/1    1.34174    1.34297 +/- 0.00072
+      101/1    1.34048    1.34292 +/- 0.00071
+      102/1    1.35186    1.34309 +/- 0.00071
+      103/1    1.34180    1.34307 +/- 0.00070
+      104/1    1.33852    1.34298 +/- 0.00069
+      105/1    1.35166    1.34314 +/- 0.00070
+      106/1    1.34421    1.34316 +/- 0.00069
+      107/1    1.33851    1.34308 +/- 0.00068
+      108/1    1.34919    1.34319 +/- 0.00068
+      109/1    1.33500    1.34305 +/- 0.00068
+      110/1    1.33818    1.34297 +/- 0.00067
+      111/1    1.35095    1.34310 +/- 0.00067
+      112/1    1.33636    1.34299 +/- 0.00067
+      113/1    1.34165    1.34297 +/- 0.00066
+      114/1    1.34688    1.34303 +/- 0.00065
+      115/1    1.33986    1.34298 +/- 0.00064
+      116/1    1.34774    1.34305 +/- 0.00064
+      117/1    1.34825    1.34313 +/- 0.00063
+      118/1    1.34885    1.34321 +/- 0.00063
+      119/1    1.34300    1.34321 +/- 0.00062
+      120/1    1.35173    1.34333 +/- 0.00062
+      121/1    1.34330    1.34333 +/- 0.00062
+      122/1    1.33827    1.34326 +/- 0.00061
+      123/1    1.33687    1.34317 +/- 0.00061
+      124/1    1.34758    1.34323 +/- 0.00060
+      125/1    1.33657    1.34314 +/- 0.00060
+      126/1    1.35100    1.34325 +/- 0.00060
+      127/1    1.34360    1.34325 +/- 0.00060
+      128/1    1.34538    1.34328 +/- 0.00059
+      129/1    1.35692    1.34345 +/- 0.00061
+      130/1    1.33987    1.34341 +/- 0.00060
+      131/1    1.34692    1.34345 +/- 0.00059
+      132/1    1.34591    1.34348 +/- 0.00059
+      133/1    1.33971    1.34343 +/- 0.00058
+      134/1    1.33780    1.34337 +/- 0.00058
+      135/1    1.34366    1.34337 +/- 0.00057
+      136/1    1.34381    1.34338 +/- 0.00057
+      137/1    1.34301    1.34337 +/- 0.00056
+      138/1    1.34652    1.34341 +/- 0.00055
+      139/1    1.34147    1.34339 +/- 0.00055
+      140/1    1.33892    1.34334 +/- 0.00054
+      141/1    1.34620    1.34337 +/- 0.00054
+      142/1    1.34758    1.34341 +/- 0.00054
+      143/1    1.34205    1.34340 +/- 0.00053
+      144/1    1.34324    1.34340 +/- 0.00052
+      145/1    1.35163    1.34348 +/- 0.00053
+      146/1    1.35255    1.34358 +/- 0.00053
+      147/1    1.33873    1.34353 +/- 0.00053
+      148/1    1.34704    1.34356 +/- 0.00052
+      149/1    1.35113    1.34364 +/- 0.00052
+      150/1    1.34734    1.34368 +/- 0.00052
+ Creating state point statepoint.150.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 1.1219e+04 seconds
+   Time in transport only          = 1.1194e+04 seconds
+   Time in inactive batches        = 4.2600e+02 seconds
+   Time in active batches          = 1.0793e+04 seconds
+   Time synchronizing fission bank = 2.6160e+00 seconds
+     Sampling source sites         = 2.0918e+00 seconds
+     SEND/RECV source sites        = 4.8754e-01 seconds
+   Time accumulating tallies       = 1.5328e+01 seconds
+   Time writing statepoints        = 5.1262e+00 seconds
+ Total time for finalization       = 3.6098e-02 seconds
+ Total time elapsed                = 1.1220e+04 seconds
+ Calculation Rate (inactive)       = 11737.2 particles/second
+ Calculation Rate (active)         = 926.53 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.34353 +/- 0.00049
+ k-effective (Track-length)  = 1.34368 +/- 0.00052
+ k-effective (Absorption)    = 1.34328 +/- 0.00033
+ Combined k-effective        = 1.34333 +/- 0.00031
+ Leakage Fraction            = 0.09848 +/- 0.00011
+
+ Creating state point openmc_simulation_n5.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    1.10619
+        2/1    1.23394
+        3/1    1.25884
+        4/1    1.26555
+        5/1    1.26370
+        6/1    1.27918
+        7/1    1.27712
+        8/1    1.26694
+        9/1    1.26930
+       10/1    1.27598
+       11/1    1.26904
+       12/1    1.27249
+       13/1    1.28327
+       14/1    1.27842
+       15/1    1.27629
+       16/1    1.28393
+       17/1    1.27964
+       18/1    1.26852
+       19/1    1.26616
+       20/1    1.28654
+       21/1    1.27481
+       22/1    1.27032
+       23/1    1.26830
+       24/1    1.26859
+       25/1    1.26657
+       26/1    1.27417
+       27/1    1.27201
+       28/1    1.27837
+       29/1    1.27616
+       30/1    1.27940
+       31/1    1.28008
+       32/1    1.28275
+       33/1    1.28200
+       34/1    1.27297
+       35/1    1.26955
+       36/1    1.27610
+       37/1    1.27692
+       38/1    1.26656
+       39/1    1.27761
+       40/1    1.27123
+       41/1    1.27557
+       42/1    1.28152
+       43/1    1.27529
+       44/1    1.26941
+       45/1    1.27935
+       46/1    1.27727
+       47/1    1.27316
+       48/1    1.27841
+       49/1    1.27885
+       50/1    1.27669
+       51/1    1.26640
+       52/1    1.26797    1.26719 +/- 0.00078
+       53/1    1.26927    1.26788 +/- 0.00083
+       54/1    1.27157    1.26880 +/- 0.00109
+       55/1    1.26738    1.26852 +/- 0.00089
+       56/1    1.27275    1.26922 +/- 0.00101
+       57/1    1.27689    1.27032 +/- 0.00139
+       58/1    1.27070    1.27037 +/- 0.00121
+       59/1    1.27916    1.27134 +/- 0.00144
+       60/1    1.27342    1.27155 +/- 0.00131
+       61/1    1.27318    1.27170 +/- 0.00119
+       62/1    1.27169    1.27170 +/- 0.00109
+       63/1    1.26557    1.27123 +/- 0.00111
+       64/1    1.27777    1.27169 +/- 0.00113
+       65/1    1.27267    1.27176 +/- 0.00105
+       66/1    1.27959    1.27225 +/- 0.00110
+       67/1    1.27383    1.27234 +/- 0.00104
+       68/1    1.28000    1.27277 +/- 0.00106
+       69/1    1.26677    1.27245 +/- 0.00106
+       70/1    1.28101    1.27288 +/- 0.00109
+       71/1    1.27679    1.27307 +/- 0.00105
+       72/1    1.26536    1.27272 +/- 0.00106
+       73/1    1.27499    1.27281 +/- 0.00102
+       74/1    1.27764    1.27302 +/- 0.00100
+       75/1    1.26654    1.27276 +/- 0.00099
+       76/1    1.27009    1.27265 +/- 0.00096
+       77/1    1.26738    1.27246 +/- 0.00094
+       78/1    1.27287    1.27247 +/- 0.00091
+       79/1    1.27876    1.27269 +/- 0.00090
+       80/1    1.27255    1.27269 +/- 0.00087
+       81/1    1.27344    1.27271 +/- 0.00084
+       82/1    1.27021    1.27263 +/- 0.00082
+       83/1    1.27144    1.27260 +/- 0.00080
+       84/1    1.27562    1.27268 +/- 0.00078
+       85/1    1.26783    1.27255 +/- 0.00077
+       86/1    1.28597    1.27292 +/- 0.00083
+       87/1    1.27846    1.27307 +/- 0.00082
+       88/1    1.27486    1.27312 +/- 0.00080
+       89/1    1.27327    1.27312 +/- 0.00078
+       90/1    1.27788    1.27324 +/- 0.00077
+       91/1    1.27526    1.27329 +/- 0.00076
+       92/1    1.27542    1.27334 +/- 0.00074
+       93/1    1.28006    1.27349 +/- 0.00074
+       94/1    1.27669    1.27357 +/- 0.00072
+       95/1    1.26624    1.27340 +/- 0.00073
+       96/1    1.27174    1.27337 +/- 0.00071
+       97/1    1.27467    1.27340 +/- 0.00070
+       98/1    1.27026    1.27333 +/- 0.00069
+       99/1    1.27119    1.27329 +/- 0.00067
+      100/1    1.26458    1.27311 +/- 0.00068
+      101/1    1.26290    1.27291 +/- 0.00070
+      102/1    1.27487    1.27295 +/- 0.00069
+      103/1    1.27729    1.27303 +/- 0.00068
+      104/1    1.26586    1.27290 +/- 0.00068
+      105/1    1.28242    1.27307 +/- 0.00069
+      106/1    1.27697    1.27314 +/- 0.00068
+      107/1    1.27335    1.27315 +/- 0.00067
+      108/1    1.27298    1.27314 +/- 0.00065
+      109/1    1.26866    1.27307 +/- 0.00065
+      110/1    1.26781    1.27298 +/- 0.00064
+      111/1    1.27192    1.27296 +/- 0.00063
+      112/1    1.27132    1.27294 +/- 0.00062
+      113/1    1.27726    1.27300 +/- 0.00062
+      114/1    1.27843    1.27309 +/- 0.00061
+      115/1    1.27050    1.27305 +/- 0.00060
+      116/1    1.28352    1.27321 +/- 0.00062
+      117/1    1.27394    1.27322 +/- 0.00061
+      118/1    1.27265    1.27321 +/- 0.00060
+      119/1    1.27200    1.27319 +/- 0.00059
+      120/1    1.26542    1.27308 +/- 0.00059
+      121/1    1.26331    1.27294 +/- 0.00060
+      122/1    1.27625    1.27299 +/- 0.00059
+      123/1    1.27246    1.27298 +/- 0.00058
+      124/1    1.27080    1.27295 +/- 0.00058
+      125/1    1.27677    1.27300 +/- 0.00057
+      126/1    1.27395    1.27302 +/- 0.00056
+      127/1    1.27991    1.27311 +/- 0.00056
+      128/1    1.27102    1.27308 +/- 0.00056
+      129/1    1.27331    1.27308 +/- 0.00055
+      130/1    1.26971    1.27304 +/- 0.00055
+      131/1    1.27033    1.27301 +/- 0.00054
+      132/1    1.26691    1.27293 +/- 0.00054
+      133/1    1.26531    1.27284 +/- 0.00054
+      134/1    1.27174    1.27283 +/- 0.00053
+      135/1    1.27371    1.27284 +/- 0.00053
+      136/1    1.27128    1.27282 +/- 0.00052
+      137/1    1.27581    1.27285 +/- 0.00052
+      138/1    1.28383    1.27298 +/- 0.00053
+      139/1    1.27912    1.27305 +/- 0.00052
+      140/1    1.27057    1.27302 +/- 0.00052
+      141/1    1.27905    1.27309 +/- 0.00052
+      142/1    1.27452    1.27310 +/- 0.00051
+      143/1    1.27412    1.27311 +/- 0.00051
+      144/1    1.27062    1.27309 +/- 0.00050
+      145/1    1.27906    1.27315 +/- 0.00050
+      146/1    1.28208    1.27324 +/- 0.00050
+      147/1    1.26031    1.27311 +/- 0.00052
+      148/1    1.28904    1.27327 +/- 0.00054
+      149/1    1.27044    1.27324 +/- 0.00053
+      150/1    1.27834    1.27329 +/- 0.00053
+ Creating state point statepoint.150.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 1.0896e+04 seconds
+   Time in transport only          = 1.0840e+04 seconds
+   Time in inactive batches        = 4.4601e+02 seconds
+   Time in active batches          = 1.0450e+04 seconds
+   Time synchronizing fission bank = 2.5741e+00 seconds
+     Sampling source sites         = 2.0452e+00 seconds
+     SEND/RECV source sites        = 5.0730e-01 seconds
+   Time accumulating tallies       = 1.2158e+01 seconds
+   Time writing statepoints        = 4.0129e+01 seconds
+ Total time for finalization       = 4.3516e-03 seconds
+ Total time elapsed                = 1.0897e+04 seconds
+ Calculation Rate (inactive)       = 11210.4 particles/second
+ Calculation Rate (active)         = 956.955 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.27320 +/- 0.00049
+ k-effective (Track-length)  = 1.27329 +/- 0.00053
+ k-effective (Absorption)    = 1.27345 +/- 0.00030
+ Combined k-effective        = 1.27336 +/- 0.00027
+ Leakage Fraction            = 0.10098 +/- 0.00010
+
+ Creating state point openmc_simulation_n6.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    1.04173
+        2/1    1.16315
+        3/1    1.18373
+        4/1    1.19140
+        5/1    1.19517
+        6/1    1.19668
+        7/1    1.19990
+        8/1    1.20979
+        9/1    1.19616
+       10/1    1.20632
+       11/1    1.19071
+       12/1    1.20149
+       13/1    1.20232
+       14/1    1.19678
+       15/1    1.19800
+       16/1    1.20406
+       17/1    1.19461
+       18/1    1.19987
+       19/1    1.19713
+       20/1    1.20186
+       21/1    1.20667
+       22/1    1.19154
+       23/1    1.20097
+       24/1    1.19928
+       25/1    1.20607
+       26/1    1.19987
+       27/1    1.20301
+       28/1    1.19610
+       29/1    1.19206
+       30/1    1.21047
+       31/1    1.19358
+       32/1    1.19522
+       33/1    1.19800
+       34/1    1.20947
+       35/1    1.20898
+       36/1    1.19753
+       37/1    1.20041
+       38/1    1.19839
+       39/1    1.19429
+       40/1    1.20083
+       41/1    1.20358
+       42/1    1.20619
+       43/1    1.19873
+       44/1    1.19618
+       45/1    1.19896
+       46/1    1.19499
+       47/1    1.19714
+       48/1    1.19697
+       49/1    1.20250
+       50/1    1.19771
+       51/1    1.19768
+       52/1    1.18851    1.19310 +/- 0.00459
+       53/1    1.19576    1.19398 +/- 0.00279
+       54/1    1.20241    1.19609 +/- 0.00289
+       55/1    1.20380    1.19763 +/- 0.00272
+       56/1    1.19768    1.19764 +/- 0.00222
+       57/1    1.20339    1.19846 +/- 0.00205
+       58/1    1.19718    1.19830 +/- 0.00178
+       59/1    1.19909    1.19839 +/- 0.00157
+       60/1    1.20701    1.19925 +/- 0.00165
+       61/1    1.20116    1.19942 +/- 0.00150
+       62/1    1.20974    1.20028 +/- 0.00162
+       63/1    1.20732    1.20083 +/- 0.00158
+       64/1    1.18975    1.20003 +/- 0.00167
+       65/1    1.19981    1.20002 +/- 0.00155
+       66/1    1.20098    1.20008 +/- 0.00145
+       67/1    1.18887    1.19942 +/- 0.00152
+       68/1    1.19426    1.19913 +/- 0.00146
+       69/1    1.19426    1.19888 +/- 0.00140
+       70/1    1.19865    1.19887 +/- 0.00133
+       71/1    1.19629    1.19874 +/- 0.00127
+       72/1    1.19815    1.19872 +/- 0.00121
+       73/1    1.20116    1.19882 +/- 0.00116
+       74/1    1.19294    1.19858 +/- 0.00114
+       75/1    1.20239    1.19873 +/- 0.00110
+       76/1    1.19233    1.19848 +/- 0.00109
+       77/1    1.19240    1.19826 +/- 0.00107
+       78/1    1.20291    1.19842 +/- 0.00105
+       79/1    1.20580    1.19868 +/- 0.00104
+       80/1    1.19885    1.19869 +/- 0.00101
+       81/1    1.20051    1.19874 +/- 0.00097
+       82/1    1.19693    1.19869 +/- 0.00095
+       83/1    1.20230    1.19880 +/- 0.00092
+       84/1    1.21564    1.19929 +/- 0.00102
+       85/1    1.20674    1.19950 +/- 0.00102
+       86/1    1.20155    1.19956 +/- 0.00099
+       87/1    1.20748    1.19978 +/- 0.00099
+       88/1    1.19390    1.19962 +/- 0.00097
+       89/1    1.20680    1.19981 +/- 0.00096
+       90/1    1.20274    1.19988 +/- 0.00094
+       91/1    1.19456    1.19975 +/- 0.00093
+       92/1    1.20149    1.19979 +/- 0.00091
+       93/1    1.20742    1.19997 +/- 0.00090
+       94/1    1.20075    1.19999 +/- 0.00088
+       95/1    1.19627    1.19990 +/- 0.00087
+       96/1    1.19115    1.19971 +/- 0.00087
+       97/1    1.20434    1.19981 +/- 0.00086
+       98/1    1.20132    1.19984 +/- 0.00084
+       99/1    1.20225    1.19989 +/- 0.00082
+      100/1    1.19522    1.19980 +/- 0.00081
+      101/1    1.20393    1.19988 +/- 0.00080
+      102/1    1.20937    1.20006 +/- 0.00080
+      103/1    1.20109    1.20008 +/- 0.00079
+      104/1    1.19358    1.19996 +/- 0.00078
+      105/1    1.20423    1.20004 +/- 0.00077
+      106/1    1.20530    1.20013 +/- 0.00077
+      107/1    1.19790    1.20009 +/- 0.00075
+      108/1    1.20066    1.20010 +/- 0.00074
+      109/1    1.19198    1.19997 +/- 0.00074
+      110/1    1.19147    1.19982 +/- 0.00074
+      111/1    1.19506    1.19975 +/- 0.00073
+      112/1    1.20228    1.19979 +/- 0.00072
+      113/1    1.20115    1.19981 +/- 0.00071
+      114/1    1.20744    1.19993 +/- 0.00071
+      115/1    1.20456    1.20000 +/- 0.00070
+      116/1    1.19467    1.19992 +/- 0.00070
+      117/1    1.20266    1.19996 +/- 0.00069
+      118/1    1.19555    1.19989 +/- 0.00068
+      119/1    1.19884    1.19988 +/- 0.00067
+      120/1    1.20202    1.19991 +/- 0.00066
+      121/1    1.19853    1.19989 +/- 0.00065
+      122/1    1.20408    1.19995 +/- 0.00065
+      123/1    1.20345    1.20000 +/- 0.00064
+      124/1    1.20154    1.20002 +/- 0.00063
+      125/1    1.19826    1.19999 +/- 0.00062
+      126/1    1.21069    1.20013 +/- 0.00063
+      127/1    1.20113    1.20015 +/- 0.00062
+      128/1    1.20272    1.20018 +/- 0.00062
+      129/1    1.20422    1.20023 +/- 0.00061
+      130/1    1.19653    1.20018 +/- 0.00060
+      131/1    1.20290    1.20022 +/- 0.00060
+      132/1    1.19565    1.20016 +/- 0.00059
+      133/1    1.20201    1.20018 +/- 0.00059
+      134/1    1.20021    1.20018 +/- 0.00058
+      135/1    1.19614    1.20014 +/- 0.00057
+      136/1    1.20047    1.20014 +/- 0.00057
+      137/1    1.21219    1.20028 +/- 0.00058
+      138/1    1.19040    1.20017 +/- 0.00058
+      139/1    1.20435    1.20021 +/- 0.00058
+      140/1    1.19969    1.20021 +/- 0.00057
+      141/1    1.20267    1.20024 +/- 0.00056
+      142/1    1.19919    1.20022 +/- 0.00056
+      143/1    1.19889    1.20021 +/- 0.00055
+      144/1    1.20372    1.20025 +/- 0.00055
+      145/1    1.19813    1.20023 +/- 0.00054
+      146/1    1.19845    1.20021 +/- 0.00054
+      147/1    1.20167    1.20022 +/- 0.00053
+      148/1    1.19888    1.20021 +/- 0.00053
+      149/1    1.20340    1.20024 +/- 0.00052
+      150/1    1.20361    1.20027 +/- 0.00052
+ Creating state point statepoint.150.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 1.1876e+04 seconds
+   Time in transport only          = 1.1824e+04 seconds
+   Time in inactive batches        = 4.4257e+02 seconds
+   Time in active batches          = 1.1434e+04 seconds
+   Time synchronizing fission bank = 2.5322e+00 seconds
+     Sampling source sites         = 2.0061e+00 seconds
+     SEND/RECV source sites        = 4.9845e-01 seconds
+   Time accumulating tallies       = 1.3846e+01 seconds
+   Time writing statepoints        = 3.5124e+01 seconds
+ Total time for finalization       = 3.9792e-02 seconds
+ Total time elapsed                = 1.1878e+04 seconds
+ Calculation Rate (inactive)       = 11297.8 particles/second
+ Calculation Rate (active)         = 874.59 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.20029 +/- 0.00050
+ k-effective (Track-length)  = 1.20027 +/- 0.00052
+ k-effective (Absorption)    = 1.20022 +/- 0.00030
+ Combined k-effective        = 1.20023 +/- 0.00027
+ Leakage Fraction            = 0.10477 +/- 0.00012
+
+ Creating state point openmc_simulation_n7.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    0.97232
+        2/1    1.08179
+        3/1    1.11643
+        4/1    1.11565
+        5/1    1.11561
+        6/1    1.11601
+        7/1    1.12371
+        8/1    1.11908
+        9/1    1.11465
+       10/1    1.11911
+       11/1    1.12099
+       12/1    1.12400
+       13/1    1.11996
+       14/1    1.11363
+       15/1    1.11938
+       16/1    1.11609
+       17/1    1.11860
+       18/1    1.11966
+       19/1    1.11666
+       20/1    1.12010
+       21/1    1.12935
+       22/1    1.12183
+       23/1    1.12365
+       24/1    1.12056
+       25/1    1.11695
+       26/1    1.12817
+       27/1    1.13065
+       28/1    1.11899
+       29/1    1.11994
+       30/1    1.11778
+       31/1    1.12031
+       32/1    1.12176
+       33/1    1.12791
+       34/1    1.11699
+       35/1    1.11571
+       36/1    1.11866
+       37/1    1.11090
+       38/1    1.12438
+       39/1    1.12518
+       40/1    1.12961
+       41/1    1.12001
+       42/1    1.12810
+       43/1    1.12320
+       44/1    1.12365
+       45/1    1.12534
+       46/1    1.12226
+       47/1    1.11879
+       48/1    1.11824
+       49/1    1.12836
+       50/1    1.12246
+       51/1    1.12004
+       52/1    1.11506    1.11755 +/- 0.00249
+       53/1    1.12352    1.11954 +/- 0.00245
+       54/1    1.12208    1.12018 +/- 0.00185
+       55/1    1.12370    1.12088 +/- 0.00160
+       56/1    1.11707    1.12025 +/- 0.00145
+       57/1    1.11610    1.11965 +/- 0.00136
+       58/1    1.10865    1.11828 +/- 0.00181
+       59/1    1.12492    1.11902 +/- 0.00176
+       60/1    1.12062    1.11918 +/- 0.00158
+       61/1    1.11708    1.11899 +/- 0.00144
+       62/1    1.12822    1.11976 +/- 0.00153
+       63/1    1.11711    1.11955 +/- 0.00142
+       64/1    1.11866    1.11949 +/- 0.00131
+       65/1    1.12127    1.11961 +/- 0.00123
+       66/1    1.12123    1.11971 +/- 0.00115
+       67/1    1.12611    1.12009 +/- 0.00115
+       68/1    1.12106    1.12014 +/- 0.00108
+       69/1    1.11826    1.12004 +/- 0.00103
+       70/1    1.12223    1.12015 +/- 0.00098
+       71/1    1.11687    1.11999 +/- 0.00095
+       72/1    1.12277    1.12012 +/- 0.00091
+       73/1    1.12397    1.12029 +/- 0.00089
+       74/1    1.11664    1.12014 +/- 0.00086
+       75/1    1.12085    1.12016 +/- 0.00083
+       76/1    1.12481    1.12034 +/- 0.00082
+       77/1    1.12127    1.12038 +/- 0.00079
+       78/1    1.12289    1.12047 +/- 0.00076
+       79/1    1.12409    1.12059 +/- 0.00075
+       80/1    1.12605    1.12077 +/- 0.00074
+       81/1    1.11507    1.12059 +/- 0.00074
+       82/1    1.11582    1.12044 +/- 0.00073
+       83/1    1.11691    1.12033 +/- 0.00072
+       84/1    1.11524    1.12018 +/- 0.00071
+       85/1    1.11777    1.12011 +/- 0.00070
+       86/1    1.12113    1.12014 +/- 0.00068
+       87/1    1.12548    1.12029 +/- 0.00067
+       88/1    1.12071    1.12030 +/- 0.00066
+       89/1    1.11364    1.12013 +/- 0.00066
+       90/1    1.11547    1.12001 +/- 0.00066
+       91/1    1.12048    1.12002 +/- 0.00064
+       92/1    1.11205    1.11983 +/- 0.00065
+       93/1    1.11423    1.11970 +/- 0.00065
+       94/1    1.12130    1.11974 +/- 0.00064
+       95/1    1.12192    1.11979 +/- 0.00062
+       96/1    1.11903    1.11977 +/- 0.00061
+       97/1    1.11812    1.11974 +/- 0.00060
+       98/1    1.11919    1.11972 +/- 0.00059
+       99/1    1.12339    1.11980 +/- 0.00058
+      100/1    1.11864    1.11978 +/- 0.00057
+      101/1    1.11587    1.11970 +/- 0.00056
+      102/1    1.11696    1.11965 +/- 0.00055
+      103/1    1.11652    1.11959 +/- 0.00055
+      104/1    1.12065    1.11961 +/- 0.00054
+      105/1    1.12152    1.11964 +/- 0.00053
+      106/1    1.12152    1.11968 +/- 0.00052
+      107/1    1.11348    1.11957 +/- 0.00052
+      108/1    1.11642    1.11951 +/- 0.00051
+      109/1    1.12787    1.11965 +/- 0.00053
+      110/1    1.11494    1.11958 +/- 0.00052
+      111/1    1.11363    1.11948 +/- 0.00052
+      112/1    1.12088    1.11950 +/- 0.00052
+      113/1    1.11040    1.11936 +/- 0.00053
+      114/1    1.11976    1.11936 +/- 0.00052
+      115/1    1.12708    1.11948 +/- 0.00052
+      116/1    1.12366    1.11954 +/- 0.00052
+      117/1    1.12193    1.11958 +/- 0.00051
+      118/1    1.12060    1.11959 +/- 0.00051
+      119/1    1.12138    1.11962 +/- 0.00050
+      120/1    1.12215    1.11966 +/- 0.00049
+      121/1    1.11820    1.11964 +/- 0.00049
+      122/1    1.11763    1.11961 +/- 0.00048
+      123/1    1.12396    1.11967 +/- 0.00048
+      124/1    1.12043    1.11968 +/- 0.00047
+      125/1    1.11706    1.11964 +/- 0.00047
+      126/1    1.12194    1.11967 +/- 0.00046
+      127/1    1.12159    1.11970 +/- 0.00046
+      128/1    1.11770    1.11967 +/- 0.00045
+      129/1    1.11606    1.11963 +/- 0.00045
+      130/1    1.12631    1.11971 +/- 0.00045
+      131/1    1.11515    1.11965 +/- 0.00045
+      132/1    1.12361    1.11970 +/- 0.00045
+      133/1    1.12097    1.11972 +/- 0.00044
+      134/1    1.11876    1.11971 +/- 0.00043
+      135/1    1.12357    1.11975 +/- 0.00043
+      136/1    1.11514    1.11970 +/- 0.00043
+      137/1    1.12094    1.11971 +/- 0.00043
+      138/1    1.11961    1.11971 +/- 0.00042
+      139/1    1.10605    1.11956 +/- 0.00044
+      140/1    1.13079    1.11968 +/- 0.00046
+      141/1    1.11856    1.11967 +/- 0.00045
+      142/1    1.11549    1.11962 +/- 0.00045
+      143/1    1.11828    1.11961 +/- 0.00044
+      144/1    1.12030    1.11962 +/- 0.00044
+      145/1    1.11793    1.11960 +/- 0.00043
+      146/1    1.11882    1.11959 +/- 0.00043
+      147/1    1.12519    1.11965 +/- 0.00043
+      148/1    1.12053    1.11966 +/- 0.00043
+      149/1    1.12122    1.11967 +/- 0.00042
+      150/1    1.11927    1.11967 +/- 0.00042
+ Creating state point statepoint.150.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 1.1900e+04 seconds
+   Time in transport only          = 1.1871e+04 seconds
+   Time in inactive batches        = 4.5342e+02 seconds
+   Time in active batches          = 1.1447e+04 seconds
+   Time synchronizing fission bank = 2.7215e+00 seconds
+     Sampling source sites         = 2.1642e+00 seconds
+     SEND/RECV source sites        = 5.3138e-01 seconds
+   Time accumulating tallies       = 1.4262e+01 seconds
+   Time writing statepoints        = 1.0542e+01 seconds
+ Total time for finalization       = 1.6372e-01 seconds
+ Total time elapsed                = 1.1901e+04 seconds
+ Calculation Rate (inactive)       = 11027.4 particles/second
+ Calculation Rate (active)         = 873.624 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.11955 +/- 0.00041
+ k-effective (Track-length)  = 1.11967 +/- 0.00042
+ k-effective (Absorption)    = 1.12032 +/- 0.00033
+ Combined k-effective        = 1.12007 +/- 0.00030
+ Leakage Fraction            = 0.10986 +/- 0.00011
+
+ Creating state point openmc_simulation_n8.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    0.89011
+        2/1    0.99445
+        3/1    1.01883
+        4/1    1.02082
+        5/1    1.02547
+        6/1    1.02152
+        7/1    1.02289
+        8/1    1.02138
+        9/1    1.02190
+       10/1    1.02289
+       11/1    1.02827
+       12/1    1.03306
+       13/1    1.02511
+       14/1    1.02570
+       15/1    1.02761
+       16/1    1.02225
+       17/1    1.02362
+       18/1    1.02721
+       19/1    1.03414
+       20/1    1.02954
+       21/1    1.02208
+       22/1    1.02164
+       23/1    1.02756
+       24/1    1.03569
+       25/1    1.02924
+       26/1    1.03223
+       27/1    1.01880
+       28/1    1.02937
+       29/1    1.02668
+       30/1    1.01893
+       31/1    1.02474
+       32/1    1.03003
+       33/1    1.03182
+       34/1    1.02635
+       35/1    1.01997
+       36/1    1.02480
+       37/1    1.02975
+       38/1    1.02805
+       39/1    1.02424
+       40/1    1.02769
+       41/1    1.02192
+       42/1    1.03107
+       43/1    1.03078
+       44/1    1.02745
+       45/1    1.02689
+       46/1    1.03443
+       47/1    1.02036
+       48/1    1.03072
+       49/1    1.03169
+       50/1    1.03177
+       51/1    1.01816
+       52/1    1.02665    1.02240 +/- 0.00424
+       53/1    1.02127    1.02202 +/- 0.00248
+       54/1    1.02770    1.02344 +/- 0.00226
+       55/1    1.01914    1.02258 +/- 0.00195
+       56/1    1.02308    1.02266 +/- 0.00159
+       57/1    1.02845    1.02349 +/- 0.00158
+       58/1    1.02997    1.02430 +/- 0.00159
+       59/1    1.02902    1.02483 +/- 0.00150
+       60/1    1.02428    1.02477 +/- 0.00134
+       61/1    1.02723    1.02499 +/- 0.00123
+       62/1    1.02670    1.02514 +/- 0.00113
+       63/1    1.02761    1.02533 +/- 0.00106
+       64/1    1.03404    1.02595 +/- 0.00116
+       65/1    1.02891    1.02615 +/- 0.00110
+       66/1    1.02664    1.02618 +/- 0.00103
+       67/1    1.02679    1.02621 +/- 0.00097
+       68/1    1.02985    1.02642 +/- 0.00093
+       69/1    1.02228    1.02620 +/- 0.00091
+       70/1    1.02544    1.02616 +/- 0.00086
+       71/1    1.02957    1.02632 +/- 0.00084
+       72/1    1.03024    1.02650 +/- 0.00082
+       73/1    1.02795    1.02656 +/- 0.00078
+       74/1    1.02448    1.02648 +/- 0.00076
+       75/1    1.01772    1.02613 +/- 0.00081
+       76/1    1.02623    1.02613 +/- 0.00077
+       77/1    1.02772    1.02619 +/- 0.00075
+       78/1    1.02185    1.02603 +/- 0.00074
+       79/1    1.02681    1.02606 +/- 0.00071
+       80/1    1.02344    1.02597 +/- 0.00069
+       81/1    1.02509    1.02595 +/- 0.00067
+       82/1    1.02656    1.02596 +/- 0.00065
+       83/1    1.03072    1.02611 +/- 0.00065
+       84/1    1.02550    1.02609 +/- 0.00063
+       85/1    1.02416    1.02604 +/- 0.00061
+       86/1    1.03252    1.02622 +/- 0.00062
+       87/1    1.02194    1.02610 +/- 0.00061
+       88/1    1.02602    1.02610 +/- 0.00060
+       89/1    1.01996    1.02594 +/- 0.00060
+       90/1    1.02829    1.02600 +/- 0.00059
+       91/1    1.02924    1.02608 +/- 0.00058
+       92/1    1.03114    1.02620 +/- 0.00058
+       93/1    1.01989    1.02605 +/- 0.00059
+       94/1    1.01751    1.02586 +/- 0.00060
+       95/1    1.02311    1.02580 +/- 0.00059
+       96/1    1.02858    1.02586 +/- 0.00058
+       97/1    1.02871    1.02592 +/- 0.00057
+       98/1    1.02963    1.02600 +/- 0.00057
+       99/1    1.03650    1.02621 +/- 0.00060
+      100/1    1.02833    1.02625 +/- 0.00059
+      101/1    1.02980    1.02632 +/- 0.00058
+      102/1    1.03370    1.02646 +/- 0.00058
+      103/1    1.02922    1.02652 +/- 0.00058
+      104/1    1.02095    1.02641 +/- 0.00057
+      105/1    1.02625    1.02641 +/- 0.00056
+      106/1    1.02651    1.02641 +/- 0.00055
+      107/1    1.02312    1.02635 +/- 0.00055
+      108/1    1.02741    1.02637 +/- 0.00054
+      109/1    1.03054    1.02644 +/- 0.00053
+      110/1    1.03716    1.02662 +/- 0.00055
+      111/1    1.02593    1.02661 +/- 0.00054
+      112/1    1.02391    1.02657 +/- 0.00054
+      113/1    1.02636    1.02656 +/- 0.00053
+      114/1    1.02172    1.02649 +/- 0.00053
+      115/1    1.02795    1.02651 +/- 0.00052
+      116/1    1.02463    1.02648 +/- 0.00051
+      117/1    1.02169    1.02641 +/- 0.00051
+      118/1    1.02664    1.02641 +/- 0.00050
+      119/1    1.01727    1.02628 +/- 0.00051
+      120/1    1.02009    1.02619 +/- 0.00051
+      121/1    1.02313    1.02615 +/- 0.00051
+      122/1    1.03166    1.02623 +/- 0.00050
+      123/1    1.02888    1.02626 +/- 0.00050
+      124/1    1.01887    1.02616 +/- 0.00050
+      125/1    1.03660    1.02630 +/- 0.00051
+      126/1    1.02277    1.02626 +/- 0.00051
+      127/1    1.03524    1.02637 +/- 0.00052
+      128/1    1.03224    1.02645 +/- 0.00052
+      129/1    1.02818    1.02647 +/- 0.00051
+      130/1    1.01536    1.02633 +/- 0.00052
+      131/1    1.02405    1.02630 +/- 0.00052
+      132/1    1.02744    1.02632 +/- 0.00051
+      133/1    1.02834    1.02634 +/- 0.00050
+      134/1    1.02889    1.02637 +/- 0.00050
+      135/1    1.02532    1.02636 +/- 0.00049
+      136/1    1.02493    1.02634 +/- 0.00049
+      137/1    1.02720    1.02635 +/- 0.00048
+      138/1    1.02819    1.02637 +/- 0.00048
+      139/1    1.02695    1.02638 +/- 0.00047
+      140/1    1.02650    1.02638 +/- 0.00047
+      141/1    1.02798    1.02640 +/- 0.00046
+      142/1    1.02311    1.02636 +/- 0.00046
+      143/1    1.03152    1.02642 +/- 0.00046
+      144/1    1.02874    1.02644 +/- 0.00045
+      145/1    1.02930    1.02647 +/- 0.00045
+      146/1    1.03109    1.02652 +/- 0.00045
+      147/1    1.02733    1.02653 +/- 0.00044
+      148/1    1.02433    1.02651 +/- 0.00044
+      149/1    1.02467    1.02649 +/- 0.00043
+      150/1    1.01854    1.02641 +/- 0.00044
+ Creating state point statepoint.150.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 1.3473e+04 seconds
+   Time in transport only          = 1.3414e+04 seconds
+   Time in inactive batches        = 4.7760e+02 seconds
+   Time in active batches          = 1.2995e+04 seconds
+   Time synchronizing fission bank = 2.5838e+00 seconds
+     Sampling source sites         = 2.0503e+00 seconds
+     SEND/RECV source sites        = 5.1225e-01 seconds
+   Time accumulating tallies       = 1.4314e+01 seconds
+   Time writing statepoints        = 4.0165e+01 seconds
+ Total time for finalization       = 5.9245e-02 seconds
+ Total time elapsed                = 1.3474e+04 seconds
+ Calculation Rate (inactive)       = 10469 particles/second
+ Calculation Rate (active)         = 769.525 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.02635 +/- 0.00043
+ k-effective (Track-length)  = 1.02641 +/- 0.00044
+ k-effective (Absorption)    = 1.02646 +/- 0.00033
+ Combined k-effective        = 1.02644 +/- 0.00030
+ Leakage Fraction            = 0.11746 +/- 0.00011
+
+ Creating state point openmc_simulation_n9.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    0.78367
+        2/1    0.88487
+        3/1    0.89927
+        4/1    0.90708
+        5/1    0.90743
+        6/1    0.90514
+        7/1    0.90864
+        8/1    0.90681
+        9/1    0.90766
+       10/1    0.90418
+       11/1    0.90997
+       12/1    0.90748
+       13/1    0.90856
+       14/1    0.90409
+       15/1    0.91244
+       16/1    0.90932
+       17/1    0.91445
+       18/1    0.91585
+       19/1    0.90981
+       20/1    0.90677
+       21/1    0.90627
+       22/1    0.90961
+       23/1    0.91219
+       24/1    0.90570
+       25/1    0.91031
+       26/1    0.91337
+       27/1    0.90892
+       28/1    0.91178
+       29/1    0.90973
+       30/1    0.91690
+       31/1    0.90763
+       32/1    0.90397
+       33/1    0.91131
+       34/1    0.91075
+       35/1    0.91301
+       36/1    0.91860
+       37/1    0.91159
+       38/1    0.90612
+       39/1    0.90349
+       40/1    0.90645
+       41/1    0.91049
+       42/1    0.91185
+       43/1    0.90670
+       44/1    0.90857
+       45/1    0.91182
+       46/1    0.91394
+       47/1    0.90588
+       48/1    0.90758
+       49/1    0.91434
+       50/1    0.91080
+       51/1    0.90271
+       52/1    0.90903    0.90587 +/- 0.00316
+       53/1    0.90487    0.90554 +/- 0.00185
+       54/1    0.91230    0.90723 +/- 0.00214
+       55/1    0.90542    0.90687 +/- 0.00170
+       56/1    0.91330    0.90794 +/- 0.00175
+       57/1    0.91307    0.90867 +/- 0.00165
+       58/1    0.90375    0.90806 +/- 0.00156
+       59/1    0.90420    0.90763 +/- 0.00144
+       60/1    0.90865    0.90773 +/- 0.00129
+       61/1    0.91034    0.90797 +/- 0.00119
+       62/1    0.90776    0.90795 +/- 0.00109
+       63/1    0.90990    0.90810 +/- 0.00101
+       64/1    0.91609    0.90867 +/- 0.00110
+       65/1    0.90958    0.90873 +/- 0.00102
+       66/1    0.90759    0.90866 +/- 0.00096
+       67/1    0.91432    0.90899 +/- 0.00096
+       68/1    0.91053    0.90908 +/- 0.00091
+       69/1    0.91181    0.90922 +/- 0.00087
+       70/1    0.91116    0.90932 +/- 0.00083
+       71/1    0.91082    0.90939 +/- 0.00080
+       72/1    0.91095    0.90946 +/- 0.00076
+       73/1    0.90605    0.90931 +/- 0.00074
+       74/1    0.91003    0.90934 +/- 0.00071
+       75/1    0.90782    0.90928 +/- 0.00069
+       76/1    0.91136    0.90936 +/- 0.00066
+       77/1    0.91297    0.90950 +/- 0.00065
+       78/1    0.91094    0.90955 +/- 0.00063
+       79/1    0.90499    0.90939 +/- 0.00063
+       80/1    0.90832    0.90935 +/- 0.00061
+       81/1    0.91425    0.90951 +/- 0.00061
+       82/1    0.90486    0.90937 +/- 0.00061
+       83/1    0.90705    0.90930 +/- 0.00059
+       84/1    0.91099    0.90935 +/- 0.00058
+       85/1    0.90854    0.90932 +/- 0.00056
+       86/1    0.90649    0.90924 +/- 0.00055
+       87/1    0.90415    0.90911 +/- 0.00055
+       88/1    0.91121    0.90916 +/- 0.00054
+       89/1    0.91032    0.90919 +/- 0.00053
+       90/1    0.90989    0.90921 +/- 0.00052
+       91/1    0.91047    0.90924 +/- 0.00050
+       92/1    0.91230    0.90931 +/- 0.00050
+       93/1    0.90941    0.90932 +/- 0.00048
+       94/1    0.90480    0.90921 +/- 0.00048
+       95/1    0.90282    0.90907 +/- 0.00049
+       96/1    0.90897    0.90907 +/- 0.00048
+       97/1    0.90808    0.90905 +/- 0.00047
+       98/1    0.90686    0.90900 +/- 0.00047
+       99/1    0.91199    0.90906 +/- 0.00046
+      100/1    0.90897    0.90906 +/- 0.00045
+      101/1    0.90693    0.90902 +/- 0.00044
+      102/1    0.90755    0.90899 +/- 0.00044
+      103/1    0.90684    0.90895 +/- 0.00043
+      104/1    0.91546    0.90907 +/- 0.00044
+      105/1    0.90674    0.90903 +/- 0.00043
+      106/1    0.90801    0.90901 +/- 0.00043
+      107/1    0.90884    0.90901 +/- 0.00042
+      108/1    0.90410    0.90892 +/- 0.00042
+      109/1    0.90700    0.90889 +/- 0.00041
+      110/1    0.90746    0.90887 +/- 0.00041
+      111/1    0.90818    0.90886 +/- 0.00040
+      112/1    0.90975    0.90887 +/- 0.00039
+      113/1    0.91257    0.90893 +/- 0.00039
+      114/1    0.91254    0.90899 +/- 0.00039
+      115/1    0.90889    0.90898 +/- 0.00038
+      116/1    0.91587    0.90909 +/- 0.00039
+      117/1    0.90807    0.90907 +/- 0.00039
+      118/1    0.91158    0.90911 +/- 0.00038
+      119/1    0.90658    0.90907 +/- 0.00038
+      120/1    0.90310    0.90899 +/- 0.00038
+      121/1    0.90594    0.90894 +/- 0.00038
+      122/1    0.91266    0.90900 +/- 0.00038
+      123/1    0.91539    0.90908 +/- 0.00038
+      124/1    0.90288    0.90900 +/- 0.00039
+      125/1    0.91235    0.90904 +/- 0.00038
+      126/1    0.90227    0.90896 +/- 0.00039
+      127/1    0.90735    0.90893 +/- 0.00039
+      128/1    0.90593    0.90890 +/- 0.00038
+      129/1    0.91404    0.90896 +/- 0.00038
+      130/1    0.90945    0.90897 +/- 0.00038
+      131/1    0.91140    0.90900 +/- 0.00037
+      132/1    0.90820    0.90899 +/- 0.00037
+      133/1    0.91066    0.90901 +/- 0.00037
+      134/1    0.91229    0.90905 +/- 0.00036
+      135/1    0.90949    0.90905 +/- 0.00036
+      136/1    0.90429    0.90900 +/- 0.00036
+      137/1    0.90670    0.90897 +/- 0.00036
+      138/1    0.90817    0.90896 +/- 0.00035
+      139/1    0.90490    0.90892 +/- 0.00035
+      140/1    0.91241    0.90895 +/- 0.00035
+      141/1    0.90996    0.90897 +/- 0.00035
+      142/1    0.90295    0.90890 +/- 0.00035
+      143/1    0.91076    0.90892 +/- 0.00035
+      144/1    0.90282    0.90886 +/- 0.00035
+      145/1    0.90825    0.90885 +/- 0.00034
+      146/1    0.90247    0.90878 +/- 0.00035
+      147/1    0.90952    0.90879 +/- 0.00034
+      148/1    0.91115    0.90881 +/- 0.00034
+      149/1    0.90891    0.90882 +/- 0.00034
+      150/1    0.90626    0.90879 +/- 0.00034
+ Creating state point statepoint.150.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 1.4045e+04 seconds
+   Time in transport only          = 1.3988e+04 seconds
+   Time in inactive batches        = 5.1121e+02 seconds
+   Time in active batches          = 1.3534e+04 seconds
+   Time synchronizing fission bank = 2.5634e+00 seconds
+     Sampling source sites         = 2.0242e+00 seconds
+     SEND/RECV source sites        = 5.1019e-01 seconds
+   Time accumulating tallies       = 1.3259e+01 seconds
+   Time writing statepoints        = 4.0111e+01 seconds
+ Total time for finalization       = 3.9240e-03 seconds
+ Total time elapsed                = 1.4047e+04 seconds
+ Calculation Rate (inactive)       = 9780.64 particles/second
+ Calculation Rate (active)         = 738.873 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 0.90889 +/- 0.00033
+ k-effective (Track-length)  = 0.90879 +/- 0.00034
+ k-effective (Absorption)    = 0.90922 +/- 0.00035
+ Combined k-effective        = 0.90904 +/- 0.00027
+ Leakage Fraction            = 0.12832 +/- 0.00012
+
+ Creating state point openmc_simulation_n10.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    0.65466
+        2/1    0.73854
+        3/1    0.75548
+        4/1    0.75171
+        5/1    0.75918
+        6/1    0.75845
+        7/1    0.76348
+        8/1    0.76089
+        9/1    0.75466
+       10/1    0.75810
+       11/1    0.75588
+       12/1    0.75263
+       13/1    0.75515
+       14/1    0.75743
+       15/1    0.76186
+       16/1    0.75799
+       17/1    0.76288
+       18/1    0.76085
+       19/1    0.75956
+       20/1    0.75388
+       21/1    0.75523
+       22/1    0.75992
+       23/1    0.76281
+       24/1    0.75579
+       25/1    0.75421
+       26/1    0.76135
+       27/1    0.76407
+       28/1    0.75886
+       29/1    0.75567
+       30/1    0.76487
+       31/1    0.75930
+       32/1    0.76343
+       33/1    0.75639
+       34/1    0.76127
+       35/1    0.75806
+       36/1    0.75948
+       37/1    0.76239
+       38/1    0.75870
+       39/1    0.75835
+       40/1    0.75828
+       41/1    0.76328
+       42/1    0.75860
+       43/1    0.75825
+       44/1    0.76360
+       45/1    0.76001
+       46/1    0.75933
+       47/1    0.76183
+       48/1    0.75621
+       49/1    0.75986
+       50/1    0.76391
+       51/1    0.76106
+       52/1    0.75893    0.75999 +/- 0.00107
+       53/1    0.76449    0.76149 +/- 0.00162
+       54/1    0.75990    0.76110 +/- 0.00121
+       55/1    0.76114    0.76110 +/- 0.00094
+       56/1    0.75762    0.76052 +/- 0.00096
+       57/1    0.75988    0.76043 +/- 0.00082
+       58/1    0.75384    0.75961 +/- 0.00109
+       59/1    0.75776    0.75940 +/- 0.00098
+       60/1    0.76326    0.75979 +/- 0.00096
+       61/1    0.75527    0.75938 +/- 0.00096
+       62/1    0.76036    0.75946 +/- 0.00088
+       63/1    0.75478    0.75910 +/- 0.00089
+       64/1    0.75626    0.75890 +/- 0.00084
+       65/1    0.75906    0.75891 +/- 0.00079
+       66/1    0.75477    0.75865 +/- 0.00078
+       67/1    0.75704    0.75856 +/- 0.00074
+       68/1    0.75717    0.75848 +/- 0.00070
+       69/1    0.75891    0.75850 +/- 0.00066
+       70/1    0.76062    0.75861 +/- 0.00064
+       71/1    0.75766    0.75856 +/- 0.00061
+       72/1    0.75924    0.75859 +/- 0.00058
+       73/1    0.76130    0.75871 +/- 0.00057
+       74/1    0.76086    0.75880 +/- 0.00055
+       75/1    0.75455    0.75863 +/- 0.00055
+       76/1    0.76074    0.75871 +/- 0.00054
+       77/1    0.76012    0.75876 +/- 0.00052
+       78/1    0.76287    0.75891 +/- 0.00052
+       79/1    0.76050    0.75896 +/- 0.00051
+       80/1    0.76425    0.75914 +/- 0.00052
+       81/1    0.75806    0.75911 +/- 0.00051
+       82/1    0.75535    0.75899 +/- 0.00050
+       83/1    0.75612    0.75890 +/- 0.00050
+       84/1    0.75988    0.75893 +/- 0.00048
+       85/1    0.75557    0.75883 +/- 0.00048
+       86/1    0.76380    0.75897 +/- 0.00048
+       87/1    0.75965    0.75899 +/- 0.00047
+       88/1    0.76030    0.75903 +/- 0.00046
+       89/1    0.76019    0.75906 +/- 0.00045
+       90/1    0.75621    0.75898 +/- 0.00044
+       91/1    0.76161    0.75905 +/- 0.00044
+       92/1    0.76278    0.75914 +/- 0.00044
+       93/1    0.75725    0.75909 +/- 0.00043
+       94/1    0.76334    0.75919 +/- 0.00043
+       95/1    0.75831    0.75917 +/- 0.00042
+       96/1    0.75815    0.75915 +/- 0.00041
+       97/1    0.75874    0.75914 +/- 0.00040
+       98/1    0.75966    0.75915 +/- 0.00039
+       99/1    0.75815    0.75913 +/- 0.00039
+      100/1    0.75869    0.75912 +/- 0.00038
+      101/1    0.75274    0.75900 +/- 0.00039
+      102/1    0.75282    0.75888 +/- 0.00040
+      103/1    0.76483    0.75899 +/- 0.00041
+      104/1    0.76217    0.75905 +/- 0.00041
+      105/1    0.75970    0.75906 +/- 0.00040
+      106/1    0.76206    0.75911 +/- 0.00040
+      107/1    0.76544    0.75922 +/- 0.00040
+      108/1    0.75768    0.75920 +/- 0.00040
+      109/1    0.76517    0.75930 +/- 0.00040
+      110/1    0.75827    0.75928 +/- 0.00040
+      111/1    0.75821    0.75926 +/- 0.00039
+      112/1    0.76035    0.75928 +/- 0.00039
+      113/1    0.75691    0.75924 +/- 0.00038
+      114/1    0.75517    0.75918 +/- 0.00038
+      115/1    0.76121    0.75921 +/- 0.00038
+      116/1    0.76133    0.75924 +/- 0.00037
+      117/1    0.75794    0.75922 +/- 0.00037
+      118/1    0.76372    0.75929 +/- 0.00037
+      119/1    0.76147    0.75932 +/- 0.00036
+      120/1    0.75277    0.75923 +/- 0.00037
+      121/1    0.75717    0.75920 +/- 0.00037
+      122/1    0.75541    0.75915 +/- 0.00036
+      123/1    0.75821    0.75913 +/- 0.00036
+      124/1    0.75635    0.75910 +/- 0.00036
+      125/1    0.75866    0.75909 +/- 0.00035
+      126/1    0.76133    0.75912 +/- 0.00035
+      127/1    0.75943    0.75912 +/- 0.00034
+      128/1    0.76374    0.75918 +/- 0.00034
+      129/1    0.75627    0.75915 +/- 0.00034
+      130/1    0.76111    0.75917 +/- 0.00034
+      131/1    0.76146    0.75920 +/- 0.00034
+      132/1    0.76097    0.75922 +/- 0.00033
+      133/1    0.75549    0.75918 +/- 0.00033
+      134/1    0.75935    0.75918 +/- 0.00033
+      135/1    0.75705    0.75915 +/- 0.00032
+      136/1    0.76104    0.75917 +/- 0.00032
+      137/1    0.75869    0.75917 +/- 0.00032
+      138/1    0.76281    0.75921 +/- 0.00032
+      139/1    0.76252    0.75925 +/- 0.00032
+      140/1    0.76259    0.75928 +/- 0.00031
+      141/1    0.76019    0.75929 +/- 0.00031
+      142/1    0.75802    0.75928 +/- 0.00031
+      143/1    0.75999    0.75929 +/- 0.00030
+      144/1    0.76109    0.75931 +/- 0.00030
+      145/1    0.76435    0.75936 +/- 0.00030
+      146/1    0.76212    0.75939 +/- 0.00030
+      147/1    0.76239    0.75942 +/- 0.00030
+      148/1    0.75803    0.75941 +/- 0.00030
+      149/1    0.76014    0.75941 +/- 0.00029
+      150/1    0.75802    0.75940 +/- 0.00029
+ Creating state point statepoint.150.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 1.5900e+04 seconds
+   Time in transport only          = 1.5842e+04 seconds
+   Time in inactive batches        = 5.5464e+02 seconds
+   Time in active batches          = 1.5345e+04 seconds
+   Time synchronizing fission bank = 2.7778e+00 seconds
+     Sampling source sites         = 2.2122e+00 seconds
+     SEND/RECV source sites        = 5.3360e-01 seconds
+   Time accumulating tallies       = 1.3372e+01 seconds
+   Time writing statepoints        = 4.0293e+01 seconds
+ Total time for finalization       = 3.4326e-02 seconds
+ Total time elapsed                = 1.5901e+04 seconds
+ Calculation Rate (inactive)       = 9014.8 particles/second
+ Calculation Rate (active)         = 651.67 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 0.75950 +/- 0.00029
+ k-effective (Track-length)  = 0.75940 +/- 0.00029
+ k-effective (Absorption)    = 0.75951 +/- 0.00033
+ Combined k-effective        = 0.75949 +/- 0.00024
+ Leakage Fraction            = 0.14405 +/- 0.00012
+
+ Creating state point openmc_simulation_n11.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    0.49981
+        2/1    0.56619
+        3/1    0.58244
+        4/1    0.58399
+        5/1    0.58218
+        6/1    0.58686
+        7/1    0.58488
+        8/1    0.58649
+        9/1    0.58780
+       10/1    0.58392
+       11/1    0.58214
+       12/1    0.58326
+       13/1    0.58032
+       14/1    0.58634
+       15/1    0.58658
+       16/1    0.58331
+       17/1    0.58610
+       18/1    0.58325
+       19/1    0.58238
+       20/1    0.58226
+       21/1    0.58063
+       22/1    0.58566
+       23/1    0.58217
+       24/1    0.58276
+       25/1    0.58584
+       26/1    0.58176
+       27/1    0.58057
+       28/1    0.58765
+       29/1    0.58194
+       30/1    0.58441
+       31/1    0.58730
+       32/1    0.58532
+       33/1    0.58818
+       34/1    0.58606
+       35/1    0.58332
+       36/1    0.58546
+       37/1    0.59111
+       38/1    0.58510
+       39/1    0.58585
+       40/1    0.58346
+       41/1    0.58522
+       42/1    0.58317
+       43/1    0.58506
+       44/1    0.58667
+       45/1    0.58060
+       46/1    0.58398
+       47/1    0.58780
+       48/1    0.58384
+       49/1    0.58343
+       50/1    0.58566
+       51/1    0.58849
+       52/1    0.58535    0.58692 +/- 0.00157
+       53/1    0.58479    0.58621 +/- 0.00115
+       54/1    0.58893    0.58689 +/- 0.00106
+       55/1    0.57994    0.58550 +/- 0.00162
+       56/1    0.58285    0.58506 +/- 0.00139
+       57/1    0.58430    0.58495 +/- 0.00118
+       58/1    0.58557    0.58503 +/- 0.00103
+       59/1    0.58339    0.58484 +/- 0.00092
+       60/1    0.58922    0.58528 +/- 0.00093
+       61/1    0.58556    0.58531 +/- 0.00085
+       62/1    0.58362    0.58517 +/- 0.00078
+       63/1    0.58250    0.58496 +/- 0.00075
+       64/1    0.58644    0.58507 +/- 0.00070
+       65/1    0.58243    0.58489 +/- 0.00068
+       66/1    0.58678    0.58501 +/- 0.00064
+       67/1    0.58088    0.58477 +/- 0.00065
+       68/1    0.58419    0.58473 +/- 0.00062
+       69/1    0.59077    0.58505 +/- 0.00066
+       70/1    0.58468    0.58503 +/- 0.00063
+       71/1    0.57734    0.58467 +/- 0.00070
+       72/1    0.58701    0.58477 +/- 0.00068
+       73/1    0.58965    0.58499 +/- 0.00068
+       74/1    0.58562    0.58501 +/- 0.00065
+       75/1    0.58050    0.58483 +/- 0.00065
+       76/1    0.58685    0.58491 +/- 0.00063
+       77/1    0.58443    0.58489 +/- 0.00061
+       78/1    0.58465    0.58488 +/- 0.00059
+       79/1    0.58375    0.58484 +/- 0.00057
+       80/1    0.58355    0.58480 +/- 0.00055
+       81/1    0.58286    0.58474 +/- 0.00053
+       82/1    0.58397    0.58471 +/- 0.00052
+       83/1    0.57947    0.58456 +/- 0.00053
+       84/1    0.58731    0.58464 +/- 0.00052
+       85/1    0.58592    0.58467 +/- 0.00050
+       86/1    0.58057    0.58456 +/- 0.00050
+       87/1    0.58345    0.58453 +/- 0.00049
+       88/1    0.58331    0.58450 +/- 0.00048
+       89/1    0.58833    0.58460 +/- 0.00048
+       90/1    0.58291    0.58455 +/- 0.00047
+       91/1    0.57931    0.58443 +/- 0.00047
+       92/1    0.58706    0.58449 +/- 0.00046
+       93/1    0.58605    0.58452 +/- 0.00045
+       94/1    0.58652    0.58457 +/- 0.00045
+       95/1    0.58705    0.58463 +/- 0.00044
+       96/1    0.58097    0.58455 +/- 0.00044
+       97/1    0.58253    0.58450 +/- 0.00043
+       98/1    0.58116    0.58443 +/- 0.00043
+       99/1    0.58122    0.58437 +/- 0.00042
+      100/1    0.58272    0.58433 +/- 0.00042
+      101/1    0.58479    0.58434 +/- 0.00041
+      102/1    0.58198    0.58430 +/- 0.00040
+      103/1    0.58748    0.58436 +/- 0.00040
+      104/1    0.58708    0.58441 +/- 0.00040
+      105/1    0.58954    0.58450 +/- 0.00040
+      106/1    0.59208    0.58464 +/- 0.00041
+      107/1    0.58446    0.58463 +/- 0.00041
+      108/1    0.58356    0.58462 +/- 0.00040
+      109/1    0.58640    0.58465 +/- 0.00039
+      110/1    0.58682    0.58468 +/- 0.00039
+      111/1    0.58453    0.58468 +/- 0.00038
+      112/1    0.58330    0.58466 +/- 0.00038
+      113/1    0.58477    0.58466 +/- 0.00037
+      114/1    0.58570    0.58467 +/- 0.00037
+      115/1    0.58489    0.58468 +/- 0.00036
+      116/1    0.57966    0.58460 +/- 0.00036
+      117/1    0.58202    0.58456 +/- 0.00036
+      118/1    0.58620    0.58459 +/- 0.00036
+      119/1    0.58595    0.58461 +/- 0.00035
+      120/1    0.58722    0.58464 +/- 0.00035
+      121/1    0.58529    0.58465 +/- 0.00034
+      122/1    0.58494    0.58466 +/- 0.00034
+      123/1    0.58520    0.58467 +/- 0.00033
+      124/1    0.58347    0.58465 +/- 0.00033
+      125/1    0.57992    0.58459 +/- 0.00033
+      126/1    0.58420    0.58458 +/- 0.00033
+      127/1    0.58444    0.58458 +/- 0.00032
+      128/1    0.58661    0.58461 +/- 0.00032
+      129/1    0.58010    0.58455 +/- 0.00032
+      130/1    0.58420    0.58454 +/- 0.00032
+      131/1    0.58343    0.58453 +/- 0.00031
+      132/1    0.58256    0.58451 +/- 0.00031
+      133/1    0.58360    0.58450 +/- 0.00031
+      134/1    0.58596    0.58451 +/- 0.00030
+      135/1    0.58373    0.58450 +/- 0.00030
+      136/1    0.58164    0.58447 +/- 0.00030
+      137/1    0.58548    0.58448 +/- 0.00029
+      138/1    0.58257    0.58446 +/- 0.00029
+      139/1    0.58604    0.58448 +/- 0.00029
+      140/1    0.58249    0.58446 +/- 0.00029
+      141/1    0.58056    0.58441 +/- 0.00029
+      142/1    0.58757    0.58445 +/- 0.00029
+      143/1    0.58211    0.58442 +/- 0.00028
+      144/1    0.58707    0.58445 +/- 0.00028
+      145/1    0.58604    0.58447 +/- 0.00028
+      146/1    0.58459    0.58447 +/- 0.00028
+      147/1    0.58225    0.58445 +/- 0.00028
+      148/1    0.58803    0.58448 +/- 0.00027
+      149/1    0.58489    0.58449 +/- 0.00027
+      150/1    0.58594    0.58450 +/- 0.00027
+ Creating state point statepoint.150.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 1.8187e+04 seconds
+   Time in transport only          = 1.8138e+04 seconds
+   Time in inactive batches        = 6.1374e+02 seconds
+   Time in active batches          = 1.7574e+04 seconds
+   Time synchronizing fission bank = 2.8674e+00 seconds
+     Sampling source sites         = 2.2932e+00 seconds
+     SEND/RECV source sites        = 5.3909e-01 seconds
+   Time accumulating tallies       = 1.4903e+01 seconds
+   Time writing statepoints        = 3.0119e+01 seconds
+ Total time for finalization       = 4.7330e-02 seconds
+ Total time elapsed                = 1.8189e+04 seconds
+ Calculation Rate (inactive)       = 8146.79 particles/second
+ Calculation Rate (active)         = 569.034 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 0.58448 +/- 0.00027
+ k-effective (Track-length)  = 0.58450 +/- 0.00027
+ k-effective (Absorption)    = 0.58406 +/- 0.00035
+ Combined k-effective        = 0.58436 +/- 0.00025
+ Leakage Fraction            = 0.16446 +/- 0.00014
+
+ Creating state point openmc_simulation_n12.h5...
+[openmc.deplete] t=0.0 s, dt=3944700.0 s, source=24242424.242424242
+[openmc.deplete] t=3944700.0 s, dt=3944700.0 s, source=24242424.242424242
+WARNING: nuclide B11 in material2 is negative (density = -8.877945364259619e-16 atom/b-cm)
+WARNING: nuclide Pb208 in material2 is negative (density = -1.4069342562135775e-19 atom/b-cm)
+WARNING: nuclide B11 in material4 is negative (density = -8.878058175141193e-16 atom/b-cm)
+WARNING: nuclide Pb208 in material4 is negative (density = -1.4069421962156843e-19 atom/b-cm)
+[openmc.deplete] t=7889400.0 s, dt=7889400.0 s, source=24242424.242424242
+WARNING: nuclide Pb208 in material2 is negative (density = -7.220241636221746e-19 atom/b-cm)
+WARNING: nuclide Pb208 in material4 is negative (density = -7.220152231718351e-19 atom/b-cm)
+[openmc.deplete] t=15778800.0 s, dt=7889400.0 s, source=24242424.242424242
+WARNING: nuclide Pb208 in material2 is negative (density = -1.0232201390481136e-17 atom/b-cm)
+WARNING: nuclide Pb208 in material4 is negative (density = -1.0232098781195232e-17 atom/b-cm)
+[openmc.deplete] t=23668200.0 s, dt=7889400.0 s, source=24242424.242424242
+WARNING: nuclide Pb208 in material2 is negative (density = -1.163130538719834e-17 atom/b-cm)
+WARNING: nuclide Pb208 in material4 is negative (density = -1.163121888073818e-17 atom/b-cm)
+[openmc.deplete] t=31557600.0 s, dt=31557600.0 s, source=24242424.242424242
+WARNING: nuclide Pb208 in material2 is negative (density = -1.9292258227629517e-17 atom/b-cm)
+WARNING: nuclide Pb208 in material4 is negative (density = -1.9292115798012493e-17 atom/b-cm)
+[openmc.deplete] t=63115200.0 s, dt=31557600.0 s, source=24242424.242424242
+WARNING: nuclide Pb208 in material2 is negative (density = -2.1329874261142408e-16 atom/b-cm)
+WARNING: nuclide Pb208 in material4 is negative (density = -2.1329819451265222e-16 atom/b-cm)
+[openmc.deplete] t=94672800.0 s, dt=31557600.0 s, source=24242424.242424242
+WARNING: nuclide Pb208 in material2 is negative (density = -4.785389236232477e-16 atom/b-cm)
+WARNING: nuclide Np234 in material2 is negative (density = -1.8575042513792156e-18 atom/b-cm)
+WARNING: nuclide Cf246 in material2 is negative (density = -1.2165847364663861e-21 atom/b-cm)
+WARNING: nuclide Pb208 in material4 is negative (density = -4.785379644376257e-16 atom/b-cm)
+WARNING: nuclide Np234 in material4 is negative (density = -1.857507653410433e-18 atom/b-cm)
+WARNING: nuclide Cf246 in material4 is negative (density = -1.216494647952e-21 atom/b-cm)
+[openmc.deplete] t=126230400.0 s, dt=31557600.0 s, source=24242424.242424242
+WARNING: nuclide Cf246 in material2 is negative (density = -2.616702791980672e-21 atom/b-cm)
+WARNING: nuclide Cf246 in material4 is negative (density = -2.6170745751892896e-21 atom/b-cm)
+[openmc.deplete] t=157788000.0 s, dt=31557600.0 s, source=24242424.242424242
+WARNING: nuclide Np234 in material2 is negative (density = -2.1637901915982376e-18 atom/b-cm)
+WARNING: nuclide Bk247 in material2 is negative (density = -1.641960299086912e-21 atom/b-cm)
+WARNING: nuclide Np234 in material4 is negative (density = -2.1636930910624204e-18 atom/b-cm)
+WARNING: nuclide Bk247 in material4 is negative (density = -1.6419608730765427e-21 atom/b-cm)
+[openmc.deplete] t=189345600.0 s, dt=31557600.0 s, source=24242424.242424242
+[openmc.deplete] t=220903200.0 s, dt=31557600.0 s, source=24242424.242424242
+WARNING: nuclide Np234 in material2 is negative (density = -1.912607437252519e-18 atom/b-cm)
+WARNING: nuclide Bk247 in material2 is negative (density = -3.3732739319623108e-21 atom/b-cm)
+WARNING: nuclide Np234 in material4 is negative (density = -1.9125258433493955e-18 atom/b-cm)
+WARNING: nuclide Bk247 in material4 is negative (density = -3.373276147846196e-21 atom/b-cm)
+[openmc.deplete] t=252460800.0 (final operator evaluation)
+WARNING: nuclide Bk247 in material2 is negative (density = -6.509601113024021e-21 atom/b-cm)
+WARNING: nuclide Bk247 in material4 is negative (density = -6.509607267125566e-21 atom/b-cm)
+Time taken: 161627s
