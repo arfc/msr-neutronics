@@ -3,12 +3,13 @@
 ## Running a model
 These scripts have been built and tested using OpenMC version 0.13.4, Git Sha1: 1cb22075efdb90570f233a3d26151f7b763f8529.
 
-The models each pull from the `scripts` directory for the more basic functionality. To run a model, go to the desired model directory and adjust the run parameters and constants files to the desired values. Then, run the `build.py` file in the directory to run the model.
+The models each pull from the `scripts` directory for the more basic functionality. To run a model, go to the desired model directory and adjust the run parameters and constants files to the desired values. Then, run the `build_MODELNAME.py` file in the directory to run the model.
+
+There are some more advanced options in the build file that can be changed, but the main parameters and run settings are in the `run_params_MODELNAME.py` file. Additionally, if any changes to the geometry are made, setting `plotting` to `True` in the run parameters is useful to generate some basic 2D plots of the model.
 
 After running the simulation, there is an analysis script where the user can adjust the number of batches to match the statepoint file generated.
-Other adjustments can be made to paths and desired nuclide figures to generate.
-Then, run the analysis script in order to generate figures showing some tally data.
-Additionally, if there is depletion data, set `depletion = True` in the script in order to generate figures showing $k_{eff}$ and nuclide compositions as a function of time.
+Other adjustments can be made to paths and desired nuclide figures to generate and settings based on the run.
+Then, run the `analysis_MODELNAME.py` script for post processing.
 
 ### Important notes for running the models
 - Name each material used (typical naming conventions are `fuel0` (with subdivisions of `fuel` named with increasing indexing), `waste`, and `excore`).
