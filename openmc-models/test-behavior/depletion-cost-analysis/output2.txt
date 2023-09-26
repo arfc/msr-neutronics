@@ -1,0 +1,460 @@
+                                %%%%%%%%%%%%%%%
+                           %%%%%%%%%%%%%%%%%%%%%%%%
+                        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                    %%%%%%%%%%%%%%%%%%%%%%%%
+                                     %%%%%%%%%%%%%%%%%%%%%%%%
+                 ###############      %%%%%%%%%%%%%%%%%%%%%%%%
+                ##################     %%%%%%%%%%%%%%%%%%%%%%%
+                ###################     %%%%%%%%%%%%%%%%%%%%%%%
+                ####################     %%%%%%%%%%%%%%%%%%%%%%
+                #####################     %%%%%%%%%%%%%%%%%%%%%
+                ######################     %%%%%%%%%%%%%%%%%%%%
+                #######################     %%%%%%%%%%%%%%%%%%
+                 #######################     %%%%%%%%%%%%%%%%%
+                 ######################     %%%%%%%%%%%%%%%%%
+                  ####################     %%%%%%%%%%%%%%%%%
+                    #################     %%%%%%%%%%%%%%%%%
+                     ###############     %%%%%%%%%%%%%%%%
+                       ############     %%%%%%%%%%%%%%%
+                          ########     %%%%%%%%%%%%%%
+                                      %%%%%%%%%%%
+
+                 | The OpenMC Monte Carlo Code
+       Copyright | 2011-2023 MIT, UChicago Argonne LLC, and contributors
+         License | https://docs.openmc.org/en/latest/license.html
+         Version | 0.13.4-dev
+        Git SHA1 | 1cb22075efdb90570f233a3d26151f7b763f8529
+       Date/Time | 2023-06-27 14:29:27
+   MPI Processes | 1
+  OpenMP Threads | 4
+
+ Reading settings XML file...
+ Reading cross sections XML file...
+ Reading materials XML file...
+ Reading geometry XML file...
+ Reading O16 from /root/nndc_hdf5/O16.h5
+ Reading U234 from /root/nndc_hdf5/U234.h5
+ Reading U235 from /root/nndc_hdf5/U235.h5
+ Reading U236 from /root/nndc_hdf5/U236.h5
+ Reading U238 from /root/nndc_hdf5/U238.h5
+ Reading O17 from /root/nndc_hdf5/O17.h5
+ Reading H1 from /root/nndc_hdf5/H1.h5
+ Reading H2 from /root/nndc_hdf5/H2.h5
+ Minimum neutron data temperature: 294 K
+ Maximum neutron data temperature: 294 K
+ Preparing distributed cell instances...
+ Reading plot XML file...
+ Writing summary.h5 file...
+ Reading B10 from /root/nndc_hdf5/B10.h5
+ Reading B11 from /root/nndc_hdf5/B11.h5
+ Reading Br81 from /root/nndc_hdf5/Br81.h5
+ Reading Kr82 from /root/nndc_hdf5/Kr82.h5
+ Reading Kr83 from /root/nndc_hdf5/Kr83.h5
+ Reading Kr84 from /root/nndc_hdf5/Kr84.h5
+ Reading Kr85 from /root/nndc_hdf5/Kr85.h5
+ Reading Kr86 from /root/nndc_hdf5/Kr86.h5
+ Reading Sr89 from /root/nndc_hdf5/Sr89.h5
+ Reading Sr90 from /root/nndc_hdf5/Sr90.h5
+ Reading Y89 from /root/nndc_hdf5/Y89.h5
+ Reading Y90 from /root/nndc_hdf5/Y90.h5
+ Reading Y91 from /root/nndc_hdf5/Y91.h5
+ Reading Zr90 from /root/nndc_hdf5/Zr90.h5
+ Reading Zr91 from /root/nndc_hdf5/Zr91.h5
+ Reading Zr92 from /root/nndc_hdf5/Zr92.h5
+ Reading Zr93 from /root/nndc_hdf5/Zr93.h5
+ Reading Zr94 from /root/nndc_hdf5/Zr94.h5
+ Reading Zr95 from /root/nndc_hdf5/Zr95.h5
+ Reading Zr96 from /root/nndc_hdf5/Zr96.h5
+ Reading Nb95 from /root/nndc_hdf5/Nb95.h5
+ Reading Mo92 from /root/nndc_hdf5/Mo92.h5
+ Reading Mo94 from /root/nndc_hdf5/Mo94.h5
+ Reading Mo95 from /root/nndc_hdf5/Mo95.h5
+ Reading Mo96 from /root/nndc_hdf5/Mo96.h5
+ Reading Mo97 from /root/nndc_hdf5/Mo97.h5
+ Reading Mo98 from /root/nndc_hdf5/Mo98.h5
+ Reading Mo99 from /root/nndc_hdf5/Mo99.h5
+ Reading Mo100 from /root/nndc_hdf5/Mo100.h5
+ Reading Tc99 from /root/nndc_hdf5/Tc99.h5
+ Reading Ru100 from /root/nndc_hdf5/Ru100.h5
+ Reading Ru101 from /root/nndc_hdf5/Ru101.h5
+ Reading Ru102 from /root/nndc_hdf5/Ru102.h5
+ Reading Ru103 from /root/nndc_hdf5/Ru103.h5
+ Reading Ru104 from /root/nndc_hdf5/Ru104.h5
+ Reading Ru105 from /root/nndc_hdf5/Ru105.h5
+ Reading Ru106 from /root/nndc_hdf5/Ru106.h5
+ Reading Rh103 from /root/nndc_hdf5/Rh103.h5
+ Reading Rh105 from /root/nndc_hdf5/Rh105.h5
+ Reading Pd104 from /root/nndc_hdf5/Pd104.h5
+ Reading Pd105 from /root/nndc_hdf5/Pd105.h5
+ Reading Pd106 from /root/nndc_hdf5/Pd106.h5
+ Reading Pd107 from /root/nndc_hdf5/Pd107.h5
+ Reading Pd108 from /root/nndc_hdf5/Pd108.h5
+ Reading Ag107 from /root/nndc_hdf5/Ag107.h5
+ Reading Ag109 from /root/nndc_hdf5/Ag109.h5
+ Reading Ag110_m1 from /root/nndc_hdf5/Ag110_m1.h5
+ Reading Ag111 from /root/nndc_hdf5/Ag111.h5
+ Reading Cd110 from /root/nndc_hdf5/Cd110.h5
+ Reading Cd111 from /root/nndc_hdf5/Cd111.h5
+ Reading Cd112 from /root/nndc_hdf5/Cd112.h5
+ Reading Cd113 from /root/nndc_hdf5/Cd113.h5
+ Reading Cd114 from /root/nndc_hdf5/Cd114.h5
+ Reading In113 from /root/nndc_hdf5/In113.h5
+ Reading In115 from /root/nndc_hdf5/In115.h5
+ Reading Sb121 from /root/nndc_hdf5/Sb121.h5
+ Reading Sb123 from /root/nndc_hdf5/Sb123.h5
+ Reading Sb125 from /root/nndc_hdf5/Sb125.h5
+ Reading Te127_m1 from /root/nndc_hdf5/Te127_m1.h5
+ Reading Te129_m1 from /root/nndc_hdf5/Te129_m1.h5
+ Reading Te132 from /root/nndc_hdf5/Te132.h5
+ Reading I127 from /root/nndc_hdf5/I127.h5
+ Reading I129 from /root/nndc_hdf5/I129.h5
+ Reading I130 from /root/nndc_hdf5/I130.h5
+ Reading I131 from /root/nndc_hdf5/I131.h5
+ Reading I135 from /root/nndc_hdf5/I135.h5
+ Reading Xe128 from /root/nndc_hdf5/Xe128.h5
+ Reading Xe130 from /root/nndc_hdf5/Xe130.h5
+ Reading Xe131 from /root/nndc_hdf5/Xe131.h5
+ Reading Xe132 from /root/nndc_hdf5/Xe132.h5
+ Reading Xe133 from /root/nndc_hdf5/Xe133.h5
+ Reading Xe134 from /root/nndc_hdf5/Xe134.h5
+ Reading Xe135 from /root/nndc_hdf5/Xe135.h5
+ Reading Xe136 from /root/nndc_hdf5/Xe136.h5
+ Reading Cs133 from /root/nndc_hdf5/Cs133.h5
+ Reading Cs134 from /root/nndc_hdf5/Cs134.h5
+ Reading Cs135 from /root/nndc_hdf5/Cs135.h5
+ Reading Cs136 from /root/nndc_hdf5/Cs136.h5
+ Reading Cs137 from /root/nndc_hdf5/Cs137.h5
+ Reading Ba134 from /root/nndc_hdf5/Ba134.h5
+ Reading Ba137 from /root/nndc_hdf5/Ba137.h5
+ Reading Ba140 from /root/nndc_hdf5/Ba140.h5
+ Reading La139 from /root/nndc_hdf5/La139.h5
+ Reading La140 from /root/nndc_hdf5/La140.h5
+ Reading Ce140 from /root/nndc_hdf5/Ce140.h5
+ Reading Ce141 from /root/nndc_hdf5/Ce141.h5
+ Reading Ce142 from /root/nndc_hdf5/Ce142.h5
+ Reading Ce143 from /root/nndc_hdf5/Ce143.h5
+ Reading Ce144 from /root/nndc_hdf5/Ce144.h5
+ Reading Pr141 from /root/nndc_hdf5/Pr141.h5
+ Reading Pr142 from /root/nndc_hdf5/Pr142.h5
+ Reading Pr143 from /root/nndc_hdf5/Pr143.h5
+ Reading Nd142 from /root/nndc_hdf5/Nd142.h5
+ Reading Nd143 from /root/nndc_hdf5/Nd143.h5
+ Reading Nd144 from /root/nndc_hdf5/Nd144.h5
+ Reading Nd145 from /root/nndc_hdf5/Nd145.h5
+ Reading Nd146 from /root/nndc_hdf5/Nd146.h5
+ Reading Nd147 from /root/nndc_hdf5/Nd147.h5
+ Reading Nd148 from /root/nndc_hdf5/Nd148.h5
+ Reading Nd150 from /root/nndc_hdf5/Nd150.h5
+ Reading Pm147 from /root/nndc_hdf5/Pm147.h5
+ Reading Pm148 from /root/nndc_hdf5/Pm148.h5
+ Reading Pm148_m1 from /root/nndc_hdf5/Pm148_m1.h5
+ Reading Pm149 from /root/nndc_hdf5/Pm149.h5
+ Reading Pm151 from /root/nndc_hdf5/Pm151.h5
+ Reading Sm147 from /root/nndc_hdf5/Sm147.h5
+ Reading Sm148 from /root/nndc_hdf5/Sm148.h5
+ Reading Sm149 from /root/nndc_hdf5/Sm149.h5
+ Reading Sm150 from /root/nndc_hdf5/Sm150.h5
+ Reading Sm151 from /root/nndc_hdf5/Sm151.h5
+ Reading Sm152 from /root/nndc_hdf5/Sm152.h5
+ Reading Sm153 from /root/nndc_hdf5/Sm153.h5
+ Reading Sm154 from /root/nndc_hdf5/Sm154.h5
+ Reading Eu151 from /root/nndc_hdf5/Eu151.h5
+ Reading Eu152 from /root/nndc_hdf5/Eu152.h5
+ Reading Eu153 from /root/nndc_hdf5/Eu153.h5
+ Reading Eu154 from /root/nndc_hdf5/Eu154.h5
+ Reading Eu155 from /root/nndc_hdf5/Eu155.h5
+ Reading Eu156 from /root/nndc_hdf5/Eu156.h5
+ Reading Eu157 from /root/nndc_hdf5/Eu157.h5
+ Reading Gd152 from /root/nndc_hdf5/Gd152.h5
+ Reading Gd154 from /root/nndc_hdf5/Gd154.h5
+ Reading Gd155 from /root/nndc_hdf5/Gd155.h5
+ Reading Gd156 from /root/nndc_hdf5/Gd156.h5
+ Reading Gd157 from /root/nndc_hdf5/Gd157.h5
+ Reading Gd158 from /root/nndc_hdf5/Gd158.h5
+ Reading Gd160 from /root/nndc_hdf5/Gd160.h5
+ Reading Tb159 from /root/nndc_hdf5/Tb159.h5
+ Reading Tb160 from /root/nndc_hdf5/Tb160.h5
+ Reading Dy160 from /root/nndc_hdf5/Dy160.h5
+ Reading Dy161 from /root/nndc_hdf5/Dy161.h5
+ Reading Dy162 from /root/nndc_hdf5/Dy162.h5
+ Reading Dy163 from /root/nndc_hdf5/Dy163.h5
+ Reading Dy164 from /root/nndc_hdf5/Dy164.h5
+ Reading Ho165 from /root/nndc_hdf5/Ho165.h5
+ Reading Er162 from /root/nndc_hdf5/Er162.h5
+ Reading Er164 from /root/nndc_hdf5/Er164.h5
+ Reading Er166 from /root/nndc_hdf5/Er166.h5
+ Reading Er167 from /root/nndc_hdf5/Er167.h5
+ Reading Er168 from /root/nndc_hdf5/Er168.h5
+ Reading Er170 from /root/nndc_hdf5/Er170.h5
+ Reading Tm169 from /root/nndc_hdf5/Tm169.h5
+ Reading Tm170 from /root/nndc_hdf5/Tm170.h5
+ Reading Hf174 from /root/nndc_hdf5/Hf174.h5
+ Reading Hf176 from /root/nndc_hdf5/Hf176.h5
+ Reading Hf177 from /root/nndc_hdf5/Hf177.h5
+ Reading Hf178 from /root/nndc_hdf5/Hf178.h5
+ Reading Hf179 from /root/nndc_hdf5/Hf179.h5
+ Reading Hf180 from /root/nndc_hdf5/Hf180.h5
+ Reading Ta181 from /root/nndc_hdf5/Ta181.h5
+ Reading Ta182 from /root/nndc_hdf5/Ta182.h5
+ Reading Th230 from /root/nndc_hdf5/Th230.h5
+ Reading Th231 from /root/nndc_hdf5/Th231.h5
+ Reading Th232 from /root/nndc_hdf5/Th232.h5
+ Reading Th233 from /root/nndc_hdf5/Th233.h5
+ Reading Th234 from /root/nndc_hdf5/Th234.h5
+ Reading Pa231 from /root/nndc_hdf5/Pa231.h5
+ Reading Pa232 from /root/nndc_hdf5/Pa232.h5
+ Reading Pa233 from /root/nndc_hdf5/Pa233.h5
+ Reading U232 from /root/nndc_hdf5/U232.h5
+ Reading U233 from /root/nndc_hdf5/U233.h5
+ Reading U237 from /root/nndc_hdf5/U237.h5
+ Reading U239 from /root/nndc_hdf5/U239.h5
+ Reading Np236 from /root/nndc_hdf5/Np236.h5
+ Reading Np237 from /root/nndc_hdf5/Np237.h5
+ Reading Np238 from /root/nndc_hdf5/Np238.h5
+ Reading Np239 from /root/nndc_hdf5/Np239.h5
+ Reading Pu236 from /root/nndc_hdf5/Pu236.h5
+ Reading Pu237 from /root/nndc_hdf5/Pu237.h5
+ Reading Pu238 from /root/nndc_hdf5/Pu238.h5
+ Reading Pu239 from /root/nndc_hdf5/Pu239.h5
+ Reading Pu240 from /root/nndc_hdf5/Pu240.h5
+ Reading Pu241 from /root/nndc_hdf5/Pu241.h5
+ Reading Pu242 from /root/nndc_hdf5/Pu242.h5
+ Reading Pu243 from /root/nndc_hdf5/Pu243.h5
+ Reading Am241 from /root/nndc_hdf5/Am241.h5
+ Reading Am242 from /root/nndc_hdf5/Am242.h5
+ Reading Am242_m1 from /root/nndc_hdf5/Am242_m1.h5
+ Reading Am243 from /root/nndc_hdf5/Am243.h5
+ Reading Am244 from /root/nndc_hdf5/Am244.h5
+ Reading Am244_m1 from /root/nndc_hdf5/Am244_m1.h5
+ Reading Cm242 from /root/nndc_hdf5/Cm242.h5
+ Reading Cm243 from /root/nndc_hdf5/Cm243.h5
+ Reading Cm244 from /root/nndc_hdf5/Cm244.h5
+ Reading Cm245 from /root/nndc_hdf5/Cm245.h5
+ Reading Cm246 from /root/nndc_hdf5/Cm246.h5
+ Maximum neutron transport energy: 20000000 eV for U235
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    1.20670
+        2/1    1.14359    1.17515 +/- 0.03155
+        3/1    0.92332    1.09120 +/- 0.08590
+        4/1    1.30067    1.14357 +/- 0.08020
+        5/1    1.04611    1.12408 +/- 0.06511
+        6/1    1.15460    1.12917 +/- 0.05340
+        7/1    1.03697    1.11600 +/- 0.04701
+        8/1    0.98988    1.10023 +/- 0.04366
+        9/1    0.96322    1.08501 +/- 0.04141
+       10/1    1.06625    1.08313 +/- 0.03708
+ Creating state point statepoint.10.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 4.8281e-01 seconds
+   Reading cross sections          = 4.0863e-01 seconds
+ Total time in simulation          = 4.8897e+00 seconds
+   Time in transport only          = 4.8359e+00 seconds
+   Time in inactive batches        = 0.0000e+00 seconds
+   Time in active batches          = 4.8897e+00 seconds
+   Time synchronizing fission bank = 3.2640e-04 seconds
+     Sampling source sites         = 1.3430e-04 seconds
+     SEND/RECV source sites        = 4.3600e-05 seconds
+   Time accumulating tallies       = 1.8905e-03 seconds
+   Time writing statepoints        = 4.1836e-02 seconds
+ Total time for finalization       = 2.3830e-03 seconds
+ Total time elapsed                = 5.4476e+00 seconds
+ Calculation Rate (active)         = 204.512 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.10816 +/- 0.02740
+ k-effective (Track-length)  = 1.08313 +/- 0.03708
+ k-effective (Absorption)    = 1.10050 +/- 0.03043
+ Combined k-effective        = 1.10355 +/- 0.02583
+ Leakage Fraction            = 0.00000 +/- 0.00000
+
+ Creating state point openmc_simulation_n0.h5...
+[openmc.deplete] t=0.0 s, dt=86400 s, source=174.0
+ Maximum neutron transport energy: 20000000 eV for U235
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    1.13143
+        2/1    1.20369    1.16756 +/- 0.03613
+        3/1    1.34917    1.22810 +/- 0.06403
+        4/1    0.89431    1.14465 +/- 0.09494
+        5/1    1.18640    1.15300 +/- 0.07401
+        6/1    1.02399    1.13150 +/- 0.06414
+        7/1    0.93211    1.10302 +/- 0.06124
+        8/1    0.99965    1.09009 +/- 0.05458
+        9/1    1.10457    1.09170 +/- 0.04817
+       10/1    1.19471    1.10200 +/- 0.04430
+ Creating state point statepoint.10.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 5.6098e+00 seconds
+   Time in transport only          = 5.5457e+00 seconds
+   Time in inactive batches        = 0.0000e+00 seconds
+   Time in active batches          = 5.6098e+00 seconds
+   Time synchronizing fission bank = 5.1440e-04 seconds
+     Sampling source sites         = 1.4500e-04 seconds
+     SEND/RECV source sites        = 2.2240e-04 seconds
+   Time accumulating tallies       = 6.2186e-03 seconds
+   Time writing statepoints        = 4.6737e-02 seconds
+ Total time for finalization       = 2.5338e-03 seconds
+ Total time elapsed                = 5.7264e+00 seconds
+ Calculation Rate (active)         = 178.26 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.07702 +/- 0.04253
+ k-effective (Track-length)  = 1.10200 +/- 0.04430
+ k-effective (Absorption)    = 1.09802 +/- 0.03592
+ Combined k-effective        = 1.09276 +/- 0.01980
+ Leakage Fraction            = 0.00000 +/- 0.00000
+
+ Maximum neutron transport energy: 20000000 eV for U235
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    1.06791
+        2/1    1.09350    1.08071 +/- 0.01280
+        3/1    1.00998    1.05713 +/- 0.02471
+        4/1    1.03068    1.05052 +/- 0.01868
+        5/1    1.30792    1.10200 +/- 0.05348
+        6/1    0.92806    1.07301 +/- 0.05241
+        7/1    1.01184    1.06427 +/- 0.04515
+        8/1    0.94000    1.04874 +/- 0.04207
+        9/1    1.18712    1.06411 +/- 0.04016
+       10/1    1.38548    1.09625 +/- 0.04820
+ Creating state point statepoint.10.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 1.1389e+01 seconds
+   Time in transport only          = 1.1263e+01 seconds
+   Time in inactive batches        = 0.0000e+00 seconds
+   Time in active batches          = 1.1389e+01 seconds
+   Time synchronizing fission bank = 8.3550e-04 seconds
+     Sampling source sites         = 2.8480e-04 seconds
+     SEND/RECV source sites        = 2.5440e-04 seconds
+   Time accumulating tallies       = 6.4105e-03 seconds
+   Time writing statepoints        = 9.8713e-02 seconds
+ Total time for finalization       = 5.7052e-03 seconds
+ Total time elapsed                = 1.1587e+01 seconds
+ Calculation Rate (active)         = 87.8031 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.09980 +/- 0.04986
+ k-effective (Track-length)  = 1.09625 +/- 0.04820
+ k-effective (Absorption)    = 1.08482 +/- 0.03142
+ Combined k-effective        = 1.08795 +/- 0.03311
+ Leakage Fraction            = 0.00000 +/- 0.00000
+
+ Maximum neutron transport energy: 20000000 eV for U235
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    0.97952
+        2/1    1.02428    1.00190 +/- 0.02238
+        3/1    0.89996    0.96792 +/- 0.03635
+        4/1    1.07850    0.99557 +/- 0.03775
+        5/1    1.01487    0.99943 +/- 0.02950
+        6/1    1.04042    1.00626 +/- 0.02503
+        7/1    1.10900    1.02094 +/- 0.02575
+        8/1    0.95136    1.01224 +/- 0.02394
+        9/1    1.07614    1.01934 +/- 0.02227
+       10/1    1.10208    1.02761 +/- 0.02157
+ Creating state point statepoint.10.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 1.6325e+01 seconds
+   Time in transport only          = 1.6152e+01 seconds
+   Time in inactive batches        = 0.0000e+00 seconds
+   Time in active batches          = 1.6325e+01 seconds
+   Time synchronizing fission bank = 1.1637e-03 seconds
+     Sampling source sites         = 4.4230e-04 seconds
+     SEND/RECV source sites        = 2.8470e-04 seconds
+   Time accumulating tallies       = 6.6574e-03 seconds
+   Time writing statepoints        = 1.3617e-01 seconds
+ Total time for finalization       = 8.1800e-03 seconds
+ Total time elapsed                = 1.6606e+01 seconds
+ Calculation Rate (active)         = 61.256 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.03042 +/- 0.02125
+ k-effective (Track-length)  = 1.02761 +/- 0.02157
+ k-effective (Absorption)    = 1.02163 +/- 0.03147
+ Combined k-effective        = 1.02768 +/- 0.02240
+ Leakage Fraction            = 0.00000 +/- 0.00000
+
+ Maximum neutron transport energy: 20000000 eV for U235
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    1.22915
+        2/1    1.19996    1.21456 +/- 0.01459
+        3/1    0.93948    1.12286 +/- 0.09208
+        4/1    1.05758    1.10654 +/- 0.06712
+        5/1    1.15691    1.11662 +/- 0.05296
+        6/1    1.23989    1.13716 +/- 0.04788
+        7/1    0.89230    1.10218 +/- 0.05349
+        8/1    1.30892    1.12802 +/- 0.05304
+        9/1    1.11662    1.12676 +/- 0.04680
+       10/1    0.89902    1.10398 +/- 0.04765
+ Creating state point statepoint.10.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 2.4207e+01 seconds
+   Time in transport only          = 2.3911e+01 seconds
+   Time in inactive batches        = 0.0000e+00 seconds
+   Time in active batches          = 2.4207e+01 seconds
+   Time synchronizing fission bank = 1.4903e-03 seconds
+     Sampling source sites         = 5.8930e-04 seconds
+     SEND/RECV source sites        = 3.1550e-04 seconds
+   Time accumulating tallies       = 3.1322e-02 seconds
+   Time writing statepoints        = 2.2153e-01 seconds
+ Total time for finalization       = 1.5459e-02 seconds
+ Total time elapsed                = 2.4576e+01 seconds
+ Calculation Rate (active)         = 41.31 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.09526 +/- 0.04127
+ k-effective (Track-length)  = 1.10398 +/- 0.04765
+ k-effective (Absorption)    = 1.06469 +/- 0.04013
+ Combined k-effective        = 1.07575 +/- 0.04308
+ Leakage Fraction            = 0.00000 +/- 0.00000
+
+ Creating state point openmc_simulation_n1.h5...
+[openmc.deplete] t=86400.0 (final operator evaluation)

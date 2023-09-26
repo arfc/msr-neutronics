@@ -1,0 +1,1961 @@
+                                %%%%%%%%%%%%%%%
+                           %%%%%%%%%%%%%%%%%%%%%%%%
+                        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                    %%%%%%%%%%%%%%%%%%%%%%%%
+                                     %%%%%%%%%%%%%%%%%%%%%%%%
+                 ###############      %%%%%%%%%%%%%%%%%%%%%%%%
+                ##################     %%%%%%%%%%%%%%%%%%%%%%%
+                ###################     %%%%%%%%%%%%%%%%%%%%%%%
+                ####################     %%%%%%%%%%%%%%%%%%%%%%
+                #####################     %%%%%%%%%%%%%%%%%%%%%
+                ######################     %%%%%%%%%%%%%%%%%%%%
+                #######################     %%%%%%%%%%%%%%%%%%
+                 #######################     %%%%%%%%%%%%%%%%%
+                 ######################     %%%%%%%%%%%%%%%%%
+                  ####################     %%%%%%%%%%%%%%%%%
+                    #################     %%%%%%%%%%%%%%%%%
+                     ###############     %%%%%%%%%%%%%%%%
+                       ############     %%%%%%%%%%%%%%%
+                          ########     %%%%%%%%%%%%%%
+                                      %%%%%%%%%%%
+
+                 | The OpenMC Monte Carlo Code
+       Copyright | 2011-2023 MIT, UChicago Argonne LLC, and contributors
+         License | https://docs.openmc.org/en/latest/license.html
+         Version | 0.13.4-dev
+        Git SHA1 | 6c7f857e1e98ce4fd5b39d8be034308596628d7e
+       Date/Time | 2023-07-11 18:43:45
+   MPI Processes | 1
+  OpenMP Threads | 80
+
+ Reading settings XML file...
+ Reading cross sections XML file...
+ Reading materials XML file...
+ Reading geometry XML file...
+ Reading B10 from /software/openmc/data/v0.13.3/lanl_endfb71/B10.h5
+ Reading B11 from /software/openmc/data/v0.13.3/lanl_endfb71/B11.h5
+ Reading O16 from /software/openmc/data/v0.13.3/lanl_endfb71/O16.h5
+ Reading O17 from /software/openmc/data/v0.13.3/lanl_endfb71/O17.h5
+ Reading Mg24 from /software/openmc/data/v0.13.3/lanl_endfb71/Mg24.h5
+ Reading Mg25 from /software/openmc/data/v0.13.3/lanl_endfb71/Mg25.h5
+ Reading Mg26 from /software/openmc/data/v0.13.3/lanl_endfb71/Mg26.h5
+ Reading Al27 from /software/openmc/data/v0.13.3/lanl_endfb71/Al27.h5
+ Reading Si28 from /software/openmc/data/v0.13.3/lanl_endfb71/Si28.h5
+ Reading Si29 from /software/openmc/data/v0.13.3/lanl_endfb71/Si29.h5
+ Reading Si30 from /software/openmc/data/v0.13.3/lanl_endfb71/Si30.h5
+ Reading S32 from /software/openmc/data/v0.13.3/lanl_endfb71/S32.h5
+ Reading S33 from /software/openmc/data/v0.13.3/lanl_endfb71/S33.h5
+ Reading S34 from /software/openmc/data/v0.13.3/lanl_endfb71/S34.h5
+ Reading S36 from /software/openmc/data/v0.13.3/lanl_endfb71/S36.h5
+ Reading Ca40 from /software/openmc/data/v0.13.3/lanl_endfb71/Ca40.h5
+ Reading Ca42 from /software/openmc/data/v0.13.3/lanl_endfb71/Ca42.h5
+ Reading Ca43 from /software/openmc/data/v0.13.3/lanl_endfb71/Ca43.h5
+ Reading Ca44 from /software/openmc/data/v0.13.3/lanl_endfb71/Ca44.h5
+ Reading Ca48 from /software/openmc/data/v0.13.3/lanl_endfb71/Ca48.h5
+ Reading Ti46 from /software/openmc/data/v0.13.3/lanl_endfb71/Ti46.h5
+ Reading Ti47 from /software/openmc/data/v0.13.3/lanl_endfb71/Ti47.h5
+ Reading Ti48 from /software/openmc/data/v0.13.3/lanl_endfb71/Ti48.h5
+ Reading Ti49 from /software/openmc/data/v0.13.3/lanl_endfb71/Ti49.h5
+ Reading Ti50 from /software/openmc/data/v0.13.3/lanl_endfb71/Ti50.h5
+ Reading V50 from /software/openmc/data/v0.13.3/lanl_endfb71/V50.h5
+ Reading V51 from /software/openmc/data/v0.13.3/lanl_endfb71/V51.h5
+ Reading Fe54 from /software/openmc/data/v0.13.3/lanl_endfb71/Fe54.h5
+ Reading Fe56 from /software/openmc/data/v0.13.3/lanl_endfb71/Fe56.h5
+ Reading Fe57 from /software/openmc/data/v0.13.3/lanl_endfb71/Fe57.h5
+ Reading Fe58 from /software/openmc/data/v0.13.3/lanl_endfb71/Fe58.h5
+ Reading C0 from /software/openmc/data/v0.13.3/lanl_endfb71/C0.h5
+ Reading H1 from /software/openmc/data/v0.13.3/lanl_endfb71/H1.h5
+ Reading H2 from /software/openmc/data/v0.13.3/lanl_endfb71/H2.h5
+ Reading H3 from /software/openmc/data/v0.13.3/lanl_endfb71/H3.h5
+ Reading He3 from /software/openmc/data/v0.13.3/lanl_endfb71/He3.h5
+ Reading He4 from /software/openmc/data/v0.13.3/lanl_endfb71/He4.h5
+ Reading Li6 from /software/openmc/data/v0.13.3/lanl_endfb71/Li6.h5
+ Reading Li7 from /software/openmc/data/v0.13.3/lanl_endfb71/Li7.h5
+ Reading Be9 from /software/openmc/data/v0.13.3/lanl_endfb71/Be9.h5
+ Reading N14 from /software/openmc/data/v0.13.3/lanl_endfb71/N14.h5
+ Reading N15 from /software/openmc/data/v0.13.3/lanl_endfb71/N15.h5
+ Reading F19 from /software/openmc/data/v0.13.3/lanl_endfb71/F19.h5
+ Reading Na22 from /software/openmc/data/v0.13.3/lanl_endfb71/Na22.h5
+ Reading Na23 from /software/openmc/data/v0.13.3/lanl_endfb71/Na23.h5
+ Reading P31 from /software/openmc/data/v0.13.3/lanl_endfb71/P31.h5
+ Reading Cl35 from /software/openmc/data/v0.13.3/lanl_endfb71/Cl35.h5
+ Reading Cl37 from /software/openmc/data/v0.13.3/lanl_endfb71/Cl37.h5
+ Reading Ar36 from /software/openmc/data/v0.13.3/lanl_endfb71/Ar36.h5
+ Reading Ar38 from /software/openmc/data/v0.13.3/lanl_endfb71/Ar38.h5
+ Reading Ar40 from /software/openmc/data/v0.13.3/lanl_endfb71/Ar40.h5
+ Reading K39 from /software/openmc/data/v0.13.3/lanl_endfb71/K39.h5
+ Reading K40 from /software/openmc/data/v0.13.3/lanl_endfb71/K40.h5
+ Reading K41 from /software/openmc/data/v0.13.3/lanl_endfb71/K41.h5
+ Reading Ca46 from /software/openmc/data/v0.13.3/lanl_endfb71/Ca46.h5
+ Reading Sc45 from /software/openmc/data/v0.13.3/lanl_endfb71/Sc45.h5
+ Reading Cr50 from /software/openmc/data/v0.13.3/lanl_endfb71/Cr50.h5
+ Reading Cr52 from /software/openmc/data/v0.13.3/lanl_endfb71/Cr52.h5
+ Reading Cr53 from /software/openmc/data/v0.13.3/lanl_endfb71/Cr53.h5
+ Reading Cr54 from /software/openmc/data/v0.13.3/lanl_endfb71/Cr54.h5
+ Reading Mn55 from /software/openmc/data/v0.13.3/lanl_endfb71/Mn55.h5
+ Reading Co58 from /software/openmc/data/v0.13.3/lanl_endfb71/Co58.h5
+ Reading Co58_m1 from /software/openmc/data/v0.13.3/lanl_endfb71/Co58_m1.h5
+ Reading Co59 from /software/openmc/data/v0.13.3/lanl_endfb71/Co59.h5
+ Reading Ni58 from /software/openmc/data/v0.13.3/lanl_endfb71/Ni58.h5
+ Reading Ni59 from /software/openmc/data/v0.13.3/lanl_endfb71/Ni59.h5
+ Reading Ni60 from /software/openmc/data/v0.13.3/lanl_endfb71/Ni60.h5
+ Reading Ni61 from /software/openmc/data/v0.13.3/lanl_endfb71/Ni61.h5
+ Reading Ni62 from /software/openmc/data/v0.13.3/lanl_endfb71/Ni62.h5
+ Reading Ni64 from /software/openmc/data/v0.13.3/lanl_endfb71/Ni64.h5
+ Reading Cu63 from /software/openmc/data/v0.13.3/lanl_endfb71/Cu63.h5
+ Reading Cu65 from /software/openmc/data/v0.13.3/lanl_endfb71/Cu65.h5
+ Reading Zn64 from /software/openmc/data/v0.13.3/lanl_endfb71/Zn64.h5
+ Reading Zn65 from /software/openmc/data/v0.13.3/lanl_endfb71/Zn65.h5
+ Reading Zn66 from /software/openmc/data/v0.13.3/lanl_endfb71/Zn66.h5
+ Reading Zn67 from /software/openmc/data/v0.13.3/lanl_endfb71/Zn67.h5
+ Reading Zn68 from /software/openmc/data/v0.13.3/lanl_endfb71/Zn68.h5
+ Reading Zn70 from /software/openmc/data/v0.13.3/lanl_endfb71/Zn70.h5
+ Reading Ga69 from /software/openmc/data/v0.13.3/lanl_endfb71/Ga69.h5
+ Reading Ga71 from /software/openmc/data/v0.13.3/lanl_endfb71/Ga71.h5
+ Reading Ge70 from /software/openmc/data/v0.13.3/lanl_endfb71/Ge70.h5
+ Reading Ge72 from /software/openmc/data/v0.13.3/lanl_endfb71/Ge72.h5
+ Reading Ge73 from /software/openmc/data/v0.13.3/lanl_endfb71/Ge73.h5
+ Reading Ge74 from /software/openmc/data/v0.13.3/lanl_endfb71/Ge74.h5
+ Reading Ge76 from /software/openmc/data/v0.13.3/lanl_endfb71/Ge76.h5
+ Reading As74 from /software/openmc/data/v0.13.3/lanl_endfb71/As74.h5
+ Reading As75 from /software/openmc/data/v0.13.3/lanl_endfb71/As75.h5
+ Reading Se74 from /software/openmc/data/v0.13.3/lanl_endfb71/Se74.h5
+ Reading Se76 from /software/openmc/data/v0.13.3/lanl_endfb71/Se76.h5
+ Reading Se77 from /software/openmc/data/v0.13.3/lanl_endfb71/Se77.h5
+ Reading Se78 from /software/openmc/data/v0.13.3/lanl_endfb71/Se78.h5
+ Reading Se79 from /software/openmc/data/v0.13.3/lanl_endfb71/Se79.h5
+ Reading Se80 from /software/openmc/data/v0.13.3/lanl_endfb71/Se80.h5
+ Reading Se82 from /software/openmc/data/v0.13.3/lanl_endfb71/Se82.h5
+ Reading Br79 from /software/openmc/data/v0.13.3/lanl_endfb71/Br79.h5
+ Reading Br81 from /software/openmc/data/v0.13.3/lanl_endfb71/Br81.h5
+ Reading Kr78 from /software/openmc/data/v0.13.3/lanl_endfb71/Kr78.h5
+ Reading Kr80 from /software/openmc/data/v0.13.3/lanl_endfb71/Kr80.h5
+ Reading Kr82 from /software/openmc/data/v0.13.3/lanl_endfb71/Kr82.h5
+ Reading Kr83 from /software/openmc/data/v0.13.3/lanl_endfb71/Kr83.h5
+ Reading Kr84 from /software/openmc/data/v0.13.3/lanl_endfb71/Kr84.h5
+ Reading Kr85 from /software/openmc/data/v0.13.3/lanl_endfb71/Kr85.h5
+ Reading Kr86 from /software/openmc/data/v0.13.3/lanl_endfb71/Kr86.h5
+ Reading Rb85 from /software/openmc/data/v0.13.3/lanl_endfb71/Rb85.h5
+ Reading Rb86 from /software/openmc/data/v0.13.3/lanl_endfb71/Rb86.h5
+ Reading Rb87 from /software/openmc/data/v0.13.3/lanl_endfb71/Rb87.h5
+ Reading Sr84 from /software/openmc/data/v0.13.3/lanl_endfb71/Sr84.h5
+ Reading Sr86 from /software/openmc/data/v0.13.3/lanl_endfb71/Sr86.h5
+ Reading Sr87 from /software/openmc/data/v0.13.3/lanl_endfb71/Sr87.h5
+ Reading Sr88 from /software/openmc/data/v0.13.3/lanl_endfb71/Sr88.h5
+ Reading Sr89 from /software/openmc/data/v0.13.3/lanl_endfb71/Sr89.h5
+ Reading Sr90 from /software/openmc/data/v0.13.3/lanl_endfb71/Sr90.h5
+ Reading Y89 from /software/openmc/data/v0.13.3/lanl_endfb71/Y89.h5
+ Reading Y90 from /software/openmc/data/v0.13.3/lanl_endfb71/Y90.h5
+ Reading Y91 from /software/openmc/data/v0.13.3/lanl_endfb71/Y91.h5
+ Reading Zr90 from /software/openmc/data/v0.13.3/lanl_endfb71/Zr90.h5
+ Reading Zr91 from /software/openmc/data/v0.13.3/lanl_endfb71/Zr91.h5
+ Reading Zr92 from /software/openmc/data/v0.13.3/lanl_endfb71/Zr92.h5
+ Reading Zr93 from /software/openmc/data/v0.13.3/lanl_endfb71/Zr93.h5
+ Reading Zr94 from /software/openmc/data/v0.13.3/lanl_endfb71/Zr94.h5
+ Reading Zr95 from /software/openmc/data/v0.13.3/lanl_endfb71/Zr95.h5
+ Reading Zr96 from /software/openmc/data/v0.13.3/lanl_endfb71/Zr96.h5
+ Reading Nb93 from /software/openmc/data/v0.13.3/lanl_endfb71/Nb93.h5
+ Reading Nb94 from /software/openmc/data/v0.13.3/lanl_endfb71/Nb94.h5
+ Reading Nb95 from /software/openmc/data/v0.13.3/lanl_endfb71/Nb95.h5
+ Reading Mo92 from /software/openmc/data/v0.13.3/lanl_endfb71/Mo92.h5
+ Reading Mo94 from /software/openmc/data/v0.13.3/lanl_endfb71/Mo94.h5
+ Reading Mo95 from /software/openmc/data/v0.13.3/lanl_endfb71/Mo95.h5
+ Reading Mo96 from /software/openmc/data/v0.13.3/lanl_endfb71/Mo96.h5
+ Reading Mo97 from /software/openmc/data/v0.13.3/lanl_endfb71/Mo97.h5
+ Reading Mo98 from /software/openmc/data/v0.13.3/lanl_endfb71/Mo98.h5
+ Reading Mo99 from /software/openmc/data/v0.13.3/lanl_endfb71/Mo99.h5
+ Reading Mo100 from /software/openmc/data/v0.13.3/lanl_endfb71/Mo100.h5
+ Reading Tc99 from /software/openmc/data/v0.13.3/lanl_endfb71/Tc99.h5
+ Reading Ru96 from /software/openmc/data/v0.13.3/lanl_endfb71/Ru96.h5
+ Reading Ru98 from /software/openmc/data/v0.13.3/lanl_endfb71/Ru98.h5
+ Reading Ru99 from /software/openmc/data/v0.13.3/lanl_endfb71/Ru99.h5
+ Reading Ru100 from /software/openmc/data/v0.13.3/lanl_endfb71/Ru100.h5
+ Reading Ru101 from /software/openmc/data/v0.13.3/lanl_endfb71/Ru101.h5
+ Reading Ru102 from /software/openmc/data/v0.13.3/lanl_endfb71/Ru102.h5
+ Reading Ru103 from /software/openmc/data/v0.13.3/lanl_endfb71/Ru103.h5
+ Reading Ru104 from /software/openmc/data/v0.13.3/lanl_endfb71/Ru104.h5
+ Reading Ru105 from /software/openmc/data/v0.13.3/lanl_endfb71/Ru105.h5
+ Reading Ru106 from /software/openmc/data/v0.13.3/lanl_endfb71/Ru106.h5
+ Reading Rh103 from /software/openmc/data/v0.13.3/lanl_endfb71/Rh103.h5
+ Reading Rh105 from /software/openmc/data/v0.13.3/lanl_endfb71/Rh105.h5
+ Reading Pd102 from /software/openmc/data/v0.13.3/lanl_endfb71/Pd102.h5
+ Reading Pd104 from /software/openmc/data/v0.13.3/lanl_endfb71/Pd104.h5
+ Reading Pd105 from /software/openmc/data/v0.13.3/lanl_endfb71/Pd105.h5
+ Reading Pd106 from /software/openmc/data/v0.13.3/lanl_endfb71/Pd106.h5
+ Reading Pd107 from /software/openmc/data/v0.13.3/lanl_endfb71/Pd107.h5
+ Reading Pd108 from /software/openmc/data/v0.13.3/lanl_endfb71/Pd108.h5
+ Reading Pd110 from /software/openmc/data/v0.13.3/lanl_endfb71/Pd110.h5
+ Reading Ag107 from /software/openmc/data/v0.13.3/lanl_endfb71/Ag107.h5
+ Reading Ag109 from /software/openmc/data/v0.13.3/lanl_endfb71/Ag109.h5
+ Reading Ag110_m1 from /software/openmc/data/v0.13.3/lanl_endfb71/Ag110_m1.h5
+ Reading Ag111 from /software/openmc/data/v0.13.3/lanl_endfb71/Ag111.h5
+ Reading Cd106 from /software/openmc/data/v0.13.3/lanl_endfb71/Cd106.h5
+ Reading Cd108 from /software/openmc/data/v0.13.3/lanl_endfb71/Cd108.h5
+ Reading Cd110 from /software/openmc/data/v0.13.3/lanl_endfb71/Cd110.h5
+ Reading Cd111 from /software/openmc/data/v0.13.3/lanl_endfb71/Cd111.h5
+ Reading Cd112 from /software/openmc/data/v0.13.3/lanl_endfb71/Cd112.h5
+ Reading Cd113 from /software/openmc/data/v0.13.3/lanl_endfb71/Cd113.h5
+ Reading Cd114 from /software/openmc/data/v0.13.3/lanl_endfb71/Cd114.h5
+ Reading Cd115_m1 from /software/openmc/data/v0.13.3/lanl_endfb71/Cd115_m1.h5
+ Reading Cd116 from /software/openmc/data/v0.13.3/lanl_endfb71/Cd116.h5
+ Reading In113 from /software/openmc/data/v0.13.3/lanl_endfb71/In113.h5
+ Reading In115 from /software/openmc/data/v0.13.3/lanl_endfb71/In115.h5
+ Reading Sn112 from /software/openmc/data/v0.13.3/lanl_endfb71/Sn112.h5
+ Reading Sn113 from /software/openmc/data/v0.13.3/lanl_endfb71/Sn113.h5
+ Reading Sn114 from /software/openmc/data/v0.13.3/lanl_endfb71/Sn114.h5
+ Reading Sn115 from /software/openmc/data/v0.13.3/lanl_endfb71/Sn115.h5
+ Reading Sn116 from /software/openmc/data/v0.13.3/lanl_endfb71/Sn116.h5
+ Reading Sn117 from /software/openmc/data/v0.13.3/lanl_endfb71/Sn117.h5
+ Reading Sn118 from /software/openmc/data/v0.13.3/lanl_endfb71/Sn118.h5
+ Reading Sn119 from /software/openmc/data/v0.13.3/lanl_endfb71/Sn119.h5
+ Reading Sn120 from /software/openmc/data/v0.13.3/lanl_endfb71/Sn120.h5
+ Reading Sn122 from /software/openmc/data/v0.13.3/lanl_endfb71/Sn122.h5
+ Reading Sn123 from /software/openmc/data/v0.13.3/lanl_endfb71/Sn123.h5
+ Reading Sn124 from /software/openmc/data/v0.13.3/lanl_endfb71/Sn124.h5
+ Reading Sn125 from /software/openmc/data/v0.13.3/lanl_endfb71/Sn125.h5
+ Reading Sn126 from /software/openmc/data/v0.13.3/lanl_endfb71/Sn126.h5
+ Reading Sb121 from /software/openmc/data/v0.13.3/lanl_endfb71/Sb121.h5
+ Reading Sb123 from /software/openmc/data/v0.13.3/lanl_endfb71/Sb123.h5
+ Reading Sb124 from /software/openmc/data/v0.13.3/lanl_endfb71/Sb124.h5
+ Reading Sb125 from /software/openmc/data/v0.13.3/lanl_endfb71/Sb125.h5
+ Reading Sb126 from /software/openmc/data/v0.13.3/lanl_endfb71/Sb126.h5
+ Reading Te120 from /software/openmc/data/v0.13.3/lanl_endfb71/Te120.h5
+ Reading Te122 from /software/openmc/data/v0.13.3/lanl_endfb71/Te122.h5
+ Reading Te123 from /software/openmc/data/v0.13.3/lanl_endfb71/Te123.h5
+ Reading Te124 from /software/openmc/data/v0.13.3/lanl_endfb71/Te124.h5
+ Reading Te125 from /software/openmc/data/v0.13.3/lanl_endfb71/Te125.h5
+ Reading Te126 from /software/openmc/data/v0.13.3/lanl_endfb71/Te126.h5
+ Reading Te127_m1 from /software/openmc/data/v0.13.3/lanl_endfb71/Te127_m1.h5
+ Reading Te128 from /software/openmc/data/v0.13.3/lanl_endfb71/Te128.h5
+ Reading Te129_m1 from /software/openmc/data/v0.13.3/lanl_endfb71/Te129_m1.h5
+ Reading Te130 from /software/openmc/data/v0.13.3/lanl_endfb71/Te130.h5
+ Reading Te132 from /software/openmc/data/v0.13.3/lanl_endfb71/Te132.h5
+ Reading I127 from /software/openmc/data/v0.13.3/lanl_endfb71/I127.h5
+ Reading I129 from /software/openmc/data/v0.13.3/lanl_endfb71/I129.h5
+ Reading I130 from /software/openmc/data/v0.13.3/lanl_endfb71/I130.h5
+ Reading I131 from /software/openmc/data/v0.13.3/lanl_endfb71/I131.h5
+ Reading I135 from /software/openmc/data/v0.13.3/lanl_endfb71/I135.h5
+ Reading Xe123 from /software/openmc/data/v0.13.3/lanl_endfb71/Xe123.h5
+ Reading Xe124 from /software/openmc/data/v0.13.3/lanl_endfb71/Xe124.h5
+ Reading Xe126 from /software/openmc/data/v0.13.3/lanl_endfb71/Xe126.h5
+ Reading Xe128 from /software/openmc/data/v0.13.3/lanl_endfb71/Xe128.h5
+ Reading Xe129 from /software/openmc/data/v0.13.3/lanl_endfb71/Xe129.h5
+ Reading Xe130 from /software/openmc/data/v0.13.3/lanl_endfb71/Xe130.h5
+ Reading Xe131 from /software/openmc/data/v0.13.3/lanl_endfb71/Xe131.h5
+ Reading Xe132 from /software/openmc/data/v0.13.3/lanl_endfb71/Xe132.h5
+ Reading Xe133 from /software/openmc/data/v0.13.3/lanl_endfb71/Xe133.h5
+ Reading Xe134 from /software/openmc/data/v0.13.3/lanl_endfb71/Xe134.h5
+ Reading Xe135 from /software/openmc/data/v0.13.3/lanl_endfb71/Xe135.h5
+ Reading Xe136 from /software/openmc/data/v0.13.3/lanl_endfb71/Xe136.h5
+ Reading Cs133 from /software/openmc/data/v0.13.3/lanl_endfb71/Cs133.h5
+ Reading Cs134 from /software/openmc/data/v0.13.3/lanl_endfb71/Cs134.h5
+ Reading Cs135 from /software/openmc/data/v0.13.3/lanl_endfb71/Cs135.h5
+ Reading Cs136 from /software/openmc/data/v0.13.3/lanl_endfb71/Cs136.h5
+ Reading Cs137 from /software/openmc/data/v0.13.3/lanl_endfb71/Cs137.h5
+ Reading Ba130 from /software/openmc/data/v0.13.3/lanl_endfb71/Ba130.h5
+ Reading Ba132 from /software/openmc/data/v0.13.3/lanl_endfb71/Ba132.h5
+ Reading Ba133 from /software/openmc/data/v0.13.3/lanl_endfb71/Ba133.h5
+ Reading Ba134 from /software/openmc/data/v0.13.3/lanl_endfb71/Ba134.h5
+ Reading Ba135 from /software/openmc/data/v0.13.3/lanl_endfb71/Ba135.h5
+ Reading Ba136 from /software/openmc/data/v0.13.3/lanl_endfb71/Ba136.h5
+ Reading Ba137 from /software/openmc/data/v0.13.3/lanl_endfb71/Ba137.h5
+ Reading Ba138 from /software/openmc/data/v0.13.3/lanl_endfb71/Ba138.h5
+ Reading Ba140 from /software/openmc/data/v0.13.3/lanl_endfb71/Ba140.h5
+ Reading La138 from /software/openmc/data/v0.13.3/lanl_endfb71/La138.h5
+ Reading La139 from /software/openmc/data/v0.13.3/lanl_endfb71/La139.h5
+ Reading La140 from /software/openmc/data/v0.13.3/lanl_endfb71/La140.h5
+ Reading Ce136 from /software/openmc/data/v0.13.3/lanl_endfb71/Ce136.h5
+ Reading Ce138 from /software/openmc/data/v0.13.3/lanl_endfb71/Ce138.h5
+ Reading Ce139 from /software/openmc/data/v0.13.3/lanl_endfb71/Ce139.h5
+ Reading Ce140 from /software/openmc/data/v0.13.3/lanl_endfb71/Ce140.h5
+ Reading Ce141 from /software/openmc/data/v0.13.3/lanl_endfb71/Ce141.h5
+ Reading Ce142 from /software/openmc/data/v0.13.3/lanl_endfb71/Ce142.h5
+ Reading Ce143 from /software/openmc/data/v0.13.3/lanl_endfb71/Ce143.h5
+ Reading Ce144 from /software/openmc/data/v0.13.3/lanl_endfb71/Ce144.h5
+ Reading Pr141 from /software/openmc/data/v0.13.3/lanl_endfb71/Pr141.h5
+ Reading Pr142 from /software/openmc/data/v0.13.3/lanl_endfb71/Pr142.h5
+ Reading Pr143 from /software/openmc/data/v0.13.3/lanl_endfb71/Pr143.h5
+ Reading Nd142 from /software/openmc/data/v0.13.3/lanl_endfb71/Nd142.h5
+ Reading Nd143 from /software/openmc/data/v0.13.3/lanl_endfb71/Nd143.h5
+ Reading Nd144 from /software/openmc/data/v0.13.3/lanl_endfb71/Nd144.h5
+ Reading Nd145 from /software/openmc/data/v0.13.3/lanl_endfb71/Nd145.h5
+ Reading Nd146 from /software/openmc/data/v0.13.3/lanl_endfb71/Nd146.h5
+ Reading Nd147 from /software/openmc/data/v0.13.3/lanl_endfb71/Nd147.h5
+ Reading Nd148 from /software/openmc/data/v0.13.3/lanl_endfb71/Nd148.h5
+ Reading Nd150 from /software/openmc/data/v0.13.3/lanl_endfb71/Nd150.h5
+ Reading Pm147 from /software/openmc/data/v0.13.3/lanl_endfb71/Pm147.h5
+ Reading Pm148 from /software/openmc/data/v0.13.3/lanl_endfb71/Pm148.h5
+ Reading Pm148_m1 from /software/openmc/data/v0.13.3/lanl_endfb71/Pm148_m1.h5
+ Reading Pm149 from /software/openmc/data/v0.13.3/lanl_endfb71/Pm149.h5
+ Reading Pm151 from /software/openmc/data/v0.13.3/lanl_endfb71/Pm151.h5
+ Reading Sm144 from /software/openmc/data/v0.13.3/lanl_endfb71/Sm144.h5
+ Reading Sm147 from /software/openmc/data/v0.13.3/lanl_endfb71/Sm147.h5
+ Reading Sm148 from /software/openmc/data/v0.13.3/lanl_endfb71/Sm148.h5
+ Reading Sm149 from /software/openmc/data/v0.13.3/lanl_endfb71/Sm149.h5
+ Reading Sm150 from /software/openmc/data/v0.13.3/lanl_endfb71/Sm150.h5
+ Reading Sm151 from /software/openmc/data/v0.13.3/lanl_endfb71/Sm151.h5
+ Reading Sm152 from /software/openmc/data/v0.13.3/lanl_endfb71/Sm152.h5
+ Reading Sm153 from /software/openmc/data/v0.13.3/lanl_endfb71/Sm153.h5
+ Reading Sm154 from /software/openmc/data/v0.13.3/lanl_endfb71/Sm154.h5
+ Reading Eu151 from /software/openmc/data/v0.13.3/lanl_endfb71/Eu151.h5
+ Reading Eu152 from /software/openmc/data/v0.13.3/lanl_endfb71/Eu152.h5
+ Reading Eu153 from /software/openmc/data/v0.13.3/lanl_endfb71/Eu153.h5
+ Reading Eu154 from /software/openmc/data/v0.13.3/lanl_endfb71/Eu154.h5
+ Reading Eu155 from /software/openmc/data/v0.13.3/lanl_endfb71/Eu155.h5
+ Reading Eu156 from /software/openmc/data/v0.13.3/lanl_endfb71/Eu156.h5
+ Reading Eu157 from /software/openmc/data/v0.13.3/lanl_endfb71/Eu157.h5
+ Reading Gd152 from /software/openmc/data/v0.13.3/lanl_endfb71/Gd152.h5
+ Reading Gd153 from /software/openmc/data/v0.13.3/lanl_endfb71/Gd153.h5
+ Reading Gd154 from /software/openmc/data/v0.13.3/lanl_endfb71/Gd154.h5
+ Reading Gd155 from /software/openmc/data/v0.13.3/lanl_endfb71/Gd155.h5
+ Reading Gd156 from /software/openmc/data/v0.13.3/lanl_endfb71/Gd156.h5
+ Reading Gd157 from /software/openmc/data/v0.13.3/lanl_endfb71/Gd157.h5
+ Reading Gd158 from /software/openmc/data/v0.13.3/lanl_endfb71/Gd158.h5
+ Reading Gd160 from /software/openmc/data/v0.13.3/lanl_endfb71/Gd160.h5
+ Reading Tb159 from /software/openmc/data/v0.13.3/lanl_endfb71/Tb159.h5
+ Reading Tb160 from /software/openmc/data/v0.13.3/lanl_endfb71/Tb160.h5
+ Reading Dy156 from /software/openmc/data/v0.13.3/lanl_endfb71/Dy156.h5
+ Reading Dy158 from /software/openmc/data/v0.13.3/lanl_endfb71/Dy158.h5
+ Reading Dy160 from /software/openmc/data/v0.13.3/lanl_endfb71/Dy160.h5
+ Reading Dy161 from /software/openmc/data/v0.13.3/lanl_endfb71/Dy161.h5
+ Reading Dy162 from /software/openmc/data/v0.13.3/lanl_endfb71/Dy162.h5
+ Reading Dy163 from /software/openmc/data/v0.13.3/lanl_endfb71/Dy163.h5
+ Reading Dy164 from /software/openmc/data/v0.13.3/lanl_endfb71/Dy164.h5
+ Reading Ho165 from /software/openmc/data/v0.13.3/lanl_endfb71/Ho165.h5
+ Reading Ho166_m1 from /software/openmc/data/v0.13.3/lanl_endfb71/Ho166_m1.h5
+ Reading Er162 from /software/openmc/data/v0.13.3/lanl_endfb71/Er162.h5
+ Reading Er164 from /software/openmc/data/v0.13.3/lanl_endfb71/Er164.h5
+ Reading Er166 from /software/openmc/data/v0.13.3/lanl_endfb71/Er166.h5
+ Reading Er167 from /software/openmc/data/v0.13.3/lanl_endfb71/Er167.h5
+ Reading Er168 from /software/openmc/data/v0.13.3/lanl_endfb71/Er168.h5
+ Reading Er170 from /software/openmc/data/v0.13.3/lanl_endfb71/Er170.h5
+ Reading Tm168 from /software/openmc/data/v0.13.3/lanl_endfb71/Tm168.h5
+ Reading Tm169 from /software/openmc/data/v0.13.3/lanl_endfb71/Tm169.h5
+ Reading Tm170 from /software/openmc/data/v0.13.3/lanl_endfb71/Tm170.h5
+ Reading Lu175 from /software/openmc/data/v0.13.3/lanl_endfb71/Lu175.h5
+ Reading Lu176 from /software/openmc/data/v0.13.3/lanl_endfb71/Lu176.h5
+ Reading Hf174 from /software/openmc/data/v0.13.3/lanl_endfb71/Hf174.h5
+ Reading Hf176 from /software/openmc/data/v0.13.3/lanl_endfb71/Hf176.h5
+ Reading Hf177 from /software/openmc/data/v0.13.3/lanl_endfb71/Hf177.h5
+ Reading Hf178 from /software/openmc/data/v0.13.3/lanl_endfb71/Hf178.h5
+ Reading Hf179 from /software/openmc/data/v0.13.3/lanl_endfb71/Hf179.h5
+ Reading Hf180 from /software/openmc/data/v0.13.3/lanl_endfb71/Hf180.h5
+ Reading Ta180 from /software/openmc/data/v0.13.3/lanl_endfb71/Ta180.h5
+ Reading Ta181 from /software/openmc/data/v0.13.3/lanl_endfb71/Ta181.h5
+ Reading Ta182 from /software/openmc/data/v0.13.3/lanl_endfb71/Ta182.h5
+ Reading W180 from /software/openmc/data/v0.13.3/lanl_endfb71/W180.h5
+ Reading W182 from /software/openmc/data/v0.13.3/lanl_endfb71/W182.h5
+ Reading W183 from /software/openmc/data/v0.13.3/lanl_endfb71/W183.h5
+ Reading W184 from /software/openmc/data/v0.13.3/lanl_endfb71/W184.h5
+ Reading W186 from /software/openmc/data/v0.13.3/lanl_endfb71/W186.h5
+ Reading Re185 from /software/openmc/data/v0.13.3/lanl_endfb71/Re185.h5
+ Reading Re187 from /software/openmc/data/v0.13.3/lanl_endfb71/Re187.h5
+ Reading Ir191 from /software/openmc/data/v0.13.3/lanl_endfb71/Ir191.h5
+ Reading Ir193 from /software/openmc/data/v0.13.3/lanl_endfb71/Ir193.h5
+ Reading Au197 from /software/openmc/data/v0.13.3/lanl_endfb71/Au197.h5
+ Reading Hg196 from /software/openmc/data/v0.13.3/lanl_endfb71/Hg196.h5
+ Reading Hg198 from /software/openmc/data/v0.13.3/lanl_endfb71/Hg198.h5
+ Reading Hg199 from /software/openmc/data/v0.13.3/lanl_endfb71/Hg199.h5
+ Reading Hg200 from /software/openmc/data/v0.13.3/lanl_endfb71/Hg200.h5
+ Reading Hg201 from /software/openmc/data/v0.13.3/lanl_endfb71/Hg201.h5
+ Reading Hg202 from /software/openmc/data/v0.13.3/lanl_endfb71/Hg202.h5
+ Reading Hg204 from /software/openmc/data/v0.13.3/lanl_endfb71/Hg204.h5
+ Reading Tl203 from /software/openmc/data/v0.13.3/lanl_endfb71/Tl203.h5
+ Reading Tl205 from /software/openmc/data/v0.13.3/lanl_endfb71/Tl205.h5
+ Reading Pb204 from /software/openmc/data/v0.13.3/lanl_endfb71/Pb204.h5
+ Reading Pb206 from /software/openmc/data/v0.13.3/lanl_endfb71/Pb206.h5
+ Reading Pb207 from /software/openmc/data/v0.13.3/lanl_endfb71/Pb207.h5
+ Reading Pb208 from /software/openmc/data/v0.13.3/lanl_endfb71/Pb208.h5
+ Reading Bi209 from /software/openmc/data/v0.13.3/lanl_endfb71/Bi209.h5
+ Reading Ra223 from /software/openmc/data/v0.13.3/lanl_endfb71/Ra223.h5
+ Reading Ra224 from /software/openmc/data/v0.13.3/lanl_endfb71/Ra224.h5
+ Reading Ra225 from /software/openmc/data/v0.13.3/lanl_endfb71/Ra225.h5
+ Reading Ra226 from /software/openmc/data/v0.13.3/lanl_endfb71/Ra226.h5
+ Reading Ac225 from /software/openmc/data/v0.13.3/lanl_endfb71/Ac225.h5
+ Reading Ac226 from /software/openmc/data/v0.13.3/lanl_endfb71/Ac226.h5
+ Reading Ac227 from /software/openmc/data/v0.13.3/lanl_endfb71/Ac227.h5
+ Reading Th227 from /software/openmc/data/v0.13.3/lanl_endfb71/Th227.h5
+ Reading Th228 from /software/openmc/data/v0.13.3/lanl_endfb71/Th228.h5
+ Reading Th229 from /software/openmc/data/v0.13.3/lanl_endfb71/Th229.h5
+ Reading Th230 from /software/openmc/data/v0.13.3/lanl_endfb71/Th230.h5
+ Reading Th231 from /software/openmc/data/v0.13.3/lanl_endfb71/Th231.h5
+ Reading Th232 from /software/openmc/data/v0.13.3/lanl_endfb71/Th232.h5
+ Reading Th233 from /software/openmc/data/v0.13.3/lanl_endfb71/Th233.h5
+ Reading Th234 from /software/openmc/data/v0.13.3/lanl_endfb71/Th234.h5
+ Reading Pa229 from /software/openmc/data/v0.13.3/lanl_endfb71/Pa229.h5
+ Reading Pa230 from /software/openmc/data/v0.13.3/lanl_endfb71/Pa230.h5
+ Reading Pa231 from /software/openmc/data/v0.13.3/lanl_endfb71/Pa231.h5
+ Reading Pa232 from /software/openmc/data/v0.13.3/lanl_endfb71/Pa232.h5
+ Reading Pa233 from /software/openmc/data/v0.13.3/lanl_endfb71/Pa233.h5
+ Reading U230 from /software/openmc/data/v0.13.3/lanl_endfb71/U230.h5
+ Reading U231 from /software/openmc/data/v0.13.3/lanl_endfb71/U231.h5
+ Reading U232 from /software/openmc/data/v0.13.3/lanl_endfb71/U232.h5
+ Reading U233 from /software/openmc/data/v0.13.3/lanl_endfb71/U233.h5
+ Reading U234 from /software/openmc/data/v0.13.3/lanl_endfb71/U234.h5
+ Reading U235 from /software/openmc/data/v0.13.3/lanl_endfb71/U235.h5
+ Reading U236 from /software/openmc/data/v0.13.3/lanl_endfb71/U236.h5
+ Reading U237 from /software/openmc/data/v0.13.3/lanl_endfb71/U237.h5
+ Reading U238 from /software/openmc/data/v0.13.3/lanl_endfb71/U238.h5
+ Reading U239 from /software/openmc/data/v0.13.3/lanl_endfb71/U239.h5
+ Reading U240 from /software/openmc/data/v0.13.3/lanl_endfb71/U240.h5
+ Reading U241 from /software/openmc/data/v0.13.3/lanl_endfb71/U241.h5
+ Reading Np234 from /software/openmc/data/v0.13.3/lanl_endfb71/Np234.h5
+ Reading Np235 from /software/openmc/data/v0.13.3/lanl_endfb71/Np235.h5
+ Reading Np236 from /software/openmc/data/v0.13.3/lanl_endfb71/Np236.h5
+ Reading Np237 from /software/openmc/data/v0.13.3/lanl_endfb71/Np237.h5
+ Reading Np238 from /software/openmc/data/v0.13.3/lanl_endfb71/Np238.h5
+ Reading Np239 from /software/openmc/data/v0.13.3/lanl_endfb71/Np239.h5
+ Reading Pu236 from /software/openmc/data/v0.13.3/lanl_endfb71/Pu236.h5
+ Reading Pu237 from /software/openmc/data/v0.13.3/lanl_endfb71/Pu237.h5
+ Reading Pu238 from /software/openmc/data/v0.13.3/lanl_endfb71/Pu238.h5
+ Reading Pu239 from /software/openmc/data/v0.13.3/lanl_endfb71/Pu239.h5
+ Reading Pu240 from /software/openmc/data/v0.13.3/lanl_endfb71/Pu240.h5
+ Reading Pu241 from /software/openmc/data/v0.13.3/lanl_endfb71/Pu241.h5
+ Reading Pu242 from /software/openmc/data/v0.13.3/lanl_endfb71/Pu242.h5
+ Reading Pu243 from /software/openmc/data/v0.13.3/lanl_endfb71/Pu243.h5
+ Reading Pu244 from /software/openmc/data/v0.13.3/lanl_endfb71/Pu244.h5
+ Reading Pu246 from /software/openmc/data/v0.13.3/lanl_endfb71/Pu246.h5
+ Reading Am240 from /software/openmc/data/v0.13.3/lanl_endfb71/Am240.h5
+ Reading Am241 from /software/openmc/data/v0.13.3/lanl_endfb71/Am241.h5
+ Reading Am242 from /software/openmc/data/v0.13.3/lanl_endfb71/Am242.h5
+ Reading Am242_m1 from /software/openmc/data/v0.13.3/lanl_endfb71/Am242_m1.h5
+ Reading Am243 from /software/openmc/data/v0.13.3/lanl_endfb71/Am243.h5
+ Reading Am244 from /software/openmc/data/v0.13.3/lanl_endfb71/Am244.h5
+ Reading Am244_m1 from /software/openmc/data/v0.13.3/lanl_endfb71/Am244_m1.h5
+ Reading Cm240 from /software/openmc/data/v0.13.3/lanl_endfb71/Cm240.h5
+ Reading Cm241 from /software/openmc/data/v0.13.3/lanl_endfb71/Cm241.h5
+ Reading Cm242 from /software/openmc/data/v0.13.3/lanl_endfb71/Cm242.h5
+ Reading Cm243 from /software/openmc/data/v0.13.3/lanl_endfb71/Cm243.h5
+ Reading Cm244 from /software/openmc/data/v0.13.3/lanl_endfb71/Cm244.h5
+ Reading Cm245 from /software/openmc/data/v0.13.3/lanl_endfb71/Cm245.h5
+ Reading Cm246 from /software/openmc/data/v0.13.3/lanl_endfb71/Cm246.h5
+ Reading Cm247 from /software/openmc/data/v0.13.3/lanl_endfb71/Cm247.h5
+ Reading Cm248 from /software/openmc/data/v0.13.3/lanl_endfb71/Cm248.h5
+ Reading Cm249 from /software/openmc/data/v0.13.3/lanl_endfb71/Cm249.h5
+ Reading Cm250 from /software/openmc/data/v0.13.3/lanl_endfb71/Cm250.h5
+ Reading Bk245 from /software/openmc/data/v0.13.3/lanl_endfb71/Bk245.h5
+ Reading Bk246 from /software/openmc/data/v0.13.3/lanl_endfb71/Bk246.h5
+ Reading Bk247 from /software/openmc/data/v0.13.3/lanl_endfb71/Bk247.h5
+ Reading Bk248 from /software/openmc/data/v0.13.3/lanl_endfb71/Bk248.h5
+ Reading Bk249 from /software/openmc/data/v0.13.3/lanl_endfb71/Bk249.h5
+ Reading Bk250 from /software/openmc/data/v0.13.3/lanl_endfb71/Bk250.h5
+ Reading Cf246 from /software/openmc/data/v0.13.3/lanl_endfb71/Cf246.h5
+ Reading Cf248 from /software/openmc/data/v0.13.3/lanl_endfb71/Cf248.h5
+ Reading Cf249 from /software/openmc/data/v0.13.3/lanl_endfb71/Cf249.h5
+ Reading Cf250 from /software/openmc/data/v0.13.3/lanl_endfb71/Cf250.h5
+ Reading Cf251 from /software/openmc/data/v0.13.3/lanl_endfb71/Cf251.h5
+ Reading Cf252 from /software/openmc/data/v0.13.3/lanl_endfb71/Cf252.h5
+ Reading Cf253 from /software/openmc/data/v0.13.3/lanl_endfb71/Cf253.h5
+ Reading Cf254 from /software/openmc/data/v0.13.3/lanl_endfb71/Cf254.h5
+ Reading Es251 from /software/openmc/data/v0.13.3/lanl_endfb71/Es251.h5
+ Reading Es252 from /software/openmc/data/v0.13.3/lanl_endfb71/Es252.h5
+ Reading Es253 from /software/openmc/data/v0.13.3/lanl_endfb71/Es253.h5
+ Reading Es254 from /software/openmc/data/v0.13.3/lanl_endfb71/Es254.h5
+ Reading Es254_m1 from /software/openmc/data/v0.13.3/lanl_endfb71/Es254_m1.h5
+ Reading Es255 from /software/openmc/data/v0.13.3/lanl_endfb71/Es255.h5
+ Reading Fm255 from /software/openmc/data/v0.13.3/lanl_endfb71/Fm255.h5
+ Reading c_Graphite from
+ /software/openmc/data/v0.13.3/lanl_endfb71/c_Graphite.h5
+ Minimum neutron data temperature: 900 K
+ Maximum neutron data temperature: 1200 K
+ Reading tallies XML file...
+ Preparing distributed cell instances...
+ Reading plot XML file...
+ Writing summary.h5 file...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    0.87170
+        2/1    1.53235
+        3/1    1.49545
+        4/1    1.51422
+        5/1    1.45211
+        6/1    1.43369
+        7/1    1.45012
+        8/1    1.46752
+        9/1    1.47005
+       10/1    1.46112
+       11/1    1.47630
+       12/1    1.41872
+       13/1    1.45963
+       14/1    1.45698
+       15/1    1.45146
+       16/1    1.45588
+       17/1    1.46514
+       18/1    1.44802
+       19/1    1.47937
+       20/1    1.45750
+       21/1    1.44776
+       22/1    1.44965
+       23/1    1.47921
+       24/1    1.43802
+       25/1    1.46505
+       26/1    1.43740
+       27/1    1.45662
+       28/1    1.45234
+       29/1    1.48474
+       30/1    1.47358
+       31/1    1.45921
+       32/1    1.43630
+       33/1    1.44818
+       34/1    1.43245
+       35/1    1.44895
+       36/1    1.47247
+       37/1    1.46681
+       38/1    1.44134
+       39/1    1.43070
+       40/1    1.45868
+       41/1    1.43444
+       42/1    1.41780
+       43/1    1.47492
+       44/1    1.46981
+       45/1    1.49574
+       46/1    1.41990
+       47/1    1.44110
+       48/1    1.45225
+       49/1    1.46375
+       50/1    1.43692
+       51/1    1.44686
+       52/1    1.44242    1.44464 +/- 0.00222
+       53/1    1.44548    1.44492 +/- 0.00131
+       54/1    1.45527    1.44751 +/- 0.00275
+       55/1    1.46355    1.45072 +/- 0.00385
+       56/1    1.44491    1.44975 +/- 0.00329
+       57/1    1.42979    1.44690 +/- 0.00398
+       58/1    1.43932    1.44595 +/- 0.00358
+       59/1    1.45699    1.44718 +/- 0.00338
+       60/1    1.46402    1.44886 +/- 0.00346
+       61/1    1.43601    1.44769 +/- 0.00334
+       62/1    1.46166    1.44886 +/- 0.00327
+       63/1    1.44681    1.44870 +/- 0.00301
+       64/1    1.47552    1.45061 +/- 0.00338
+       65/1    1.40988    1.44790 +/- 0.00416
+       66/1    1.44668    1.44782 +/- 0.00389
+       67/1    1.47093    1.44918 +/- 0.00390
+       68/1    1.48845    1.45136 +/- 0.00427
+       69/1    1.43584    1.45055 +/- 0.00412
+       70/1    1.45434    1.45074 +/- 0.00392
+       71/1    1.44650    1.45053 +/- 0.00373
+       72/1    1.46499    1.45119 +/- 0.00362
+       73/1    1.46864    1.45195 +/- 0.00354
+       74/1    1.44841    1.45180 +/- 0.00339
+       75/1    1.48958    1.45331 +/- 0.00359
+ Creating state point statepoint.75.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 3.4747e+02 seconds
+   Reading cross sections          = 3.3592e+02 seconds
+ Total time in simulation          = 5.3191e+02 seconds
+   Time in transport only          = 5.1856e+02 seconds
+   Time in inactive batches        = 1.2404e+02 seconds
+   Time in active batches          = 4.0787e+02 seconds
+   Time synchronizing fission bank = 2.9265e-01 seconds
+     Sampling source sites         = 2.1534e-01 seconds
+     SEND/RECV source sites        = 6.2892e-02 seconds
+   Time accumulating tallies       = 2.7965e+00 seconds
+   Time writing statepoints        = 1.0069e+01 seconds
+ Total time for finalization       = 1.1537e-02 seconds
+ Total time elapsed                = 8.7979e+02 seconds
+ Calculation Rate (inactive)       = 4030.89 particles/second
+ Calculation Rate (active)         = 612.942 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.45478 +/- 0.00357
+ k-effective (Track-length)  = 1.45331 +/- 0.00359
+ k-effective (Absorption)    = 1.45108 +/- 0.00147
+ Combined k-effective        = 1.45101 +/- 0.00160
+ Leakage Fraction            = 0.09916 +/- 0.00050
+
+ Creating state point openmc_simulation_n0.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    0.91352
+        2/1    1.33209
+        3/1    1.45025
+        4/1    1.43662
+        5/1    1.42873
+        6/1    1.41204
+        7/1    1.45144
+        8/1    1.45592
+        9/1    1.43847
+       10/1    1.40502
+       11/1    1.44199
+       12/1    1.42140
+       13/1    1.40580
+       14/1    1.43278
+       15/1    1.40704
+       16/1    1.44009
+       17/1    1.41490
+       18/1    1.38008
+       19/1    1.42270
+       20/1    1.41304
+       21/1    1.40847
+       22/1    1.42424
+       23/1    1.44963
+       24/1    1.40219
+       25/1    1.45291
+       26/1    1.42526
+       27/1    1.40276
+       28/1    1.43203
+       29/1    1.42239
+       30/1    1.43247
+       31/1    1.41433
+       32/1    1.40439
+       33/1    1.42394
+       34/1    1.41956
+       35/1    1.43386
+       36/1    1.41748
+       37/1    1.42855
+       38/1    1.42391
+       39/1    1.44311
+       40/1    1.42104
+       41/1    1.41824
+       42/1    1.40424
+       43/1    1.44444
+       44/1    1.40516
+       45/1    1.39845
+       46/1    1.44113
+       47/1    1.38290
+       48/1    1.44262
+       49/1    1.44449
+       50/1    1.42578
+       51/1    1.42256
+       52/1    1.41453    1.41854 +/- 0.00401
+       53/1    1.43730    1.42479 +/- 0.00667
+       54/1    1.42325    1.42441 +/- 0.00473
+       55/1    1.46992    1.43351 +/- 0.00981
+       56/1    1.39896    1.42775 +/- 0.00987
+       57/1    1.42059    1.42673 +/- 0.00840
+       58/1    1.41131    1.42480 +/- 0.00753
+       59/1    1.43374    1.42579 +/- 0.00671
+       60/1    1.45098    1.42831 +/- 0.00651
+       61/1    1.40018    1.42575 +/- 0.00642
+       62/1    1.43775    1.42675 +/- 0.00595
+       63/1    1.40646    1.42519 +/- 0.00569
+       64/1    1.42224    1.42498 +/- 0.00527
+       65/1    1.37964    1.42196 +/- 0.00576
+       66/1    1.41792    1.42171 +/- 0.00540
+       67/1    1.42863    1.42211 +/- 0.00508
+       68/1    1.44515    1.42339 +/- 0.00496
+       69/1    1.40985    1.42268 +/- 0.00475
+       70/1    1.43956    1.42352 +/- 0.00458
+       71/1    1.44040    1.42433 +/- 0.00443
+       72/1    1.41676    1.42398 +/- 0.00424
+       73/1    1.39562    1.42275 +/- 0.00423
+       74/1    1.42970    1.42304 +/- 0.00406
+       75/1    1.41932    1.42289 +/- 0.00390
+ Creating state point statepoint.75.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 6.3452e+02 seconds
+   Time in transport only          = 6.3139e+02 seconds
+   Time in inactive batches        = 2.3694e+02 seconds
+   Time in active batches          = 3.9759e+02 seconds
+   Time synchronizing fission bank = 3.8940e-01 seconds
+     Sampling source sites         = 3.1004e-01 seconds
+     SEND/RECV source sites        = 7.3902e-02 seconds
+   Time accumulating tallies       = 2.4554e+00 seconds
+   Time writing statepoints        = 6.5207e-02 seconds
+ Total time for finalization       = 1.1161e-02 seconds
+ Total time elapsed                = 6.3497e+02 seconds
+ Calculation Rate (inactive)       = 2110.28 particles/second
+ Calculation Rate (active)         = 628.79 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.42176 +/- 0.00350
+ k-effective (Track-length)  = 1.42289 +/- 0.00390
+ k-effective (Absorption)    = 1.42115 +/- 0.00198
+ Combined k-effective        = 1.42076 +/- 0.00208
+ Leakage Fraction            = 0.09744 +/- 0.00053
+
+ Creating state point openmc_simulation_n1.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    0.93870
+        2/1    1.30304
+        3/1    1.47768
+        4/1    1.44562
+        5/1    1.39606
+        6/1    1.40258
+        7/1    1.40677
+        8/1    1.39909
+        9/1    1.41691
+       10/1    1.43237
+       11/1    1.41122
+       12/1    1.40705
+       13/1    1.42835
+       14/1    1.40140
+       15/1    1.40640
+       16/1    1.40885
+       17/1    1.42079
+       18/1    1.42888
+       19/1    1.41026
+       20/1    1.41944
+       21/1    1.44646
+       22/1    1.38080
+       23/1    1.42726
+       24/1    1.39787
+       25/1    1.41728
+       26/1    1.40835
+       27/1    1.41132
+       28/1    1.39888
+       29/1    1.39627
+       30/1    1.41385
+       31/1    1.39107
+       32/1    1.41322
+       33/1    1.41096
+       34/1    1.36951
+       35/1    1.44287
+       36/1    1.41244
+       37/1    1.38397
+       38/1    1.40147
+       39/1    1.43150
+       40/1    1.39866
+       41/1    1.44778
+       42/1    1.41939
+       43/1    1.40090
+       44/1    1.42548
+       45/1    1.41663
+       46/1    1.41994
+       47/1    1.40759
+       48/1    1.39132
+       49/1    1.40633
+       50/1    1.37688
+       51/1    1.40170
+       52/1    1.39905    1.40038 +/- 0.00133
+       53/1    1.41104    1.40393 +/- 0.00363
+       54/1    1.43188    1.41092 +/- 0.00744
+       55/1    1.43829    1.41639 +/- 0.00795
+       56/1    1.38288    1.41081 +/- 0.00856
+       57/1    1.42704    1.41313 +/- 0.00760
+       58/1    1.45829    1.41877 +/- 0.00867
+       59/1    1.44098    1.42124 +/- 0.00804
+       60/1    1.42920    1.42203 +/- 0.00723
+       61/1    1.39078    1.41919 +/- 0.00713
+       62/1    1.39494    1.41717 +/- 0.00682
+       63/1    1.39919    1.41579 +/- 0.00642
+       64/1    1.40771    1.41521 +/- 0.00597
+       65/1    1.45864    1.41811 +/- 0.00627
+       66/1    1.41497    1.41791 +/- 0.00587
+       67/1    1.42954    1.41860 +/- 0.00555
+       68/1    1.42271    1.41882 +/- 0.00524
+       69/1    1.40890    1.41830 +/- 0.00499
+       70/1    1.45319    1.42005 +/- 0.00504
+       71/1    1.39448    1.41883 +/- 0.00495
+       72/1    1.42914    1.41930 +/- 0.00474
+       73/1    1.42467    1.41953 +/- 0.00454
+       74/1    1.41553    1.41936 +/- 0.00435
+       75/1    1.42979    1.41978 +/- 0.00419
+ Creating state point statepoint.75.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 6.2830e+02 seconds
+   Time in transport only          = 6.2606e+02 seconds
+   Time in inactive batches        = 2.4629e+02 seconds
+   Time in active batches          = 3.8201e+02 seconds
+   Time synchronizing fission bank = 3.7648e-01 seconds
+     Sampling source sites         = 2.9969e-01 seconds
+     SEND/RECV source sites        = 7.0910e-02 seconds
+   Time accumulating tallies       = 1.5683e+00 seconds
+   Time writing statepoints        = 5.5488e-02 seconds
+ Total time for finalization       = 1.0266e-02 seconds
+ Total time elapsed                = 6.2874e+02 seconds
+ Calculation Rate (inactive)       = 2030.1 particles/second
+ Calculation Rate (active)         = 654.433 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.41899 +/- 0.00396
+ k-effective (Track-length)  = 1.41978 +/- 0.00419
+ k-effective (Absorption)    = 1.41435 +/- 0.00175
+ Combined k-effective        = 1.41484 +/- 0.00186
+ Leakage Fraction            = 0.09807 +/- 0.00060
+
+ Creating state point openmc_simulation_n2.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    0.94685
+        2/1    1.30800
+        3/1    1.43573
+        4/1    1.43108
+        5/1    1.42073
+        6/1    1.41406
+        7/1    1.35248
+        8/1    1.45250
+        9/1    1.39883
+       10/1    1.42578
+       11/1    1.39539
+       12/1    1.39411
+       13/1    1.38463
+       14/1    1.41744
+       15/1    1.39042
+       16/1    1.38632
+       17/1    1.39830
+       18/1    1.43159
+       19/1    1.38898
+       20/1    1.39404
+       21/1    1.39090
+       22/1    1.40847
+       23/1    1.42030
+       24/1    1.38211
+       25/1    1.42316
+       26/1    1.42783
+       27/1    1.40893
+       28/1    1.40756
+       29/1    1.40707
+       30/1    1.41177
+       31/1    1.42231
+       32/1    1.41602
+       33/1    1.44046
+       34/1    1.38604
+       35/1    1.39753
+       36/1    1.41165
+       37/1    1.40805
+       38/1    1.39387
+       39/1    1.41510
+       40/1    1.42300
+       41/1    1.38996
+       42/1    1.37323
+       43/1    1.38300
+       44/1    1.39587
+       45/1    1.39050
+       46/1    1.41404
+       47/1    1.38754
+       48/1    1.39531
+       49/1    1.40529
+       50/1    1.39691
+       51/1    1.41224
+       52/1    1.41065    1.41144 +/- 0.00080
+       53/1    1.41944    1.41411 +/- 0.00270
+       54/1    1.37343    1.40394 +/- 0.01035
+       55/1    1.43396    1.40994 +/- 0.01001
+       56/1    1.42058    1.41171 +/- 0.00837
+       57/1    1.44747    1.41682 +/- 0.00872
+       58/1    1.36273    1.41006 +/- 0.01014
+       59/1    1.41915    1.41107 +/- 0.00900
+       60/1    1.40756    1.41072 +/- 0.00806
+       61/1    1.40196    1.40992 +/- 0.00733
+       62/1    1.41637    1.41046 +/- 0.00671
+       63/1    1.42055    1.41124 +/- 0.00622
+       64/1    1.41531    1.41153 +/- 0.00577
+       65/1    1.43352    1.41299 +/- 0.00557
+       66/1    1.39360    1.41178 +/- 0.00535
+       67/1    1.42017    1.41228 +/- 0.00505
+       68/1    1.39342    1.41123 +/- 0.00487
+       69/1    1.38129    1.40965 +/- 0.00487
+       70/1    1.41987    1.41016 +/- 0.00465
+       71/1    1.41285    1.41029 +/- 0.00442
+       72/1    1.42341    1.41089 +/- 0.00426
+       73/1    1.42122    1.41134 +/- 0.00410
+       74/1    1.37737    1.40992 +/- 0.00417
+       75/1    1.42900    1.41068 +/- 0.00407
+ Creating state point statepoint.75.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 6.3757e+02 seconds
+   Time in transport only          = 6.3439e+02 seconds
+   Time in inactive batches        = 2.4903e+02 seconds
+   Time in active batches          = 3.8854e+02 seconds
+   Time synchronizing fission bank = 3.3741e-01 seconds
+     Sampling source sites         = 2.5640e-01 seconds
+     SEND/RECV source sites        = 7.6960e-02 seconds
+   Time accumulating tallies       = 2.5877e+00 seconds
+   Time writing statepoints        = 5.7121e-02 seconds
+ Total time for finalization       = 7.7181e-03 seconds
+ Total time elapsed                = 6.3801e+02 seconds
+ Calculation Rate (inactive)       = 2007.78 particles/second
+ Calculation Rate (active)         = 643.434 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.41019 +/- 0.00372
+ k-effective (Track-length)  = 1.41068 +/- 0.00407
+ k-effective (Absorption)    = 1.40843 +/- 0.00216
+ Combined k-effective        = 1.40859 +/- 0.00213
+ Leakage Fraction            = 0.09687 +/- 0.00060
+
+ Creating state point openmc_simulation_n3.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    0.93153
+        2/1    1.31080
+        3/1    1.43556
+        4/1    1.40671
+        5/1    1.38965
+        6/1    1.37994
+        7/1    1.40517
+        8/1    1.41741
+        9/1    1.42599
+       10/1    1.40550
+       11/1    1.41553
+       12/1    1.41406
+       13/1    1.39639
+       14/1    1.38801
+       15/1    1.41846
+       16/1    1.38317
+       17/1    1.38626
+       18/1    1.37548
+       19/1    1.39976
+       20/1    1.40890
+       21/1    1.42006
+       22/1    1.41019
+       23/1    1.40249
+       24/1    1.41840
+       25/1    1.42924
+       26/1    1.40583
+       27/1    1.39347
+       28/1    1.40709
+       29/1    1.41718
+       30/1    1.38008
+       31/1    1.40605
+       32/1    1.38969
+       33/1    1.39989
+       34/1    1.38089
+       35/1    1.41951
+       36/1    1.39593
+       37/1    1.37015
+       38/1    1.41203
+       39/1    1.39097
+       40/1    1.40183
+       41/1    1.40762
+       42/1    1.42915
+       43/1    1.42559
+       44/1    1.41315
+       45/1    1.40870
+       46/1    1.39903
+       47/1    1.43550
+       48/1    1.36050
+       49/1    1.41116
+       50/1    1.40662
+       51/1    1.39668
+       52/1    1.41962    1.40815 +/- 0.01147
+       53/1    1.39983    1.40538 +/- 0.00718
+       54/1    1.39914    1.40382 +/- 0.00531
+       55/1    1.41280    1.40561 +/- 0.00449
+       56/1    1.42909    1.40953 +/- 0.00536
+       57/1    1.42297    1.41145 +/- 0.00492
+       58/1    1.40534    1.41068 +/- 0.00433
+       59/1    1.40328    1.40986 +/- 0.00391
+       60/1    1.39296    1.40817 +/- 0.00388
+       61/1    1.41594    1.40888 +/- 0.00358
+       62/1    1.41203    1.40914 +/- 0.00328
+       63/1    1.41792    1.40982 +/- 0.00309
+       64/1    1.40693    1.40961 +/- 0.00287
+       65/1    1.41131    1.40972 +/- 0.00267
+       66/1    1.39182    1.40860 +/- 0.00274
+       67/1    1.41924    1.40923 +/- 0.00265
+       68/1    1.38308    1.40778 +/- 0.00289
+       69/1    1.38033    1.40633 +/- 0.00309
+       70/1    1.41423    1.40673 +/- 0.00296
+       71/1    1.40474    1.40663 +/- 0.00282
+       72/1    1.40648    1.40663 +/- 0.00268
+       73/1    1.39250    1.40601 +/- 0.00264
+       74/1    1.40021    1.40577 +/- 0.00254
+       75/1    1.40088    1.40557 +/- 0.00244
+ Creating state point statepoint.75.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 6.2935e+02 seconds
+   Time in transport only          = 6.2365e+02 seconds
+   Time in inactive batches        = 2.4675e+02 seconds
+   Time in active batches          = 3.8260e+02 seconds
+   Time synchronizing fission bank = 3.4959e-01 seconds
+     Sampling source sites         = 2.6595e-01 seconds
+     SEND/RECV source sites        = 7.8099e-02 seconds
+   Time accumulating tallies       = 1.0308e+00 seconds
+   Time writing statepoints        = 5.4924e-02 seconds
+ Total time for finalization       = 1.0720e-02 seconds
+ Total time elapsed                = 6.2979e+02 seconds
+ Calculation Rate (inactive)       = 2026.36 particles/second
+ Calculation Rate (active)         = 653.416 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.40607 +/- 0.00219
+ k-effective (Track-length)  = 1.40557 +/- 0.00244
+ k-effective (Absorption)    = 1.40115 +/- 0.00179
+ Combined k-effective        = 1.40308 +/- 0.00173
+ Leakage Fraction            = 0.09751 +/- 0.00073
+
+ Creating state point openmc_simulation_n4.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    0.91085
+        2/1    1.31807
+        3/1    1.41591
+        4/1    1.40576
+        5/1    1.40591
+        6/1    1.38089
+        7/1    1.38912
+        8/1    1.39640
+        9/1    1.41995
+       10/1    1.41711
+       11/1    1.39144
+       12/1    1.41081
+       13/1    1.40125
+       14/1    1.37364
+       15/1    1.39453
+       16/1    1.39696
+       17/1    1.38447
+       18/1    1.37891
+       19/1    1.40805
+       20/1    1.38794
+       21/1    1.38146
+       22/1    1.37431
+       23/1    1.38313
+       24/1    1.39695
+       25/1    1.38613
+       26/1    1.36157
+       27/1    1.39493
+       28/1    1.40674
+       29/1    1.39970
+       30/1    1.39924
+       31/1    1.37526
+       32/1    1.38822
+       33/1    1.38798
+       34/1    1.38011
+       35/1    1.38590
+       36/1    1.44356
+       37/1    1.37624
+       38/1    1.37983
+       39/1    1.42489
+       40/1    1.41428
+       41/1    1.38563
+       42/1    1.37290
+       43/1    1.37287
+       44/1    1.37761
+       45/1    1.38855
+       46/1    1.40443
+       47/1    1.38025
+       48/1    1.38603
+       49/1    1.40542
+       50/1    1.43105
+       51/1    1.42714
+       52/1    1.38249    1.40482 +/- 0.02233
+       53/1    1.39645    1.40203 +/- 0.01319
+       54/1    1.39474    1.40021 +/- 0.00950
+       55/1    1.39838    1.39984 +/- 0.00737
+       56/1    1.41186    1.40184 +/- 0.00634
+       57/1    1.40756    1.40266 +/- 0.00542
+       58/1    1.36528    1.39799 +/- 0.00662
+       59/1    1.39439    1.39759 +/- 0.00586
+       60/1    1.38899    1.39673 +/- 0.00531
+       61/1    1.39444    1.39652 +/- 0.00481
+       62/1    1.42828    1.39917 +/- 0.00512
+       63/1    1.39730    1.39902 +/- 0.00471
+       64/1    1.39154    1.39849 +/- 0.00440
+       65/1    1.38118    1.39734 +/- 0.00425
+       66/1    1.39508    1.39719 +/- 0.00398
+       67/1    1.37409    1.39584 +/- 0.00398
+       68/1    1.40690    1.39645 +/- 0.00380
+       69/1    1.37495    1.39532 +/- 0.00377
+       70/1    1.41111    1.39611 +/- 0.00366
+       71/1    1.39429    1.39602 +/- 0.00348
+       72/1    1.39244    1.39586 +/- 0.00333
+       73/1    1.40514    1.39626 +/- 0.00320
+       74/1    1.40953    1.39681 +/- 0.00312
+       75/1    1.39919    1.39691 +/- 0.00299
+ Creating state point statepoint.75.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 5.9088e+02 seconds
+   Time in transport only          = 5.8881e+02 seconds
+   Time in inactive batches        = 2.1462e+02 seconds
+   Time in active batches          = 3.7626e+02 seconds
+   Time synchronizing fission bank = 3.5130e-01 seconds
+     Sampling source sites         = 2.7798e-01 seconds
+     SEND/RECV source sites        = 6.6471e-02 seconds
+   Time accumulating tallies       = 1.4443e+00 seconds
+   Time writing statepoints        = 4.8045e-02 seconds
+ Total time for finalization       = 1.1076e-02 seconds
+ Total time elapsed                = 5.9131e+02 seconds
+ Calculation Rate (inactive)       = 2329.7 particles/second
+ Calculation Rate (active)         = 664.436 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.39663 +/- 0.00303
+ k-effective (Track-length)  = 1.39691 +/- 0.00299
+ k-effective (Absorption)    = 1.39359 +/- 0.00158
+ Combined k-effective        = 1.39407 +/- 0.00162
+ Leakage Fraction            = 0.09817 +/- 0.00081
+
+ Creating state point openmc_simulation_n5.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    0.92761
+        2/1    1.28800
+        3/1    1.36503
+        4/1    1.38125
+        5/1    1.39065
+        6/1    1.35066
+        7/1    1.39510
+        8/1    1.35309
+        9/1    1.37878
+       10/1    1.37294
+       11/1    1.37703
+       12/1    1.37143
+       13/1    1.36483
+       14/1    1.37184
+       15/1    1.35434
+       16/1    1.35332
+       17/1    1.35531
+       18/1    1.37581
+       19/1    1.37488
+       20/1    1.37064
+       21/1    1.35362
+       22/1    1.39183
+       23/1    1.35709
+       24/1    1.36287
+       25/1    1.34589
+       26/1    1.36046
+       27/1    1.37115
+       28/1    1.37221
+       29/1    1.36286
+       30/1    1.36324
+       31/1    1.38148
+       32/1    1.35677
+       33/1    1.37896
+       34/1    1.36380
+       35/1    1.35050
+       36/1    1.35912
+       37/1    1.38429
+       38/1    1.37444
+       39/1    1.37744
+       40/1    1.36685
+       41/1    1.35496
+       42/1    1.37807
+       43/1    1.36807
+       44/1    1.37880
+       45/1    1.36592
+       46/1    1.35525
+       47/1    1.39016
+       48/1    1.36625
+       49/1    1.35193
+       50/1    1.36075
+       51/1    1.37011
+       52/1    1.36305    1.36658 +/- 0.00353
+       53/1    1.37174    1.36830 +/- 0.00266
+       54/1    1.37372    1.36965 +/- 0.00232
+       55/1    1.39455    1.37463 +/- 0.00529
+       56/1    1.36114    1.37238 +/- 0.00487
+       57/1    1.37437    1.37267 +/- 0.00413
+       58/1    1.39803    1.37584 +/- 0.00478
+       59/1    1.35946    1.37402 +/- 0.00459
+       60/1    1.36724    1.37334 +/- 0.00416
+       61/1    1.35444    1.37162 +/- 0.00414
+       62/1    1.40373    1.37430 +/- 0.00463
+       63/1    1.35843    1.37308 +/- 0.00443
+       64/1    1.36734    1.37267 +/- 0.00412
+       65/1    1.35003    1.37116 +/- 0.00412
+       66/1    1.36100    1.37052 +/- 0.00391
+       67/1    1.37908    1.37103 +/- 0.00371
+       68/1    1.37450    1.37122 +/- 0.00350
+       69/1    1.36911    1.37111 +/- 0.00331
+       70/1    1.37489    1.37130 +/- 0.00315
+       71/1    1.40587    1.37294 +/- 0.00342
+       72/1    1.36231    1.37246 +/- 0.00329
+       73/1    1.37463    1.37256 +/- 0.00315
+       74/1    1.37880    1.37282 +/- 0.00303
+       75/1    1.38508    1.37331 +/- 0.00294
+ Creating state point statepoint.75.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 6.1817e+02 seconds
+   Time in transport only          = 6.1601e+02 seconds
+   Time in inactive batches        = 2.2636e+02 seconds
+   Time in active batches          = 3.9181e+02 seconds
+   Time synchronizing fission bank = 3.3766e-01 seconds
+     Sampling source sites         = 2.5961e-01 seconds
+     SEND/RECV source sites        = 7.0865e-02 seconds
+   Time accumulating tallies       = 1.5219e+00 seconds
+   Time writing statepoints        = 5.5201e-02 seconds
+ Total time for finalization       = 1.1634e-02 seconds
+ Total time elapsed                = 6.1861e+02 seconds
+ Calculation Rate (inactive)       = 2208.88 particles/second
+ Calculation Rate (active)         = 638.065 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.37435 +/- 0.00273
+ k-effective (Track-length)  = 1.37331 +/- 0.00294
+ k-effective (Absorption)    = 1.37342 +/- 0.00199
+ Combined k-effective        = 1.37335 +/- 0.00190
+ Leakage Fraction            = 0.09740 +/- 0.00066
+
+ Creating state point openmc_simulation_n6.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    0.90337
+        2/1    1.23747
+        3/1    1.36404
+        4/1    1.39341
+        5/1    1.34920
+        6/1    1.32195
+        7/1    1.35503
+        8/1    1.35439
+        9/1    1.33023
+       10/1    1.35379
+       11/1    1.32968
+       12/1    1.35417
+       13/1    1.34894
+       14/1    1.37425
+       15/1    1.31310
+       16/1    1.32665
+       17/1    1.33783
+       18/1    1.32820
+       19/1    1.30782
+       20/1    1.30507
+       21/1    1.35026
+       22/1    1.34857
+       23/1    1.34486
+       24/1    1.39289
+       25/1    1.34546
+       26/1    1.34821
+       27/1    1.34120
+       28/1    1.35455
+       29/1    1.34346
+       30/1    1.33949
+       31/1    1.35712
+       32/1    1.33845
+       33/1    1.37894
+       34/1    1.35979
+       35/1    1.35964
+       36/1    1.32258
+       37/1    1.35041
+       38/1    1.37151
+       39/1    1.35145
+       40/1    1.35319
+       41/1    1.37619
+       42/1    1.37364
+       43/1    1.35925
+       44/1    1.32373
+       45/1    1.34044
+       46/1    1.33900
+       47/1    1.34748
+       48/1    1.34541
+       49/1    1.32114
+       50/1    1.35647
+       51/1    1.33163
+       52/1    1.33450    1.33306 +/- 0.00144
+       53/1    1.34605    1.33739 +/- 0.00441
+       54/1    1.37249    1.34617 +/- 0.00931
+       55/1    1.37007    1.35095 +/- 0.00865
+       56/1    1.35778    1.35209 +/- 0.00716
+       57/1    1.35187    1.35206 +/- 0.00605
+       58/1    1.34647    1.35136 +/- 0.00528
+       59/1    1.34560    1.35072 +/- 0.00470
+       60/1    1.36103    1.35175 +/- 0.00433
+       61/1    1.37220    1.35361 +/- 0.00434
+       62/1    1.34585    1.35296 +/- 0.00401
+       63/1    1.35288    1.35296 +/- 0.00369
+       64/1    1.34934    1.35270 +/- 0.00343
+       65/1    1.33228    1.35134 +/- 0.00347
+       66/1    1.37046    1.35253 +/- 0.00346
+       67/1    1.34485    1.35208 +/- 0.00328
+       68/1    1.36485    1.35279 +/- 0.00317
+       69/1    1.35113    1.35270 +/- 0.00300
+       70/1    1.33199    1.35167 +/- 0.00303
+       71/1    1.33118    1.35069 +/- 0.00304
+       72/1    1.33561    1.35001 +/- 0.00298
+       73/1    1.35359    1.35016 +/- 0.00285
+       74/1    1.31125    1.34854 +/- 0.00318
+       75/1    1.32607    1.34764 +/- 0.00318
+ Creating state point statepoint.75.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 6.0268e+02 seconds
+   Time in transport only          = 5.9594e+02 seconds
+   Time in inactive batches        = 2.1504e+02 seconds
+   Time in active batches          = 3.8764e+02 seconds
+   Time synchronizing fission bank = 3.3145e-01 seconds
+     Sampling source sites         = 2.5201e-01 seconds
+     SEND/RECV source sites        = 7.3323e-02 seconds
+   Time accumulating tallies       = 1.2841e+00 seconds
+   Time writing statepoints        = 7.6772e-02 seconds
+ Total time for finalization       = 1.1300e-02 seconds
+ Total time elapsed                = 6.0312e+02 seconds
+ Calculation Rate (inactive)       = 2325.16 particles/second
+ Calculation Rate (active)         = 644.922 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.34874 +/- 0.00295
+ k-effective (Track-length)  = 1.34764 +/- 0.00318
+ k-effective (Absorption)    = 1.34617 +/- 0.00241
+ Combined k-effective        = 1.34699 +/- 0.00244
+ Leakage Fraction            = 0.09833 +/- 0.00047
+
+ Creating state point openmc_simulation_n7.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    0.89443
+        2/1    1.21559
+        3/1    1.31340
+        4/1    1.33010
+        5/1    1.35244
+        6/1    1.33111
+        7/1    1.31450
+        8/1    1.30344
+        9/1    1.32609
+       10/1    1.31357
+       11/1    1.31146
+       12/1    1.33272
+       13/1    1.32436
+       14/1    1.33540
+       15/1    1.33152
+       16/1    1.30948
+       17/1    1.31839
+       18/1    1.34060
+       19/1    1.32978
+       20/1    1.31792
+       21/1    1.32124
+       22/1    1.29617
+       23/1    1.31220
+       24/1    1.29469
+       25/1    1.29498
+       26/1    1.31407
+       27/1    1.29358
+       28/1    1.31825
+       29/1    1.29544
+       30/1    1.33790
+       31/1    1.29203
+       32/1    1.34279
+       33/1    1.34411
+       34/1    1.30884
+       35/1    1.32934
+       36/1    1.32495
+       37/1    1.33554
+       38/1    1.31338
+       39/1    1.32271
+       40/1    1.34941
+       41/1    1.32112
+       42/1    1.30282
+       43/1    1.34427
+       44/1    1.32568
+       45/1    1.31246
+       46/1    1.33019
+       47/1    1.35019
+       48/1    1.35178
+       49/1    1.29177
+       50/1    1.34070
+       51/1    1.33252
+       52/1    1.34026    1.33639 +/- 0.00387
+       53/1    1.30014    1.32430 +/- 0.01229
+       54/1    1.32514    1.32451 +/- 0.00869
+       55/1    1.29719    1.31905 +/- 0.00867
+       56/1    1.32319    1.31974 +/- 0.00711
+       57/1    1.35465    1.32473 +/- 0.00781
+       58/1    1.31984    1.32412 +/- 0.00679
+       59/1    1.31143    1.32271 +/- 0.00615
+       60/1    1.32619    1.32306 +/- 0.00552
+       61/1    1.34441    1.32500 +/- 0.00535
+       62/1    1.29782    1.32273 +/- 0.00539
+       63/1    1.31917    1.32246 +/- 0.00496
+       64/1    1.32425    1.32259 +/- 0.00460
+       65/1    1.32226    1.32256 +/- 0.00428
+       66/1    1.33728    1.32348 +/- 0.00411
+       67/1    1.33710    1.32428 +/- 0.00394
+       68/1    1.34620    1.32550 +/- 0.00391
+       69/1    1.33945    1.32624 +/- 0.00377
+       70/1    1.33976    1.32691 +/- 0.00364
+       71/1    1.31586    1.32639 +/- 0.00350
+       72/1    1.33908    1.32696 +/- 0.00339
+       73/1    1.33378    1.32726 +/- 0.00325
+       74/1    1.33166    1.32744 +/- 0.00312
+       75/1    1.32987    1.32754 +/- 0.00299
+ Creating state point statepoint.75.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 6.1665e+02 seconds
+   Time in transport only          = 6.1384e+02 seconds
+   Time in inactive batches        = 2.1716e+02 seconds
+   Time in active batches          = 3.9948e+02 seconds
+   Time synchronizing fission bank = 4.1143e-01 seconds
+     Sampling source sites         = 3.2472e-01 seconds
+     SEND/RECV source sites        = 7.9799e-02 seconds
+   Time accumulating tallies       = 2.0247e+00 seconds
+   Time writing statepoints        = 7.0515e-02 seconds
+ Total time for finalization       = 1.0944e-02 seconds
+ Total time elapsed                = 6.1709e+02 seconds
+ Calculation Rate (inactive)       = 2302.43 particles/second
+ Calculation Rate (active)         = 625.807 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.32549 +/- 0.00309
+ k-effective (Track-length)  = 1.32754 +/- 0.00299
+ k-effective (Absorption)    = 1.32430 +/- 0.00186
+ Combined k-effective        = 1.32516 +/- 0.00205
+ Leakage Fraction            = 0.09979 +/- 0.00064
+
+ Creating state point openmc_simulation_n8.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    0.89392
+        2/1    1.20076
+        3/1    1.27518
+        4/1    1.29858
+        5/1    1.29600
+        6/1    1.30040
+        7/1    1.29327
+        8/1    1.29354
+        9/1    1.29567
+       10/1    1.30920
+       11/1    1.30511
+       12/1    1.31064
+       13/1    1.29293
+       14/1    1.29732
+       15/1    1.29463
+       16/1    1.29049
+       17/1    1.29146
+       18/1    1.31774
+       19/1    1.30869
+       20/1    1.27909
+       21/1    1.29481
+       22/1    1.29809
+       23/1    1.30034
+       24/1    1.28235
+       25/1    1.28916
+       26/1    1.29766
+       27/1    1.29141
+       28/1    1.29394
+       29/1    1.28546
+       30/1    1.31656
+       31/1    1.30899
+       32/1    1.32853
+       33/1    1.26652
+       34/1    1.28249
+       35/1    1.29859
+       36/1    1.27926
+       37/1    1.29207
+       38/1    1.28958
+       39/1    1.31085
+       40/1    1.26540
+       41/1    1.29498
+       42/1    1.29242
+       43/1    1.30268
+       44/1    1.27573
+       45/1    1.28380
+       46/1    1.29314
+       47/1    1.27883
+       48/1    1.28655
+       49/1    1.30938
+       50/1    1.30018
+       51/1    1.31289
+       52/1    1.28300    1.29795 +/- 0.01494
+       53/1    1.30364    1.29984 +/- 0.00883
+       54/1    1.29530    1.29871 +/- 0.00635
+       55/1    1.27189    1.29334 +/- 0.00728
+       56/1    1.28091    1.29127 +/- 0.00629
+       57/1    1.30826    1.29370 +/- 0.00585
+       58/1    1.25916    1.28938 +/- 0.00665
+       59/1    1.31037    1.29171 +/- 0.00631
+       60/1    1.26625    1.28917 +/- 0.00619
+       61/1    1.29588    1.28978 +/- 0.00564
+       62/1    1.28437    1.28933 +/- 0.00517
+       63/1    1.30137    1.29025 +/- 0.00484
+       64/1    1.32781    1.29294 +/- 0.00522
+       65/1    1.27044    1.29144 +/- 0.00509
+       66/1    1.29054    1.29138 +/- 0.00476
+       67/1    1.26913    1.29007 +/- 0.00466
+       68/1    1.32280    1.29189 +/- 0.00475
+       69/1    1.30989    1.29284 +/- 0.00460
+       70/1    1.29919    1.29315 +/- 0.00437
+       71/1    1.28844    1.29293 +/- 0.00416
+       72/1    1.26121    1.29149 +/- 0.00422
+       73/1    1.28634    1.29126 +/- 0.00404
+       74/1    1.28259    1.29090 +/- 0.00389
+       75/1    1.27037    1.29008 +/- 0.00382
+ Creating state point statepoint.75.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 6.2633e+02 seconds
+   Time in transport only          = 6.2447e+02 seconds
+   Time in inactive batches        = 2.3100e+02 seconds
+   Time in active batches          = 3.9533e+02 seconds
+   Time synchronizing fission bank = 3.7894e-01 seconds
+     Sampling source sites         = 3.0717e-01 seconds
+     SEND/RECV source sites        = 6.5725e-02 seconds
+   Time accumulating tallies       = 1.1906e+00 seconds
+   Time writing statepoints        = 5.9696e-02 seconds
+ Total time for finalization       = 1.1254e-02 seconds
+ Total time elapsed                = 6.2676e+02 seconds
+ Calculation Rate (inactive)       = 2164.47 particles/second
+ Calculation Rate (active)         = 632.39 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.29081 +/- 0.00387
+ k-effective (Track-length)  = 1.29008 +/- 0.00382
+ k-effective (Absorption)    = 1.29344 +/- 0.00191
+ Combined k-effective        = 1.29347 +/- 0.00204
+ Leakage Fraction            = 0.10076 +/- 0.00059
+
+ Creating state point openmc_simulation_n9.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    0.85127
+        2/1    1.14127
+        3/1    1.23061
+        4/1    1.27988
+        5/1    1.25326
+        6/1    1.28289
+        7/1    1.28191
+        8/1    1.27095
+        9/1    1.26604
+       10/1    1.23801
+       11/1    1.27966
+       12/1    1.30820
+       13/1    1.26680
+       14/1    1.30463
+       15/1    1.25102
+       16/1    1.27072
+       17/1    1.26890
+       18/1    1.25964
+       19/1    1.25740
+       20/1    1.23945
+       21/1    1.25882
+       22/1    1.26732
+       23/1    1.25453
+       24/1    1.25900
+       25/1    1.26493
+       26/1    1.27051
+       27/1    1.24450
+       28/1    1.30467
+       29/1    1.28601
+       30/1    1.27159
+       31/1    1.25065
+       32/1    1.29496
+       33/1    1.25840
+       34/1    1.27269
+       35/1    1.25651
+       36/1    1.26602
+       37/1    1.23224
+       38/1    1.25479
+       39/1    1.24742
+       40/1    1.26641
+       41/1    1.27138
+       42/1    1.29900
+       43/1    1.24659
+       44/1    1.26923
+       45/1    1.26638
+       46/1    1.28150
+       47/1    1.27160
+       48/1    1.26024
+       49/1    1.25097
+       50/1    1.27881
+       51/1    1.26121
+       52/1    1.25290    1.25705 +/- 0.00416
+       53/1    1.27288    1.26233 +/- 0.00579
+       54/1    1.25632    1.26083 +/- 0.00436
+       55/1    1.26790    1.26224 +/- 0.00366
+       56/1    1.28215    1.26556 +/- 0.00447
+       57/1    1.24761    1.26299 +/- 0.00456
+       58/1    1.29433    1.26691 +/- 0.00556
+       59/1    1.25098    1.26514 +/- 0.00522
+       60/1    1.26039    1.26467 +/- 0.00469
+       61/1    1.25912    1.26416 +/- 0.00427
+       62/1    1.23491    1.26172 +/- 0.00460
+       63/1    1.27355    1.26263 +/- 0.00433
+       64/1    1.25629    1.26218 +/- 0.00403
+       65/1    1.27237    1.26286 +/- 0.00381
+       66/1    1.27768    1.26379 +/- 0.00369
+       67/1    1.26605    1.26392 +/- 0.00347
+       68/1    1.28744    1.26523 +/- 0.00352
+       69/1    1.24891    1.26437 +/- 0.00344
+       70/1    1.27291    1.26479 +/- 0.00329
+       71/1    1.24524    1.26386 +/- 0.00326
+       72/1    1.26630    1.26397 +/- 0.00311
+       73/1    1.28205    1.26476 +/- 0.00308
+       74/1    1.27316    1.26511 +/- 0.00297
+       75/1    1.25354    1.26465 +/- 0.00288
+ Creating state point statepoint.75.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 6.3426e+02 seconds
+   Time in transport only          = 6.3204e+02 seconds
+   Time in inactive batches        = 2.2966e+02 seconds
+   Time in active batches          = 4.0461e+02 seconds
+   Time synchronizing fission bank = 3.2217e-01 seconds
+     Sampling source sites         = 2.4508e-01 seconds
+     SEND/RECV source sites        = 7.1752e-02 seconds
+   Time accumulating tallies       = 1.5751e+00 seconds
+   Time writing statepoints        = 6.2175e-02 seconds
+ Total time for finalization       = 1.1254e-02 seconds
+ Total time elapsed                = 6.3470e+02 seconds
+ Calculation Rate (inactive)       = 2177.18 particles/second
+ Calculation Rate (active)         = 617.881 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.26519 +/- 0.00289
+ k-effective (Track-length)  = 1.26465 +/- 0.00288
+ k-effective (Absorption)    = 1.26878 +/- 0.00191
+ Combined k-effective        = 1.26781 +/- 0.00193
+ Leakage Fraction            = 0.10239 +/- 0.00062
+
+ Creating state point openmc_simulation_n10.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    0.85879
+        2/1    1.17236
+        3/1    1.23561
+        4/1    1.22764
+        5/1    1.22963
+        6/1    1.25623
+        7/1    1.24220
+        8/1    1.24487
+        9/1    1.22251
+       10/1    1.23059
+       11/1    1.21852
+       12/1    1.25778
+       13/1    1.23772
+       14/1    1.24313
+       15/1    1.22032
+       16/1    1.24941
+       17/1    1.25505
+       18/1    1.24015
+       19/1    1.24295
+       20/1    1.24448
+       21/1    1.21570
+       22/1    1.24704
+       23/1    1.23085
+       24/1    1.20524
+       25/1    1.24299
+       26/1    1.25746
+       27/1    1.25273
+       28/1    1.21827
+       29/1    1.24069
+       30/1    1.24722
+       31/1    1.23152
+       32/1    1.24237
+       33/1    1.23778
+       34/1    1.24788
+       35/1    1.23306
+       36/1    1.22294
+       37/1    1.24985
+       38/1    1.27451
+       39/1    1.24926
+       40/1    1.23566
+       41/1    1.20675
+       42/1    1.21955
+       43/1    1.24407
+       44/1    1.23185
+       45/1    1.20545
+       46/1    1.26107
+       47/1    1.23389
+       48/1    1.21152
+       49/1    1.24985
+       50/1    1.24180
+       51/1    1.23966
+       52/1    1.20758    1.22362 +/- 0.01604
+       53/1    1.22590    1.22438 +/- 0.00929
+       54/1    1.26940    1.23563 +/- 0.01303
+       55/1    1.23039    1.23459 +/- 0.01015
+       56/1    1.25345    1.23773 +/- 0.00886
+       57/1    1.24594    1.23890 +/- 0.00758
+       58/1    1.22898    1.23766 +/- 0.00668
+       59/1    1.20881    1.23446 +/- 0.00671
+       60/1    1.26634    1.23764 +/- 0.00679
+       61/1    1.24972    1.23874 +/- 0.00624
+       62/1    1.24523    1.23928 +/- 0.00573
+       63/1    1.29153    1.24330 +/- 0.00662
+       64/1    1.23758    1.24289 +/- 0.00615
+       65/1    1.23602    1.24244 +/- 0.00574
+       66/1    1.24019    1.24230 +/- 0.00537
+       67/1    1.24537    1.24248 +/- 0.00505
+       68/1    1.26533    1.24375 +/- 0.00493
+       69/1    1.22634    1.24283 +/- 0.00475
+       70/1    1.22324    1.24185 +/- 0.00461
+       71/1    1.26415    1.24291 +/- 0.00451
+       72/1    1.21598    1.24169 +/- 0.00447
+       73/1    1.24445    1.24181 +/- 0.00428
+       74/1    1.23843    1.24167 +/- 0.00410
+       75/1    1.25090    1.24204 +/- 0.00395
+ Creating state point statepoint.75.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 5.9576e+02 seconds
+   Time in transport only          = 5.9288e+02 seconds
+   Time in inactive batches        = 1.9802e+02 seconds
+   Time in active batches          = 3.9774e+02 seconds
+   Time synchronizing fission bank = 3.6187e-01 seconds
+     Sampling source sites         = 2.6838e-01 seconds
+     SEND/RECV source sites        = 8.7485e-02 seconds
+   Time accumulating tallies       = 2.2231e+00 seconds
+   Time writing statepoints        = 5.6717e-02 seconds
+ Total time for finalization       = 1.1044e-02 seconds
+ Total time elapsed                = 5.9620e+02 seconds
+ Calculation Rate (inactive)       = 2524.97 particles/second
+ Calculation Rate (active)         = 628.553 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.24219 +/- 0.00366
+ k-effective (Track-length)  = 1.24204 +/- 0.00395
+ k-effective (Absorption)    = 1.24079 +/- 0.00208
+ Combined k-effective        = 1.24124 +/- 0.00179
+ Leakage Fraction            = 0.10235 +/- 0.00066
+
+ Creating state point openmc_simulation_n11.h5...
+ Maximum neutron transport energy: 20000000 eV for B10
+ Initializing source particles...
+
+ ====================>     K EIGENVALUE SIMULATION     <====================
+
+  Bat./Gen.      k            Average k
+  =========   ========   ====================
+        1/1    0.83165
+        2/1    1.13182
+        3/1    1.18686
+        4/1    1.24575
+        5/1    1.21593
+        6/1    1.22846
+        7/1    1.19809
+        8/1    1.20364
+        9/1    1.22443
+       10/1    1.19543
+       11/1    1.21945
+       12/1    1.21751
+       13/1    1.17874
+       14/1    1.22353
+       15/1    1.19096
+       16/1    1.20891
+       17/1    1.20676
+       18/1    1.20613
+       19/1    1.21437
+       20/1    1.18917
+       21/1    1.20889
+       22/1    1.19094
+       23/1    1.21392
+       24/1    1.19836
+       25/1    1.22275
+       26/1    1.21788
+       27/1    1.20340
+       28/1    1.21125
+       29/1    1.21526
+       30/1    1.20660
+       31/1    1.21379
+       32/1    1.22178
+       33/1    1.22765
+       34/1    1.22723
+       35/1    1.21889
+       36/1    1.22197
+       37/1    1.23517
+       38/1    1.20138
+       39/1    1.19887
+       40/1    1.20931
+       41/1    1.22871
+       42/1    1.19568
+       43/1    1.21741
+       44/1    1.19984
+       45/1    1.18491
+       46/1    1.19232
+       47/1    1.19349
+       48/1    1.24879
+       49/1    1.20891
+       50/1    1.22413
+       51/1    1.22922
+       52/1    1.23650    1.23286 +/- 0.00364
+       53/1    1.17420    1.21330 +/- 0.01967
+       54/1    1.25183    1.22294 +/- 0.01692
+       55/1    1.21585    1.22152 +/- 0.01318
+       56/1    1.17981    1.21457 +/- 0.01281
+       57/1    1.21538    1.21468 +/- 0.01083
+       58/1    1.20471    1.21344 +/- 0.00946
+       59/1    1.21728    1.21386 +/- 0.00835
+       60/1    1.20684    1.21316 +/- 0.00750
+       61/1    1.20408    1.21234 +/- 0.00684
+       62/1    1.20761    1.21194 +/- 0.00625
+       63/1    1.22463    1.21292 +/- 0.00584
+       64/1    1.19803    1.21185 +/- 0.00551
+       65/1    1.22172    1.21251 +/- 0.00517
+       66/1    1.21260    1.21252 +/- 0.00483
+       67/1    1.19015    1.21120 +/- 0.00473
+       68/1    1.20166    1.21067 +/- 0.00449
+       69/1    1.22278    1.21131 +/- 0.00429
+       70/1    1.21343    1.21142 +/- 0.00407
+       71/1    1.19166    1.21047 +/- 0.00399
+       72/1    1.22652    1.21120 +/- 0.00387
+       73/1    1.22745    1.21191 +/- 0.00377
+       74/1    1.21781    1.21216 +/- 0.00361
+       75/1    1.18727    1.21116 +/- 0.00361
+ Creating state point statepoint.75.h5...
+
+ =======================>     TIMING STATISTICS     <=======================
+
+ Total time for initialization     = 0.0000e+00 seconds
+   Reading cross sections          = 0.0000e+00 seconds
+ Total time in simulation          = 6.1654e+02 seconds
+   Time in transport only          = 6.1366e+02 seconds
+   Time in inactive batches        = 2.0571e+02 seconds
+   Time in active batches          = 4.1083e+02 seconds
+   Time synchronizing fission bank = 3.2789e-01 seconds
+     Sampling source sites         = 2.4850e-01 seconds
+     SEND/RECV source sites        = 7.4059e-02 seconds
+   Time accumulating tallies       = 2.3068e+00 seconds
+   Time writing statepoints        = 5.1445e-02 seconds
+ Total time for finalization       = 1.0988e-02 seconds
+ Total time elapsed                = 6.1699e+02 seconds
+ Calculation Rate (inactive)       = 2430.61 particles/second
+ Calculation Rate (active)         = 608.525 particles/second
+
+ ============================>     RESULTS     <============================
+
+ k-effective (Collision)     = 1.21098 +/- 0.00337
+ k-effective (Track-length)  = 1.21116 +/- 0.00361
+ k-effective (Absorption)    = 1.21354 +/- 0.00214
+ Combined k-effective        = 1.21322 +/- 0.00225
+ Leakage Fraction            = 0.10345 +/- 0.00063
+
+ Creating state point openmc_simulation_n12.h5...
+Removed Xe and I from all flow
+[openmc.deplete] t=0.0 s, dt=3944700.0 s, source=8000000.0
+[openmc.deplete] t=3944700.0 s, dt=3944700.0 s, source=8000000.0
+WARNING: nuclide B11 in material2 is negative (density = -1.096114947071783e-15 atom/b-cm)
+WARNING: nuclide B11 in material4 is negative (density = -1.0961128738437788e-15 atom/b-cm)
+[openmc.deplete] t=7889400.0 s, dt=7889400.0 s, source=8000000.0
+WARNING: nuclide B11 in material2 is negative (density = -1.096099857566079e-15 atom/b-cm)
+WARNING: nuclide B11 in material4 is negative (density = -1.0960998575696892e-15 atom/b-cm)
+[openmc.deplete] t=15778800.0 s, dt=7889400.0 s, source=8000000.0
+WARNING: nuclide B11 in material2 is negative (density = -1.096096592887927e-15 atom/b-cm)
+WARNING: nuclide Pb208 in material2 is negative (density = -2.7185483103564625e-18 atom/b-cm)
+WARNING: nuclide B11 in material4 is negative (density = -1.096096592902037e-15 atom/b-cm)
+WARNING: nuclide Pb208 in material4 is negative (density = -2.718542966636192e-18 atom/b-cm)
+[openmc.deplete] t=23668200.0 s, dt=7889400.0 s, source=8000000.0
+WARNING: nuclide B11 in material2 is negative (density = -1.0960878896831972e-15 atom/b-cm)
+WARNING: nuclide Pb208 in material2 is negative (density = -8.838189421183458e-18 atom/b-cm)
+WARNING: nuclide B11 in material4 is negative (density = -1.0960878897143478e-15 atom/b-cm)
+WARNING: nuclide Pb208 in material4 is negative (density = -8.83808045938934e-18 atom/b-cm)
+[openmc.deplete] t=31557600.0 s, dt=31557600.0 s, source=8000000.0
+WARNING: nuclide B11 in material2 is negative (density = -1.0960712482352316e-15 atom/b-cm)
+WARNING: nuclide Pb208 in material2 is negative (density = -8.191041361360145e-18 atom/b-cm)
+WARNING: nuclide B11 in material4 is negative (density = -1.0960712482895879e-15 atom/b-cm)
+WARNING: nuclide Pb208 in material4 is negative (density = -8.191041361360937e-18 atom/b-cm)
+[openmc.deplete] t=63115200.0 s, dt=31557600.0 s, source=8000000.0
+WARNING: nuclide B11 in material2 is negative (density = -1.0958825015699363e-15 atom/b-cm)
+WARNING: nuclide Pb208 in material2 is negative (density = -2.0504060546038163e-17 atom/b-cm)
+WARNING: nuclide B11 in material4 is negative (density = -1.0958825017679476e-15 atom/b-cm)
+WARNING: nuclide Pb208 in material4 is negative (density = -2.0503699639543608e-17 atom/b-cm)
+[openmc.deplete] t=94672800.0 s, dt=31557600.0 s, source=8000000.0
+WARNING: nuclide B11 in material2 is negative (density = -1.0954014556114924e-15 atom/b-cm)
+WARNING: nuclide B11 in material4 is negative (density = -1.0954014560284923e-15 atom/b-cm)
+[openmc.deplete] t=126230400.0 s, dt=31557600.0 s, source=8000000.0
+WARNING: nuclide B11 in material2 is negative (density = -1.094517469797727e-15 atom/b-cm)
+WARNING: nuclide B11 in material4 is negative (density = -1.094517470496832e-15 atom/b-cm)
+[openmc.deplete] t=157788000.0 s, dt=31557600.0 s, source=8000000.0
+WARNING: nuclide B11 in material2 is negative (density = -1.0931343766512907e-15 atom/b-cm)
+WARNING: nuclide Np234 in material2 is negative (density = -2.6406551844871584e-18 atom/b-cm)
+WARNING: nuclide B11 in material4 is negative (density = -1.0931343776878322e-15 atom/b-cm)
+WARNING: nuclide Np234 in material4 is negative (density = -2.640361615932389e-18 atom/b-cm)
+[openmc.deplete] t=189345600.0 s, dt=31557600.0 s, source=8000000.0
+WARNING: nuclide B11 in material2 is negative (density = -1.0911668695636447e-15 atom/b-cm)
+WARNING: nuclide B11 in material4 is negative (density = -1.0911668709870406e-15 atom/b-cm)
+[openmc.deplete] t=220903200.0 s, dt=31557600.0 s, source=8000000.0
+WARNING: nuclide B11 in material2 is negative (density = -1.0885369845998551e-15 atom/b-cm)
+WARNING: nuclide Np234 in material2 is negative (density = -2.2568887077975906e-18 atom/b-cm)
+WARNING: nuclide B11 in material4 is negative (density = -1.088536986455602e-15 atom/b-cm)
+WARNING: nuclide Np234 in material4 is negative (density = -2.25679381943452e-18 atom/b-cm)
+[openmc.deplete] t=252460800.0 (final operator evaluation)
+WARNING: nuclide B11 in material2 is negative (density = -1.0851680437415752e-15 atom/b-cm)
+WARNING: nuclide B11 in material4 is negative (density = -1.0851680460747469e-15 atom/b-cm)
+Time taken: 8373s
